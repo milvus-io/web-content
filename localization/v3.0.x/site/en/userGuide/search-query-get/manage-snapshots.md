@@ -77,7 +77,29 @@ client.create_snapshot(
     description=<span class="hljs-string">&quot;Daily backup for January 1st, 2024&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.CreateSnapshotReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.FlushReq;
+
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
+
+<span class="hljs-comment">// Recommended: Flush data before creating snapshot to ensure all data is included</span>
+client.flush(FlushReq.builder()
+        .collectionNames(Collections.singletonList(<span class="hljs-string">&quot;my_collection&quot;</span>))
+        .build());
+
+<span class="hljs-comment">// Create snapshot for entire collection</span>
+client.createSnapshot(CreateSnapshotReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .snapshotName(<span class="hljs-string">&quot;backup_20240101&quot;</span>)
+        .description(<span class="hljs-string">&quot;Daily backup for January 1st, 2024&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -113,7 +135,24 @@ err = client.CreateSnapshot(context.Background(), createOpt)
     <span class="hljs-built_in">panic</span>(err)
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+});
+
+<span class="hljs-comment">// Recommended: Flush data before creating snapshot to ensure all data is included</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">flushSync</span>({
+    <span class="hljs-attr">collection_names</span>: [<span class="hljs-string">&quot;my_collection&quot;</span>],
+});
+
+<span class="hljs-comment">// Create snapshot for entire collection</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createSnapshot</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">snapshot_name</span>: <span class="hljs-string">&quot;backup_20240101&quot;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&quot;Daily backup for January 1st, 2024&quot;</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -157,7 +196,16 @@ snapshots = client.list_snapshots(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.ListSnapshotsReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.ListSnapshotsResp;
+
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-comment">// List all snapshots for a collection</span>
+<span class="hljs-type">ListSnapshotsResp</span> <span class="hljs-variable">listResp</span> <span class="hljs-operator">=</span> client.listSnapshots(ListSnapshotsReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
+List&lt;String&gt; snapshots = listResp.getSnapshots();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Add this import to the same Go file for the following examples.</span>
 <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
@@ -171,7 +219,10 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 }
 fmt.Println(snapshots)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// List all snapshots for a collection</span>
+<span class="hljs-keyword">const</span> { snapshots } = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listSnapshots</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -218,7 +269,18 @@ curl --request POST \
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Created: <span class="hljs-subst">{snapshot_info.create_ts}</span>&quot;</span>)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Description: <span class="hljs-subst">{snapshot_info.description}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.DescribeSnapshotReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.DescribeSnapshotResp;
+
+<span class="hljs-type">DescribeSnapshotResp</span> <span class="hljs-variable">snapshotInfo</span> <span class="hljs-operator">=</span> client.describeSnapshot(DescribeSnapshotReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .snapshotName(<span class="hljs-string">&quot;backup_20240101&quot;</span>)
+        .build());
+
+System.out.println(<span class="hljs-string">&quot;Snapshot: &quot;</span> + snapshotInfo.getName());
+System.out.println(<span class="hljs-string">&quot;Collection: &quot;</span> + snapshotInfo.getCollectionName());
+System.out.println(<span class="hljs-string">&quot;Created: &quot;</span> + snapshotInfo.getCreateTs());
+System.out.println(<span class="hljs-string">&quot;Description: &quot;</span> + snapshotInfo.getDescription());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">describeOpt := milvusclient.NewDescribeSnapshotOption(<span class="hljs-string">&quot;backup_20240101&quot;</span>, <span class="hljs-string">&quot;my_collection&quot;</span>)
 resp, err := client.DescribeSnapshot(context.Background(), describeOpt)
@@ -230,7 +292,15 @@ fmt.Printf(<span class="hljs-string">&quot;Snapshot: %s\n&quot;</span>, resp.Get
 fmt.Printf(<span class="hljs-string">&quot;Collection: %s\n&quot;</span>, resp.GetCollectionName())
 fmt.Printf(<span class="hljs-string">&quot;Created at: %d\n&quot;</span>, resp.GetCreateTs())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> snapshotInfo = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeSnapshot</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">snapshot_name</span>: <span class="hljs-string">&quot;backup_20240101&quot;</span>,
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Snapshot: <span class="hljs-subst">${snapshotInfo.name}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Collection: <span class="hljs-subst">${snapshotInfo.collection_name}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Created: <span class="hljs-subst">${snapshotInfo.create_ts}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Description: <span class="hljs-subst">${snapshotInfo.description}</span>`</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -279,7 +349,19 @@ client.unpin_snapshot_data(
     pin_id=pin_id
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.PinSnapshotDataReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.UnpinSnapshotDataReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.PinSnapshotDataResp;
+
+<span class="hljs-type">PinSnapshotDataResp</span> <span class="hljs-variable">pinResp</span> <span class="hljs-operator">=</span> client.pinSnapshotData(PinSnapshotDataReq.builder()
+        .snapshotName(<span class="hljs-string">&quot;backup_20240101&quot;</span>)
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .ttlSeconds(<span class="hljs-number">3600L</span>)
+        .build());
+
+client.unpinSnapshotData(UnpinSnapshotDataReq.builder()
+        .pinId(pinResp.getPinId())
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">pinID, err := client.PinSnapshotData(
     context.Background(),
@@ -298,7 +380,15 @@ client.unpin_snapshot_data(
 
 <span class="hljs-comment">// Do work with pinned snapshot data.</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { pin_id } = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">pinSnapshotData</span>({
+    <span class="hljs-attr">snapshot_name</span>: <span class="hljs-string">&quot;backup_20240101&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">ttl_seconds</span>: <span class="hljs-number">3600</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">unpinSnapshotData</span>({
+    <span class="hljs-attr">pin_id</span>: pin_id,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -361,7 +451,16 @@ job_id = client.restore_snapshot(
     collection_name=<span class="hljs-string">&quot;restored_collection&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.RestoreSnapshotReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.RestoreSnapshotResp;
+
+<span class="hljs-comment">// Restore snapshot to new collection</span>
+<span class="hljs-type">RestoreSnapshotResp</span> <span class="hljs-variable">restoreResp</span> <span class="hljs-operator">=</span> client.restoreSnapshot(RestoreSnapshotReq.builder()
+        .snapshotName(<span class="hljs-string">&quot;backup_20240101&quot;</span>)
+        .sourceCollectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .targetCollectionName(<span class="hljs-string">&quot;restored_collection&quot;</span>)
+        .build());
+<span class="hljs-type">Long</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> restoreResp.getJobId();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">restoreOpt := milvusclient.NewRestoreSnapshotOption(
     <span class="hljs-string">&quot;backup_20240101&quot;</span>,     <span class="hljs-comment">// snapshot name</span>
@@ -376,7 +475,12 @@ jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 
 fmt.Println(jobID)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Restore snapshot to new collection</span>
+<span class="hljs-keyword">const</span> { job_id } = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">restoreSnapshot</span>({
+    <span class="hljs-attr">snapshot_name</span>: <span class="hljs-string">&quot;backup_20240101&quot;</span>,
+    <span class="hljs-attr">source_collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">target_collection_name</span>: <span class="hljs-string">&quot;restored_collection&quot;</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -420,7 +524,12 @@ curl --request POST \
     snapshot_name=<span class="hljs-string">&quot;backup_20240101&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.DropSnapshotReq;
+
+client.dropSnapshot(DropSnapshotReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .snapshotName(<span class="hljs-string">&quot;backup_20240101&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">dropOpt := milvusclient.NewDropSnapshotOption(<span class="hljs-string">&quot;backup_20240101&quot;</span>, <span class="hljs-string">&quot;my_collection&quot;</span>)
 err = client.DropSnapshot(context.Background(), dropOpt)
@@ -428,7 +537,10 @@ err = client.DropSnapshot(context.Background(), dropOpt)
     <span class="hljs-built_in">panic</span>(err)
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropSnapshot</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">snapshot_name</span>: <span class="hljs-string">&quot;backup_20240101&quot;</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -476,7 +588,24 @@ jobs = client.list_restore_snapshot_jobs()
 <span class="hljs-comment"># List restore jobs for a specific collection</span>
 jobs = client.list_restore_snapshot_jobs(collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.ListRestoreSnapshotJobsReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.ListRestoreSnapshotJobsResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.RestoreSnapshotJobInfo;
+
+<span class="hljs-comment">// List all restore jobs</span>
+<span class="hljs-type">ListRestoreSnapshotJobsResp</span> <span class="hljs-variable">jobsResp</span> <span class="hljs-operator">=</span> client.listRestoreSnapshotJobs(ListRestoreSnapshotJobsReq.builder()
+        .build());
+
+<span class="hljs-keyword">for</span> (RestoreSnapshotJobInfo job : jobsResp.getJobs()) {
+    System.out.printf(<span class="hljs-string">&quot;Job %d: %s -&gt; Collection %s%n&quot;</span>,
+            job.getJobId(), job.getSnapshotName(), job.getCollectionName());
+    System.out.printf(<span class="hljs-string">&quot;  State: %s, Progress: %d%%%n&quot;</span>, job.getState(), job.getProgress());
+}
+
+<span class="hljs-comment">// List restore jobs for a specific collection</span>
+jobsResp = client.listRestoreSnapshotJobs(ListRestoreSnapshotJobsReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// List all restore jobs</span>
 jobsOpt := milvusclient.NewListRestoreSnapshotJobsOption()
@@ -504,7 +633,18 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), jobsOpt)
         job.GetJobId(), job.GetSnapshotName(), job.GetCollectionName())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// List all restore jobs</span>
+<span class="hljs-keyword">let</span> jobsResp = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listRestoreSnapshotJobs</span>();
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> job <span class="hljs-keyword">of</span> jobsResp.<span class="hljs-property">jobs</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Job <span class="hljs-subst">${job.job_id}</span>: <span class="hljs-subst">${job.snapshot_name}</span> -&gt; Collection <span class="hljs-subst">${job.collection_name}</span>`</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  State: <span class="hljs-subst">${job.state}</span>, Progress: <span class="hljs-subst">${job.progress}</span>%`</span>);
+}
+
+<span class="hljs-comment">// List restore jobs for a specific collection</span>
+jobsResp = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listRestoreSnapshotJobs</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -561,7 +701,24 @@ curl --request POST \
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Failure Reason: <span class="hljs-subst">{state.reason}</span>&quot;</span>)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Time Cost: <span class="hljs-subst">{state.time_cost}</span>ms&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.request.GetRestoreSnapshotStateReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.GetRestoreSnapshotStateResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.snapshot.response.RestoreSnapshotJobInfo;
+
+<span class="hljs-type">GetRestoreSnapshotStateResp</span> <span class="hljs-variable">stateResp</span> <span class="hljs-operator">=</span> client.getRestoreSnapshotState(GetRestoreSnapshotStateReq.builder()
+        .jobId(<span class="hljs-number">12345L</span>)
+        .build());
+<span class="hljs-type">RestoreSnapshotJobInfo</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> stateResp.getJobInfo();
+
+System.out.println(<span class="hljs-string">&quot;Job ID: &quot;</span> + state.getJobId());
+System.out.println(<span class="hljs-string">&quot;Snapshot Name: &quot;</span> + state.getSnapshotName());
+System.out.println(<span class="hljs-string">&quot;Collection: &quot;</span> + state.getCollectionName());
+System.out.println(<span class="hljs-string">&quot;State: &quot;</span> + state.getState());
+System.out.println(<span class="hljs-string">&quot;Progress: &quot;</span> + state.getProgress() + <span class="hljs-string">&quot;%&quot;</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;RestoreSnapshotFailed&quot;</span>.equals(state.getState())) {
+    System.out.println(<span class="hljs-string">&quot;Failure Reason: &quot;</span> + state.getReason());
+}
+System.out.println(<span class="hljs-string">&quot;Time Cost: &quot;</span> + state.getTimeCost() + <span class="hljs-string">&quot;ms&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">stateOpt := milvusclient.NewGetRestoreSnapshotStateOption(<span class="hljs-number">12345</span>)
 state, err := client.GetRestoreSnapshotState(context.Background(), stateOpt)
@@ -579,7 +736,20 @@ fmt.Printf(<span class="hljs-string">&quot;Progress: %d%%\n&quot;</span>, state.
 }
 fmt.Printf(<span class="hljs-string">&quot;Time Cost: %dms\n&quot;</span>, state.GetTimeCost())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> stateResp = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">getRestoreSnapshotState</span>({
+    <span class="hljs-attr">job_id</span>: <span class="hljs-number">12345</span>,
+});
+<span class="hljs-keyword">const</span> state = stateResp.<span class="hljs-property">info</span>;
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Job ID: <span class="hljs-subst">${state.job_id}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Snapshot Name: <span class="hljs-subst">${state.snapshot_name}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Collection: <span class="hljs-subst">${state.collection_name}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`State: <span class="hljs-subst">${state.state}</span>`</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Progress: <span class="hljs-subst">${state.progress}</span>%`</span>);
+<span class="hljs-keyword">if</span> (state.<span class="hljs-property">state</span> === <span class="hljs-string">&quot;RestoreSnapshotFailed&quot;</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Failure Reason: <span class="hljs-subst">${state.reason}</span>`</span>);
+}
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Time Cost: <span class="hljs-subst">${state.time_cost}</span>ms`</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
