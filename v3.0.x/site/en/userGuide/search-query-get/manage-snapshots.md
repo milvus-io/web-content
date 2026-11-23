@@ -60,7 +60,29 @@ client.create_snapshot(
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.service.snapshot.request.CreateSnapshotReq;
+import io.milvus.v2.service.utility.request.FlushReq;
+
+import java.util.Collections;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+
+// Recommended: Flush data before creating snapshot to ensure all data is included
+client.flush(FlushReq.builder()
+        .collectionNames(Collections.singletonList("my_collection"))
+        .build());
+
+// Create snapshot for entire collection
+client.createSnapshot(CreateSnapshotReq.builder()
+        .collectionName("my_collection")
+        .snapshotName("backup_20240101")
+        .description("Daily backup for January 1st, 2024")
+        .build());
 ```
 
 ```go
@@ -100,7 +122,24 @@ if err != nil {
 ```
 
 ```javascript
-// node.js
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530",
+    token: "root:Milvus",
+});
+
+// Recommended: Flush data before creating snapshot to ensure all data is included
+await client.flushSync({
+    collection_names: ["my_collection"],
+});
+
+// Create snapshot for entire collection
+await client.createSnapshot({
+    collection_name: "my_collection",
+    snapshot_name: "backup_20240101",
+    description: "Daily backup for January 1st, 2024",
+});
 ```
 
 ```bash
@@ -139,7 +178,16 @@ snapshots = client.list_snapshots(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.ListSnapshotsReq;
+import io.milvus.v2.service.snapshot.response.ListSnapshotsResp;
+
+import java.util.List;
+
+// List all snapshots for a collection
+ListSnapshotsResp listResp = client.listSnapshots(ListSnapshotsReq.builder()
+        .collectionName("my_collection")
+        .build());
+List<String> snapshots = listResp.getSnapshots();
 ```
 
 ```go
@@ -157,7 +205,10 @@ fmt.Println(snapshots)
 ```
 
 ```javascript
-// node.js
+// List all snapshots for a collection
+const { snapshots } = await client.listSnapshots({
+    collection_name: "my_collection",
+});
 ```
 
 ```bash
@@ -199,7 +250,18 @@ print(f"Description: {snapshot_info.description}")
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.DescribeSnapshotReq;
+import io.milvus.v2.service.snapshot.response.DescribeSnapshotResp;
+
+DescribeSnapshotResp snapshotInfo = client.describeSnapshot(DescribeSnapshotReq.builder()
+        .collectionName("my_collection")
+        .snapshotName("backup_20240101")
+        .build());
+
+System.out.println("Snapshot: " + snapshotInfo.getName());
+System.out.println("Collection: " + snapshotInfo.getCollectionName());
+System.out.println("Created: " + snapshotInfo.getCreateTs());
+System.out.println("Description: " + snapshotInfo.getDescription());
 ```
 
 ```go
@@ -215,7 +277,15 @@ fmt.Printf("Created at: %d\n", resp.GetCreateTs())
 ```
 
 ```javascript
-// node.js
+const snapshotInfo = await client.describeSnapshot({
+    collection_name: "my_collection",
+    snapshot_name: "backup_20240101",
+});
+
+console.log(`Snapshot: ${snapshotInfo.name}`);
+console.log(`Collection: ${snapshotInfo.collection_name}`);
+console.log(`Created: ${snapshotInfo.create_ts}`);
+console.log(`Description: ${snapshotInfo.description}`);
 ```
 
 ```bash
@@ -260,7 +330,19 @@ client.unpin_snapshot_data(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.PinSnapshotDataReq;
+import io.milvus.v2.service.snapshot.request.UnpinSnapshotDataReq;
+import io.milvus.v2.service.snapshot.response.PinSnapshotDataResp;
+
+PinSnapshotDataResp pinResp = client.pinSnapshotData(PinSnapshotDataReq.builder()
+        .snapshotName("backup_20240101")
+        .collectionName("my_collection")
+        .ttlSeconds(3600L)
+        .build());
+
+client.unpinSnapshotData(UnpinSnapshotDataReq.builder()
+        .pinId(pinResp.getPinId())
+        .build());
 ```
 
 ```go
@@ -283,7 +365,15 @@ defer func() {
 ```
 
 ```javascript
-// node.js
+const { pin_id } = await client.pinSnapshotData({
+    snapshot_name: "backup_20240101",
+    collection_name: "my_collection",
+    ttl_seconds: 3600,
+});
+
+await client.unpinSnapshotData({
+    pin_id: pin_id,
+});
 ```
 
 ```bash
@@ -342,7 +432,16 @@ job_id = client.restore_snapshot(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.RestoreSnapshotReq;
+import io.milvus.v2.service.snapshot.response.RestoreSnapshotResp;
+
+// Restore snapshot to new collection
+RestoreSnapshotResp restoreResp = client.restoreSnapshot(RestoreSnapshotReq.builder()
+        .snapshotName("backup_20240101")
+        .sourceCollectionName("my_collection")
+        .targetCollectionName("restored_collection")
+        .build());
+Long jobId = restoreResp.getJobId();
 ```
 
 ```go
@@ -361,7 +460,12 @@ fmt.Println(jobID)
 ```
 
 ```javascript
-// node.js
+// Restore snapshot to new collection
+const { job_id } = await client.restoreSnapshot({
+    snapshot_name: "backup_20240101",
+    source_collection_name: "my_collection",
+    target_collection_name: "restored_collection",
+});
 ```
 
 ```bash
@@ -401,7 +505,12 @@ client.drop_snapshot(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.DropSnapshotReq;
+
+client.dropSnapshot(DropSnapshotReq.builder()
+        .collectionName("my_collection")
+        .snapshotName("backup_20240101")
+        .build());
 ```
 
 ```go
@@ -413,7 +522,10 @@ if err != nil {
 ```
 
 ```javascript
-// node.js
+await client.dropSnapshot({
+    collection_name: "my_collection",
+    snapshot_name: "backup_20240101",
+});
 ```
 
 ```bash
@@ -456,7 +568,24 @@ jobs = client.list_restore_snapshot_jobs(collection_name="my_collection")
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.ListRestoreSnapshotJobsReq;
+import io.milvus.v2.service.snapshot.response.ListRestoreSnapshotJobsResp;
+import io.milvus.v2.service.snapshot.response.RestoreSnapshotJobInfo;
+
+// List all restore jobs
+ListRestoreSnapshotJobsResp jobsResp = client.listRestoreSnapshotJobs(ListRestoreSnapshotJobsReq.builder()
+        .build());
+
+for (RestoreSnapshotJobInfo job : jobsResp.getJobs()) {
+    System.out.printf("Job %d: %s -> Collection %s%n",
+            job.getJobId(), job.getSnapshotName(), job.getCollectionName());
+    System.out.printf("  State: %s, Progress: %d%%%n", job.getState(), job.getProgress());
+}
+
+// List restore jobs for a specific collection
+jobsResp = client.listRestoreSnapshotJobs(ListRestoreSnapshotJobsReq.builder()
+        .collectionName("my_collection")
+        .build());
 ```
 
 ```go
@@ -488,7 +617,18 @@ for _, job := range jobs {
 ```
 
 ```javascript
-// node.js
+// List all restore jobs
+let jobsResp = await client.listRestoreSnapshotJobs();
+
+for (const job of jobsResp.jobs) {
+    console.log(`Job ${job.job_id}: ${job.snapshot_name} -> Collection ${job.collection_name}`);
+    console.log(`  State: ${job.state}, Progress: ${job.progress}%`);
+}
+
+// List restore jobs for a specific collection
+jobsResp = await client.listRestoreSnapshotJobs({
+    collection_name: "my_collection",
+});
 ```
 
 ```bash
@@ -540,7 +680,24 @@ print(f"Time Cost: {state.time_cost}ms")
 ```
 
 ```java
-// java
+import io.milvus.v2.service.snapshot.request.GetRestoreSnapshotStateReq;
+import io.milvus.v2.service.snapshot.response.GetRestoreSnapshotStateResp;
+import io.milvus.v2.service.snapshot.response.RestoreSnapshotJobInfo;
+
+GetRestoreSnapshotStateResp stateResp = client.getRestoreSnapshotState(GetRestoreSnapshotStateReq.builder()
+        .jobId(12345L)
+        .build());
+RestoreSnapshotJobInfo state = stateResp.getJobInfo();
+
+System.out.println("Job ID: " + state.getJobId());
+System.out.println("Snapshot Name: " + state.getSnapshotName());
+System.out.println("Collection: " + state.getCollectionName());
+System.out.println("State: " + state.getState());
+System.out.println("Progress: " + state.getProgress() + "%");
+if ("RestoreSnapshotFailed".equals(state.getState())) {
+    System.out.println("Failure Reason: " + state.getReason());
+}
+System.out.println("Time Cost: " + state.getTimeCost() + "ms");
 ```
 
 ```go
@@ -562,7 +719,20 @@ fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())
 ```
 
 ```javascript
-// node.js
+const stateResp = await client.getRestoreSnapshotState({
+    job_id: 12345,
+});
+const state = stateResp.info;
+
+console.log(`Job ID: ${state.job_id}`);
+console.log(`Snapshot Name: ${state.snapshot_name}`);
+console.log(`Collection: ${state.collection_name}`);
+console.log(`State: ${state.state}`);
+console.log(`Progress: ${state.progress}%`);
+if (state.state === "RestoreSnapshotFailed") {
+    console.log(`Failure Reason: ${state.reason}`);
+}
+console.log(`Time Cost: ${state.time_cost}ms`);
 ```
 
 ```bash

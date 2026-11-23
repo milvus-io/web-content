@@ -73,11 +73,84 @@ print(f"Collection '{collection_name}' with a TimestampTz field created successf
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+import io.milvus.v2.service.collection.request.HasCollectionReq;
+
+String serverAddress = "http://localhost:19530";
+String collectionName = "timestamptz_test123";
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri(serverAddress)
+        .build());
+
+if (client.hasCollection(HasCollectionReq.builder()
+        .collectionName(collectionName)
+        .build())) {
+    client.dropCollection(DropCollectionReq.builder()
+            .collectionName(collectionName)
+            .build());
+}
+
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
+// Add a primary key field
+schema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .build());
+// Add a TIMESTAMPTZ field that allows null values
+// highlight-next-line
+schema.addField(AddFieldReq.builder().fieldName("tsz").dataType(DataType.Timestamptz).isNullable(true).build());
+// Add a vector field
+schema.addField(AddFieldReq.builder()
+        .fieldName("vec")
+        .dataType(DataType.FloatVector)
+        .dimension(4)
+        .build());
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName(collectionName)
+        .collectionSchema(schema)
+        .consistencyLevel(ConsistencyLevel.SESSION)
+        .build());
+System.out.printf("Collection '%s' with a TimestampTz field created successfully.%n", collectionName);
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const server_address = "localhost:19530";
+const collection_name = "timestamptz_test123";
+
+const client = new MilvusClient({ address: server_address });
+
+const has = await client.hasCollection({ collection_name: collection_name });
+if (has.value) {
+    await client.dropCollection({ collection_name: collection_name });
+}
+
+const schema = [
+    // Add a primary key field
+    { name: "id", data_type: DataType.Int64, is_primary_key: true },
+    // Add a TIMESTAMPTZ field that allows null values
+    // highlight-next-line
+    { name: "tsz", data_type: DataType.Timestamptz, nullable: true },
+    // Add a vector field
+    { name: "vec", data_type: DataType.FloatVector, dim: 4 },
+];
+
+await client.createCollection({
+    collection_name: collection_name,
+    schema: schema,
+    consistency_level: "Session",
+});
+console.log(`Collection '${collection_name}' with a TimestampTz field created successfully.`);
 ```
 
 ```go
@@ -202,11 +275,68 @@ print("Data inserted successfully.")
 ```
 
 ```java
-// java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.vector.request.InsertReq;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+int dataSize = 8193;
+
+// Get the Asia/Shanghai time zone
+// You can use any valid IANA time zone identifier such as:
+//   "Asia/Tokyo", "America/New_York", "Europe/London", "UTC", etc.
+// To view all available values:
+//   System.out.println(ZoneId.getAvailableZoneIds());
+// Reference:
+//   IANA database – https://www.iana.org/time-zones
+//   Wikipedia – https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ZoneId shanghaiTz = ZoneId.of("Asia/Shanghai");
+ZonedDateTime start = ZonedDateTime.of(2025, 1, 1, 0, 0, 0, 0, shanghaiTz);
+
+Gson gson = new Gson();
+List<JsonObject> data = new ArrayList<>();
+for (int i = 0; i < dataSize; i++) {
+    JsonObject row = new JsonObject();
+    row.addProperty("id", i + 1);
+    // ISO 8601 string with a time-zone offset, such as "2025-01-01T00:00:00+08:00"
+    row.addProperty("tsz", start.plusDays(i).format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+    row.add("vec", gson.toJsonTree(new float[]{0.0f, 0.1f, 0.2f, 0.3f}));
+    data.add(row);
+}
+
+client.insert(InsertReq.builder()
+        .collectionName(collectionName)
+        .data(data)
+        .build());
+System.out.println("Data inserted successfully.");
 ```
 
 ```javascript
-// nodejs
+const data_size = 8193;
+
+// Build ISO 8601 strings with the Asia/Shanghai time-zone offset (+08:00).
+// Any ISO 8601 string with a time-zone offset is accepted, such as
+// "2025-01-01T00:00:00Z" or "2025-01-01T00:00:00-05:00".
+const data = [];
+for (let i = 0; i < data_size; i++) {
+    const day = new Date(Date.UTC(2025, 0, 1 + i));
+    data.push({
+        id: i + 1,
+        tsz: `${day.toISOString().slice(0, 10)}T00:00:00+08:00`,
+        vec: [0.0, 0.1, 0.2, 0.3],
+    });
+}
+
+await client.insert({
+    collection_name: collection_name,
+    data: data,
+});
+console.log("Data inserted successfully.");
 ```
 
 ```go
@@ -301,11 +431,46 @@ print(f"Collection '{collection_name}' loaded successfully.")
 ```
 
 ```java
-// java
+import java.util.Collections;
+
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.LoadCollectionReq;
+import io.milvus.v2.service.index.request.CreateIndexReq;
+
+// Create index on vector field
+IndexParam indexParam = IndexParam.builder()
+        .fieldName("vec")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexName("vec_index")
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(collectionName)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+System.out.println("Index created successfully.");
+
+// Load the collection
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(collectionName)
+        .build());
+System.out.printf("Collection '%s' loaded successfully.%n", collectionName);
 ```
 
 ```javascript
-// nodejs
+// Create index on vector field
+await client.createIndex({
+    collection_name: collection_name,
+    field_name: "vec",
+    index_type: "AUTOINDEX",
+    index_name: "vec_index",
+    metric_type: "COSINE",
+});
+console.log("Index created successfully.");
+
+// Load the collection
+await client.loadCollection({ collection_name: collection_name });
+console.log(`Collection '${collection_name}' loaded successfully.`);
 ```
 
 ```go
@@ -390,11 +555,38 @@ print("Query result: ", results)
 ```
 
 ```java
-// java
+import java.util.Arrays;
+
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+// Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
+// highlight-next-line
+String expr = "tsz != ISO '2025-01-03T00:00:00+08:00'";
+
+QueryResp results = client.query(QueryReq.builder()
+        .collectionName(collectionName)
+        .filter(expr)
+        .outputFields(Arrays.asList("id", "tsz"))
+        .limit(10)
+        .build());
+
+System.out.println("Query result: " + results.getQueryResults());
 ```
 
 ```javascript
-// nodejs
+// Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
+// highlight-next-line
+const expr = "tsz != ISO '2025-01-03T00:00:00+08:00'";
+
+const results = await client.query({
+    collection_name: collection_name,
+    filter: expr,
+    output_fields: ["id", "tsz"],
+    limit: 10,
+});
+
+console.log("Query result: ", results.data);
 ```
 
 ```go
@@ -468,11 +660,36 @@ print("Query result: ", results)
 ```
 
 ```java
-// java
+import java.util.Arrays;
+
+import io.milvus.v2.service.vector.request.QueryReq;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+// highlight-next-line
+String expr = "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'";
+
+QueryResp results = client.query(QueryReq.builder()
+        .collectionName(collectionName)
+        .filter(expr)
+        .outputFields(Arrays.asList("id", "tsz"))
+        .limit(10)
+        .build());
+
+System.out.println("Query result: " + results.getQueryResults());
 ```
 
 ```javascript
-// nodejs
+// highlight-next-line
+const expr = "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'";
+
+const results = await client.query({
+    collection_name: collection_name,
+    filter: expr,
+    output_fields: ["id", "tsz"],
+    limit: 10,
+});
+
+console.log("Query result: ", results.data);
 ```
 
 ```go
@@ -556,11 +773,42 @@ print("Search result: ", res)
 ```
 
 ```java
-// java
+import java.util.Arrays;
+import java.util.Collections;
+
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// Define a time-based filter expression
+String filter = "tsz > ISO '2025-01-05T00:00:00+08:00'";
+
+SearchResp res = client.search(SearchReq.builder()
+        .collectionName(collectionName)                                                      // Collection name
+        .data(Collections.singletonList(new FloatVec(new float[]{0.1f, 0.2f, 0.3f, 0.4f}))) // Query vector (must match collection's vector dim)
+        .limit(5)                                                                            // Max. number of results to return
+        // highlight-next-line
+        .filter(filter)                                                                      // Filter expression using TIMESTAMPTZ
+        .outputFields(Arrays.asList("id", "tsz"))                                            // Fields to include in the search results
+        .build());
+
+System.out.println("Search result: " + res.getSearchResults());
 ```
 
 ```javascript
-// nodejs
+// Define a time-based filter expression
+const filter = "tsz > ISO '2025-01-05T00:00:00+08:00'";
+
+const res = await client.search({
+    collection_name: collection_name,  // Collection name
+    data: [[0.1, 0.2, 0.3, 0.4]],      // Query vector (must match collection's vector dim)
+    limit: 5,                          // Max. number of results to return
+    // highlight-next-line
+    filter: filter,                    // Filter expression using TIMESTAMPTZ
+    output_fields: ["id", "tsz"],      // Fields to include in the search results
+});
+
+console.log("Search result: ", res.results);
 ```
 
 ```go

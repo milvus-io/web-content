@@ -239,11 +239,79 @@ schema.add_field("dense", DataType.FLOAT_VECTOR, dim=1536)
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+// Initialize Milvus client
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .build());
+
+// Create a new schema for the collection
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
+
+// Add primary field "id"
+schema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(false)
+        .build());
+
+// Add scalar field "document" for storing textual data
+schema.addField(AddFieldReq.builder()
+        .fieldName("document")
+        .dataType(DataType.VarChar)
+        .maxLength(9000)
+        .build());
+
+// Add vector field "dense" for storing embeddings.
+// IMPORTANT: Set dimension to match the exact output dimension of the embedding model.
+// For instance, OpenAI's text-embedding-3-small model outputs 1536-dimensional vectors.
+// For dense vector, data type can be FloatVector or Int8Vector
+schema.addField(AddFieldReq.builder()
+        .fieldName("dense")
+        .dataType(DataType.FloatVector)
+        .dimension(1536)
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+// Initialize Milvus client
+const client = new MilvusClient({
+    address: "localhost:19530",
+});
+
+// Define the fields of the collection schema
+const schema = [
+    // Primary field "id"
+    {
+        name: "id",
+        data_type: DataType.Int64,
+        is_primary_key: true,
+        autoID: false,
+    },
+    // Scalar field "document" for storing textual data
+    {
+        name: "document",
+        data_type: DataType.VarChar,
+        max_length: 9000,
+    },
+    // Vector field "dense" for storing embeddings.
+    // IMPORTANT: Set dim to match the exact output dimension of the embedding model.
+    // For instance, OpenAI's text-embedding-3-small model outputs 1536-dimensional vectors.
+    // For dense vector, data type can be FloatVector or Int8Vector
+    {
+        name: "dense",
+        data_type: DataType.FloatVector,
+        dim: 1536,
+    },
+];
 ```
 
 ```go
@@ -340,11 +408,51 @@ schema.add_function(text_embedding_function)
 ```
 
 ```java
-// java
+import java.util.Collections;
+
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+// Define embedding function (example: OpenAI provider)
+Function textEmbeddingFunction = Function.builder()
+        .name("openai_embedding")                                // Unique identifier for this embedding function
+        .functionType(FunctionType.TEXTEMBEDDING)                // Type of embedding function
+        .inputFieldNames(Collections.singletonList("document"))  // Scalar field to embed
+        .outputFieldNames(Collections.singletonList("dense"))    // Vector field to store embeddings
+        // Provider-specific configuration (highest priority)
+        .param("provider", "openai")                             // Embedding model provider
+        .param("model_name", "text-embedding-3-small")           // Embedding model
+        // .param("credential", "apikey1")                       // Optional: Credential label
+        // Optional parameters:
+        // .param("dim", "1536")                                 // Optionally shorten the vector dimension
+        // .param("user", "user123")                             // Optional: identifier for API tracking
+        .build();
+
+// Add the embedding function to your schema
+schema.addFunction(textEmbeddingFunction);
 ```
 
 ```javascript
-// nodejs
+import { FunctionType } from "@zilliz/milvus2-sdk-node";
+
+// Define embedding function (example: OpenAI provider)
+// Pass these functions to createCollection() together with the schema fields
+const functions = [
+    {
+        name: "openai_embedding",                 // Unique identifier for this embedding function
+        type: FunctionType.TEXTEMBEDDING,         // Type of embedding function
+        input_field_names: ["document"],          // Scalar field to embed
+        output_field_names: ["dense"],            // Vector field to store embeddings
+        params: {                                 // Provider-specific configuration (highest priority)
+            provider: "openai",                   // Embedding model provider
+            model_name: "text-embedding-3-small", // Embedding model
+            // credential: "apikey1",             // Optional: Credential label
+            // Optional parameters:
+            // dim: "1536",                       // Optionally shorten the vector dimension
+            // user: "user123",                   // Optional: identifier for API tracking
+        },
+    },
+];
 ```
 
 ```go
@@ -470,11 +578,34 @@ index_params.add_index(
 ```
 
 ```java
-// java
+import java.util.ArrayList;
+import java.util.List;
+
+import io.milvus.v2.common.IndexParam;
+
+// Prepare index parameters
+List<IndexParam> indexes = new ArrayList<>();
+
+// Add AUTOINDEX to automatically select optimal indexing method
+indexes.add(IndexParam.builder()
+        .fieldName("dense")
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { IndexType, MetricType } from "@zilliz/milvus2-sdk-node";
+
+// Prepare index parameters
+// Add AUTOINDEX to automatically select optimal indexing method
+const index_params = [
+    {
+        field_name: "dense",
+        index_type: IndexType.AUTOINDEX,
+        metric_type: MetricType.COSINE,
+    },
+];
 ```
 
 ```go
@@ -519,11 +650,22 @@ client.create_collection(
 ```
 
 ```java
-// java
+// Create collection named "demo"
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("demo")
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build());
 ```
 
 ```javascript
-// nodejs
+// Create collection named "demo"
+await client.createCollection({
+    collection_name: "demo",
+    schema: schema,
+    functions: functions,
+    index_params: index_params,
+});
 ```
 
 ```go
@@ -592,11 +734,37 @@ client.insert('demo', [
 ```
 
 ```java
-// java
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.vector.request.InsertReq;
+
+// Insert sample documents
+Gson gson = new Gson();
+List<JsonObject> rows = Arrays.asList(
+        gson.fromJson("{\"id\": 1, \"document\": \"Milvus simplifies semantic search through embeddings.\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 2, \"document\": \"Vector embeddings convert text into searchable numeric data.\"}", JsonObject.class),
+        gson.fromJson("{\"id\": 3, \"document\": \"Semantic search helps users find relevant information quickly.\"}", JsonObject.class)
+);
+
+client.insert(InsertReq.builder()
+        .collectionName("demo")
+        .data(rows)
+        .build());
 ```
 
 ```javascript
-// nodejs
+// Insert sample documents
+await client.insert({
+    collection_name: "demo",
+    data: [
+        { id: 1, document: "Milvus simplifies semantic search through embeddings." },
+        { id: 2, document: "Vector embeddings convert text into searchable numeric data." },
+        { id: 3, document: "Semantic search helps users find relevant information quickly." },
+    ],
+});
 ```
 
 ```go
@@ -665,11 +833,35 @@ print(results)
 ```
 
 ```java
-// java
+import java.util.Collections;
+
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// Perform semantic search
+SearchResp results = client.search(SearchReq.builder()
+        .collectionName("demo")
+        .data(Collections.singletonList(new EmbeddedText("How does Milvus handle semantic search?"))) // Use text query rather than query vector
+        .annsField("dense")   // Use the vector field that stores embeddings
+        .limit(1)
+        .outputFields(Collections.singletonList("document"))
+        .build());
+
+System.out.println(results.getSearchResults());
 ```
 
 ```javascript
-// nodejs
+// Perform semantic search
+const results = await client.search({
+    collection_name: "demo",
+    data: ["How does Milvus handle semantic search?"], // Use text query rather than query vector
+    anns_field: "dense",   // Use the vector field that stores embeddings
+    limit: 1,
+    output_fields: ["document"],
+});
+
+console.log(results.results);
 ```
 
 ```go
@@ -766,11 +958,48 @@ results = client.search(
 ```
 
 ```java
-// java
+import java.util.Collections;
+
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// Using raw text (Function module converts automatically)
+SearchResp textResults = client.search(SearchReq.builder()
+        .collectionName("demo")
+        .data(Collections.singletonList(new EmbeddedText("How does Milvus handle semantic search?")))
+        .annsField("dense")
+        .limit(1)
+        .build());
+
+// Using pre-computed query vector (must match stored vector dimensions)
+float[] queryVector = new float[]{0.1f, 0.2f, 0.3f /* ... */};  // Must be same dimension as stored embeddings
+SearchResp vectorResults = client.search(SearchReq.builder()
+        .collectionName("demo")
+        .data(Collections.singletonList(new FloatVec(queryVector)))
+        .annsField("dense")
+        .limit(1)
+        .build());
 ```
 
 ```javascript
-// nodejs
+// Using raw text (Function module converts automatically)
+const textResults = await client.search({
+    collection_name: "demo",
+    data: ["How does Milvus handle semantic search?"],
+    anns_field: "dense",
+    limit: 1,
+});
+
+// Using pre-computed query vector (must match stored vector dimensions)
+const query_vector = [0.1, 0.2, 0.3 /* ... */];  // Must be same dimension as stored embeddings
+const vectorResults = await client.search({
+    collection_name: "demo",
+    data: [query_vector],
+    anns_field: "dense",
+    limit: 1,
+});
 ```
 
 ```go
