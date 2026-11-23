@@ -35,7 +35,7 @@ result, err := client.SearchIterator(ctx, option)
 
     The name of the target collection.
 
-- **vector** (*entity.Vector*)
+- **vector** (*[entity.Vector](Vector.md)*)
 
     The query vectors for similarity search.
 
@@ -164,3 +164,11 @@ for {
 	}
 }
 ```
+
+## SearchIterator
+
+The SearchIterator interface returned by the `SearchIterator()` method. It has a single method:
+
+- `Next(ctx context.Context) (ResultSet, error)`
+
+    Returns the next batch of search results as a [ResultSet](ResultSet.md). When all results have been consumed, returns `io.EOF` as the error.

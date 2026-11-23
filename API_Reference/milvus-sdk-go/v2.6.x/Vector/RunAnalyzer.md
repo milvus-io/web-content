@@ -60,6 +60,42 @@ result, err := client.RunAnalyzer(ctx, option)
 
 The analyzer output showing how the input text is tokenized. Returns an error if the operation fails.
 
+```go
+type AnalyzerResult struct {
+    Tokens []*Token
+}
+```
+
+**PARAMETERS:**
+
+- **Tokens** (*[]*Token*)
+
+    The tokens produced by the analyzer. Each token has:
+
+    - **Text** (*string*)
+
+        The token text.
+
+    - **StartOffset** (*int64*)
+
+        The start offset of the token in the input text.
+
+    - **EndOffset** (*int64*)
+
+        The end offset of the token in the input text.
+
+    - **Position** (*int64*)
+
+        The position of the token.
+
+    - **PositionLength** (*int64*)
+
+        The number of characters the token occupies in the input.
+
+    - **Hash** (*uint32*)
+
+        The hash of the token.
+
 **ERROR HANDLING:**
 
 - **error**

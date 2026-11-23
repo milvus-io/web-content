@@ -38,7 +38,7 @@ result, err := client.Search(ctx, option)
 
     The maximum number of results to return.
 
-- **vectors** (*[]entity.Vector*)
+- **vectors** (*[]*[entity.Vector](Vector.md)*)
 
     The query vectors for the search.
 

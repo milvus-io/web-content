@@ -52,6 +52,32 @@ type IndexDescription struct {
 
     The current state.
 
+    **Constants:**
+
+    - **IndexStateNone** = 0
+
+        The index state is not set.
+
+    - **Unissued** = 1
+
+        The index is not yet issued.
+
+    - **InProgress** = 2
+
+        The index is being created.
+
+    - **Finished** = 3
+
+        The index has been created.
+
+    - **Failed** = 4
+
+        Index creation failed.
+
+    - **Retry** = 5
+
+        Index creation is being retried.
+
 - **PendingIndexRows** (*int64*)
 
     The number of rows pending indexing.

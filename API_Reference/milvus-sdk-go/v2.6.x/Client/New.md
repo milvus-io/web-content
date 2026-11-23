@@ -14,7 +14,7 @@ func New(ctx context.Context, config *ClientConfig) (*Client, error)
 
 **RETURN TYPE:**
 
-**Client, error*
+*[Client](Client.md), error*
 
 **RETURNS:**
 

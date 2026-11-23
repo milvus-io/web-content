@@ -28,6 +28,50 @@ result, err := client.DescribeReplica(ctx, option)
 
 A list of replica details including shard distribution. Returns an error if the operation fails.
 
+```go
+type ReplicaInfo struct {
+    ReplicaID         int64
+    Shards            []*Shard
+    Nodes             []int64
+    ResourceGroupName string
+    NumOutboundNode   map[string]int32
+}
+```
+
+**PARAMETERS:**
+
+- **ReplicaID** (*int64*)
+
+    The ID of the replica.
+
+- **Shards** (*[]*Shard*)
+
+    The shards of the replica. Each shard has:
+
+    - **ChannelName** (*string*)
+
+        The channel name of the shard.
+
+    - **ShardNodes** (*[]int64*)
+
+        The query nodes hosting the shard.
+
+    - **ShardLeader** (*int64*)
+
+        The leader node of the shard.
+
+- **Nodes** (*[]int64*)
+
+    The query nodes that hold the replica.
+
+- **ResourceGroupName** (*string*)
+
+    The resource group that owns the replica.
+
+- **NumOutboundNode** (*map[string]int32*)
+
+    The number of query nodes transferred out to each resource group.
+
 **ERROR HANDLING:**
 
 - **error**

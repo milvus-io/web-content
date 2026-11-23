@@ -22,7 +22,7 @@ err := client.UpdateResourceGroup(ctx, option)
 
 - **[resourceGroupConfig](ResourceGroupConfig.md)** (**[entity.ResourceGroupConfig](ResourceGroupConfig.md)*)
 
-    The resource group config.
+    The resource group config. The requested and limited node counts are expressed with [ResourceGroupLimit](ResourceGroupLimit.md).
 
 **RETURN TYPE:**
 

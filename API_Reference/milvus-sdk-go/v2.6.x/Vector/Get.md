@@ -58,7 +58,7 @@ result, err := client.Get(ctx, option)
 
     Limits the operation to the specified partitions.
 
-- `WithIDs(ids column.Column)`
+- `WithIDs(ids [column.Column](Column.md))`
 
     Sets the i ds for the operation.
 

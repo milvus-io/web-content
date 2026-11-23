@@ -28,6 +28,65 @@ result, err := client.DescribeResourceGroup(ctx, option)
 
 The resource group description including node configurations and capacity. Returns an error if the operation fails.
 
+```go
+type ResourceGroup struct {
+    Name             string
+    Capacity         int32
+    NumAvailableNode int32
+    NumLoadedReplica map[string]int32
+    NumOutgoingNode  map[string]int32
+    NumIncomingNode  map[string]int32
+    Config           *ResourceGroupConfig
+    Nodes            []NodeInfo
+}
+```
+
+**PARAMETERS:**
+
+- **Name** (*string*)
+
+    The name of the resource group.
+
+- **Capacity** (*int32*)
+
+    The total node capacity of the resource group.
+
+- **NumAvailableNode** (*int32*)
+
+    The number of available query nodes.
+
+- **NumLoadedReplica** (*map[string]int32*)
+
+    The number of loaded replicas per collection.
+
+- **NumOutgoingNode** (*map[string]int32*)
+
+    The number of query nodes transferred out to each resource group.
+
+- **NumIncomingNode** (*map[string]int32*)
+
+    The number of query nodes transferred in from each resource group.
+
+- **Config** (*[ResourceGroupConfig](ResourceGroupConfig.md)*)
+
+    The resource group configuration.
+
+- **Nodes** (*[]NodeInfo*)
+
+    The query nodes in the resource group. Each node has:
+
+    - **NodeID** (*int64*)
+
+        The query node ID.
+
+    - **Address** (*string*)
+
+        The node address.
+
+    - **HostName** (*string*)
+
+        The node host name.
+
 **ERROR HANDLING:**
 
 - **error**
