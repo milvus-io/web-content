@@ -39,42 +39,6 @@ GetRefreshExternalCollectionProgressResponse
 
     The refresh job information. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
-    - `get_job_id()` (*i64*) -
-
-        The ID of the refresh job.
-
-    - `get_collection_name()` (*&str*) -
-
-        The name of the refreshed collection.
-
-    - `get_state()` (*RefreshExternalCollectionStateCode*) -
-
-        The state of the refresh job. See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
-
-    - `get_progress()` (*i32*) -
-
-        The progress of the refresh job.
-
-    - `get_reason()` (*&str*) -
-
-        The failure reason, when the job failed.
-
-    - `get_external_source()` (*&str*) -
-
-        The external source of the refreshed data.
-
-    - `get_external_spec()` (*&str*) -
-
-        The detailed external specification reported by the server.
-
-    - `get_start_time()` (*u64*) -
-
-        The start time of the refresh job.
-
-    - `get_end_time()` (*u64*) -
-
-        The end time of the refresh job.
-
 ## Example
 
 ```rust
