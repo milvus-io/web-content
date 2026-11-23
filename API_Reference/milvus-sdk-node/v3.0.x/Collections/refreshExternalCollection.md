@@ -27,12 +27,12 @@ The name of the external collection to refresh.
 
 - **external_source** (*string*) -
 <!-- doc:block:start id="node-refresh-external-collection-external-source" -->
-Optional new external source path. If provided, the collection will be refreshed from this new source.
+Optional new external source path. If provided, the collection will be refreshed from this new source. Provide `external_source` and `external_spec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
 <!-- doc:block:end id="node-refresh-external-collection-external-source" -->
 
 - **external_spec** (*string*) -
 <!-- doc:block:start id="node-refresh-external-collection-external-spec" -->
-Optional new external spec configuration. If provided, the collection will use this new spec.
+Optional new external spec configuration. If provided, the collection will use this new spec. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 <!-- doc:block:end id="node-refresh-external-collection-external-spec" -->
 
 - **db_name** (*string*) -
