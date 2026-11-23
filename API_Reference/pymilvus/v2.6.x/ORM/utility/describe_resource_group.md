@@ -98,18 +98,6 @@ A **ResourceGroupInfo** object contains the following fields:
 
     A [ResourceGroupConfig](../../MilvusClient/ResourceGroup/ResourceGroupConfig.md) object that represents the configuration of the resource group.
 
-    - **requests** (*dict*) -
-
-        A dictionary specifying the number of query nodes that the resource group should hold. This key should include:
-
-        - **node_num** (*int*) - The number of query nodes requested for the resource group.
-
-    - **limits** (*dict*) -
-
-        A dictionary specifying the maximum number of query nodes that the resource group can hold. This key should include:
-
-        - **node_num** (*int*) - The maximum number of query nodes allowed for the resource group.
-
 - **nodes** (*list*)
 
     A list of NodeInfo objects, each containing:
