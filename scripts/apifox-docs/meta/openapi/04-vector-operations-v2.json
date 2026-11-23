@@ -6082,9 +6082,6 @@
             "content": "<p>Include the <code>FLOAT_VECTOR</code> field in <code>outputFields</code> and add this header to your request:</p><pre><code>Accept-Type-Float-Vector-Encoding: base64</code></pre><p>For a field named <code>vector</code> containing <code>[1.0, -2.0]</code>, the response entity contains:</p><pre><code>{\"vector\": \"AACAPwAAAMA=\"}</code></pre><p>Decode the value in Python:</p><pre><code class=\"language-python\">import base64\nimport struct\n\nraw = base64.b64decode(\"AACAPwAAAMA=\")\nvector = list(struct.unpack(f\"&lt;{len(raw) // 4}f\", raw))\n# [1.0, -2.0]</code></pre>"
           }
         ],
-        "x-include-target": [
-          "milvus"
-        ],
         "x-added-at": "3.0.x",
         "x-last-modified": "3.0.x",
         "x-deprecated-since": null
