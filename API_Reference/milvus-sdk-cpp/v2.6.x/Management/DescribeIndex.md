@@ -72,53 +72,6 @@ Returns a [Status](../Client/Status.md), with the DescribeIndexResponse output p
         Get index description.
         See [IndexDesc](IndexDesc.md).
 
-        - **FieldName** (*const std::string&*) -
-
-            Field name which the index belong to.
-
-        - **IndexName** (*const std::string&*) -
-
-            Index name. Index name cannot be empty.
-
-        - **IndexId** (*int64_t*) -
-
-            Index ID.
-
-        - **MetricType** (*milvus::MetricType*) -
-
-            Metric type.
-            See [MetricType](MetricType.md).
-
-        - **IndexType** (*milvus::IndexType*) -
-
-            Index type.
-            See [IndexType](IndexType.md).
-
-        - **ExtraParams** (*const std::unordered_map<std::string, std::string>&*) -
-
-            Get extra param. Note: this method was redefined in v2.4, which may affect older client code.
-
-        - **StateCode** (*IndexStateCode*) -
-
-            Get index state.
-            See [IndexStateCode](IndexStateCode.md).
-
-        - **FailReason** (*std::string*) -
-
-            Get index failed reason.
-
-        - **IndexedRows** (*int64_t*) -
-
-            Get number of indexed rows. Note that indexed rows could be larger than total rows, because some segments will be reindexed after compaction.
-
-        - **TotalRows** (*int64_t*) -
-
-            Get number of total rows.
-
-        - **PendingRows** (*int64_t*) -
-
-            Get number of pending unindexed rows.
-
 **ERROR HANDLING:**
 
 - **[Status](../Client/Status.md)**
