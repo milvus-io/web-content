@@ -67,23 +67,32 @@ title: 在 Docker 中运行 Milvus（Linux）
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>该脚本从 Milvus 的<code translate="no">master</code> 分支下载。脚本中定义了其 Docker 镜像标签，该标签可能与 v3.0.5 不同。若要安装该确切版本，请使用《<a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a>》中的带版本号的配置。</p>
-<p>此 Docker 部署将<strong>Woodpecker</strong>的 WAL 后端设置为<strong>本地文件系统</strong>，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
+<p>此 Docker 部署将<strong>Woodpecker</strong>与<strong>本地文件系统</strong>作为其 WAL 后端，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
 <p>如果您希望在独立部署模式下使用<a href="/docs/zh/milvus_backup_overview.md">Backup，</a>建议采用<a href="/docs/zh/install_standalone-docker-compose.md">Docker Compose</a>部署方式。</p>
 <p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p>
 </div>
 <p>运行安装脚本后：</p>
 <ul>
-<li>一个名为 Milvus Standalone 的 Docker 容器已在<strong>19530</strong> 端口启动。</li>
-<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并通过端口<strong>2379</strong> 提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
-<li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
-<li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
+<li>一个名为 Milvus Standalone 的 Docker 容器已在端口<strong>19530</strong> 上启动。</li>
+<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在端口<strong>2379</strong> 上提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
+<li>若要修改 Milvus 的默认配置，请在当前目录的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
+<li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>。</li>
 </ul>
-<p>验证实际镜像及运行状态：</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<p><code translate="no">start</code> 命令会输出<code translate="no">Wait for Milvus Starting...</code> ，随后每秒检查一次，直到<code translate="no">docker ps</code> 报告容器状态为正常。此检查没有时间限制。如果该命令未返回结果，请从另一个终端检查容器日志：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>请等待<code translate="no">healthy</code> 状态出现后再继续执行<a href="/docs/zh/quickstart.md">快速入门指南</a>。使用此服务器时，请将 SDK 连接至<code translate="no">http://localhost:19530</code> ；若使用本地<code translate="no">.db</code> URI，则会启动 Milvus Lite。</p>
-<p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>该脚本通过<code translate="no">sudo</code> 执行其<code translate="no">docker</code> 命令。每次<code translate="no">start</code> 都会先从 Milvus 镜像中启动一个短暂运行的容器<code translate="no">root</code> ，该容器会递归地将<strong>volumes/milvus</strong>的所有者更改为镜像中的<code translate="no">milvus</code> 用户，除非该文件夹中的<code translate="no">.milvus-volume-owner-*</code> 标记文件表明此操作已完成。脚本通过<code translate="no">--security-opt seccomp:unconfined</code> 启动 Milvus 容器，因此该容器将不使用默认的 Docker seccomp 配置文件运行。</p>
+<div class="alert warning">
+<blockquote>
+<p>该脚本将端口<strong>19530</strong>、<strong>9091</strong> 和<strong>2379</strong>公开，但未指定主机地址；而 `<strong>embedEtcd.yaml</strong>` 将 etcd 设置为监听<code translate="no">http://0.0.0.0:2379</code> 。 Docker 会在所有主机地址上发布不带主机地址的端口，因此能够访问该主机的其他机器也可以连接到 Milvus 和 etcd。若要限制对该主机的访问，请在<code translate="no">standalone_embed.sh</code> 文件中，位于第一个<code translate="no">start</code> 之前的位置（例如<code translate="no">-p 127.0.0.1:19530:19530</code> ）编辑<code translate="no">-p</code> 选项，并且如果不在容器外部连接 etcd，请移除<code translate="no">-p 2379:2379</code> 。 如果已存在<code translate="no">milvus-standalone</code> 容器，<code translate="no">start</code> 将使用其原始选项重新启动该容器。若需为 Milvus 连接设置凭据，请参阅<a href="/docs/zh/authenticate.md">《验证用户访问》</a>。</p>
+</blockquote>
+</div>
+<p>验证实际镜像及运行状态：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>请等待<code translate="no">healthy</code> ，然后再继续执行<a href="/docs/zh/quickstart.md">《快速入门》</a>。使用此服务器时，请将 SDK 连接至<code translate="no">http://localhost:19530</code> ；而本地<code translate="no">.db</code> URI 则会启动 Milvus Lite。</p>
+<p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅《<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>》。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +134,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>脚本中的<code translate="no">upgrade</code> 命令会从<code translate="no">master</code> 下载脚本，并使用该脚本选定的镜像重新创建容器。该命令不会验证源版本到目标版本的兼容性路径，且可能会重新生成已生成的配置文件。请勿将其视为任意旧版本部署均可安全升级至 v3.0.5 的保证。</p>
+    </button></h2><p>脚本中的<code translate="no">upgrade</code> 命令会从<code translate="no">master</code> 下载脚本，并使用该脚本选定的镜像重新创建容器。该命令不会验证源版本到目标版本的兼容性路径，且可能会重新生成已有的配置文件。请勿将其视为任意旧版部署均可安全升级至 v3.0.5 的保证。</p>
 <p>升级前，请备份元数据、持久化数据、<code translate="no">embedEtcd.yaml</code> 以及<code translate="no">user.yaml</code> 。请检查目标版本、消息队列和存储的兼容性，并在非生产环境中验证恢复功能。对于使用 Docker Compose 管理的部署，请遵循<a href="/docs/zh/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升级 Milvus Standalone</a>》<a href="/docs/zh/upgrade_milvus_standalone-docker.md">中的</a>说明；请勿将该流程直接应用于由脚本管理的容器。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止并删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,7 +200,7 @@ EOF
     </button></h2><p>在 Docker 中安装 Milvus 后，您可以：</p>
 <ul>
 <li><p>查看<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
-<li><p>了解 Milvus 的基本操作：</p>
+<li><p>学习 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
 <li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
@@ -201,14 +210,14 @@ EOF
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p>在更改 Milvus 版本之前，请先查阅本页面上的升级注意事项。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展您的 Milvus 集群</a>。</p></li>
-<li><p>在云端部署您的 Milvus 集群：</p>
+<li><p>在 Kubernetes 上<a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a>。该操作使用 Helm，不适用于此 Docker 部署。</p></li>
+<li><p>在云平台上部署您的 Milvus 集群：</p>
 <ul>
 <li><a href="/docs/zh/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI，</a>这是一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>

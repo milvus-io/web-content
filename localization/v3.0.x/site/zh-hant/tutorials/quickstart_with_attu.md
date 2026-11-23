@@ -56,7 +56,7 @@ title: Attu 快速入門——Milvus 的網頁使用者介面
 <li>與您的伺服器相容的 Attu 版本。Attu 3.0 支援 Milvus 2.6.0 及後續版本（包含 Milvus 3.x）；若使用較舊的伺服器，請參<a href="https://github.com/zilliztech/attu#compatibility">閱相容性對照表</a>。</li>
 <li>一個 Python 環境，其 PyMilvus 版本須與您的伺服器相容。請參閱《<a href="/docs/zh-hant/install-pymilvus.md">安裝 Milvus Python SDK</a>》及<a href="/docs/zh-hant/release_notes.md">《發行說明》</a>。若要使用本文件分支中使用的 SDK 版本，請安裝 model extra 及 progress-bar 依賴項：</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>資料準備步驟亦會使用<code translate="no">wget</code> 及<code translate="no">unzip</code> 。嵌入函式會在首次使用時下載其模型，因此請允許存取模型主機的網路連線，或預先準備模型快取。螢幕截圖展示了工作流程；不同 Attu 版本的標籤與佈局可能有所差異。</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. 安裝桌面應用程式<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -222,7 +222,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>將 Python 連接到您在 Attu 中選定的相同 Milvus 端點和資料庫。若已啟用驗證，請在兩個客戶端中皆設定相應的憑證。建立一個集合：</p>
+    </button></h3><p>將 Python 連接到您在 Attu 中選定的相同 Milvus 端點和資料庫。若已啟用驗證，請在兩個客戶端中皆配置相應的憑證。建立一個集合：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to Milvus Standalone</span>
@@ -326,7 +326,7 @@ client.insert(collection_name=collection_name, data=data)
     </button></h3><p>在 Attu 中導航至「<strong>向量搜尋</strong>」分頁。</p>
 <ol>
 <li>點擊「<strong>產生隨機資料</strong>」按鈕以建立測試查詢。</li>
-<li>點擊「<strong>搜尋</strong>」以根據生成的資料擷取結果。</li>
+<li>點擊「<strong>搜尋</strong>」以根據生成的資料檢索結果。</li>
 </ol>
 <p>結果將以表格形式顯示，其中包含每個匹配實體的 ID、相似度分數以及動態欄位。隨機向量是用來測試搜尋工作流程，而非語義相關性。若要進行有意義的文字查詢，請使用與本資料集相同的 `<code translate="no">embedding_model.encode_queries()</code> ` 函式對其進行編碼，然後使用該向量進行搜尋。請參閱<a href="/docs/zh-hant/single-vector-search.md">「單一向量搜尋」</a>以取得 Python 範例。</p>
 <p align="center">
@@ -394,5 +394,5 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>Attu 簡化了儲存於 Milvus 中的向量資料的管理與視覺化。從資料插入到查詢執行及互動式探索，它提供了一個直觀的介面，用於處理複雜的向量搜尋任務。透過動態模式支援、圖形化搜尋視覺化以及靈活的查詢篩選器等功能，Attu 賦予使用者有效分析大規模資料集的能力。</p>
-<p>透過運用 Attu 的視覺化探索工具，使用者能更深入地理解數據、發掘隱藏的關聯性，並做出以數據為依據的決策。立即開始使用 Attu 與 Milvus 探索您自己的數據集吧！</p>
+<p>透過運用 Attu 的視覺化探索工具，使用者能更深入地理解資料、發掘隱藏的關聯性，並做出以資料為依據的決策。立即開始使用 Attu 與 Milvus 探索您自己的資料集吧！</p>
 <hr>

@@ -62,7 +62,7 @@ title: 发布说明
     </button></h3><ul>
 <li>在 QueryCoord 中添加了按资源组划分的负载百分比和分片领导者的就绪状态，并为每个分片领导者标记其副本所属的资源组，以便查询可在单个资源组内进行路由 (<a href="https://github.com/milvus-io/milvus/pull/52500">#52500</a>,<a href="https://github.com/milvus-io/milvus/pull/52711">#52711</a>)</li>
 <li>通过直接借用已解码的帖子块，减少了未计分的 Tantivy 术语查询中的复制操作（<a href="https://github.com/milvus-io/milvus/pull/54469">#54469</a>）</li>
-<li>将 Knowhere 升级至 v3.0.17，并将可为空的向量偏移量映射移至 Knowhere API 后端（<a href="https://github.com/milvus-io/milvus/pull/54473">#54473</a>）</li>
+<li>将 Knowhere 升级至 v3.0.17，并将可为空的向量偏移量映射移至 Knowhere API 背后（<a href="https://github.com/milvus-io/milvus/pull/54473">#54473</a>）</li>
 <li>通过复用按请求划分的编码缓冲区，减少了批量 RESTful 查询和搜索响应编码时的内存分配（<a href="https://github.com/milvus-io/milvus/pull/54540">#54540</a>）</li>
 <li>通过在分析器过滤器中复用已编译的正则表达式和每个过滤器的搜索缓存，提升了文本分析器的性能（<a href="https://github.com/milvus-io/milvus/pull/54570">#54570</a>）</li>
 <li>添加了一个可选的两级混合压缩规划器（<code translate="no">dataCoord.compaction.twoTierCompaction</code> ，默认关闭），以减少压缩写入放大效应（<a href="https://github.com/milvus-io/milvus/pull/54589">#54589</a>）</li>
@@ -87,7 +87,7 @@ title: 发布说明
         ></path>
       </svg>
     </button></h3><ul>
-<li>修复了一个问题：包含结构体数组字段的 Collections 在首次搜索或缓存驱逐后，会强制加载原始嵌入列表向量，从而增加内存使用量和查询延迟（<a href="https://github.com/milvus-io/milvus/pull/54167">#54167</a>）</li>
+<li>修复了一个问题：包含结构体数组字段的Collection在首次搜索或缓存驱逐后，会强制加载原始嵌入列表向量，从而增加内存使用量和查询延迟（<a href="https://github.com/milvus-io/milvus/pull/54167">#54167</a>）</li>
 <li>修复了一个问题：在启用了 CMEK 的 Collections 上执行 upsert 操作时，会将删除部分（主键和时间戳）以未加密的形式写入 WAL（<a href="https://github.com/milvus-io/milvus/pull/54478">#54478</a>）</li>
 <li>修复了以下问题：在带有 RTREE 索引的分段上，<code translate="no">ST_DWITHIN</code> 过滤器返回的行数少于未建索引的分段；空几何体不再匹配<code translate="no">ST_DWITHIN</code> ，这与 PostGIS 保持一致 (<a href="https://github.com/milvus-io/milvus/pull/54611">#54611</a>)</li>
 <li>修复了一个问题：在协调器重启后，写入 Storage V3 分段可能会停滞，原因是下一次刷新使用的列布局与已提交的清单冲突（<a href="https://github.com/milvus-io/milvus/pull/54652">#54652</a>）</li>
@@ -96,7 +96,7 @@ title: 发布说明
 <li>修复了在查询索引状态时若分区被删除，索引状态会被错误地报告为“失败”的问题（<a href="https://github.com/milvus-io/milvus/pull/54670">#54670</a>）</li>
 <li>修复了在任务执行期间并行序列化同步任务统计信息时发生的数据竞争问题（<a href="https://github.com/milvus-io/milvus/pull/54610">#54610</a>）</li>
 <li>修复了为字段指定非整数类型的 max_length 时，返回原始解析错误而非指明字段名称的无效参数错误的问题（<a href="https://github.com/milvus-io/milvus/pull/54694">#54694</a>）</li>
-<li>修复了在滚动升级过程中停止 MixCoord 时发生的崩溃问题，该问题会导致内核转储，并使旧 Pod 卡在“Terminating”状态长达数分钟 (<a href="https://github.com/milvus-io/milvus/pull/54732">#54732</a>)</li>
+<li>修复了在滚动升级期间停止 MixCoord 时发生的崩溃问题，该问题会导致内核转储，并使旧 Pod 卡在“Terminating”状态长达数分钟 (<a href="https://github.com/milvus-io/milvus/pull/54732">#54732</a>)</li>
 <li>修复了 Milvus Backup 无法复制 FlushAll 返回的刷新位置的问题 (<a href="https://github.com/milvus-io/milvus/pull/54745">#54745</a>)</li>
 <li>修复了 MixCoord 及其他组件在遇到 etcd 暂态错误（如领导者变更）时崩溃的问题，该问题可能导致缩容操作停滞；现在这些组件会重试并持续监听，直至 etcd 恢复正常（<a href="https://github.com/milvus-io/milvus/pull/54754">#54754</a>）</li>
 <li>修复了同时停止集群中所有查询节点时，可能导致系统挂起直至优雅停止超时（默认 30 分钟）的问题；将<code translate="no">queryNode.standaloneMigrateDataTimeout</code> 重命名为<code translate="no">queryNode.migrateDataTimeout</code> ，旧键仍可正常使用（<a href="https://github.com/milvus-io/milvus/pull/54813">#54813</a>）</li>
@@ -146,15 +146,15 @@ title: 发布说明
       </svg>
     </button></h3><ul>
 <li>通过并行读取输入块并积极预取字节范围，提升了排序压缩的读取吞吐量（<a href="https://github.com/milvus-io/milvus/pull/53437">#53437</a>）</li>
-<li>为基于 Parquet、Lance 和 Vortex 文件的外部 Collection 增加了对预计算稀疏向量的支持（<a href="https://github.com/milvus-io/milvus/pull/53894">#53894</a>）</li>
+<li>为基于 Parquet、Lance 和 Vortex 文件的外部 Collections 添加了对预计算稀疏向量的支持（<a href="https://github.com/milvus-io/milvus/pull/53894">#53894</a>）</li>
 <li>将代理 DML 任务重构为专用包，以分离任务职责（<a href="https://github.com/milvus-io/milvus/pull/54064">#54064</a>）</li>
-<li>确保对已封装分段的搜索中，所有输出字段均从与搜索本身相同的分段快照中填充（<a href="https://github.com/milvus-io/milvus/pull/54074">#54074</a>）</li>
+<li>确保对已密封分段的搜索中，所有输出字段均从与搜索本身相同的分段快照中填充（<a href="https://github.com/milvus-io/milvus/pull/54074">#54074</a>）</li>
 <li>新增了<code translate="no">queryNode.segcore.tieredStorage.lazyColumnGroupEnabled</code> 选项（默认禁用），用于将Storage V3列组的加载推迟至首次访问时，从而减少分段加载时间和内存占用（<a href="https://github.com/milvus-io/milvus/pull/54169">#54169</a>）</li>
-<li>新增了<code translate="no">autoIndex.params.sparse.ip.build</code> 和<code translate="no">autoIndex.params.sparse.bm25.build</code> 选项，用于分别配置IP和BM25指标的稀疏AutoIndex构建参数，若配置缺失则回退至<code translate="no">autoIndex.params.sparse.build</code> （<a href="https://github.com/milvus-io/milvus/pull/54212">#54212</a>）</li>
+<li>新增了<code translate="no">autoIndex.params.sparse.ip.build</code> 和<code translate="no">autoIndex.params.sparse.bm25.build</code> 选项，用于分别配置IP和BM25指标的稀疏AutoIndex构建参数，若配置未指定则回退至<code translate="no">autoIndex.params.sparse.build</code> （<a href="https://github.com/milvus-io/milvus/pull/54212">#54212</a>）</li>
 <li>通过在 CheckHealth 期间不再收集 DataCoord 自身指标，降低了具有大量分段元数据的集群上的健康检查延迟（<a href="https://github.com/milvus-io/milvus/pull/54214">#54214</a>）</li>
 <li>通过按作业 ID 对导入任务进行索引，提升了具有大量导入作业的集群中 DataCoord 导入调度性能（<a href="https://github.com/milvus-io/milvus/pull/54202">#54202</a>）</li>
 <li>通过在每个垃圾回收（GC）周期内扫描过时的 JSON 统计前缀一次（而非每个分段扫描一次），减少了垃圾回收期间的对象存储列表请求 (<a href="https://github.com/milvus-io/milvus/pull/54207">#54207</a>)</li>
-<li>通过从现有数组块偏移量中读取长度，提升了已封装分段上<code translate="no">ARRAY_LENGTH</code> 过滤器的性能，使客户过滤器工作负载的每秒查询数（QPS）从102提升至270 (<a href="https://github.com/milvus-io/milvus/pull/54321">#54321</a>)</li>
+<li>通过从现有数组块偏移量中读取长度，提升了已封装分段上<code translate="no">ARRAY_LENGTH</code> 过滤器的性能，使客户过滤器工作负载的每秒请求数（QPS）从102提升至270（<a href="https://github.com/milvus-io/milvus/pull/54321">#54321</a>）</li>
 <li>将 grpc-go 升级至 v1.84.0，使代理在解码后立即释放原始请求缓冲区，最多可节省整个请求的大小（对于 nq=10000、 1536维搜索）的堆内存（<a href="https://github.com/milvus-io/milvus/pull/54271">#54271</a>）</li>
 <li>新增了一个隐藏的<code translate="no">streaming.partialUpdate.enableCAS</code> 选项（默认启用），用于关闭StreamingNode上部分更新的比较并交换（compare-and-swap）检查，以更低的写入开销为代价，换取对并发过期更新的保护（<a href="https://github.com/milvus-io/milvus/pull/54249">#54249</a>）</li>
 <li>移除了 Proxy 在每次成功查询时记录的虚假“status is nil”警告（<a href="https://github.com/milvus-io/milvus/pull/54247">#54247</a>）</li>
@@ -185,7 +185,7 @@ title: 发布说明
         ></path>
       </svg>
     </button></h3><ul>
-<li>修复了一个问题：启动期间 etcd 读操作的短暂失败可能会导致时间戳分配器分配出比先前已分配时间戳更早的时间戳（<a href="https://github.com/milvus-io/milvus/pull/51762">#51762</a>）</li>
+<li>修复了一个问题：启动期间 etcd 读操作的短暂失败可能会导致时间戳分配器分配出比先前已分配时间戳更早的时间戳 (<a href="https://github.com/milvus-io/milvus/pull/51762">#51762</a>)</li>
 <li>修复了导入任务可能无限期挂起并阻塞 pchannel 检查点的问题，此前该问题需要手动修复 etcd 并重启 StreamingNode (<a href="https://github.com/milvus-io/milvus/pull/54111">#54111</a>)</li>
 <li>修复了向包含 Timestamptz 或 Geometry 字段的 Collections 插入行时 Go SDK 发生 panic 的问题（<a href="https://github.com/milvus-io/milvus/pull/54131">#54131</a>）</li>
 <li>修复了在执行部分更新时，分片上写入延迟过高和写入积压的问题，此前每次部分更新的提交都会阻塞同一 vchannel 上的所有其他写入操作；现在，部分更新仅会阻塞涉及相同主键的写入操作（<a href="https://github.com/milvus-io/milvus/pull/54215">#54215</a>）</li>
@@ -204,10 +204,10 @@ title: 发布说明
 <li>修复了计算单词级 MinHash 签名时的内存泄漏问题（<a href="https://github.com/milvus-io/milvus/pull/54463">#54463</a>）</li>
 <li>修复了 RESTful v2 搜索会无提示忽略显式分组参数（例如非正数的 `<code translate="no">groupSize</code> ` 或 `<code translate="no">strictGroupSize</code>`）的问题；现在会拒绝无效值，而非回退到默认值（<a href="https://github.com/milvus-io/milvus/pull/54466">#54466</a>）</li>
 <li>修复了强一致性查询的问题：即使之前的写入操作已经应用，查询仍可能等待下一个周期性时间点 (<a href="https://github.com/milvus-io/milvus/pull/54501">#54501</a>)</li>
-<li>修复了一个问题：当包含 TEXT 字段的空闲 Collection 在数据插入并持久化后，若分段仍处于“增长中”状态，其通道检查点将停止推进（<a href="https://github.com/milvus-io/milvus/pull/54538">#54538</a>）</li>
+<li>修复了一个问题：当包含 TEXT 字段的空闲 Collection 在数据插入并持久化后，若分段仍处于“增长”状态，其通道检查点将停止推进（<a href="https://github.com/milvus-io/milvus/pull/54538">#54538</a>）</li>
 <li>修复了由某个 Milvus 版本写入的快照清单在另一个版本中可能无法解码的问题；快照清单现已成为自描述的 Avro 文件 (<a href="https://github.com/milvus-io/milvus/pull/54549">#54549</a>)</li>
 <li>修复了在未配置复制的集群上查询复制配置时，请求会阻塞直至超时的问题，并使复制流在辅助节点拒绝每条消息时进行退避 (<a href="https://github.com/milvus-io/milvus/pull/54555">#54555</a>)</li>
-<li>修复了在 CDC 次要集群上执行 LoadCollection 后创建的分区未被加载的问题，该问题导致在次要集群上的查询无法获取相关数据（<a href="https://github.com/milvus-io/milvus/pull/54561">#54561</a>）</li>
+<li>修复了在 CDC 次要集群上执行 LoadCollection 之后创建的分区未被加载的问题，该问题导致在次要集群上的查询无法获取相关数据（<a href="https://github.com/milvus-io/milvus/pull/54561">#54561</a>）</li>
 <li>修复了代理指标中将成功的 upsert 操作的报告值计数两次，导致报告数量被高估的问题（<a href="https://github.com/milvus-io/milvus/pull/54605">#54605</a>）</li>
 </ul>
 <h2 id="v303" class="common-anchor-header">v3.0.3<button data-href="#v303" class="anchor-icon" translate="no">
@@ -252,7 +252,7 @@ title: 发布说明
       </svg>
     </button></h3><ul>
 <li>为混合搜索（Hybrid Search）新增了函数链（Function Chain）支持，允许以<code translate="no">merge</code> 开头的顶级 L2 链定义融合和重新排序，并允许每个子搜索在融合前运行自己的 L0/L1 链（<a href="https://github.com/milvus-io/milvus/pull/53541">#53541</a>）</li>
-<li>在部分更新中增加了对替换单个数组元素、结构体数组元素或其子字段以及 JSON 路径的支持，该功能在 Go SDK 和 REST v2 中可用（<a href="https://github.com/milvus-io/milvus/pull/53746">#53746</a>）</li>
+<li>在部分更新中增加了对替换单个数组元素、结构体数组元素或其子字段以及 JSON 路径的支持，该功能已在 Go SDK 和 REST v2 中提供 (<a href="https://github.com/milvus-io/milvus/pull/53746">#53746</a>)</li>
 <li>在搜索和混合搜索中为函数链添加了Dynamic Field支持（<a href="https://github.com/milvus-io/milvus/pull/54011">#54011</a>）</li>
 <li>新增对可空向量字段上<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> 过滤表达式支持，并采用批量有效性检查以实现高效评估（<a href="https://github.com/milvus-io/milvus/pull/54020">#54020</a>）</li>
 </ul>
@@ -275,16 +275,16 @@ title: 发布说明
 <li>在指标端口的管理端点上添加了可选的根身份验证（<code translate="no">common.security.adminAuthEnabled</code> ，默认禁用），并从配置导出、HTTP 响应和日志中屏蔽了凭据及其他敏感值（<a href="https://github.com/milvus-io/milvus/pull/53499">#53499</a>）</li>
 <li>在 AutoID Collection 的完整 upsert 操作中保留现有实体的主键，仅为未找到的键分配新 ID；此类 upsert 操作现在要求先加载该 Collection (<a href="https://github.com/milvus-io/milvus/pull/53511">#53511</a>)</li>
 <li>新增了 snappy 和 s2 gRPC 压缩算法，使 zstd 编解码器可配置，并加强了 gRPC 解压缩机制以防范超大内存分配（<a href="https://github.com/milvus-io/milvus/pull/53598">#53598</a>）</li>
-<li>阻止指向 Milvus 内部存储目录的导入路径，并要求对二进制日志 (<code translate="no">backup=true</code>) 和 L0 导入操作授予新的集群级<code translate="no">ImportBinlog</code> 权限；这将导致仅拥有集合级<code translate="no">Import</code> 权限的非管理员角色无法正常工作，直至其被授予<code translate="no">ImportBinlog</code> 权限 (<a href="https://github.com/milvus-io/milvus/pull/53680">#53680</a>)</li>
-<li>优化了基于 Tantivy 的索引查找中的位集写入操作，使连续文档 ID 的写入速度在微基准测试中提升了约 7 倍（<a href="https://github.com/milvus-io/milvus/pull/53700">#53700</a>）</li>
+<li>阻止了指向 Milvus 内部存储目录的导入路径，并要求对二进制日志 (<code translate="no">backup=true</code>) 和 L0 导入操作授予新的集群级权限<code translate="no">ImportBinlog</code> ；这将导致仅拥有集合级权限<code translate="no">Import</code> 的非管理员角色无法正常工作，直至其被授予<code translate="no">ImportBinlog</code> 权限 (<a href="https://github.com/milvus-io/milvus/pull/53680">#53680</a>)</li>
+<li>优化了基于 Tantivy 的索引查找中的位集写入操作，使连续文档 ID 的写入速度在微基准测试中提高了约 7 倍 (<a href="https://github.com/milvus-io/milvus/pull/53700">#53700</a>)</li>
 <li>减少了 C++ 查询执行路径中冗余的有效载荷和元数据复制 (<a href="https://github.com/milvus-io/milvus/pull/53756">#53756</a>)</li>
-<li>在禁用预热时，将密封分区的 JSON 统计信息加载推迟至首次使用时，因此那些从未被查询其 JSON 统计信息的分区不再承担加载成本（<a href="https://github.com/milvus-io/milvus/pull/53888">#53888</a>）</li>
+<li>在禁用预热时，将密封分区的 JSON 统计信息加载推迟至首次使用时，因此从未被查询 JSON 统计信息的分区不再承担加载成本（<a href="https://github.com/milvus-io/milvus/pull/53888">#53888</a>）</li>
 <li>新增可选的 QueryCoord 预检查功能，可在加载 Collections 或分区前估算内存和本地磁盘需求，并提供按资源组划分的需求指标 (<a href="https://github.com/milvus-io/milvus/pull/53905">#53905</a>)</li>
-<li>通过读取请求固定列快照，减少了密封分段中过滤表达式和分组搜索的每块开销（<a href="https://github.com/milvus-io/milvus/pull/53984">#53984</a>）</li>
+<li>通过读取请求固定列快照，减少了密封分段中过滤表达式和按组搜索的每块开销 (<a href="https://github.com/milvus-io/milvus/pull/53984">#53984</a>)</li>
 <li>通过 fastPB 解码器加速了搜索、查询、插入和更新/插入路径的 RPC protobuf 解码，该功能默认启用，并可通过<code translate="no">common.enableFastPB</code> 进行控制（<a href="https://github.com/milvus-io/milvus/pull/53995">#53995</a>、<a href="https://github.com/milvus-io/milvus/pull/54003">#54003</a>）</li>
 <li>从 metrics 端口移除了旧版不带下划线的<code translate="no">/api/v1/*</code> REST 路由（包括<code translate="no">/api/v1/health</code> ），并添加了<code translate="no">proxy.http.enableV1</code> 以禁用剩余的 V1 API；此为破坏性变更，因此客户端应迁移至 V2 REST API 或 gRPC SDK，并使用<code translate="no">/healthz</code> 或<code translate="no">/livez</code> 进行健康检查 (<a href="https://github.com/milvus-io/milvus/pull/54028">#54028</a>)</li>
 <li>将分析器的词干化器与 Tantivy 解耦，因此无论 Tantivy 是否升级，内置和自定义分析器都能为现有文本索引持续生成相同的词干化令牌（<a href="https://github.com/milvus-io/milvus/pull/54097">#54097</a>）</li>
-<li>在执行器负载较重时，减少了已完成的异步 segcore 结果的交付延迟，因此完成的结果能更早释放，而不会因排队任务而滞后 (<a href="https://github.com/milvus-io/milvus/pull/54127">#54127</a>)</li>
+<li>在执行器负载较重时，减少了已完成的异步 segcore 结果的交付延迟，因此完成的结果能更早释放，而非滞留在队列任务之后 (<a href="https://github.com/milvus-io/milvus/pull/54127">#54127</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">错误修复<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -304,19 +304,19 @@ title: 发布说明
     </button></h3><ul>
 <li>修复了一个问题：当包含<code translate="no">timeout</code> 的两阶段导入作业在提交期间过期时，该作业会失败并回滚，从而删除了查询中已可见的数据；此外，删除导入作业并不会停止其在DataNodes上运行的任务（<a href="https://github.com/milvus-io/milvus/pull/53481">#53481</a>）</li>
 <li>修复了一个问题：当使用 Pulsar 作为 WAL 时，在另一个节点接管通道后，StreamingNode 仍可能继续向该通道写入数据，导致已提交的行丢失；默认的<code translate="no">pulsar.producerAccessMode</code> 现为<code translate="no">exclusive</code> ，这需要 Pulsar 2.8.0 或更高版本 (<a href="https://github.com/milvus-io/milvus/pull/53539">#53539</a>)</li>
-<li>修复了通过 Docker Compose 或<code translate="no">standalone_embed.sh</code> 部署的 Milvus Standalone 独立实例，在新安装和升级后均可能无法向 root 拥有的绑定挂载数据目录写入数据的问题（<a href="https://github.com/milvus-io/milvus/pull/53564">#53564</a>、<a href="https://github.com/milvus-io/milvus/pull/53615">#53615</a>）</li>
+<li>修复了一个问题：当使用 Docker Compose 或<code translate="no">standalone_embed.sh</code> 部署 Milvus Standalone 实例时，无论是在全新安装还是升级过程中，都可能无法向 root 拥有的绑定挂载数据目录写入数据（<a href="https://github.com/milvus-io/milvus/pull/53564">#53564</a>,<a href="https://github.com/milvus-io/milvus/pull/53615">#53615</a>）</li>
 <li>修复了一个问题：当数据正在并发插入时，对带有临时索引的增长分段进行搜索可能会间歇性地因 reduce 错误而失败（<a href="https://github.com/milvus-io/milvus/pull/53574">#53574</a>）</li>
 <li>修复了一个问题：当在更新 Woodpecker 存储配置后立即运行<code translate="no">AlterWAL</code> 时，StreamingNode 可能会使用错误的 Woodpecker 模式，导致下次重启后 WAL 恢复挂起（<a href="https://github.com/milvus-io/milvus/pull/53584">#53584</a>）</li>
-<li>修复了在启用几何缓存的情况下，当持续承受 GIS 查询负载时，向包含几何字段的 Collections 插入数据可能会停滞的问题 (<a href="https://github.com/milvus-io/milvus/pull/53609">#53609</a>)</li>
+<li>修复了在启用几何缓存的情况下，当持续承受 GIS 查询负载时，向包含几何字段的 Collections 插入数据可能会停滞的问题（<a href="https://github.com/milvus-io/milvus/pull/53609">#53609</a>）</li>
 <li>修复了当日志输出卡顿时，Milvus 在关闭过程中可能挂起或在日志调用时阻塞的问题 (<a href="https://github.com/milvus-io/milvus/pull/53625">#53625</a>)</li>
 <li>修复了一个问题：从无效的 Milvus 快照源，或从格式错误或使用了不受支持版本的快照元数据刷新外部 Collection 时，操作不会立即失败，可能会一直处于待处理状态直至超时（<a href="https://github.com/milvus-io/milvus/pull/53695">#53695</a>、<a href="https://github.com/milvus-io/milvus/pull/54034">#54034</a>）</li>
 <li>修复了在 ngram 索引字段上包含 NUL 字符的 LIKE 查询可能导致 QueryNode 崩溃或返回错误匹配结果的问题 (<a href="https://github.com/milvus-io/milvus/pull/53711">#53711</a>)</li>
 <li>修复了健康检查端点在节点所有组件完成注册之前就报告该节点已就绪的问题（<a href="https://github.com/milvus-io/milvus/pull/53735">#53735</a>）</li>
 <li>修复了一个问题：加载 Collection 时，可能会在跳过仅具有已提交 V3 清单的已恢复分段的情况下报告完成，导致查询结果中缺少这些分段的数据（<a href="https://github.com/milvus-io/milvus/pull/53782">#53782</a>）</li>
-<li>修复了在 OSS 上跨存储桶复制大对象（约 2 GB）的快照时可能超时的问题；现在，超过新可配置的<code translate="no">minio.multipartCopyThreshold</code> （默认 1 GiB）的对象将使用服务器端多部分复制进行复制（<a href="https://github.com/milvus-io/milvus/pull/53789">#53789</a>）</li>
+<li>修复了在 OSS 上跨存储桶复制大对象（约 2 GB）的快照时可能超时的问题；现在，超过新可配置<code translate="no">minio.multipartCopyThreshold</code> （默认 1 GiB）的对象将使用服务器端多部分复制进行复制（<a href="https://github.com/milvus-io/milvus/pull/53789">#53789</a>）</li>
 <li>修复了快照操作（创建、删除、固定、取消固定、导出和还原）可能因 Collection DDL 速率限制和 DDL 强制拒绝而被限流或拒绝的问题（<a href="https://github.com/milvus-io/milvus/pull/53791">#53791</a>）</li>
-<li>修复了 Parquet 导入在可为空的 Timestamptz 字段中，对于空行会存储 NULL 而不是字段默认值的问题 (<a href="https://github.com/milvus-io/milvus/pull/53808">#53808</a>)</li>
-<li>修复了以下问题：当重新排序服务返回的结果顺序不同时，基于模型的Rerankers可能会将得分分配给错误的文档，从而导致搜索结果排序不正确（<a href="https://github.com/milvus-io/milvus/pull/53813">#53813</a>）</li>
+<li>修复了 Parquet 导入在可为空的 Timestamptz 字段中，对于空行会存储 NULL 而不是字段默认值的问题（<a href="https://github.com/milvus-io/milvus/pull/53808">#53808</a>）</li>
+<li>修复了以下问题：当重新排序服务返回的结果顺序不同时，基于模型的Rerankers可能会将得分分配给错误的文档，从而产生排序错误的搜索结果（<a href="https://github.com/milvus-io/milvus/pull/53813">#53813</a>）</li>
 <li>修复了在通道重新平衡到另一个 QueryNode 后，搜索和查询请求可能因“<code translate="no">collection not loaded</code> ”错误而长时间失败的问题 (<a href="https://github.com/milvus-io/milvus/pull/53814">#53814</a>)</li>
 <li>修复了一个问题：当分组搜索设置了严格的分组大小时，即使存在足够多的匹配实体，返回的分组中结果数也可能少于<code translate="no">group_size</code> （<a href="https://github.com/milvus-io/milvus/pull/53899">#53899</a>）</li>
 <li>修复了用户可通过 DescribeCollection 查看其无权访问的 Collections 的元数据，且可在未具备所需权限的情况下调用 segment-info 和 replica RPC 的问题 (<a href="https://github.com/milvus-io/milvus/pull/54033">#54033</a>)</li>
@@ -346,10 +346,10 @@ title: 发布说明
 <tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th><th>Go SDK 版本</th></tr>
 </thead>
 <tbody>
-<tr><td>3.0.2</td><td>3.0.2</td><td>3.0.6</td><td>3.0.10</td><td>3.0.2</td></tr>
+<tr><td>3.0.2</td><td>3.0.2</td><td>3.0.6</td><td>3.0.10</td><td>3.0.0</td></tr>
 </tbody>
 </table>
-<p>我们很高兴地宣布 Milvus v3.0.2 正式发布！本次发布重点提升了搜索和查询性能——消除了过滤搜索、分组操作以及索引构建中的热点路径竞争——同时增强了对外部 Collection 和 Storage V2 的支持，并针对流处理、压缩和索引管理进行了广泛的稳定性修复。</p>
+<p>我们很高兴地宣布 Milvus v3.0.2 正式发布！本次发布重点提升了搜索和查询性能——消除了过滤搜索、分组操作以及索引构建中的热点路径竞争——同时增强了对外部 Collection 和 Storage V2 的支持，并在流处理、压缩和索引管理方面进行了广泛的稳定性修复。</p>
 <h3 id="Improvements" class="common-anchor-header">改进<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -366,17 +366,17 @@ title: 发布说明
         ></path>
       </svg>
     </button></h3><ul>
-<li>通过在查询规划器中将链式“contains”谓词合并为单个<code translate="no">ContainsAny</code>/<code translate="no">ContainsAll</code> 表达式，优化了 ARRAY 过滤功能（<a href="https://github.com/milvus-io/milvus/pull/52365">#52365</a>）</li>
-<li>通过<code translate="no">extfs.endpoint_url</code> 选项，在外部 Collection 中增加了对自定义 S3 兼容端点的支持，并会验证不安全或冲突的端点设置（<a href="https://github.com/milvus-io/milvus/pull/52814">#52814</a>）</li>
+<li>通过在查询规划器中将链式“contains”谓词合并为单个<code translate="no">ContainsAny</code>/<code translate="no">ContainsAll</code> 表达式，优化了ARRAY过滤功能（<a href="https://github.com/milvus-io/milvus/pull/52365">#52365</a>）</li>
+<li>通过<code translate="no">extfs.endpoint_url</code> 选项，在外部 Collections 中增加了对自定义 S3 兼容端点的支持，并会验证不安全或冲突的端点设置（<a href="https://github.com/milvus-io/milvus/pull/52814">#52814</a>）</li>
 <li>将 Bloom 和 Roaring 成员资格过滤器统一到单个<code translate="no">membership_match</code> 表达式中，并提供相应的 Go 客户端支持，用于构建和查询这两种过滤器类型 (<a href="https://github.com/milvus-io/milvus/pull/53019">#53019</a>)</li>
 <li>降低了基于 Tantivy 的索引构建过程中的写入放大效应，从而减少了文本匹配、NGRAM 和 JSON 键统计索引的磁盘 I/O 开销 (<a href="https://github.com/milvus-io/milvus/pull/53057">#53057</a>)</li>
 <li>在 RESTful v2 DQL 端点上添加了准入控制，当代理查询队列已满时，会在请求解码前通过<code translate="no">Retry-After</code> 返回 HTTP 429 状态码 (<a href="https://github.com/milvus-io/milvus/pull/53111">#53111</a>)</li>
 <li>优化了标量过滤器评估路径中一个占搜索叶节点 CPU 时间约 48% 的原子引用计数热点，从而提升了过滤搜索的吞吐量（<a href="https://github.com/milvus-io/milvus/pull/53167">#53167</a>）</li>
-<li>通过用<code translate="no">folly::CPUThreadPoolExecutor</code> 替换手动编写的实现，并恢复弹性工作进程扩展，从而提升了存储线程池的可扩展性 (<a href="https://github.com/milvus-io/milvus/pull/53184">#53184</a>)</li>
+<li>通过用<code translate="no">folly::CPUThreadPoolExecutor</code> 替换手动编写的实现，并恢复弹性工作进程扩展，从而提升了存储线程池的可扩展性（<a href="https://github.com/milvus-io/milvus/pull/53184">#53184</a>）</li>
 <li>改进了 REST 访问日志匹配机制，使格式化器与解析后的 URL 路径进行匹配，且配置的方法现可应用于携带查询参数的请求（<a href="https://github.com/milvus-io/milvus/pull/53147">#53147</a>）</li>
 <li>新增幂等广播支持，重试请求不再创建重复任务，<code translate="no">BulkImport</code> 成为首个采用该功能的组件 (<a href="https://github.com/milvus-io/milvus/pull/53228">#53228</a>)</li>
 <li>为 Lindera 分词器添加了可配置的句子分隔符，允许包含标点符号的用户词典条目作为单个词元进行匹配 (<a href="https://github.com/milvus-io/milvus/pull/53287">#53287</a>)</li>
-<li>新增集群版本门控机制，仅在所有节点完成升级后才自动启用“写入前函数实例化”功能，从而避免滚动升级期间出现版本混杂导致的不一致问题（<a href="https://github.com/milvus-io/milvus/pull/53261">#53261</a>）</li>
+<li>新增集群版本门控机制，仅在所有节点完成升级后才自动启用“写入前函数实例化”功能，从而避免滚动升级期间出现的版本混杂不一致问题（<a href="https://github.com/milvus-io/milvus/pull/53261">#53261</a>）</li>
 <li>将 Woodpecker 升级至 v0.1.42，修复了已最终化的空分段上的 WAL 恢复失败问题，并提高了追加路径的稳定性和指标 (<a href="https://github.com/milvus-io/milvus/pull/53295">#53295</a>)</li>
 <li>通过在每次请求中固定一次已密封分段的快照，降低了搜索和查询热路径中每块数据的原子操作和引用计数开销（<a href="https://github.com/milvus-io/milvus/pull/53301">#53301</a>）</li>
 <li>通过用基于快照的乐观锁取代 TimeTick 等待，改善了部分更新延迟；并优化了 AutoID 处理机制，确保保留现有主键，且返回的 ID 保持输入顺序 (<a href="https://github.com/milvus-io/milvus/pull/53337">#53337</a>)</li>
@@ -408,24 +408,24 @@ title: 发布说明
 <li>修复了过期的结构体数组偏移量别名问题，该问题可能导致密封分段重新打开后显示错误数据（<a href="https://github.com/milvus-io/milvus/pull/53154">#53154</a>）</li>
 <li>修复了文件资源同步在任何资源添加之前就运行的问题，这可能导致在启动或节点注册时清除节点本地文件（<a href="https://github.com/milvus-io/milvus/pull/53170">#53170</a>）</li>
 <li>修复了一个问题：不完整的二进制日志块可能会被默默地视为已完全读取，从而导致查询和压缩结果中可能出现数据缺失（<a href="https://github.com/milvus-io/milvus/pull/53263">#53263</a>）</li>
-<li>修复了对于没有活动索引的 Collection，已删除分段的存储空间从未被回收的问题 (<a href="https://github.com/milvus-io/milvus/pull/53252">#53252</a>)</li>
+<li>修复了对于没有活动索引的 Collections，已删除分段的存储空间从未被回收的问题（<a href="https://github.com/milvus-io/milvus/pull/53252">#53252</a>）</li>
 <li>修复了加载稀疏向量索引时资源估算不准确的问题，该问题可能导致原始数据处理错误，并在 QueryNode 上反复触发警告 (<a href="https://github.com/milvus-io/milvus/pull/53249">#53249</a>)</li>
 <li>修复了在重新平衡过程中，位于主资源组之外的冻结流式处理节点可能意外解冻的问题（<a href="https://github.com/milvus-io/milvus/pull/53229">#53229</a>）</li>
 <li>修复了在分块管理器预检查之前未注册 GCP 凭据（IAM 和 HMAC）时无法连接到 Google Cloud Storage 的问题（<a href="https://github.com/milvus-io/milvus/pull/53288">#53288</a>）</li>
 <li>修复了 C++ 日志意外写入 `<code translate="no">/tmp</code> ` 目录而非转发到统一日志输出中的问题（<a href="https://github.com/milvus-io/milvus/pull/53293">#53293</a>）</li>
 <li>修复了当 Spark 结果跨越多个分区时，回填提交会因 HTTP 500 错误而失败的问题 (<a href="https://github.com/milvus-io/milvus/pull/53346">#53346</a>)</li>
-<li>修复了 DataNode 中的内存泄漏问题：被取消的索引构建或分析任务从未释放其已构建对象的本地内存（<a href="https://github.com/milvus-io/milvus/pull/53348">#53348</a>）</li>
+<li>修复了 DataNode 中的内存泄漏问题：被取消的索引构建或分析任务从未释放其已构建对象的原生内存（<a href="https://github.com/milvus-io/milvus/pull/53348">#53348</a>）</li>
 <li>修复了当可为空的向量字段没有二进制日志文件时，二进制日志导入失败的问题（<a href="https://github.com/milvus-io/milvus/pull/53363">#53363</a>）</li>
 <li>修复了搜索和查询请求读取外部表数据时输出字段不完整或不正确的问题 (<a href="https://github.com/milvus-io/milvus/pull/53372">#53372</a>,<a href="https://github.com/milvus-io/milvus/pull/53385">#53385</a>)</li>
 <li>修复了 REST 请求中稀疏向量行和分区 ID 重复的问题，以及查询提前退出时可能导致崩溃或内存泄漏的内存所有权和清理问题 (<a href="https://github.com/milvus-io/milvus/pull/53402">#53402</a>)</li>
-<li>修复了紧凑化报告完成但未包含结果有效载荷时，可能导致 DataCoord 崩溃或使紧凑化任务卡住而非正常重试的问题 (<a href="https://github.com/milvus-io/milvus/pull/53443">#53443</a>)</li>
-<li>修复了构建分段清单时外部数据文件属性被丢弃的问题，该问题会导致外部 Collections 丢失源文件元数据（<a href="https://github.com/milvus-io/milvus/pull/53444">#53444</a>）</li>
+<li>修复了紧凑化报告完成但未包含结果有效载荷时，可能导致 DataCoord 崩溃或使紧凑化任务卡住而非正常重试的问题（<a href="https://github.com/milvus-io/milvus/pull/53443">#53443</a>）</li>
+<li>修复了构建分段清单时外部数据文件的属性被丢弃的问题，该问题会导致外部 Collections 丢失源文件元数据（<a href="https://github.com/milvus-io/milvus/pull/53444">#53444</a>）</li>
 <li>修复了在调试日志级别处理<code translate="no">count(*)</code> 请求时（特别是在滚动升级期间）可能发生的QueryNode崩溃问题（<a href="https://github.com/milvus-io/milvus/pull/53474">#53474</a>）</li>
 <li>修复了索引和统计信息构建任务在所属分段、索引或 Collection 被删除后仍持续消耗工作节点资源的问题，并改进了孤立索引文件的清理机制（<a href="https://github.com/milvus-io/milvus/pull/53515">#53515</a>）</li>
-<li>修复了本地存储路径的处理机制，确保不同组件写入的数据始终位于读取器和垃圾回收机制预期位置，并对现有本地部署进行了自动升级（<a href="https://github.com/milvus-io/milvus/pull/53530">#53530</a>）</li>
+<li>修复了本地存储路径的处理机制，确保不同组件写入的数据始终位于读取器和垃圾回收机制预期位置，并对现有本地部署进行了自动升级 (<a href="https://github.com/milvus-io/milvus/pull/53530">#53530</a>)</li>
 <li>修复了当分段包含格式错误的 JSON 文档时，索引构建任务会无限期重试的问题；此类构建现在会快速失败，而非无限期消耗 worker 资源（<a href="https://github.com/milvus-io/milvus/pull/53531">#53531</a>）</li>
 <li>修复了针对同一Collection的并发快照还原问题：还原操作现已串行化，若目标已存在，系统将明确返回“数据库中已存在”错误并拒绝还原，而非导致竞态条件或资源泄漏（<a href="https://github.com/milvus-io/milvus/pull/53586">#53586</a>）</li>
-<li>通过升级 Milvus，修复了跨存储接口的二进制加密密钥损坏问题，以及投影 Storage V2 压缩读取器中光标对齐错误的问题 (<a href="https://github.com/milvus-io/milvus/pull/53569">#53569</a>)</li>
+<li>通过升级 milvus-storage，修复了跨存储接口的二进制加密密钥损坏问题，以及投影 Storage V2 压缩读取器中光标对齐错误的问题 (<a href="https://github.com/milvus-io/milvus/pull/53569">#53569</a>)</li>
 </ul>
 <h2 id="v301" class="common-anchor-header">v3.0.1<button data-href="#v301" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -448,10 +448,10 @@ title: 发布说明
 <tr><th>Milvus 版本</th><th>Python SDK 版本</th><th>Node.js SDK 版本</th><th>Java SDK 版本</th><th>Go SDK 版本</th></tr>
 </thead>
 <tbody>
-<tr><td>3.0.1</td><td>3.0.1</td><td>3.0.5</td><td>3.0.9</td><td>3.0.1</td></tr>
+<tr><td>3.0.1</td><td>3.0.1</td><td>3.0.5</td><td>3.0.9</td><td>3.0.0</td></tr>
 </tbody>
 </table>
-<p>我们很高兴地宣布 Milvus v3.0.1 正式发布！本次发布新增了 REST v2 快照管理功能、扩展的重新排序能力，并在 Go 客户端和 RESTful API 中支持 TEXT 字段，同时对 Storage V3、数据一致性和安全性进行了性能优化和问题修复。</p>
+<p>我们很高兴地宣布 Milvus v3.0.1 正式发布！本次发布新增了 REST v2 快照管理功能、扩展的重新排序能力，以及 Go 客户端和 RESTful API 对 TEXT 字段的支持，同时还对 Storage V3、数据一致性和安全性进行了性能优化和问题修复。</p>
 <h3 id="Features-improvements" class="common-anchor-header">功能改进<button data-href="#Features-improvements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -469,7 +469,7 @@ title: 发布说明
       </svg>
     </button></h3><ul>
 <li>新增用于集合范围内的原生快照管理和异步恢复的 REST v2 API（<a href="https://github.com/milvus-io/milvus/pull/52118">#52118</a>、<a href="https://github.com/milvus-io/milvus/pull/52172">#52172</a>）</li>
-<li>新增可配置的结果计数阈值，用于控制搜索和查询操作中 Take 输出路径的选择 (<a href="https://github.com/milvus-io/milvus/pull/52437">#52437</a>)</li>
+<li>新增可配置的结果数量阈值，用于控制搜索和查询操作中 Take 输出路径的选择 (<a href="https://github.com/milvus-io/milvus/pull/52437">#52437</a>)</li>
 <li>在 Go 客户端和 RESTful API 中增加了对 TEXT 字段的支持（<a href="https://github.com/milvus-io/milvus/pull/52450">#52450</a>）</li>
 <li>为外部表添加了可配置的初始和最大读取 IOPS 速率（<a href="https://github.com/milvus-io/milvus/pull/52503">#52503</a>）</li>
 <li>为外部Collection刷新任务添加了可选设置，使其在报告完成前等待所有分段完成索引，同时不延迟数据发布（<a href="https://github.com/milvus-io/milvus/pull/52712">#52712</a>）</li>
@@ -492,11 +492,11 @@ title: 发布说明
         ></path>
       </svg>
     </button></h3><ul>
-<li>改进了几何 RTree 索引和缓存的内存安全性，以及对无法解析的 WKB 和空几何查询的处理 (<a href="https://github.com/milvus-io/milvus/pull/51312">#51312</a>)</li>
+<li>改进了几何 RTree 索引和缓存的内存安全性，以及对无法解析的 WKB 和空几何查询的处理（<a href="https://github.com/milvus-io/milvus/pull/51312">#51312</a>）</li>
 <li>通过恢复全进程范围的临时内存预算，并修正并发 Storage V2/V3 字段加载和标量 V3 索引加载的内存估算值，改进了内存管理 (<a href="https://github.com/milvus-io/milvus/pull/51405">#51405</a>)</li>
 <li>通过并行化读取并将原始向量数据流式传输到磁盘，减少了外部Collection索引构建过程中的下载瓶颈和内存使用量（<a href="https://github.com/milvus-io/milvus/pull/51651">#51651</a>）</li>
 <li>通过批量处理客户端追加操作并公开同步设置，提升了 Woodpecker 在小批量、高并发工作负载下的吞吐量（<a href="https://github.com/milvus-io/milvus/pull/51810">#51810</a>）</li>
-<li>改进了记录读取器的所有权和生命周期一致性、空 Blob 处理，以及存储和压缩路径中的读取错误报告 (<a href="https://github.com/milvus-io/milvus/pull/51891">#51891</a>)</li>
+<li>改进了记录读取器的所有权和生命周期一致性、空 Blob 处理，以及存储和压缩路径中的读取错误报告（<a href="https://github.com/milvus-io/milvus/pull/51891">#51891</a>）</li>
 <li>通过四路交错管道以及针对冲突和重新哈希边界的保护措施，提高了分组哈希探查的效率（<a href="https://github.com/milvus-io/milvus/pull/51977">#51977</a>）</li>
 <li>通过跳过不包含 BM25 或 MinHash 输出字段的 Collections 的 WAL 插入主体解析，降低了插入处理开销 (<a href="https://github.com/milvus-io/milvus/pull/51986">#51986</a>)</li>
 <li>通过在各执行层保留临时和永久错误分类，改进了存储故障报告和重试处理 (<a href="https://github.com/milvus-io/milvus/pull/51990">#51990</a>)</li>
@@ -531,7 +531,7 @@ title: 发布说明
 <li>通过消除每次比较时的映射查找，优化了合并后重新排序结果的排序（<a href="https://github.com/milvus-io/milvus/pull/52885">#52885</a>）</li>
 <li>在处理 JSON 默认值和非 NUL 终止的字符串视图时，提高了内存安全性 (<a href="https://github.com/milvus-io/milvus/pull/52906">#52906</a>)</li>
 <li>通过范围限定统一编译、改进编译器缓存以及减少冗余编译工作，缩短了 C++ 构建时间（<a href="https://github.com/milvus-io/milvus/pull/52995">#52995</a>）</li>
-<li>通过在抓取时从缓存的文件系统收集指标，同时保留现有的指标名称和标签，从而提高了文件系统指标的覆盖率和时效性 (<a href="https://github.com/milvus-io/milvus/pull/53026">#53026</a>)</li>
+<li>通过在抓取时从缓存的文件系统中收集指标，同时保留现有的指标名称和标签，从而提高了文件系统指标的覆盖率和时效性 (<a href="https://github.com/milvus-io/milvus/pull/53026">#53026</a>)</li>
 <li>添加了可刷新设置 growingBuildThreadRate，用于配置每个增长段临时索引构建所用的线程数，同时保留单线程默认行为 (<a href="https://github.com/milvus-io/milvus/pull/53033">#53033</a>)</li>
 <li>通过回溯移植为 3.0 版本添加了 mmap 字段数据写回支持，并提供了默认禁用的 queryNode.mmap.writeback 选项 (<a href="https://github.com/milvus-io/milvus/pull/53079">#53079</a>)</li>
 </ul>
@@ -553,24 +553,24 @@ title: 发布说明
     </button></h3><ul>
 <li>修复了 JSON、ARRAY 和 TIMESTAMPTZ 查询中结果不正确和谓词验证不一致的问题，包括混合类型的谓词、大数比较以及跨多个批次的过滤 (<a href="https://github.com/milvus-io/milvus/pull/51775">#51775</a>)</li>
 <li>修复了当分段的源文件跨越多个任务时，并行外部Collection刷新期间刷新数据不一致的问题（<a href="https://github.com/milvus-io/milvus/pull/51893">#51893</a>）</li>
-<li>修复了 MATCH 表达式接受不在元素级别运行的谓词的问题 (<a href="https://github.com/milvus-io/milvus/pull/51940">#51940</a>)</li>
+<li>修复了 MATCH 表达式接受不在元素级别操作的谓词的问题 (<a href="https://github.com/milvus-io/milvus/pull/51940">#51940</a>)</li>
 <li>修复了无匹配结果的搜索因“不支持的 ID 类型”错误而失败的问题（<a href="https://github.com/milvus-io/milvus/pull/51999">#51999</a>）</li>
 <li>通过添加可配置的迁移超时（默认值为 10 秒），修复了 Milvus Standalone 在关机时卡死的问题 (<a href="https://github.com/milvus-io/milvus/pull/52027">#52027</a>)</li>
-<li>修复了当 DataNode 工作节点在多个服务集群间共享时，外部表嵌入请求使用错误的集群标识的问题 (<a href="https://github.com/milvus-io/milvus/pull/52042">#52042</a>)</li>
+<li>修复了当 DataNode 工作节点在多个服务集群间共享时，外部表嵌入请求使用错误集群标识的问题 (<a href="https://github.com/milvus-io/milvus/pull/52042">#52042</a>)</li>
 <li>修复了导致无法更新 TextEmbedding 函数的 integration_id 和 model_deployment_id 的问题（<a href="https://github.com/milvus-io/milvus/pull/52081">#52081</a>）</li>
 <li>修复了 HTTP JSON 响应中，对于失败的回填分段未显式包含 ok=false 状态码的问题（<a href="https://github.com/milvus-io/milvus/pull/52082">#52082</a>）</li>
 <li>修复了在传输或低速超时后重试时，MinIO 对象上传因 HTTP 400 XAmzContentChecksumMismatch 错误而失败的问题（<a href="https://github.com/milvus-io/milvus/pull/52128">#52128</a>、<a href="https://github.com/milvus-io/milvus/pull/52194">#52194</a>）</li>
 <li>修复了在启用流式服务时，QueryNodes 之间的分段平衡会陷入停滞的问题（<a href="https://github.com/milvus-io/milvus/pull/52147">#52147</a>、<a href="https://github.com/milvus-io/milvus/pull/52169">#52169</a>）</li>
 <li>修复了在混合压缩过程中，当无法重建保留记录时发生的无提示数据丢失问题（<a href="https://github.com/milvus-io/milvus/pull/52200">#52200</a>）</li>
 <li>修复了快照还原时丢失Collection设置并意外默认采用“强一致性”的问题（<a href="https://github.com/milvus-io/milvus/pull/52206">#52206</a>）</li>
-<li>修复了流式删除操作遗漏新加载的已封存分段的问题，该问题会导致已删除的数据仍可被查询 (<a href="https://github.com/milvus-io/milvus/pull/52218">#52218</a>)</li>
+<li>修复了流式删除操作遗漏新加载的已封存分段的问题，该问题会导致已删除数据仍可被查询 (<a href="https://github.com/milvus-io/milvus/pull/52218">#52218</a>)</li>
 <li>修复了针对空数据时嵌套索引构建不正确的问题（<a href="https://github.com/milvus-io/milvus/pull/52247">#52247</a>）</li>
 <li>修复了切换到流式服务时导致死锁，使操作无限期等待的问题（<a href="https://github.com/milvus-io/milvus/pull/52292">#52292</a>）</li>
 <li>修复了压缩和记录重建期间几何值的默认值不正确，以及 Parquet 导入中默认填充的几何值标记为空的问题（<a href="https://github.com/milvus-io/milvus/pull/52350">#52350</a>）</li>
 <li>修复了 DataCoord 重启后，在压缩和恢复过程中有效 V3 分段被拒绝的问题（<a href="https://github.com/milvus-io/milvus/pull/52383">#52383</a>、<a href="https://github.com/milvus-io/milvus/pull/52389">#52389</a>、<a href="https://github.com/milvus-io/milvus/pull/52390">#52390</a>、<a href="https://github.com/milvus-io/milvus/pull/52391">#52391</a>、<a href="https://github.com/milvus-io/milvus/pull/52392">#52392</a>、<a href="https://github.com/milvus-io/milvus/pull/52393">#52393</a>）</li>
 <li>修复了在结构体中的 VARCHAR 数组子字段上使用混合标量索引时，因缺少版本元数据而导致的分段加载失败问题（<a href="https://github.com/milvus-io/milvus/pull/52385">#52385</a>）</li>
 <li>修复了重新打开已更新的清单时外部列无法刷新的问题 (<a href="https://github.com/milvus-io/milvus/pull/52397">#52397</a>)</li>
-<li>修复了在包含时间依赖条件的搜索中时区处理不正确的问题（<a href="https://github.com/milvus-io/milvus/pull/52407">#52407</a>）</li>
+<li>修复了在包含时间依赖条件搜索中时区处理不正确的问题（<a href="https://github.com/milvus-io/milvus/pull/52407">#52407</a>）</li>
 <li>修复了搜索请求中对 ArrayOfVector 输入处理不正确的问题（<a href="https://github.com/milvus-io/milvus/pull/52408">#52408</a>）</li>
 <li>修复了插入操作无法拒绝超过支持大小限制的行的问题（<a href="https://github.com/milvus-io/milvus/pull/52426">#52426</a>）</li>
 <li>修复了临时索引忽略配置的目标索引版本的问题（<a href="https://github.com/milvus-io/milvus/pull/52449">#52449</a>）</li>
@@ -624,7 +624,7 @@ title: 发布说明
 <tr><td>3.0.0</td><td>3.0.1</td><td>3.0.3</td><td>3.0.5</td><td>3.0.0</td></tr>
 </tbody>
 </table>
-<p>Milvus 3.0.0 正式发布！基于<a href="https://milvus.io/docs/release_notes.md#v30-beta">3.0-beta</a> 版本中引入的湖原生架构，此版本完成了 beta 版所开启的工作：外部集合（External Collection）覆盖了更多湖屋（lakehouse）工作流；Schema 支持在线添加/回填/删除；稀疏索引围绕 SINDI 进行了重构； StructArray 和分面搜索进一步完善了检索引擎；FAISS 直通和 TEXT 扩展了索引及模态选项；Woodpecker 现可作为独立服务运行。</p>
+<p>Milvus 3.0.0 正式发布！基于<a href="https://milvus.io/docs/release_notes.md#v30-beta">3.0-beta</a> 版本中引入的湖原生架构，此版本完成了 beta 版所开启的工作：外部 Collection 覆盖了更多湖屋工作流；Schema 支持在线添加/回填/删除；稀疏索引围绕 SINDI 进行了重构； StructArray 和分面搜索进一步完善了检索引擎；FAISS 直通和 TEXT 扩展了索引及模态选项；Woodpecker 现可作为独立服务运行。</p>
 <p>观看下方视频，深入了解 Milvus 3.0 并参与与核心维护者的问答环节：</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SAm4YfrO1ok?si=87HTPnuH_xJtZda0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 <p>如果您是首次接触 3.0 系列，下文的“Core 3.0 功能回顾”部分总结了 3.0-beta 中引入的功能；完整的说明请参阅<a href="https://milvus.io/docs/release_notes.md#v30-beta">3.0-beta 发布说明</a>。</p>
@@ -651,14 +651,14 @@ title: 发布说明
 <p>有关更多信息，请参阅《<a href="/docs/zh/add-fields-to-an-existing-collection.md">向现有Collection添加字段》</a>。</p>
 <h4 id="Sparse-index-overhaul-SINDI-Block-Max-WAND-and-Block-Max-MaxScore" class="common-anchor-header">稀疏索引全面升级：SINDI、Block-Max WAND 和 Block-Max MaxScore</h4><p>Milvus 3.0 对稀疏向量索引进行了全面升级。它引入了新的搜索算法<a href="https://arxiv.org/abs/2509.08395">——SINDI</a>、Block-Max WAND 和 Block-Max MaxScore——同时还支持倒排列表压缩、可配置量化以及按工作负载选择搜索算法。 此外，mmap 加载、序列化和 BM25 评分机制也得到了优化，从而降低了大规模稀疏向量和全文搜索的索引存储及加载开销。 在内部基准测试中，压缩后的 BM25 索引在可比召回率下比 2.6 稀疏索引小约 3 倍，而 SINDI 在学习型稀疏 Embeddings 上达到的 QPS 最高可达 MaxScore 的 10 倍左右。 启用新索引版本后（参见“兼容性与行为说明”），SINDI 将成为稀疏 IP 搜索的默认选项，而 MaxScore 将成为 BM25 的默认选项。</p>
 <h4 id="StructArray-coverage" class="common-anchor-header">StructArray 支持范围</h4><p>StructArray 现支持空值、位图索引、对在线 Collection 的 Dynamic Field 添加，以及通过 upsert 对结构体字段进行部分更新，并提供相应的 REST 和批量导入支持。</p>
-<p>元素级搜索新增了跨向量子字段的混合搜索，支持按实体配置的折叠（最大值/求和/平均值/前k个变体），此外还支持范围搜索和组内聚合。嵌套过滤支持<code translate="no">element_filter</code> 谓词、<code translate="no">MATCH_ANY</code> /<code translate="no">MATCH_ALL</code> /<code translate="no">MATCH_LEAST</code> /<code translate="no">MATCH_MOST</code> /<code translate="no">MATCH_EXACT</code> 量词、位置子字段访问（如<code translate="no">tags[0][name]</code> ）以及结构列上的<code translate="no">array_length()</code> 操作。</p>
+<p><code translate="no">element_filter</code> <code translate="no">MATCH_ANY</code> <code translate="no">MATCH_ALL</code> <code translate="no">MATCH_LEAST</code> <code translate="no">MATCH_MOST</code> <code translate="no">MATCH_EXACT</code> <code translate="no">tags[0][name]</code> <code translate="no">array_length()</code> </p>
 <p>有关更多信息，请参阅<a href="/docs/zh/array-of-structs.md">StructArray</a>和<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
-<h4 id="Search-Aggregation-and-faceted-search" class="common-anchor-header">搜索聚合与分面搜索</h4><p>测试版中的查询聚合会对过滤后的数据计算精确统计数据；3.0.0 版本在搜索路径中添加了分面功能。在搜索时指定一个分面字段，Milvus 将返回排名前列的分面值，每个值由其在 ANN 排名中匹配度最高的成员表示，并标注有 COUNT 和 AVG 等聚合统计信息 ——通过单次请求即可获得分面搜索侧边栏（品牌、价格范围、属性）的结果，而无需在客户端进行过度检索和计数。</p>
-<h4 id="Function-Chain-reranking" class="common-anchor-header">函数链重新排序</h4><p>现在可以通过函数链 API 对重新排序进行组合，该 API 作为单个搜索请求的一部分，执行有序且带类型的管道。 一条链可以结合 QueryNode 上的早期 L0 重新评分与 Proxy 上的 L2 后缩减重新排序，支持评分转换与组合、基于模型的重新排序、排序以及候选项筛选，且无需客户端协调。 此版本还为 L0 重新排序添加了原生 XGBoost 评分功能（使用注册为 FileResources 的 UBJ 模型），并提供了 Hugging Face 推理提供程序，用于服务器管理的文本嵌入和句子相似度重新排序。</p>
+<h4 id="Search-Aggregation-and-faceted-search" class="common-anchor-header">搜索聚合与分面搜索</h4><p>测试版中的查询聚合会对过滤后的数据计算精确统计数据；3.0.0 版本在搜索路径中添加了分面功能。在搜索时指定一个分面字段，Milvus 将返回排名前列的分面值，每个值由其在 ANN 排名中匹配度最高的成员代表，并标注有 COUNT 和 AVG 等聚合统计信息 ——通过单次请求即可获得分面搜索侧边栏（品牌、价格范围、属性）的结果，而无需在客户端进行过度检索和计数。</p>
+<h4 id="Function-Chain-reranking" class="common-anchor-header">函数链重新排序</h4><p>现在可以通过函数链 API 对重新排序进行组合，该 API 作为单个搜索请求的一部分，执行有序且带类型的管道。 一条链可以结合 QueryNode 上的早期 L0 重新评分与 Proxy 上的 L2 后缩减重新排序，支持评分转换与组合、基于模型的重新排序、排序以及候选项筛选，且无需客户端协调。 此版本还为 L0 重新排序添加了原生 XGBoost 评分功能，使用注册为 FileResources 的 UBJ 模型，同时提供了 Hugging Face 推理提供程序，用于服务器管理的文本嵌入和句子相似度重新排序。</p>
 <h4 id="TEXT-long-text-fields" class="common-anchor-header">TEXT 长文本字段</h4><p>TEXT字段使长文本成为第一类数据，并取消了存储层面的长度限制：它们支持<code translate="no">text_match</code> 、<code translate="no">phrase_match</code> 和BM25。小于64 KB的值保持内联存储；更大的值则存储在分区级别的Vortex格式LOB文件中，而列中仅存储<code translate="no">(file_id, offset)</code> 引用。 LOB 文件在各个分段之间共享，因此压缩操作仅需移动引用而非重写文本。对于 RAG 而言，这意味着可以通过一次 I/O 从同一存储中检索向量和源文本——无需操作外部 blob 存储。</p>
 <h4 id="FAISS-index-passthrough" class="common-anchor-header">FAISS 索引直通</h4><p>新的<code translate="no">FAISS</code> 索引类型通过<code translate="no">faiss_index_name</code> 参数接受任意Faiss索引生成器字符串——<code translate="no">IVF64,Flat</code> 、<code translate="no">HNSW16,Flat</code> 、<code translate="no">OPQ16,IVF64,PQ16x4</code> ——并传递搜索参数，因此Faiss配置方案可直接在Milvus上复现。</p>
 <h4 id="Vortex-and-Lance-format-support" class="common-anchor-header">支持 Vortex 和 Lance 格式</h4><p>存储层新增了两种开放的列式格式：Vortex作为下一代内部格式——支持自适应编码（字典编码、RLE、位打包、浮点数专用压缩）、零拷贝解压，并针对向量与标量混合工作负载进行了优化；此外，Lance与Parquet并行，用于开放生态系统的数据交换。 Vortex 将成为默认的内部格式，其路线图中还包含过滤器下推和本地变体功能。</p>
-<h4 id="Woodpecker-standalone-deployment" class="common-anchor-header">Woodpecker 独立部署</h4><p>作为流式写入路径核心的 WAL（写入前日志）Woodpecker，现可作为独立服务部署，而非嵌入其他节点——具备独立扩展、故障隔离和可观测性，如同任何其他微服务。这对大型集群和高写入工作负载尤为重要。</p>
+<h4 id="Woodpecker-standalone-deployment" class="common-anchor-header">Woodpecker 独立部署</h4><p>作为流式写入路径核心的 WAL（写入前日志）Woodpecker，现可作为独立服务进行部署，而非嵌入其他节点——具备独立扩展、故障隔离和可观测性，如同其他任何微服务一样。这对大型集群和高写入工作负载尤为重要。</p>
 <h3 id="Core-30-features-recall" class="common-anchor-header">Core 3.0 功能回顾<button data-href="#Core-30-features-recall" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -680,7 +680,7 @@ title: 发布说明
 <li><strong>快照</strong>— 通过分段引用生成特定时间点的只读Collection视图，边际存储成本近乎为零。</li>
 <li><strong>存储 V3（Loon）</strong>——基于清单的对象存储列式存储；是快照和外部 Collection 的基础。</li>
 <li><strong>查询/搜索 ORDER BY</strong>— 支持服务器端多字段排序，每个字段均可设置 ASC/DESC。</li>
-<li><strong>查询聚合</strong>— 支持带分组的 COUNT / SUM / AVG / MIN / MAX，在服务器端进行计算。</li>
+<li><strong>查询聚合</strong>— 支持带分组条件的 COUNT / SUM / AVG / MIN / MAX，在服务器端进行计算。</li>
 <li><strong>EmbList + DiskANN</strong>—— 针对 StructArray 嵌入列表的磁盘上多向量索引，包含 Muvera 和 Lemur 等加速路径。</li>
 <li><strong>MinHash 函数（doc-in、doc-out）</strong>——服务器端的 MinHash 签名，配合<code translate="no">MINHASH_LSH</code> 用于近似重复检测。</li>
 <li><strong>可为空向量</strong>— 六种向量类型均支持 NULL；搜索会跳过 NULL 行，且 AddField 功能已扩展至向量字段。</li>
@@ -750,18 +750,18 @@ title: 发布说明
         ></path>
       </svg>
     </button></h3><h4 id="External-Collection" class="common-anchor-header">External Collection</h4><p>在典型的 AI 数据管道中，数 TB 的 Embeddings 和元数据通常已作为 Parquet、Lance 或 Iceberg 表存储在对象存储中。将这些数据复制到 Milvus 会使存储成本翻倍，增加一条必须保持同步的 ETL 管道，并导致数据治理权脱离客户掌控。</p>
-<p>外部 Collection 功能消除了数据复制的需求。Milvus Collection 可直接引用文件在原始位置的存储位置，而 Milvus 仅负责管理 Schema、索引和查询执行。 增量刷新机制确保 Collections 与底层文件保持同步。对于数据无法离开数据湖的客户（如金融和医疗团队），可在数据原地运行向量检索。单个驻留数据湖的数据集也可同时由多个 Milvus 实例提供服务。</p>
+<p>外部 Collection 功能消除了数据复制的需求。Milvus Collection 可直接引用文件在原始位置的存储位置，而 Milvus 仅负责管理 Schema、索引和查询执行。 增量刷新机制确保 Collection 与底层文件保持同步。对于数据无法离开数据湖的客户（如金融和医疗团队），可在数据原地运行向量检索。单个驻留数据湖的数据集也可同时由多个 Milvus 实例提供服务。</p>
 <p>如需了解更多信息，请参阅《<a href="/docs/zh/create-an-external-collection.md">创建外部Collection》</a>。</p>
 <h4 id="Snapshot" class="common-anchor-header">快照</h4><p>服务和批量发现通常需要同时访问同一个 Collection。A/B 模型评估、大规模去重、回填验证以及版本回滚，在写入操作仍在进行时，都需要 Collection 的稳定视图。</p>
 <p>快照通过引用现有分段（而非复制数据）来创建 Collection 的某个时间点的只读视图，因此边际存储成本接近于零。在 MVCC 风格的隔离机制下，批处理任务可以从快照中读取数据，而实时 Collection 则继续接受写入操作。</p>
 <p>有关更多信息，请参阅<a href="/docs/zh/snapshots.md">“快照”</a>、<a href="/docs/zh/manage-snapshots.md">“管理快照</a>”和<a href="/docs/zh/snapshot-use-cases.md">“快照用例”</a>。</p>
-<h4 id="Query--Search-Order-By" class="common-anchor-header">查询/搜索排序</h4><p>搜索和查询现支持多字段排序，排序操作已下推至Milvus内核，且可针对每个字段分别设置<code translate="no">ASC</code> 和<code translate="no">DESC</code> 。这弥补了生产环境中的常见缺陷：当最相似的项目并非最便宜、最新或最受欢迎时，仅按距离排序的“Top-K”结果往往无法满足业务需求。</p>
+<h4 id="Query--Search-Order-By" class="common-anchor-header">查询/搜索排序</h4><p>搜索和查询现支持多字段排序，排序操作已下推至Milvus内核，且可针对每个字段分别设置<code translate="no">ASC</code> 和<code translate="no">DESC</code> 。这弥补了生产环境中的常见缺陷：当最相似的项目并非最便宜、最新或最受欢迎时，仅基于距离的Top-K排序往往无法满足业务需求。</p>
 <p>应用程序不再需要过度检索结果并在客户端重新排序来实现复合排名。</p>
 <p>有关更多信息，请参阅《<a href="/docs/zh/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields--Milvus-30x">按标量字段对搜索结果排序</a>》和《<a href="/docs/zh/get-and-scalar-query.md#Sort-Query-Results--Milvus-30x">对查询结果排序</a>》。</p>
-<h4 id="Query-Aggregation" class="common-anchor-header">查询聚合</h4><p><code translate="no">group_by_fields</code> <code translate="no">output_fields</code> <code translate="no">count(*)</code> <code translate="no">count(&lt;field&gt;)</code> <code translate="no">sum(&lt;field&gt;)</code> <code translate="no">avg(&lt;field&gt;)</code> <code translate="no">min(&lt;field&gt;)</code>过去，要从 Milvus Collection 中生成租户分布统计、字段完整性计数或版本发布进度，通常需要将匹配的实体拉回客户端并在那里进行聚合。<code translate="no">max(&lt;field&gt;)</code></p>
+<h4 id="Query-Aggregation" class="common-anchor-header">查询聚合</h4><p>过去，要从 Milvus Collection 中生成租户分布统计、字段完整性计数或版本发布进度，通常需要将匹配的实体拉回客户端并在那里进行聚合。 Milvus 3.0 将 SQL 风格的标量聚合推入内核。查询调用支持 `<code translate="no">group_by_fields</code> ` 以及 `<code translate="no">output_fields</code>` 中的聚合表达式，包括 `<code translate="no">count(*)</code>`、`<code translate="no">count(&lt;field&gt;)</code>`、`<code translate="no">sum(&lt;field&gt;)</code>`、`<code translate="no">avg(&lt;field&gt;)</code>`、`<code translate="no">min(&lt;field&gt;)</code>` 和 `<code translate="no">max(&lt;field&gt;)</code>`。聚合在过滤后于服务器端进行评估。</p>
 <p>有关更多信息，请参阅<a href="/docs/zh/get-and-scalar-query.md#Aggregate-Query-Results--Milvus-30x">“聚合查询结果</a>”。</p>
 <h4 id="Null-Vector" class="common-anchor-header">空向量</h4><p>Embeddings通常是异步生成的，因此实体可能在其向量到达之前就已出现。 多模态数据本身也存在天然缺失，例如没有字幕的视频或没有图片的产品。早期版本对此没有理想的解决方案：应用程序要么延迟写入直到向量准备就绪，要么填入占位符向量，这两种选择都会降低检索质量。</p>
-<p>Milvus 3.0 支持所有六种向量类型的向量字段中的 NULL 值。搜索会自动跳过 NULL 向量，检索质量不受影响，且 NULL 向量实际上不占用存储空间。<code translate="no">AddField</code> 功能也扩展到了此变更涉及的向量字段：通过<code translate="no">nullable=True</code> ，现有 Collection 可在不重建的情况下在线扩展新的向量字段。</p>
+<p>Milvus 3.0 支持所有六种向量类型的向量字段中的 NULL 值。搜索会自动跳过 NULL 向量，检索质量不受影响，且 NULL 向量实际上不占用存储空间。<code translate="no">AddField</code> 功能也扩展到了此次变更涉及的向量字段：通过<code translate="no">nullable=True</code> ，现有 Collection 可在不重建的情况下在线扩展新的向量字段。</p>
 <p>有关更多信息，请参阅《<a href="/docs/zh/nullable-and-default.md">可为空字段</a>》。</p>
 <h4 id="Custom-Dictionary--Synonym-Dictionary" class="common-anchor-header">自定义词典与同义词词典</h4><p>开箱即用的分词器并不总能满足生产环境的搜索质量要求。中文、医学、法律和化学等垂直领域，以及多语言语料库，均可从自定义词典和同义词表中获益匪浅。此前，这些资源主要以应用程序侧的查询重写形式存在。</p>
 <p>Milvus 3.0 引入了 FileResource 机制，用于注册自定义分词器词典、同义词表、停用词表以及复合词拆分规则。 资源注册后，可在任何分词器或过滤器中引用，并适用于 BM25、分析器和文本匹配功能。词典和同义词现可进行版本控制并集中管理，无需分散在应用程序代码中。</p>
@@ -778,6 +778,6 @@ title: 发布说明
 <h4 id="Force-Merge" class="common-anchor-header">强制合并</h4><p>生产环境中的工作负载会随着时间推移积累分段碎片，从而导致查询延迟波动和存储空间膨胀。</p>
 <p>Milvus 3.0 增加了在非高峰时段显式触发分段压缩的功能，支持同步和异步两种模式。</p>
 <p>有关更多信息，请参阅《<a href="/docs/zh/force-merge.md">强制合并压缩</a>》。</p>
-<h4 id="Storage-V3" class="common-anchor-header">Storage V3</h4><p>Milvus 3.0 推出了 Storage V3，这是一种基于清单的列式存储引擎，其数据和元数据存储在兼容 S3 的对象存储中。每个数据集版本都被封装为不可变的清单快照——这是一个 Avro 编码的文件，记录了构成该数据集的列组、增量日志和统计信息。</p>
+<h4 id="Storage-V3" class="common-anchor-header">Storage V3</h4><p>Milvus 3.0 推出了 Storage V3，这是一种基于清单的列式存储引擎，其数据和元数据存储在兼容 S3 的对象存储中。每个数据集版本都被捕获为一个不可变的清单快照——这是一个 Avro 编码的文件，记录了构成该数据集的列组、增量日志和统计信息。</p>
 <p>清单是紧凑的 Avro 文件，增量日志记录实体级别的删除操作，而无需重写数据文件。这使得随着数据集的增长，元数据开销得以保持在较低水平。此外，清单还将元数据追踪与查询路径解耦，从而使 Collection 能够管理更多分段，而不会降低查询性能。</p>
 <p>由于状态存储在对象存储中，数据集具有自描述性：任何能够访问存储路径的读取者，无需中央目录即可发现并解析数据集。这一特性为外部Collection、快照以及未来的湖存储集成提供了基础。</p>

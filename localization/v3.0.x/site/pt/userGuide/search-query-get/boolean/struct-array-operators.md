@@ -81,7 +81,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os exemplos parciais de entidades a seguir mostram apenas os campos <code translate="no">chunks</code> da <strong>Entidade A</strong> e <strong>da Entidade B</strong>. Não se trata de cargas úteis de inserção completas.</p>
+    </button></h2><p>Os exemplos parciais de entidades a seguir mostram apenas os campos « <code translate="no">chunks</code> » da <strong>Entidade A</strong> e <strong>da Entidade B</strong>. Não se trata de cargas úteis de inserção completas.</p>
 <p><strong>Entidade A</strong>:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;chunks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -290,7 +290,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <pre><code translate="no" class="language-text">MATCH_EXACT(chunks, $[section] == &quot;filter&quot;, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
 <p>Nenhuma das entidades corresponde, porque nenhuma tem um elemento com <code translate="no">section</code> definido como <code translate="no">&quot;filter&quot;</code>.</p>
-<p>Para ` <code translate="no">MATCH_EXACT</code>`, ` <code translate="no">threshold</code> ` pode ser zero ou um número inteiro positivo.</p>
+<p>Para <code translate="no">MATCH_EXACT</code>, <code translate="no">threshold</code> pode ser zero ou um número inteiro positivo.</p>
 <h2 id="Row-level-predicates-on-StructArray-paths" class="common-anchor-header">Predicados ao nível da linha em percursos StructArray<button data-href="#Row-level-predicates-on-StructArray-paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -378,7 +378,7 @@ array_length(chunks) == 1
 <pre><code translate="no" class="language-text">ARRAY_LENGTH(chunks[quality_score]) == 3
 <button class="copy-code-btn"></button></code></pre>
 <p>Apenas a Entidade B corresponde, porque o seu subcampo « <code translate="no">quality_score</code> » tem três valores.</p>
-<h4 id="Test-subfield-values-across-elements" class="common-anchor-header">Testar valores de subcampos em vários elementos</h4><p>Por exemplo, verifique se algum índice de qualidade é igual a « <code translate="no">0.74</code> »:</p>
+<h4 id="Test-subfield-values-across-elements" class="common-anchor-header">Testar valores de subcampos em vários elementos</h4><p>Por exemplo, verifique se alguma pontuação de qualidade é igual a « <code translate="no">0.74</code> »:</p>
 <pre><code translate="no" class="language-text">ARRAY_CONTAINS(chunks[quality_score], 0.74)
 <button class="copy-code-btn"></button></code></pre>
 <p>Apenas a Entidade A corresponde.</p>
@@ -439,8 +439,8 @@ chunks is not null
 <tr><th>Tipo de subcampo</th><th>Suporte a predicados ao nível do elemento</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code></td><td>Predicados escalares, tais como <code translate="no">$[has_code] == true</code> ou <code translate="no">!($[has_code] == true)</code>. Evite expressões booleanas simples, tais como <code translate="no">$[has_code]</code>.</td></tr>
-<tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>comparação, intervalo encadeado, <code translate="no">in</code>, <code translate="no">not in</code>, expressões aritméticas com <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> ou <code translate="no">%</code> seguidas de comparação e combinações lógicas.</td></tr>
+<tr><td><code translate="no">BOOL</code></td><td>Predicados escalares, tais como « <code translate="no">$[has_code] == true</code> » ou « <code translate="no">!($[has_code] == true)</code> ». Evite expressões booleanas simples, tais como « <code translate="no">$[has_code]</code> ».</td></tr>
+<tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>comparação, intervalo encadeado, <code translate="no">in</code>, <code translate="no">not in</code>, expressões aritméticas com <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> ou <code translate="no">%</code> seguidas de comparação, e combinações lógicas.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Comparação, intervalo encadeado, <code translate="no">in</code>, <code translate="no">not in</code>, expressões aritméticas com <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code> ou <code translate="no">/</code> seguidas de comparação e combinações lógicas. O operador <code translate="no">%</code> não é suportado para subcampos de ponto flutuante.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>Comparação de cadeias de caracteres, intervalos encadeados, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code> e combinações lógicas.</td></tr>
 <tr><td>Subcampos escalares de ` <code translate="no">ARRAY</code> ` (Milvus 3.0.6 e versões posteriores)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> e <code translate="no">array_length</code> em <code translate="no">$[tags]</code>, além de <code translate="no">$[tags] is null</code> e <code translate="no">$[tags] is not null</code>. Os operadores de comparação, <code translate="no">in</code> e <code translate="no">like</code> em <code translate="no">$[tags]</code> são rejeitados.</td></tr>
@@ -482,6 +482,27 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <p>Os caminhos posicionais ao nível da linha seguem a mesma regra: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> é desconhecido quando o valor <code translate="no">lang</code> do primeiro elemento é nulo, quando a entidade não tem nenhum elemento nessa posição ou quando o campo StructArray é nulo, pelo que a entidade não corresponde.</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">Encontrar entidades com vetores em falta nos elementos StructArray<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Suponha que cada produto armazene partes da sua descrição num campo StructArray denominado <code translate="no">chunks</code>. Cada fragmento tem um subcampo de vetor denominado <code translate="no">embedding</code> que permite o valor NULL quando o respetivo vetor está em falta. O produto A tem dois fragmentos e um deles não tem o vetor. Ambos os fragmentos do produto B têm vetores.</p>
+<p>Para a configuração do esquema, consulte <a href="/docs/pt/create-structarray-field.md#Allow-null-values-in-Struct-elements">Permitir valores nulos em elementos Struct</a>.</p>
+<p>Para encontrar produtos com pelo menos um fragmento sem o seu vetor, passe este filtro para <code translate="no">query()</code>.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> refere-se ao vetor no bloco atual. <code translate="no">MATCH_ANY</code> seleciona um produto quando pelo menos um dos seus blocos tem um vetor NULL. A consulta devolve o produto A.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Predicados não suportados<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -499,8 +520,8 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
       </svg>
     </button></h2><p>Os predicados « <code translate="no">$[...]</code> » ao nível do elemento não suportam:</p>
 <ul>
-<li><p>Funções de correspondência de texto, tais como <code translate="no">text_match(field, &quot;...&quot;)</code> ou <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
-<li><p>Sintaxe de caminho JSON, <code translate="no">exists</code> em caminhos JSON ou funções JSON como <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code> ou <code translate="no">json_contains_any</code>.</p></li>
+<li><p>Funções de correspondência de texto, tais como ` <code translate="no">text_match(field, &quot;...&quot;)</code> ` ou ` <code translate="no">phrase_match(field, &quot;...&quot;)</code>`.</p></li>
+<li><p>Sintaxe de caminho JSON, <code translate="no">exists</code> em caminhos JSON ou funções JSON, tais como <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code> ou <code translate="no">json_contains_any</code>.</p></li>
 <li><p>Funções de contentores de matrizes, tais como <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> ou <code translate="no">array_length</code> em <code translate="no">$[subfield]</code> de um subcampo escalar. Em vez disso, utilize estas funções num caminho de subcampo, como <code translate="no">chunks[section]</code>, num predicado ao nível da linha. A partir do Milvus 3.0.6, estas funções são suportadas em <code translate="no">$[tags]</code> para subcampos escalares <code translate="no">ARRAY</code>.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> ou <code translate="no">$[subfield] is not null</code> antes do Milvus 3.0.6.</p></li>
 </ul>

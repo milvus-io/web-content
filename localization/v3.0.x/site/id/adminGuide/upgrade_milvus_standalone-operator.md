@@ -49,7 +49,7 @@ title: Memperbarui Milvus Standalone dengan Milvus Operator
 <li>Metode instalasi dan manifest yang digunakan untuk Milvus Operator yang sudah ada</li>
 <li>Cadangan terbaru dari metadata Milvus dan data persisten</li>
 </ul>
-<p><strong>Batasan antrian pesan</strong>: Saat melakukan upgrade ke Milvus v3.0.5, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0.5, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antar sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
 <div class="alert warning">
 <p>Prosedur ini tidak memvalidasi penurunan versi atau rollback dengan mengubah gambar Milvus kembali ke 2.6.x. Setelah v3.0.5 menulis data, rollback yang hanya melibatkan gambar dapat gagal membaca status yang telah diperbarui. Jika peningkatan gagal, hentikan penulisan dan gunakan rencana pemulihan yang mengembalikan cadangan metadata dan data persisten sebelum peningkatan. Validasi rencana pemulihan di lingkungan non-produksi terlebih dahulu.</p>
 </div>
@@ -88,7 +88,7 @@ title: Memperbarui Milvus Standalone dengan Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan manifest sumber untuk penyebaran yang ada sebagai manifest peningkatan versi. Jangan menerapkan file cadangan yang diekspor secara langsung tanpa terlebih dahulu menghapus metadata yang dikelola server dan bidang status.</p>
+<p>Gunakan manifest sumber untuk penyebaran yang ada (<code translate="no">milvus.yaml</code> dalam panduan ini) sebagai manifest peningkatan versi. Jangan menerapkan file cadangan yang diekspor secara langsung tanpa terlebih dahulu menghapus metadata yang dikelola server dan bidang status.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Langkah 2: Konfirmasi versi Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,4 +163,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pastikan bahwa CR Milvus melaporkan ` <code translate="no">Healthy</code>`, gambar saat ini adalah ` <code translate="no">milvusdb/milvus:v3.0.5</code>`, dan koleksi yang ada tetap dapat di-query dan dicari. Selesaikan pemeriksaan ini sebelum Anda mengaktifkan fitur apa pun yang spesifik untuk v3.0.5.</p>
+<p>Pastikan CR Milvus melaporkan ` <code translate="no">Healthy</code>`, gambar saat ini adalah ` <code translate="no">milvusdb/milvus:v3.0.5</code>`, dan koleksi yang ada tetap dapat di-query dan dicari. Selesaikan pemeriksaan ini sebelum Anda mengaktifkan fitur apa pun yang spesifik untuk v3.0.5.</p>
+<div class="alert note">
+<p>Peningkatan ke Milvus 3.0 tidak mengaktifkan Storage V3. Setelah Anda memverifikasi peningkatan, tinjau <a href="/docs/id/storage-v3.md">Storage V3</a> sebelum mengaktifkan fitur yang bergantung padanya. Setelah Milvus menulis data Storage V3, penurunan versi ke versi Milvus yang lebih lama yang tidak dapat membaca Storage V3 tidak didukung.</p>
+</div>

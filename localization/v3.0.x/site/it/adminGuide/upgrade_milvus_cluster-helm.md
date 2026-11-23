@@ -25,7 +25,7 @@ title: Aggiornamento del cluster Milvus con Helm Chart
       </svg>
     </button></h1><p>Questa guida descrive come aggiornare il cluster Milvus 2.6.x alla versione 3.0.5 utilizzando Helm.</p>
 <div class="alert note">
-<p>Questa procedura è stata verificata per il passaggio da Milvus 2.6.20 a Milvus v3.0.5 con il chart Helm di Milvus 5.0.22. Se si utilizza un'altra versione patch di Milvus 2.6.x o una versione diversa del chart Helm, verificare prima l'aggiornamento in un ambiente non di produzione.</p>
+<p>Questa procedura è stata verificata per il passaggio da Milvus 2.6.20 a Milvus v3.0.5 con il chart Helm di Milvus 5.0.22. Se si utilizza un’altra versione patch di Milvus 2.6.x o una versione diversa del chart Helm, verificare prima l’aggiornamento in un ambiente non di produzione.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ title: Aggiornamento del cluster Milvus con Helm Chart
 <li>I valori Helm utilizzati per l’implementazione esistente</li>
 <li>Un backup aggiornato dei metadati e dei dati persistenti di Milvus</li>
 </ul>
-<p><strong>Limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0.5, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di coda dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di coda dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limitazioni relative alla coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0.5, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di code dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
 <div class="alert warning">
 <p>Non modificare né effettuare il downgrade dell’Helm Chart nell’ambito di questa procedura. Mantieni la versione del Chart già installata per la tua release Helm. La baseline testata ha mantenuto l’Helm Chart 5.0.22 e ha modificato solo il tag dell’immagine Milvus in <code translate="no">v3.0.5</code>.</p>
 <p>Questa procedura non convalida un downgrade o un rollback che comporti il ripristino dell’immagine Milvus alla versione 2.6.x. Dopo che la v3.0.5 ha scritto i dati, un rollback che riguarda solo l’immagine potrebbe non riuscire a leggere lo stato aggiornato. Se l’aggiornamento fallisce, interrompi le operazioni di scrittura e utilizza un piano di ripristino che ripristini i metadati precedenti all’aggiornamento e i backup dei dati persistenti. Verifica prima il piano di ripristino in un ambiente non di produzione.</p>
@@ -87,7 +87,8 @@ title: Aggiornamento del cluster Milvus con Helm Chart
     </button></h3><p>Salvare i valori completi della versione corrente e verificare i Pod in esecuzione:</p>
 <pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
   --namespace &lt;namespace&gt; \
-  --all &gt; milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
@@ -165,7 +166,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verifica che tutti i carichi di lavoro richiesti siano pronti, che tutti i componenti Milvus utilizzino <code translate="no">v3.0.5</code> e che le tue raccolte esistenti rimangano interrogabili e ricercabili. Completa questi controlli prima di abilitare qualsiasi funzionalità specifica della v3.0.5.</p>
+<p>Verifica che tutti i carichi di lavoro richiesti siano pronti, che tutti i componenti Milvus utilizzino <code translate="no">v3.0.5</code> e che le tue raccolte esistenti rimangano interrogabili e ricercabili. Completa questi controlli prima di abilitare qualsiasi funzionalità specifica della versione 3.0.5.</p>
 <div class="alert note">
 <p>L’aggiornamento a Milvus 3.0 non abilita Storage V3. Dopo aver verificato l’aggiornamento, esamina <a href="/docs/it/storage-v3.md">Storage V3</a> prima di abilitare le funzionalità che dipendono da esso. Una volta che Milvus scrive i dati in Storage V3, il downgrade a una versione precedente di Milvus che non è in grado di leggere Storage V3 non è supportato.</p>
 </div>

@@ -115,12 +115,18 @@ standalone.bat start
 <li>Milvus speichert Daten im Verzeichnis <strong>„volumes/milvus“</strong> im Arbeitsverzeichnis.</li>
 <li>Konfigurationsüberschreibungen gehören in die Datei <strong>„user.yaml“</strong> im Arbeitsverzeichnis. Starten Sie den Container nach Änderungen neu.</li>
 </ul>
-<p>Überprüfen Sie den Status des Images und des Containers in einem beliebigen Terminal:</p>
+<p>Der Befehl „ <code translate="no">start</code> “ gibt „ <code translate="no">Wait for Milvus Starting...</code> “ aus und führt anschließend einmal pro Sekunde eine Überprüfung durch, bis „ <code translate="no">docker ps</code> “ den Container als „healthy“ meldet. Diese Überprüfung ist zeitlich unbegrenzt. Wenn der Befehl keine Rückmeldung liefert, überprüfen Sie die Container-Protokolle von einem anderen Terminal aus mit „ <code translate="no">docker logs milvus-standalone</code> “. Das Skript startet den Container mit „ <code translate="no">--security-opt seccomp:unconfined</code> “, sodass der Container ohne das standardmäßige Docker-Seccomp-Profil läuft.</p>
+<div class="alert warning">
+<blockquote>
+<p>Das Skript veröffentlicht die Ports <strong>19530</strong>, <strong>9091</strong> und <strong>2379</strong> ohne Host-Adresse, und <strong>„embedEtcd.yaml“</strong> konfiguriert etcd so, dass es auf <code translate="no">http://0.0.0.0:2379</code> lauscht. Standardmäßig veröffentlicht Docker Desktop solche Ports auf allen Netzwerkschnittstellen, sodass andere Rechner, die diesen Computer erreichen können, ebenfalls eine Verbindung zu Milvus und etcd herstellen können. Um den Zugriff auf diesen Computer einzuschränken, bearbeiten Sie die Optionen unter „ <code translate="no">-p</code> “ in der Datei „ <code translate="no">standalone.bat</code> “ vor dem ersten „ <code translate="no">start</code> “, beispielsweise „ <code translate="no">-p 127.0.0.1:19530:19530</code> “, und entfernen Sie „ <code translate="no">-p 2379:2379</code> “, wenn Sie keine Verbindung zu etcd von außerhalb des Containers herstellen. Falls bereits ein „ <code translate="no">milvus-standalone</code> “-Container vorhanden ist, startet „ <code translate="no">start</code> “ diesen erneut mit den ursprünglichen Optionen. Informationen dazu, wie veröffentlichte Ports standardmäßig an „localhost“ gebunden werden, finden Sie unter <a href="https://docs.docker.com/desktop/features/networking/">„Netzwerk auf Docker Desktop</a>“.</p>
+</blockquote>
+</div>
+<p>Überprüfen Sie den Status des Images und des Containers in einem der beiden Terminals:</p>
 <pre><code translate="no" class="language-powershell">docker inspect --format &quot;{{.Config.Image}}&quot; milvus-standalone
 docker ps --filter name=milvus-standalone
 </code></pre>
-<p>Um Milvus über PowerShell zu beenden, führen Sie „ <code translate="no">.\standalone.bat stop</code> “ aus; über die Eingabeaufforderung führen Sie „ <code translate="no">standalone.bat stop</code> “ aus. Der Befehl „ <code translate="no">delete</code> “ entfernt sowohl den Container als auch die darin gespeicherten Daten. Sichern Sie die Daten, bevor Sie sie verwenden.</p>
-<h3 id="From-WSL-2" class="common-anchor-header">Von WSL 2 aus<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
+<p>Um Milvus über PowerShell zu beenden, führen Sie „ <code translate="no">.\standalone.bat stop</code> “ aus; über die Eingabeaufforderung führen Sie „ <code translate="no">standalone.bat stop</code> “ aus. Führen Sie „ <code translate="no">stop</code> “ vor „ <code translate="no">delete</code> “ aus: Nach Ihrer Bestätigung versucht der Befehl „ <code translate="no">delete</code> “, den Container zu entfernen, und löscht anschließend den Ordner <strong>„volumes“</strong> sowie <strong>die Dateien „embedEtcd.yaml“</strong> und <strong>„user.yaml“</strong>, selbst wenn der Container noch läuft und nicht entfernt wurde. Sichern Sie die Daten, bevor Sie diesen Befehl ausführen.</p>
+<h3 id="From-WSL-2" class="common-anchor-header">Von WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,7 +141,7 @@ docker ps --filter name=milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Öffnen Sie Ihre installierte WSL-Distribution in einem Windows-Terminal:</p>
+    </button></h3><p>Öffnen Sie Ihre installierte WSL-Distribution über ein Windows-Terminal:</p>
 <pre><code translate="no" class="language-powershell">wsl
 </code></pre>
 <p>Laden Sie im WSL-Terminal das Linux-Skript herunter und starten Sie Milvus einmalig:</p>
@@ -143,6 +149,7 @@ docker ps --filter name=milvus-standalone
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
 <p>Um Milvus zu beenden, führen Sie „ <code translate="no">bash standalone_embed.sh stop</code> “ aus. Der Befehl „ <code translate="no">bash standalone_embed.sh delete</code> “ entfernt den Container, die Konfiguration und die Daten; sichern Sie die Daten vor der Verwendung.</p>
+<p>Das Linux-Skript führt Docker mit „ <code translate="no">sudo</code> “ aus, veröffentlicht dessen Ports ohne Hostadresse und startet den Container mit „ <code translate="no">--security-opt seccomp:unconfined</code> “. Die Hinweise zu diesen Einstellungen unter <a href="/docs/de/install_standalone-docker.md">„Milvus in Docker (Linux) ausführen“</a> gelten auch, wenn Sie Milvus in WSL 2 ausführen.</p>
 <h2 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Milvus mit Docker Compose ausführen<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,7 +165,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie die der Version v3.0.5 beiliegende Konfiguration. Führen Sie nur die für Ihr Terminal zutreffende Befehlsfolge aus.</p>
+    </button></h2><p>Verwenden Sie die der Version v3.0.5 beigefügte Konfiguration. Führen Sie nur die für Ihr Terminal zutreffende Befehlsfolge aus.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Über PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,10 +181,9 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Laden Sie die Konfiguration herunter und starten Sie Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>Laden Sie die Konfiguration herunter und geben Sie deren SHA-256-Hash aus:</p>
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yaml
+Get-FileHash docker-compose.yaml -Algorithm SHA256
 </code></pre>
 <h3 id="From-Windows-Command-Prompt" class="common-anchor-header">Über die Windows-Eingabeaufforderung<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -194,12 +200,11 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Laden Sie die Konfiguration herunter und starten Sie Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>Laden Sie die Konfiguration herunter und geben Sie deren SHA-256-Hash aus:</p>
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yaml
+certutil -hashfile docker-compose.yaml SHA256
 </code></pre>
-<h3 id="From-WSL-2" class="common-anchor-header">Über WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
+<h3 id="From-WSL-2" class="common-anchor-header">In WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,12 +219,30 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Öffnen Sie Ihre WSL-Distribution und führen Sie anschließend die folgenden Linux-Befehle aus:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
-docker compose up -d
+    </button></h3><p>Öffnen Sie Ihre WSL-Distribution, laden Sie dann die Konfiguration herunter und geben Sie den SHA-256-Hash aus:</p>
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml
+<span class="hljs-built_in">sha256sum</span> docker-compose.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Start-Milvus" class="common-anchor-header">Starten Sie Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vergleichen Sie den Hash mit dem Digest „ <code translate="no">sha256</code> “, der auf der <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">Release-Seite</a> für <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">Version 3.0.5</a> unter <code translate="no">milvus-standalone-docker-compose.yaml</code> aufgeführt ist. Der Befehl „ <code translate="no">Get-FileHash</code> “ gibt den Hash in Großbuchstaben aus, während er auf der Release-Seite in Kleinbuchstaben aufgeführt ist; ignorieren Sie daher bei dem Vergleich die Groß-/Kleinschreibung. Starten Sie anschließend Milvus und überprüfen Sie die Container über dasselbe Terminal:</p>
+<pre><code translate="no" class="language-shell">docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Konfiguration startet drei lang laufende Container: <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> und <strong>milvus-etcd</strong>. Außerdem wird der einmalig auszuführende Dienst „ <code translate="no">milvus-volume-init</code> “ ausgeführt, um die Eigentumsrechte für das Datenverzeichnis vorzubereiten. Die Daten dieser Container werden im Arbeitsverzeichnis den Verzeichnissen <strong>„volumes/milvus“</strong>, <strong>„volumes/minio“</strong> und <strong>„volumes/etcd“</strong> zugeordnet. MinIO stellt die Ports <strong>9000</strong> und <strong>9001</strong> bereit; Milvus stellt die Ports <strong>19530</strong> und <strong>9091</strong> bereit. Informationen zu Konfigurations- und Lebenszyklusbefehlen finden Sie unter <a href="/docs/de/install_standalone-docker-compose.md">„Milvus mit Docker Compose ausführen</a>“.</p>
+<p>Die Konfiguration startet drei lang laufende Container: <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> und <strong>milvus-etcd</strong>. Außerdem wird der einmalig ausgeführte Dienst „ <code translate="no">milvus-volume-init</code> “ ausgeführt, um die Eigentumsrechte für das Datenverzeichnis vorzubereiten. Ihre Daten werden im Arbeitsverzeichnis den Verzeichnissen <strong>„volumes/milvus“</strong>, <strong>„volumes/minio“</strong> und <strong>„volumes/etcd“</strong> zugeordnet. MinIO stellt die Ports <strong>9000</strong> und <strong>9001</strong> bereit; Milvus stellt die Ports <strong>19530</strong> und <strong>9091</strong> bereit. Die Konfiguration veröffentlicht diese Ports auf allen Netzwerkschnittstellen, MinIO verwendet die Standard-Anmeldedaten „ <code translate="no">minioadmin</code> “, und der Dienst „ <code translate="no">standalone</code> “ legt „ <code translate="no">security_opt: seccomp:unconfined</code> “ fest. Informationen zur Zugriffsbeschränkung, zum Ändern der Anmeldedaten sowie zu Konfigurations- und Lebenszyklusbefehlen finden Sie unter <a href="/docs/de/install_standalone-docker-compose.md">„Milvus mit Docker Compose ausführen</a>“.</p>
 <h2 id="FAQs" class="common-anchor-header">Häufig gestellte Fragen<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +273,7 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus verwendet Linux-Container. Überprüfen Sie Docker Desktop und dessen WSL-2-Backend, bevor Sie die Installation erneut versuchen:</p>
+    </button></h3><p>Milvus verwendet Linux-Container. Überprüfen Sie Docker Desktop und dessen WSL 2-Backend, bevor Sie die Installation erneut versuchen:</p>
 <ol>
 <li><p>Aktivieren Sie die Hardwarevirtualisierung im BIOS/UEFI, falls unter <strong>„Task-Manager</strong> &gt; <strong>Leistung“</strong> angezeigt wird, dass sie deaktiviert ist. Siehe die <a href="https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements">Windows-Anforderungen für Docker Desktop</a>.</p></li>
 <li><p>Starten Sie Docker Desktop über das Windows-Startmenü und warten Sie, bis die Engine läuft. Für die Installation oder Aktualisierung von WSL oder für bestimmte Installationsmodi von Docker Desktop sind möglicherweise Administratorrechte erforderlich; diese sind jedoch keine allgemeine Voraussetzung für die Ausführung von Linux-Containern mit dem WSL 2-Backend.</p></li>
@@ -258,7 +281,7 @@ docker compose ps
 <pre><code translate="no" class="language-powershell">wsl --version
 wsl --update
 </code></pre></li>
-<li><p>Aktivieren Sie <strong>die Option „WSL 2-basierte Engine</strong> in Docker Desktop <strong>verwenden</strong> “. Wenn im Docker-Menü die Option <strong>„Zu Linux-Containern wechseln</strong>“ angeboten wird, wählen Sie diese aus. Wechseln Sie nicht zu Windows-Containern, um ein Milvus-Linux-Image zu debuggen.</p></li>
+<li><p>Aktivieren Sie <strong>die Option „WSL 2-basierte Engine</strong> in Docker Desktop <strong>verwenden</strong> “. Wenn das Docker-Menü <strong>die</strong> Option <strong>„Zu Linux-Containern wechseln</strong>“ anbietet, wählen Sie diese aus. Wechseln Sie nicht zu Windows-Containern, um ein Milvus-Linux-Image zu überprüfen.</p></li>
 <li><p>Führen Sie im Terminal, das Sie für die Installation verwenden, den folgenden Befehl aus:</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>
@@ -296,7 +319,7 @@ wsl --update
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="common-anchor-header">Wie kann ich mit den beim Start von Milvus angezeigten volumenbezogenen Fehlern umgehen, die lauten: „ <code translate="no">Read config failed</code> “?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="common-anchor-header">Wie kann ich mit den volumenbezogenen Fehlern umgehen, die beim Start von Milvus angezeigt werden und lauten: „ <code translate="no">Read config failed</code> “?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -356,7 +379,7 @@ wsl --update
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p>Für Compose-Bereitstellungen befolgen Sie die <a href="/docs/de/upgrade_milvus_standalone-docker.md">Anleitung „Upgrade von Milvus Standalone mit Docker Compose“</a>; überprüfen Sie die Vorgehensweise in Ihrer Umgebung, bevor Sie das Upgrade durchführen.</p></li>
-<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p><a href="/docs/de/scaleout.md">Skalieren Sie einen Milvus-Cluster</a> auf Kubernetes. Diese Vorgehensweise nutzt Helm und gilt nicht für diese Docker-Bereitstellung.</p></li>
 <li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
 <ul>
 <li><a href="/docs/de/eks.md">Amazon EKS</a></li>
@@ -365,7 +388,7 @@ wsl --update
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool für die Fehlerbehebung bei Milvus und dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menggunakan antrian pesan untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Mulai dari Milvus 3.0.x, Woodpecker menjadi antrian pesan yang direkomendasikan secara default; topik ini menjelaskan cara mengonfigurasi Pulsar atau Kafka dengan Docker Compose atau Helm.</p>
+    </button></h1><p>Milvus menggunakan antrian pesan untuk mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Mulai dari Milvus 3.0.x, Woodpecker menjadi antrian pesan yang direkomendasikan secara default; topik ini menjelaskan cara mengonfigurasi Pulsar atau Kafka menggunakan Docker Compose atau Helm.</p>
 <p>Anda dapat mengonfigurasi Pulsar dengan <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> atau di K8s, serta mengonfigurasi Kafka di K8s.</p>
 <div class="alert note">
 <p><strong>Batasan Antrian Pesan</strong>: Saat melakukan upgrade ke Milvus v3.0.5, Anda harus mempertahankan pilihan antrian pesan yang saat ini digunakan. Pergantian antara sistem antrian pesan yang berbeda selama proses upgrade tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.</p>
@@ -56,12 +56,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengonfigurasi Pulsar dengan Docker Compose, masukkan nilai-nilai Anda untuk bagian ` <code translate="no">pulsar</code> ` dalam berkas ` <code translate="no">milvus.yaml</code> ` di jalur `milvus/configs`.</p>
-<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
-  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
+    </button></h3><p>Konfigurasi Docker Compose yang disertakan dalam rilis Milvus tidak mencakup layanan Pulsar. Untuk menggunakan layanan Pulsar yang sudah ada dengan Milvus standalone, buat berkas ` <code translate="no">user.yaml</code> ` dan isi nilai-nilai Anda pada bagian ` <code translate="no">pulsar</code> `:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_pulsar_address&gt;</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
-  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">2097152</span> <span class="hljs-comment"># 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Di berkas Docker Compose Anda, atur ` <code translate="no">MQ_TYPE</code> ` menjadi ` <code translate="no">pulsar</code> ` pada bagian ` <code translate="no">environment</code> ` dari layanan ` <code translate="no">standalone</code> `, dan petakan jalur lokal ke berkas ` <code translate="no">user.yaml</code> ` Anda ke ` <code translate="no">/milvus/configs/user.yaml</code> ` pada bagian ` <code translate="no">volumes</code> `-nya. Pertahankan entri yang sudah ada di kedua bagian tersebut:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">MINIO_REGION:</span> <span class="hljs-string">us-east-1</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+      <span class="hljs-attr">MQ_TYPE:</span> <span class="hljs-string">pulsar</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus membaca <code translate="no">/milvus/configs/user.yaml</code> setelah <code translate="no">milvus.yaml</code>, sehingga nilai-nilai di <code translate="no">user.yaml</code> menggantikan nilai default. Variabel lingkungan <code translate="no">MQ_TYPE</code> menetapkan <code translate="no">mq.type</code>, yang memilih antrian pesan, dan memiliki prioritas lebih tinggi daripada berkas konfigurasi.</p>
+<p>Tetapkan antrian pesan sebelum Anda memulai penyebaran baru untuk pertama kalinya. Milvus mencatat <code translate="no">mq.type</code> di etcd saat pertama kali dimulai dan tidak akan menimpa nilai yang telah dicatat tersebut di kemudian hari.</p>
 <p>Lihat <a href="/docs/id/configure_pulsar.md">konfigurasi terkait Pulsar</a> untuk informasi lebih lanjut.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Jalankan Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +95,7 @@ summary: >-
     </button></h3><p>Jalankan perintah berikut untuk memulai Milvus yang menggunakan konfigurasi Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Konfigurasi hanya berlaku setelah Milvus dimulai. Lihat <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Memulai Milvus</a> untuk informasi lebih lanjut.</div>
+<div class="alert note">Konfigurasi hanya berlaku setelah Milvus dimulai. Lihat <a href="/docs/id/install_standalone-docker-compose.md#Install-Milvus">Instal Milvus</a> untuk informasi lebih lanjut.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Konfigurasikan Pulsar dengan Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,9 +111,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk klaster Milvus di K8s, Anda dapat mengonfigurasi Pulsar dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Pulsar menggunakan berkas ` <code translate="no">values.yml</code> ` di jalur `/charts/milvus` dalam repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Konfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.
-|</p>
+    </button></h2><p>Untuk kluster Milvus di K8s, Anda dapat mengonfigurasi Pulsar dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Pulsar menggunakan berkas ` <code translate="no">values.yaml</code> ` di jalur `/charts/milvus` dalam repositori <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> sebelum memulai Milvus.</p>
+<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Konfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.</p>
+<p>Tambahkan repositori chart Helm Milvus dan perbarui indeks chart lokal sebelum Anda menginstal Milvus dengan salah satu perintah Helm di halaman ini:</p>
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,22 +133,22 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Konfigurasikan bagian ` <code translate="no">externalConfigFiles</code> ` dalam berkas ` <code translate="no">values.yaml</code> `.</li>
+<li>Konfigurasikan bagian ` <code translate="no">extraConfigFiles</code> ` dalam berkas ` <code translate="no">values.yaml</code> `.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     pulsar:
       address: localhost # Address of pulsar
       port: 6650 # Port of Pulsar
-      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
-      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      webport: 80 # Web port of pulsar, if you connect directly without proxy, should use 8080
+      maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Setelah mengonfigurasi bagian-bagian sebelumnya dan menyimpan berkas ` <code translate="no">values.yaml</code> `, jalankan perintah berikut untuk menginstal Milvus yang menggunakan konfigurasi Pulsar.</li>
+<li>Setelah mengonfigurasi bagian-bagian sebelumnya dan menyimpan berkas <code translate="no">values.yaml</code>, jalankan perintah berikut untuk menginstal Milvus yang menggunakan konfigurasi Pulsar.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">Konfigurasikan Woodpecker dengan Helm<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,9 +165,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk klaster Milvus di K8s, Anda dapat mengonfigurasi Woodpecker dalam perintah yang sama yang digunakan untuk memulai Milvus. Atau, Anda dapat mengonfigurasi Woodpecker menggunakan berkas <code translate="no">values.yml</code> di jalur /charts/milvus dalam repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
-<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>. Untuk detail mengenai item konfigurasi yang terkait dengan Woodpecker, lihat <a href="/docs/id/woodpecker.md">konfigurasi terkait Woodpecker</a>.
-|</p>
+    </button></h2><p>Untuk kluster Milvus di K8s, Anda dapat mengonfigurasi Woodpecker dalam perintah yang sama saat memulai Milvus. Sebagai alternatif, Anda dapat mengonfigurasi Woodpecker menggunakan berkas ` <code translate="no">values.yaml</code> ` di jalur `/charts/milvus` dalam repositori ` <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> ` sebelum memulai Milvus.</p>
+<p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Woodpecker, lihat <a href="/docs/id/woodpecker.md">konfigurasi terkait woodpecker</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -167,7 +183,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Konfigurasikan bagian ` <code translate="no">externalConfigFiles</code> ` dalam berkas ` <code translate="no">values.yaml</code> `.</li>
+<li>Konfigurasikan bagian ` <code translate="no">extraConfigFiles</code> ` dalam berkas ` <code translate="no">values.yaml</code> `.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -209,7 +225,7 @@ summary: >-
 <ol start="2">
 <li>Setelah mengonfigurasi bagian-bagian sebelumnya dan menyimpan berkas ` <code translate="no">values.yaml</code> `, jalankan perintah berikut untuk menginstal Milvus yang menggunakan konfigurasi Woodpecker.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">Konfigurasikan Kafka dengan Helm<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,7 +242,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk kluster Milvus di K8s, Anda dapat mengonfigurasi Kafka dalam perintah yang sama saat memulai Milvus. Atau, Anda dapat mengonfigurasi Kafka menggunakan berkas <code translate="no">values.yml</code> di jalur /charts/milvus dalam repositori <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> sebelum memulai Milvus.</p>
+    </button></h2><p>Untuk kluster Milvus di K8s, Anda dapat mengonfigurasi Kafka dalam perintah yang sama saat memulai Milvus. Atau, Anda dapat mengonfigurasi Kafka menggunakan berkas ` <code translate="no">values.yaml</code> ` di jalur `/charts/milvus` dalam repositori ` <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> ` sebelum memulai Milvus.</p>
 <p>Untuk detail tentang cara mengonfigurasi Milvus menggunakan Helm, lihat <a href="/docs/id/configure-helm.md">Mengonfigurasi Milvus dengan Helm Charts</a>. Untuk detail tentang item konfigurasi terkait Pulsar, lihat <a href="/docs/id/configure_pulsar.md">Konfigurasi terkait Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">Menggunakan berkas YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -244,7 +260,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ol>
-<li>Konfigurasikan bagian ` <code translate="no">externalConfigFiles</code> ` dalam berkas ` <code translate="no">values.yaml</code> ` jika Anda ingin menggunakan Kafka sebagai sistem penyimpanan pesan.</li>
+<li>Konfigurasikan bagian ` <code translate="no">extraConfigFiles</code> ` dalam berkas ` <code translate="no">values.yaml</code> ` jika Anda ingin menggunakan Kafka sebagai sistem penyimpanan pesan.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -259,7 +275,7 @@ summary: >-
 <ol start="2">
 <li>Setelah mengonfigurasi bagian-bagian sebelumnya dan menyimpan berkas ` <code translate="no">values.yaml</code> `, jalankan perintah berikut untuk menginstal Milvus yang menggunakan konfigurasi Kafka.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-RocksMQ-with-Helm" class="common-anchor-header">Konfigurasi RocksMQ dengan Helm<button data-href="#Configure-RocksMQ-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -279,7 +295,7 @@ summary: >-
     </button></h2><p>RocksMQ merupakan penyimpanan pesan default di Milvus standalone hingga versi 2.5.x; mulai versi 2.6.x, defaultnya adalah Woodpecker. Untuk langkah-langkah terperinci mengenai cara mengonfigurasi Milvus dengan Helm, lihat <a href="/docs/id/configure-helm.md">Konfigurasi Milvus dengan Helm Charts</a>. Untuk detail mengenai item konfigurasi terkait RocksMQ, lihat <a href="/docs/id/configure_rocksmq.md">Konfigurasi terkait RocksMQ</a>.</p>
 <ul>
 <li><p>Jika Anda memulai Milvus dengan RocksMQ dan ingin mengubah pengaturannya, Anda dapat menjalankan ` <code translate="no">helm upgrade -f</code> ` dengan pengaturan yang telah diubah dalam berkas YAML berikut.</p></li>
-<li><p>Jika Anda telah menginstal Milvus secara mandiri menggunakan Helm dengan penyimpanan pesan selain RocksMQ dan ingin mengembalikannya ke RocksMQ, jalankan perintah ` <code translate="no">helm upgrade -f</code> ` dengan berkas YAML berikut setelah Anda menghapus semua koleksi dan menghentikan Milvus.</p></li>
+<li><p>Jika Anda telah menginstal Milvus secara mandiri menggunakan Helm dengan penyimpanan pesan selain RocksMQ dan ingin mengembalikannya ke RocksMQ, jalankan perintah ` <code translate="no">helm upgrade -f</code> ` dengan berkas YAML berikut setelah Anda mengosongkan semua koleksi dan menghentikan Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

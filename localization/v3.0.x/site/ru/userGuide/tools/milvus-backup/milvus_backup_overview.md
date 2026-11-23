@@ -46,7 +46,7 @@ title: Milvus Backup
 <tr><td>Продолжить использование Backup 0.5.x</td><td><a href="/docs/ru/milvus_backup_cli.md">Команды</a> и <a href="/docs/ru/milvus_backup_api.md">HTTP API</a><a href="/docs/ru/milvus_backup_cli.md">версии 0.5.x</a> с примерами, привязанными к версии 0.5.16</td></tr>
 <tr><td>Обновление существующей установки Backup</td><td><a href="/docs/ru/milvus_backup_upgrade.md">Обновление с версии 0.5.x до 0.6.x</a></td></tr>
 <tr><td>Установка и использование Backup версии 0.6.x</td><td><a href="/docs/ru/milvus_backup_0_6_cli.md">команды и настройки</a> или <a href="/docs/ru/milvus_backup_0_6_api.md">HTTP API</a></td></tr>
-<tr><td>Резервное копирование и восстановление моментального снимка в Milvus 3.0.1 или более поздней версии</td><td><a href="/docs/ru/snapshot-backup-and-restore.md">Резервное копирование и восстановление моментального снимка в одном экземпляре</a></td></tr>
+<tr><td>Резервное копирование и восстановление моментального снимка в Milvus 3.0.1 или более поздней версии</td><td><a href="/docs/ru/snapshot-backup-and-restore.md">Резервное копирование и восстановление моментальных снимков в одном экземпляре</a></td></tr>
 </tbody>
 </table>
 <p>В существующих руководствах по резервному копированию <a href="/docs/ru/single-instance-backup-and-restore.md">в пределах одного экземпляра</a>, <a href="/docs/ru/shared-bucket-backup-and-restore.md">в общем контейнере</a>, <a href="/docs/ru/cross-bucket-backup-and-restore.md">между контейнерами</a> и <a href="/docs/ru/multi-storage-backup-and-restore.md">между хранилищами</a> сохранены настройки и команды версии 0.5.16. Примеры в них не обновляются при выпуске новой версии Backup.</p>
@@ -66,7 +66,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li>Используйте бинарный файл Backup и примеры конфигурации из одного и того же выпуска. <a href="/docs/ru/milvus_backup_cli.md#Obtain-Milvus-Backup">Руководство по</a> версии <a href="/docs/ru/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x</a> привязано к версии 0.5.16; <a href="/docs/ru/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">настоящее руководство</a> привязано к версии 0.6.0.</li>
+<li>Используйте бинарный файл Backup и примеры конфигурации из одного и того же выпуска. <a href="/docs/ru/milvus_backup_cli.md#Obtain-Milvus-Backup">Руководство</a> по версии <a href="/docs/ru/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x</a> привязано к версии 0.5.16; <a href="/docs/ru/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">текущее руководство</a> привязано к версии 0.6.0.</li>
 <li>Обеспечьте сетевой доступ к Milvus, его хранилищу и месту назначения резервной копии. Для операций создания моментальных снимков также требуется, чтобы сервер Milvus имел доступ к хранилищу резервных копий.</li>
 <li>Проверьте совместимость сервера, как указано ниже. Go требуется только при сборке из исходного кода: версия 1.25 или более поздняя для Backup 0.5.16 и 1.26 или более поздняя для 0.6.0.</li>
 </ul>
@@ -102,7 +102,7 @@ title: Milvus Backup
 <tr><td><code translate="no">auto</code></td><td>Формат выбирается в соответствии с поддерживаемыми сервером возможностями. В Milvus 3.0 выбирается формат «моментальный снимок».</td></tr>
 </tbody>
 </table>
-<p>Каталог резервной копии содержит метаданные и файлы, необходимые для данного формата. При архивировании или перемещении сохраняйте каталог целиком. Не следует предполагать, что резервное копирование с помощью моментального снимка использует структуру каталога binlog.</p>
+<p>Каталог резервной копии содержит метаданные и файлы, необходимые для данного формата. При архивировании или перемещении сохраняйте каталог целиком. Не следует предполагать, что резервное копирование с использованием моментального снимка использует структуру каталога binlog.</p>
 <p>В версии 0.6.0 предустановки « <code translate="no">create --for</code> » настраивают параметры для конкретных целей: « <code translate="no">clone</code> » сохраняет выбранный формат, тогда как « <code translate="no">archive</code> » и « <code translate="no">secondary</code> » требуют наличия binlog. Для вторичного сервера также требуется настроенная топология репликации; для обычной миграции между экземплярами вторичный сервер не требуется. См. раздел <a href="/docs/ru/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Выбор формата резервного копирования или цели</a>».</p>
 <p>В версии Backup 0.6.0 во время резервного копирования пропускаются внешние коллекции. Успешное выполнение задачи не означает, что данные внешних коллекций были включены.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Матрица совместимости<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
@@ -152,5 +152,5 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">v0.6.0</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.2">v0.6.2</a></li>
 </ul>

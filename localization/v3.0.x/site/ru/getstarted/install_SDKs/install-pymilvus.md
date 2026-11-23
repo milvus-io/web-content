@@ -37,9 +37,9 @@ title: Установка Python SDK для Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Для подключения к удаленному серверу Milvus PyMilvus 3.0.2 требует Python 3.9 или более поздней версии.</li>
+<li>Для подключения к удаленному серверу Milvus PyMilvus 3.0.3 требует Python 3.9 или более поздней версии.</li>
 <li>Для локальных примеров Milvus Lite 3.2.2 требуется Python 3.10 или более поздней версии и поддерживаемая платформа. См. раздел <a href="/docs/ru/milvus_lite.md">«Запуск Milvus Lite локально</a>».</li>
-<li>Установите зависимости через <code translate="no">pip</code>. Для работы PyMilvus 3.0.2 требуется <code translate="no">protobuf&gt;=5.27.2</code>; не фиксируйте отдельно версию <code translate="no">protobuf==3.20.0</code>. Для использования SDK не требуется <code translate="no">grpcio-tools</code>.</li>
+<li>Установите зависимости через <code translate="no">pip</code>. Для работы PyMilvus 3.0.3 требуется версия <code translate="no">protobuf&gt;=5.27.2</code>; не фиксируйте отдельно версию <code translate="no">protobuf==3.20.0</code>. Для использования SDK не требуется версия <code translate="no">grpcio-tools</code>.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Установите PyMilvus с помощью pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,18 +58,18 @@ title: Установка Python SDK для Milvus
       </svg>
     </button></h2><p>PyMilvus доступен в <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
-Рекомендуется установить версию PyMilvus, соответствующую версии установленного сервера Milvus. Дополнительную информацию см. в <a href="/docs/ru/release_notes.md">примечаниях к выпуску</a>.
+Рекомендуется установить версию PyMilvus, соответствующую версии установленного вами сервера Milvus. Дополнительную информацию см. в <a href="/docs/ru/release_notes.md">примечаниях к выпуску</a>.
 </div>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>При этом устанавливается клиент для удалённого сервера Milvus. Milvus Lite и модель для встраивания не устанавливаются.</p>
+<p>При этом устанавливается клиент для удалённого сервера Milvus. Milvus Lite и модель встраивания не устанавливаются.</p>
 <p>Для локальной базы данных, используемой в <a href="/docs/ru/quickstart.md">«Быстром старте»</a>, установите дополнение <code translate="no">milvus-lite</code> и соответствующий пакет Lite:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Для вспомогательных средств встраивания установите отдельный дополнительный модуль « <code translate="no">model</code> »:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В Windows pip пропускает дополнение « <code translate="no">milvus-lite</code> » для PyMilvus 3.0.2 из-за его платформенного маркера. В приведенной выше команде явно указан файл « <code translate="no">milvus-lite</code> », поэтому установка в Windows пройдет успешно, если для вашей версии Python существуют библиотеки « <code translate="no">faiss-cpu</code> » и « <code translate="no">pyarrow</code> » в формате wheel.</p>
+<p>В Windows pip пропускает дополнение « <code translate="no">milvus-lite</code> » для PyMilvus 3.0.3 из-за его платформенного маркера. В приведенной выше команде явно указан файл « <code translate="no">milvus-lite</code> », поэтому установка в Windows пройдет успешно, если для вашей версии Python существуют библиотеки « <code translate="no">faiss-cpu</code> » и « <code translate="no">pyarrow</code> » в формате wheel.</p>
 <h2 id="Verify-installation" class="common-anchor-header">Проверка установки<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,8 +2,8 @@
 id: basic-operators.md
 title: 基本的な演算子
 summary: >-
-  比較演算子、範囲演算子、算術演算子、論理演算子、およびNULL演算子を使用して、エンティティをフィルタリングします。Milvus 3.0.3以降では、「IS
-  NULL」および「IS NOT NULL」も通常のベクトルフィールドに対応しています。
+  比較演算子、範囲演算子、算術演算子、論理演算子、およびNULL演算子を使用して、エンティティをフィルタリングします。Milvus 3.0.3以降では、IS
+  NULLおよびIS NOT NULLも通常のベクトルフィールドに対応しています。
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">基本的な演算子<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -739,7 +739,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions ^ 7) == 2&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">(permissions &amp; 4) == 4</code> のように、結果を比較する前に、ビット演算は常に括弧で囲んでください。Milvusは、フィルタ式において<code translate="no">&amp;</code> 、<code translate="no">|</code> 、および<code translate="no">^</code> をサポートしています。ビット単位のNOT演算子（<code translate="no">~</code> ）およびシフト演算子（<code translate="no">&lt;&lt;</code> および<code translate="no">&gt;&gt;</code> ）はサポートされていません。</p>
+<p><code translate="no">(permissions &amp; 4) == 4</code> のように、結果を比較する前に、ビット演算は常に括弧で囲んでください。Milvusは、フィルタ式において<code translate="no">&amp;</code> 、<code translate="no">|</code> 、および<code translate="no">^</code> をサポートしています。ビット演算のNOT (<code translate="no">~</code>) およびシフト演算子 (<code translate="no">&lt;&lt;</code> および<code translate="no">&gt;&gt;</code>) はサポートされていません。</p>
 </div>
 <h2 id="Logical-operators" class="common-anchor-header">論理演算子<button data-href="#Logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -932,9 +932,10 @@ summary: >-
 </tbody>
 </table>
 <p>サポートされているスカラーフィールドには、Boolean、numeric、<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> 、および<code translate="no">ARRAY</code> フィールドが含まれます。<a href="/docs/ja/text.md">これらの演算子はTEXTフィールドをサポート</a>していません。</p>
-<p>Milvus 3.0.3 以降、これらの演算子は通常のベクトル型フィールドもサポートするようになりました：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 、および<code translate="no">INT8_VECTOR</code> 。</p>
+<p>Milvus 3.0.3 以降、これらの演算子は通常のベクトルフィールドもサポートするようになりました：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 、および<code translate="no">INT8_VECTOR</code> 。</p>
 <p>演算子は大文字小文字を区別しません。つまり、<code translate="no">IS NULL</code> と<code translate="no">is null</code> は同等であり、<code translate="no">IS NOT NULL</code> と<code translate="no">is not null</code> も同様です。</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">例：値が欠落している、または利用可能なエンティティを検索する<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">例：ベクトルが欠落しているエンティティを検索する<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -949,7 +950,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">products</code> という名前のコレクションが、Milvus 3.0.3 以降でインデックス化され、読み込まれているものと仮定します。このコレクションには、<code translate="no">id</code> という名前の<code translate="no">INT64</code> プライマリキー、<code translate="no">category</code> という名前の null 許容の<code translate="no">VARCHAR</code> フィールド、および<code translate="no">embedding</code> という名前の null 許容の 3 次元<code translate="no">FLOAT_VECTOR</code> フィールドがあります。このコレクションには、すでに以下のエンティティが含まれています：</p>
+    </button></h3><p>ベクトルを生成する前にコレクションに商品を追加したと仮定します。この例では、<code translate="no">products</code> コレクションがインデックス登録され、読み込まれています。このコレクションには、<code translate="no">id</code> という名前の<code translate="no">INT64</code> 主キー、<code translate="no">category</code> という名前の null 許容の<code translate="no">VARCHAR</code> フィールド、および<code translate="no">embedding</code> という名前の null 許容の 3 次元<code translate="no">FLOAT_VECTOR</code> フィールドがあります。次の表は、ベクトルを持つ商品を示しています。</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -961,7 +962,7 @@ summary: >-
 </tbody>
 </table>
 <p>コレクションの作成とデータの挿入については割愛します。これらの手順については、「<a href="/docs/ja/nullable-and-default.md">Null可能なフィールド</a>」を参照してください。</p>
-<p>まだ埋め込みが必要なエンティティを見つけるには、<code translate="no">embedding IS NULL</code> をクエリします。サーバーに合わせて接続設定を調整してください。</p>
+<p>まだベクトルが必要な製品を見つけるには、フィルター `<code translate="no">embedding IS NULL</code>` を指定して `<code translate="no">query()</code> ` を呼び出します。<code translate="no">embedding</code> を自身のベクトルフィールド名に置き換え、サーバーの接続設定を調整してください。この例では、その製品のベクトルが NULL であるため、クエリは ID<code translate="no">3</code> を返します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1133,7 +1134,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>同じクエリ内の `<code translate="no">filter</code> ` を置き換えて、特定のフィールドを確認したり、条件を組み合わせたりできます:</p>
+<p>同じクエリ内の `<code translate="no">filter</code> ` を置き換えて、フィールドを確認したり、条件を組み合わせたりできます:</p>
 <table>
 <thead>
 <tr><th>フィルタ式</th><th>一致するID</th><th>目的</th></tr>
@@ -1146,6 +1147,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>両方の値を持つエンティティを検索</td></tr>
 </tbody>
 </table>
+<p>各商品に複数のチャンクがあり、各チャンクが独自のベクトルを保持している場合は、<a href="/docs/ja/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">StructArrayフィルター</a>を使用して、<a href="/docs/ja/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">チャンクベクトルが欠落している商品を検索します</a>。</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1164,7 +1166,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>演算子は、保存されたフィールド値を確認します。デフォルト値のないNULL許容フィールドの場合、挿入時にそのフィールドを省略するか、明示的にNULLに設定すると、NULLが保存されます。設定されたデフォルト値によって、保存される値が変わる場合があります。詳細については、「<a href="/docs/ja/default-values.md">NULL許容</a> <a href="/docs/ja/nullable-and-default.md">フィールドと</a> <a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>
+    </button></h3><p>演算子は、格納されたフィールド値をチェックします。デフォルト値のないNull許容フィールドの場合、挿入時にフィールドを省略するか、明示的にNULLに設定すると、NULLが格納されます。設定されたデフォルト値によって、格納される値が変わる場合があります。詳細については、「<a href="/docs/ja/nullable-and-default.md">Null許容フィールドと</a> <a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>
 <table>
 <thead>
 <tr><th>フィールド型</th><th>NULL の挙動</th></tr>
@@ -1172,15 +1174,15 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>空の文字列 `<code translate="no">&quot;&quot;</code> ` は NULL 以外の値です。</td></tr>
 <tr><td><code translate="no">JSON</code></td><td>フィールド全体がNULL値の場合、<code translate="no">IS NULL</code> と一致します。<code translate="no">{&quot;category&quot;: null}</code> のようなJSONオブジェクトは、内部の値がNULLであっても非NULLです。</td></tr>
-<tr><td><code translate="no">ARRAY</code></td><td>フィールド全体の値が NULL の場合、<code translate="no">IS NULL</code> と一致します。個々の要素は NULL にできず、<code translate="no">IS NULL</code> /<code translate="no">IS NOT NULL</code> は、<code translate="no">tags[0]</code> のような配列要素へのアクセスをサポートしていません。「<a href="/docs/ja/array_data_type.md">配列フィールド</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>フィールド全体の値が NULL の場合、<code translate="no">IS NULL</code> と一致します。個々の要素は NULL にできません。また、<code translate="no">IS NULL</code> や<code translate="no">IS NOT NULL</code> では、<code translate="no">tags[0]</code> のような配列要素へのアクセスはサポートされていません。<a href="/docs/ja/array_data_type.md">配列フィールドを</a>参照してください。</td></tr>
 <tr><td>通常のベクトル型</td><td>NULLは、ベクトルの値が存在しないことを意味します。成分がすべてゼロのベクトルはNULLではありません。</td></tr>
 </tbody>
 </table>
 <p><code translate="no">nullable=False</code> で定義されたサポート対象のフィールドの場合、<code translate="no">IS NULL</code> はどのエンティティにも一致せず、<code translate="no">IS NOT NULL</code> はすべての可視エンティティに一致します。フィルタ内のその他の条件は引き続き適用されます。</p>
 <div class="alert note">
-<p>スカラーNULLフィルタは、適格なインデックスまたはフィールドデータからの有効性情報を使用します。特定のスカラーインデックス型を必要としません。NULL不可のフィールドは、定数の結果を生成することがあります。</p>
+<p>スカラーNULLフィルタは、適格なインデックスまたはフィールドデータからの有効性情報を使用します。特定のスカラーインデックス型を必要としません。NULL不可のフィールドは、定数の結果を生成する場合があります。</p>
 </div>
-<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">ベクトル検索でのNULLフィルタの使用<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
+<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">ベクトル検索でのNULLフィルターの使用<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

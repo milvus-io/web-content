@@ -54,10 +54,10 @@ title: Быстрый старт
         ></path>
       </svg>
     </button></h3><p>В этом руководстве используется Milvus Lite — дополнительная зависимость SDK PyMilvus для Python, которая работает локально. Для развертывания на сервере см. <a href="/docs/ru/install_standalone-docker.md">Docker</a> или <a href="/docs/ru/install_cluster-milvusoperator.md">Kubernetes</a>.</p>
-<p>Используйте Python 3.10 или более поздней версии на macOS, Linux или Windows, с бинарными пакетами (wheels) для зависимостей Milvus Lite, такими как <code translate="no">faiss-cpu</code> и <code translate="no">pyarrow</code>. В примерах используется PyMilvus 3.0.2 и Milvus Lite 3.2.2. Установите оба пакета явно:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<p>Используйте Python 3.10 или более поздней версии на macOS, Linux или Windows, с бинарными пакетами (wheels), доступными для зависимостей Milvus Lite, таких как <code translate="no">faiss-cpu</code> и <code translate="no">pyarrow</code>. В примерах используется PyMilvus 3.0.3 и Milvus Lite 3.2.2. Установите оба пакета явно:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В Windows pip пропускает дополнительный файл <code translate="no">milvus-lite</code> из PyMilvus 3.0.2; в приведённой выше команде явно указан файл <code translate="no">milvus-lite</code>, поэтому локальный путь также будет работать. Требования к установке только SDK см. в разделе <a href="/docs/ru/install-pymilvus.md">«Установка Python SDK Milvus</a>».</p>
+<p>В Windows pip пропускает дополнительный пакет <code translate="no">milvus-lite</code> для PyMilvus 3.0.3; в приведённой выше команде явно указан <code translate="no">milvus-lite</code>, поэтому локальный путь также будет работать. Требования к установке только SDK см. в разделе <a href="/docs/ru/install-pymilvus.md">«Установка Python SDK для Milvus</a>».</p>
 <div class="alert note">
 <blockquote>
 <p>Если вы используете Google Colab, для активации только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong>. (Щелкните меню «Runtime» в верхней части экрана и выберите «Restart session» в раскрывающемся меню).</p>
@@ -78,8 +78,8 @@ title: Быстрый старт
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если вы уже установили Milvus с помощью Docker или Kubernetes либо имеете конечную точку Zilliz Cloud, установите только SDK. Для PyMilvus 3.0.2 требуется Python 3.9 или более поздней версии; при таком подходе вам не нужна локальная зависимость Lite:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+    </button></h3><p>Если вы уже установили Milvus с помощью Docker или Kubernetes либо имеете конечную точку Zilliz Cloud, установите только SDK. Для PyMilvus 3.0.3 требуется Python 3.9 или более поздней версии; при таком подходе вам не нужна локальная зависимость Lite:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Используйте блок подключения к серверу, описанный в следующем разделе, вместо открытия пути <code translate="no">.db</code>. Убедитесь, что версия SDK совместима с вашим сервером; см. <a href="/docs/ru/release_notes.md">«Примечания к выпуску</a>».</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Настройка векторной базы данных<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -168,7 +168,7 @@ client.create_collection(
 <li>первичный ключ и векторные поля используют свои имена по умолчанию («id» и «vector»).</li>
 <li>Тип метрики (определение векторного расстояния) установлен на значение по умолчанию (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
 <li>Поле первичного ключа принимает целые числа и не инкрементируется автоматически (то есть не используется <a href="https://milvus.io/docs/schema.md">функция auto-id</a>).
-В качестве альтернативы вы можете формально определить схему коллекции, следуя этой <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">инструкции</a>.</li>
+В качестве альтернативы вы можете формально определить схему коллекции, следуя этой <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/create_schema.md">инструкции</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Подготовка данных<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В данном руководстве мы используем векторы для выполнения семантического поиска по тексту. Нам необходимо сгенерировать векторы для текста, загрузив модели встраивания. Это можно легко сделать с помощью вспомогательных функций из библиотеки <code translate="no">pymilvus[model]</code>.</p>
+    </button></h2><p>В данном руководстве мы используем векторы для выполнения семантического поиска по тексту. Нам необходимо сгенерировать векторы для текста, загрузив модели встраивания. Это легко сделать с помощью вспомогательных функций из библиотеки <code translate="no">pymilvus[model]</code>.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">Представление текста с помощью векторов<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -202,7 +202,7 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>Сначала установите библиотеку моделей. Этот пакет включает в себя основные инструменты машинного обучения, такие как PyTorch. Загрузка пакета может занять некоторое время, если в вашей локальной среде ранее не был установлен PyTorch.</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Сгенерируйте векторные вложения с помощью модели по умолчанию. Milvus ожидает, что данные будут введены в виде списка словарей, где каждый словарь представляет запись данных, называемую сущностью.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -343,7 +343,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus принимает один или несколько запросов на векторный поиск одновременно. Значением переменной query_vectors является список векторов, где каждый вектор представляет собой массив чисел типа float.</p>
+    </button></h3><p>Milvus принимает один или несколько запросов на векторный поиск одновременно. Значение переменной query_vectors представляет собой список векторов, где каждый вектор является массивом чисел типа float.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -375,7 +375,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы также можете выполнять векторный поиск с учётом значений метаданных (называемых в Milvus «скалярными» полями, поскольку термин «скалярный» относится к не векторным данным). Это осуществляется с помощью выражения фильтра, задающего определённые критерии. Рассмотрим, как выполнять поиск и фильтрацию с использованием поля <code translate="no">subject</code> в следующем примере.</p>
+    </button></h2><p>Вы также можете выполнять векторный поиск с учётом значений метаданных (называемых в Milvus «скалярными» полями, поскольку термин «скалярный» относится к невекторным данным). Это осуществляется с помощью выражения фильтра, задающего определённые критерии. Давайте посмотрим, как выполнять поиск и фильтрацию по полю <code translate="no">subject</code> в следующем примере.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -529,7 +529,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <li>Разработайте поля и фильтры для ваших данных с помощью инструмента <a href="/docs/ru/schema-hands-on.md">«Data Model Design for Search</a>».</li>
 <li>Сравните требования к локальной среде и серверу с помощью <a href="/docs/ru/install-overview.md">«Вариантов развертывания Milvus</a>».</li>
 </ul>
-<p>Milvus Lite отлично подходит для начала работы с локальной программой на Python. Если у вас есть большие объемы данных или вы хотите использовать Milvus в производственной среде, вы можете узнать о развертывании Milvus на <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> и <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Все режимы развертывания Milvus используют один и тот же API, поэтому при переходе на другой режим развертывания ваш клиентский код практически не потребует изменений. Просто укажите <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI и токен</a> сервера Milvus, развернутого в любом месте:</p>
+<p>Milvus Lite отлично подходит для начала работы с локальной программой на Python. Если у вас есть большие объемы данных или вы хотите использовать Milvus в производственной среде, вы можете узнать о развертывании Milvus в <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> и <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Все режимы развертывания Milvus используют один и тот же API, поэтому при переходе на другой режим развертывания ваш клиентский код практически не потребует изменений. Просто укажите <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Client/MilvusClient.md">URI и токен</a> сервера Milvus, развернутого в любом месте:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Для переноса данных из Milvus Lite в Milvus, развернутый на Docker или Kubernetes, обратитесь к разделу <a href="/docs/ru/milvus_lite.md#Migrating-data-from-Milvus-Lite">«Перенос данных из Milvus Lite</a>».</p>
@@ -550,5 +550,5 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Если вы используете помощников по программированию на базе ИИ, такие как Claude Code или Cursor, вы можете установить <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>, чтобы помочь вашим ИИ-инструментам писать корректный код Milvus.</p>
+    </button></h2><p>Если вы используете помощников по программированию на базе ИИ, такие как Claude Code или Cursor, вы можете установить <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>, чтобы помочь вашим инструментам ИИ писать корректный код Milvus.</p>
 <p>Дополнительные инструменты для агентов, включая серверы MCP и отобранные подсказки, см. в разделе <a href="/docs/ru/milvus_for_agents.md">«Milvus для ИИ-агентов</a>».</p>

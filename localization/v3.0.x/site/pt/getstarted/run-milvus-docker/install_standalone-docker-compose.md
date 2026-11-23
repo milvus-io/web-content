@@ -56,19 +56,15 @@ title: Executar o Milvus com o Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus disponibiliza um ficheiro de configuração do Docker Compose no repositório do Milvus. Descarregue a configuração para a versão 3.0.5 e inicie uma nova implementação:</p>
+    </button></h2><p>O Milvus disponibiliza um ficheiro de configuração do Docker Compose no repositório do Milvus. Descarregue a configuração para a versão 3.0.5 com o comando <code translate="no">wget</code> abaixo. Imediatamente após o descarregamento, antes de editar o ficheiro ou iniciar o Milvus com <code translate="no">sudo docker compose up -d</code>, execute <code translate="no">sha256sum docker-compose.yaml</code> e compare o resultado com o resumo <code translate="no">sha256</code> indicado para <code translate="no">milvus-standalone-docker-compose.yaml</code> na <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">página de lançamento da versão 3.0.5</a>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
-
-Creating milvus-etcd  ... done
-Creating milvus-minio ... done
-Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Implantação padrão (v3.0.5):</strong> <code translate="no">docker compose up -d</code> inicia três contentores de execução prolongada — <code translate="no">milvus-etcd</code> (metadados), <code translate="no">milvus-minio</code> (armazenamento de objetos) e <code translate="no">milvus-standalone</code>. A fila de mensagens é <strong>o Woodpecker (incorporado, com o MinIO / armazenamento de objetos como backend WAL)</strong>, pelo que não é necessário um contentor separado para a fila de mensagens.</p>
+<p><strong>Implantação predefinida (v3.0.5):</strong> <code translate="no">docker compose up -d</code> inicia três contentores de execução prolongada — <code translate="no">milvus-etcd</code> (metadados), <code translate="no">milvus-minio</code> (armazenamento de objetos) e <code translate="no">milvus-standalone</code>. A fila de mensagens é <strong>o Woodpecker (incorporado, com o MinIO / armazenamento de objetos como backend WAL)</strong>, pelo que não é necessário um contentor separado para a fila de mensagens.</p>
 <p>A configuração também executa o serviço «one-shot» <code translate="no">milvus-volume-init</code> para preparar a propriedade do diretório de dados. Este serviço encerra após concluir essa tarefa.</p>
 <p><strong>Fila de mensagens predefinida por versão:</strong></p>
 <ul>
@@ -86,18 +82,25 @@ Creating milvus-standalone ... done
 <li>os contentores denominados <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong> estão em funcionamento.
 <ul>
 <li>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</li>
-<li>O contentor <strong>milvus-minio</strong> serve as portas <strong>9000</strong> e <strong>9001</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</li>
-<li>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</li>
+<li>O contentor <strong>milvus-minio</strong> publica as portas <strong>9000</strong> e <strong>9001</strong> com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</li>
+<li>O contentor <strong>milvus-standalone</strong> publica as portas <strong>19530</strong> e <strong>9091</strong> com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul></li>
 </ul>
-<p>Pode verificar se os contentores estão em funcionamento utilizando o seguinte comando:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose ps</span>
+<p>O serviço « <code translate="no">standalone</code> » define « <code translate="no">security_opt: seccomp:unconfined</code> », para que o contentor Milvus seja executado sem o perfil seccomp predefinido do Docker.</p>
+<div class="alert warning">
+<blockquote>
+<p>O ficheiro de configuração publica estas portas sem um endereço de anfitrião. O Docker publica uma porta sem endereço de anfitrião em todos os endereços de anfitrião, pelo que outras máquinas que consigam aceder a este anfitrião também se podem ligar ao Milvus e ao MinIO. O MinIO utiliza a chave de acesso e a chave secreta <code translate="no">minioadmin</code>, que estão definidas no ficheiro de configuração. Para limitar o acesso a este anfitrião, adicione <code translate="no">127.0.0.1:</code> às entradas <code translate="no">ports</code> dos serviços <code translate="no">minio</code> e <code translate="no">standalone</code> em <code translate="no">docker-compose.yaml</code>, por exemplo, <code translate="no">&quot;127.0.0.1:19530:19530&quot;</code>, e execute novamente <code translate="no">sudo docker compose up -d</code>. Para utilizar outras credenciais do MinIO, altere <code translate="no">MINIO_ACCESS_KEY</code> e <code translate="no">MINIO_SECRET_KEY</code> do serviço <code translate="no">minio</code> e defina os mesmos valores em <code translate="no">minio.accessKeyID</code> e <code translate="no">minio.secretAccessKey</code> da configuração do Milvus. Para exigir credenciais para as ligações ao Milvus, consulte <a href="/docs/pt/authenticate.md">«Autenticar o acesso do utilizador</a>».</p>
+</blockquote>
+</div>
+<p>Pode verificar se os contentores estão ativos e a funcionar utilizando o seguinte comando:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
 NAME                IMAGE   COMMAND                  SERVICE      CREATED         STATUS                   PORTS
 milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         2 minutes ago   Up 2 minutes (healthy)   2379-2380/tcp
-milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
+milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9000-9001-&gt;9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
+<p>A coluna « <code translate="no">PORTS</code> » também pode listar cada porta publicada com o endereço IPv6 <code translate="no">[::]</code>, por exemplo, <code translate="no">[::]:19530-&gt;19530/tcp</code>, porque o Docker publica uma porta sem um endereço de anfitrião tanto em <code translate="no">0.0.0.0</code> como em <code translate="no">[::]</code>.</p>
 <p>Também pode aceder à interface Web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/milvus-webui.md">interface Web do Milvus</a>.</p>
 <p>Para testar o servidor em execução, siga o caminho <strong>«Utilizar um servidor Milvus existente»</strong> no <a href="/docs/pt/quickstart.md">Guia de Início Rápido</a> e ligue-se a <code translate="no">http://localhost:19530</code>. Não utilize o bloco de ligação local <code translate="no">.db</code>, que inicia uma base de dados Milvus Lite separada.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Atualizar as configurações do Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
@@ -115,23 +118,30 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, terá de modificar o ficheiro <code translate="no">/milvus/configs/user.yaml</code> dentro do contentor <code translate="no">milvus-standalone</code>.</p>
+    </button></h2><p>Para atualizar a configuração do Milvus de acordo com as suas necessidades, coloque as suas definições num ficheiro <code translate="no">user.yaml</code> no anfitrião e monte-o em <code translate="no">/milvus/configs/user.yaml</code> no contentor <code translate="no">milvus-standalone</code>. O ficheiro de configuração monta apenas <code translate="no">/var/lib/milvus</code> neste contentor; por isso, um ficheiro <code translate="no">user.yaml</code> que edite dentro do contentor será perdido quando o Compose recriar o contentor, por exemplo, após uma alteração em <code translate="no">docker-compose.yaml</code> ou na imagem do Milvus.</p>
 <ol>
-<li><p>Aceda ao contentor <code translate="no">milvus-standalone</code>.</p>
-<pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Adicione configurações adicionais para substituir as predefinidas.
-O que se segue pressupõe que precisa de substituir o ficheiro <code translate="no">proxy.healthCheckTimeout</code> predefinido. Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">Configuração do sistema</a>.</p>
-<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
+<li><p>Crie <code translate="no">user.yaml</code> na pasta que contém <code translate="no">docker-compose.yaml</code>. Crie o ficheiro antes de o montar: se o caminho de origem não existir, o Compose cria, em vez disso, um diretório com esse nome.
+O que se segue pressupõe que precisa de substituir o <code translate="no">proxy.healthCheckTimeout</code> predefinido. Para os itens de configuração aplicáveis, consulte <a href="/docs/pt/system_configuration.md">Configuração do Sistema</a>.</p>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Reinicie o contentor <code translate="no">milvus-standalone</code> para aplicar as alterações.</p>
-<pre><code translate="no" class="language-shell">docker restart milvus-standalone
+<li><p>Em <code translate="no">docker-compose.yaml</code>, adicione o ficheiro à lista <code translate="no">volumes</code> do serviço <code translate="no">standalone</code>. Mantenha as restantes definições do serviço, tais como <code translate="no">security_opt</code>, <code translate="no">healthcheck</code> e <code translate="no">depends_on</code>, tal como estão.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Aplique a alteração. Como a configuração do serviço foi alterada, o Compose recria o contentor <code translate="no">milvus-standalone</code> e mantém os dados nos seus volumes montados.</p>
+<pre><code translate="no" class="language-shell">sudo docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
+<p>Depois de o ficheiro estar montado, reinicie o serviço <code translate="no">standalone</code> para aplicar alterações posteriores a <code translate="no">user.yaml</code>:</p>
+<pre><code translate="no" class="language-shell">sudo docker compose restart standalone
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Parar e eliminar o Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +179,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para uma implementação autónoma do Milvus 2.6.x, siga as instruções <a href="/docs/pt/upgrade_milvus_standalone-docker.md">em Atualizar o Milvus autónomo com o Docker Compose</a>. Faça uma cópia de segurança dos metadados e dos dados persistentes, preserve as dependências e a configuração existentes e valide o caminho de atualização documentado de origem para destino antes de alterar a imagem do Milvus. Não substitua o ficheiro Compose de uma implementação mais antiga pela configuração de nova instalação acima referida.</p>
+    </button></h2><p>Para uma implementação autónoma do Milvus 2.6.x, siga as instruções em <a href="/docs/pt/upgrade_milvus_standalone-docker.md">«Atualizar o Milvus autónomo com o Docker Compose</a>». Faça uma cópia de segurança dos metadados e dos dados persistentes, preserve as dependências e a configuração existentes e valide o caminho de atualização documentado de origem para destino antes de alterar a imagem do Milvus. Não substitua o ficheiro Compose de uma implementação mais antiga pela configuração de nova instalação acima referida.</p>
 <p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.5, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <p>O Milvus 2.6.x e versões posteriores utilizam o Woodpecker por predefinição, enquanto as implementações 2.5.x utilizam <strong>o RocksMQ</strong> por predefinição. Se a implementação que está a atualizar ainda utilizar o RocksMQ, fixe-o em « <code translate="no">user.yaml</code> » antes de alterar a imagem do Milvus, para que a instância atualizada mantenha a sua fila de mensagens existente em vez de iniciar com a nova predefinição:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
@@ -229,8 +239,8 @@ EOF
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_standalone-docker.md">Atualizar o Milvus Standalone com o Docker Compose</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Expanda o seu cluster Milvus</a>.</p></li>
-<li><p>Implemente o seu cluster Milvus nas nuvens:</p>
+<li><p><a href="/docs/pt/scaleout.md">Dimensionar um cluster Milvus</a> no Kubernetes. Esse procedimento utiliza o Helm e não se aplica a esta implementação do Docker.</p></li>
+<li><p>Implemente o seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

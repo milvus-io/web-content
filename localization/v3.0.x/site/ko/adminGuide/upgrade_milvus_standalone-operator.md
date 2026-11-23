@@ -25,7 +25,7 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
       </svg>
     </button></h1><p>이 가이드에서는 Milvus Operator를 사용하여 Milvus 2.6.x 독립형 배포 환경을 v3.0.5로 업그레이드하는 방법을 설명합니다.</p>
 <div class="alert note">
-<p>이 절차는 Milvus Operator 1.3.0(Woodpecker), 클러스터 내 etcd 및 클러스터 내 MinIO를 사용하여 Milvus 2.6.20에서 Milvus v3.0.5로 업그레이드하는 경우 검증되었습니다. 다른 Milvus 2.6.x 패치 릴리스, Operator 버전, 메시지 큐 또는 종속성 구성을 사용하는 경우, 먼저 비생산 환경에서 업그레이드를 검증하십시오.</p>
+<p>이 절차는 Milvus Operator 1.3.0(Woodpecker), 클러스터 내 etcd, 클러스터 내 MinIO를 사용하여 Milvus 2.6.20에서 Milvus v3.0.5로 업그레이드하는 경우 검증되었습니다. 다른 Milvus 2.6.x 패치 릴리스, Operator 버전, 메시지 큐 또는 종속성 구성을 사용하는 경우, 먼저 비생산 환경에서 업그레이드를 검증하십시오.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>기존 배포의 소스 매니페스트를 업그레이드 매니페스트로 사용하십시오. 서버에서 관리하는 메타데이터 및 상태 필드를 먼저 제거하지 않고는 내보낸 백업 파일을 직접 적용하지 마십시오.</p>
+<p>기존 배포의 소스 매니페스트(이 가이드에서는<code translate="no">milvus.yaml</code> )를 업그레이드 매니페스트로 사용하십시오. 서버에서 관리하는 메타데이터 및 상태 필드를 먼저 제거하지 않고는 내보낸 백업 파일을 직접 적용하지 마십시오.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">2단계: Milvus Operator 버전 확인<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>검증된 업그레이드에서는 Milvus Operator 버전을 1.3.0으로 유지했습니다. 지원 정책에 따라 별도의 Operator 업그레이드가 필요한 경우가 아니라면, 현재 Milvus 2.6.x 배포를 관리하고 있는 Operator 버전을 그대로 유지하십시오. 최신 버전의 Operator를 테스트된 버전으로 다운그레이드하지 마십시오. Operator 버전을 변경해야 하는 경우, 기존 설치와 동일한 Helm 또는 <code translate="no">kubectl</code> 설치 방법과 동일한 릴리스 이름 및 네임스페이스를 사용한 다음, Milvus CR을 업데이트하기 전에 Operator 변경 사항을 검증하십시오.</p>
+<p>검증된 업그레이드에서는 Milvus Operator 버전을 1.3.0으로 유지했습니다. 지원 정책에 따라 별도의 Operator 업그레이드가 필요한 경우가 아니라면, 현재 Milvus 2.6.x 배포를 관리하고 있는 Operator 버전을 그대로 유지하십시오. 최신 버전의 Operator를 테스트된 버전으로 다운그레이드하지 마십시오. Operator 버전을 변경해야 하는 경우, 기존 설치와 동일한 Helm 또는 <code translate="no">kubectl</code> 설치 방법을 사용하고 동일한 릴리스 이름 및 네임스페이스를 지정한 다음, Milvus CR을 업데이트하기 전에 Operator 변경 사항을 검증하십시오.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">3단계: Milvus 이미지 업데이트<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,3 +164,6 @@ kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus CR에 <code translate="no">Healthy</code> 가 보고되고, 현재 이미지가 <code translate="no">milvusdb/milvus:v3.0.5</code> 이며, 기존 컬렉션을 계속 쿼리하고 검색할 수 있는지 확인하십시오. v3.0.5 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
+<div class="alert note">
+<p>Milvus 3.0으로 업그레이드한다고 해서 Storage V3가 활성화되는 것은 아닙니다. 업그레이드를 확인한 후, Storage V3에 의존하는 기능을 활성화하기 전에 <a href="/docs/ko/storage-v3.md">Storage V3에 대해</a> 검토하십시오. Milvus가 Storage V3 데이터를 기록한 후에는 Storage V3를 읽을 수 없는 이전 Milvus 버전으로 다운그레이드하는 것이 지원되지 않습니다.</p>
+</div>

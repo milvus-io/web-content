@@ -67,7 +67,7 @@ title: Milvus Backup
       </svg>
     </button></h2><ul>
 <li>Utilize um binário do Backup e exemplos de configuração da mesma versão. O <a href="/docs/pt/milvus_backup_cli.md#Obtain-Milvus-Backup">guia 0.5.x</a> refere a versão 0.5.16; o <a href="/docs/pt/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">guia atual</a> refere a versão 0.6.0.</li>
-<li>Assegure o acesso de rede ao Milvus, ao seu armazenamento e ao destino do backup. As operações de instantâneo também exigem que o servidor Milvus consiga aceder ao repositório de backup.</li>
+<li>Assegure o acesso de rede ao Milvus, ao seu armazenamento e ao destino do backup. As operações de instantâneo também requerem que o servidor Milvus consiga aceder ao repositório de backup.</li>
 <li>Verifique a compatibilidade do servidor abaixo. O Go só é necessário quando se compila a partir do código-fonte: versão 1.25 ou posterior para o Backup 0.5.16 e 1.26 ou posterior para a versão 0.6.0.</li>
 </ul>
 <h2 id="Architecture" class="common-anchor-header">Arquitetura<button data-href="#Architecture" class="anchor-icon" translate="no">
@@ -122,7 +122,7 @@ title: Milvus Backup
       </svg>
     </button></h2><p><strong>O Backup 0.6.0 não requer a atualização de todas as instalações do Milvus para a versão 3.0.</strong> Suporta fluxos de trabalho de binlog nas versões 2.x do Milvus compatíveis. O suporte oficial para cópias de segurança e restauração da linha Milvus 3.0 começa com <strong>o Milvus 3.0.1</strong>; o exemplo de instantâneo utiliza essa linha.</p>
 <p><a href="/docs/pt/milvus_backup_upgrade.md">O guia de atualização</a> foi validado com o Backup 0.5.16 e 0.6.0 no Milvus 2.6.11, incluindo a restauração de um backup 0.5.16 pelo 0.6.0. Esta combinação testada não amplia a matriz abaixo.</p>
-<p>As versões de origem e de destino do Milvus devem formar um par suportado. Uma versão de destino mais recente, por si só, não garante a compatibilidade. A matriz de compatibilidade a seguir abrange o Milvus 2.x, conforme documentado desde o Milvus Backup 0.5.7; não estabelece a compatibilidade de migração de 2.x para 3.0.</p>
+<p>As versões de origem e de destino do Milvus devem formar um par compatível. Uma versão de destino mais recente, por si só, não garante a compatibilidade. A matriz de compatibilidade a seguir abrange o Milvus 2.x, conforme documentado desde o Milvus Backup 0.5.7; não estabelece a compatibilidade de migração de 2.x para 3.0.</p>
 <table>
 <thead>
 <tr><th>Cópia de segurança de ↓ / Restauração para →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
@@ -152,5 +152,5 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">v0.6.0</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.2">v0.6.2</a></li>
 </ul>

@@ -74,16 +74,25 @@ title: 在 Docker 中執行 Milvus（Linux）
 <p>執行安裝腳本後：</p>
 <ul>
 <li>一個名為 milvus-standalone 的 Docker 容器已於<strong>19530</strong> 埠啟動。</li>
-<li>一個嵌入式 etcd 已隨 Milvus 一起安裝在同一容器中，並於<strong>2379</strong> 埠提供服務。其設定檔對應至當前資料夾中的<strong>embedEtcd.yaml</strong>檔案。</li>
+<li>一個嵌入式 etcd 已隨 Milvus 一起安裝在同一容器中，並於<strong>2379</strong> 埠提供服務。其設定檔對應至當前資料夾中的<strong>embedEtcd.yaml</strong>。</li>
 <li>若要變更預設的 Milvus 設定，請將您的設定新增至當前資料夾中的<strong>user.yaml</strong>檔案，然後重新啟動服務。</li>
 <li>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul>
-<p>請驗證實際映像檔及運作狀態：</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<p><code translate="no">start</code> 指令會輸出「<code translate="no">Wait for Milvus Starting...</code> 」，隨後每秒檢查一次，直到<code translate="no">docker ps</code> 回報該容器狀態為正常為止。此檢查無時間限制。若該指令未返回結果，請從另一個終端機檢查容器日誌：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>請等待<code translate="no">healthy</code> 狀態顯示為「 」後，再繼續進行<a href="/docs/zh-hant/quickstart.md">《快速入門》步驟</a>。使用此伺服器時，請將 SDK 連線至<code translate="no">http://localhost:19530</code> ；若使用本機的<code translate="no">.db</code> URI，則會啟動 Milvus Lite。</p>
-<p>您可以透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 執行個體。詳細資訊請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>該腳本會使用 `<code translate="no">sudo</code>` 執行其 `<code translate="no">docker</code> ` 指令。每次執行 `<code translate="no">start</code> ` 時，會先從 Milvus 映像檔啟動一個短暫存在的容器 `<code translate="no">root</code>`，該容器會遞迴地將<strong>`volumes/milvus</strong>` 的擁有者變更為映像檔中的 `<code translate="no">milvus</code> ` 使用者，除非該資料夾中的 `<code translate="no">.milvus-volume-owner-*</code> ` 標記檔顯示此操作已完成。腳本會使用 `<code translate="no">--security-opt seccomp:unconfined</code>` 啟動 Milvus 容器，因此該容器將在不使用預設 Docker seccomp 設定檔的情況下運行。</p>
+<div class="alert warning">
+<blockquote>
+<p>該腳本會不指定主機位址地公開<strong>19530</strong>、<strong>9091</strong> 和<strong>2379</strong>這三個埠，而<strong>`embedEtcd.yaml</strong>` 則將 etcd 設定為監聽<code translate="no">http://0.0.0.0:2379</code> 。 Docker 會在所有主機位址上，以不指定主機位址的方式公開端口，因此能夠連至此主機的其他機器也能連線至 Milvus 和 etcd。若要限制對此主機的存取，請在<code translate="no">standalone_embed.sh</code> 檔案中，於第一個<code translate="no">start</code> 之前編輯<code translate="no">-p</code> 選項（例如<code translate="no">-p 127.0.0.1:19530:19530</code> ），並在您無需從容器外部連線至 etcd 的情況下，移除<code translate="no">-p 2379:2379</code> 。 若已存在<code translate="no">milvus-standalone</code> 容器，<code translate="no">start</code> 會以其原始選項重新啟動該容器。若要要求 Milvus 連線時提供憑證，請參閱《<a href="/docs/zh-hant/authenticate.md">驗證使用者存取權限</a>》。</p>
+</blockquote>
+</div>
+<p>驗證實際映像檔及運作狀態：</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>請等待<code translate="no">healthy</code> 出現後，再進行<a href="/docs/zh-hant/quickstart.md">《快速入門》操作</a>。使用此伺服器時，請將 SDK 連線至<code translate="no">http://localhost:19530</code> ；若使用本機的<code translate="no">.db</code> URI，則會啟動 Milvus Lite。</p>
+<p>您可以透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 實例。詳細資訊請參閱《<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>》。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(可選) 更新 Milvus 設定<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +134,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>該腳本中的<code translate="no">upgrade</code> 指令會從<code translate="no">master</code> 下載腳本，並使用該腳本選定的映像重新建立容器。此指令不會驗證來源至目標版本路徑是否受支援，且可能會重新建立已生成的設定檔。請勿將此視為保證任意舊版部署皆能安全升級至 v3.0.5。</p>
+    </button></h2><p>該腳本中的<code translate="no">upgrade</code> 指令會從<code translate="no">master</code> 下載腳本，並使用該腳本選定的映像檔重新建立容器。此指令不會驗證來源至目標版本路徑是否受支援，且可能會重新建立已生成的設定檔。請勿將此視為保證任意舊版部署皆能安全升級至 v3.0.5。</p>
 <p>升級前，請備份元資料、持久化資料、<code translate="no">embedEtcd.yaml</code> 以及<code translate="no">user.yaml</code> 。請檢查目標版本、訊息佇列及儲存空間的相容性，並在非生產環境中驗證恢復功能。對於使用 Docker Compose 管理的部署，請遵循<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升級 Milvus 獨立執行版</a>》的指引；請勿將該程序直接套用至由腳本管理的容器。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止並刪除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,14 +210,14 @@ EOF
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
 <li><p>在變更 Milvus 版本之前，請先參閱本頁面的升級注意事項。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
-<li><p>在雲端部署您的 Milvus 叢集：</p>
+<li><p>在 Kubernetes<a href="/docs/zh-hant/scaleout.md">上擴展 Milvus 叢集</a>。該程序使用 Helm，不適用於此 Docker 部署。</p></li>
+<li><p>在雲端平台上部署您的 Milvus 叢集：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh-hant/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI，</a>這是用於 Milvus 可觀察性與管理的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

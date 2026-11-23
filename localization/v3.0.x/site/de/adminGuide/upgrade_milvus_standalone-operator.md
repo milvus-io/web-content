@@ -51,9 +51,9 @@ title: Upgrade von Milvus Standalone mit Milvus Operator
 <li>Die für den bestehenden Milvus Operator verwendete Installationsmethode und die entsprechenden Manifeste</li>
 <li>Eine aktuelle Sicherung der Milvus-Metadaten und persistenten Daten</li>
 </ul>
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v3.0.5 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel von Nachrichtenwarteschlangensystemen wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.5 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 <div class="alert warning">
-<p>Dieses Verfahren gilt nicht für ein Downgrade oder einen Rollback, bei dem das Milvus-Image wieder auf 2.6.x zurückgesetzt wird. Nachdem v3.0.5 Daten geschrieben hat, kann es bei einem reinen Image-Rollback zu Fehlern beim Einlesen des aktualisierten Zustands kommen. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die vor dem Upgrade erstellten Sicherungen der Metadaten und persistenten Daten wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
+<p>Dieses Verfahren gilt nicht für ein Downgrade oder einen Rollback, bei dem das Milvus-Image wieder auf 2.6.x zurückgesetzt wird. Nachdem v3.0.5 Daten geschrieben hat, kann es bei einem reinen Image-Rollback vorkommen, dass der aktualisierte Zustand nicht gelesen werden kann. Wenn das Upgrade fehlschlägt, stoppen Sie Schreibvorgänge und wenden Sie einen Wiederherstellungsplan an, der die vor dem Upgrade erstellten Sicherungen der Metadaten und persistenten Daten wiederherstellt. Testen Sie den Wiederherstellungsplan zunächst in einer Nicht-Produktionsumgebung.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Upgrade-Prozess<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,8 +90,8 @@ title: Upgrade von Milvus Standalone mit Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Verwenden Sie das Quellmanifest Ihrer bestehenden Bereitstellung als Upgrade-Manifest. Wenden Sie die exportierte Sicherungsdatei nicht direkt an, ohne zuvor die vom Server verwalteten Metadaten und Statusfelder zu entfernen.</p>
-<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Schritt 2: Überprüfen Sie die Version des Milvus-Operators<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
+<p>Verwenden Sie das Quellmanifest Ihrer bestehenden Bereitstellung (in dieser Anleitung „<code translate="no">milvus.yaml</code> “) als Upgrade-Manifest. Wenden Sie die exportierte Sicherungsdatei nicht direkt an, ohne zuvor die vom Server verwalteten Metadaten und Statusfelder zu entfernen.</p>
+<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Schritt 2: Überprüfen Sie die Milvus-Operator-Version<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,7 +111,7 @@ title: Upgrade von Milvus Standalone mit Milvus Operator
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei dem validierten Upgrade wurde der Milvus Operator in Version 1.3.0 beibehalten. Behalten Sie die Operator-Version bei, die derzeit Ihre Milvus 2.6.x-Bereitstellung verwaltet, es sei denn, Ihre Support-Richtlinie erfordert ein separates Operator-Upgrade. Führen Sie kein Downgrade eines neueren Operators auf die getestete Version durch. Wenn Sie die Operator-Version ändern müssen, verwenden Sie dieselbe Helm- oder „ <code translate="no">kubectl</code> “-Installationsmethode sowie denselben Release-Namen und denselben Namespace wie bei der bestehenden Installation und validieren Sie anschließend die Operator-Änderung, bevor Sie den Milvus-CR aktualisieren.</p>
+<p>Bei dem validierten Upgrade blieb der Milvus Operator bei Version 1.3.0. Behalten Sie die Operator-Version bei, die derzeit Ihre Milvus 2.6.x-Bereitstellung verwaltet, es sei denn, Ihre Support-Richtlinie erfordert ein separates Operator-Upgrade. Führen Sie kein Downgrade eines neueren Operators auf die getestete Version durch. Wenn Sie die Operator-Version ändern müssen, verwenden Sie dieselbe Installationsmethode (Helm oder „ <code translate="no">kubectl</code> “) sowie denselben Release-Namen und denselben Namespace wie bei der bestehenden Installation und validieren Sie die Operator-Änderung, bevor Sie den Milvus-CR aktualisieren.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Schritt 3: Aktualisieren Sie das Milvus-Image<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,4 +165,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Stellen Sie sicher, dass das Milvus-CR „ <code translate="no">Healthy</code> “ meldet, das aktuelle Image „ <code translate="no">milvusdb/milvus:v3.0.5</code> “ lautet und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie v3.0.5-spezifische Funktionen aktivieren.</p>
+<p>Stellen Sie sicher, dass das Milvus-CR „ <code translate="no">Healthy</code> “ angibt, das aktuelle Image „ <code translate="no">milvusdb/milvus:v3.0.5</code> “ lautet und die vorhandenen Sammlungen weiterhin abfragbar und durchsuchbar sind. Führen Sie diese Überprüfungen durch, bevor Sie v3.0.5-spezifische Funktionen aktivieren.</p>
+<div class="alert note">
+<p>Durch das Upgrade auf Milvus 3.0 wird „Storage V3“ nicht aktiviert. Nachdem Sie das Upgrade überprüft haben, machen Sie sich mit <a href="/docs/de/storage-v3.md">„Storage V3“</a> vertraut, bevor Sie Funktionen aktivieren, die davon abhängen. Sobald Milvus Daten im „Storage V3“-Format schreibt, wird ein Downgrade auf eine ältere Milvus-Version, die „Storage V3“ nicht lesen kann, nicht unterstützt.</p>
+</div>

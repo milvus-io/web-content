@@ -56,19 +56,15 @@ title: 使用 Docker Compose 运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其仓库中提供了一个 Docker Compose 配置文件。请下载 v3.0.5 版本的配置文件并启动新的部署：</p>
+    </button></h2><p>Milvus 在其仓库中提供了一个 Docker Compose 配置文件。请使用下方的<code translate="no">wget</code> 命令下载 v3.0.5 版本的配置文件。下载完成后，在编辑文件或使用<code translate="no">sudo docker compose up -d</code> 启动 Milvus 之前，请运行<code translate="no">sha256sum docker-compose.yaml</code> 命令，并将结果与<a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">v3.0.5 发布页面</a>上<code translate="no">milvus-standalone-docker-compose.yaml</code> 条目中列出的<code translate="no">sha256</code> 摘要进行比对：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
-
-Creating milvus-etcd  ... done
-Creating milvus-minio ... done
-Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>默认部署（v3.0.5）：</strong> <code translate="no">docker compose up -d</code> 将启动三个长期运行的容器——<code translate="no">milvus-etcd</code> （元数据）、<code translate="no">milvus-minio</code> （对象存储）和<code translate="no">milvus-standalone</code> 。消息队列使用<strong>Woodpecker（嵌入式，以 MinIO / 对象存储作为其 WAL 后端）</strong>，因此无需单独的消息队列容器。</p>
+<p><strong>默认部署（v3.0.5）：</strong> <code translate="no">docker compose up -d</code> 会启动三个长期运行的容器——<code translate="no">milvus-etcd</code> （元数据）、<code translate="no">milvus-minio</code> （对象存储）和<code translate="no">milvus-standalone</code> 。消息队列使用<strong>Woodpecker（嵌入式，以 MinIO / 对象存储作为其 WAL 后端）</strong>，因此无需单独的消息队列容器。</p>
 <p>该配置还会运行一次性的<code translate="no">milvus-volume-init</code> 服务，以准备数据目录的所有权。该服务在完成该任务后即退出。</p>
 <p><strong>各版本的消息队列默认设置：</strong></p>
 <ul>
@@ -86,20 +82,27 @@ Creating milvus-standalone ... done
 <li>名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
-<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地监听<strong>9000</strong>和<strong>9001</strong>端口，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
-<li><strong>Milvus Standalone</strong>容器在本地通过默认设置提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
+<li><strong>milvus-minio</strong>容器使用默认身份验证凭据公开端口<strong>9000</strong>和<strong>9001</strong>，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
+<li><strong>Milvus Standalone</strong>容器使用默认设置公开了<strong>19530</strong>和<strong>9091</strong>端口，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
 </ul></li>
 </ul>
+<p><code translate="no">standalone</code> 服务将<code translate="no">security_opt: seccomp:unconfined</code> 设置为true，因此Milvus容器在运行时不使用默认的Docker seccomp配置文件。</p>
+<div class="alert warning">
+<blockquote>
+<p>该配置文件在未指定主机地址的情况下公开了这些端口。Docker 会在所有主机地址上公开未指定主机地址的端口，因此能够访问该主机的其他机器也可以连接到 Milvus 和 MinIO。MinIO 使用配置文件中设置的访问密钥和密钥<code translate="no">minioadmin</code> 。 若要限制对该主机的访问，请在<code translate="no">docker-compose.yaml</code> 文件中，将<code translate="no">127.0.0.1:</code> 添加到<code translate="no">minio</code> 和<code translate="no">standalone</code> 服务的<code translate="no">ports</code> 条目中（例如<code translate="no">&quot;127.0.0.1:19530:19530&quot;</code> ），然后再次运行<code translate="no">sudo docker compose up -d</code> 。若要使用其他 MinIO 凭据，请修改<code translate="no">minio</code> 服务中的<code translate="no">MINIO_ACCESS_KEY</code> 和<code translate="no">MINIO_SECRET_KEY</code> ，并在 Milvus 配置的<code translate="no">minio.accessKeyID</code> 和<code translate="no">minio.secretAccessKey</code> 中设置相同的值。若要要求 Milvus 连接时提供凭据，请参阅<a href="/docs/zh/authenticate.md">《验证用户访问》</a>。</p>
+</blockquote>
+</div>
 <p>您可以使用以下命令检查容器是否已启动并正在运行：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose ps</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
 NAME                IMAGE   COMMAND                  SERVICE      CREATED         STATUS                   PORTS
 milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         2 minutes ago   Up 2 minutes (healthy)   2379-2380/tcp
-milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
+milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9000-9001-&gt;9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以访问 Milvus WebUI（<code translate="no">http://127.0.0.1:9091/webui/</code> ）以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
-<p>若要测试运行中的服务器，请按照<a href="/docs/zh/quickstart.md">《快速入门》</a>中的<strong>“使用现有 Milvus 服务器</strong>”路径操作，并连接至<code translate="no">http://localhost:19530</code> 。请勿使用本地<code translate="no">.db</code> 连接块，该块会启动一个独立的 Milvus Lite 数据库。</p>
+<p>“<code translate="no">PORTS</code> ”列还会列出每个已发布的端口及其 IPv6 地址<code translate="no">[::]</code> ，例如<code translate="no">[::]:19530-&gt;19530/tcp</code> ，因为 Docker 会在<code translate="no">0.0.0.0</code> 和<code translate="no">[::]</code> 上发布不带主机地址的端口。</p>
+<p>您还可以访问<code translate="no">http://127.0.0.1:9091/webui/</code> 上的 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>若要测试正在运行的服务器，请按照<a href="/docs/zh/quickstart.md">《快速入门》</a>中的<strong>“使用现有 Milvus 服务器”</strong>路径操作，并连接至<code translate="no">http://localhost:19530</code> 。请勿使用本地<code translate="no">.db</code> 连接块，该块会启动一个独立的 Milvus Lite 数据库。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,23 +118,30 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要根据您的需求更新 Milvus 配置，您需要修改<code translate="no">milvus-standalone</code> 容器中的<code translate="no">/milvus/configs/user.yaml</code> 文件。</p>
+    </button></h2><p>若要根据您的需求更新 Milvus 配置，请将设置写入主机上的<code translate="no">user.yaml</code> 文件，并将其挂载到<code translate="no">milvus-standalone</code> 容器中的<code translate="no">/milvus/configs/user.yaml</code> 路径下。该配置文件仅将<code translate="no">/var/lib/milvus</code> 挂载到此容器中，因此当您在容器内编辑<code translate="no">user.yaml</code> 文件时，若 Compose 重新创建容器（例如在修改<code translate="no">docker-compose.yaml</code> 或 Milvus 镜像后），该文件内容将会丢失。</p>
 <ol>
-<li><p>访问<code translate="no">milvus-standalone</code> 容器。</p>
-<pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>添加额外配置以覆盖默认设置。
-下文假设您需要覆盖默认的<code translate="no">proxy.healthCheckTimeout</code> 。有关适用的配置项，请参阅《<a href="/docs/zh/system_configuration.md">系统配置》</a>。</p>
-<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
+<li><p>在包含<code translate="no">docker-compose.yaml</code> 的文件夹中创建<code translate="no">user.yaml</code> 。请在挂载该文件之前先创建它：如果源路径不存在，Compose 会自动创建一个同名的目录。
+以下内容假设您需要覆盖默认的<code translate="no">proxy.healthCheckTimeout</code> 。有关适用的配置项，请参阅<a href="/docs/zh/system_configuration.md">《系统配置》</a>。</p>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>重启<code translate="no">milvus-standalone</code> 容器以应用更改。</p>
-<pre><code translate="no" class="language-shell">docker restart milvus-standalone
+<li><p>在<code translate="no">docker-compose.yaml</code> 中，将该文件添加到<code translate="no">standalone</code> 服务的<code translate="no">volumes</code> 列表中。保持该服务的其他设置（如<code translate="no">security_opt</code> 、<code translate="no">healthcheck</code> 和<code translate="no">depends_on</code> ）不变。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>应用更改。由于服务配置发生变化，Compose 会重新创建<code translate="no">milvus-standalone</code> 容器，并保留其挂载卷中的数据。</p>
+<pre><code translate="no" class="language-shell">sudo docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
+<p>文件挂载完成后，重启<code translate="no">standalone</code> 服务以应用后续对<code translate="no">user.yaml</code> 所做的更改：</p>
+<pre><code translate="no" class="language-shell">sudo docker compose restart standalone
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止并删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +179,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于 Milvus 2.6.x 独立部署，请遵循<a href="/docs/zh/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升级 Milvus Standalone</a>》中的说明。在更改 Milvus 镜像之前，请备份元数据和持久化数据，保留现有的依赖项和配置，并验证文档中记录的源到目标的升级路径。 请勿用上述新安装配置替换旧部署的 Compose 文件。</p>
+    </button></h2><p>对于 Milvus 2.6.x 独立部署，请遵循<a href="/docs/zh/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升级 Milvus Standalone</a>》的指南。在更改 Milvus 镜像之前，请备份元数据和持久化数据，保留现有的依赖项和配置，并验证文档中记录的源到目标的升级路径。 请勿用上述新安装配置替换旧部署的 Compose 文件。</p>
 <p><strong>消息队列限制</strong>：升级至 Milvus v3.0.5 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
 <p>Milvus 2.6.x 及更高版本默认使用 Woodpecker，而 2.5.x 部署默认使用<strong>RocksMQ</strong>。如果您要升级的部署仍在使用 RocksMQ，请在更改 Milvus 镜像之前，通过 `<code translate="no">user.yaml</code> ` 将其固定，以便升级后的实例保留现有的消息队列，而不是使用新的默认设置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
@@ -229,14 +239,14 @@ EOF
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升级 Milvus Standalone</a>。</p></li>
-<li><p><a href="/docs/zh/scaleout.md">扩展您的 Milvus 集群</a>。</p></li>
-<li><p>在云端部署您的 Milvus 集群：</p>
+<li><p>在 Kubernetes 上<a href="/docs/zh/scaleout.md">扩展 Milvus 集群</a>。该操作使用 Helm，不适用于此 Docker 部署。</p></li>
+<li><p>在云平台上部署您的 Milvus 集群：</p>
 <ul>
 <li><a href="/docs/zh/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>——一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
+<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI，</a>这是一个用于 Milvus 可观测性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus Backup</a>，一款用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>了解<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>——一款用于调试 Milvus 并进行动态配置更新的开源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu</a>——一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>

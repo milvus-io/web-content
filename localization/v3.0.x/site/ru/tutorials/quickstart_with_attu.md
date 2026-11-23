@@ -1,7 +1,7 @@
 ---
 id: quickstart_with_attu.md
 summary: >-
-  Используйте Attu Desktop и Python для создания коллекции в Milvus, добавления
+  Используйте Attu Desktop и Python для создания коллекции Milvus, добавления
   текстовых вложений и просмотра результатов векторного поиска.
 title: Быстрый старт с Attu — веб-интерфейсом Milvus
 ---
@@ -56,9 +56,9 @@ title: Быстрый старт с Attu — веб-интерфейсом Milvu
 <ul>
 <li>Работающий сервер Milvus, к которому имеют доступ как Attu, так и ваша среда Python. В этом руководстве используется автономная версия Milvus, доступная по адресу <code translate="no">http://localhost:19530</code>, а не локальный файл Milvus Lite <code translate="no">.db</code>.</li>
 <li>Версия Attu, совместимая с вашим сервером. Attu 3.0 поддерживает Milvus 2.6.0 и более поздние версии, включая Milvus 3.x; для более старых серверов воспользуйтесь <a href="https://github.com/zilliztech/attu#compatibility">таблицей совместимости</a>.</li>
-<li>Среда Python с версией PyMilvus, совместимой с вашим сервером. См. разделы <a href="/docs/ru/install-pymilvus.md">«Установка Python SDK для Milvus</a> » и <a href="/docs/ru/release_notes.md">«Примечания к выпуску</a>». Для версии SDK, используемой в этой ветке документации, установите дополнительные зависимости model extra и progress-bar:</li>
+<li>Среда Python с версией PyMilvus, совместимой с вашим сервером. См. разделы <a href="/docs/ru/install-pymilvus.md">«Установка Python SDK для Milvus</a> » и <a href="/docs/ru/release_notes.md">«Примечания к выпуску</a>». Для версии SDK, используемой в этой ветке документации, установите дополнительный модуль model и зависимость progress-bar:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>На этапах подготовки данных также используются <code translate="no">wget</code> и <code translate="no">unzip</code>. Функция embedding загружает свою модель при первом использовании, поэтому обеспечьте сетевой доступ к хосту модели или заранее подготовьте кэш модели. Скриншоты иллюстрируют рабочий процесс; метки и макеты могут отличаться в разных версиях Attu.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Установка настольного приложения<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -325,7 +325,7 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Перейдите на вкладку <strong>«Векторный поиск</strong> » в Attu.</p>
+    </button></h3><p>Перейдите на вкладку <strong>«Векторный поиск»</strong> в Attu.</p>
 <ol>
 <li>Нажмите кнопку <strong>«Генерировать случайные данные</strong> », чтобы создать тестовые запросы.</li>
 <li>Нажмите <strong>«Поиск»</strong>, чтобы получить результаты на основе сгенерированных данных.</li>
@@ -375,7 +375,7 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h3><p>Дважды щелкните по любому узлу результата, чтобы развернуть его связи. Это действие раскрывает дополнительные взаимосвязи между выбранным узлом и другими точками данных в коллекции, создавая <strong>более обширный, взаимосвязанный граф знаний</strong>.</p>
-<p>Этот расширенный вид позволяет более глубоко изучить взаимосвязи между точками данных на основе векторного сходства.</p>
+<p>Этот расширенный вид позволяет глубже изучить взаимосвязи между точками данных на основе сходства векторов.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">
 </p>

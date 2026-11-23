@@ -54,10 +54,10 @@ title: Panduan Cepat
         ></path>
       </svg>
     </button></h3><p>Panduan ini menggunakan Milvus Lite, sebuah dependensi opsional dari SDK Python PyMilvus yang berjalan secara lokal. Untuk penyebaran server, lihat <a href="/docs/id/install_standalone-docker.md">Docker</a> atau <a href="/docs/id/install_cluster-milvusoperator.md">Kubernetes</a>.</p>
-<p>Gunakan Python 3.10 atau yang lebih baru di macOS, Linux, atau Windows, dengan paket biner (wheels) yang tersedia untuk dependensi Milvus Lite seperti <code translate="no">faiss-cpu</code> dan <code translate="no">pyarrow</code>. Contoh-contoh ini menggunakan PyMilvus 3.0.2 dan Milvus Lite 3.2.2. Instal kedua paket tersebut secara eksplisit:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<p>Gunakan Python 3.10 atau yang lebih baru di macOS, Linux, atau Windows, dengan paket biner (wheels) yang tersedia untuk dependensi Milvus Lite seperti <code translate="no">faiss-cpu</code> dan <code translate="no">pyarrow</code>. Contoh-contoh ini menggunakan PyMilvus 3.0.3 dan Milvus Lite 3.2.2. Instal kedua paket tersebut secara eksplisit:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Di Windows, pip melewatkan dependensi tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.2; perintah di atas secara eksplisit menyebutkan <code translate="no">milvus-lite</code>, sehingga jalur lokal juga berfungsi di sana. Untuk persyaratan instalasi SDK saja, lihat <a href="/docs/id/install-pymilvus.md">Install Milvus Python SDK</a>.</p>
+<p>Di Windows, pip melewatkan dependensi tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.3; perintah di atas secara eksplisit menyebutkan <code translate="no">milvus-lite</code>, sehingga jalur lokal juga berfungsi di sana. Untuk persyaratan instalasi SDK saja, lihat <a href="/docs/id/install-pymilvus.md">Install Milvus Python SDK</a>.</p>
 <div class="alert note">
 <blockquote>
 <p>Jika Anda menggunakan Google Colab, untuk mengaktifkan dependensi yang baru saja diinstal, Anda mungkin perlu <strong>me-restart runtime</strong>. (Klik menu “Runtime” di bagian atas layar, lalu pilih “Restart session” dari menu dropdown).</p>
@@ -78,8 +78,8 @@ title: Panduan Cepat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika Anda telah menginstal Milvus dengan Docker atau Kubernetes, atau memiliki titik akhir Zilliz Cloud, instal hanya SDK-nya saja. PyMilvus 3.0.2 memerlukan Python 3.9 atau yang lebih baru; Anda tidak memerlukan dependensi Lite lokal untuk jalur ini:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+    </button></h3><p>Jika Anda telah menginstal Milvus dengan Docker atau Kubernetes, atau memiliki titik akhir Zilliz Cloud, instal hanya SDK-nya saja. PyMilvus 3.0.3 memerlukan Python 3.9 atau yang lebih baru; Anda tidak memerlukan dependensi Lite lokal untuk jalur ini:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Gunakan blok koneksi server di bagian berikutnya alih-alih membuka jalur <code translate="no">.db</code>. Pastikan versi SDK kompatibel dengan server Anda; lihat <a href="/docs/id/release_notes.md">Catatan Rilis</a>.</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Menyiapkan Basis Data Vektor<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -168,7 +168,7 @@ client.create_collection(
 <li>Kunci utama dan bidang vektor menggunakan nama defaultnya (“id” dan “vector”).</li>
 <li>Jenis metrik (definisi jarak vektor) disetel ke nilai defaultnya (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
 <li>Bidang kunci utama menerima bilangan bulat dan tidak bertambah secara otomatis (yaitu, tidak menggunakan <a href="https://milvus.io/docs/schema.md">fitur auto-id</a>).
-Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">petunjuk</a> ini.</li>
+Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/create_schema.md">petunjuk</a> ini.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Mempersiapkan Data<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,7 +202,7 @@ Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan
         ></path>
       </svg>
     </button></h2><p>Pertama, instal pustaka model. Paket ini mencakup alat ML penting seperti PyTorch. Pengunduhan paket mungkin memerlukan waktu jika lingkungan lokal Anda belum pernah menginstal PyTorch.</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Buat embedding vektor dengan model default. Milvus mengharapkan data dimasukkan dalam bentuk daftar kamus, di mana setiap kamus mewakili satu catatan data, yang disebut sebagai entitas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -254,7 +254,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jika Anda tidak dapat mengunduh model karena masalah jaringan, sebagai solusi sementara, Anda dapat menggunakan vektor acak untuk merepresentasikan teks dan tetap menyelesaikan contoh ini. Perlu diperhatikan bahwa hasil pencarian tidak akan mencerminkan kesamaan semantik karena vektor-vektor tersebut adalah vektor palsu.</p>
+    </button></h2><p>Jika Anda tidak dapat mengunduh model karena masalah jaringan, sebagai solusi sementara, Anda dapat menggunakan vektor acak untuk mewakili teks dan tetap menyelesaikan contoh ini. Perlu diperhatikan bahwa hasil pencarian tidak akan mencerminkan kesamaan semantik karena vektor-vektor tersebut adalah vektor palsu.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -529,7 +529,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <li>Rancang bidang dan filter untuk data Anda sendiri dengan <a href="/docs/id/schema-hands-on.md">Data Model Design for Search</a>.</li>
 <li>Bandingkan persyaratan lokal dan server dengan <a href="/docs/id/install-overview.md">Milvus Deployment Options</a>.</li>
 </ul>
-<p>Milvus Lite sangat cocok untuk memulai dengan program Python lokal. Jika Anda memiliki data berskala besar atau ingin menggunakan Milvus dalam produksi, Anda dapat mempelajari cara mengimplementasikan Milvus di <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Semua mode penerapan Milvus menggunakan API yang sama, sehingga kode sisi klien Anda tidak perlu banyak diubah jika beralih ke mode penerapan lain. Cukup tentukan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI dan Token</a> dari server Milvus yang diterapkan di mana saja:</p>
+<p>Milvus Lite sangat cocok untuk memulai dengan program Python lokal. Jika Anda memiliki data berskala besar atau ingin menggunakan Milvus dalam produksi, Anda dapat mempelajari cara mengimplementasikan Milvus di <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Semua mode penerapan Milvus menggunakan API yang sama, sehingga kode sisi klien Anda tidak perlu banyak diubah jika beralih ke mode penerapan lain. Cukup tentukan <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Client/MilvusClient.md">URI dan Token</a> dari server Milvus yang diterapkan di mana saja:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk memigrasikan data dari Milvus Lite ke Milvus yang diimplementasikan di Docker atau Kubernetes, lihat <a href="/docs/id/milvus_lite.md#Migrating-data-from-Milvus-Lite">Migrasi data dari Milvus Lite</a>.</p>

@@ -29,11 +29,11 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">element_filter</code></td><td>스칼라 술어를 만족하는 Struct 요소를 일치시킵니다.</td><td>요소 수준 검색에서 일치하는 결과에는 요소 오프셋이 포함될 수 있습니다. 행 수준 쿼리 또는 필터링된 검색에서 결과 형식은 API 및 출력 필드에 따라 달라집니다.</td></tr>
-<tr><td><code translate="no">MATCH_*</code></td><td>스칼라 술어 조건을 만족하는 Struct 요소의 개수에 따라 엔티티를 선택합니다.</td><td>행 수준 필터링. 이 연산자들은 그 자체로는 요소 오프셋을 반환하지 않습니다.</td></tr>
+<tr><td><code translate="no">MATCH_*</code></td><td>스칼라 술어 조건을 만족하는 Struct 요소의 개수에 따라 엔티티를 선택합니다.</td><td>행 수준 필터링. 이러한 연산자는 그 자체로는 요소 오프셋을 반환하지 않습니다.</td></tr>
 <tr><td>행 수준 경로 술어</td><td><code translate="no">$[...]</code> ( ) 술어 없이 하나의 요소 위치를 검사하거나, Struct 요소의 개수를 세거나, 여러 요소에 걸친 하위 필드 값을 검사합니다.</td><td>행 수준 필터링. 이러한 술어는 요소 오프셋을 반환하지 않습니다.</td></tr>
 </tbody>
 </table>
-<p>StructArray 연산자에서는 스칼라 서브필드와 Milvus 3.0.6 이상 버전의 배열 서브필드를 사용합니다. 벡터 서브필드는 벡터 검색 경로에서 사용되며, 스칼라 술어 입력으로 사용되지 않습니다.</p>
+<p>StructArray 연산자에서는 스칼라 서브필드와 Milvus 3.0.6 이후 버전의 배열 서브필드를 사용합니다. 벡터 서브필드는 벡터 검색 경로에서 사용되며, 스칼라 술어 입력으로 사용되지 않습니다.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">어떤 연산자를 언제 사용할지<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">MATCH_*</code> 연산자는 술어를 만족하는 Struct 요소의 수에 따라 엔티티를 선택해야 할 때 사용합니다. 이 연산자들은 다음과 같은 의미를 가집니다:</p>
+    </button></h2><p><code translate="no">MATCH_*</code> 연산자는 술어를 만족하는 Struct 요소의 수에 따라 엔티티를 선택해야 할 때 사용합니다. 이 연산자들의 의미는 다음과 같습니다:</p>
 <table>
 <thead>
 <tr><th>연산자</th><th>의미</th></tr>
@@ -189,7 +189,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td><code translate="no">N</code> 개의 Struct 요소가 정확히 해당 술어를 만족합니다.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">MATCH_ANY</code> <code translate="no">element_filter</code> 은 모두 적어도 하나의 Struct 요소가 술어를 만족함을 나타낼 수 있습니다. 행 수준 필터링만 필요한 경우 을 사용하십시오. 요소 수준 벡터 검색에 참여하는 Struct 요소를 필터링하는 등 요소 수준 제약 조건이 필요한 경우 을 사용하십시오. <code translate="no">MATCH_ANY</code> <code translate="no">element_filter</code> </p>
+<p><code translate="no">MATCH_ANY</code> <code translate="no">element_filter</code> 은 모두 적어도 하나의 Struct 요소가 술어를 만족함을 나타낼 수 있습니다. 행 수준 필터링만 필요한 경우 를 사용하십시오. 요소 수준 벡터 검색에 참여하는 Struct 요소를 필터링하는 등 요소 수준 제약 조건이 필요한 경우 를 사용하십시오. <code translate="no">MATCH_ANY</code> <code translate="no">element_filter</code> </p>
 <h3 id="MATCHANY" class="common-anchor-header">MATCH_ANY<button data-href="#MATCHANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,9 +392,9 @@ array_contains_any(chunks[section], [&quot;index&quot;, &quot;search&quot;])
 # not necessarily in the same chunk.
 array_contains_all(chunks[section], [&quot;index&quot;, &quot;search&quot;])
 <button class="copy-code-btn"></button></code></pre>
-<p>예제 데이터의 경우, <code translate="no">array_contains</code> 및 <code translate="no">array_contains_any</code> 표현식은 두 엔티티 모두와 일치합니다. <code translate="no">array_contains_all</code> 표현식은 두 엔티티 모두에 <code translate="no">&quot;search&quot;</code> 섹션이 없기 때문에 어느 쪽과도 일치하지 않습니다. 이 예제들은 서로 다른 서브필드에서 서로 다른 요소에 의해 조건이 충족되는 경우는 보여주지 않습니다.</p>
+<p>예제 데이터의 경우, <code translate="no">array_contains</code> 및 <code translate="no">array_contains_any</code> 표현식은 두 엔티티 모두에 일치합니다. <code translate="no">array_contains_all</code> 표현식은 두 엔티티 모두에 <code translate="no">&quot;search&quot;</code> 섹션이 없기 때문에 어느 쪽에도 일치하지 않습니다. 이 예제들은 서로 다른 서브필드에서 서로 다른 요소에 의해 조건이 충족되는 경우는 보여주지 않습니다.</p>
 <p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> 과 동일한 엔티티를 선택합니다. 술어는 요소별로 평가되므로, 동일한 Struct 요소에 대해 여러 조건이 충족되어야 할 때는 또는 을 사용하십시오. <code translate="no">$[...]</code> <code translate="no">MATCH_*</code> <code translate="no">element_filter</code> </p>
-<h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">Null 허용 StructArray 필드가 null인지 테스트<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
+<h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">Null이 허용되는 StructArray 필드가 null인지 테스트<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -438,13 +438,13 @@ chunks is not null
 <tr><th>서브필드 유형</th><th>요소 수준 술어 지원</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code></td><td><code translate="no">$[has_code] == true</code> 또는 <code translate="no">!($[has_code] == true)</code> 와 같은 스칼라 술어. <code translate="no">$[has_code]</code> 와 같은 단순한 부울 표현식은 피하십시오.</td></tr>
+<tr><td><code translate="no">BOOL</code></td><td><code translate="no">$[has_code] == true</code> 또는 <code translate="no">!($[has_code] == true)</code> 와 같은 스칼라 술어. <code translate="no">$[has_code]</code> 와 같은 단순한 부울 표현식은 사용하지 마십시오.</td></tr>
 <tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>비교 연산, 연쇄 범위, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> 또는 <code translate="no">%</code> 에 이어 비교 연산이 포함된 산술 표현식, 그리고 논리 연산 조합.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>비교, 연쇄 범위, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code> 또는 <code translate="no">/</code> 을 포함한 산술 표현식에 이어지는 비교 연산, 그리고 논리 결합. <code translate="no">%</code> 연산자는 부동 소수점 하위 필드에서는 지원되지 않습니다.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>문자열 비교, 연쇄 범위, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code> 및 논리 연산 조합.</td></tr>
 <tr><td>스칼라 <code translate="no">ARRAY</code> 하위 필드 (Milvus 3.0.6 이상)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> 및 <code translate="no">array_length</code> on <code translate="no">$[tags]</code>, 여기에 <code translate="no">$[tags] is null</code> 및 <code translate="no">$[tags] is not null</code> 가 추가됩니다. <code translate="no">$[tags]</code> 에 대한 비교 연산자, <code translate="no">in</code> 및 <code translate="no">like</code> 는 거부됩니다.</td></tr>
 <tr><td>요소가 null일 수 있는 하위 필드(Milvus 3.0.6 이상)</td><td><code translate="no">$[subfield] is null</code> 및 <code translate="no">$[subfield] is not null</code> 는 현재 Struct 요소의 값이 null인지 여부를 검사합니다. null 값을 가질 수 없는 하위 필드에서는 <code translate="no">is null</code> 가 항상 false입니다.</td></tr>
-<tr><td>벡터 하위 필드</td><td><code translate="no">$[...]</code> 의 스칼라 술어 입력으로는 지원되지 않으며, Milvus 3.0.6 및 이후 버전에서 null 값을 허용하는 요소의 벡터 하위 필드에 대한 <code translate="no">$[emb] is null</code> 및 <code translate="no">$[emb] is not null</code> 만 예외입니다. 대신 EmbeddingList 검색 또는 요소 수준 벡터 검색을 통해 벡터 하위 필드를 사용하십시오.</td></tr>
+<tr><td>벡터 하위 필드</td><td><code translate="no">$[...]</code> 의 스칼라 술어 입력으로는 지원되지 않습니다. 단, Milvus 3.0.6 및 이후 버전에서 null 값을 허용하는 요소의 벡터 하위 필드에 대한 <code translate="no">$[emb] is null</code> 및 <code translate="no">$[emb] is not null</code> 는 예외입니다. 대신 EmbeddingList 검색 또는 요소 수준 벡터 검색을 통해 벡터 하위 필드를 사용하십시오.</td></tr>
 </tbody>
 </table>
 <p><code translate="no">&amp;&amp;</code>, <code translate="no">||</code>, <code translate="no">!</code> 와 같은 논리 연산자는 술어 표현식에 적용됩니다. 예를 들어, <code translate="no">!$[has_code]</code> 대신 <code translate="no">!($[has_code] == true)</code> 를 작성하십시오.</p>
@@ -469,7 +469,7 @@ chunks is not null
 <li><p><code translate="no">element_filter</code> 술어가 참인 Struct 요소만 유지합니다. 알 수 없는 요소는 일치하지 않습니다.</p></li>
 <li><p><code translate="no">MATCH_*</code> 알 수 없는 요소를 미일치(miss)로 간주합니다. 어떤 요소라도 알 수 없는 경우 <code translate="no">MATCH_ALL</code> 는 false가 되지만, 빈 StructArray는 여전히 <code translate="no">MATCH_ALL</code> 를 만족합니다.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> <code translate="no">$[subfield] is not null</code> 는 항상 참 또는 거짓입니다. 이 함수들은 현재 요소의 유효성을 확인하므로, 는 값이 null인 요소와 정확히 일치합니다. <code translate="no">$[lang] is null</code> <code translate="no">lang</code> </p></li>
-<li><p>배열 하위 필드에서, <code translate="no">$[tags]</code> 에 대한 <code translate="no">array_contains*</code> 는 null 내부 값을 건너뛰며 null 내부 배열과는 절대 일치하지 않고, <code translate="no">array_length($[tags])</code> 는 null 내부 값을 포함하며, <code translate="no">$[tags] is null</code> 는 null 내부 배열인 경우에만 true입니다.</p></li>
+<li><p>배열 하위 필드에서, <code translate="no">$[tags]</code> 에 대한 <code translate="no">array_contains*</code> 는 null 내부 값을 건너뛰고 null 내부 배열과는 절대 일치하지 않으며, <code translate="no">array_length($[tags])</code> 는 null 내부 값을 포함하고, <code translate="no">$[tags] is null</code> 는 null 내부 배열인 경우에만 참입니다.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
 element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
@@ -481,6 +481,27 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <p>행 수준 위치 경로도 동일한 규칙을 따릅니다: 첫 번째 요소의 <code translate="no">lang</code> 값이 null이거나, 엔티티에 해당 위치에 요소가 없거나, StructArray 필드가 null인 경우 <code translate="no">chunks[0][lang] == &quot;en&quot;</code> 의 결과가 알 수 없으므로 엔티티가 일치하지 않습니다.</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">StructArray 요소에서 벡터가 누락된 엔티티 찾기<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>각 제품이 <code translate="no">chunks</code> 라는 StructArray 필드에 설명의 일부를 저장한다고 가정해 보겠습니다. 각 청크에는 <code translate="no">embedding</code> 라는 벡터 하위 필드가 있으며, 벡터가 누락된 경우 NULL을 허용합니다. 제품 A에는 두 개의 청크가 있으며, 그중 하나에는 벡터가 누락되어 있습니다. 제품 B의 두 청크 모두 벡터를 가지고 있습니다.</p>
+<p>스키마 설정에 대해서는 <a href="/docs/ko/create-structarray-field.md#Allow-null-values-in-Struct-elements">‘Struct 요소에서 NULL 값 허용’을</a> 참조하십시오.</p>
+<p>벡터가 누락된 청크가 하나 이상 있는 제품을 찾으려면, 이 필터를 ` <code translate="no">query()</code>`에 전달하십시오.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> 는 현재 청크의 벡터를 가리킵니다. ` <code translate="no">MATCH_ANY</code> `는 청크 중 적어도 하나에 NULL 벡터가 있는 제품을 선택합니다. 이 쿼리는 제품 A를 반환합니다.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">지원되지 않는 술어<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -496,15 +517,15 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>요소 수준 <code translate="no">$[...]</code> 술어는 다음을 지원하지 않습니다:</p>
+    </button></h2><p>요소 수준의 <code translate="no">$[...]</code> 술어는 다음을 지원하지 않습니다:</p>
 <ul>
-<li><p><code translate="no">text_match(field, &quot;...&quot;)</code> 또는 <code translate="no">phrase_match(field, &quot;...&quot;)</code> 과 같은 텍스트 일치 함수.</p></li>
+<li><p><code translate="no">text_match(field, &quot;...&quot;)</code> 이나 <code translate="no">phrase_match(field, &quot;...&quot;)</code> 과 같은 텍스트 일치 함수.</p></li>
 <li><p>JSON 경로 구문, JSON 경로에 대한 ` <code translate="no">exists</code> `, 또는 ` <code translate="no">json_contains</code>`, ` <code translate="no">json_contains_all</code>`, ` <code translate="no">json_contains_any</code>`과 같은 JSON 함수.</p></li>
 <li><p><code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_length</code> 와 같은 배열 컨테이너 함수는 스칼라 하위 필드의 <code translate="no">$[subfield]</code> 에 적용됩니다. 대신 행 수준 술어에서 <code translate="no">chunks[section]</code> 와 같은 하위 필드 경로에 이러한 함수를 사용하십시오. Milvus 3.0.6부터는 스칼라 <code translate="no">ARRAY</code> 하위 필드의 <code translate="no">$[tags]</code> 에서도 지원됩니다.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> Milvus 3.0.6 이전 버전에서는 <code translate="no">$[subfield] is not null</code> 을 사용하십시오.</p></li>
 </ul>
 <ul>
-<li><p><code translate="no">$[tags][0]</code> 와 같은 배열 하위 필드에 대한 첨자 및 <code translate="no">$[tags]</code> 에 대한 <code translate="no">like</code>.</p></li>
+<li><p><code translate="no">$[tags][0]</code> 과 같이 배열 하위 필드에 대한 첨자나, <code translate="no">$[tags]</code> 에 대한 <code translate="no">like</code> 등이 있습니다.</p></li>
 <li><p>지오메트리/GIS 함수.</p></li>
 <li><p>timestamptz 표현식.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
@@ -540,7 +561,7 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
 </ul>
 <ul>
 <li><p>배열 하위 필드에 인덱스를 지정하지 마십시오. <code translate="no">$[tags][0]</code> 및 <code translate="no">chunks[0][tags][0]</code> 는 지원되지 않습니다.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> 빈 StructArray에 대해 이 연산을 수행하면 <code translate="no">false</code> 를 반환합니다.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> 빈 StructArray에서 호출하면 <code translate="no">false</code> 를 반환합니다.</p></li>
 <li><p><code translate="no">MATCH_ALL</code> 빈 StructArray에 대해 호출하면 <code translate="no">true</code> 를 반환합니다.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">참조<button data-href="#See-also" class="anchor-icon" translate="no">

@@ -25,7 +25,7 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
       </svg>
     </button></h1><p>Ce guide décrit comment mettre à niveau votre cluster Milvus 2.6.x vers la version 3.0.5 à l'aide de Helm.</p>
 <div class="alert note">
-<p>Cette procédure a été validée de Milvus 2.6.20 à Milvus v3.0.5 avec le Helm Chart Milvus 5.0.22. Si vous utilisez une autre version de Milvus 2.6.x ou une autre version du Helm Chart, validez d'abord la mise à niveau dans un environnement hors production.</p>
+<p>Cette procédure a été validée de Milvus 2.6.20 à Milvus v3.0.5 avec le Helm Chart Milvus 5.0.22. Si vous utilisez une autre version de Milvus 2.6.x ou une autre version du Helm Chart, testez d'abord la mise à niveau dans un environnement hors production.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,11 +87,12 @@ title: Mise à niveau du cluster Milvus à l'aide d'un Helm Chart
     </button></h3><p>Enregistrez l’ensemble des valeurs de la version actuelle et vérifiez les pods en cours d’exécution :</p>
 <pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
   --namespace &lt;namespace&gt; \
-  --all &gt; milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Vérifiez que le cluster utilise MixCoord et StreamingNode et qu’aucun pod IndexNode n’est en cours d’exécution. La commande de mise à niveau décrite plus loin dans ce guide conserve les valeurs Helm existantes. Si vos valeurs actuelles activent IndexNode ou utilisent une autre topologie de composants, n’effectuez pas cette mise à niveau « image uniquement ». Reproduisez d’abord la topologie dans un environnement hors production et obtenez un plan de migration approuvé par l’équipe d’ingénierie.</p>
+<p>Vérifiez que le cluster utilise MixCoord et StreamingNode et qu’aucun pod IndexNode n’est en cours d’exécution. La commande de mise à niveau décrite plus loin dans ce guide conserve les valeurs Helm existantes. Si vos valeurs actuelles activent IndexNode ou utilisent une autre topologie de composants, n’effectuez pas cette mise à niveau « image seule ». Reproduisez d’abord la topologie dans un environnement hors production et obtenez un plan de migration approuvé par l’équipe d’ingénierie.</p>
 <h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">Étape 2 : Mettre à jour le référentiel Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -142,7 +143,7 @@ Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https
   --<span class="hljs-built_in">timeout</span> 30m
 <button class="copy-code-btn"></button></code></pre>
 <p>L’option ` <code translate="no">--reset-then-reuse-values</code> ` conserve les valeurs de la version précédente tout en appliquant le remplacement explicite de l’image par rapport aux valeurs par défaut du Chart sélectionné.</p>
-<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérification de la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

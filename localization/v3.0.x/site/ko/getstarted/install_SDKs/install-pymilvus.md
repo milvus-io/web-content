@@ -37,9 +37,9 @@ title: Milvus Python SDK 설치
         ></path>
       </svg>
     </button></h2><ul>
-<li>PyMilvus 3.0.2는 원격 Milvus 서버에 연결하기 위해 Python 3.9 이상이 필요합니다.</li>
+<li>PyMilvus 3.0.3은 원격 Milvus 서버에 연결하기 위해 Python 3.9 이상이 필요합니다.</li>
 <li>로컬 Milvus Lite 3.2.2 예제를 <a href="/docs/ko/milvus_lite.md">실행하려면</a> Python 3.10 이상과 지원되는 플랫폼이 필요합니다. <a href="/docs/ko/milvus_lite.md">‘로컬에서 Milvus Lite 실행’을</a> 참조하십시오.</li>
-<li><code translate="no">pip</code> 를 통해 종속성을 설치하십시오. PyMilvus 3.0.2를 사용하려면 <code translate="no">protobuf&gt;=5.27.2</code> 가 필요하며, <code translate="no">protobuf==3.20.0</code> 는 별도로 고정하지 마십시오. SDK를 사용하기 위해 <code translate="no">grpcio-tools</code> 는 필요하지 않습니다.</li>
+<li><code translate="no">pip</code> 를 통해 종속성을 설치하십시오. PyMilvus 3.0.3에는 <code translate="no">protobuf&gt;=5.27.2</code> 가 필요하며, <code translate="no">protobuf==3.20.0</code> 는 별도로 지정하지 마십시오. SDK를 사용하기 위해 <code translate="no">grpcio-tools</code> 는 필요하지 않습니다.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">pip를 통해 PyMilvus 설치<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,16 +60,16 @@ title: Milvus Python SDK 설치
 <div class="alert note">
 설치한 Milvus 서버의 버전과 일치하는 PyMilvus 버전을 설치하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/release_notes.md">릴리스 노트를</a> 참조하십시오.
 </div>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>이렇게 하면 원격 Milvus 서버용 클라이언트가 설치됩니다. Milvus Lite나 임베딩 모델은 설치되지 않습니다.</p>
 <p><a href="/docs/ko/quickstart.md">퀵스타트에서</a> 사용되는 로컬 데이터베이스를 사용하려면 <code translate="no">milvus-lite</code> 추가 구성 요소와 이에 맞는 Lite 패키지를 설치하십시오:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>임베딩 헬퍼를 사용하려면 별도의 <code translate="no">model</code> 추가 패키지를 설치하십시오:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Windows에서는 플랫폼 마커로 인해 pip가 PyMilvus 3.0.2의 <code translate="no">milvus-lite</code> 추가 구성 요소를 건너뜁니다. 위의 명령어는 <code translate="no">milvus-lite</code> 를 명시적으로 지정하므로, 사용 중인 Python 버전에 맞는 <code translate="no">faiss-cpu</code> 및 <code translate="no">pyarrow</code> 용 휠 파일이 존재하는 한 Windows에서도 설치됩니다.</p>
+<p>Windows에서는 플랫폼 마커로 인해 pip가 PyMilvus 3.0.3의 ` <code translate="no">milvus-lite</code> ` 추가 모듈을 건너뜁니다. 위의 명령어는 ` <code translate="no">milvus-lite</code> `을 명시적으로 지정하므로, 사용 중인 Python 버전에 맞는 ` <code translate="no">faiss-cpu</code> ` 및 ` <code translate="no">pyarrow</code> ` 휠 파일이 존재하는 한 Windows에서도 설치됩니다.</p>
 <h2 id="Verify-installation" class="common-anchor-header">설치 확인<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

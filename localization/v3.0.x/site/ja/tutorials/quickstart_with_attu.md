@@ -56,7 +56,7 @@ title: Attu（MilvusのWeb UI）のクイックスタート
 <li>お使いのサーバーと互換性のあるAttuリリース。Attu 3.0は、Milvus 3.xを含むMilvus 2.6.0以降をサポートしています。古いサーバーについては、<a href="https://github.com/zilliztech/attu#compatibility">互換性表</a>を参照してください。</li>
 <li>お使いのサーバーと互換性のある PyMilvus バージョンがインストールされた Python 環境。<a href="/docs/ja/install-pymilvus.md">「Milvus Python SDK のインストール</a>」および<a href="/docs/ja/release_notes.md">「リリースノート」</a>を参照してください。このドキュメントブランチで使用されている SDK バージョンの場合は、モデルエクストラとプログレスバーの依存関係をインストールしてください：</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>データ準備の手順では、<code translate="no">wget</code> および<code translate="no">unzip</code> も使用されます。embedding関数は初回使用時にモデルをダウンロードするため、モデルホストへのネットワークアクセスを許可するか、事前にモデルキャッシュを準備してください。ワークフローはスクリーンショットで説明されていますが、ラベルやレイアウトはAttuのリリースによって異なる場合があります。</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. デスクトップアプリケーションのインストール<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ title: Attu（MilvusのWeb UI）のクイックスタート
 <li>Attuを開き、接続情報を入力します:
 <ul>
 <li>Milvusアドレス：Milvus StandaloneサーバーのURI（例：http://localhost:19530）</li>
-<li>その他のオプション設定：Milvusの設定に応じて設定するか、デフォルトのままにしておくことができます。</li>
+<li>その他のオプション設定：Milvusの設定に応じて設定するか、デフォルトのままにしておくこともできます。</li>
 </ul></li>
 <li>「Connect」をクリックしてデータベースにアクセスします。</li>
 </ol>
@@ -287,7 +287,7 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h3><p>Attuでコレクションリストを更新し、<code translate="no">attu_tutorial</code> を開きます。クイックセットアップのスキーマには、<code translate="no">id</code> という主キーと、次元が<code translate="no">embedding_dim</code> で、メトリックが<code translate="no">Inner Product (IP)</code> である<code translate="no">vector</code> フィールドが含まれています。<code translate="no">text</code> の値は動的フィールドに格納されます。 具体的なスキーマオプションについては、<a href="/docs/ja/create-collection.md">「コレクションと</a> <a href="/docs/ja/enable-dynamic-field.md">動的フィールド</a> <a href="/docs/ja/create-collection.md">の作成</a>」を参照してください。エンティティの数は抽出されたサンプルテキストによって異なるため、スクリーンショットに表示されている数値ではなく、実際に挿入した行数に基づいてください。</p>
-<p>さらに、ID、ベクトル埋め込み、およびテキストコンテンツなどのメタデータを格納する動的フィールドを含む、挿入されたデータを表示できます。このインターフェースでは、指定された条件や動的フィールドに基づくフィルタリングやクエリを実行できます。</p>
+<p>さらに、ID、ベクトル埋め込み、およびテキストコンテンツなどのメタデータを格納する動的フィールドを含む、挿入されたデータを表示できます。このインターフェースでは、指定した条件や動的フィールドに基づくフィルタリングやクエリを実行できます。</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
@@ -348,7 +348,7 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>結果パネル内の「<strong>探索</strong>」ボタンをクリックすると、クエリベクトルと検索結果の関係が、<strong>ナレッジグラフのような構造で</strong>可視化されます。</p>
+    </button></h3><p>結果パネル内の [<strong>探索</strong>] ボタンをクリックすると、クエリベクトルと検索結果の関係が、<strong>ナレッジグラフのような構造</strong>で可視化されます。</p>
 <ul>
 <li><strong>中央のノードは</strong>検索ベクトルを表しています。</li>
 <li><strong>接続されたノード</strong>は検索結果を表しており、それらをクリックすると、対応するノードの詳細情報が表示されます。</li>

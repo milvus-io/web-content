@@ -20,9 +20,9 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題說明如何使用 Docker Compose 配置 Milvus 組件及其第三方依賴項。</p>
+    </button></h1><p>本主題說明如何使用 Docker Compose 配置 Milvus 元件及其第三方依賴項。</p>
 <div class="alert note">
-在當前版本中，所有參數僅在 Milvus 重新啟動後才會生效。
+部分參數可在 Milvus 執行期間進行變更。詳細資訊請參閱《<a href="/docs/zh-hant/dynamic_config.md">即時配置 Milvus</a>》。若要套用其他參數的變更，請重新啟動 Milvus。
 </div>
 <h2 id="Download-a-configuration-file" class="common-anchor-header">下載配置檔案<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ title: 使用 Docker Compose 設定 Milvus
     </button></h2><p>可直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/configs/milvus.yaml">下載</a>`<code translate="no">milvus.yaml</code> `，或使用以下指令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/configs/milvus.yaml">進行下載</a>。</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-configuration-file" class="common-anchor-header">修改配置檔案<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-configuration-file" class="common-anchor-header">修改設定檔<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,8 +57,11 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請透過調整<code translate="no">milvus.yaml</code> 中的相應參數，根據您的應用情境來配置 Milvus 實例。</p>
-<p>如需各參數的更多資訊，請參閱以下連結。</p>
+    </button></h2><p>請在 `<code translate="no">user.yaml</code> ` 檔案中，根據您的應用情境配置 Milvus 實例。僅需新增您欲變更的參數，並參考下載的 `<code translate="no">milvus.yaml</code> ` 檔案以確認參數名稱與預設值。Milvus 會先讀取 `<code translate="no">milvus.yaml</code>`，再讀取 `<code translate="no">user.yaml</code> `，因此 `<code translate="no">user.yaml</code> ` 中的值將覆寫預設值。以下範例示範如何變更日誌等級：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">log:</span>
+  <span class="hljs-attr">level:</span> <span class="hljs-string">warn</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>如需了解各參數的更多資訊，請參閱以下連結。</p>
 <p>排序依據：</p>
 <div class="filter">
 <a href="#component">元件或依賴項</a> <a href="#purpose">配置目的</a>
@@ -87,7 +90,7 @@ title: 使用 Docker Compose 設定 Milvus
             <li><a href="/docs/zh-hant/configure_proxy.md">代理</a></li>
             <li><a href="/docs/zh-hant/configure_querycoord.md">查詢座標</a></li>
             <li><a href="/docs/zh-hant/configure_querynode.md">查詢節點</a></li>
-            <li><a href="/docs/zh-hant/configure_indexnode.md">索引節點</a></li>
+            <li><a href="/docs/zh-hant/configure_indexnode.md">索引節點（舊版）</a></li>
             <li><a href="/docs/zh-hant/configure_datacoord.md">資料座標</a></li>
             <li><a href="/docs/zh-hant/configure_datanode.md">資料節點</a></li>
             <li><a href="/docs/zh-hant/configure_localstorage.md">本機儲存</a></li>
@@ -96,7 +99,7 @@ title: 使用 Docker Compose 設定 Milvus
             <li><a href="/docs/zh-hant/configure_common.md">通用</a></li>
             <li><a href="/docs/zh-hant/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/zh-hant/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/zh-hant/configure_indexcoord.md">索引座標</a></li>
+            <li><a href="/docs/zh-hant/configure_indexcoord.md">索引座標（舊版）</a></li>
             <li><a href="/docs/zh-hant/configure_metastore.md">元數據儲存庫</a></li>
             <li><a href="/docs/zh-hant/configure_mq.md">訊息佇列</a></li>
             <li><a href="/docs/zh-hant/configure_tikv.md">Tikv</a></li>
@@ -121,14 +124,13 @@ title: 使用 Docker Compose 設定 Milvus
     <td>效能調校</td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/zh-hant/configure_common.md#commongracefulTime"><code translate="no">common.gracefulTime</code></a></li>
             <li><a href="/docs/zh-hant/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
             <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
             <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/zh-hant/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/zh-hant/configure_datanode.md#dataNodesegmentinsertBufSize"><code translate="no">dataNode.segment.insertBufSize</code></a></li>
             <li><a href="/docs/zh-hant/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
             <li><a href="/docs/zh-hant/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/zh-hant/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -136,7 +138,6 @@ title: 使用 Docker Compose 設定 Milvus
     <td>資料與元資料</td>
     <td>
         <ul>
-            <li><a href="/docs/zh-hant/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
             <li><a href="/docs/zh-hant/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
             <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
             <li><a href="/docs/zh-hant/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
@@ -166,16 +167,16 @@ title: 使用 Docker Compose 設定 Milvus
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
+            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsflushRatemax"><code translate="no">quotaAndLimits.flushRate.max</code></a></li>
+            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitscompactionRateenabled"><code translate="no">quotaAndLimits.compactionRate.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitscompactionRatemax"><code translate="no">quotaAndLimits.compactionRate.max</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
+            <li><a href="/docs/zh-hant/configure_quotaandlimits.md"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
@@ -185,11 +186,6 @@ title: 使用 Docker Compose 設定 Milvus
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-            <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
         </ul>
     </td>
@@ -232,29 +228,15 @@ title: 使用 Docker Compose 設定 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<code translate="no">docker-compose.yml</code> 檔案中，於每個<code translate="no">milvus-standalone</code> 下方新增一個<code translate="no">volumes</code> 區段。</p>
-<p>將您的<code translate="no">milvus.yaml</code> 檔案的本地路徑映射到對應的 Docker 容器路徑，以對應所有<code translate="no">volumes</code> 區段下的<code translate="no">/milvus/configs/milvus.yaml</code> 配置檔案。</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+    </button></h2><p>在<code translate="no">docker-compose.yml</code> 中，將您的<code translate="no">user.yaml</code> 檔案的本地路徑映射至<code translate="no">standalone</code> 服務的<code translate="no">volumes</code> 區段中的<code translate="no">/milvus/configs/user.yaml</code> 。請保留現有的卷宗條目以及該服務的其他設定，例如映像檔、環境變數、健康檢查和依賴項：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
   <span class="hljs-attr">standalone:</span>
-    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.2.13</span>
-    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
-      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-    <span class="hljs-attr">ports:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;19530:19530&quot;</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9091:9091&quot;</span>
-    <span class="hljs-attr">depends_on:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;etcd&quot;</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;minio&quot;</span>
-<span class="hljs-string">...</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-資料會根據<code translate="no">docker-compose.yml</code> 中的預設設定，儲存於<code translate="no">/volumes</code> 資料夾中。若要變更資料儲存資料夾，請編輯<code translate="no">docker-compose.yml</code> 或執行<code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 。
+資料會根據<code translate="no">docker-compose.yml</code> 中的預設設定，儲存於<code translate="no">./volumes</code> 資料夾中。若要變更資料儲存資料夾，請編輯<code translate="no">docker-compose.yml</code> 或執行<code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> 。
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">啟動 Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

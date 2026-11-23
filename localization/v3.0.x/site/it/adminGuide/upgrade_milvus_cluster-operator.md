@@ -25,7 +25,7 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
       </svg>
     </button></h1><p>Questa guida descrive come aggiornare un cluster Milvus 2.6.x alla versione 3.0.5 con Milvus Operator.</p>
 <div class="alert note">
-<p>Questa procedura è stata verificata per il passaggio da Milvus 2.6.20 a Milvus v3.0.5 con Milvus Operator 1.3.0, MixCoord, StreamingNode, Woodpecker, etcd all'interno del cluster e MinIO all'interno del cluster. Se si utilizza un’altra versione patch di Milvus 2.6.x, una versione diversa di Operator, una topologia dei componenti diversa, una coda di messaggi diversa o una configurazione delle dipendenze diversa, verificare prima l’aggiornamento in un ambiente non di produzione.</p>
+<p>Questa procedura è stata verificata dal Milvus 2.6.20 al Milvus v3.0.5 con Milvus Operator 1.3.0, MixCoord, StreamingNode, Woodpecker, etcd all'interno del cluster e MinIO all'interno del cluster. Se si utilizza un’altra versione patch di Milvus 2.6.x, una versione diversa di Operator, una topologia dei componenti diversa, una coda di messaggi diversa o una configurazione delle dipendenze diversa, verificare prima l’aggiornamento in un ambiente non di produzione.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,13 +46,13 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
 <li>Un cluster Kubernetes con un cluster Milvus 2.6.x gestito da Milvus Operator</li>
 <li><code translate="no">kubectl</code> accesso al cluster</li>
 <li>Il manifesto completo della risorsa personalizzata (CR) di Milvus utilizzato per la distribuzione esistente</li>
-<li>Il metodo di installazione e i manifest utilizzati per l’Operatore Milvus esistente</li>
+<li>Il metodo di installazione e i manifest utilizzati per l’attuale Milvus Operator</li>
 <li>Un backup aggiornato dei metadati e dei dati persistenti di Milvus</li>
 </ul>
 <p><strong>Limitazioni relative alle code di messaggi</strong>: durante l'aggiornamento a Milvus v3.0.5, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio tra diversi sistemi di code di messaggi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</p>
 <div class="alert warning">
 <p>Applicare la CR completa di Milvus per questo aggiornamento. Non utilizzare una patch di unione solo immagine. L’Operator può impostare per impostazione predefinita i campi dei componenti con replica zero, il che può riattivare un componente che la distribuzione 2.6.x esistente aveva disabilitato.</p>
-<p>Questa procedura non convalida un downgrade o un rollback che comporti il ripristino dell’immagine di Milvus alla versione 2.6.x. Dopo che la v3.0.5 ha scritto i dati, un rollback solo dell’immagine potrebbe non riuscire a leggere lo stato aggiornato. Se l’aggiornamento fallisce, interrompere le operazioni di scrittura e utilizzare un piano di ripristino che ripristini i metadati precedenti all’aggiornamento e i backup dei dati persistenti. Verificare prima il piano di ripristino in un ambiente non di produzione.</p>
+<p>Questa procedura non convalida un downgrade o un rollback che comporti il ripristino dell’immagine di Milvus alla versione 2.6.x. Dopo che la v3.0.5 ha scritto i dati, un rollback che interessa solo l’immagine potrebbe non riuscire a leggere lo stato aggiornato. Se l’aggiornamento fallisce, interrompere le operazioni di scrittura e utilizzare un piano di ripristino che ripristini i metadati precedenti all’aggiornamento e i backup dei dati persistenti. Verificare prima il piano di ripristino in un ambiente non di produzione.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo di aggiornamento<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,7 +89,7 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizzare il manifesto di origine della distribuzione esistente come manifesto di aggiornamento. Non applicare direttamente il file di backup esportato senza aver prima rimosso i metadati gestiti dal server e i campi di stato.</p>
+<p>Utilizzare il manifesto di origine della distribuzione esistente (<code translate="no">milvus.yaml</code> in questa guida) come manifesto di aggiornamento. Non applicare direttamente il file di backup esportato senza aver prima rimosso i metadati gestiti dal server e i campi di stato.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Passaggio 2: Verifica della versione di Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ title: Aggiornamento del cluster Milvus con Milvus Operator
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>L'aggiornamento convalidato ha mantenuto Milvus Operator alla versione 1.3.0. Mantieni la versione di Operator che attualmente gestisce la tua distribuzione Milvus 2.6.x, a meno che la tua politica di supporto non richieda un aggiornamento separato di Operator. Non eseguire il downgrade di un Operator più recente alla versione testata. Se è necessario modificare la versione dell’Operator, utilizzare lo stesso metodo di installazione (Helm o <code translate="no">kubectl</code> ) e lo stesso nome di release e namespace dell’installazione esistente, quindi convalidare la modifica dell’Operator prima di aggiornare il CR di Milvus.</p>
+<p>L'aggiornamento convalidato ha mantenuto Milvus Operator alla versione 1.3.0. Mantenere la versione di Operator che attualmente gestisce la distribuzione di Milvus 2.6.x, a meno che la politica di supporto non richieda un aggiornamento separato di Operator. Non eseguire il downgrade di un Operator più recente alla versione testata. Se è necessario modificare la versione dell’Operator, utilizzare lo stesso metodo di installazione (Helm o <code translate="no">kubectl</code> ) e lo stesso nome di release e namespace dell’installazione esistente, quindi convalidare la modifica dell’Operator prima di aggiornare il CR di Milvus.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Passaggio 3: aggiornare l’immagine di Milvus<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,3 +168,6 @@ kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Verificare che il CR di Milvus riporti <code translate="no">Healthy</code>, che tutti i componenti di Milvus utilizzino <code translate="no">milvusdb/milvus:v3.0.5</code>, che nessun Pod IndexNode sia in esecuzione e che le collezioni esistenti rimangano interrogabili e ricercabili. Completare questi controlli prima di abilitare qualsiasi funzionalità specifica della versione v3.0.5.</p>
+<div class="alert note">
+<p>L’aggiornamento a Milvus 3.0 non abilita Storage V3. Dopo aver verificato l’aggiornamento, esamina <a href="/docs/it/storage-v3.md">Storage V3</a> prima di abilitare le funzionalità che dipendono da esso. Una volta che Milvus scrive i dati in Storage V3, il downgrade a una versione precedente di Milvus che non è in grado di leggere Storage V3 non è supportato.</p>
+</div>

@@ -59,10 +59,10 @@ title: 'Prise en main rapide d''Attu, l''interface utilisateur Web de Milvus'
 <li>Une version d’Attu compatible avec votre serveur. Attu 3.0 prend en charge Milvus 2.6.0 et les versions ultérieures, y compris Milvus 3.x ; consultez le <a href="https://github.com/zilliztech/attu#compatibility">tableau de compatibilité</a> pour les serveurs plus anciens.</li>
 <li>Un environnement Python avec une version de PyMilvus compatible avec votre serveur. Consultez les sections « <a href="/docs/fr/install-pymilvus.md">Installer le SDK Python de Milvus</a> » et « <a href="/docs/fr/release_notes.md">Notes de mise à jour</a> ». Pour la version du SDK utilisée dans cette branche de documentation, installez les dépendances « model extra » et « progress-bar » :</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>Les étapes de préparation des données utilisent également <code translate="no">wget</code> et <code translate="no">unzip</code>. La fonction d’intégration télécharge son modèle lors de la première utilisation ; veillez donc à autoriser l’accès réseau à l’hôte du modèle ou à préparer le cache du modèle à l’avance. Des captures d’écran illustrent le flux de travail ; les libellés et la mise en page peuvent varier d’une version d’Attu à l’autre.</p>
-<h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Installer l’application de bureau<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
+<h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Installation de l’application de bureau<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

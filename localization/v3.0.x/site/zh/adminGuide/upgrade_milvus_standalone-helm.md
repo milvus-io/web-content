@@ -25,7 +25,7 @@ title: 使用 Helm 图表升级 Milvus Standalone
       </svg>
     </button></h1><p>本指南介绍了如何使用 Helm 将 Milvus 2.6.x Standalone 部署升级至 v3.0.5。</p>
 <div class="alert note">
-<p>本流程已通过 Milvus 2.6.20 至 Milvus v3.0.5 版本的验证，所用 Milvus Helm 图表版本为 5.0.22。如果您使用的是其他 Milvus 2.6.x 补丁版本或 Helm 图表版本，请先在非生产环境中验证升级过程。</p>
+<p>本流程已通过 Milvus 2.6.20 至 Milvus v3.0.5 版本的验证，所用 Milvus Helm 图表版本为 5.0.22。如果您使用的是其他 Milvus 2.6.x 补丁版本或 Helm 图表版本，请先在非生产环境中验证升级操作。</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,28 @@ title: 使用 Helm 图表升级 Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">步骤 1：更新 Helm 存储库<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">步骤 1：备份当前的 Helm 值<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在更改部署之前，请保存当前发布版本的完整值：</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">步骤 2：更新 Helm 仓库<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +109,9 @@ title: 使用 Helm 图表升级 Milvus Standalone
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-位于<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 仓库已归档。对于 4.0.31 及更高版本的图表，请使用新仓库<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 。
+位于<code translate="no">https://milvus-io.github.io/milvus-helm/</code> 的 Milvus Helm Charts 仓库已存档。对于 4.0.31 及更高版本的图表，请使用新仓库<code translate="no">https://zilliztech.github.io/milvus-helm/</code> 。
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">步骤 2：升级 Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">步骤 3：升级 Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,7 +138,7 @@ helm repo update zilliztech
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 20m
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">--reset-then-reuse-values</code> 选项在应用对所选Chart默认值的显式镜像覆盖时，会保留上一版本的值。</p>
+<p><code translate="no">--reset-then-reuse-values</code> 选项在应用显式镜像覆盖以替代所选Chart默认值的同时，会保留上一版本的值。</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">验证升级<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,7 +162,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>请确认所有必需的工作负载均已就绪，Milvus 正在使用<code translate="no">v3.0.5</code> ，且现有 Collections 仍可进行查询和搜索。在启用任何 v3.0.5 专属功能之前，请完成这些检查。</p>
+<p>请确认所有必需的工作负载均已就绪，Milvus 正在使用<code translate="no">v3.0.5</code> ，且现有 Collections 仍可进行查询和搜索。在启用任何 v3.0.5 专属功能之前，请先完成这些检查。</p>
 <div class="alert note">
-<p>升级到 Milvus 3.0 不会启用 Storage V3。在验证升级后，请先了解<a href="/docs/zh/storage-v3.md">Storage V3</a>，然后再启用依赖于它的功能。一旦 Milvus 写入了 Storage V3 数据，将系统降级到无法读取 Storage V3 的旧版 Milvus 是不受支持的。</p>
+<p>升级到 Milvus 3.0 不会启用 Storage V3。在验证升级成功后，请先了解<a href="/docs/zh/storage-v3.md">Storage V3，</a>再启用依赖于它的功能。一旦 Milvus 写入了 Storage V3 数据，将系统降级到无法读取 Storage V3 的旧版 Milvus 是不受支持的。</p>
 </div>

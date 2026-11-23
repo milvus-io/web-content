@@ -37,9 +37,9 @@ title: Menginstal Milvus Python SDK
         ></path>
       </svg>
     </button></h2><ul>
-<li>PyMilvus 3.0.2 memerlukan Python 3.9 atau versi yang lebih baru untuk terhubung ke server Milvus jarak jauh.</li>
+<li>PyMilvus 3.0.3 memerlukan Python 3.9 atau versi yang lebih baru untuk terhubung ke server Milvus jarak jauh.</li>
 <li>Contoh Milvus Lite 3.2.2 lokal memerlukan Python 3.10 atau yang lebih baru serta platform yang didukung. Lihat <a href="/docs/id/milvus_lite.md">Jalankan Milvus Lite Secara Lokal</a>.</li>
-<li>Instal dependensi melalui <code translate="no">pip</code>. PyMilvus 3.0.2 memerlukan <code translate="no">protobuf&gt;=5.27.2</code>; jangan mem-pin <code translate="no">protobuf==3.20.0</code> secara terpisah. Anda tidak memerlukan <code translate="no">grpcio-tools</code> untuk menggunakan SDK ini.</li>
+<li>Instal dependensi melalui <code translate="no">pip</code>. PyMilvus 3.0.3 memerlukan <code translate="no">protobuf&gt;=5.27.2</code>; jangan mem-pin <code translate="no">protobuf==3.20.0</code> secara terpisah. Anda tidak memerlukan <code translate="no">grpcio-tools</code> untuk menggunakan SDK ini.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Instal PyMilvus melalui pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,16 +60,16 @@ title: Menginstal Milvus Python SDK
 <div class="alert note">
 Disarankan untuk menginstal versi PyMilvus yang sesuai dengan versi server Milvus yang telah Anda instal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/release_notes.md">Catatan Rilis</a>.
 </div>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Proses ini menginstal klien untuk server Milvus jarak jauh. Proses ini tidak menginstal Milvus Lite atau model embedding.</p>
 <p>Untuk basis data lokal yang digunakan dalam <a href="/docs/id/quickstart.md">Panduan Cepat</a>, instal paket tambahan <code translate="no">milvus-lite</code> dan paket Lite yang sesuai:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk alat bantu embedding, instal ekstensi <code translate="no">model</code> secara terpisah:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Di Windows, pip melewatkan paket tambahan " <code translate="no">milvus-lite</code> " dari PyMilvus 3.0.2 karena penanda platformnya. Perintah di atas secara eksplisit menyebutkan " <code translate="no">milvus-lite</code> ", sehingga akan terinstal di Windows selama paket " <code translate="no">faiss-cpu</code> " dan " <code translate="no">pyarrow</code> " tersedia untuk versi Python Anda.</p>
+<p>Di Windows, pip melewatkan paket tambahan " <code translate="no">milvus-lite</code> " dari PyMilvus 3.0.3 karena penanda platformnya. Perintah di atas secara eksplisit menyebutkan " <code translate="no">milvus-lite</code> ", sehingga akan terinstal di Windows selama paket " <code translate="no">faiss-cpu</code> " dan " <code translate="no">pyarrow</code> " tersedia untuk versi Python Anda.</p>
 <h2 id="Verify-installation" class="common-anchor-header">Memverifikasi Instalasi<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -54,12 +54,26 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Docker Compose を使用して Pulsar を設定するには、milvus/configs パスにある<code translate="no">milvus.yaml</code> ファイル内の `<code translate="no">pulsar</code> ` セクションに値を指定します。</p>
-<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
-  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
+    </button></h3><p>Milvus リリースに付属する Docker Compose 設定には、Pulsar サービスは含まれていません。Milvus スタンドアロンで既存の Pulsar サービスを使用するには、<code translate="no">user.yaml</code> ファイルを作成し、<code translate="no">pulsar</code> セクションに適切な値を指定してください。</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_pulsar_address&gt;</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
-  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">2097152</span> <span class="hljs-comment"># 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Docker Compose ファイル内で、<code translate="no">standalone</code> サービスの<code translate="no">environment</code> セクションにある<code translate="no">MQ_TYPE</code> を<code translate="no">pulsar</code> に設定し、<code translate="no">volumes</code> セクションで<code translate="no">user.yaml</code> ファイルへのローカルパスを<code translate="no">/milvus/configs/user.yaml</code> にマッピングします。両セクションの既存のエントリはそのまま残してください：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">MINIO_REGION:</span> <span class="hljs-string">us-east-1</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+      <span class="hljs-attr">MQ_TYPE:</span> <span class="hljs-string">pulsar</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvusは、<code translate="no">milvus.yaml</code> の後に<code translate="no">/milvus/configs/user.yaml</code> を読み込むため、<code translate="no">user.yaml</code> 内の値がデフォルト値を上書きします。<code translate="no">MQ_TYPE</code> 環境変数は<code translate="no">mq.type</code> を設定し、メッセージキューを選択しますが、これは設定ファイルよりも優先されます。</p>
+<p>新しいデプロイを初めて開始する前に、メッセージキューを設定してください。Milvusは初回起動時に<code translate="no">mq.type</code> をetcdに記録し、その後、記録された値を上書きすることはありません。</p>
 <p>詳細については、<a href="/docs/ja/configure_pulsar.md">Pulsar 関連の設定を</a>参照してください。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvusの実行<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,10 +90,10 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下のコマンドを実行して、Pulsarの設定を使用したMilvusを起動します。</p>
+    </button></h3><p>以下のコマンドを実行して、Pulsarの設定を使用するMilvusを起動します。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">設定は、Milvusの起動後にのみ有効になります。詳細については、「<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvusの起動</a>」を参照してください。</div>
+<div class="alert note">設定は、Milvusの起動後にのみ有効になります。詳細については、「<a href="/docs/ja/install_standalone-docker-compose.md#Install-Milvus">Milvusのインストール</a>」を参照してください。</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Helm を使用した Pulsar の設定<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,9 +109,12 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でPulsarを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してPulsarを設定することもできます。</p>
-<p>Helm を使用した Milvus の設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helm チャートによる Milvus の設定</a>」を参照してください。Pulsar 関連の設定項目に関する詳細については、「<a href="/docs/ja/configure_pulsar.md">Pulsar 関連の設定</a>」を参照してください。
-|</p>
+    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でPulsarを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yaml</code> ファイルを使用してPulsarを設定することもできます。</p>
+<p>Helm を使用した Milvus の設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helm チャートによる Milvus の設定</a>」を参照してください。Pulsar 関連の設定項目に関する詳細については、「<a href="/docs/ja/configure_pulsar.md">Pulsar 関連の設定</a>」を参照してください。</p>
+<p>このページに記載されているいずれかのHelmコマンドを使用してMilvusをインストールする前に、Milvus Helmチャートリポジトリを追加し、ローカルのチャートインデックスを更新してください：</p>
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML ファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,22 +131,22 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         ></path>
       </svg>
     </button></h3><ol>
-<li><code translate="no">values.yaml</code> ファイル内の<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
+<li><code translate="no">values.yaml</code> ファイル内の<code translate="no">extraConfigFiles</code> セクションを設定します。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     pulsar:
       address: localhost # Address of pulsar
       port: 6650 # Port of Pulsar
-      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
-      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      webport: 80 # Web port of pulsar, if you connect directly without proxy, should use 8080
+      maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Pulsarの設定を使用するMilvusをインストールします。</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">Helm を使用した Woodpecker の設定<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,9 +163,8 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でWoodpeckerを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してWoodpeckerを設定することもできます。</p>
-<p>Helm を使用した Milvus の設定方法の詳細については、<a href="/docs/ja/configure-helm.md">「Helm チャートによる Milvus の設定</a>」を参照してください。Woodpecker に関連する設定項目の詳細については、「<a href="/docs/ja/woodpecker.md">Woodpecker 関連の設定</a>」を参照してください。
-|</p>
+    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でWoodpeckerを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yaml</code> ファイルを使用してWoodpeckerを設定することもできます。</p>
+<p>Helm を使用した Milvus の設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helm チャートによる Milvus の設定</a>」を参照してください。Woodpecker に関連する設定項目の詳細については、「<a href="/docs/ja/woodpecker.md">Woodpecker 関連の設定</a>」を参照してください。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML ファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +181,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         ></path>
       </svg>
     </button></h3><ol>
-<li><code translate="no">values.yaml</code> ファイル内の<code translate="no">externalConfigFiles</code> セクションを設定します。</li>
+<li><code translate="no">values.yaml</code> ファイル内の<code translate="no">extraConfigFiles</code> セクションを設定します。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -205,9 +221,9 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、以下のコマンドを実行して、Woodpeckerの設定を使用したMilvusをインストールします。</li>
+<li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、次のコマンドを実行して、Woodpeckerの設定を使用するMilvusをインストールします。</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">Helm を使用した Kafka の設定<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +240,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でKafkaを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yml</code> ファイルを使用してKafkaを設定することもできます。</p>
+    </button></h2><p>K8s上のMilvusクラスタの場合、Milvusを起動するコマンド内でKafkaを設定できます。あるいは、Milvusを起動する前に、<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a>リポジトリの/charts/milvusパスにある<code translate="no">values.yaml</code> ファイルを使用してKafkaを設定することもできます。</p>
 <p>Helm を使用した Milvus の設定方法の詳細については、「<a href="/docs/ja/configure-helm.md">Helm チャートによる Milvus の設定</a>」を参照してください。Pulsar 関連の設定項目に関する詳細については、「<a href="/docs/ja/configure_pulsar.md">Pulsar 関連の設定</a>」を参照してください。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML ファイルの使用<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +258,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         ></path>
       </svg>
     </button></h3><ol>
-<li>Kafkaをメッセージストレージシステムとして使用したい場合は、<code translate="no">values.yaml</code> ファイル内の<code translate="no">externalConfigFiles</code> セクションを設定してください。</li>
+<li>Kafkaをメッセージストレージシステムとして使用したい場合は、<code translate="no">values.yaml</code> ファイル内の<code translate="no">extraConfigFiles</code> セクションを設定してください。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -257,7 +273,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
 <ol start="2">
 <li>前述のセクションを設定し、<code translate="no">values.yaml</code> ファイルを保存した後、以下のコマンドを実行して、Kafkaの設定を使用したMilvusをインストールします。</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-RocksMQ-with-Helm" class="common-anchor-header">Helm を使用した RocksMQ の設定<button data-href="#Configure-RocksMQ-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"

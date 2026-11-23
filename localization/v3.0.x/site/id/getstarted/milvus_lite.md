@@ -59,13 +59,13 @@ title: Menjalankan Milvus Lite Secara Lokal
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Panduan ini menggunakan PyMilvus <strong>3.0.2</strong> dan Milvus Lite <strong>3.2.2</strong>. Siapkan lingkungan berikut:</p>
+    </button></h2><p>Panduan ini menggunakan PyMilvus <strong>3.0.3</strong> dan Milvus Lite <strong>3.2.2</strong>. Siapkan lingkungan berikut:</p>
 <ul>
 <li>Python 3.10 atau yang lebih baru. Backend Lite lokal memiliki versi Python minimum yang lebih tinggi daripada klien PyMilvus jarak jauh.</li>
 <li>macOS, Linux, atau Windows, dengan wheel yang kompatibel untuk dependensi seperti <code translate="no">faiss-cpu</code> dan <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 adalah paket Python murni, sehingga sistem operasi dan arsitektur harus memenuhi dependensi tersebut, bukan paket Lite itu sendiri.</li>
 <li>Direktori lokal yang dapat ditulis untuk penyimpanan basis data.</li>
 </ul>
-<p>Di Windows, pip melewatkan tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.2 karena penanda platformnya, sehingga <code translate="no">milvus-lite</code> harus disebutkan secara eksplisit. Perintah instalasi di bawah ini sudah melakukannya. Untuk kombinasi paket dan platform lainnya, lihat <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">persyaratan rilis Milvus Lite</a>.</p>
+<p>Di Windows, pip melewatkan paket tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.3 karena penanda platformnya, sehingga <code translate="no">milvus-lite</code> harus disebutkan secara eksplisit. Perintah instalasi di bawah ini sudah melakukannya. Untuk kombinasi paket dan platform lainnya, lihat <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">persyaratan rilis Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Siapkan Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,9 +84,9 @@ title: Menjalankan Milvus Lite Secara Lokal
     </button></h2><p>Buat lingkungan Python yang terisolasi dan instal kedua paket tersebut:</p>
 <pre><code translate="no" class="language-bash">python3 -m venv .venv
 <span class="hljs-built_in">source</span> .venv/bin/activate
-python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Beri tanda kutip pada ekspresi ekstra agar shell seperti zsh tidak menafsirkan tanda kurung. Di Windows PowerShell, aktifkan lingkungan dengan <code translate="no">.venv\Scripts\Activate.ps1</code>, bukan <code translate="no">source .venv/bin/activate</code>. Versi yang disebutkan secara eksplisit menjaga agar SDK dan backend lokal tetap selaras dengan panduan ini.</p>
+<p>Beri tanda kutip pada ekspresi extras agar shell seperti zsh tidak menafsirkan tanda kurung. Di Windows PowerShell, aktifkan lingkungan dengan <code translate="no">.venv\Scripts\Activate.ps1</code>, bukan <code translate="no">source .venv/bin/activate</code>. Versi yang disebutkan secara eksplisit menjaga agar SDK dan backend lokal tetap selaras dengan panduan ini.</p>
 <div class="alert note">
 <blockquote>
 <p>Milvus Lite 3.x menggunakan mesin penyimpanan yang berbeda dari paket 2.x asli. Milvus Lite 3.x tidak dapat membuka file <code translate="no">.db</code> 2.x yang sudah ada secara langsung. Simpan database asli dan lingkungan yang dapat membukanya, ekspor datanya ke sana, lalu impor data tersebut ke database baru. Menginstal paket baru tidak akan memigrasikan format penyimpanan lama. Lihat <a href="#Migrating-data-from-Milvus-Lite">Migrasi data dari Milvus Lite</a>.</p>
@@ -181,7 +181,7 @@ res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collect
 client.close()
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk aplikasi yang menghasilkan embedding dari teks, lanjutkan ke <a href="/docs/id/quickstart.md">Panduan Cepat</a>. Anda juga dapat menjelajahi <a href="https://github.com/milvus-io/bootcamp">contoh Milvus Bootcamp</a> untuk RAG, pencarian gambar, dan integrasi kerangka kerja.</p>
-<h2 id="Supported-features-and-limits" class="common-anchor-header">Fitur yang didukung dan batasan<button data-href="#Supported-features-and-limits" class="anchor-icon" translate="no">
+<h2 id="Supported-features-and-limits" class="common-anchor-header">Fitur dan batasan yang didukung<button data-href="#Supported-features-and-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -215,7 +215,7 @@ client.close()
 <ul>
 <li>Hanya satu proses yang dapat memiliki direktori penyimpanan basis data pada satu waktu. Mesin melindungi direktori tersebut dengan kunci file.</li>
 <li>Serialisasikan penulisan ke koleksi yang sama. Penulisan bersamaan tidak didukung dengan aman.</li>
-<li>Adaptor lokal tidak mengimplementasikan setiap RPC Milvus. Operasi yang tidak didukung akan mengembalikan ` <code translate="no">UNIMPLEMENTED</code>`; perubahan skema serta pemuatan atau pelepasan pada tingkat partisi tidak tersedia.</li>
+<li>Adaptor lokal tidak mengimplementasikan semua RPC Milvus. Operasi yang tidak didukung akan mengembalikan ` <code translate="no">UNIMPLEMENTED</code>`; perubahan skema serta pemuatan atau pelepasan pada tingkat partisi tidak tersedia.</li>
 <li>Otentikasi, pengguna, peran, RBAC, dan TLS tidak didukung. Jangan mengekspos server lokal ke jaringan yang tidak tepercaya.</li>
 <li>Bidang vektor biner, float16, bfloat16, dan int8, serta indeks Kuantisasi Produk, tidak didukung.</li>
 <li>Lite dirancang untuk beban kerja lokal. Kompatibilitas API lokal tidak menyediakan penskalaan terdistribusi atau isolasi produksi serta ketersediaan seperti pada penerapan jarak jauh.</li>
@@ -238,7 +238,7 @@ client.close()
       </svg>
     </button></h2><p>Gunakan <code translate="no">milvus-lite dump</code> untuk mengekspor koleksi sebagai berkas JSON Milvus BulkWriter. Berkas-berkas ini dapat diimpor ke deployment Milvus yang dihosting sendiri atau Zilliz Cloud.</p>
 <p>Instal dependensi bulk writer SDK di lingkungan yang membuka basis data sumber:</p>
-<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.3&quot;</span>
 milvus-lite dump -h
 <button class="copy-code-btn"></button></code></pre>
 <p>Tutup aplikasi Python yang mengelola basis data lokal sebelum menjalankan perintah di proses lain. Ekspor koleksi dari contoh sebelumnya:</p>

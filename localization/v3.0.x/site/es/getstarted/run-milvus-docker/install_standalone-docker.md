@@ -78,12 +78,21 @@ title: Ejecutar Milvus en Docker (Linux)
 <li>Para modificar la configuración predeterminada de Milvus, añade tus ajustes al archivo <strong>user.yaml</strong> de la carpeta actual y, a continuación, reinicia el servicio.</li>
 <li>El volumen de datos de Milvus está asignado a <strong>«volumes/milvus»</strong> en la carpeta actual.</li>
 </ul>
-<p>Comprueba la imagen real y el estado de funcionamiento:</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<p>El comando « <code translate="no">start</code> » muestra el mensaje « <code translate="no">Wait for Milvus Starting...</code> » y, a continuación, comprueba una vez por segundo hasta que « <code translate="no">docker ps</code> » informe de que el contenedor está en buen estado. Esta comprobación no tiene límite de tiempo. Si el comando no devuelve ningún resultado, comprueba los registros del contenedor desde otro terminal:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Espere a que aparezca « <code translate="no">healthy</code> » antes de seguir <a href="/docs/es/quickstart.md">la guía de inicio rápido</a>. Al utilizar este servidor, conecte el SDK a <code translate="no">http://localhost:19530</code>; por el contrario, una URI local de tipo <code translate="no">.db</code> inicia Milvus Lite.</p>
-<p>Puede acceder a la interfaz de usuario web de Milvus en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/milvus-webui.md">la interfaz de usuario web de Milvus</a>.</p>
+<p>El script ejecuta sus comandos ` <code translate="no">docker</code> ` con ` <code translate="no">sudo</code>`. Cada ` <code translate="no">start</code> ` ejecuta primero un contenedor de corta duración a partir de la imagen de Milvus como ` <code translate="no">root</code>`, que cambia de forma recursiva el propietario de <strong>`volumes/milvus`</strong> al usuario ` <code translate="no">milvus</code> ` de la imagen, a menos que un archivo marcador ` <code translate="no">.milvus-volume-owner-*</code> ` en esa carpeta indique que esto ya se ha hecho. El script inicia el contenedor de Milvus con ` <code translate="no">--security-opt seccomp:unconfined</code>`, de modo que el contenedor se ejecuta sin el perfil seccomp predeterminado de Docker.</p>
+<div class="alert warning">
+<blockquote>
+<p>El script publica los puertos <strong>19530</strong>, <strong>9091</strong> y <strong>2379</strong> sin una dirección de host, y el archivo ` <strong>embedEtcd.yaml</strong> ` configura etcd para que escuche en <code translate="no">http://0.0.0.0:2379</code>. Docker publica un puerto sin dirección de host en todas las direcciones de host, por lo que otras máquinas que puedan acceder a este host también podrán conectarse a Milvus y a etcd. Para limitar el acceso a este host, edita las opciones de « <code translate="no">-p</code> » en <code translate="no">standalone_embed.sh</code> antes del primer « <code translate="no">start</code> », por ejemplo, <code translate="no">-p 127.0.0.1:19530:19530</code>, y elimina « <code translate="no">-p 2379:2379</code> » si no te conectas a etcd desde fuera del contenedor. Si ya existe un contenedor <code translate="no">milvus-standalone</code>, <code translate="no">start</code> lo reinicia con sus opciones originales. Para exigir credenciales para las conexiones a Milvus, consulta <a href="/docs/es/authenticate.md">«Autenticación del acceso de usuario</a>».</p>
+</blockquote>
+</div>
+<p>Comprueba la imagen real y el estado de funcionamiento:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Espere a que aparezca « <code translate="no">healthy</code> » antes de seguir <a href="/docs/es/quickstart.md">la guía de inicio rápido</a>. Al utilizar este servidor, conecte el SDK a <code translate="no">http://localhost:19530</code>; en cambio, una URI local <code translate="no">.db</code> inicia Milvus Lite.</p>
+<p>Puede acceder a la interfaz de usuario web de Milvus en <code translate="no">http://127.0.0.1:9091/webui/</code> para obtener más información sobre su instancia de Milvus. Para más detalles, consulte <a href="/docs/es/milvus-webui.md">Interfaz de usuario web de Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Actualizar las configuraciones de Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +134,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El comando <code translate="no">upgrade</code> del script descarga el script desde <code translate="no">master</code> y vuelve a crear el contenedor utilizando la imagen seleccionada por dicho script. No valida si la ruta de versión de origen a destino es compatible y puede volver a crear los archivos de configuración generados. No lo consideres una garantía de que cualquier implementación anterior pueda actualizarse de forma segura a la versión 3.0.5.</p>
+    </button></h2><p>El comando <code translate="no">upgrade</code> del script descarga el script desde <code translate="no">master</code> y vuelve a crear el contenedor utilizando la imagen seleccionada por dicho script. No comprueba que la ruta de versión de origen a destino sea compatible y puede volver a crear los archivos de configuración generados. No lo consideres una garantía de que cualquier implementación anterior pueda actualizarse de forma segura a la versión 3.0.5.</p>
 <p>Antes de realizar una actualización, haz una copia de seguridad de los metadatos, los datos persistentes, <code translate="no">embedEtcd.yaml</code> y <code translate="no">user.yaml</code>. Comprueba la versión de destino, la cola de mensajes y la compatibilidad del almacenamiento, y valida la recuperación en un entorno que no sea de producción. Para implementaciones gestionadas con Docker Compose, sigue <a href="/docs/es/upgrade_milvus_standalone-docker.md">las instrucciones de «Actualizar Milvus Standalone con Docker Compose»</a>; no apliques ese procedimiento directamente a un contenedor gestionado mediante scripts.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Detener y eliminar Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -201,14 +210,14 @@ EOF
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>
 <li><p>Revisa las consideraciones sobre la actualización que figuran en esta página antes de cambiar la versión de Milvus.</p></li>
-<li><p><a href="/docs/es/scaleout.md">Escala tu clúster de Milvus</a>.</p></li>
+<li><p><a href="/docs/es/scaleout.md">Escala un clúster de Milvus</a> en Kubernetes. Ese procedimiento utiliza Helm y no se aplica a esta implementación de Docker.</p></li>
 <li><p>Implementa tu clúster de Milvus en la nube:</p>
 <ul>
 <li><a href="/docs/es/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/es/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/es/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Descubre <a href="/docs/es/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
+<li><p>Explora <a href="/docs/es/milvus-webui.md">Milvus WebUI</a>, una interfaz web intuitiva para la observabilidad y la gestión de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/milvus_backup_overview.md">Milvus Backup</a>, una herramienta de código abierto para realizar copias de seguridad de los datos de Milvus.</p></li>
 <li><p>Descubre <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para la depuración de Milvus y las actualizaciones dinámicas de configuración.</p></li>
 <li><p>Descubre <a href="https://github.com/zilliztech/attu">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>

@@ -4,7 +4,7 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
-summary: 了解如何使用 Milvus Operator 对 Milvus 集群进行升级。
+summary: 了解如何使用 Milvus Operator 升级 Milvus 集群。
 title: 使用 Milvus Operator 升级 Milvus 集群
 ---
 <div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/zh/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
@@ -25,7 +25,7 @@ title: 使用 Milvus Operator 升级 Milvus 集群
       </svg>
     </button></h1><p>本指南介绍了如何使用 Milvus Operator 将 Milvus 2.6.x 集群升级至 v3.0.5。</p>
 <div class="alert note">
-<p>本流程已在 Milvus 2.6.20 至 Milvus v3.0.5 的环境中经过验证，所用组件包括 Milvus Operator 1.3.0、MixCoord、StreamingNode、Woodpecker、集群内 etcd 以及集群内 MinIO。 如果您使用的 Milvus 2.6.x 补丁版本、Operator 版本、组件拓扑、消息队列或依赖关系配置与上述不同，请先在非生产环境中验证升级是否成功。</p>
+<p>本流程已在 Milvus 2.6.20 至 Milvus v3.0.5 的环境中经过验证，所用组件包括 Milvus Operator 1.3.0、MixCoord、StreamingNode、Woodpecker、集群内 etcd 以及集群内 MinIO。 如果您使用的 Milvus 2.6.x 补丁版本、Milvus Operator 版本、组件拓扑、消息队列或依赖配置与上述不同，请先在非生产环境中验证升级是否成功。</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,7 +89,7 @@ title: 使用 Milvus Operator 升级 Milvus 集群
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>请将现有部署的源清单用作升级清单。切勿在未先移除服务器管理的元数据和状态字段的情况下，直接应用导出的备份文件。</p>
+<p>使用现有部署的源清单（本指南中为<code translate="no">milvus.yaml</code> ）作为升级清单。请勿直接应用导出的备份文件，必须先移除服务器管理的元数据和状态字段。</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">步骤 2：确认 Milvus Operator 版本<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,8 +126,8 @@ title: 使用 Milvus Operator 升级 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在完整的 Milvus CR 清单中，将<code translate="no">spec.components.image</code> 更改为目标版本。保留当前的运行模式、组件拓扑、消息队列、etcd、存储以及其他依赖项设置。以下摘录展示了需要确认的字段；请勿用此摘录替换您的完整 CR。</p>
-<p>在应用目标 CR 之前，请确认<code translate="no">indexNode.replicas</code> 设置为<code translate="no">0</code> 。已验证的 Milvus 2.6.20 配置已使用此设置。请在目标 CR 中保留显式的零副本设置。</p>
+    </button></h3><p>在完整的 Milvus CR 清单中，将 `<code translate="no">spec.components.image</code> ` 更改为目标版本。保留当前的运行模式、组件拓扑、消息队列、etcd、存储以及其他依赖项设置。以下摘录展示了需要确认的字段；请勿用此摘录替换您的完整 CR。</p>
+<p>在应用目标 CR 之前，请确认<code translate="no">indexNode.replicas</code> 设置为<code translate="no">0</code> 。已验证的 Milvus 2.6.20 配置已采用此设置。请在目标 CR 中保留显式的零副本设置。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -167,4 +167,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>请验证 Milvus CR 是否报告<code translate="no">Healthy</code> ，所有 Milvus 组件是否均使用<code translate="no">milvusdb/milvus:v3.0.5</code> ，是否没有 IndexNode Pod 在运行，以及现有 Collections 是否仍可查询和搜索。在启用任何 v3.0.5 特定功能之前，请完成这些检查。</p>
+<p>请确认 Milvus CR 报告的值为<code translate="no">Healthy</code> ，所有 Milvus 组件均使用<code translate="no">milvusdb/milvus:v3.0.5</code> ，没有 IndexNode Pod 在运行，且现有 Collections 仍可进行查询和搜索。在启用任何 v3.0.5 特定功能之前，请完成这些检查。</p>
+<div class="alert note">
+<p>升级到 Milvus 3.0 不会启用 Storage V3。在验证升级后，请先了解<a href="/docs/zh/storage-v3.md">Storage V3</a>，然后再启用依赖于它的功能。一旦 Milvus 写入了 Storage V3 数据，就不支持降级到无法读取 Storage V3 的旧版 Milvus。</p>
+</div>

@@ -25,7 +25,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
       </svg>
     </button></h1><p>本指南介绍了如何使用 Milvus Operator 将 Milvus 2.6.x Standalone 部署升级至 v3.0.5。</p>
 <div class="alert note">
-<p>该流程已在 Milvus 2.6.20 至 Milvus v3.0.5 的环境中经过验证，测试环境包含 Milvus Operator 1.3.0、Woodpecker、集群内 etcd 以及集群内 MinIO。 如果您使用的是其他 Milvus 2.6.x 补丁版本、Milvus Operator 版本、消息队列或依赖项配置，请先在非生产环境中验证升级是否成功。</p>
+<p>该流程已在 Milvus 2.6.20 至 Milvus v3.0.5 的环境中经过验证，测试环境包含 Milvus Operator 1.3.0、Woodpecker、集群内 etcd 以及集群内 MinIO。 如果您使用的是其他 Milvus 2.6.x 补丁版本、Milvus Operator 版本、消息队列或依赖项配置，请先在非生产环境中验证升级过程。</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ title: 使用 Milvus Operator 升级 Milvus Standalone
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>请将现有部署的源清单用作升级清单。切勿在未先移除服务器管理的元数据和状态字段的情况下，直接应用导出的备份文件。</p>
+<p>使用现有部署的源清单（本指南中为<code translate="no">milvus.yaml</code> ）作为升级清单。请勿直接应用导出的备份文件，必须先移除服务器管理的元数据和状态字段。</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">步骤 2：确认 Milvus Operator 版本<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,4 +163,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>请确认 Milvus CR 报告的镜像为<code translate="no">Healthy</code> ，当前镜像为<code translate="no">milvusdb/milvus:v3.0.5</code> ，且现有 Collections 仍可查询和搜索。在启用任何 v3.0.5 专属功能之前，请先完成这些检查。</p>
+<p>请确认 Milvus CR 报告的镜像为<code translate="no">Healthy</code> ，当前镜像为<code translate="no">milvusdb/milvus:v3.0.5</code> ，且现有 Collection 仍可查询和搜索。在启用任何 v3.0.5 专属功能之前，请先完成这些检查。</p>
+<div class="alert note">
+<p>升级至 Milvus 3.0 不会启用 Storage V3。在验证升级成功后，请先了解<a href="/docs/zh/storage-v3.md">Storage V3，</a>再启用依赖于它的功能。一旦 Milvus 写入了 Storage V3 数据，将系统降级到无法读取 Storage V3 的旧版 Milvus 是不受支持的。</p>
+</div>

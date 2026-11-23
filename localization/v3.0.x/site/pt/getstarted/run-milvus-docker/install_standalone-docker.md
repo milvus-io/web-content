@@ -78,12 +78,21 @@ title: Executar o Milvus no Docker (Linux)
 <li>Para alterar a configuração predefinida do Milvus, adicione as suas definições ao ficheiro <strong>user.yaml</strong> na pasta atual e, em seguida, reinicie o serviço.</li>
 <li>O volume de dados do Milvus está mapeado para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul>
-<p>Verifique a imagem atual e o estado de integridade:</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<p>O comando ` <code translate="no">start</code> ` exibe ` <code translate="no">Wait for Milvus Starting...</code> ` e, em seguida, verifica uma vez por segundo até que ` <code translate="no">docker ps</code> ` indique que o contentor está em bom estado. Esta verificação não tem limite de tempo. Se o comando não responder, verifique os registos do contentor a partir de outro terminal:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Aguarde até que o <code translate="no">healthy</code> esteja disponível antes de seguir <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a>. Ao utilizar este servidor, ligue o SDK a <code translate="no">http://localhost:19530</code>; uma URI local <code translate="no">.db</code> inicia, em vez disso, o Milvus Lite.</p>
-<p>Pode aceder à interface Web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte a <a href="/docs/pt/milvus-webui.md">interface Web do Milvus</a>.</p>
+<p>O script executa os seus comandos ` <code translate="no">docker</code> ` com ` <code translate="no">sudo</code>`. Cada ` <code translate="no">start</code> ` executa primeiro um contentor de curta duração a partir da imagem do Milvus como ` <code translate="no">root</code>`, o qual altera recursivamente o proprietário de <strong>`volumes/milvus</strong> ` para o utilizador ` <code translate="no">milvus</code> ` da imagem, a menos que um ficheiro marcador ` <code translate="no">.milvus-volume-owner-*</code> ` nessa pasta indique que isso já foi feito. O script inicia o contentor do Milvus com ` <code translate="no">--security-opt seccomp:unconfined</code>`, para que o contentor seja executado sem o perfil seccomp predefinido do Docker.</p>
+<div class="alert warning">
+<blockquote>
+<p>O script publica as portas <strong>19530</strong>, <strong>9091</strong> e <strong>2379</strong> sem um endereço de anfitrião, e o ficheiro ` <strong>embedEtcd.yaml</strong> ` configura o etcd para escutar em <code translate="no">http://0.0.0.0:2379</code>. O Docker publica uma porta sem endereço de anfitrião em todos os endereços de anfitrião, pelo que outras máquinas que consigam aceder a este anfitrião também se podem ligar ao Milvus e ao etcd. Para limitar o acesso a este anfitrião, edite as opções « <code translate="no">-p</code> » em <code translate="no">standalone_embed.sh</code> antes do primeiro « <code translate="no">start</code> », por exemplo, <code translate="no">-p 127.0.0.1:19530:19530</code>, e remova « <code translate="no">-p 2379:2379</code> » se não se ligar ao etcd a partir do exterior do contentor. Se já existir um contentor <code translate="no">milvus-standalone</code>, o comando <code translate="no">start</code> reinicia-o com as suas opções originais. Para exigir credenciais para as ligações ao Milvus, consulte <a href="/docs/pt/authenticate.md">«Autenticar o acesso do utilizador</a>».</p>
+</blockquote>
+</div>
+<p>Verifique a imagem atual e o estado de integridade:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Aguarde até que <code translate="no">healthy</code> esteja disponível antes de seguir <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a>. Ao utilizar este servidor, ligue o SDK a <code translate="no">http://localhost:19530</code>; uma URI local <code translate="no">.db</code> inicia, em vez disso, o Milvus Lite.</p>
+<p>Pode aceder à interface Web do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para mais detalhes, consulte <a href="/docs/pt/milvus-webui.md">Interface Web do Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opcional) Atualizar as configurações do Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -201,7 +210,7 @@ EOF
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p>Consulte as considerações relativas à atualização nesta página antes de alterar a versão do Milvus.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Dimensionar o seu cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/pt/scaleout.md">Dimensionar um cluster Milvus</a> no Kubernetes. Esse procedimento utiliza o Helm e não se aplica a esta implementação do Docker.</p></li>
 <li><p>Implemente o seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>

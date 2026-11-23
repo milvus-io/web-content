@@ -935,7 +935,8 @@ summary: >-
 <p>Os campos escalares suportados incluem campos booleanos, numéricos, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> e <code translate="no">ARRAY</code>. Estes operadores não suportam <a href="/docs/pt/text.md">campos TEXT</a>.</p>
 <p>A partir do Milvus 3.0.3, os operadores também suportam campos vetoriais comuns: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> e <code translate="no">INT8_VECTOR</code>.</p>
 <p>Os operadores não distinguem maiúsculas de minúsculas: <code translate="no">IS NULL</code> e <code translate="no">is null</code> são equivalentes, tal como <code translate="no">IS NOT NULL</code> e <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Exemplo: Encontrar entidades com valores em falta ou disponíveis<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Exemplo: Encontrar entidades com vetores em falta<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Suponha que uma coleção denominada <code translate="no">products</code> esteja indexada e carregada no Milvus 3.0.3 ou posterior. A coleção possui uma chave primária <code translate="no">INT64</code> denominada <code translate="no">id</code>, um campo nulo <code translate="no">VARCHAR</code> denominado <code translate="no">category</code> e um campo tridimensional nulo <code translate="no">FLOAT_VECTOR</code> denominado <code translate="no">embedding</code>. Já contém as seguintes entidades:</p>
+    </button></h3><p>Suponha que adicione produtos a uma coleção antes de gerar os respetivos vetores. Neste exemplo, a coleção <code translate="no">products</code> está indexada e carregada. Possui uma chave primária <code translate="no">INT64</code> denominada <code translate="no">id</code>, um campo <code translate="no">VARCHAR</code> nulo denominado <code translate="no">category</code> e um campo <code translate="no">FLOAT_VECTOR</code> tridimensional e nulo denominado <code translate="no">embedding</code>. A tabela seguinte mostra quais os produtos que possuem um vetor.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -962,7 +963,7 @@ summary: >-
 </tbody>
 </table>
 <p>A criação da coleção e a inserção de dados foram omitidas. Para essas etapas, consulte <a href="/docs/pt/nullable-and-default.md">«Campos nulos</a>».</p>
-<p>Para encontrar entidades que ainda necessitem de uma incorporação, execute a consulta <code translate="no">embedding IS NULL</code>. Ajuste as definições de ligação para o seu servidor.</p>
+<p>Para encontrar produtos que ainda necessitam de um vetor, chame <code translate="no">query()</code> com o filtro <code translate="no">embedding IS NULL</code>. Substitua <code translate="no">embedding</code> pelo nome do seu campo vetorial e ajuste as definições de ligação para o seu servidor. Neste exemplo, a consulta devolve o ID <code translate="no">3</code> porque o vetor desse produto é NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1134,7 +1135,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Substitua o ` <code translate="no">filter</code> ` na mesma consulta para verificar um campo ou combinar condições:</p>
+<p>Substitua o <code translate="no">filter</code> na mesma consulta para verificar um campo ou combinar condições:</p>
 <table>
 <thead>
 <tr><th>Expressão de filtragem</th><th>IDs correspondentes</th><th>Objetivo</th></tr>
@@ -1147,6 +1148,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Encontrar entidades com ambos os valores</td></tr>
 </tbody>
 </table>
+<p>Se cada produto tiver vários blocos e cada bloco armazenar o seu próprio vetor, utilize um <a href="/docs/pt/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">filtro StructArray para encontrar produtos com um vetor de bloco em falta</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1165,7 +1167,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Os operadores verificam o valor do campo armazenado. No caso de um campo nulo sem valor predefinido, omitir o campo durante a inserção ou defini-lo explicitamente como NULL resulta no armazenamento de NULL. Um valor predefinido configurado pode alterar o que é armazenado. Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Campos nulos</a> e <a href="/docs/pt/default-values.md">valores predefinidos</a>.</p>
+    </button></h3><p>Os operadores verificam o valor do campo armazenado. No caso de um campo nulo sem valor predefinido, omitir o campo durante a inserção ou defini-lo explicitamente como NULL armazena NULL. Um valor predefinido configurado pode alterar o que é armazenado. Para mais detalhes, consulte <a href="/docs/pt/nullable-and-default.md">Campos nulos</a> e <a href="/docs/pt/default-values.md">valores predefinidos</a>.</p>
 <table>
 <thead>
 <tr><th>Tipo de campo</th><th>Comportamento de NULL</th></tr>
@@ -1224,7 +1226,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Faça referência a uma chave JSON ou a um elemento ARRAY diretamente na expressão. Por exemplo, para filtrar a chave « <code translate="no">price</code> » num campo JSON denominado « <code translate="no">product</code> »:</p>
+    </button></h2><p>Faça referência a uma chave JSON ou a um elemento ARRAY diretamente na expressão. Por exemplo, para filtrar a chave <code translate="no">price</code> num campo JSON denominado <code translate="no">product</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

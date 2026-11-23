@@ -22,7 +22,7 @@ title: Milvus mit Docker Compose konfigurieren
       </svg>
     </button></h1><p>In diesem Abschnitt wird beschrieben, wie Sie Milvus-Komponenten und deren Abhängigkeiten von Drittanbietern mit Docker Compose konfigurieren.</p>
 <div class="alert note">
-In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milvus wirksam.
+Einige Parameter können geändert werden, während Milvus läuft. Weitere Informationen finden Sie unter <a href="/docs/de/dynamic_config.md">„Milvus im laufenden Betrieb konfigurieren</a>“. Um Änderungen an anderen Parametern zu übernehmen, starten Sie Milvus neu.
 </div>
 <h2 id="Download-a-configuration-file" class="common-anchor-header">Konfigurationsdatei herunterladen<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +42,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
     </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/configs/milvus.yaml">Laden Sie</a> „ <code translate="no">milvus.yaml</code> “ direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/configs/milvus.yaml">herunter</a>.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/configs/milvus.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Modify-the-configuration-file" class="common-anchor-header">Konfigurationsdatei anpassen<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+<h2 id="Modify-the-configuration-file" class="common-anchor-header">Konfigurationsdatei bearbeiten<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,10 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Konfigurieren Sie Ihre Milvus-Instanz entsprechend Ihren Anwendungsszenarien, indem Sie die entsprechenden Parameter in „ <code translate="no">milvus.yaml</code> “ anpassen.</p>
+    </button></h2><p>Konfigurieren Sie Ihre Milvus-Instanz in der Datei „ <code translate="no">user.yaml</code> “ entsprechend Ihren Anwendungsszenarien. Fügen Sie nur die Parameter hinzu, die Sie ändern möchten, und verwenden Sie die heruntergeladene Datei „ <code translate="no">milvus.yaml</code> “ als Referenz für deren Namen und Standardwerte. Milvus liest „ <code translate="no">user.yaml</code> “ nach „ <code translate="no">milvus.yaml</code> “, sodass die Werte in „ <code translate="no">user.yaml</code> “ die Standardwerte überschreiben. Das folgende Beispiel ändert die Protokollstufe:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">log:</span>
+  <span class="hljs-attr">level:</span> <span class="hljs-string">warn</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>Weitere Informationen zu den einzelnen Parametern finden Sie unter den folgenden Links.</p>
 <p>Sortiert nach:</p>
 <div class="filter">
@@ -87,7 +90,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_proxy.md">Proxy</a></li>
             <li><a href="/docs/de/configure_querycoord.md">Abfragekoordinator</a></li>
             <li><a href="/docs/de/configure_querynode.md">Abfrageknoten</a></li>
-            <li><a href="/docs/de/configure_indexnode.md">Indexknoten</a></li>
+            <li><a href="/docs/de/configure_indexnode.md">Indexknoten (veraltet)</a></li>
             <li><a href="/docs/de/configure_datacoord.md">Datenkoordinaten</a></li>
             <li><a href="/docs/de/configure_datanode.md">Datenknoten</a></li>
             <li><a href="/docs/de/configure_localstorage.md">Lokaler Speicher</a></li>
@@ -96,12 +99,12 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_common.md">Allgemein</a></li>
             <li><a href="/docs/de/configure_gpu.md">GPU</a></li>
             <li><a href="/docs/de/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/de/configure_indexcoord.md">Indexkoordinate</a></li>
+            <li><a href="/docs/de/configure_indexcoord.md">Indexkoordinate (veraltet)</a></li>
             <li><a href="/docs/de/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/de/configure_mq.md">Nachrichtenwarteschlange</a></li>
             <li><a href="/docs/de/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/de/configure_trace.md">Trace</a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md">Kontingente und Grenzwerte</a></li>
+            <li><a href="/docs/de/configure_quotaandlimits.md">Kontingente und Limits</a></li>
         </ul>
     </td>
   </tr>
@@ -121,14 +124,13 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
     <td>Leistungsoptimierung</td>
     <td>
         <ul>
-            <li><a href="/docs/de/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/de/configure_common.md#commongracefulTime"><code translate="no">common.gracefulTime</code></a></li>
             <li><a href="/docs/de/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
             <li><a href="/docs/de/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
             <li><a href="/docs/de/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/de/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/de/configure_datanode.md#dataNodesegmentinsertBufSize"><code translate="no">dataNode.segment.insertBufSize</code></a></li>
             <li><a href="/docs/de/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
             <li><a href="/docs/de/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/de/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
@@ -136,7 +138,6 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
     <td>Daten und Metadaten</td>
     <td>
         <ul>
-            <li><a href="/docs/de/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
             <li><a href="/docs/de/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
             <li><a href="/docs/de/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
             <li><a href="/docs/de/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
@@ -166,16 +167,16 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
+            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsflushRatemax"><code translate="no">quotaAndLimits.flushRate.max</code></a></li>
+            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitscompactionRateenabled"><code translate="no">quotaAndLimits.compactionRate.enabled</code></a></li>
+            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitscompactionRatemax"><code translate="no">quotaAndLimits.compactionRate.max</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
+            <li><a href="/docs/de/configure_quotaandlimits.md"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
@@ -185,11 +186,6 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-            <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
         </ul>
     </td>
@@ -232,29 +228,15 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Fügen Sie in der Datei „ <code translate="no">docker-compose.yml</code> “ unter jedem Eintrag „ <code translate="no">milvus-standalone</code> “ einen Abschnitt „ <code translate="no">volumes</code> “ hinzu.</p>
-<p>Ordnen Sie den lokalen Pfad zu Ihrer Datei „ <code translate="no">milvus.yaml</code> “ den entsprechenden Docker-Container-Pfaden zu den Konfigurationsdateien „ <code translate="no">/milvus/configs/milvus.yaml</code> “ unter allen „ <code translate="no">volumes</code> “-Abschnitten zu.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+    </button></h2><p>Ordnen Sie in der Datei „ <code translate="no">docker-compose.yml</code> “ den lokalen Pfad zu Ihrer Datei „ <code translate="no">user.yaml</code> “ dem Pfad „ <code translate="no">/milvus/configs/user.yaml</code> “ im Abschnitt „ <code translate="no">volumes</code> “ des Dienstes „ <code translate="no">standalone</code> “ zu. Behalten Sie die vorhandenen Volume-Einträge und die anderen Einstellungen des Dienstes bei, wie z. B. das Image, die Umgebungsvariablen, den Zustandscheck und die Abhängigkeiten:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
   <span class="hljs-attr">standalone:</span>
-    <span class="hljs-attr">container_name:</span> <span class="hljs-string">milvus-standalone</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v2.2.13</span>
-    <span class="hljs-attr">command:</span> [<span class="hljs-string">&quot;milvus&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;standalone&quot;</span>]
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
-      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/milvus.yaml:/milvus/configs/milvus.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-    <span class="hljs-attr">ports:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;19530:19530&quot;</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;9091:9091&quot;</span>
-    <span class="hljs-attr">depends_on:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;etcd&quot;</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;minio&quot;</span>
-<span class="hljs-string">...</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>   <span class="hljs-comment"># Map the local path to the container path</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Die Daten werden gemäß der Standardkonfiguration in <code translate="no">docker-compose.yml</code> im Ordner „ <code translate="no">/volumes</code> “ gespeichert. Um den Ordner für die Datenspeicherung zu ändern, bearbeiten Sie „ <code translate="no">docker-compose.yml</code> “ oder führen Sie „ <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> “ aus.
+Die Daten werden gemäß der Standardkonfiguration in „ <code translate="no">docker-compose.yml</code> “ im Ordner „ <code translate="no">./volumes</code> “ gespeichert. Um den Ordner für die Datenspeicherung zu ändern, bearbeiten Sie „ <code translate="no">docker-compose.yml</code> “ oder führen Sie „ <code translate="no">$ export DOCKER_VOLUME_DIRECTORY=</code> “ aus.
 </div>
 <h2 id="Start-Milvus" class="common-anchor-header">Milvus starten<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

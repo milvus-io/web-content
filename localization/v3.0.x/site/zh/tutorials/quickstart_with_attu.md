@@ -56,9 +56,9 @@ title: Attu 快速入门——Milvus 的 Web 界面
 <li>与您的服务器兼容的 Attu 版本。Attu 3.0 支持 Milvus 2.6.0 及更高版本（包括 Milvus 3.x）；若使用较旧的服务器，<a href="https://github.com/zilliztech/attu#compatibility">请参考兼容性表</a>。</li>
 <li>一个 Python 环境，其中 Milvus 版本需与您的服务器兼容。请参阅<a href="/docs/zh/install-pymilvus.md">《安装 Milvus Python SDK》</a>和<a href="/docs/zh/release_notes.md">《发行说明》</a>。对于本文档分支中使用的 SDK 版本，请安装 model extra 和 progress-bar 依赖项：</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>数据准备步骤还使用<code translate="no">wget</code> 和<code translate="no">unzip</code> 。embedding 函数在首次使用时会下载其模型，因此请允许访问模型主机的网络连接，或预先准备好模型缓存。屏幕截图展示了工作流；不同版本的 Attu 中标签和布局可能有所不同。</p>
+<p>数据准备步骤还使用<code translate="no">wget</code> 和<code translate="no">unzip</code> 。embedding 函数在首次使用时会下载其模型，因此请允许访问模型主机的网络连接，或预先准备好模型缓存。截图展示了工作流；不同版本的 Attu 中标签和布局可能有所不同。</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. 安装桌面应用程序<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ title: Attu 快速入门——Milvus 的 Web 界面
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>访问<a href="https://github.com/zilliztech/attu/releases">Attu GitHub 发布页面下载</a> Attu 桌面版。选择适合您操作系统的版本，并按照安装步骤进行操作。</p>
+    </button></h2><p>请访问<a href="https://github.com/zilliztech/attu/releases">Attu GitHub 发布页面下载</a> Attu 桌面版。选择适合您操作系统的版本，并按照安装步骤进行操作。</p>
 <h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">macOS（M系列芯片）注意事项：<button data-href="#Note-for-macOS-M-series-chip" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: Attu 快速入门——Milvus 的 Web 界面
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果您遇到以下错误：</p>
+    </button></h3><p>若遇到以下错误：</p>
 <pre><code translate="no">attu.app <span class="hljs-keyword">is</span> damaged <span class="hljs-keyword">and</span> cannot be opened.
 <button class="copy-code-btn"></button></code></pre>
 <p>请在终端中运行以下命令以解决此问题：</p>
@@ -112,7 +112,7 @@ title: Attu 快速入门——Milvus 的 Web 界面
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu 支持连接<strong>Milvus Standalone</strong>和<strong>Zilliz Cloud</strong>，为您提供灵活处理本地或云端数据库的选项。</p>
+    </button></h2><p>Attu 支持连接<strong>Milvus Standalone</strong>和<strong>Zilliz Cloud</strong>，为您提供了灵活使用本地或云端数据库的选项。</p>
 <p>要在本地使用 Milvus Standalone：</p>
 <ol>
 <li>请按照<a href="https://milvus.io/docs/install_standalone-docker.md">Milvus 安装指南</a>启动 Milvus Standalone。</li>
@@ -124,7 +124,7 @@ title: Attu 快速入门——Milvus 的 Web 界面
 <li>点击“连接”以访问您的数据库。</li>
 </ol>
 <blockquote>
-<p>您还可以连接<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus。只需将“<code translate="no">Milvus Address</code> ”和“<code translate="no">token</code> ”分别设置为您的 Zilliz Cloud 实例的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>即可。</p>
+<p>您还可以连接<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全托管 Milvus 服务。只需将“<code translate="no">Milvus Address</code> ”和“<code translate="no">token</code> ”分别设置为您的 Zilliz Cloud 实例的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>即可。</p>
 </blockquote>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_login_page.png" alt="Attu Login Page" width="80%">
@@ -191,7 +191,7 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定义一个嵌入模型，使用<code translate="no">milvus_model</code> 生成文本Embeddings。我们以<code translate="no">DefaultEmbeddingFunction</code> 模型为例，这是一个预训练的轻量级Embeddings模型。</p>
+    </button></h3><p>定义一个嵌入模型，使用<code translate="no">milvus_model</code> 生成文本嵌入。我们以<code translate="no">DefaultEmbeddingFunction</code> 模型为例，这是一个预训练的轻量级嵌入模型。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
@@ -207,7 +207,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
  -0.03041712 -0.02269499 -0.02317863 -0.00426028]
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="43-Create-Collection" class="common-anchor-header">4.3 创建Collection<button data-href="#43-Create-Collection" class="anchor-icon" translate="no">
+<h3 id="43-Create-Collection" class="common-anchor-header">4.3 创建 Collection<button data-href="#43-Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -286,8 +286,8 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Attu 中刷新 Collection 列表，并打开<code translate="no">attu_tutorial</code> 。快速设置 Schema 包含一个主键<code translate="no">id</code> 以及一个字段<code translate="no">vector</code> ，其维度为<code translate="no">embedding_dim</code> ，并带有指标<code translate="no">Inner Product (IP)</code> 。<code translate="no">text</code> 的值存储在 Dynamic Field 中。 有关显式Schema选项，请参阅<a href="/docs/zh/create-collection.md">“创建Collection</a>”和<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field”</a>。实体数量取决于提取的样本文本，因此请使用您插入的行数，而非截图中的数字。</p>
-<p>此外，我们可以查看插入的数据，包括ID、向量Embeddings以及存储文本内容等元数据的Dynamic Field。该界面支持根据指定条件或Dynamic Field进行筛选和查询。</p>
+    </button></h3><p>在 Attu 中刷新 Collection 列表，并打开<code translate="no">attu_tutorial</code> 。快速设置模式包含一个主键<code translate="no">id</code> 以及一个字段<code translate="no">vector</code> ，其维度为<code translate="no">embedding_dim</code> ，并带有指标<code translate="no">Inner Product (IP)</code> 。<code translate="no">text</code> 的值存储在 Dynamic Field 中。 有关显式Schema选项，请参阅<a href="/docs/zh/create-collection.md">“创建Collection</a>”和<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field”</a>。实体数量取决于提取的样本文本，因此请使用您插入的行数，而非截图中的数字。</p>
+<p>此外，我们可以查看插入的数据，包括 ID、向量 Embeddings 以及存储文本内容等元数据的 Dynamic Field。该界面支持根据指定条件或 Dynamic Field 进行筛选和查询。</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />

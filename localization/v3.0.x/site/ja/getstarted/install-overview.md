@@ -36,7 +36,7 @@ title: Milvusの導入オプションの概要
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteは</a>、アプリケーションにインポートできるPythonライブラリです。Milvusの軽量版として、Jupyter Notebookでの迅速なプロトタイピングや、リソースが限られたスマートデバイスでの実行に最適です。 Milvus Liteは、他のMilvusデプロイメントと同じAPIをサポートしています。Milvus Liteとやり取りするクライアント側のコードは、他のデプロイメントモードのMilvusインスタンスでも動作します。</p>
 <p>ローカルでのサンプル実行には、Python 3.10 以降を使用し、オプションの Lite 依存関係を明示的にインストールしてください。Windows では、pip が `<code translate="no">milvus-lite</code> ` という接頭辞を省略するため、パッケージ名を明示的に指定する必要があります：</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> を使用してローカルストレージを開きます。Milvus Lite 3.x はこのパスにディレクトリを作成します。既存の Milvus Lite 2.x データベースファイルを使用する場合は、エクスポートと移行が必要です。プラットフォーム要件については「<a href="/docs/ja/milvus_lite.md">Milvus Lite の実行</a>」を、挿入と検索の完全な例については「<a href="/docs/ja/quickstart.md">クイックスタート</a>」を参照してください。</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus Standalone<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
@@ -70,7 +70,7 @@ title: Milvusの導入オプションの概要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Distributedは、<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetesクラスター上に</a>デプロイできます。このデプロイ方式はクラウドネイティブなアーキテクチャを採用しており、データ取り込み負荷と検索クエリが分離されたノードによって個別に処理されるため、重要なコンポーネントの冗長性を確保できます。最高のスケーラビリティと可用性を提供するとともに、各コンポーネントに割り当てるリソースを柔軟にカスタマイズすることも可能です。 Milvus Distributedは、本番環境で大規模なベクトル検索システムを運用するエンタープライズユーザーにとって最適な選択肢です。デフォルトでは、Milvus Distributedはメッセージキューとして<strong>Woodpecker</strong>を実行し、Milvusと並行して専用のサービスとしてデプロイされます。</p>
+    </button></h2><p>Milvus Distributedは、<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetesクラスタ</a>上にデプロイできます。このデプロイ方式はクラウドネイティブなアーキテクチャを採用しており、データ取り込み負荷と検索クエリが分離されたノードによって個別に処理されるため、重要なコンポーネントの冗長性を確保できます。最高のスケーラビリティと可用性を提供するとともに、各コンポーネントに割り当てるリソースを柔軟にカスタマイズすることも可能です。 Milvus Distributedは、本番環境で大規模なベクトル検索システムを運用するエンタープライズユーザーにとって最適な選択肢です。デフォルトでは、Milvus Distributedはメッセージキューとして<strong>Woodpecker</strong>を実行し、Milvusと並行して専用のサービスとしてデプロイされます。</p>
 <h2 id="Choose-the-Right-Deployment-for-Your-Use-Case" class="common-anchor-header">ユースケースに適したデプロイメントを選択する<button data-href="#Choose-the-Right-Deployment-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ title: Milvusの導入オプションの概要
     </button></h2><p>デプロイモードの選択は、通常、アプリケーションの開発段階によって異なります：</p>
 <ul>
 <li><p><strong>迅速なプロトタイピングの場合</strong></p>
-<p>ノートブック上で Milvus Lite を使用し、埋め込みベクトル、RAG チャンキング戦略、および検索挙動をテストします。共有サーバーが必要になった場合、または測定されたメモリ使用量やクエリ負荷がローカル環境の許容範囲を超えた場合は、Milvus Standalone に移行してください。クライアント API は類似していますが、機能の違いを確認し、保存されたデータは別途移行してください。</p></li>
+<p>ノートブック上で Milvus Lite を使用し、埋め込みベクトル、RAG チャンキング戦略、および検索挙動をテストします。共有サーバーが必要になった場合、または測定されたメモリ使用量やクエリ負荷がローカル環境の許容範囲を超えた場合は、Milvus Standalone に移行してください。クライアント API は類似していますが、機能の違いを確認し、保存されたデータは別途移行する必要があります。</p></li>
 <li><p><strong>小規模な本番環境へのデプロイ</strong></p>
 <p>単一のサーバーでワークロードと可用性の要件を満たせ、かつKubernetesを使用せずに運用したい場合は、Milvus Standaloneを使用してください。ベクトルの次元、スカラーフィールド、インデックス設定、レプリカ数からメモリ使用量を推定し、予想されるクエリの同時実行数と書き込みレートをベンチマークしてください。ベクトルの数だけでは容量を決定できません。</p></li>
 <li><p><strong>大規模な本番環境への導入</strong></p>
@@ -104,7 +104,7 @@ title: Milvusの導入オプションの概要
 <li><strong>Milvus Distributedは</strong>、1台のサーバーを超えて拡張する必要がある場合や、読み取りリソースと書き込みリソースを分離する必要がある場合に、コンポーネントレベルのスケーリングと冗長性を提供します。</li>
 </ul>
 <p>Milvus Standalone および Distributed は、メッセージキュー、オブジェクトストレージ、およびメタデータストアを使用します。Milvus Lite は、これらの個別のサービスを使用せずにローカルで実行されます。サーバー展開のデフォルトの依存関係および外部サービスのオプションについては、「<a href="/docs/ja/data-infra-integration-overview.md">データインフラストラクチャ</a>」を参照してください。</p>
-<p>サーバーインフラストラクチャの運用ではなく、マネージドサービスをご希望の場合は、<a href="https://zilliz.com/cloud">Zilliz Cloud</a>をご検討ください。ご自身でデプロイを行う場合は、<a href="/docs/ja/install_standalone-docker.md">Dockerまたは</a> <a href="/docs/ja/install_cluster-milvusoperator.md">Kubernetes</a>の手順に進んでください。</p>
+<p>サーバーインフラストラクチャを運用する代わりにマネージドサービスを利用したい場合は、<a href="https://zilliz.com/cloud">Zilliz Cloudをご</a>検討ください。自身でデプロイを行う場合は、<a href="/docs/ja/install_standalone-docker.md">Docker</a>または<a href="/docs/ja/install_cluster-milvusoperator.md">Kubernetes</a> の手順に進んでください。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" /> 

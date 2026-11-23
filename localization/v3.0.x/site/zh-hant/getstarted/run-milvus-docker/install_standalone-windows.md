@@ -82,7 +82,7 @@ docker compose version
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下載腳本後，啟動 Milvus：</p>
+    </button></h3><p>下載腳本，然後啟動 Milvus：</p>
 <pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.bat&quot; -OutFile standalone.bat
 .\standalone.bat start
 </code></pre>
@@ -113,12 +113,18 @@ standalone.bat start
 <li>Milvus 將資料儲存於工作目錄中的<strong>volumes/milvus</strong>目錄內。</li>
 <li>若需覆寫設定，請在工作目錄中的<strong>user.yaml</strong>檔案中進行修改。修改後請重新啟動容器。</li>
 </ul>
+<p><code translate="no">start</code> 指令會輸出「<code translate="no">Wait for Milvus Starting...</code> 」，隨後每秒檢查一次，直到<code translate="no">docker ps</code> 回報該容器狀態為正常為止。此檢查無時間限制。若指令未返回結果，請透過另一終端機使用<code translate="no">docker logs milvus-standalone</code> 檢查容器日誌。此腳本會以<code translate="no">--security-opt seccomp:unconfined</code> 啟動容器，因此容器將不採用預設的 Docker seccomp 設定檔運行。</p>
+<div class="alert warning">
+<blockquote>
+<p>該腳本會不指定主機位址地公開<strong>19530</strong>、<strong>9091</strong> 和<strong>2379</strong>這三個埠，而<strong>`embedEtcd.yaml</strong>` 則將 etcd 設定為監聽<code translate="no">http://0.0.0.0:2379</code> 。 預設情況下，Docker Desktop 會將此類埠號發佈至所有網路介面，因此能夠連線至這台電腦的其他機器也能連線至 Milvus 和 etcd。若要限制對這台電腦的存取權限，請在<code translate="no">standalone.bat</code> 檔案中，於第一個<code translate="no">start</code> （例如<code translate="no">-p 127.0.0.1:19530:19530</code> ）之前編輯<code translate="no">-p</code> 選項，並在您無需從容器外部連線至 etcd 的情況下，移除<code translate="no">-p 2379:2379</code> 。 若已存在<code translate="no">milvus-standalone</code> 容器，執行<code translate="no">start</code> 將以原始參數重新啟動該容器。若要預設將已發佈的埠綁定至 localhost，請參閱<a href="https://docs.docker.com/desktop/features/networking/">《Docker Desktop 網路設定》</a>。</p>
+</blockquote>
+</div>
 <p>請在任一終端機中檢查映像檔與容器的狀態：</p>
 <pre><code translate="no" class="language-powershell">docker inspect --format &quot;{{.Config.Image}}&quot; milvus-standalone
 docker ps --filter name=milvus-standalone
 </code></pre>
-<p>若要從 PowerShell 停止 Milvus，請執行 `<code translate="no">.\standalone.bat stop</code>`；若要從命令提示字元停止，請執行 `<code translate="no">standalone.bat stop</code>`。執行 `<code translate="no">delete</code> ` 指令將同時移除容器及其儲存的資料。使用前請先備份資料。</p>
-<h3 id="From-WSL-2" class="common-anchor-header">透過 WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
+<p>若要從 PowerShell 停止 Milvus，請執行<code translate="no">.\standalone.bat stop</code> ；若要從命令提示字元執行，請執行<code translate="no">standalone.bat stop</code> 。請在執行<code translate="no">delete</code> 之前先執行<code translate="no">stop</code> ：確認後，<code translate="no">delete</code> 指令會嘗試移除容器，並隨後刪除<strong>卷宗</strong>資料夾、<strong>embedEtcd.yaml</strong> 及<strong>user.yaml，</strong>即使容器仍在運行且尚未被移除亦然。使用前請先備份資料。</p>
+<h3 id="From-WSL-2" class="common-anchor-header">從 WSL 2 執行<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,7 +139,7 @@ docker ps --filter name=milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Windows 終端機中開啟已安裝的 WSL 發行版：</p>
+    </button></h3><p>請從 Windows 終端機開啟已安裝的 WSL 發行版：</p>
 <pre><code translate="no" class="language-powershell">wsl
 </code></pre>
 <p>在 WSL 終端機中，下載 Linux 腳本並執行一次 Milvus：</p>
@@ -141,6 +147,7 @@ docker ps --filter name=milvus-standalone
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
 <p>若要停止 Milvus，請執行<code translate="no">bash standalone_embed.sh stop</code> 。<code translate="no">bash standalone_embed.sh delete</code> 指令會移除容器、設定檔及資料；使用前請先備份資料。</p>
+<p>此 Linux 腳本會透過 `<code translate="no">sudo</code>` 執行 Docker，在不指定主機位址的情況下公開其埠號，並透過 `<code translate="no">--security-opt seccomp:unconfined</code>` 啟動容器。關於這些設定的說明，請參閱《<a href="/docs/zh-hant/install_standalone-docker.md">在 Docker（Linux）中執行 Milvus</a>》，這些說明同樣適用於在 WSL 2 中執行 Milvus 的情況。</p>
 <h2 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 執行 Milvus<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +163,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用 v3.0.5 版本隨附的設定檔。僅執行適用於您所用終端的指令序列。</p>
+    </button></h2><p>請使用 v3.0.5 版本隨附的配置。僅執行適用於您終端機的命令序列。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">透過 PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,10 +179,9 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下載設定檔並啟動 Milvus：</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>下載配置檔並輸出其 SHA-256 雜湊值：</p>
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yaml
+Get-FileHash docker-compose.yaml -Algorithm SHA256
 </code></pre>
 <h3 id="From-Windows-Command-Prompt" class="common-anchor-header">透過 Windows 命令提示字元<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,10 +198,9 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下載設定檔並啟動 Milvus：</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>下載配置檔並輸出其 SHA-256 雜湊值：</p>
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yaml
+certutil -hashfile docker-compose.yaml SHA256
 </code></pre>
 <h3 id="From-WSL-2" class="common-anchor-header">透過 WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -212,12 +217,30 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>開啟您的 WSL 發行版，然後執行以下 Linux 指令：</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
-docker compose up -d
+    </button></h3><p>開啟您的 WSL 發行版，然後下載設定檔並輸出其 SHA-256 雜湊值：</p>
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml
+<span class="hljs-built_in">sha256sum</span> docker-compose.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Start-Milvus" class="common-anchor-header">啟動 Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>將該雜湊值與<a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">v3.0.5 發行頁面中</a> <code translate="no">milvus-standalone-docker-compose.yaml</code> 所列的<code translate="no">sha256</code> 摘要進行比對。<code translate="no">Get-FileHash</code> 會以大寫字母輸出雜湊值，而發行頁面則以小寫字母列出，因此比對時請忽略大小寫差異。接著在同一終端機中啟動 Milvus 並檢查容器：</p>
+<pre><code translate="no" class="language-shell">docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
-<p>此設定檔會啟動三個長期運行的容器：<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 以及<strong>milvus-etcd</strong>。同時也會執行一次性的<code translate="no">milvus-volume-init</code> 服務，以設定資料目錄的所有權。這些資料對應至工作目錄中的<strong>volumes/milvus</strong>、<strong>volumes/minio</strong> 及<strong>volumes/etcd</strong>。 MinIO 會開放<strong>9000</strong>和<strong>9001</strong> 埠；Milvus 則會開放<strong>19530</strong>和<strong>9091</strong> 埠。有關設定與生命週期指令，請參閱《<a href="/docs/zh-hant/install_standalone-docker-compose.md">使用 Docker Compose 執行 Milvus</a>》。</p>
+<p>此配置會啟動三個長期運行的容器：<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 以及<strong>milvus-etcd</strong>。此外，還會執行一次性的<code translate="no">milvus-volume-init</code> 服務，以設定資料目錄的所有權。 這些資料對應至工作目錄中的<strong>volumes/milvus</strong>、<strong>volumes/minio</strong> 及<strong>volumes/etcd</strong>。MinIO 會公開<strong>9000</strong>和<strong>9001</strong> 埠；Milvus 則會公開<strong>19530</strong>和<strong>9091</strong> 埠。 此設定會將這些埠號發佈至所有網路介面；MinIO 使用預設的<code translate="no">minioadmin</code> 憑證，而<code translate="no">standalone</code> 服務則設定為<code translate="no">security_opt: seccomp:unconfined</code> 。若要限制存取權限、變更憑證，或執行設定與生命週期指令，請參閱《<a href="/docs/zh-hant/install_standalone-docker-compose.md">使用 Docker Compose 執行 Milvus</a>》。</p>
 <h2 id="FAQs" class="common-anchor-header">常見問題<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -251,12 +274,12 @@ docker compose ps
     </button></h3><p>Milvus 使用 Linux 容器。在重新嘗試安裝之前，請檢查 Docker Desktop 及其 WSL 2 後端：</p>
 <ol>
 <li><p>若<strong>「工作管理員</strong>」&gt;「<strong>效能</strong>」顯示硬體虛擬化已停用，請在 BIOS/UEFI 中啟用此功能。請參閱<a href="https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements">Docker Desktop</a> 的<a href="https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements">Windows 系統需求</a>。</p></li>
-<li><p>從 Windows 「開始」選單啟動 Docker Desktop，並等待其引擎運行。安裝或更新 WSL，或使用特定的 Docker Desktop 安裝模式時，可能需要系統管理員權限；但若僅是透過 WSL 2 後端執行 Linux 容器，則通常無需此權限。</p></li>
+<li><p>從 Windows「開始」選單啟動 Docker Desktop，並等待其引擎運行。安裝或更新 WSL，或使用特定的 Docker Desktop 安裝模式時，可能需要系統管理員權限；但若僅是透過 WSL 2 後端執行 Linux 容器，則通常無需此權限。</p></li>
 <li><p>請透過 Windows 終端機檢查 WSL。若需更新，請依照 Windows 要求的權限執行更新指令：</p>
 <pre><code translate="no" class="language-powershell">wsl --version
 wsl --update
 </code></pre></li>
-<li><p>在 Docker Desktop 中啟用<strong>「使用基於 WSL 2 的引擎」</strong>。若 Docker 選單提供「<strong>切換至 Linux 容器</strong>」選項，請點選該選項。請勿切換至 Windows 容器來排除 Milvus Linux 映像檔的故障。</p></li>
+<li><p>在 Docker Desktop 中啟用<strong>「使用基於 WSL 2 的引擎</strong>」。若 Docker 選單提供「<strong>切換至 Linux 容器</strong>」選項，請點選該選項。請勿為排除 Milvus Linux 映像檔的疑難排解而切換至 Windows 容器。</p></li>
 <li><p>在您用於安裝的終端機中執行以下檢查：</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>
@@ -353,15 +376,15 @@ wsl --update
 <li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p>針對 Compose 部署，請參閱《<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立執行版本</a>》；在升級前，請先於您的環境中驗證此程序是否可行。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
-<li><p>在雲端部署您的 Milvus 叢集：</p>
+<li><p>若採用 Compose 部署方式，請參閱《<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立執行版本</a>》；升級前請先在您的環境中驗證此程序是否適用。</p></li>
+<li><p>在 Kubernetes<a href="/docs/zh-hant/scaleout.md">上擴展 Milvus 叢集</a>。該程序使用 Helm，不適用於此 Docker 部署。</p></li>
+<li><p>在雲端平台上部署您的 Milvus 叢集：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh-hant/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI，</a>這是用於 Milvus 可觀察性與管理的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

@@ -66,7 +66,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Skrip tersebut diunduh dari cabang Milvus <code translate="no">master</code>. Tag gambar Docker-nya ditentukan dalam skrip dan dapat berbeda dari v3.0.5. Untuk menginstal rilis tersebut secara tepat, gunakan konfigurasi berversi di <a href="/docs/id/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>.</p>
+<p>Skrip ini diunduh dari cabang Milvus <code translate="no">master</code>. Tag gambar Docker-nya ditentukan dalam skrip dan dapat berbeda dari v3.0.5. Untuk menginstal rilis tersebut secara tepat, gunakan konfigurasi berversi di <a href="/docs/id/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>.</p>
 <p>Deploymen Docker ini menjalankan <strong>Woodpecker</strong> dengan <strong>sistem file lokal</strong> sebagai backend WAL-nya, sehingga tidak diperlukan layanan antrian pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</p>
 <p>Jika Anda ingin menggunakan <a href="/docs/id/milvus_backup_overview.md">Backup</a> dalam mode penyebaran mandiri, disarankan untuk menggunakan metode penyebaran <a href="/docs/id/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p>
@@ -78,11 +78,20 @@ title: Menjalankan Milvus di Docker (Linux)
 <li>Untuk mengubah konfigurasi Milvus default, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>
-<p>Verifikasi gambar aktual dan status kesehatan:</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<p>Perintah ` <code translate="no">start</code> ` menampilkan pesan ` <code translate="no">Wait for Milvus Starting...</code> `, lalu melakukan pemeriksaan setiap detik hingga ` <code translate="no">docker ps</code> ` melaporkan bahwa kontainer dalam kondisi sehat. Pemeriksaan ini tidak memiliki batas waktu. Jika perintah tidak merespons, periksa log kontainer dari terminal lain:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Tunggu hingga status menjadi " <code translate="no">healthy</code> " sebelum melanjutkan ke <a href="/docs/id/quickstart.md">Panduan Cepat</a>. Saat menggunakan server ini, hubungkan SDK ke <code translate="no">http://localhost:19530</code>; sedangkan URI lokal <code translate="no">.db</code> akan menjalankan Milvus Lite.</p>
+<p>Skrip ini menjalankan perintah ` <code translate="no">docker</code> ` dengan ` <code translate="no">sudo</code>`. Setiap ` <code translate="no">start</code> ` terlebih dahulu menjalankan kontainer berumur pendek dari gambar Milvus sebagai ` <code translate="no">root</code>`, yang secara rekursif mengubah pemilik ` <strong>volumes/milvus`</strong> menjadi pengguna ` <code translate="no">milvus</code> ` dari gambar tersebut, kecuali jika berkas penanda ` <code translate="no">.milvus-volume-owner-*</code> ` di folder tersebut menunjukkan bahwa hal ini telah dilakukan sebelumnya. Skrip ini memulai kontainer Milvus dengan ` <code translate="no">--security-opt seccomp:unconfined</code>`, sehingga kontainer berjalan tanpa profil seccomp Docker default.</p>
+<div class="alert warning">
+<blockquote>
+<p>Skrip ini mempublikasikan port <strong>19530</strong>, <strong>9091</strong>, dan <strong>2379</strong> tanpa alamat host, dan ` <strong>embedEtcd.yaml</strong> ` mengatur etcd untuk mendengarkan di <code translate="no">http://0.0.0.0:2379</code>. Docker mempublikasikan port tanpa alamat host di semua alamat host, sehingga mesin lain yang dapat menjangkau host ini juga dapat terhubung ke Milvus dan etcd. Untuk membatasi akses ke host ini, edit opsi ` <code translate="no">-p</code> ` di ` <code translate="no">standalone_embed.sh</code> ` sebelum baris pertama ` <code translate="no">start</code>`, misalnya ` <code translate="no">-p 127.0.0.1:19530:19530</code>`, dan hapus ` <code translate="no">-p 2379:2379</code> ` jika Anda tidak terhubung ke etcd dari luar kontainer. Jika kontainer <code translate="no">milvus-standalone</code> sudah ada, <code translate="no">start</code> akan menjalankannya kembali dengan opsi aslinya. Untuk mengharuskan kredensial pada koneksi Milvus, lihat <a href="/docs/id/authenticate.md">Otentikasi Akses Pengguna</a>.</p>
+</blockquote>
+</div>
+<p>Verifikasi gambar aktual dan status kesehatan:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Tunggu hingga <code translate="no">healthy</code> sebelum mengikuti <a href="/docs/id/quickstart.md">Panduan Cepat</a>. Saat menggunakan server ini, hubungkan SDK ke <code translate="no">http://localhost:19530</code>; URI lokal <code translate="no">.db</code> akan menjalankan Milvus Lite.</p>
 <p>Anda dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opsional) Perbarui konfigurasi Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,8 +209,8 @@ EOF
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
-<li><p>Tinjau pertimbangan peningkatan versi di halaman ini sebelum mengubah versi Milvus.</p></li>
-<li><p><a href="/docs/id/scaleout.md">Skalakan kluster Milvus Anda</a>.</p></li>
+<li><p>Tinjau pertimbangan peningkatan versi pada halaman ini sebelum mengubah versi Milvus.</p></li>
+<li><p><a href="/docs/id/scaleout.md">Skalakan kluster Milvus</a> di Kubernetes. Prosedur tersebut menggunakan Helm dan tidak berlaku untuk penyebaran Docker ini.</p></li>
 <li><p>Terapkan kluster Milvus Anda di cloud:</p>
 <ul>
 <li><a href="/docs/id/eks.md">Amazon EKS</a></li>

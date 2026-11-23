@@ -54,10 +54,10 @@ title: Guida rapida
         ></path>
       </svg>
     </button></h3><p>Questa guida utilizza Milvus Lite, una dipendenza opzionale dell’SDK Python PyMilvus che viene eseguita localmente. Per una distribuzione su server, consulta <a href="/docs/it/install_standalone-docker.md">Docker</a> o <a href="/docs/it/install_cluster-milvusoperator.md">Kubernetes</a>.</p>
-<p>Utilizza Python 3.10 o versioni successive su macOS, Linux o Windows, con i file wheel binari disponibili per le dipendenze di Milvus Lite, quali <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code>. Gli esempi utilizzano PyMilvus 3.0.2 e Milvus Lite 3.2.2. Installa entrambi i pacchetti in modo esplicito:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<p>Utilizza Python 3.10 o versioni successive su macOS, Linux o Windows, con i file wheel binari disponibili per le dipendenze di Milvus Lite, quali <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code>. Gli esempi utilizzano PyMilvus 3.0.3 e Milvus Lite 3.2.2. Installa entrambi i pacchetti in modo esplicito:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Su Windows, pip ignora il pacchetto aggiuntivo <code translate="no">milvus-lite</code> di PyMilvus 3.0.2; il comando sopra riportato specifica esplicitamente <code translate="no">milvus-lite</code>, quindi il percorso locale funziona anche in questo caso. Per i requisiti di installazione relativi esclusivamente all’SDK, consultare <a href="/docs/it/install-pymilvus.md">Installare l’SDK Python di Milvus</a>.</p>
+<p>Su Windows, pip ignora il file aggiuntivo <code translate="no">milvus-lite</code> di PyMilvus 3.0.3; il comando sopra riportato indica esplicitamente <code translate="no">milvus-lite</code>, quindi il percorso locale funziona anche in questo caso. Per i requisiti di installazione relativi esclusivamente all’SDK, consultare <a href="/docs/it/install-pymilvus.md">Installare l’SDK Python di Milvus</a>.</p>
 <div class="alert note">
 <blockquote>
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu “Runtime” nella parte superiore dello schermo e selezionare “Riavvia sessione” dal menu a discesa).</p>
@@ -78,8 +78,8 @@ title: Guida rapida
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se avete già installato Milvus con Docker o Kubernetes, oppure disponete di un endpoint Zilliz Cloud, installate solo l’SDK. PyMilvus 3.0.2 richiede Python 3.9 o versioni successive; per questo percorso non è necessaria la dipendenza locale Lite:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+    </button></h3><p>Se avete già installato Milvus con Docker o Kubernetes, oppure disponete di un endpoint Zilliz Cloud, installate solo l’SDK. PyMilvus 3.0.3 richiede Python 3.9 o versioni successive; per questo percorso non è necessaria la dipendenza locale Lite:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Utilizza il blocco di connessione al server nella sezione successiva invece di aprire un percorso <code translate="no">.db</code>. Verifica che la versione dell’SDK sia compatibile con il tuo server; consulta <a href="/docs/it/release_notes.md">le Note di rilascio</a>.</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurazione del database vettoriale<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -168,7 +168,7 @@ client.create_collection(
 <li>la chiave primaria e i campi vettoriali utilizzano i nomi predefiniti (“id” e “vector”).</li>
 <li>Il tipo di metrica (definizione della distanza vettoriale) è impostato sul valore predefinito (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
 <li>Il campo della chiave primaria accetta numeri interi e non viene incrementato automaticamente (ovvero, non utilizza <a href="https://milvus.io/docs/schema.md">la funzione auto-id</a>).
-In alternativa, è possibile definire formalmente lo schema della collezione seguendo queste <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">istruzioni</a>.</li>
+In alternativa, è possibile definire formalmente lo schema della collezione seguendo queste <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/create_schema.md">istruzioni</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Preparazione dei dati<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,7 +202,7 @@ In alternativa, è possibile definire formalmente lo schema della collezione seg
         ></path>
       </svg>
     </button></h2><p>Per prima cosa, installare la libreria dei modelli. Questo pacchetto include strumenti essenziali per l’apprendimento automatico (ML) come PyTorch. Il download del pacchetto potrebbe richiedere un po’ di tempo se PyTorch non è mai stato installato nell’ambiente locale.</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Generare embedding vettoriali con il modello predefinito. Milvus richiede che i dati vengano inseriti organizzati come un elenco di dizionari, in cui ogni dizionario rappresenta un record di dati, denominato entità.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -467,7 +467,7 @@ res = client.delete(
 <pre><code translate="no">[<span class="hljs-meta">0, 2</span>]
 [<span class="hljs-meta">3, 4, 5</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Existing-Data" class="common-anchor-header">Caricamento dei dati esistenti<button data-href="#Load-Existing-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Existing-Data" class="common-anchor-header">Caricare dati esistenti<button data-href="#Load-Existing-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -529,7 +529,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <li>Progettare campi e filtri per i propri dati con <a href="/docs/it/schema-hands-on.md">Data Model Design for Search</a>.</li>
 <li>Confronta i requisiti locali e quelli del server con <a href="/docs/it/install-overview.md">le opzioni di distribuzione di Milvus</a>.</li>
 </ul>
-<p>Milvus Lite è l'ideale per muovere i primi passi con un programma Python locale. Se disponi di dati su larga scala o desideri utilizzare Milvus in produzione, puoi scoprire come distribuire Milvus su <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Tutte le modalità di distribuzione di Milvus condividono la stessa API, quindi il codice lato client non richiede modifiche significative in caso di passaggio a un’altra modalità di distribuzione. È sufficiente specificare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">l’URI e il token</a> di un server Milvus distribuito ovunque:</p>
+<p>Milvus Lite è l'ideale per muovere i primi passi con un programma Python locale. Se disponi di dati su larga scala o desideri utilizzare Milvus in produzione, puoi scoprire come distribuire Milvus su <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Tutte le modalità di distribuzione di Milvus condividono la stessa API, quindi il codice lato client non richiede modifiche significative in caso di passaggio a un’altra modalità di distribuzione. È sufficiente specificare <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Client/MilvusClient.md">l’URI e il token</a> di un server Milvus distribuito ovunque:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Per migrare i dati da Milvus Lite a Milvus distribuito su Docker o Kubernetes, consultare la guida <a href="/docs/it/milvus_lite.md#Migrating-data-from-Milvus-Lite">alla migrazione dei dati da Milvus Lite</a>.</p>
@@ -551,4 +551,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
         ></path>
       </svg>
     </button></h2><p>Se si utilizzano assistenti di codifica basati sull’IA come Claude Code o Cursor, è possibile installare <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> per aiutare i propri strumenti di IA a scrivere codice Milvus corretto.</p>
-<p>Per ulteriori strumenti per gli agenti, inclusi i server MCP e i prompt curati, consultare <a href="/docs/it/milvus_for_agents.md">Milvus per gli agenti IA</a>.</p>
+<p>Per ulteriori strumenti per gli agenti, inclusi i server MCP e i prompt curati, consultare <a href="/docs/it/milvus_for_agents.md">Milvus per agenti IA</a>.</p>

@@ -78,12 +78,21 @@ title: Milvus in Docker ausführen (Linux)
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen zur Datei <strong>„user.yaml“</strong> im aktuellen Ordner hinzu und starten Sie den Dienst anschließend neu.</li>
 <li>Das Milvus-Datenvolume ist auf <strong>„volumes/milvus“</strong> im aktuellen Ordner abgebildet.</li>
 </ul>
+<p>Der Befehl „ <code translate="no">start</code> “ gibt „ <code translate="no">Wait for Milvus Starting...</code> “ aus und führt anschließend einmal pro Sekunde eine Überprüfung durch, bis „ <code translate="no">docker ps</code> “ den Container als fehlerfrei meldet. Diese Überprüfung unterliegt keiner zeitlichen Begrenzung. Falls der Befehl keine Rückmeldung liefert, überprüfen Sie die Container-Protokolle über ein anderes Terminal:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Das Skript führt seine „ <code translate="no">docker</code> “-Befehle mit „ <code translate="no">sudo</code> “ aus. Bei jedem „ <code translate="no">start</code> “ wird zunächst ein kurzlebiger Container aus dem Milvus-Image als „ <code translate="no">root</code> “ gestartet, der rekursiv den Eigentümer von <strong>„volumes/milvus“</strong> auf den Benutzer „ <code translate="no">milvus</code> “ des Images ändert, sofern nicht eine Markierungsdatei „ <code translate="no">.milvus-volume-owner-*</code> “ in diesem Ordner anzeigt, dass dies bereits geschehen ist. Das Skript startet den Milvus-Container mit „ <code translate="no">--security-opt seccomp:unconfined</code> “, sodass der Container ohne das standardmäßige Docker-Seccomp-Profil läuft.</p>
+<div class="alert warning">
+<blockquote>
+<p>Das Skript veröffentlicht die Ports <strong>19530</strong>, <strong>9091</strong> und <strong>2379</strong> ohne Host-Adresse, und <strong>„embedEtcd.yaml“</strong> konfiguriert etcd so, dass es auf <code translate="no">http://0.0.0.0:2379</code> lauscht. Docker veröffentlicht einen Port ohne Hostadresse auf allen Hostadressen, sodass andere Rechner, die diesen Host erreichen können, ebenfalls eine Verbindung zu Milvus und etcd herstellen können. Um den Zugriff auf diesen Host einzuschränken, bearbeiten Sie die Optionen „ <code translate="no">-p</code> “ in der Datei „ <code translate="no">standalone_embed.sh</code> “ vor dem ersten „ <code translate="no">start</code> “, beispielsweise auf „ <code translate="no">-p 127.0.0.1:19530:19530</code> “, und entfernen Sie „ <code translate="no">-p 2379:2379</code> “, wenn Sie keine Verbindung zu etcd von außerhalb des Containers herstellen. Falls bereits ein „ <code translate="no">milvus-standalone</code> “-Container vorhanden ist, startet „ <code translate="no">start</code> “ diesen erneut mit seinen ursprünglichen Optionen. Informationen dazu, wie Sie Anmeldeinformationen für Milvus-Verbindungen erforderlich machen können, finden Sie unter <a href="/docs/de/authenticate.md">„Authentifizierung des Benutzerzugriffs</a>“.</p>
+</blockquote>
+</div>
 <p>Überprüfen Sie das aktuelle Image und den Betriebszustand:</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Warten Sie, bis „ <code translate="no">healthy</code> “ angezeigt wird, bevor Sie mit <a href="/docs/de/quickstart.md">dem Schnellstart</a> fortfahren. Wenn Sie diesen Server verwenden, verbinden Sie das SDK mit <code translate="no">http://localhost:19530</code>; eine lokale URI <code translate="no">.db</code> startet stattdessen Milvus Lite.</p>
-<p>Sie können über <code translate="no">http://127.0.0.1:9091/webui/</code> auf die Milvus-WebUI zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Weitere Informationen finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus-WebUI</a>.</p>
+<p>Sie können über <code translate="no">http://127.0.0.1:9091/webui/</code> auf die Milvus-WebUI zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Weitere Informationen finden Sie unter <a href="/docs/de/milvus-webui.md">„Milvus-WebUI</a>“.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +173,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standardmäßig verwendet diese Bereitstellung <strong>Woodpecker</strong> (WAL im lokalen Dateisystem) als Nachrichtenwarteschlange und ein <strong>eingebettetes etcd</strong> für Metadaten – es muss nichts weiter installiert werden. Informationen zur Verwendung einer anderen Nachrichtenwarteschlange oder zur Anbindung eines externen Objektspeichers bzw. von Metadaten finden Sie hier:</p>
+    </button></h2><p>Standardmäßig verwendet diese Bereitstellung <strong>Woodpecker</strong> (WAL im lokalen Dateisystem) als Nachrichtenwarteschlange und ein <strong>eingebettetes etcd</strong> für Metadaten – es muss nichts weiter installiert werden. Um eine andere Nachrichtenwarteschlange zu verwenden oder einen externen Objektspeicher bzw. Metadaten anzubinden, siehe:</p>
 <ul>
 <li>Nachrichtenwarteschlange: <a href="/docs/de/woodpecker.md">Woodpecker</a> (Standard) · <a href="/docs/de/mq_pulsar.md">Pulsar</a> · <a href="/docs/de/mq_kafka.md">Kafka</a> · <a href="/docs/de/mq_rocksmq.md">RocksMQ</a></li>
 <li>Objektspeicher: <a href="/docs/de/deploy_s3.md">MinIO</a> (Standard) · <a href="/docs/de/deploy_s3.md">AWS S3</a> · <a href="/docs/de/abs.md">Azure Blob</a> · <a href="/docs/de/gcs.md">GCP Cloud Storage</a> · <a href="/docs/de/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/de/deploy_s3.md">Tencent COS</a> · <a href="/docs/de/deploy_s3.md">Huawei OBS</a> · <a href="/docs/de/deploy_s3.md">S3-kompatibel</a></li>
@@ -201,7 +210,7 @@ EOF
 <li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
 </ul></li>
 <li><p>Lesen Sie die Hinweise zum Upgrade auf dieser Seite, bevor Sie die Milvus-Version ändern.</p></li>
-<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p><a href="/docs/de/scaleout.md">Skalieren Sie einen Milvus-Cluster</a> auf Kubernetes. Dieses Verfahren nutzt Helm und gilt nicht für diese Docker-Bereitstellung.</p></li>
 <li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
 <ul>
 <li><a href="/docs/de/eks.md">Amazon EKS</a></li>

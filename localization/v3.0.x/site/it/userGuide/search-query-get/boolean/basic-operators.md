@@ -121,7 +121,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per trovare le entità in cui <code translate="no">status</code> non è "inactive":</p>
+    </button></h3><p>Per trovare le entità in cui <code translate="no">status</code> non è "inattivo":</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -604,7 +604,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Gli operatori bit a bit sono utili quando un campo intero codifica più flag, come permessi, flag di funzionalità o bit di stato. È possibile utilizzare questi operatori nelle espressioni di filtro per verificare, combinare o confrontare singoli bit in un valore intero.</p>
-<p>Per i campi scalari, gli operatori bit a bit si applicano ai tipi di campo interi, come <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> e <code translate="no">INT64</code>.</p>
+<p>Per i campi scalari, gli operatori bit a bit si applicano ai tipi di campo interi, quali <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> e <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Operatori bit a bit supportati<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -712,7 +712,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per individuare le entità i cui bit di autorizzazione differiscono da " <code translate="no">READ + WRITE + SHARE</code> " solo per il bit " <code translate="no">WRITE</code> ", utilizzare l'operazione XOR a livello di bit (<code translate="no">^</code>):</p>
+<p>Per individuare le entità i cui bit di autorizzazione differiscono da " <code translate="no">READ + WRITE + SHARE</code> " solo per il bit " <code translate="no">WRITE</code> ", utilizzare l'operazione XOR bit a bit (<code translate="no">^</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -935,7 +935,8 @@ summary: >-
 <p>I campi scalari supportati includono i campi booleani, numerici, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> e <code translate="no">ARRAY</code>. Questi operatori non supportano <a href="/docs/it/text.md">i campi TEXT</a>.</p>
 <p>A partire da Milvus 3.0.3, gli operatori supportano anche i campi vettoriali ordinari: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> e <code translate="no">INT8_VECTOR</code>.</p>
 <p>Gli operatori non distinguono tra maiuscole e minuscole: <code translate="no">IS NULL</code> e <code translate="no">is null</code> sono equivalenti, così come <code translate="no">IS NOT NULL</code> e <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Esempio: ricerca di entità con valori mancanti o disponibili<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Esempio: ricerca di entità con vettori mancanti<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si supponga che una collezione denominata <code translate="no">products</code> sia indicizzata e caricata su Milvus 3.0.3 o versioni successive. La collezione presenta una chiave primaria <code translate="no">INT64</code> denominata <code translate="no">id</code>, un campo <code translate="no">VARCHAR</code> nullabile denominato <code translate="no">category</code> e un campo <code translate="no">FLOAT_VECTOR</code> tridimensionale e nullabile denominato <code translate="no">embedding</code>. Contiene già le seguenti entità:</p>
+    </button></h3><p>Supponiamo di aggiungere prodotti a una collezione prima di generare i relativi vettori. In questo esempio, la collezione <code translate="no">products</code> è indicizzata e caricata. Presenta una chiave primaria <code translate="no">INT64</code> denominata <code translate="no">id</code>, un campo <code translate="no">VARCHAR</code> nullabile denominato <code translate="no">category</code> e un campo <code translate="no">FLOAT_VECTOR</code> tridimensionale e nullabile denominato <code translate="no">embedding</code>. La tabella seguente mostra quali prodotti dispongono di un vettore.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -962,7 +963,7 @@ summary: >-
 </tbody>
 </table>
 <p>La creazione della raccolta e l’inserimento dei dati sono stati omessi. Per tali passaggi, consultare <a href="/docs/it/nullable-and-default.md">Campi nullabili</a>.</p>
-<p>Per individuare le entità che necessitano ancora di un'incorporazione, eseguire una query per <code translate="no">embedding IS NULL</code>. Modificare le impostazioni di connessione in base al proprio server.</p>
+<p>Per individuare i prodotti che necessitano ancora di un vettore, chiamare <code translate="no">query()</code> con il filtro <code translate="no">embedding IS NULL</code>. Sostituire <code translate="no">embedding</code> con il nome del proprio campo vettore e adattare le impostazioni di connessione al proprio server. In questo esempio, la query restituisce l’ID <code translate="no">3</code> poiché il vettore di quel prodotto è NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1134,7 +1135,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sostituire <code translate="no">filter</code> nella stessa query per verificare un campo specifico o combinare più condizioni:</p>
+<p>Sostituisci l’ <code translate="no">filter</code> e nella stessa query per verificare un campo o combinare più condizioni:</p>
 <table>
 <thead>
 <tr><th>Espressione di filtro</th><th>ID corrispondenti</th><th>Scopo</th></tr>
@@ -1147,6 +1148,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Trova entità con entrambi i valori</td></tr>
 </tbody>
 </table>
+<p>Se ogni prodotto ha diversi chunk e ogni chunk memorizza il proprio vettore, usa un <a href="/docs/it/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">filtro StructArray per trovare i prodotti con un vettore di chunk mancante</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1165,7 +1167,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gli operatori verificano il valore del campo memorizzato. Per un campo nullabile senza valore predefinito, omettendo il campo durante l’inserimento o impostandolo esplicitamente su NULL, viene memorizzato NULL. Un valore predefinito configurato può modificare ciò che viene memorizzato. Per ulteriori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Campi nullabili</a> e <a href="/docs/it/default-values.md">valori predefiniti</a>.</p>
+    </button></h3><p>Gli operatori verificano il valore del campo memorizzato. Per un campo nullabile senza valore predefinito, omettendo il campo durante l’inserimento o impostandolo esplicitamente su NULL, viene memorizzato NULL. Un valore predefinito configurato può modificare ciò che viene memorizzato. Per i dettagli, vedere <a href="/docs/it/nullable-and-default.md">Campi nullabili</a> e <a href="/docs/it/default-values.md">valori predefiniti</a>.</p>
 <table>
 <thead>
 <tr><th>Tipo di campo</th><th>Comportamento di NULL</th></tr>
@@ -1197,7 +1199,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
         ></path>
       </svg>
     </button></h3><p>Gli stessi operatori possono essere utilizzati nei filtri di ricerca, ma affinché un’entità partecipi alla ricerca per somiglianza è necessario che nel campo oggetto della ricerca sia presente anche un vettore.</p>
-<p>Utilizzando i dati di esempio sopra riportati, si consideri una ricerca con <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
+<p>Utilizzando i dati di esempio sopra riportati, si consideri una ricerca con ` <code translate="no">anns_field=&quot;embedding&quot;</code>`:</p>
 <table>
 <thead>
 <tr><th>Espressione di filtro</th><th>Entità idonee alla ricerca per somiglianza</th><th>Motivo</th></tr>
@@ -1208,7 +1210,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td><code translate="no">embedding</code> Entrambe le entità dispongono di un vettore .</td></tr>
 </tbody>
 </table>
-<p>Per recuperare gli embedding mancanti, utilizzare <code translate="no">query()</code>; una ricerca su <code translate="no">embedding</code> con <code translate="no">embedding IS NULL</code> è valida ma non restituisce alcun risultato. La ricerca vettoriale salta già gli embedding NULL, quindi <code translate="no">embedding IS NOT NULL</code> non restringe ulteriormente i candidati. Il ranking, gli altri filtri e il limite di ricerca determinano comunque i risultati restituiti.</p>
+<p>Per recuperare gli embedding mancanti, utilizzare <code translate="no">query()</code>; una ricerca su <code translate="no">embedding</code> con <code translate="no">embedding IS NULL</code> è valida ma non restituisce risultati. La ricerca vettoriale salta già gli embedding NULL, quindi <code translate="no">embedding IS NOT NULL</code> non restringe ulteriormente i candidati. Il ranking, gli altri filtri e il limite di ricerca determinano comunque i risultati restituiti.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Suggerimenti sull’uso degli operatori di base con i campi JSON e ARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1295,5 +1297,5 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
         ></path>
       </svg>
     </button></h2><p><strong>Esiste un limite alla lunghezza dell’elenco dei valori di corrispondenza nelle condizioni di filtro (ad es., filter=’color in ["red", "green", “blue”]')? Cosa devo fare se l’elenco è troppo lungo?</strong></p>
-<p>Milvus non impone un limite di lunghezza all’elenco dei valori di corrispondenza nelle condizioni di filtro. Tuttavia, un elenco eccessivamente lungo può influire in modo significativo sulle prestazioni della query.
-Se la condizione di filtro include un lungo elenco di valori di corrispondenza o un’espressione complessa con molti elementi, si consiglia di utilizzare <a href="/docs/it/filtering-templating.md">i modelli di filtro (Filter Templating)</a> per migliorare le prestazioni della query.</p>
+<p>Milvus non impone un limite di lunghezza all’elenco dei valori di corrispondenza nelle condizioni di filtro. Tuttavia, un elenco eccessivamente lungo può influire in modo significativo sulle prestazioni delle query.
+Se la condizione di filtro include un lungo elenco di valori di corrispondenza o un’espressione complessa con molti elementi, si consiglia di utilizzare <a href="/docs/it/filtering-templating.md">i modelli di filtro (Filter Templating)</a> per migliorare le prestazioni delle query.</p>

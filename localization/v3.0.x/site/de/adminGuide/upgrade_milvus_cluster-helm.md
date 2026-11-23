@@ -89,7 +89,8 @@ title: Milvus-Cluster mit Helm-Chart aktualisieren
     </button></h3><p>Speichern Sie die vollständigen Werte der aktuellen Version und überprüfen Sie die laufenden Pods:</p>
 <pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
   --namespace &lt;namespace&gt; \
-  --all &gt; milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>

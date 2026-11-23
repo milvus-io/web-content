@@ -1,7 +1,7 @@
 ---
 id: quickstart_with_attu.md
 summary: >-
-  Utiliza Attu Desktop y Python para crear una colección en Milvus, introducir
+  Utiliza Attu Desktop y Python para crear una colección de Milvus, insertar
   representaciones de texto e inspeccionar los resultados de la búsqueda
   vectorial.
 title: 'Guía de inicio rápido con Attu: la interfaz de usuario web de Milvus'
@@ -56,10 +56,10 @@ title: 'Guía de inicio rápido con Attu: la interfaz de usuario web de Milvus'
     </button></h2><p>Antes de empezar, prepara lo siguiente:</p>
 <ul>
 <li>Un servidor Milvus en funcionamiento al que puedan acceder tanto Attu como tu entorno de Python. Este tutorial utiliza Milvus Standalone, disponible en <code translate="no">http://localhost:19530</code>, y no un archivo local de Milvus Lite <code translate="no">.db</code>.</li>
-<li>Una versión de Attu compatible con su servidor. Attu 3.0 es compatible con Milvus 2.6.0 y versiones posteriores, incluido Milvus 3.x; consulte la <a href="https://github.com/zilliztech/attu#compatibility">tabla de compatibilidad</a> para servidores más antiguos.</li>
-<li>Un entorno de Python con una versión de PyMilvus compatible con tu servidor. Consulta <a href="/docs/es/install-pymilvus.md">«Instalar el SDK de Python de Milvus</a> » y <a href="/docs/es/release_notes.md">las «Notas de la versión</a>». Para la versión del SDK utilizada en esta rama de documentación, instala las dependencias «model extra» y «progress-bar»:</li>
+<li>Una versión de Attu compatible con su servidor. Attu 3.0 es compatible con Milvus 2.6.0 y versiones posteriores, incluido Milvus 3.x; utilice la <a href="https://github.com/zilliztech/attu#compatibility">tabla de compatibilidad</a> para servidores más antiguos.</li>
+<li>Un entorno de Python con una versión de PyMilvus compatible con su servidor. Consulte <a href="/docs/es/install-pymilvus.md">«Instalar el SDK de Python de Milvus</a> » y <a href="/docs/es/release_notes.md">las «Notas de la versión</a>». Para la versión del SDK utilizada en esta rama de documentación, instale las dependencias «model extra» y «progress-bar»:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>Los pasos de preparación de datos también utilizan <code translate="no">wget</code> y <code translate="no">unzip</code>. La función de incrustación descarga su modelo la primera vez que se utiliza, por lo que debe permitir el acceso a la red al servidor del modelo o preparar la caché del modelo con antelación. Las capturas de pantalla ilustran el flujo de trabajo; las etiquetas y los diseños pueden variar entre las distintas versiones de Attu.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Instalar la aplicación de escritorio<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -127,7 +127,7 @@ title: 'Guía de inicio rápido con Attu: la interfaz de usuario web de Milvus'
 <li>Haz clic en «Conectar» para acceder a tu base de datos.</li>
 </ol>
 <blockquote>
-<p>También puedes conectarte al Milvus totalmente gestionado en <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Solo tienes que configurar « <code translate="no">Milvus Address</code> » y « <code translate="no">token</code> » con el <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">punto de conexión público y la clave API</a> de tu instancia de Zilliz Cloud.</p>
+<p>También puedes conectarte a Milvus totalmente gestionado en <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Solo tienes que configurar « <code translate="no">Milvus Address</code> » y « <code translate="no">token</code> » con el <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">punto de conexión público y la clave API</a> de tu instancia de Zilliz Cloud.</p>
 </blockquote>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_login_page.png" alt="Attu Login Page" width="80%">

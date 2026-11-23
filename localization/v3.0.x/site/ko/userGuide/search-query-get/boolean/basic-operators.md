@@ -375,7 +375,7 @@ summary: >-
       </svg>
     </button></h2><p>패턴 매칭 연산자는 와일드카드 패턴이나 정규식을 기반으로 문자열 값을 필터링하는 데 도움이 됩니다.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: 문자열 값에 대한 간단한 와일드카드 패턴을 일치시키는 데 사용됩니다. 예를 들어, ` <code translate="no">name LIKE &quot;Prod%&quot;</code> `는 ` <code translate="no">Prod</code>`로 시작하는 값과 일치합니다.</p></li>
+<li><p><code translate="no">LIKE</code>: 문자열 값에 대한 간단한 와일드카드 패턴과 일치시키는 데 사용됩니다. 예를 들어, ` <code translate="no">name LIKE &quot;Prod%&quot;</code> `는 ` <code translate="no">Prod</code>`로 시작하는 값과 일치합니다.</p></li>
 <li><p><code translate="no">=~</code>: RE2 정규 표현식과 일치하는 문자열 값을 찾는 데 사용됩니다. 예를 들어, ` <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> `는 ` <code translate="no">E1001</code>`와 같은 오류 코드가 포함된 값과 일치합니다.</p></li>
 <li><p><code translate="no">!~</code>: RE2 정규 표현식과 일치하는 문자열 값을 제외하는 데 사용됩니다. 이는 <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> 과 동일합니다.</p></li>
 </ul>
@@ -460,7 +460,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>구문, 이스케이프 처리, 필드 지원 및 <code translate="no">NGRAM</code> 과 같은 가속화 옵션에 대해서는 <a href="/docs/ko/pattern-matching.md">패턴 매칭을</a> 참조하십시오.</p>
+<p>구문, 이스케이프 처리, 필드 지원 및 ` <code translate="no">NGRAM</code>`과 같은 가속화 옵션에 대해서는 <a href="/docs/ko/pattern-matching.md">패턴 매칭을</a> 참조하십시오.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">산술 연산자<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -585,7 +585,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>산술 연산자는 <strong>단일 필드와 상수가</strong> 포함된 표현식만 지원합니다. <code translate="no">price * quantity &gt; 100</code> 과 같이 두 필드를 산술적으로 결합한 표현식은 현재 지원되지 않으며 오류가 발생합니다. 여러 필드에서 계산된 파생 값을 기준으로 필터링해야 하는 경우, 삽입 시점에 미리 계산된 값을 별도의 스칼라 필드로 저장하는 방법을 고려해 보십시오.</p>
+<p>산술 연산자는 <strong>단일 필드와 상수만</strong> 포함된 표현식만 지원합니다. <code translate="no">price * quantity &gt; 100</code> 과 같이 두 필드를 산술적으로 결합한 표현식은 현재 지원되지 않으며 오류가 발생합니다. 여러 필드에서 계산된 파생 값을 기준으로 필터링해야 하는 경우, 삽입 시점에 미리 계산된 값을 별도의 스칼라 필드로 저장하는 방법을 고려해 보십시오.</p>
 </div>
 <h2 id="Bitwise-operators" class="common-anchor-header">비트 연산자<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -933,8 +933,9 @@ summary: >-
 </table>
 <p>지원되는 스칼라 필드에는 Boolean, numeric, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> 및 <code translate="no">ARRAY</code> 필드가 포함됩니다. 이 연산자들은 <a href="/docs/ko/text.md">TEXT 필드를</a> 지원하지 않습니다.</p>
 <p>Milvus 3.0.3부터 이 연산자는 일반 벡터 필드도 지원합니다: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> 및 <code translate="no">INT8_VECTOR</code>.</p>
-<p>연산자는 대소문자를 구분하지 않습니다. 즉, <code translate="no">IS NULL</code> 과 <code translate="no">is null</code> 은 동일하며, <code translate="no">IS NOT NULL</code> 과 <code translate="no">is not null</code> 도 동일합니다.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">예시: 값이 누락되었거나 존재하는 엔티티 찾기<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p>연산자는 대소문자를 구분하지 않습니다. 즉, <code translate="no">IS NULL</code> 과 <code translate="no">is null</code> 은 동일하며, <code translate="no">IS NOT NULL</code> 과 <code translate="no">is not null</code> 도 마찬가지입니다.</p>
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">예제: 벡터가 누락된 엔티티 찾기<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -949,7 +950,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">products</code> 라는 이름의 컬렉션이 Milvus 3.0.3 이상 버전에 인덱싱되어 로드되어 있다고 가정합니다. 이 컬렉션에는 <code translate="no">id</code> 라는 이름의 <code translate="no">INT64</code> 기본 키, <code translate="no">category</code> 라는 이름의 null 허용 <code translate="no">VARCHAR</code> 필드, 그리고 <code translate="no">embedding</code> 라는 이름의 null 허용 3차원 <code translate="no">FLOAT_VECTOR</code> 필드가 있습니다. 이 컬렉션에는 이미 다음과 같은 엔티티가 포함되어 있습니다:</p>
+    </button></h3><p>벡터를 생성하기 전에 컬렉션에 제품을 추가한다고 가정해 보겠습니다. 이 예제에서는 <code translate="no">products</code> 컬렉션이 인덱싱되고 로드되어 있습니다. 이 컬렉션에는 <code translate="no">id</code> 라는 <code translate="no">INT64</code> 기본 키, <code translate="no">category</code> 라는 null 허용 <code translate="no">VARCHAR</code> 필드, 그리고 <code translate="no">embedding</code> 라는 null 허용 3차원 <code translate="no">FLOAT_VECTOR</code> 필드가 있습니다. 다음 표는 벡터가 있는 제품을 보여줍니다.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -961,7 +962,7 @@ summary: >-
 </tbody>
 </table>
 <p>컬렉션 생성 및 데이터 삽입 과정은 생략되었습니다. 해당 단계에 대해서는 <a href="/docs/ko/nullable-and-default.md">‘Nullable Fields’를</a> 참조하십시오.</p>
-<p>아직 임베딩이 필요한 엔티티를 찾으려면 ` <code translate="no">embedding IS NULL</code>`을 쿼리하십시오. 서버에 맞게 연결 설정을 조정하십시오.</p>
+<p>아직 벡터가 필요한 제품을 찾으려면 <code translate="no">embedding IS NULL</code> 필터를 사용하여 <code translate="no">query()</code> 를 호출하십시오. <code translate="no">embedding</code> 을 사용자의 벡터 필드 이름으로 바꾸고 서버에 맞게 연결 설정을 조정하십시오. 이 예제에서 쿼리는 해당 제품의 벡터가 NULL이므로 ID <code translate="no">3</code> 을 반환합니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1133,7 +1134,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>동일한 쿼리에서 ` <code translate="no">filter</code> `을 대체하여 특정 필드를 확인하거나 조건을 결합할 수 있습니다:</p>
+<p>동일한 쿼리에서 <code translate="no">filter</code> 을 대체하여 필드를 확인하거나 조건을 결합해 보세요:</p>
 <table>
 <thead>
 <tr><th>필터 표현식</th><th>일치하는 ID</th><th>목적</th></tr>
@@ -1146,6 +1147,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>두 값을 모두 가진 엔티티 찾기</td></tr>
 </tbody>
 </table>
+<p>각 상품에 여러 청크가 있고 각 청크가 자체 벡터를 저장하는 경우, <a href="/docs/ko/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">StructArray 필터를</a> 사용하여 <a href="/docs/ko/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">청크 벡터가 누락된 상품을 찾으십시오</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1164,7 +1166,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>연산자는 저장된 필드 값을 확인합니다. 기본값이 없는 null 허용 필드의 경우, 삽입 시 해당 필드를 생략하거나 명시적으로 NULL로 설정하면 NULL이 저장됩니다. 구성된 기본값에 따라 저장되는 값이 달라질 수 있습니다. 자세한 내용은 <a href="/docs/ko/default-values.md">'null 허용</a> <a href="/docs/ko/nullable-and-default.md">필드</a> 및 <a href="/docs/ko/default-values.md">기본값'을</a> 참조하십시오.</p>
+    </button></h3><p>연산자는 저장된 필드 값을 확인합니다. 기본값이 없는 null 허용 필드의 경우, 삽입 시 필드를 생략하거나 명시적으로 NULL로 설정하면 NULL이 저장됩니다. 구성된 기본값에 따라 저장되는 값이 달라질 수 있습니다. 자세한 내용은 <a href="/docs/ko/default-values.md">‘null 허용</a> <a href="/docs/ko/nullable-and-default.md">필드</a> 및 <a href="/docs/ko/default-values.md">기본값’을</a> 참조하십시오.</p>
 <table>
 <thead>
 <tr><th>필드 유형</th><th>NULL 처리 방식</th></tr>
@@ -1172,7 +1174,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>빈 문자열 <code translate="no">&quot;&quot;</code> 은 NULL이 아닌 값입니다.</td></tr>
 <tr><td><code translate="no">JSON</code></td><td>전체 필드의 NULL 값은 <code translate="no">IS NULL</code> 과 일치합니다. <code translate="no">{&quot;category&quot;: null}</code> 와 같은 JSON 객체는 내부 값이 NULL이라 하더라도 NULL이 아닙니다.</td></tr>
-<tr><td><code translate="no">ARRAY</code></td><td>전체 필드의 NULL 값은 <code translate="no">IS NULL</code> 과 일치합니다. 개별 요소는 NULL일 수 없으며, <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> 은 <code translate="no">tags[0]</code> 과 같은 배열 요소 액세스를 지원하지 않습니다. <a href="/docs/ko/array_data_type.md">배열 필드를</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>전체 필드의 NULL 값은 <code translate="no">IS NULL</code> 과 일치합니다. 개별 요소는 NULL일 수 없으며, <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> 은 <code translate="no">tags[0]</code> 와 같은 배열 요소 액세스를 지원하지 않습니다. <a href="/docs/ko/array_data_type.md">배열 필드를</a> 참조하십시오.</td></tr>
 <tr><td>일반 벡터 유형</td><td>NULL은 벡터 값이 존재하지 않음을 의미합니다. 성분이 모두 0인 벡터는 NULL이 아닙니다.</td></tr>
 </tbody>
 </table>
@@ -1195,7 +1197,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>검색 필터에서도 동일한 연산자를 사용할 수 있지만, 유사도 검색에 참여하려면 엔티티가 검색 대상 필드에 벡터를 포함하고 있어야 합니다.</p>
+    </button></h3><p>검색 필터에서도 동일한 연산자를 사용할 수 있지만, 유사도 검색에 참여하려면 엔티티가 검색 대상 필드에 벡터를 가지고 있어야 합니다.</p>
 <p>위의 예제 데이터를 사용하여 <code translate="no">anns_field=&quot;embedding&quot;</code> 을 포함한 검색을 고려해 보겠습니다:</p>
 <table>
 <thead>
@@ -1207,7 +1209,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>두 엔티티 모두 <code translate="no">embedding</code> 벡터를 가지고 있습니다.</td></tr>
 </tbody>
 </table>
-<p>누락된 임베딩을 검색하려면 ` <code translate="no">query()</code>`을 사용하십시오. ` <code translate="no">embedding</code> `에서 ` <code translate="no">embedding IS NULL</code> `을 사용하여 검색하는 것은 유효하지만, 일치하는 결과가 반환되지 않습니다. 벡터 검색은 이미 NULL 임베딩을 건너뛰므로, ` <code translate="no">embedding IS NOT NULL</code> `은 후보를 더 좁히지 않습니다. 순위, 기타 필터 및 검색 제한에 따라 반환되는 결과가 결정됩니다.</p>
+<p>누락된 임베딩을 검색하려면 <code translate="no">query()</code> 를 사용하십시오. <code translate="no">embedding</code> 에서 <code translate="no">embedding IS NULL</code> 를 사용하여 검색하는 것은 유효하지만, 검색 결과가 반환되지 않습니다. 벡터 검색은 이미 NULL 임베딩을 건너뛰므로, <code translate="no">embedding IS NOT NULL</code> 는 후보를 더 좁히지 않습니다. 순위, 기타 필터 및 검색 제한은 여전히 반환되는 검색 결과를 결정합니다.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">JSON 및 ARRAY 필드에서 기본 연산자 사용 팁<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

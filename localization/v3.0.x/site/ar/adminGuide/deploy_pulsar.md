@@ -54,12 +54,26 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتكوين Pulsar باستخدام Docker Compose، أدخل القيم الخاصة بك في قسم « <code translate="no">pulsar</code> » في الملف « <code translate="no">milvus.yaml</code> » الموجود في المسار milvus/configs.</p>
-<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
-  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
+    </button></h3><p>لا يتضمن تكوين Docker Compose المرفق بإصدار Milvus خدمة Pulsar. لاستخدام خدمة Pulsar موجودة مع Milvus المستقل، قم بإنشاء ملف <code translate="no">user.yaml</code> وأدخل قيمك في قسم <code translate="no">pulsar</code>:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_pulsar_address&gt;</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
-  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">2097152</span> <span class="hljs-comment"># 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>في ملف Docker Compose الخاص بك، اضبط <code translate="no">MQ_TYPE</code> على <code translate="no">pulsar</code> في قسم <code translate="no">environment</code> الخاص بخدمة <code translate="no">standalone</code> ، وقم بتعيين المسار المحلي لملف <code translate="no">user.yaml</code> الخاص بك إلى <code translate="no">/milvus/configs/user.yaml</code> في قسم <code translate="no">volumes</code> الخاص به. احتفظ بالمدخلات الموجودة في كلا القسمين:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">MINIO_REGION:</span> <span class="hljs-string">us-east-1</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+      <span class="hljs-attr">MQ_TYPE:</span> <span class="hljs-string">pulsar</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>يقرأ Milvus <code translate="no">/milvus/configs/user.yaml</code> بعد <code translate="no">milvus.yaml</code> ، لذا فإن القيم الموجودة في <code translate="no">user.yaml</code> تتجاوز القيم الافتراضية. يحدد متغير البيئة <code translate="no">MQ_TYPE</code> <code translate="no">mq.type</code> ، الذي يختار قائمة انتظار الرسائل، وله الأسبقية على ملفات التكوين.</p>
+<p>قم بتعيين قائمة انتظار الرسائل قبل بدء عملية نشر جديدة لأول مرة. يقوم Milvus بتسجيل <code translate="no">mq.type</code> في etcd عند بدء التشغيل لأول مرة ولا يقوم بالكتابة فوق القيمة المسجلة لاحقًا.</p>
 <p>انظر <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a> لمزيد من المعلومات.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. تشغيل Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,10 +90,10 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus الذي يستخدم تكوينات Pulsar.</p>
+    </button></h3><p>قم بتشغيل الأمر التالي لبدء تشغيل Milvus باستخدام تكوينات Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">لا تصبح الإعدادات سارية المفعول إلا بعد بدء تشغيل Milvus. راجع <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">«بدء تشغيل Milvus</a> » لمزيد من المعلومات.</div>
+<div class="alert note">لا تصبح التكوينات سارية المفعول إلا بعد بدء تشغيل Milvus. راجع <a href="/docs/ar/install_standalone-docker-compose.md#Install-Milvus">تثبيت Milvus</a> لمزيد من المعلومات.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">تكوين Pulsar باستخدام Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,10 +109,13 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Pulsar في نفس الأمر الذي يبدأ تشغيل Milvus. أو بدلاً من ذلك، يمكنك تكوين Pulsar باستخدام ملف <code translate="no">values.yml</code> الموجود في المسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
-<p>للحصول على تفاصيل حول كيفية تكوين Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Pulsar، راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a>.
-|</p>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
+    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Pulsar في نفس الأمر الذي يبدأ تشغيل Milvus. أو بدلاً من ذلك، يمكنك تكوين Pulsar باستخدام ملف " <code translate="no">values.yaml</code> " الموجود في المسار /charts/milvus في مستودع <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
+<p>للحصول على تفاصيل حول كيفية تكوين Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Pulsar، راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a>.</p>
+<p>أضف مستودع مخططات Milvus Helm وقم بتحديث فهرس المخططات المحلي قبل تثبيت Milvus باستخدام أي من أوامر Helm الموجودة في هذه الصفحة:</p>
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">باستخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,22 +131,22 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         ></path>
       </svg>
     </button></h3><ol>
-<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code>.</li>
+<li>قم بتكوين قسم « <code translate="no">extraConfigFiles</code> » في ملف « <code translate="no">values.yaml</code> ».</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     pulsar:
       address: localhost # Address of pulsar
       port: 6650 # Port of Pulsar
-      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
-      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      webport: 80 # Web port of pulsar, if you connect directly without proxy, should use 8080
+      maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>بعد تكوين الأقسام السابقة وحفظ ملف <code translate="no">values.yaml</code> ، قم بتشغيل الأمر التالي لتثبيت Milvus الذي يستخدم تكوينات Pulsar.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">تكوين Woodpecker باستخدام Helm<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,9 +163,8 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Woodpecker في نفس الأمر الذي يبدأ تشغيل Milvus. أو بدلاً من ذلك، يمكنك تكوين Woodpecker باستخدام ملف <code translate="no">values.yml</code> الموجود في المسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
-<p>للحصول على تفاصيل حول كيفية تكوين Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Woodpecker، راجع <a href="/docs/ar/woodpecker.md">التكوينات المتعلقة بـ Woodpecker</a>.
-|</p>
+    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Woodpecker في نفس الأمر الذي يبدأ تشغيل Milvus. أو بدلاً من ذلك، يمكنك تكوين Woodpecker باستخدام ملف <code translate="no">values.yaml</code> الموجود في المسار /charts/milvus في مستودع <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
+<p>للحصول على تفاصيل حول كيفية تكوين Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Woodpecker، راجع <a href="/docs/ar/woodpecker.md">التكوينات المتعلقة بـ Woodpecker</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +181,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         ></path>
       </svg>
     </button></h3><ol>
-<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في الملف <code translate="no">values.yaml</code>.</li>
+<li>قم بتكوين قسم <code translate="no">extraConfigFiles</code> في ملف <code translate="no">values.yaml</code>.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -207,7 +223,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
 <ol start="2">
 <li>بعد تكوين الأقسام السابقة وحفظ ملف <code translate="no">values.yaml</code> ، قم بتشغيل الأمر التالي لتثبيت Milvus الذي يستخدم تكوينات Woodpecker.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">تكوين Kafka باستخدام Helm<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +240,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Kafka في نفس الأمر الذي يبدأ تشغيل Milvus. أو بدلاً من ذلك، يمكنك تكوين Kafka باستخدام ملف <code translate="no">values.yml</code> الموجود في المسار /charts/milvus في مستودع <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
+    </button></h2><p>بالنسبة لمجموعات Milvus على K8s، يمكنك تكوين Kafka في نفس الأمر الذي يبدأ تشغيل Milvus. أو بدلاً من ذلك، يمكنك تكوين Kafka باستخدام ملف <code translate="no">values.yaml</code> الموجود في المسار /charts/milvus في مستودع <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> قبل بدء تشغيل Milvus.</p>
 <p>للحصول على تفاصيل حول كيفية تكوين Milvus باستخدام Helm، راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus باستخدام مخططات Helm</a>. للحصول على تفاصيل حول عناصر التكوين المتعلقة بـ Pulsar، راجع <a href="/docs/ar/configure_pulsar.md">التكوينات المتعلقة بـ Pulsar</a>.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">استخدام ملف YAML<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +258,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
         ></path>
       </svg>
     </button></h3><ol>
-<li>قم بتكوين قسم <code translate="no">externalConfigFiles</code> في ملف <code translate="no">values.yaml</code> إذا كنت ترغب في استخدام Kafka كنظام تخزين للرسائل.</li>
+<li>قم بتكوين قسم <code translate="no">extraConfigFiles</code> في ملف <code translate="no">values.yaml</code> إذا كنت ترغب في استخدام Kafka كنظام تخزين الرسائل.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -257,7 +273,7 @@ summary: تعرف على كيفية تكوين تخزين الرسائل باس�
 <ol start="2">
 <li>بعد تكوين الأقسام السابقة وحفظ ملف <code translate="no">values.yaml</code> ، قم بتشغيل الأمر التالي لتثبيت Milvus الذي يستخدم تكوينات Kafka.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-RocksMQ-with-Helm" class="common-anchor-header">تكوين RocksMQ باستخدام Helm<button data-href="#Configure-RocksMQ-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"

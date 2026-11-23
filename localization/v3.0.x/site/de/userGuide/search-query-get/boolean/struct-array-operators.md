@@ -185,7 +185,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <tbody>
 <tr><td><code translate="no">MATCH_ANY(field, predicate)</code></td><td>Mindestens ein Struct-Element erfüllt das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>Alle „Struct“-Elemente erfüllen das Prädikat.</td></tr>
-<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Mindestens <code translate="no">N</code> Struct-Elemente erfüllen das Prädikat.</td></tr>
+<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Mindestens „ <code translate="no">N</code> “ Struct-Elemente erfüllen das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>Höchstens <code translate="no">N</code> -Struct-Elemente erfüllen das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>Genau <code translate="no">N</code> Struct-Elemente erfüllen das Prädikat.</td></tr>
 </tbody>
@@ -374,7 +374,7 @@ array_length(chunks) &gt;= 3
 # Articles with exactly one chunk.
 array_length(chunks) == 1
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Prädikate zur Anzahl der übergeordneten Felder treffen bei „ <code translate="no">&gt;= 3</code> “ auf beide Entitäten zu, bei „ <code translate="no">== 1</code> “ hingegen auf keine. Sie können Werte auch auf einem Unterfeldpfad zählen:</p>
+<p>Die Prädikate zur Anzahl der übergeordneten Felder treffen bei „ <code translate="no">&gt;= 3</code> “ auf beide Entitäten zu und bei „ <code translate="no">== 1</code> “ auf keine. Sie können Werte auch auf einem Unterfeldpfad zählen:</p>
 <pre><code translate="no" class="language-text">ARRAY_LENGTH(chunks[quality_score]) == 3
 <button class="copy-code-btn"></button></code></pre>
 <p>Nur Entität B entspricht den Kriterien, da ihr Unterfeld „ <code translate="no">quality_score</code> “ drei Werte enthält.</p>
@@ -410,14 +410,14 @@ array_contains_all(chunks[section], [&quot;index&quot;, &quot;search&quot;])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “ für ein nullfähiges „StructArray“-Feld, um den gesamten Feldwert zu prüfen. Da sich „NULL“ auf das gesamte „StructArray“-Feld bezieht, akzeptieren diese Prädikate nur den Feldnamen, nicht jedoch einen Unterfeldpfad.</p>
+    </button></h3><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “ für ein nullfähiges „StructArray“-Feld, um den gesamten Feldwert zu prüfen. „NULL“ gilt für das gesamte „StructArray“-Feld, daher akzeptieren diese Prädikate nur den Feldnamen, nicht jedoch einen Unterfeldpfad.</p>
 <pre><code translate="no" class="language-text"># Entities that have no chunks value.
 chunks is null
 
 # Entities that have a chunks value.
 chunks is not null
 <button class="copy-code-btn"></button></code></pre>
-<p>Informationen zur Anwendbarkeit finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„Einschränkungen für nullfähige und dynamische Schemata</a>“. Entität A und Entität B weisen beide nicht-NULL-Werte für „StructArray“ auf.</p>
+<p>Informationen zur Anwendbarkeit finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„Einschränkungen für nullfähige und dynamische Schemata</a>“. Entität A und Entität B weisen beide nicht-NULL-Werte vom Typ „StructArray“ auf.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Unterstützte Prädikate<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -481,7 +481,28 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 <span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<p>Positionspfade auf Zeilenebene folgen derselben Regel: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> ist unbekannt, wenn der Wert von „ <code translate="no">lang</code> “ des ersten Elements null ist, wenn die Entität an dieser Position kein Element enthält oder wenn das StructArray-Feld null ist; daher passt die Entität nicht.</p>
+<p>Positionspfade auf Zeilenebene folgen derselben Regel: „ <code translate="no">chunks[0][lang] == &quot;en&quot;</code> “ ist unbekannt, wenn der Wert „ <code translate="no">lang</code> “ des ersten Elements null ist, wenn die Entität an dieser Position kein Element hat oder wenn das StructArray-Feld null ist; daher passt die Entität nicht.</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">Entitäten mit fehlenden Vektoren in „StructArray“-Elementen finden<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Angenommen, jedes Produkt speichert Teile seiner Beschreibung in einem StructArray-Feld namens „ <code translate="no">chunks</code> “. Jeder Block verfügt über ein Vektor-Unterfeld namens „ <code translate="no">embedding</code> “, das NULL zulässt, wenn der zugehörige Vektor fehlt. Produkt A hat zwei Blöcke, bei einem fehlt der Vektor. Beide Blöcke für Produkt B verfügen über Vektoren.</p>
+<p>Informationen zur Schemaeinrichtung finden Sie unter <a href="/docs/de/create-structarray-field.md#Allow-null-values-in-Struct-elements">„Nullwerte in Struct-Elementen zulassen</a>“.</p>
+<p>Um Produkte zu finden, bei denen mindestens einem Teil der Vektor fehlt, übergeben Sie diesen Filter an „ <code translate="no">query()</code> “.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> bezieht sich auf den Vektor im aktuellen Chunk. „ <code translate="no">MATCH_ANY</code> “ wählt ein Produkt aus, wenn mindestens einer seiner Chunks einen NULL-Vektor aufweist. Die Abfrage gibt Produkt A zurück.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Nicht unterstützte Prädikate<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -497,10 +518,10 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Prädikate auf Elementebene vom Typ „ <code translate="no">$[...]</code> “ unterstützen Folgendes nicht:</p>
+    </button></h2><p>Prädikate auf Elementebene für „ <code translate="no">$[...]</code> “ unterstützen Folgendes nicht:</p>
 <ul>
 <li><p>Textabgleichsfunktionen wie „ <code translate="no">text_match(field, &quot;...&quot;)</code> “ oder „ <code translate="no">phrase_match(field, &quot;...&quot;)</code> “.</p></li>
-<li><p>JSON-Path-Syntax, „ <code translate="no">exists</code> “ auf JSON-Paths oder JSON-Funktionen wie „ <code translate="no">json_contains</code> “, „ <code translate="no">json_contains_all</code> “ oder „ <code translate="no">json_contains_any</code> “.</p></li>
+<li><p>JSON-Pfad-Syntax, „ <code translate="no">exists</code> “ auf JSON-Pfaden oder JSON-Funktionen wie „ <code translate="no">json_contains</code> “, „ <code translate="no">json_contains_all</code> “ oder „ <code translate="no">json_contains_any</code> “.</p></li>
 <li><p>Array-Container-Funktionen wie <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> oder <code translate="no">array_length</code> auf <code translate="no">$[subfield]</code> eines skalaren Unterfelds. Verwenden Sie diese Funktionen stattdessen auf einem Unterfeldpfad wie <code translate="no">chunks[section]</code> in einem Prädikat auf Zeilenebene. Ab Milvus 3.0.6 werden sie auf <code translate="no">$[tags]</code> für skalare <code translate="no">ARRAY</code> -Unterfelder unterstützt.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> oder <code translate="no">$[subfield] is not null</code> vor Milvus 3.0.6.</p></li>
 </ul>

@@ -57,13 +57,13 @@ title: Milvus Liteをローカルで実行する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このガイドでは、PyMilvus<strong>3.0.2</strong>および Milvus Lite<strong>3.2.2</strong> を使用しています。以下の環境を準備してください：</p>
+    </button></h2><p>このガイドでは、PyMilvus<strong>3.0.3</strong>および Milvus Lite<strong>3.2.2</strong> を使用しています。以下の環境を準備してください：</p>
 <ul>
-<li>Python 3.10 以降。ローカルの Lite バックエンドは、リモートの PyMilvus クライアントよりも高い Python の最小バージョンを必要とします。</li>
-<li>macOS、Linux、または Windows。<code translate="no">faiss-cpu</code> や<code translate="no">pyarrow</code> などの依存関係に対応したホイールが必要です。Milvus Lite 3.2.2 は純粋な Python パッケージであるため、Lite パッケージ自体ではなく、オペレーティングシステムとアーキテクチャがこれらの依存関係を満たしている必要があります。</li>
+<li>Python 3.10 以降。ローカルの Lite バックエンドは、リモートの PyMilvus クライアントよりも高い Python バージョンを最低要件としています。</li>
+<li>macOS、Linux、またはWindows。<code translate="no">faiss-cpu</code> や<code translate="no">pyarrow</code> などの依存関係に対応したWheelsが用意されていること。Milvus Lite 3.2.2は純粋なPythonパッケージであるため、オペレーティングシステムとアーキテクチャは、Liteパッケージ自体ではなく、これらの依存関係を満たす必要があります。</li>
 <li>データベースを保存するための書き込み可能なローカルディレクトリ。</li>
 </ul>
-<p>Windows では、pip はプラットフォームマーカーのため PyMilvus 3.0.2 の<code translate="no">milvus-lite</code> エクストラをスキップするため、<code translate="no">milvus-lite</code> を明示的に指定する必要があります。以下のインストールコマンドでは、すでにこれが行われています。その他のパッケージとプラットフォームの組み合わせについては、<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite のリリース要件を</a>参照してください。</p>
+<p>Windows では、pip はプラットフォームマーカーのため PyMilvus 3.0.3 の<code translate="no">milvus-lite</code> エクストラをスキップするため、<code translate="no">milvus-lite</code> を明示的に指定する必要があります。以下のインストールコマンドでは、すでにこれが行われています。その他のパッケージとプラットフォームの組み合わせについては、<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite のリリース要件を</a>参照してください。</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Milvus Lite のセットアップ<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,9 +82,9 @@ title: Milvus Liteをローカルで実行する
     </button></h2><p>隔離されたPython環境を作成し、両方のパッケージをインストールします：</p>
 <pre><code translate="no" class="language-bash">python3 -m venv .venv
 <span class="hljs-built_in">source</span> .venv/bin/activate
-python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>zsh などのシェルが括弧を解釈しないように、extras 式を引用符で囲んでください。Windows PowerShell では、<code translate="no">source .venv/bin/activate</code> の代わりに<code translate="no">.venv\Scripts\Activate.ps1</code> を使用して環境を有効化してください。バージョンを明示的に指定することで、SDK とローカルバックエンドを本ガイドの内容と整合させることができます。</p>
+<p>zsh などのシェルが角括弧を解釈しないように、extras 式を引用符で囲んでください。Windows PowerShell では、<code translate="no">source .venv/bin/activate</code> の代わりに<code translate="no">.venv\Scripts\Activate.ps1</code> を使用して環境を有効化してください。バージョンを明示的に指定することで、SDK とローカルバックエンドを本ガイドの内容と整合させることができます。</p>
 <div class="alert note">
 <blockquote>
 <p>Milvus Lite 3.x は、元の 2.x パッケージとは異なるストレージエンジンを使用しています。既存の 2.x 形式の `<code translate="no">.db</code> ` ファイルをそのまま開くことはできません。 元のデータベースと、それを開くことができる環境を保持し、そこからデータをエクスポートして、新しいデータベースにインポートしてください。新しいパッケージをインストールしても、古いストレージ形式は移行されません。「<a href="#Migrating-data-from-Milvus-Lite">Milvus Lite からのデータ移行</a>」を参照してください。</p>
@@ -194,7 +194,7 @@ client.close()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 3.2.2 は、ローカルの PyMilvus アダプターを通じて Milvus 操作の一部を実装しています。<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features">バージョン管理された機能リファレンス</a>には、以下の機能が記載されています：</p>
+    </button></h2><p>Milvus Lite 3.2.2 は、ローカルの PyMilvus アダプタを通じて Milvus 操作の一部を実装しています。<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features">バージョン管理された機能リファレンス</a>には、以下の機能が記載されています：</p>
 <table>
 <thead>
 <tr><th>領域</th><th>このLiteバージョンでのサポート状況</th></tr>
@@ -205,7 +205,7 @@ client.close()
 <tr><td>スカラーおよびスパースインデックス</td><td><code translate="no">INVERTED</code> スカラーインデックスおよび<code translate="no">SPARSE_INVERTED_INDEX</code></td></tr>
 <tr><td>データ操作</td><td>挿入、アップサート、取得、クエリ、ベクトル検索、および削除</td></tr>
 <tr><td>検索</td><td>密インデックスおよび疎インデックスによる検索、メタデータフィルター、複数のベクトルフィールド、ハイブリッド検索</td></tr>
-<tr><td>コレクションの構成</td><td>ローカルアダプタでサポートされている操作範囲内での、コレクション、名前付きデータベース、エイリアス、およびパーティション</td></tr>
+<tr><td>コレクションの構成</td><td>ローカルアダプタがサポートする操作範囲内でのコレクション、名前付きデータベース、エイリアス、およびパーティション</td></tr>
 </tbody>
 </table>
 <p>このバージョンは、<code translate="no">FLAT</code> インデックスに限定されません。インデックスの利用可能性と動作はLiteバージョンによって異なります。元の2.xバックエンドの制限を3.xエンジンに適用しないでください。</p>
@@ -236,7 +236,7 @@ client.close()
       </svg>
     </button></h2><p><code translate="no">milvus-lite dump</code> を使用して、コレクションを Milvus BulkWriter JSON ファイルとしてエクスポートします。これらのファイルは、セルフホスト型の Milvus デプロイメントまたは Zilliz Cloud にインポートできます。</p>
 <p>ソースデータベースを開く環境に、SDKのバルクライター依存関係をインストールします:</p>
-<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.3&quot;</span>
 milvus-lite dump -h
 <button class="copy-code-btn"></button></code></pre>
 <p>別のプロセスでコマンドを実行する前に、ローカルデータベースを所有する Python アプリケーションを終了してください。前の例で作成したコレクションをエクスポートします：</p>

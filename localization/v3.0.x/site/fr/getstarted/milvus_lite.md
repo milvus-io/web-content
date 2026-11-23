@@ -59,13 +59,13 @@ title: Exécuter Milvus Lite en local
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ce guide utilise PyMilvus <strong>3.0.2</strong> et Milvus Lite <strong>3.2.2</strong>. Préparez l’environnement suivant :</p>
+    </button></h2><p>Ce guide utilise PyMilvus <strong>3.0.3</strong> et Milvus Lite <strong>3.2.2</strong>. Préparez l’environnement suivant :</p>
 <ul>
 <li>Python 3.10 ou version plus récente. Le backend Lite local requiert une version minimale de Python supérieure à celle du client PyMilvus distant.</li>
 <li>macOS, Linux ou Windows, avec des paquets « wheels » compatibles pour les dépendances telles que <code translate="no">faiss-cpu</code> et <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 est un paquet entièrement en Python ; le système d’exploitation et l’architecture doivent donc satisfaire ces dépendances plutôt que le paquet Lite lui-même.</li>
 <li>Un répertoire local accessible en écriture pour le stockage de la base de données.</li>
 </ul>
-<p>Sous Windows, pip ignore le module supplémentaire « <code translate="no">milvus-lite</code> » de PyMilvus 3.0.2 en raison de son marqueur de plateforme ; il faut donc spécifier explicitement « <code translate="no">milvus-lite</code> ». La commande d’installation ci-dessous le fait déjà. Pour d’autres combinaisons de paquets et de plateformes, consultez les <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">exigences de version de Milvus Lite</a>.</p>
+<p>Sous Windows, pip ignore le module supplémentaire <code translate="no">milvus-lite</code> de PyMilvus 3.0.3 en raison de son marqueur de plateforme ; il faut donc spécifier explicitement <code translate="no">milvus-lite</code>. La commande d’installation ci-dessous le fait déjà. Pour d’autres combinaisons de paquets et de plateformes, consultez les <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">exigences de version de Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurer Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ title: Exécuter Milvus Lite en local
     </button></h2><p>Créez un environnement Python isolé et installez les deux paquets :</p>
 <pre><code translate="no" class="language-bash">python3 -m venv .venv
 <span class="hljs-built_in">source</span> .venv/bin/activate
-python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mettez l’expression « extras » entre guillemets afin que les shells tels que zsh n’interprètent pas les crochets. Sous Windows PowerShell, activez l’environnement avec ` <code translate="no">.venv\Scripts\Activate.ps1</code> ` au lieu de ` <code translate="no">source .venv/bin/activate</code>`. Les versions explicites permettent de maintenir la cohérence entre le SDK et le backend local, conformément à ce guide.</p>
 <div class="alert note">
@@ -180,7 +180,7 @@ res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collect
 <span class="hljs-built_in">print</span>(res)
 client.close()
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour une application générant des représentations à partir de texte, passez à <a href="/docs/fr/quickstart.md">la section « Démarrage rapide</a> ». Vous pouvez également explorer les <a href="https://github.com/milvus-io/bootcamp">exemples du Bootcamp Milvus</a> consacrés au RAG, à la recherche d’images et aux intégrations de frameworks.</p>
+<p>Pour une application générant des plongées à partir de texte, passez à <a href="/docs/fr/quickstart.md">la section « Démarrage rapide</a> ». Vous pouvez également explorer les <a href="https://github.com/milvus-io/bootcamp">exemples du Bootcamp Milvus</a> consacrés au RAG, à la recherche d’images et aux intégrations de frameworks.</p>
 <h2 id="Supported-features-and-limits" class="common-anchor-header">Fonctionnalités prises en charge et limites<button data-href="#Supported-features-and-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,9 +236,9 @@ client.close()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez <code translate="no">milvus-lite dump</code> pour exporter une collection sous forme de fichiers JSON Milvus BulkWriter. Ces fichiers peuvent être importés dans un déploiement Milvus auto-hébergé ou dans Zilliz Cloud.</p>
+    </button></h2><p>Utilisez <code translate="no">milvus-lite dump</code> pour exporter une collection sous forme de fichiers JSON Milvus BulkWriter. Ces fichiers peuvent être importés dans un déploiement Milvus auto-hébergé ou sur Zilliz Cloud.</p>
 <p>Installez les dépendances du BulkWriter du SDK dans l’environnement qui ouvre la base de données source :</p>
-<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.3&quot;</span>
 milvus-lite dump -h
 <button class="copy-code-btn"></button></code></pre>
 <p>Fermez l’application Python qui gère la base de données locale avant d’exécuter la commande dans un autre processus. Exportez la collection de l’exemple précédent :</p>
@@ -268,7 +268,7 @@ milvus-lite dump -h
       </svg>
     </button></h2><p>Poursuivez avec les tâches suivantes :</p>
 <ul>
-<li><a href="/docs/fr/quickstart.md">Guide de démarrage rapide</a>: générez des représentations et exécutez un workflow de recherche.</li>
+<li><a href="/docs/fr/quickstart.md">Démarrage rapide</a>: générez des représentations et exécutez un workflow de recherche.</li>
 <li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a> et <a href="/docs/fr/multi-vector-search.md">recherche hybride</a>: concevez des requêtes pour votre application.</li>
 <li><a href="/docs/fr/install-overview.md">Choisissez un déploiement</a>: allez au-delà du développement local.</li>
 <li><a href="https://github.com/zilliztech/attu">Attu</a>: découvrez l'interface graphique de Milvus pour un déploiement à distance.</li>

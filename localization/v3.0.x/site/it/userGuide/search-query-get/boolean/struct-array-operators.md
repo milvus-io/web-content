@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Predicati di percorso a livello di riga</td><td>Verifica la posizione di un elemento, conta gli elementi Struct o verifica i valori dei sottocampi tra gli elementi senza un predicato " <code translate="no">$[...]</code> ".</td><td>Filtraggio a livello di riga. Questi predicati non restituiscono offset degli elementi.</td></tr>
 </tbody>
 </table>
-<p>Utilizzare sottocampi scalari e sottocampi array in Milvus 3.0.6 e versioni successive negli operatori StructArray. I sottocampi vettoriali sono utilizzati dai percorsi di ricerca vettoriali e non costituiscono input per predicati scalari.</p>
+<p>Utilizzare sottocampi scalari e sottocampi array in Milvus 3.0.6 e versioni successive negli operatori StructArray. I sottocampi vettoriali sono utilizzati dai percorsi di ricerca vettoriali e non costituiscono input per i predicati scalari.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">Quando utilizzare quale operatore<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,7 +190,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>Esattament <code translate="no">N</code> i elementi Struct soddisfano il predicato.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">MATCH_ANY</code> sia " <code translate="no">element_filter</code> " che " " possono entrambi indicare che almeno un elemento Struct soddisfa un predicato. Utilizza " <code translate="no">MATCH_ANY</code> " quando è necessario solo un filtro a livello di riga. Utilizza " <code translate="no">element_filter</code> " quando sono necessari vincoli a livello di elemento, come il filtraggio degli elementi Struct che partecipano alla ricerca vettoriale a livello di elemento.</p>
+<p><code translate="no">MATCH_ANY</code> sia " <code translate="no">element_filter</code> " che " " possono entrambi indicare che almeno un elemento Struct soddisfa un predicato. Utilizza " <code translate="no">MATCH_ANY</code> " quando è necessario solo un filtro a livello di riga. Utilizza " <code translate="no">element_filter</code> " quando sono necessari vincoli a livello di elemento, come ad esempio il filtraggio degli elementi Struct che partecipano alla ricerca vettoriale a livello di elemento.</p>
 <h3 id="MATCHANY" class="common-anchor-header">MATCH_ANY<button data-href="#MATCHANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -206,7 +206,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_ANY</code> restituisce " <code translate="no">true</code> " se almeno un elemento di StructArray soddisfa il predicato.</p>
+    </button></h3><p><code translate="no">MATCH_ANY</code> restituisce il valore " <code translate="no">true</code> " se almeno un elemento dello StructArray soddisfa il predicato.</p>
 <pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[section] == &quot;index&quot;)
 <button class="copy-code-btn"></button></code></pre>
 <p>Sia l’Entità A che l’Entità B corrispondono perché ciascuna ha almeno un elemento con <code translate="no">section</code> impostato su <code translate="no">&quot;index&quot;</code>.</p>
@@ -382,7 +382,7 @@ array_length(chunks) == 1
 <pre><code translate="no" class="language-text">ARRAY_CONTAINS(chunks[quality_score], 0.74)
 <button class="copy-code-btn"></button></code></pre>
 <p>Solo l’Entità A corrisponde.</p>
-<p>Utilizzare <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_contains_all</code> su un percorso di sottocampo scalare per verificare i valori di quel sottocampo su tutti gli elementi Struct presenti nell’entità. Ogni percorso di sottocampo viene valutato separatamente, pertanto le condizioni relative a sottocampi diversi possono essere soddisfatte da elementi Struct diversi.</p>
+<p>Utilizzare <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_contains_all</code> su un percorso di sottocampo scalare per verificare i valori di quel sottocampo su tutti gli elementi Struct dell’entità. Ogni percorso di sottocampo viene valutato separatamente, quindi le condizioni su sottocampi diversi possono essere soddisfatte da elementi Struct diversi.</p>
 <pre><code translate="no" class="language-text"># At least one chunk belongs to the &quot;index&quot; section.
 array_contains(chunks[section], &quot;index&quot;)
 
@@ -417,7 +417,7 @@ chunks is null
 # Entities that have a chunks value.
 chunks is not null
 <button class="copy-code-btn"></button></code></pre>
-<p>Per informazioni sull’applicabilità, consultare <a href="/docs/it/structarray-limits.md#Nullable-and-dynamic-schema-limits">Limiti relativi agli schemi dinamici e nullabili</a>. L’Entità A e l’Entità B hanno entrambe valori StructArray non NULL.</p>
+<p>Per quanto riguarda l’applicabilità, consultare <a href="/docs/it/structarray-limits.md#Nullable-and-dynamic-schema-limits">Limiti relativi agli schemi dinamici e nullabili</a>. L’entità A e l’entità B hanno entrambe valori StructArray non NULL.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Predicati supportati<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -466,7 +466,7 @@ chunks is not null
       </svg>
     </button></h2><p>A partire da Milvus 3.0.6, un sottocampo con elementi nullabili può contenere un valore nullo in un elemento Struct. I valori nulli seguono la logica a tre valori nei predicati StructArray:</p>
 <ul>
-<li><p>Un predicato di confronto, del tipo « <code translate="no">in</code> », « <code translate="no">like</code> » o aritmetico su un valore nullo di un sottocampo è considerato «unknown» anziché «false». « <code translate="no">&amp;&amp;</code> », « <code translate="no">\|\|</code> » e « <code translate="no">!</code> » propagano risultati «unknown», pertanto « <code translate="no">!($[lang] == &quot;en&quot;)</code> » rimane «unknown» quando « <code translate="no">$[lang]</code> » è nullo.</p></li>
+<li><p>Un predicato di confronto, del tipo « <code translate="no">in</code> », « <code translate="no">like</code> » o aritmetico su un valore nullo di un sottocampo è considerato «unknown» anziché «false». « <code translate="no">&amp;&amp;</code> », « <code translate="no">\|\|</code> » e « <code translate="no">!</code> » propagano risultati «unknown», quindi « <code translate="no">!($[lang] == &quot;en&quot;)</code> » rimane «unknown» quando « <code translate="no">$[lang]</code> » è nullo.</p></li>
 <li><p><code translate="no">element_filter</code> mantiene solo gli elementi Struct il cui predicato è vero. Gli elementi sconosciuti non vengono abbinati.</p></li>
 <li><p><code translate="no">MATCH_*</code> Conta un elemento sconosciuto come un errore. <code translate="no">MATCH_ALL</code> è falso quando un qualsiasi elemento è sconosciuto, mentre un StructArray vuoto soddisfa comunque <code translate="no">MATCH_ALL</code>.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> e <code translate="no">$[subfield] is not null</code> sono sempre veri o falsi. Essi rilevano la validità dell’elemento corrente, pertanto <code translate="no">$[lang] is null</code> corrisponde esattamente agli elementi il cui valore <code translate="no">lang</code> è nullo.</p></li>
@@ -481,7 +481,28 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 <span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<p>I percorsi posizionali a livello di riga seguono la stessa regola: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> è sconosciuto quando il valore <code translate="no">lang</code> del primo elemento è nullo, quando l’entità non ha alcun elemento in quella posizione o quando il campo StructArray è nullo, quindi l’entità non corrisponde.</p>
+<p>I percorsi posizionali a livello di riga seguono la stessa regola: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> è sconosciuto quando il valore <code translate="no">lang</code> del primo elemento è nullo, quando l’entità non ha alcun elemento in quella posizione o quando il campo StructArray è nullo; pertanto, l’entità non viene individuata.</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">Trovare entità con vettori mancanti negli elementi StructArray<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Supponiamo che ogni prodotto memorizzi parti della propria descrizione in un campo StructArray denominato <code translate="no">chunks</code>. Ogni blocco ha un sottocampo vettoriale denominato <code translate="no">embedding</code> che ammette il valore NULL quando il relativo vettore è mancante. Il prodotto A ha due blocchi e in uno di essi manca il vettore. Entrambi i blocchi del prodotto B contengono vettori.</p>
+<p>Per la configurazione dello schema, consultare <a href="/docs/it/create-structarray-field.md#Allow-null-values-in-Struct-elements">Consentire valori NULL negli elementi Struct</a>.</p>
+<p>Per individuare i prodotti con almeno una porzione priva di vettore, passare questo filtro a ` <code translate="no">query()</code>`.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> si riferisce al vettore nel chunk corrente. <code translate="no">MATCH_ANY</code> seleziona un prodotto quando almeno uno dei suoi chunk presenta un vettore NULL. La query restituisce il prodotto A.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Predicati non supportati<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -497,10 +518,10 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>I predicati di tipo « <code translate="no">$[...]</code> » a livello di elemento non supportano:</p>
+    </button></h2><p>I predicati di livello elemento <code translate="no">$[...]</code> non supportano:</p>
 <ul>
 <li><p>Funzioni di corrispondenza testuale, come ` <code translate="no">text_match(field, &quot;...&quot;)</code> ` o ` <code translate="no">phrase_match(field, &quot;...&quot;)</code>`.</p></li>
-<li><p>La sintassi JSON path, ` <code translate="no">exists</code> ` su percorsi JSON o funzioni JSON quali ` <code translate="no">json_contains</code>`, ` <code translate="no">json_contains_all</code>` o ` <code translate="no">json_contains_any</code>`.</p></li>
+<li><p>La sintassi dei percorsi JSON, l’ <code translate="no">exists</code> sui percorsi JSON o le funzioni JSON quali <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code> o <code translate="no">json_contains_any</code>.</p></li>
 <li><p>Funzioni relative ai contenitori array quali <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_length</code> su <code translate="no">$[subfield]</code> di un sottocampo scalare. Utilizzare invece queste funzioni su un percorso di sottocampo come <code translate="no">chunks[section]</code> in un predicato a livello di riga. A partire da Milvus 3.0.6, sono supportate su <code translate="no">$[tags]</code> per i sottocampi scalari <code translate="no">ARRAY</code>.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> oppure <code translate="no">$[subfield] is not null</code> prima di Milvus 3.0.6.</p></li>
 </ul>

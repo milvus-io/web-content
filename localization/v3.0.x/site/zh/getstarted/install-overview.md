@@ -36,7 +36,7 @@ title: Milvus 部署选项概述
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>是一个可导入到应用程序中的 Python 库。作为 Milvus 的轻量级版本，它非常适合在 Jupyter Notebook 中进行快速原型开发，或在资源有限的智能设备上运行。 Milvus Lite 支持其他 Milvus 部署方式相同的 API。与 Milvus Lite 交互的客户端代码也可与其他部署模式下的 Milvus 实例配合使用。</p>
 <p>对于本地示例，请使用 Python 3.10 或更高版本，并显式安装可选的 Lite 依赖项。在 Windows 系统中，pip 会跳过 `<code translate="no">milvus-lite</code> ` 这一补充参数，因此需要显式指定包名：</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>使用 `<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> ` 打开本地存储。Milvus Lite 3.x 会在此路径下创建一个目录；若存在 Milvus Lite 2.x 数据库文件，则需要进行导出和迁移。有关平台要求，请参阅《<a href="/docs/zh/milvus_lite.md">运行 Milvus Lite</a>》；有关完整的插入和搜索示例，请参阅《<a href="/docs/zh/quickstart.md">快速入门》</a>。</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus Standalone<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
@@ -91,9 +91,9 @@ title: Milvus 部署选项概述
 <li><p><strong>快速原型开发</strong></p>
 <p>在笔记本中使用 Milvus Lite 来测试 Embeddings、RAG 分块策略和检索行为。当需要共享服务器，或者测得的内存和查询负载超过本地环境时，请切换到 Milvus Standalone。客户端 API 类似，但请检查功能差异，并单独迁移存储的数据。</p></li>
 <li><p><strong>小规模生产部署</strong></p>
-<p>当单台服务器能够满足您的工作负载和可用性要求，且您希望在不使用 Kubernetes 的情况下运行时，请使用 Milvus Standalone。根据向量维度、标量字段、索引设置和副本数量估算内存需求，然后对预期的查询并发量和写入速率进行基准测试。仅凭向量数量无法确定容量。</p></li>
+<p>当单台服务器能满足您的工作负载和可用性要求，且您希望在不使用 Kubernetes 的情况下运行时，请使用 Milvus Standalone。根据向量维度、标量字段、索引设置和副本数量估算内存需求，然后对预期的查询并发量和写入速率进行基准测试。仅凭向量数量无法确定容量。</p></li>
 <li><p><strong>大规模生产部署</strong></p>
-<p>随着业务快速增长，当数据规模超过单台服务器的容量时，就该考虑使用 Milvus Distributed 了。您可以继续在开发或预发布环境中使用 Milvus Standalone 以保持便利性，同时运行托管 Milvus Distributed 的 K8s 集群。 这不仅能支持您处理数百亿量级的向量，还能根据具体工作负载（例如高读取、低写入，或高写入、低读取等场景）灵活调整节点规格。</p></li>
+<p>随着业务快速增长，数据规模超过单台服务器的容量，此时应考虑采用 Milvus Distributed。您可以继续在开发或预生产环境中使用 Milvus Standalone 以保持便利性，同时运行托管 Milvus Distributed 的 K8s 集群。 这不仅能支持您处理数百亿量级的向量，还能根据具体工作负载（例如高读取、低写入，或高写入、低读取等场景）灵活调整节点规格。</p></li>
 <li><p><strong>边缘设备上的本地搜索</strong></p>
 <p>若需在边缘设备上搜索私有或敏感数据，您可在设备上部署 Milvus Lite，无需依赖云端服务即可进行文本或图像搜索。这适用于专有文档搜索或设备端物体检测等场景。</p></li>
 </ul>
@@ -103,8 +103,8 @@ title: Milvus 部署选项概述
 <li>当单台服务器满足您对容量和可用性的要求时<strong>，Milvus Standalone</strong>可提供共享服务。</li>
 <li>当您需要扩展至多台服务器，或隔离读写资源时，<strong>Milvus Distributed</strong>可提供组件级别的扩展性和冗余性。</li>
 </ul>
-<p>Milvus Standalone 和 Distributed 采用消息队列、对象存储以及元数据存储。Milvus Lite 则在本地运行，无需这些独立服务。有关服务器部署的默认依赖项和外部服务选项，请参阅<a href="/docs/zh/data-infra-integration-overview.md">“数据基础设施”</a>。</p>
-<p>如果您希望使用托管服务而非自行运维服务器基础设施，请考虑<a href="https://zilliz.com/cloud">Zilliz Cloud</a>。如需自行部署，请继续使用<a href="/docs/zh/install_standalone-docker.md">Docker</a>或<a href="/docs/zh/install_cluster-milvusoperator.md">Kubernetes</a>。</p>
+<p>Milvus Standalone 和 Milvus Distributed 采用消息队列、对象存储以及元数据存储。Milvus Lite 则在本地运行，无需这些独立服务。有关服务器部署的默认依赖项和外部服务选项，请参阅<a href="/docs/zh/data-infra-integration-overview.md">“数据基础设施”</a>。</p>
+<p>如果您希望使用托管服务而非自行操作服务器基础设施，请考虑<a href="https://zilliz.com/cloud">Zilliz Cloud</a>。如需自行部署，请继续使用<a href="/docs/zh/install_standalone-docker.md">Docker</a>或<a href="/docs/zh/install_cluster-milvusoperator.md">Kubernetes</a>。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" /> 
@@ -134,9 +134,9 @@ title: Milvus 部署选项概述
 <tbody>
 <tr><td>SDK / 客户端库</td><td>Python（本地 PyMilvus 适配器）</td><td>Python<br/>Go<br/>Java<br/>Node.js<br/>C#<br/>RESTful</td><td>Python<br/>Java<br/>Go<br/>Node.js<br/>C#<br/>RESTful</td></tr>
 <tr><td>数据类型</td><td><br/><br/><br/><br/><br/><br/><br/></td><td>稠密向量<br/>稀疏向量<br/>二进制向量<br/>布尔值<br/>整数<br/>浮点数<br/>VarChar<br/>数组<br/>JSON</td><td>稠密向量<br/>稀疏向量<br/>二进制向量<br/>布尔型<br/>整数型<br/>浮点型<br/>VarChar<br/>数组<br/>JSON</td></tr>
-<tr><td>搜索功能</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>按主键获取实体<br/>混合搜索</td><td>向量搜索（ANN搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>按主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>按主键获取实体<br/>混合搜索</td></tr>
+<tr><td>搜索功能</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>按主键获取实体<br/>混合搜索</td><td><br/><br/><br/><br/><br/></td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>按主键获取实体<br/>混合搜索</td></tr>
 <tr><td>CRUD 操作</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
-<tr><td>高级数据管理</td><td>数据库<br/>分区<br/>别名<br/>无访问控制</td><td>访问控制<br/>分区<br/>分区 Key</td><td>访问控制<br/>分区<br/>分区 Key<br/>物理资源分组</td></tr>
+<tr><td>高级数据管理</td><td>数据库<br/>分区<br/>别名<br/>无访问控制</td><td>访问控制<br/>分区<br/>分区 Key</td><td>访问控制<br/>分区<br/>Partition Key<br/>物理资源分组</td></tr>
 <tr><td>一致性级别</td><td>不适用：由单个本地进程处理所有请求；<code translate="no">consistency_level</code> 被接受但无效</td><td>强一致性<br/>有限过时<br/>会话<br/>最终一致性</td><td>强<br/>有限过时<br/>会话<br/>最终</td></tr>
 <tr><td>消息队列</td><td>不适用</td><td>Woodpecker（嵌入式）</td><td>Woodpecker（服务）</td></tr>
 </tbody>

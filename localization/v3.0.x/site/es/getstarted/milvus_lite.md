@@ -43,7 +43,7 @@ title: Ejecutar Milvus Lite de forma local
 <li>Ordenadores portátiles</li>
 <li>Dispositivos periféricos con dependencias de Python compatibles</li>
 </ul>
-<p>Milvus Lite utiliza la API de <code translate="no">MilvusClient</code> para las operaciones compatibles, entre las que se incluyen la persistencia de datos vectoriales, la inserción y eliminación, la búsqueda vectorial y el filtrado de metadatos. Para trasladar un flujo de trabajo de una aplicación compatible a una implementación remota, cambie la URI de conexión y las credenciales, y revise las diferencias en las funciones compatibles. Para cargas de trabajo de producción a gran escala, utilice <a href="/docs/es/install-overview.md">Milvus Standalone o Distributed</a>, o Milvus totalmente gestionado en <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Milvus Lite utiliza la API de <code translate="no">MilvusClient</code> para las operaciones compatibles, entre las que se incluyen la persistencia de datos vectoriales, la inserción y eliminación, la búsqueda vectorial y el filtrado de metadatos. Para trasladar un flujo de trabajo de una aplicación compatible a una implementación remota, cambia la URI de conexión y las credenciales, y revisa las diferencias en las funciones compatibles. Para cargas de trabajo de producción a gran escala, utilice <a href="/docs/es/install-overview.md">Milvus Standalone o Distributed</a>, o Milvus totalmente gestionado en <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,13 +59,13 @@ title: Ejecutar Milvus Lite de forma local
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta guía utiliza PyMilvus <strong>3.0.2</strong> y Milvus Lite <strong>3.2.2</strong>. Prepara el siguiente entorno:</p>
+    </button></h2><p>Esta guía utiliza PyMilvus <strong>3.0.3</strong> y Milvus Lite <strong>3.2.2</strong>. Prepara el siguiente entorno:</p>
 <ul>
 <li>Python 3.10 o posterior. El backend local de Lite requiere una versión mínima de Python superior a la del cliente remoto de PyMilvus.</li>
-<li>macOS, Linux o Windows, con paquetes «wheels» compatibles para dependencias como <code translate="no">faiss-cpu</code> y <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 es un paquete escrito íntegramente en Python, por lo que el sistema operativo y la arquitectura deben cumplir con esas dependencias, y no el propio paquete Lite.</li>
+<li>macOS, Linux o Windows, con paquetes «wheels» compatibles para dependencias como <code translate="no">faiss-cpu</code> y <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 es un paquete escrito íntegramente en Python, por lo que el sistema operativo y la arquitectura deben cumplir con esas dependencias, más que el propio paquete Lite.</li>
 <li>Un directorio local con permisos de escritura para el almacenamiento de la base de datos.</li>
 </ul>
-<p>En Windows, pip omite el extra « <code translate="no">milvus-lite</code> » de PyMilvus 3.0.2 debido a su marcador de plataforma, por lo que « <code translate="no">milvus-lite</code> » debe indicarse explícitamente. El comando de instalación que figura a continuación ya lo hace. Para otras combinaciones de paquetes y plataformas, consulta los <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">requisitos de la versión de Milvus Lite</a>.</p>
+<p>En Windows, pip omite el extra « <code translate="no">milvus-lite</code> » de PyMilvus 3.0.3 debido a su marcador de plataforma, por lo que « <code translate="no">milvus-lite</code> » debe indicarse explícitamente. El comando de instalación que figura a continuación ya lo hace. Para otras combinaciones de paquetes y plataformas, consulta los <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">requisitos de la versión de Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configuración de Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,12 +84,12 @@ title: Ejecutar Milvus Lite de forma local
     </button></h2><p>Crea un entorno Python aislado e instala ambos paquetes:</p>
 <pre><code translate="no" class="language-bash">python3 -m venv .venv
 <span class="hljs-built_in">source</span> .venv/bin/activate
-python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pon entre comillas la expresión «extras» para que los shells como zsh no interpreten los corchetes. En Windows PowerShell, activa el entorno con ` <code translate="no">.venv\Scripts\Activate.ps1</code> ` en lugar de ` <code translate="no">source .venv/bin/activate</code>`. Las versiones explícitas mantienen el SDK y el backend local alineados con esta guía.</p>
+<p>Pon entre comillas la expresión «extras» para que los shells como zsh no interpreten los corchetes. En Windows PowerShell, activa el entorno con « <code translate="no">.venv\Scripts\Activate.ps1</code> » en lugar de « <code translate="no">source .venv/bin/activate</code> ». Las versiones explícitas mantienen el SDK y el backend local alineados con esta guía.</p>
 <div class="alert note">
 <blockquote>
-<p>Milvus Lite 3.x utiliza un motor de almacenamiento diferente al del paquete original 2.x. No puede abrir directamente un archivo <code translate="no">.db</code> existente de la versión 2.x. Conserva la base de datos original y un entorno que pueda abrirla, exporta los datos a ese entorno e impórtalos a una nueva base de datos. La instalación de un nuevo paquete no migra el formato de almacenamiento antiguo. Consulta <a href="#Migrating-data-from-Milvus-Lite">Migración de datos desde Milvus Lite</a>.</p>
+<p>Milvus Lite 3.x utiliza un motor de almacenamiento diferente al del paquete 2.x original. No puede abrir directamente un archivo <code translate="no">.db</code> existente de la versión 2.x. Conserva la base de datos original y un entorno que pueda abrirla, exporta los datos a ese entorno e impórtalos a una nueva base de datos. La instalación de un nuevo paquete no migra el formato de almacenamiento antiguo. Consulta <a href="#Migrating-data-from-Milvus-Lite">Migración de datos desde Milvus Lite</a>.</p>
 </blockquote>
 </div>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Conectarse a Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
@@ -113,7 +113,7 @@ python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>En Milvus Lite 3.2.2, esto crea un <strong>directorio milvus_demo.db</strong> en el directorio de trabajo. El directorio contiene los archivos de almacenamiento de la base de datos; el sufijo <code translate="no">.db</code> no significa que se trate de un único archivo portátil. Reutiliza la misma ruta para volver a abrir la base de datos tras cerrar el cliente o reiniciar la aplicación.</p>
-<p>Utiliza una ruta diferente para una nueva base de datos. Para conectarte a un servidor Milvus remoto, indica su punto de conexión y tus credenciales:</p>
+<p>Utiliza una ruta diferente para una nueva base de datos. Para conectarte a un servidor Milvus remoto, introduce su punto final y tus credenciales:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;username:password&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Run-a-local-search-example" class="common-anchor-header">Ejecuta un ejemplo de búsqueda local<button data-href="#Run-a-local-search-example" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El siguiente ejemplo muestra el flujo de trabajo de la API con vectores generados. Estos vectores no codifican el significado del texto; utiliza un modelo de incrustación al crear una búsqueda semántica. Ejecuta el ejemplo con una nueva ruta de base de datos o elimina el archivo <code translate="no">demo_collection</code> existente antes de volver a ejecutarlo.</p>
+    </button></h2><p>El siguiente ejemplo muestra el flujo de trabajo de la API con vectores generados. Estos vectores no codifican el significado del texto; utiliza un modelo de incrustación al crear una búsqueda semántica. Ejecuta el ejemplo con una nueva ruta de base de datos o elimina el archivo « <code translate="no">demo_collection</code> » existente antes de volver a ejecutarlo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -217,10 +217,10 @@ client.close()
 <li>Secuencialice las escrituras en la misma colección. Las escrituras simultáneas no se admiten de forma segura.</li>
 <li>El adaptador local no implementa todas las RPC de Milvus. Las operaciones no compatibles devuelven un error « <code translate="no">UNIMPLEMENTED</code> »; no están disponibles la modificación del esquema ni la carga o liberación a nivel de partición.</li>
 <li>No se admiten la autenticación, los usuarios, los roles, el RBAC ni el TLS. No expongas el servidor local a una red no fiable.</li>
-<li>No se admiten los campos vectoriales «binary», «float16», «bfloat16» e «int8», ni los índices de cuantificación de producto.</li>
+<li>No se admiten los campos vectoriales binarios, float16, bfloat16 e int8, ni los índices de cuantificación de productos.</li>
 <li>Lite está diseñado para cargas de trabajo locales. La compatibilidad con la API local no ofrece escalabilidad distribuida ni el aislamiento y la disponibilidad de producción que ofrece una implementación remota.</li>
 </ul>
-<p>Consulte las <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#known-limitations">limitaciones conocidas por versión</a> antes de confiar en una función del servidor que el ejemplo local no utilice.</p>
+<p>Consulte las <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#known-limitations">limitaciones conocidas por versión</a> antes de confiar en una característica del servidor que el ejemplo local no pone en práctica.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migración de datos desde Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,7 +238,7 @@ client.close()
       </svg>
     </button></h2><p>Utilice <code translate="no">milvus-lite dump</code> para exportar una colección como archivos JSON de Milvus BulkWriter. Estos archivos se pueden importar a una implementación de Milvus autohospedada o a Zilliz Cloud.</p>
 <p>Instala las dependencias del Bulk Writer del SDK en el entorno que abre la base de datos de origen:</p>
-<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.3&quot;</span>
 milvus-lite dump -h
 <button class="copy-code-btn"></button></code></pre>
 <p>Cierra la aplicación de Python que gestiona la base de datos local antes de ejecutar el comando en otro proceso. Exporta la colección del ejemplo anterior:</p>

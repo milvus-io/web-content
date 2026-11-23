@@ -122,7 +122,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour trouver les entités pour lesquelles <code translate="no">status</code> n’est pas « inactif » :</p>
+    </button></h3><p>Pour trouver les entités dont l’attribut « <code translate="no">status</code> » n’est pas « inactive » :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -375,7 +375,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les opérateurs de correspondance de motifs permettent de filtrer des valeurs de chaîne à l’aide de motifs génériques ou d’expressions régulières.</p>
+    </button></h2><p>Les opérateurs de correspondance de motifs permettent de filtrer des valeurs de chaîne à l’aide de motifs avec caractères génériques ou d’expressions régulières.</p>
 <ul>
 <li><p><code translate="no">LIKE</code>: Utilisé pour faire correspondre des motifs simples avec des caractères génériques sur des valeurs de chaîne. Par exemple, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » correspond aux valeurs commençant par « <code translate="no">Prod</code> ».</p></li>
 <li><p><code translate="no">=~</code>: Permet de faire correspondre une valeur de chaîne à une expression régulière RE2. Par exemple, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> correspond aux valeurs contenant un code d'erreur tel que <code translate="no">E1001</code>.</p></li>
@@ -559,7 +559,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour trouver les entités dont l'<code translate="no">price</code> e élevé à la puissance 2 est supérieur à 1 000 :</p>
+    </button></h3><p>Pour trouver les entités dont l'<code translate="no">price</code> e élevée à la puissance 2 est supérieure à 1 000 :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -713,7 +713,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour trouver les entités dont les bits d'autorisation ne diffèrent de « <code translate="no">READ + WRITE + SHARE</code> » que par le bit « <code translate="no">WRITE</code> », utilisez l'opération XOR binaire (<code translate="no">^</code>) :</p>
+<p>Pour trouver les entités dont les bits d'autorisation ne diffèrent de « <code translate="no">READ + WRITE + SHARE</code> » que par le bit « <code translate="no">WRITE</code> », utilisez l'opérateur XOR binaire (<code translate="no">^</code>) :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -923,7 +923,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez « <code translate="no">IS NULL</code> » et « <code translate="no">IS NOT NULL</code> » pour rechercher des entités dont les valeurs de champ sont manquantes ou disponibles. Par exemple, vous pouvez rechercher des produits sans catégorie ou des entités dont les embeddings sont prêts pour la recherche. Les deux opérateurs fonctionnent sur les champs scalaires et vectoriels pris en charge, avec la même signification :</p>
+    </button></h2><p>Utilisez « <code translate="no">IS NULL</code> » et « <code translate="no">IS NOT NULL</code> » pour rechercher des entités dont les valeurs de champ sont manquantes ou disponibles. Par exemple, vous pouvez rechercher des produits sans catégorie ou des entités dont les embeddings sont prêts pour la recherche. Ces deux opérateurs fonctionnent sur les champs scalaires et vectoriels pris en charge, avec la même signification :</p>
 <table>
 <thead>
 <tr><th>Opérateur</th><th>Correspond à</th></tr>
@@ -935,8 +935,9 @@ summary: >-
 </table>
 <p>Les champs scalaires pris en charge incluent les champs booléens, numériques, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> et <code translate="no">ARRAY</code>. Ces opérateurs ne prennent pas en charge <a href="/docs/fr/text.md">les champs TEXT</a>.</p>
 <p>À partir de Milvus 3.0.3, les opérateurs prennent également en charge les champs vectoriels classiques : <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> et <code translate="no">INT8_VECTOR</code>.</p>
-<p>Les opérateurs ne tiennent pas compte de la casse : <code translate="no">IS NULL</code> et <code translate="no">is null</code> sont équivalents, tout comme <code translate="no">IS NOT NULL</code> et <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Exemple : rechercher des entités dont les valeurs sont manquantes ou disponibles<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p>Les opérateurs ne sont pas sensibles à la casse : <code translate="no">IS NULL</code> et <code translate="no">is null</code> sont équivalents, tout comme <code translate="no">IS NOT NULL</code> et <code translate="no">is not null</code>.</p>
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Exemple : rechercher des entités dont les vecteurs sont manquants<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -951,7 +952,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Supposons qu’une collection nommée <code translate="no">products</code> soit indexée et chargée sur Milvus 3.0.3 ou une version ultérieure. La collection possède une clé primaire de type <code translate="no">INT64</code> nommée <code translate="no">id</code>, un champ de type <code translate="no">VARCHAR</code> pouvant prendre la valeur NULL nommé <code translate="no">category</code>, et un champ tridimensionnel de type <code translate="no">FLOAT_VECTOR</code> pouvant prendre la valeur NULL nommé <code translate="no">embedding</code>. Elle contient déjà les entités suivantes :</p>
+    </button></h3><p>Supposons que vous ajoutiez des produits à une collection avant de générer leurs vecteurs. Dans cet exemple, la collection <code translate="no">products</code> est indexée et chargée. Elle possède une clé primaire de type <code translate="no">INT64</code> nommée <code translate="no">id</code>, un champ de type <code translate="no">VARCHAR</code> pouvant prendre la valeur NULL nommé <code translate="no">category</code>, et un champ de type <code translate="no">FLOAT_VECTOR</code> tridimensionnel pouvant prendre la valeur NULL nommé <code translate="no">embedding</code>. Le tableau suivant indique quels produits possèdent un vecteur.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -963,7 +964,7 @@ summary: >-
 </tbody>
 </table>
 <p>La création de la collection et l’insertion des données sont omises. Pour ces étapes, consultez la section « <a href="/docs/fr/nullable-and-default.md">Champs pouvant prendre la valeur NULL</a> ».</p>
-<p>Pour trouver les entités qui doivent encore être intégrées, effectuez une requête sur <code translate="no">embedding IS NULL</code>. Adaptez les paramètres de connexion à votre serveur.</p>
+<p>Pour trouver les produits qui ont encore besoin d’un vecteur, appelez <code translate="no">query()</code> avec le filtre <code translate="no">embedding IS NULL</code>. Remplacez <code translate="no">embedding</code> par le nom de votre champ vectoriel et adaptez les paramètres de connexion à votre serveur. Dans cet exemple, la requête renvoie l’ID <code translate="no">3</code> car le vecteur de ce produit est NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1135,7 +1136,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Remplacez « <code translate="no">filter</code> » dans la même requête pour vérifier un champ ou combiner des conditions :</p>
+<p>Remplacez l’ <code translate="no">filter</code> e dans la même requête pour vérifier un champ ou combiner des conditions :</p>
 <table>
 <thead>
 <tr><th>Expression de filtrage</th><th>ID correspondants</th><th>Objectif</th></tr>
@@ -1148,6 +1149,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Rechercher des entités présentant les deux valeurs</td></tr>
 </tbody>
 </table>
+<p>Si chaque produit comporte plusieurs segments et que chaque segment stocke son propre vecteur, utilisez un <a href="/docs/fr/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">filtre StructArray pour rechercher les produits dont le vecteur d’un segment est manquant</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1166,7 +1168,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les opérateurs vérifient la valeur stockée du champ. Pour un champ pouvant prendre la valeur NULL et ne disposant pas de valeur par défaut, le fait d’omettre le champ lors de l’insertion ou de le définir explicitement sur NULL entraîne le stockage de la valeur NULL. Une valeur par défaut configurée peut modifier la valeur stockée. Pour plus de détails, consultez la section <a href="/docs/fr/nullable-and-default.md">Champs pouvant prendre la valeur NULL</a> et <a href="/docs/fr/default-values.md">valeurs par défaut</a>.</p>
+    </button></h3><p>Les opérateurs vérifient la valeur du champ stockée. Pour un champ pouvant prendre la valeur NULL et ne disposant pas de valeur par défaut, le fait d’omettre le champ lors de l’insertion ou de le définir explicitement sur NULL entraîne le stockage de la valeur NULL. Une valeur par défaut configurée peut modifier la valeur stockée. Pour plus de détails, consultez la section <a href="/docs/fr/nullable-and-default.md">Champs pouvant prendre la valeur NULL</a> et <a href="/docs/fr/default-values.md">valeurs par défaut</a>.</p>
 <table>
 <thead>
 <tr><th>Type de champ</th><th>Comportement de la valeur NULL</th></tr>
@@ -1174,7 +1176,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>Une chaîne vide <code translate="no">&quot;&quot;</code> est une valeur non NULL.</td></tr>
 <tr><td><code translate="no">JSON</code></td><td>Une valeur NULL pour l’ensemble du champ correspond à <code translate="no">IS NULL</code>. Un objet JSON tel que <code translate="no">{&quot;category&quot;: null}</code> est non NULL, même si une valeur qu’il contient est NULL.</td></tr>
-<tr><td><code translate="no">ARRAY</code></td><td>Une valeur NULL pour l’ensemble du champ correspond à <code translate="no">IS NULL</code>. Les éléments individuels ne peuvent pas être NULL, et <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> ne prennent pas en charge l’accès aux éléments d’un tableau, tel que <code translate="no">tags[0]</code>. Voir <a href="/docs/fr/array_data_type.md">Champ de type tableau</a>.</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>Une valeur NULL pour l’ensemble du champ correspond à <code translate="no">IS NULL</code>. Les éléments individuels ne peuvent pas être NULL, et <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> ne prennent pas en charge l’accès aux éléments de tableau tel que <code translate="no">tags[0]</code>. Voir <a href="/docs/fr/array_data_type.md">Champ de type tableau</a>.</td></tr>
 <tr><td>Types de vecteurs ordinaires</td><td>NULL signifie que la valeur du vecteur est absente. Un vecteur dont les composantes sont égales à zéro n’est pas NULL.</td></tr>
 </tbody>
 </table>
@@ -1198,7 +1200,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
         ></path>
       </svg>
     </button></h3><p>Les mêmes opérateurs peuvent être utilisés dans les filtres de recherche, mais une entité doit également disposer d’un vecteur dans le champ recherché pour participer à la recherche par similarité.</p>
-<p>En reprenant l’exemple de données ci-dessus, considérons une recherche avec l’ <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
+<p>En reprenant l’exemple de données ci-dessus, considérons une recherche avec <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
 <table>
 <thead>
 <tr><th>Expression de filtre</th><th>Entités éligibles à la recherche par similarité</th><th>Raison</th></tr>
@@ -1206,7 +1208,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>L'entité « <code translate="no">2</code> » n'a pas de catégorie, mais possède un vecteur « <code translate="no">embedding</code> ».</td></tr>
 <tr><td><code translate="no">embedding IS NULL</code></td><td>Aucune</td><td>L'<code translate="no">3</code> d'entité correspond au filtre, mais ne dispose d'aucun vecteur d'<code translate="no">embedding</code> à comparer avec le vecteur de requête.</td></tr>
-<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td><code translate="no">embedding</code> Les deux entités possèdent un vecteur d’ .</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td><code translate="no">embedding</code> Les deux entités possèdent un vecteur d' .</td></tr>
 </tbody>
 </table>
 <p>Pour récupérer les embeddings manquants, utilisez « <code translate="no">query()</code> » ; une recherche sur « <code translate="no">embedding</code> » avec « <code translate="no">embedding IS NULL</code> » est valide mais ne renvoie aucun résultat. La recherche vectorielle ignore déjà les embeddings NULL, donc « <code translate="no">embedding IS NOT NULL</code> » ne réduit pas davantage le nombre de candidats. Le classement, les autres filtres et la limite de recherche déterminent toujours les résultats renvoyés.</p>

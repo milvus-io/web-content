@@ -51,7 +51,7 @@ title: ترقية Milvus Standalone باستخدام Helm Chart
 <p><strong>قيود قائمة انتظار الرسائل</strong>: عند الترقية إلى Milvus v3.0.5، يجب الحفاظ على اختيارك الحالي لقائمة انتظار الرسائل. لا يُدعم التبديل بين أنظمة قائمة انتظار الرسائل المختلفة أثناء الترقية. سيتوفر دعم تغيير أنظمة قائمة انتظار الرسائل في الإصدارات المستقبلية.</p>
 <div class="alert warning">
 <p>لا تقم بتغيير مخطط Helm أو الرجوع إلى إصدار أقدم منه كجزء من هذا الإجراء. احتفظ بإصدار المخطط المثبت بالفعل لإصدار Helm الخاص بك. احتفظت القاعدة المرجعية التي تم اختبارها بمخطط Helm 5.0.22 وقامت فقط بتغيير علامة صورة Milvus إلى <code translate="no">v3.0.5</code>.</p>
-<p>لا يتحقق هذا الإجراء من صحة الرجوع إلى إصدار أقدم أو التراجع عن الترقية عن طريق إعادة صورة Milvus إلى الإصدار 2.6.x. بعد أن تقوم الإصدارة v3.0.5 بكتابة البيانات، قد يفشل التراجع الذي يقتصر على الصورة في قراءة الحالة المحدثة. إذا فشل الترقية، أوقف عمليات الكتابة واستخدم خطة استعادة تعيد البيانات الوصفية قبل الترقية ونسخ البيانات الدائمة الاحتياطية. تحقق من صحة خطة الاستعادة في بيئة غير إنتاجية أولاً.</p>
+<p>لا يتحقق هذا الإجراء من صحة الرجوع إلى إصدار أقدم أو التراجع عن الترقية عن طريق إعادة صورة Milvus إلى الإصدار 2.6.x. بعد أن تقوم الإصدارة v3.0.5 بكتابة البيانات، قد تفشل عملية التراجع الخاصة بالصورة فقط في قراءة الحالة المحدثة. إذا فشلت عملية الترقية، فقم بإيقاف عمليات الكتابة واستخدم خطة استعادة تعيد البيانات الوصفية قبل الترقية ونسخ البيانات الدائمة الاحتياطية. تحقق من صحة خطة الاستعادة في بيئة غير إنتاجية أولاً.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">عملية الترقية<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: ترقية Milvus Standalone باستخدام Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">الخطوة 1: تحديث مستودع Helm<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">الخطوة 1: النسخ الاحتياطي لقيم Helm الحالية<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,14 +83,35 @@ title: ترقية Milvus Standalone باستخدام Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>أضف مستودع Helm الخاص بـ Milvus أو قم بتحديثه:</p>
+    </button></h3><p>احفظ القيم الكاملة للإصدار الحالي قبل تغيير النشر:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">الخطوة 2: تحديث مستودع Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>أضف مستودع Milvus Helm أو قم بتحديثه:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 تم أرشفة مستودع Milvus Helm Charts الموجود على <code translate="no">https://milvus-io.github.io/milvus-helm/</code>. استخدم المستودع الجديد <code translate="no">https://zilliztech.github.io/milvus-helm/</code> لإصدارات المخططات 4.0.31 والإصدارات الأحدث.
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">الخطوة 2: ترقية Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">الخطوة 3: ترقية Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,7 +138,7 @@ helm repo update zilliztech
   --<span class="hljs-built_in">wait</span> \
   --<span class="hljs-built_in">timeout</span> 20m
 <button class="copy-code-btn"></button></code></pre>
-<p>يحتفظ الخيار <code translate="no">--reset-then-reuse-values</code> بالقيم من الإصدار السابق مع تطبيق التجاوز الصريح للصورة على الإعدادات الافتراضية المختارة لـ Chart.</p>
+<p>يحتفظ خيار <code translate="no">--reset-then-reuse-values</code> بالقيم من الإصدار السابق مع تطبيق التجاوز الصريح للصورة على الإعدادات الافتراضية المختارة لـ Chart.</p>
 <h2 id="Verify-the-upgrade" class="common-anchor-header">تحقق من الترقية<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

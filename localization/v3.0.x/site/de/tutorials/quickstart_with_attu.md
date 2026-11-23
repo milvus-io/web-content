@@ -58,7 +58,7 @@ title: Schnellstart mit Attu – der Web-Benutzeroberfläche von Milvus
 <li>Eine mit Ihrem Server kompatible Attu-Version. Attu 3.0 unterstützt Milvus 2.6.0 und höher, einschließlich Milvus 3.x; nutzen Sie die <a href="https://github.com/zilliztech/attu#compatibility">Kompatibilitätstabelle</a> für ältere Server.</li>
 <li>Eine Python-Umgebung mit einer PyMilvus-Version, die mit Ihrem Server kompatibel ist. Siehe <a href="/docs/de/install-pymilvus.md">„Install Milvus Python SDK</a> “ und <a href="/docs/de/release_notes.md">„Release Notes</a>“. Für die in diesem Dokumentationszweig verwendete SDK-Version installieren Sie die Abhängigkeiten „model extra“ und „progress-bar“:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>Die Schritte zur Datenaufbereitung nutzen außerdem „ <code translate="no">wget</code> “ und „ <code translate="no">unzip</code> “. Die Einbettungsfunktion lädt ihr Modell bei der ersten Verwendung herunter; stellen Sie daher den Netzwerkzugriff auf den Modellhost sicher oder bereiten Sie den Modell-Cache im Voraus vor. Screenshots veranschaulichen den Arbeitsablauf; Beschriftungen und Layouts können je nach Attu-Version variieren.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Desktop-Anwendung installieren<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -288,7 +288,7 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Aktualisieren Sie in Attu die Sammlungsliste und öffnen Sie „ <code translate="no">attu_tutorial</code> “. Das Schnellkonfigurationsschema enthält einen Primärschlüssel „ <code translate="no">id</code> “ und ein Feld „ <code translate="no">vector</code> “, dessen Dimension „ <code translate="no">embedding_dim</code> “ lautet, mit der Metrik „ <code translate="no">Inner Product (IP)</code> “. Die Werte für „ <code translate="no">text</code> “ werden im dynamischen Feld gespeichert. Siehe <a href="/docs/de/create-collection.md">„Sammlung erstellen“</a> und <a href="/docs/de/enable-dynamic-field.md">„Dynamisches Feld“</a> für explizite Schemaoptionen. Die Anzahl der Entitäten hängt vom extrahierten Beispieltext ab; verwenden Sie daher die Anzahl der von Ihnen eingefügten Zeilen anstelle der in den Screenshots angegebenen Zahl.</p>
+    </button></h3><p>Aktualisieren Sie in Attu die Sammlungsliste und öffnen Sie „ <code translate="no">attu_tutorial</code> “. Das Schnellkonfigurationsschema enthält einen Primärschlüssel „ <code translate="no">id</code> “ und ein Feld „ <code translate="no">vector</code> “, dessen Dimension „ <code translate="no">embedding_dim</code> “ lautet, mit einer Metrik „ <code translate="no">Inner Product (IP)</code> “. Die Werte für „ <code translate="no">text</code> “ werden im dynamischen Feld gespeichert. Siehe <a href="/docs/de/create-collection.md">„Sammlung erstellen“</a> und <a href="/docs/de/enable-dynamic-field.md">„Dynamisches Feld“</a> für explizite Schemaoptionen. Die Anzahl der Entitäten hängt vom extrahierten Beispieltext ab; verwenden Sie daher die Anzahl der von Ihnen eingefügten Zeilen anstelle der in den Screenshots angegebenen Zahl.</p>
 <p>Zudem können wir die eingefügten Daten einsehen, darunter ID, Vektor-Einbettungen und dynamische Felder, in denen Metadaten wie Textinhalte gespeichert sind. Die Benutzeroberfläche unterstützt das Filtern und Abfragen anhand festgelegter Bedingungen oder dynamischer Felder.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -330,7 +330,7 @@ client.insert(collection_name=collection_name, data=data)
 <li>Klicken Sie auf die Schaltfläche <strong>„Zufällige Daten generieren“</strong>, um Testabfragen zu erstellen.</li>
 <li>Klicken Sie auf <strong>„Suchen“</strong>, um Ergebnisse auf Basis der generierten Daten abzurufen.</li>
 </ol>
-<p>Die Ergebnisse werden in einer Tabelle angezeigt, die IDs, Ähnlichkeitswerte und dynamische Felder für jede übereinstimmende Entität enthält. Zufällige Vektoren dienen dazu, den Such-Workflow zu testen, nicht die semantische Relevanz. Um eine aussagekräftige Textabfrage zu erstellen, kodieren Sie diese mit derselben Funktion „ <code translate="no">embedding_model.encode_queries()</code> “, die für diese Sammlung verwendet wurde, und führen Sie dann die Suche mit diesem Vektor durch. Ein Python-Beispiel finden Sie unter <a href="/docs/de/single-vector-search.md">„Single-Vector Search</a> “.</p>
+<p>Die Ergebnisse werden in einer Tabelle angezeigt, die IDs, Ähnlichkeitswerte und dynamische Felder für jede übereinstimmende Entität enthält. Zufällige Vektoren dienen dazu, den Suchworkflow zu testen, nicht die semantische Relevanz. Um eine aussagekräftige Textabfrage zu erstellen, kodieren Sie diese mit derselben Funktion „ <code translate="no">embedding_model.encode_queries()</code> “, die für diese Sammlung verwendet wurde, und führen Sie dann die Suche mit diesem Vektor durch. Ein Python-Beispiel finden Sie unter <a href="/docs/de/single-vector-search.md">„Single-Vector Search</a> “.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
@@ -353,7 +353,7 @@ client.insert(collection_name=collection_name, data=data)
     </button></h3><p>Klicken Sie im Ergebnisbereich auf die Schaltfläche <strong>„Erkunden“</strong>, um die Beziehungen zwischen dem Abfragevektor und den Suchergebnissen in einer <strong>Knowledge-Graph-ähnlichen Struktur</strong> zu visualisieren.</p>
 <ul>
 <li>Der <strong>zentrale Knoten</strong> stellt den Suchvektor dar.</li>
-<li>Die <strong>verbundenen Knoten</strong> stellen die Suchergebnisse dar; durch Anklicken werden die detaillierten Informationen des entsprechenden Knotens angezeigt.</li>
+<li>Die <strong>verbundenen Knoten</strong> stellen die Suchergebnisse dar; wenn Sie darauf klicken, werden die detaillierten Informationen des entsprechenden Knotens angezeigt.</li>
 </ul>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
@@ -395,6 +395,6 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu vereinfacht die Verwaltung und Visualisierung von in Milvus gespeicherten Vektordaten. Von der Dateneingabe über die Ausführung von Abfragen bis hin zur interaktiven Erkundung bietet es eine intuitive Benutzeroberfläche für die Bearbeitung komplexer Vektorsuchaufgaben. Mit Funktionen wie der Unterstützung dynamischer Schemata, grafischen Suchvisualisierungen und flexiblen Abfragefiltern ermöglicht Attu den Nutzern die effektive Analyse umfangreicher Datensätze.</p>
+    </button></h2><p>Attu vereinfacht die Verwaltung und Visualisierung von in Milvus gespeicherten Vektordaten. Von der Dateneingabe über die Ausführung von Abfragen bis hin zur interaktiven Erkundung bietet es eine intuitive Benutzeroberfläche für die Bearbeitung komplexer Vektorsuchaufgaben. Mit Funktionen wie der Unterstützung dynamischer Schemata, grafischen Suchvisualisierungen und flexiblen Abfragefiltern ermöglicht Attu den Nutzern die effektive Analyse groß angelegter Datensätze.</p>
 <p>Durch die Nutzung der visuellen Erkundungstools von Attu können Nutzer ihre Daten besser verstehen, verborgene Zusammenhänge erkennen und datengestützte Entscheidungen treffen. Beginnen Sie noch heute mit Attu und Milvus, Ihre eigenen Datensätze zu erkunden!</p>
 <hr>

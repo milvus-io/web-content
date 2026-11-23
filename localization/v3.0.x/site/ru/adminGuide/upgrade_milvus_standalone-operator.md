@@ -47,7 +47,7 @@ title: Обновление автономной версии Milvus с помо
 <li><code translate="no">kubectl</code> доступ к кластеру</li>
 <li>Полный манифест пользовательского ресурса (CR) Milvus, используемый для существующего развертывания</li>
 <li>Метод установки и манифесты, используемые для существующего Milvus Operator</li>
-<li>Актуальная резервная копия метаданных Milvus и постоянных данных</li>
+<li>Актуальная резервная копия метаданных и постоянных данных Milvus</li>
 </ul>
 <p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v3.0.5 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</p>
 <div class="alert warning">
@@ -88,8 +88,8 @@ title: Обновление автономной версии Milvus с помо
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Используйте исходный манифест вашего существующего развертывания в качестве манифеста обновления. Не применяйте экспортированный файл резервной копии напрямую, не удалив сначала управляемые сервером метаданные и поля состояния.</p>
-<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Шаг 2: Проверьте версию Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
+<p>Используйте исходный манифест вашего существующего развертывания (в данном руководстве —<code translate="no">milvus.yaml</code> ) в качестве манифеста обновления. Не применяйте экспортированный файл резервной копии напрямую, не удалив сначала управляемые сервером метаданные и поля состояния.</p>
+<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Шаг 2: Проверка версии Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -109,7 +109,7 @@ title: Обновление автономной версии Milvus с помо
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>В ходе проверенного обновления версия Milvus Operator осталась 1.3.0. Сохраните версию Operator, которая в настоящее время управляет вашим развертыванием Milvus 2.6.x, если только ваша политика поддержки не требует отдельного обновления Operator. Не понижайте версию более нового Operator до протестированной версии. Если вам необходимо изменить версию Operator, используйте тот же метод установки (Helm или <code translate="no">kubectl</code> ), а также то же имя релиза и пространство имён, что и в существующей установке, а затем проверьте изменение Operator перед обновлением Milvus CR.</p>
+<p>В ходе проверенного обновления версия Milvus Operator осталась 1.3.0. Сохраните версию Operator, которая в настоящее время управляет вашим развертыванием Milvus 2.6.x, если только ваша политика поддержки не требует отдельного обновления Operator. Не переходите с более новой версии Operator на протестированную версию. Если вам необходимо изменить версию Operator, используйте тот же метод установки (Helm или <code translate="no">kubectl</code> ), а также то же имя выпуска и пространство имён, что и в существующей установке, а затем проверьте изменение Operator перед обновлением Milvus CR.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Шаг 3: Обновите образ Milvus<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,4 +163,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Убедитесь, что в CR Milvus указано <code translate="no">Healthy</code>, текущий образ — <code translate="no">milvusdb/milvus:v3.0.5</code>, а существующие коллекции по-прежнему доступны для запросов и поиска. Выполните эти проверки, прежде чем включать какие-либо функции, специфичные для версии v3.0.5.</p>
+<p>Убедитесь, что CR Milvus сообщает о <code translate="no">Healthy</code>, текущий образ — <code translate="no">milvusdb/milvus:v3.0.5</code>, а существующие коллекции по-прежнему доступны для запросов и поиска. Выполните эти проверки, прежде чем включать какие-либо функции, специфичные для версии v3.0.5.</p>
+<div class="alert note">
+<p>Обновление до Milvus 3.0 не приводит к включению Storage V3. После проверки обновления ознакомьтесь с <a href="/docs/ru/storage-v3.md">Storage V3</a>, прежде чем включать функции, зависящие от него. После того как Milvus запишет данные в Storage V3, переход на более старую версию Milvus, не поддерживающую чтение Storage V3, не допускается.</p>
+</div>

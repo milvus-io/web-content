@@ -37,7 +37,7 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请选择一种方式：使用 Milvus Lite 进行本地演示，或连接到您已部署的 Milvus 服务器。两种方式均可使用下文中的数据收集和查询示例。</p>
+    </button></h2><p>请选择一种方式：使用 Milvus Lite 进行本地演示，或连接到您已部署的 Milvus 服务器。两种方式均可使用下文中的 Collection 和查询示例。</p>
 <h3 id="Use-a-local-database" class="common-anchor-header">使用本地数据库<button data-href="#Use-a-local-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,13 +54,13 @@ title: 快速入门
         ></path>
       </svg>
     </button></h3><p>本指南使用 Milvus Lite，这是 PyMilvus Python SDK 的可选依赖项，可在本地运行。如需进行服务器部署，请参阅<a href="/docs/zh/install_standalone-docker.md">Docker</a>或<a href="/docs/zh/install_cluster-milvusoperator.md">Kubernetes</a>。</p>
-<p>在 macOS、Linux 或 Windows 系统上使用 Python 3.10 或更高版本，并确保 Milvus Lite 的依赖项（如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）的二进制 wheel 包已安装。示例中使用 PyMilvus 3.0.2 和 Milvus Lite 3.2.2。请显式安装这两个包：</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<p>在 macOS、Linux 或 Windows 系统上使用 Python 3.10 或更高版本，并确保 Milvus Lite 的依赖项（如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）的二进制 wheel 包已安装。示例中使用的是 PyMilvus 3.0.3 和 Milvus Lite 3.2.2。请显式安装这两个包：</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Windows 上，pip 会跳过 Milvus 3.0.2 的<code translate="no">milvus-lite</code> 附加组件；上述命令明确指明了<code translate="no">milvus-lite</code> ，因此该本地路径在此处同样有效。有关仅安装 SDK 的要求，请参阅<a href="/docs/zh/install-pymilvus.md">《安装 Milvus Python SDK》</a>。</p>
+<p>在 Windows 上，pip 会跳过 Milvus 3.0.3 的<code translate="no">milvus-lite</code> 附加组件；上述命令明确指明了<code translate="no">milvus-lite</code> ，因此该本地路径在此处同样有效。有关仅安装 SDK 的要求，请参阅<a href="/docs/zh/install-pymilvus.md">《安装 Milvus Python SDK》</a>。</p>
 <div class="alert note">
 <blockquote>
-<p>如果您使用的是 Google Colab，为了启用刚安装的依赖项，可能需要<strong>重启运行时</strong>。（点击屏幕顶部的“Runtime”菜单，然后从下拉菜单中选择“Restart session”）。</p>
+<p>如果您正在使用 Google Colab，为了启用刚安装的依赖项，可能需要<strong>重启运行时</strong>。（点击屏幕顶部的“Runtime”菜单，然后从下拉菜单中选择“Restart session”）。</p>
 </blockquote>
 </div>
 <h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">使用现有的 Milvus 服务器<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
@@ -78,8 +78,8 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果您已通过 Docker 或 Kubernetes 安装了 Milvus，或者拥有 Zilliz Cloud 端点，则只需安装 SDK 即可。PyMilvus 3.0.2 要求 Python 3.9 或更高版本；在此路径下，您无需本地 Lite 依赖项：</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+    </button></h3><p>如果您已通过 Docker 或 Kubernetes 安装了 Milvus，或者拥有 Zilliz Cloud 端点，则只需安装 SDK 即可。PyMilvus 3.0.3 要求 Python 3.9 或更高版本；在此路径下，您无需本地 Lite 依赖项：</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>请使用下一节中的服务器连接代码块，而非打开<code translate="no">.db</code> 路径。请确认 SDK 版本与您的服务器兼容；请参阅<a href="/docs/zh/release_notes.md">《发布说明》</a>。</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">设置向量数据库<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请从以下连接块中选择一个。</p>
+    </button></h2><p>请从以下连接模块中选择一个。</p>
 <h3 id="Local-Milvus-Lite" class="common-anchor-header">本地 Milvus Lite<button data-href="#Local-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,13 +113,13 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要创建本地 Milvus 向量数据库，请使用存储路径（例如<code translate="no">milvus_demo.db</code> ）实例化一个<code translate="no">MilvusClient</code> 。即使该路径名称以<code translate="no">.db</code> 结尾，Milvus Lite 3.x 仍会在该路径下创建一个目录。</p>
+    </button></h3><p>要创建本地 Milvus 向量数据库，请使用存储路径（例如<code translate="no">milvus_demo.db</code> ）实例化<code translate="no">MilvusClient</code> 。即使路径名称以<code translate="no">.db</code> 结尾，Milvus Lite 3.x 仍会在该路径下创建目录。</p>
 <p>如果您有由 Milvus Lite 2.x 创建的数据库文件，请在迁移前使用旧版本将其导出。请勿直接使用 Milvus Lite 3.x 打开该文件。请参阅《<a href="/docs/zh/milvus_lite.md#Migrating-data-from-Milvus-Lite">从 Milvus Lite 迁移数据</a>》。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Existing-Milvus-server" class="common-anchor-header">现有 Milvus 服务器<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
+<h3 id="Existing-Milvus-server" class="common-anchor-header">现有的 Milvus 服务器<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,7 +139,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>若您已更改凭据，请使用新配置的凭据。下文示例均使用您选择的<code translate="no">client</code> ；这些示例无需单独的本地 Lite 数据库。</p>
+<p>若您已更改凭据，请使用新配置的凭据。下文示例均使用您所选的<code translate="no">client</code> ；无需单独的本地Lite数据库。</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">创建Collection<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,10 +165,10 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述配置中，</p>
 <ul>
-<li>主键和向量字段使用其默认名称（“id”和“向量”）。</li>
+<li>主键和向量字段均使用其默认名称（“id”和“向量”）。</li>
 <li>度量类型（向量距离定义）设置为默认值（<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>）。</li>
 <li>主键字段接受整数，且不自动递增（即不使用<a href="https://milvus.io/docs/schema.md">auto-id 功能</a>）。
-此外，您还可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">说明</a>正式定义 Collection 的 Schema。</li>
+此外，您还可以按照此<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/create_schema.md">说明</a>正式定义 Collection 的 Schema。</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">准备数据<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本指南中，我们将使用向量对文本进行语义搜索。我们需要通过下载嵌入模型来为文本生成向量。这可以通过使用<code translate="no">pymilvus[model]</code> 库中的实用函数轻松实现。</p>
+    </button></h2><p>在本指南中，我们将使用向量对文本进行语义搜索。我们需要通过下载 Embeddings 模型来为文本生成向量。这可以通过使用<code translate="no">pymilvus[model]</code> 库中的实用函数轻松实现。</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">用向量表示文本<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -202,9 +202,9 @@ client.create_collection(
         ></path>
       </svg>
     </button></h2><p>首先，安装模型库。该包包含 PyTorch 等必要的机器学习工具。如果您的本地环境从未安装过 PyTorch，则下载该包可能需要一些时间。</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用默认模型生成向量嵌入。Milvus 要求数据以字典列表的形式输入，其中每个字典代表一条数据记录，称为实体。</p>
+<p>使用默认模型生成向量Embeddings。Milvus 要求数据以字典列表的形式输入，其中每个字典代表一条数据记录，称为实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># If connection to https://huggingface.co/ failed, uncomment the following path</span>
@@ -254,7 +254,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果因网络问题无法下载模型，作为临时解决方案，您可以使用随机向量来表示文本，并仍可完成本示例。请注意，由于这些向量是虚拟的，因此搜索结果将无法反映语义相似性。</p>
+    </button></h2><p>若因网络问题无法下载模型，作为临时解决方案，您可以使用随机向量来表示文本，并仍可完成本示例。请注意，由于这些向量是虚拟的，因此搜索结果将无法反映语义相似性。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -420,7 +420,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>query() 是一项操作，用于检索所有符合特定条件（例如<a href="https://milvus.io/docs/boolean.md">筛选表达式</a>或特定 ID）的实体。</p>
+    </button></h3><p>query() 是一项操作，用于检索所有符合特定条件（例如<a href="https://milvus.io/docs/boolean.md">筛选表达式</a>或匹配某些 ID）的实体。</p>
 <p>例如，检索所有标量字段具有特定值的实体：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -529,7 +529,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <li>使用<a href="/docs/zh/schema-hands-on.md">“搜索数据模型设计”</a>为您的数据设计字段和筛选条件。</li>
 <li>通过<a href="/docs/zh/install-overview.md">Milvus 部署选项</a>比较本地和服务器环境的要求。</li>
 </ul>
-<p>Milvus Lite 非常适合用于本地 Python 程序的入门。如果您拥有大规模数据，或者希望在生产环境中使用 Milvus，可以了解如何在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。 Milvus 的所有部署模式均采用相同的 API，因此若切换至其他部署模式，您的客户端代码无需进行大幅修改。只需指定任意位置部署的 Milvus 服务器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和令牌</a>即可：</p>
+<p>Milvus Lite 非常适合用于本地 Python 程序的入门。如果您拥有大规模数据，或者希望在生产环境中使用 Milvus，可以了解如何在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。 Milvus 的所有部署模式均采用相同的 API，因此若切换至其他部署模式，您的客户端代码无需进行大幅修改。只需指定部署在任意位置的 Milvus 服务器的<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Client/MilvusClient.md">URI 和令牌</a>即可：</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>若要将数据从 Milvus Lite 迁移到部署在 Docker 或 Kubernetes 上的 Milvus，请参阅《<a href="/docs/zh/milvus_lite.md#Migrating-data-from-Milvus-Lite">从 Milvus Lite 迁移数据</a>》。</p>

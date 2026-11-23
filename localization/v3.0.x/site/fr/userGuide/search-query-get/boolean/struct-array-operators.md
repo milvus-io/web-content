@@ -32,7 +32,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">element_filter</code></td><td>Recherche les éléments Struct qui satisfont un prédicat scalaire.</td><td>Dans une recherche au niveau des éléments, les résultats correspondants peuvent inclure des décalages d’éléments. Dans une requête au niveau des lignes ou une recherche filtrée, la forme du résultat dépend de l’API et des champs de sortie.</td></tr>
 <tr><td><code translate="no">MATCH_*</code></td><td>Sélectionnez les entités en fonction du nombre d’éléments de structure satisfaisant un prédicat scalaire.</td><td>Filtrage au niveau des lignes. Ces opérateurs ne renvoient pas d'offset d'élément en eux-mêmes.</td></tr>
-<tr><td>Prédicats de chemin au niveau des lignes</td><td>Vérifier la position d’un élément, compter les éléments de structure ou vérifier les valeurs de sous-champs sur plusieurs éléments sans prédicat de type « <code translate="no">$[...]</code> ».</td><td>Filtrage au niveau des lignes. Ces prédicats ne renvoient pas d’offset d’élément.</td></tr>
+<tr><td>Prédicats de chemin au niveau des lignes</td><td>Vérifier la position d’un élément, compter les éléments Struct ou vérifier les valeurs de sous-champs sur plusieurs éléments sans prédicat de type « <code translate="no">$[...]</code> ».</td><td>Filtrage au niveau des lignes. Ces prédicats ne renvoient pas d’offset d’élément.</td></tr>
 </tbody>
 </table>
 <p>Utilisez des sous-champs scalaires et, à partir de Milvus 3.0.6, des sous-champs de type tableau dans les opérateurs StructArray. Les sous-champs vectoriels sont utilisés par les chemins de recherche vectoriels et ne constituent pas des entrées de prédicats scalaires.</p>
@@ -307,7 +307,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Outre « <code translate="no">element_filter</code> » et « <code translate="no">MATCH_*</code> », une expression de filtrage standard peut faire référence directement à un champ de StructArray ou à l’un de ses sous-champs scalaires. Ces prédicats sont évalués au niveau de l’entité et ne renvoient pas de décalages d’éléments.</p>
+    </button></h2><p>Outre ` <code translate="no">element_filter</code> ` et ` <code translate="no">MATCH_*</code>`, une expression de filtrage classique peut faire référence directement à un champ de StructArray ou à l’un de ses sous-champs scalaires. Ces prédicats sont évalués au niveau de l’entité et ne renvoient pas de décalages d’éléments.</p>
 <h3 id="Subfield-access" class="common-anchor-header">Accès aux sous-champs<button data-href="#Subfield-access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,7 +357,7 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Accéder aux sous-champs d’un tableau par position<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>À partir de Milvus 3.0.6, un chemin positionnel peut également référencer un sous-champ scalaire <code translate="no">ARRAY</code>. <code translate="no">chunks[0][tags]</code> correspond au tableau interne du premier élément Struct. Il prend en charge <code translate="no">==</code> et <code translate="no">!=</code> avec un littéral de tableau, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> et <code translate="no">array_length</code>. Les opérateurs de comparaison, <code translate="no">in</code>, <code translate="no">like</code>, ainsi que les opérations arithmétiques sur celui-ci sont rejetés.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Accéder aux sous-champs d’un tableau par position<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>À partir de Milvus 3.0.6, un chemin positionnel peut également faire référence à un sous-champ scalaire <code translate="no">ARRAY</code>. <code translate="no">chunks[0][tags]</code> est le tableau interne du premier élément Struct. Il prend en charge <code translate="no">==</code> et <code translate="no">!=</code> avec un littéral de tableau, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> et <code translate="no">array_length</code>. Les opérateurs de comparaison, <code translate="no">in</code>, <code translate="no">like</code>, ainsi que les opérations arithmétiques sur celui-ci sont rejetés.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
 array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
 
@@ -368,7 +368,7 @@ chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&
 array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">array_contains*</code>, <code translate="no">==</code> et <code translate="no">!=</code> sur le chemin du sous-champ de tableau complet, tel que <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code>, sont rejetés car ce chemin contient un tableau interne par élément de structure. Utilisez plutôt <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code>.</p>
-<h4 id="Count-Struct-elements" class="common-anchor-header">Nombre d’éléments de la structure</h4><p>Utilisez <code translate="no">array_length(structArrayField)</code> pour filtrer en fonction du nombre d’éléments Struct dans une entité. <code translate="no">array_length</code> sur un chemin de sous-champ, tel que <code translate="no">array_length(chunks[section])</code>, renvoie le même nombre, car chaque sous-champ contient une valeur par élément Struct.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">Compter les éléments de la structure</h4><p>Utilisez <code translate="no">array_length(structArrayField)</code> pour filtrer en fonction du nombre d’éléments Struct dans une entité. <code translate="no">array_length</code> sur un chemin de sous-champ, tel que <code translate="no">array_length(chunks[section])</code>, renvoie le même nombre, car chaque sous-champ contient une valeur par élément Struct.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
@@ -418,7 +418,7 @@ chunks is null
 # Entities that have a chunks value.
 chunks is not null
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour connaître les conditions d’applicabilité, consultez la section « <a href="/docs/fr/structarray-limits.md#Nullable-and-dynamic-schema-limits">Limites des schémas dynamiques et pouvant contenir des valeurs NULL</a> ». L’entité A et l’entité B possèdent toutes deux des valeurs StructArray non NULL.</p>
+<p>Pour connaître les conditions d’applicabilité, consultez la section « <a href="/docs/fr/structarray-limits.md#Nullable-and-dynamic-schema-limits">Limites des schémas dynamiques et pouvant accepter la valeur NULL</a> ». L’entité A et l’entité B possèdent toutes deux des valeurs StructArray non NULL.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Prédicats pris en charge<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -482,7 +482,28 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 <span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<p>Les chemins positionnels au niveau des lignes suivent la même règle : <code translate="no">chunks[0][lang] == &quot;en&quot;</code> est indéterminé lorsque la valeur <code translate="no">lang</code> du premier élément est nulle, lorsque l’entité ne comporte aucun élément à cette position, ou lorsque le champ StructArray est nul ; l’entité ne correspond donc pas.</p>
+<p>Les chemins positionnels au niveau des lignes suivent la même règle : <code translate="no">chunks[0][lang] == &quot;en&quot;</code> est inconnu lorsque la valeur <code translate="no">lang</code> du premier élément est nulle, lorsque l’entité ne comporte aucun élément à cette position, ou lorsque le champ StructArray est nul ; l’entité ne correspond donc pas.</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">Rechercher les entités dont certains vecteurs sont manquants dans les éléments StructArray<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Supposons que chaque produit stocke des fragments de sa description dans un champ StructArray nommé <code translate="no">chunks</code>. Chaque fragment possède un sous-champ de type vecteur nommé <code translate="no">embedding</code> qui autorise la valeur NULL lorsque son vecteur est manquant. Le produit A comporte deux fragments, dont l’un est dépourvu de vecteur. Les deux fragments du produit B possèdent des vecteurs.</p>
+<p>Pour la configuration du schéma, consultez la section « <a href="/docs/fr/create-structarray-field.md#Allow-null-values-in-Struct-elements">Autoriser les valeurs NULL dans les éléments Struct</a> ».</p>
+<p>Pour rechercher les produits dont au moins un fragment ne possède pas de vecteur, appliquez ce filtre à ` <code translate="no">query()</code>`.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> fait référence au vecteur du bloc actuel. <code translate="no">MATCH_ANY</code> sélectionne un produit lorsqu’au moins un de ses blocs possède un vecteur NULL. La requête renvoie le produit A.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Prédicats non pris en charge<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -498,10 +519,10 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les prédicats d’ <code translate="no">$[...]</code> au niveau des éléments ne prennent pas en charge :</p>
+    </button></h2><p>Les prédicats « <code translate="no">$[...]</code> » au niveau des éléments ne prennent pas en charge :</p>
 <ul>
 <li><p>Les fonctions de correspondance de texte, telles que ` <code translate="no">text_match(field, &quot;...&quot;)</code> ` ou ` <code translate="no">phrase_match(field, &quot;...&quot;)</code>`.</p></li>
-<li><p>La syntaxe JSON Path, la fonction ` <code translate="no">exists</code> ` appliquée à des chemins JSON, ou les fonctions JSON telles que ` <code translate="no">json_contains</code>`, ` <code translate="no">json_contains_all</code>` ou ` <code translate="no">json_contains_any</code>`.</p></li>
+<li><p>La syntaxe des chemins JSON, l’ <code translate="no">exists</code> sur des chemins JSON, ou les fonctions JSON telles que <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code> ou <code translate="no">json_contains_any</code>.</p></li>
 <li><p>Les fonctions de conteneur de tableaux telles que <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> ou <code translate="no">array_length</code> sur <code translate="no">$[subfield]</code> d’un sous-champ scalaire. Utilisez plutôt ces fonctions sur un chemin de sous-champ tel que <code translate="no">chunks[section]</code> dans un prédicat au niveau de la ligne. À partir de Milvus 3.0.6, elles sont prises en charge sur <code translate="no">$[tags]</code> pour les sous-champs scalaires <code translate="no">ARRAY</code>.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> ou <code translate="no">$[subfield] is not null</code> avant la version 3.0.6 de Milvus.</p></li>
 </ul>
@@ -531,7 +552,7 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
     </button></h2><p>Respectez les règles syntaxiques suivantes :</p>
 <ul>
 <li><p><code translate="no">MATCH_*</code> les noms d’opérateurs ne sont pas sensibles à la casse.</p></li>
-<li><p>N'utilisez « <code translate="no">$[subfield]</code> » qu'à l'intérieur de prédicats de type « <code translate="no">element_filter</code> » ou « <code translate="no">MATCH_*</code> ». Par exemple, « <code translate="no">array_length($[section])</code> » est rejeté.</p></li>
+<li><p>Utilisez « <code translate="no">$[subfield]</code> » uniquement à l’intérieur de prédicats de type « <code translate="no">element_filter</code> » ou « <code translate="no">MATCH_*</code> ». Par exemple, « <code translate="no">array_length($[section])</code> » est rejeté.</p></li>
 <li><p>N’utilisez pas « <code translate="no">$[subfield]</code> » comme chemin JSON, conteneur de tableau ou référence de champ vectoriel.</p></li>
 <li><p>Ne pas imbriquer <code translate="no">element_filter</code> ou <code translate="no">MATCH_*</code> à l'intérieur d'un autre opérateur StructArray.</p></li>
 <li><p>Utilisez des <code translate="no">threshold=N</code> nommés pour <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> et <code translate="no">MATCH_EXACT</code>.</p></li>

@@ -113,11 +113,17 @@ standalone.bat start
 <li>Milvus는 작업 디렉터리의 <strong>volumes/milvus에</strong> 데이터를 저장합니다.</li>
 <li>구성 변경 사항은 작업 디렉터리의 <strong>user.yaml</strong> 파일에 기록해야 합니다. 변경 후에는 컨테이너를 다시 시작하십시오.</li>
 </ul>
+<p><code translate="no">start</code> 명령어는 ' <code translate="no">Wait for Milvus Starting...</code> '을 출력한 후, <code translate="no">docker ps</code> 에서 컨테이너 상태가 'healthy'로 보고될 때까지 1초마다 상태를 확인합니다. 이 확인 작업에는 시간 제한이 없습니다. 명령어가 반환되지 않으면, 다른 터미널에서 <code translate="no">docker logs milvus-standalone</code> 명령어를 실행하여 컨테이너 로그를 확인하십시오. 이 스크립트는 <code translate="no">--security-opt seccomp:unconfined</code> 명령어로 컨테이너를 시작하므로, 컨테이너는 기본 Docker seccomp 프로필 없이 실행됩니다.</p>
+<div class="alert warning">
+<blockquote>
+<p>이 스크립트는 호스트 주소 없이 <strong>19530</strong>, <strong>9091</strong>, <strong>2379</strong> 포트를 공개하며, <strong>embedEtcd.yaml은</strong> etcd가 <code translate="no">http://0.0.0.0:2379</code> 에서 리스닝하도록 설정합니다. 기본적으로 Docker Desktop은 이러한 포트를 모든 네트워크 인터페이스에 공개하므로, 이 컴퓨터에 접속할 수 있는 다른 컴퓨터에서도 Milvus 및 etcd에 연결할 수 있습니다. 이 컴퓨터에 대한 접근을 제한하려면, <code translate="no">standalone.bat</code> 파일에서 첫 번째 <code translate="no">start</code>(예: <code translate="no">-p 127.0.0.1:19530:19530</code>) 앞의 <code translate="no">-p</code> 옵션을 수정하고, 컨테이너 외부에서 etcd에 연결하지 않는 경우 <code translate="no">-p 2379:2379</code> 를 제거하십시오. <code translate="no">milvus-standalone</code> 컨테이너가 이미 존재하는 경우, <code translate="no">start</code> 는 원래 옵션으로 컨테이너를 다시 시작합니다. 게시된 포트를 기본적으로 localhost에 바인딩하려면 <a href="https://docs.docker.com/desktop/features/networking/">Docker Desktop의 네트워킹을</a> 참조하십시오.</p>
+</blockquote>
+</div>
 <p>터미널에서 이미지 및 컨테이너 상태를 확인하십시오:</p>
 <pre><code translate="no" class="language-powershell">docker inspect --format &quot;{{.Config.Image}}&quot; milvus-standalone
 docker ps --filter name=milvus-standalone
 </code></pre>
-<p>PowerShell에서 Milvus를 중지하려면 ` <code translate="no">.\standalone.bat stop</code>`을 실행하고, 명령 프롬프트에서는 ` <code translate="no">standalone.bat stop</code>`을 실행하십시오. ` <code translate="no">delete</code> ` 명령은 컨테이너와 저장된 데이터를 모두 제거합니다. 데이터를 사용하기 전에 백업하십시오.</p>
+<p>PowerShell에서 Milvus를 중지하려면 ` <code translate="no">.\standalone.bat stop</code>`를 실행하고, 명령 프롬프트에서는 ` <code translate="no">standalone.bat stop</code>`를 실행하십시오. ` <code translate="no">delete</code>`을 실행하기 전에 ` <code translate="no">stop</code> `를 실행하십시오. 확인 후 ` <code translate="no">delete</code> ` 명령은 컨테이너를 제거하려고 시도한 다음, 컨테이너가 여전히 실행 중이거나 제거되지 않았더라도 <strong>볼륨</strong> 폴더, <strong>`embedEtcd.yaml</strong>` 및 <strong>`user.yaml</strong>`을 삭제합니다. 사용하기 전에 데이터를 백업하십시오.</p>
 <h3 id="From-WSL-2" class="common-anchor-header">WSL 2에서<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,11 +142,12 @@ docker ps --filter name=milvus-standalone
     </button></h3><p>Windows 터미널에서 설치된 WSL 배포판을 엽니다:</p>
 <pre><code translate="no" class="language-powershell">wsl
 </code></pre>
-<p>WSL 터미널에서 Linux 스크립트를 다운로드하고 Milvus를 한 번 실행하십시오:</p>
+<p>WSL 터미널에서 Linux 스크립트를 다운로드하고 Milvus를 한 번 실행합니다:</p>
 <pre><code translate="no" class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus를 중지하려면 ` <code translate="no">bash standalone_embed.sh stop</code>`를 실행하십시오. ` <code translate="no">bash standalone_embed.sh delete</code> ` 명령어는 컨테이너, 구성 및 데이터를 모두 제거합니다. 사용 전에 데이터를 백업하십시오.</p>
+<p>Milvus를 중지하려면 ` <code translate="no">bash standalone_embed.sh stop</code>`을 실행하십시오. ` <code translate="no">bash standalone_embed.sh delete</code> ` 명령어는 컨테이너, 구성 및 데이터를 제거합니다. 사용 전에 데이터를 백업하십시오.</p>
+<p>이 리눅스 스크립트는 ` <code translate="no">sudo</code>` 명령어로 Docker를 실행하고, 호스트 주소 없이 포트를 공개한 다음, ` <code translate="no">--security-opt seccomp:unconfined</code>` 명령어로 컨테이너를 시작합니다. <a href="/docs/ko/install_standalone-docker.md">‘Docker(리눅스)에서 Milvus 실행’에 설명된</a> 이러한 설정에 대한 참고 사항은 WSL 2에서 실행할 때도 동일하게 적용됩니다.</p>
 <h2 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Docker Compose를 사용하여 Milvus 실행<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,10 +179,9 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>구성 파일을 다운로드하고 Milvus를 시작하십시오:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>구성 파일을 다운로드하고 SHA-256 해시 값을 출력하십시오:</p>
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yaml
+Get-FileHash docker-compose.yaml -Algorithm SHA256
 </code></pre>
 <h3 id="From-Windows-Command-Prompt" class="common-anchor-header">Windows 명령 프롬프트에서<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,10 +198,9 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>구성 파일을 다운로드하고 Milvus를 시작하세요:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>구성 파일을 다운로드하고 SHA-256 해시를 출력하세요:</p>
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yaml
+certutil -hashfile docker-compose.yaml SHA256
 </code></pre>
 <h3 id="From-WSL-2" class="common-anchor-header">WSL 2에서<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -212,12 +217,30 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 배포판을 열고 다음 Linux 명령을 실행합니다:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
-docker compose up -d
+    </button></h3><p>WSL 배포판을 실행한 후, 구성 파일을 다운로드하고 해당 SHA-256 해시를 출력합니다:</p>
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml
+<span class="hljs-built_in">sha256sum</span> docker-compose.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Start-Milvus" class="common-anchor-header">Milvus 시작<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">v3.0.5 릴리스 페이지의</a> <code translate="no">milvus-standalone-docker-compose.yaml</code> 항목에 나열된 <code translate="no">sha256</code> 다이제스트와 해시를 비교하십시오. <code translate="no">Get-FileHash</code> 에서는 해시를 대문자로 출력하지만 릴리스 페이지에는 소문자로 표시되므로, 비교 시 대소문자를 구분하지 마십시오. 그런 다음 Milvus를 시작하고 동일한 터미널에서 컨테이너를 확인하십시오:</p>
+<pre><code translate="no" class="language-shell">docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
-<p>이 구성 파일은 <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, <strong>milvus-etcd라는</strong> 세 개의 장기 실행 컨테이너를 시작합니다. 또한 데이터 디렉터리의 소유권을 설정하기 위해 일회성 <code translate="no">milvus-volume-init</code> 서비스를 실행합니다. 이들의 데이터는 작업 디렉터리의 <strong>volumes/milvus</strong>, <strong>volumes/minio</strong>, <strong>volumes/etcd에</strong> 매핑됩니다. MinIO는 <strong>9000번</strong> 및 <strong>9001번</strong> 포트를 노출하고, Milvus는 <strong>19530번</strong> 및 <strong>9091번</strong> 포트를 노출합니다. 구성 및 라이프사이클 명령어에 대해서는 <a href="/docs/ko/install_standalone-docker-compose.md">‘Docker Compose를 사용하여 Milvus 실행’을</a> 참조하십시오.</p>
+<p>이 구성은 <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, <strong>milvus-etcd라는</strong> 세 개의 장기 실행 컨테이너를 시작합니다. 또한 데이터 디렉터리의 소유권을 설정하기 위해 일회성 <code translate="no">milvus-volume-init</code> 서비스를 실행합니다. 이들의 데이터는 작업 디렉토리 내의 <strong>volumes/milvus</strong>, <strong>volumes/minio</strong>, <strong>volumes/etcd에</strong> 매핑됩니다. MinIO는 <strong>9000번</strong> 및 <strong>9001번</strong> 포트를 노출하고, Milvus는 <strong>19530번</strong> 및 <strong>9091번</strong> 포트를 노출합니다. 이 구성은 모든 네트워크 인터페이스에 이러한 포트를 공개하며, MinIO는 기본 <code translate="no">minioadmin</code> 자격 증명을 사용하고, <code translate="no">standalone</code> 서비스는 <code translate="no">security_opt: seccomp:unconfined</code> 을 설정합니다. 액세스를 제한하거나, 자격 증명을 변경하거나, 구성 및 수명 주기 명령을 <a href="/docs/ko/install_standalone-docker-compose.md">실행하려면 ‘Docker Compose로 Milvus 실행’을</a> 참조하십시오.</p>
 <h2 id="FAQs" class="common-anchor-header">자주 묻는 질문<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,21 +271,21 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus는 Linux 컨테이너를 사용합니다. 설치를 다시 시도하기 전에 Docker Desktop과 그 WSL 2 백엔드를 확인하십시오:</p>
+    </button></h3><p>Milvus는 Linux 컨테이너를 사용합니다. 설치를 다시 시도하기 전에 Docker Desktop과 해당 WSL 2 백엔드를 확인하십시오.</p>
 <ol>
-<li><p><strong>'작업 관리자</strong> &gt; <strong>성능'에서</strong> 하드웨어 가상화가 비활성화되어 있는 경우, BIOS/UEFI에서 하드웨어 가상화를 활성화하십시오. <a href="https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements">Docker Desktop Windows 시스템 요구 사항을</a> 참조하십시오.</p></li>
+<li><p><strong>작업 관리자</strong> &gt; <strong>성능에서</strong> 하드웨어 가상화가 비활성화되어 있는 경우, BIOS/UEFI에서 하드웨어 가상화를 활성화하십시오. <a href="https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements">Docker Desktop Windows 시스템 요구 사항을</a> 참조하십시오.</p></li>
 <li><p>Windows 시작 메뉴에서 Docker Desktop을 실행하고 엔진이 실행될 때까지 기다리십시오. WSL을 설치하거나 업데이트할 때, 또는 특정 Docker Desktop 설치 모드를 사용할 때는 관리자 권한이 필요할 수 있습니다. 단, WSL 2 백엔드를 사용하여 Linux 컨테이너를 실행하는 데는 일반적으로 관리자 권한이 필요하지 않습니다.</p></li>
 <li><p>Windows 터미널에서 WSL을 확인하십시오. 업데이트가 필요한 경우, Windows에서 요청하는 권한으로 업데이트 명령을 실행하십시오:</p>
 <pre><code translate="no" class="language-powershell">wsl --version
 wsl --update
 </code></pre></li>
-<li><p>Docker Desktop에서 <strong>‘WSL 2 기반 엔진 사용’을</strong> 활성화하십시오. Docker 메뉴에 <strong>‘Linux 컨테이너로 전환’ 옵션</strong>이 표시되면 이를 선택하십시오. Milvus Linux 이미지의 문제를 해결하기 위해 Windows 컨테이너로 전환하지 마십시오.</p></li>
+<li><p>Docker Desktop에서 <strong>‘WSL 2 기반 엔진 사용’을</strong> 활성화하십시오. Docker 메뉴에 <strong>‘Linux 컨테이너로 전환’ 옵션이</strong> 표시되면 이를 선택하십시오. Milvus Linux 이미지의 문제를 해결하기 위해 Windows 컨테이너로 전환하지 마십시오.</p></li>
 <li><p>설치에 사용하는 터미널에서 다음 확인 명령을 실행하십시오:</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>
 <p><code translate="no">linux</code> 가 반환되어야 합니다. 데몬에 연결할 수 없는 경우, Milvus 스크립트를 다시 실행하기 전에 <a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/">Docker Desktop 문제 해결 단계를</a> 따르십시오. <code translate="no">com.docker.service</code> 를 실행하는 것만으로는 WSL 2 리눅스 엔진이 실행 중임을 확인할 수 없습니다.</p></li>
 </ol>
-<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="common-anchor-header">Milvus 배포 중 WSL 관련 문제를 어떻게 해결할 수 있나요?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="common-anchor-header">Milvus 배포 중 WSL 관련 문제는 어떻게 해결하나요?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -353,9 +376,9 @@ wsl --update
 <li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 </ul></li>
-<li><p>Compose 배포의 경우, <a href="/docs/ko/upgrade_milvus_standalone-docker.md">‘Docker Compose를 사용하여 Milvus Standalone 업그레이드’ 지침을</a> 따르십시오. 업그레이드하기 전에 해당 절차가 사용자의 환경에서 정상적으로 작동하는지 확인하십시오.</p></li>
-<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터를 확장하십시오</a>.</p></li>
-<li><p>클라우드에 Milvus 클러스터를 배포하세요:</p>
+<li><p>Compose 배포의 경우, <a href="/docs/ko/upgrade_milvus_standalone-docker.md">‘Docker Compose를 사용하여 Milvus Standalone 업그레이드’ 지침을</a> 따르십시오. 업그레이드하기 전에 해당 절차를 사용자의 환경에서 검증하십시오.</p></li>
+<li><p>Kubernetes에서<a href="/docs/ko/scaleout.md">Milvus 클러스터를 확장하십시오</a>. 이 절차는 Helm을 사용하며, 이 Docker 배포에는 적용되지 않습니다.</p></li>
+<li><p>클라우드에 Milvus 클러스터 배포:</p>
 <ul>
 <li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/ko/gcp.md">Google Cloud</a></li>

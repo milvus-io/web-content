@@ -70,7 +70,28 @@ title: Upgrade von Milvus Standalone mit Helm-Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">Schritt 1: Helm-Repository aktualisieren<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">Schritt 1: Sichern Sie die aktuellen Helm-Werte<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Speichern Sie die vollständigen Werte der aktuellen Version, bevor Sie die Bereitstellung ändern:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">Schritt 2: Helm-Repository aktualisieren<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,7 +113,7 @@ helm repo update zilliztech
 <div class="alert note">
 Das Milvus-Helm-Charts-Repository unter <code translate="no">https://milvus-io.github.io/milvus-helm/</code> wurde archiviert. Verwenden Sie das neue Repository <code translate="no">https://zilliztech.github.io/milvus-helm/</code> für Chart-Versionen ab 4.0.31.
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">Schritt 2: Milvus aktualisieren<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Schritt 3: Milvus aktualisieren<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,7 +128,7 @@ Das Milvus-Helm-Charts-Repository unter <code translate="no">https://milvus-io.g
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Überprüfen Sie die installierte Chart-Version für Ihr Helm-Release:</p>
+    </button></h3><p>Überprüfen Sie die installierte Chart-Version für Ihre Helm-Release:</p>
 <pre><code translate="no" class="language-bash">helm list --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p>Entfernen Sie in der Spalte „ <code translate="no">CHART</code> “ das Präfix „ <code translate="no">milvus-</code> “ aus dem Wert und verwenden Sie die verbleibende Version als „ <code translate="no">&lt;current-chart-version&gt;</code> “. Führen Sie anschließend den Upgrade-Befehl aus:</p>

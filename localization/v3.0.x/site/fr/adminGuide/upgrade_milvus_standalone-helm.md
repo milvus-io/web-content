@@ -70,7 +70,28 @@ title: Mise à niveau de Milvus Standalone à l'aide d'un Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">Étape 1 : Mettre à jour le référentiel Helm<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">Étape 1 : Sauvegardez les valeurs Helm actuelles<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Enregistrez l’intégralité des valeurs de la version actuelle avant de modifier le déploiement :</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">Étape 2 : Mettre à jour le référentiel Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,9 +111,9 @@ title: Mise à niveau de Milvus Standalone à l'aide d'un Helm Chart
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https://milvus-io.github.io/milvus-helm/</code> a été archivé. Utilisez le nouveau référentiel <code translate="no">https://zilliztech.github.io/milvus-helm/</code> pour les versions 4.0.31 et ultérieures des charts.
+Le dépôt Helm Charts de Milvus à l'adresse <code translate="no">https://milvus-io.github.io/milvus-helm/</code> a été archivé. Utilisez le nouveau dépôt <code translate="no">https://zilliztech.github.io/milvus-helm/</code> pour les versions 4.0.31 et ultérieures des charts.
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">Étape 2 : Mise à niveau de Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Étape 3 : Mettre à niveau Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,7 +141,7 @@ Le référentiel Helm Charts de Milvus à l’adresse <code translate="no">https
   --<span class="hljs-built_in">timeout</span> 20m
 <button class="copy-code-btn"></button></code></pre>
 <p>L’option ` <code translate="no">--reset-then-reuse-values</code> ` conserve les valeurs de la version précédente tout en appliquant le remplacement explicite de l’image par rapport aux valeurs par défaut du Chart sélectionné.</p>
-<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérifiez la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
+<h2 id="Verify-the-upgrade" class="common-anchor-header">Vérification de la mise à niveau<button data-href="#Verify-the-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

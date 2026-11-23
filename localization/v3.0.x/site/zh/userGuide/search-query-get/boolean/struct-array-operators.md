@@ -2,7 +2,7 @@
 id: struct-array-operators.md
 title: StructArray 操作符
 summary: >-
-  StructArray 操作符通过评估 StructArray 字段内标量子字段上的谓词来过滤实体。请将本页作为
+  StructArray 操作符通过评估 StructArray 字段内部标量子字段上的谓词来过滤实体。请将本页作为
   element_filter、MATCH_* 运算符族以及 StructArray 路径上行级谓词的语法参考。
 ---
 <h1 id="StructArray-Operators" class="common-anchor-header">StructArray 操作符<button data-href="#StructArray-Operators" class="anchor-icon" translate="no">
@@ -264,7 +264,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_MOST</code> 的评估结果为<code translate="no">true</code> ，前提是满足谓词的元素个数小于或等于<code translate="no">threshold</code> 。</p>
+    </button></h3><p><code translate="no">MATCH_MOST</code> 的评估结果为<code translate="no">true</code> ，如果满足谓词的元素个数小于或等于<code translate="no">threshold</code> 。</p>
 <pre><code translate="no" class="language-text">MATCH_MOST(chunks, $[has_code] == true, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
 <p>两个实体均不匹配：实体 A 有四个符合条件的元素，实体 B 有三个。</p>
@@ -354,7 +354,7 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">按位置访问数组子字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>从 Milvus 3.0.6 开始，位置路径还可以引用标量<code translate="no">ARRAY</code> 子字段。<code translate="no">chunks[0][tags]</code> 是第一个 Struct 元素的内部数组。它支持使用数组字面量进行<code translate="no">==</code> 和<code translate="no">!=</code> 运算，以及<code translate="no">array_contains</code> 、<code translate="no">array_contains_any</code> 、<code translate="no">array_contains_all</code> 和<code translate="no">array_length</code> 。对其进行的比较运算符（<code translate="no">in</code> 、<code translate="no">like</code> ）和算术运算将被拒绝。</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">按位置访问数组子字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>从 Milvus 3.0.6 开始，位置路径还可以引用标量<code translate="no">ARRAY</code> 子字段。<code translate="no">chunks[0][tags]</code> 是第一个 Struct 元素的内部数组。它支持使用数组字面量进行<code translate="no">==</code> 和<code translate="no">!=</code> 运算，以及<code translate="no">array_contains</code> 、<code translate="no">array_contains_any</code> 、<code translate="no">array_contains_all</code> 和<code translate="no">array_length</code> 。对其进行的比较运算符<code translate="no">in</code> 、<code translate="no">like</code> 以及算术运算均被拒绝。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
 array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
 
@@ -380,7 +380,7 @@ array_length(chunks) == 1
 <pre><code translate="no" class="language-text">ARRAY_CONTAINS(chunks[quality_score], 0.74)
 <button class="copy-code-btn"></button></code></pre>
 <p>只有实体 A 匹配。</p>
-<p>在标量子字段路径上使用<code translate="no">array_contains</code> 、<code translate="no">array_contains_any</code> 或<code translate="no">array_contains_all</code> ，可在该实体中的所有 Struct 元素上测试该子字段的值。每个子字段路径均单独进行评估，因此不同子字段的条件可由不同的 Struct 元素满足。</p>
+<p>在标量子字段路径上使用<code translate="no">array_contains</code> 、<code translate="no">array_contains_any</code> 或<code translate="no">array_contains_all</code> ，可测试该子字段在实体中所有 Struct 元素上的值。每个子字段路径均单独进行评估，因此不同子字段的条件可由不同的 Struct 元素满足。</p>
 <pre><code translate="no" class="language-text"># At least one chunk belongs to the &quot;index&quot; section.
 array_contains(chunks[section], &quot;index&quot;)
 
@@ -391,7 +391,7 @@ array_contains_any(chunks[section], [&quot;index&quot;, &quot;search&quot;])
 # not necessarily in the same chunk.
 array_contains_all(chunks[section], [&quot;index&quot;, &quot;search&quot;])
 <button class="copy-code-btn"></button></code></pre>
-<p>对于示例数据，<code translate="no">array_contains</code> 和<code translate="no">array_contains_any</code> 这两个表达式均匹配两个实体。而<code translate="no">array_contains_all</code> 表达式则均不匹配，因为这两个实体均不包含<code translate="no">&quot;search&quot;</code> 部分。这些示例并未展示由不同元素在不同子字段上满足的条件。</p>
+<p>对于示例数据，<code translate="no">array_contains</code> 和<code translate="no">array_contains_any</code> 这两个表达式均匹配两个实体。而<code translate="no">array_contains_all</code> 表达式则均不匹配，因为这两个实体都没有<code translate="no">&quot;search&quot;</code> 部分。这些示例并未展示由不同元素在不同子字段上满足的条件。</p>
 <p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> 与<code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> 选择相同的实体。当同一 Struct 元素必须满足多个条件时，请使用<code translate="no">MATCH_*</code> 或<code translate="no">element_filter</code> ，因为<code translate="no">$[...]</code> 谓词是按元素逐个评估的。</p>
 <h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">测试可为空的 StructArray 字段是否为空<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -438,11 +438,11 @@ chunks is not null
 </thead>
 <tbody>
 <tr><td><code translate="no">BOOL</code></td><td>标量谓词，例如<code translate="no">$[has_code] == true</code> 或<code translate="no">!($[has_code] == true)</code> 。请避免使用裸布尔表达式，例如<code translate="no">$[has_code]</code> 。</td></tr>
-<tr><td><code translate="no">INT8</code>、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code></td><td>比较运算、链式范围、<code translate="no">in</code> 、<code translate="no">not in</code> ，以及包含<code translate="no">+</code> 、<code translate="no">-</code> 、<code translate="no">*</code> 、<code translate="no">/</code> 或<code translate="no">%</code> 后接比较运算的算术表达式，还有逻辑组合。</td></tr>
+<tr><td><code translate="no">INT8</code>、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code></td><td>比较运算、链式范围、<code translate="no">in</code> 、<code translate="no">not in</code> ，以及包含<code translate="no">+</code> 、<code translate="no">-</code> 、<code translate="no">*</code> 、<code translate="no">/</code> 或<code translate="no">%</code> 并随后跟有比较运算的算术表达式，还有逻辑组合。</td></tr>
 <tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td>比较、链式范围、<code translate="no">in</code> 、<code translate="no">not in</code> 、包含<code translate="no">+</code> 、<code translate="no">-</code> 、<code translate="no">*</code> 或<code translate="no">/</code> 的算术表达式后跟比较，以及逻辑组合。<code translate="no">%</code> 操作符不支持浮点子字段。</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>字符串比较、链式范围、<code translate="no">in</code> 、<code translate="no">not in</code> 、<code translate="no">like</code> 、<code translate="no">=~</code> 、<code translate="no">!~</code> 以及逻辑组合。</td></tr>
 <tr><td>标量<code translate="no">ARRAY</code> 子字段（Milvus 3.0.6 及更高版本）</td><td><code translate="no">array_contains</code>、<code translate="no">array_contains_any</code> 、<code translate="no">array_contains_all</code> 以及<code translate="no">array_length</code> 作用于<code translate="no">$[tags]</code> ，此外还有<code translate="no">$[tags] is null</code> 和<code translate="no">$[tags] is not null</code> 。比较操作符、<code translate="no">in</code> 以及<code translate="no">like</code> 作用于<code translate="no">$[tags]</code> 时将被拒绝。</td></tr>
-<tr><td>任何元素可为空的子字段（Milvus 3.0.6 及更高版本）</td><td><code translate="no">$[subfield] is null</code> 以及<code translate="no">$[subfield] is not null</code> 用于测试当前 Struct 元素中的值是否为 null。对于无法包含 null 值的子字段，<code translate="no">is null</code> 始终返回 false。</td></tr>
+<tr><td>任何元素可为空的子字段（Milvus 3.0.6 及更高版本）</td><td><code translate="no">$[subfield] is null</code> 以及<code translate="no">$[subfield] is not null</code> 用于测试当前 Struct 元素中的值是否为 null。对于无法包含 null 值的子字段，<code translate="no">is null</code> 始终为 false。</td></tr>
 <tr><td>向量子场</td><td>不支持作为<code translate="no">$[...]</code> 标量谓词的输入，但Milvus 3.0.6及更高版本中，针对元素可为空的向量子字段，<code translate="no">$[emb] is null</code> 和<code translate="no">$[emb] is not null</code> 除外。请改用EmbeddingList搜索或元素级向量搜索来处理向量子字段。</td></tr>
 </tbody>
 </table>
@@ -468,7 +468,7 @@ chunks is not null
 <li><p><code translate="no">element_filter</code> 仅保留谓词为 true 的 Struct 元素。未知元素不会被匹配。</p></li>
 <li><p><code translate="no">MATCH_*</code> 将未知元素计为未匹配。当任何元素为未知时，<code translate="no">MATCH_ALL</code> 为 false，而空的 StructArray 仍满足<code translate="no">MATCH_ALL</code> 。</p></li>
 <li><p><code translate="no">$[subfield] is null</code> <code translate="no">$[subfield] is not null</code> 始终为真或假。它们读取当前元素的有效性，因此 仅精确匹配那些 值为 null 的元素。<code translate="no">$[lang] is null</code> <code translate="no">lang</code> </p></li>
-<li><p>对于数组子字段，当<code translate="no">$[tags]</code> 为真时，<code translate="no">array_contains*</code> 会跳过 null 的内部值，且绝不会匹配 null 的内部数组；<code translate="no">array_length($[tags])</code> 会计入 null 的内部值；而<code translate="no">$[tags] is null</code> 仅在内部数组为 null 时为真。</p></li>
+<li><p>对于数组子字段，当<code translate="no">$[tags]</code> 为真时，<code translate="no">array_contains*</code> 会跳过 null 的内部值，且绝不会匹配 null 的内部数组；<code translate="no">array_length($[tags])</code> 会计算 null 的内部值；而<code translate="no">$[tags] is null</code> 仅在内部数组为 null 时为真。</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
 element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
@@ -480,6 +480,27 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
 <p>行级位置路径遵循相同的规则：当第一个元素的<code translate="no">lang</code> 值为 null、实体在该位置没有元素，或者 StructArray 字段为 null 时，<code translate="no">chunks[0][lang] == &quot;en&quot;</code> 的结果未知，因此实体不匹配。</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">查找 StructArray 元素中缺少向量的实体<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>假设每个产品将其描述的各个部分存储在一个名为<code translate="no">chunks</code> 的 StructArray 字段中。每个片段都有一个名为<code translate="no">embedding</code> 的向量子字段，当其向量缺失时允许为 NULL。产品 A 有两个片段，其中一个缺失向量。产品 B 的两个片段均包含向量。</p>
+<p>有关 Schema 设置，请参阅《<a href="/docs/zh/create-structarray-field.md#Allow-null-values-in-Struct-elements">允许 Struct 元素中的 NULL 值</a>》。</p>
+<p>要查找至少有一个片段缺少向量的产品，请将此过滤器传递给 `<code translate="no">query()</code>`。</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> 表示当前块中的向量。<code translate="no">MATCH_ANY</code> 会在产品至少有一个块的向量为 NULL 时选中该产品。该查询返回产品 A。</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">不支持的谓词<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -498,7 +519,7 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
     </button></h2><p>元素级<code translate="no">$[...]</code> 谓词不支持：</p>
 <ul>
 <li><p>文本匹配函数，例如 `<code translate="no">text_match(field, &quot;...&quot;)</code> ` 或 `<code translate="no">phrase_match(field, &quot;...&quot;)</code>`。</p></li>
-<li><p>JSON路径语法、针对JSON路径的<code translate="no">exists</code> ，或诸如<code translate="no">json_contains</code> 、<code translate="no">json_contains_all</code> 或<code translate="no">json_contains_any</code> 等JSON函数。</p></li>
+<li><p>JSON路径语法、针对JSON路径的<code translate="no">exists</code> 操作，或诸如<code translate="no">json_contains</code> 、<code translate="no">json_contains_all</code> 或<code translate="no">json_contains_any</code> 等JSON函数。</p></li>
 <li><p>数组容器函数，例如<code translate="no">array_contains</code> 、<code translate="no">array_contains_all</code> 、<code translate="no">array_contains_any</code> 或<code translate="no">array_length</code> ，这些函数作用于标量子字段的<code translate="no">$[subfield]</code> 。请改在行级谓词中，对诸如<code translate="no">chunks[section]</code> 之类的子字段路径使用这些函数。从 Milvus 3.0.6 开始，这些函数在标量<code translate="no">ARRAY</code> 子字段的<code translate="no">$[tags]</code> 上也受支持。</p></li>
 <li><p><code translate="no">$[subfield] is null</code> 或在 Milvus 3.0.6 之前，使用<code translate="no">$[subfield] is not null</code> 。</p></li>
 </ul>

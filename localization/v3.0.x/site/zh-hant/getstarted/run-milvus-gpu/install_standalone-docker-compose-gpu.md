@@ -1,8 +1,8 @@
 ---
 id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
-related_key: Kubernetes
-summary: 瞭解如何在 Kubernetes 上安裝 Milvus 叢集。
+related_key: Docker Compose
+summary: 瞭解如何使用 Docker Compose 安裝支援 GPU 的 Milvus 獨立版本。
 title: 使用 Docker Compose 執行具備 GPU 支援的 Milvus
 ---
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">使用 Docker Compose 執行具備 GPU 支援的 Milvus<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
@@ -77,9 +77,12 @@ title: 使用 Docker Compose 執行具備 GPU 支援的 Milvus
     </button></h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose-gpu.yaml"><code translate="no">milvus-standalone-docker-compose-gpu.yaml</code></a> 並手動將其儲存為 docker-compose.yml，或使用以下指令執行。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose-gpu.yaml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您需要對 YAML 檔案中獨立服務的環境變數進行以下修改：</p>
+<p>若要驗證下載是否成功，請將以下指令的輸出結果與<code translate="no">milvus-standalone-docker-compose-gpu.yaml</code> <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">發行頁面</a>中列出的<code translate="no">sha256</code> 摘要進行比對：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sha256sum</span> docker-compose.yml</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>您可以在 YAML 檔案中，於<code translate="no">standalone</code> 服務的<code translate="no">deploy</code> 區段中，依下述方式變更指派給 Milvus 的 GPU 裝置：</p>
 <ul>
-<li>若要將特定 GPU 裝置指派給 Milvus，請在<code translate="no">standalone</code> 服務的定義中找到 `<code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> ` 欄位，並將其值替換為所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式內附的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
+<li>若要將特定的 GPU 裝置指派給 Milvus，請在<code translate="no">standalone</code> 服務的定義中找到<code translate="no">deploy.resources.reservations.devices[0].device_ids</code> 欄位，並將其值替換為所需 GPU 的 ID。您可以使用 NVIDIA GPU 顯示驅動程式中附帶的<code translate="no">nvidia-smi</code> 工具來確定 GPU 裝置的 ID。Milvus 支援多個 GPU 裝置。</li>
 </ul>
 <p>將單一 GPU 裝置指派給 Milvus：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
@@ -124,10 +127,6 @@ title: 使用 Docker Compose 執行具備 GPU 支援的 Milvus
       </svg>
     </button></h3><p>在存放 docker-compose.yml 的目錄中，執行以下指令以啟動 Milvus：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
-
-Creating milvus-etcd  ... done
-Creating milvus-minio ... done
-Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>若無法執行上述指令，請檢查您的系統是否已安裝 Docker Compose V1。若已安裝，建議您根據<a href="https://docs.docker.com/compose/">此頁面中的</a>說明，遷移至 Docker Compose V2。</p>
@@ -136,27 +135,24 @@ Creating milvus-standalone ... done
 <ul>
 <li>名為<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 及<strong>milvus-etcd</strong>的容器已啟動。
 <ul>
-<li><strong>milvus-etcd</strong>容器不會向主機公開任何埠，並將其資料映射至當前資料夾中的<strong>volumes/etcd</strong>。</li>
-<li><strong>milvus-minio</strong>容器在本地端提供<strong>9090</strong>和<strong>9091</strong>埠，並使用預設的驗證憑證，其資料會映射至當前資料夾中的<strong>volumes/minio</strong>。</li>
-<li><strong>milvus-standalone</strong>容器在本地端以預設設定提供<strong>19530</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>目錄。</li>
+<li><strong>milvus-etcd</strong>容器不會向主機公開任何埠號，並將其資料映射至當前資料夾中的<strong>volumes/etcd</strong>。</li>
+<li><strong>milvus-minio</strong>容器使用預設的驗證憑證提供<strong>9000</strong>和<strong>9001</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/minio</strong>。</li>
+<li><strong>milvus-standalone</strong>容器以預設設定提供<strong>19530</strong>和<strong>9091</strong>埠，並將其資料映射至當前資料夾中的<strong>volumes/milvus</strong>。</li>
 </ul></li>
 </ul>
-<p>您可以使用以下指令檢查容器是否已啟動並正常運作：</p>
+<p><code translate="no">standalone</code> 服務設定了 `<code translate="no">security_opt: seccomp:unconfined</code>`，因此 Milvus 容器會在不使用預設 Docker seccomp 設定檔的情況下運行。</p>
+<div class="alert warning">
+<blockquote>
+<p>Compose 檔案在發佈這些埠時未指定主機 IP，因此 Docker 會將其綁定至主機的所有網路介面，而能夠連線至此主機的其他機器皆可連線至 Milvus 和 MinIO。MinIO 使用 Compose 檔案中設定的存取金鑰與密鑰<code translate="no">minioadmin</code> 。 若要僅在迴路位址上公開這些埠，請在<code translate="no">docker-compose.yml</code> 中的<code translate="no">minio</code> 和<code translate="no">standalone</code> 服務的<code translate="no">ports</code> 項目中，新增<code translate="no">127.0.0.1:</code> （例如<code translate="no">&quot;127.0.0.1:19530:19530&quot;</code> ），然後再次執行<code translate="no">sudo docker compose up -d</code> 。 詳細資訊請參閱<a href="https://docs.docker.com/engine/network/port-publishing/">《端口發佈與映射》</a>。若要使用其他 MinIO 憑證，請變更<code translate="no">minio</code> 服務中的<code translate="no">MINIO_ACCESS_KEY</code> 和<code translate="no">MINIO_SECRET_KEY</code> ，並在 Milvus 配置的<code translate="no">minio.accessKeyID</code> 和<code translate="no">minio.secretAccessKey</code> 中設定相同的值。若要要求客戶端連線至 Milvus 時必須提供使用者名稱和密碼，請參閱<a href="/docs/zh-hant/authenticate.md">《驗證使用者存取權限</a>》。</p>
+</blockquote>
+</div>
+<p>您可以使用以下命令檢查容器是否已啟動並正常運作：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
-
-      Name                     Command                  State                            Ports
---------------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>您也可以透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 實例。詳細資訊請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
-<p>若您已在 `docker-compose.yml` 中為 Milvus 指派了多個 GPU 裝置，您可以指定哪些 GPU 裝置對 Milvus 可見或可供使用。</p>
-<p>讓 GPU 裝置<code translate="no">0</code> 對 Milvus 可見：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>讓 GPU 裝置<code translate="no">0</code> 和<code translate="no">1</code> 對 Milvus 可見：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone</span>
+<p>預設情況下，此指令僅列出正在運行的容器。請確認輸出結果中包含<strong>milvus-etcd</strong>、<strong>milvus-minio</strong> 及<strong>milvus-standalone</strong>這三個容器，且每個容器的「<code translate="no">STATUS</code> 」欄位均以<code translate="no">Up</code> 開頭。</p>
+<p>您亦可透過<code translate="no">http://127.0.0.1:9091/webui/</code> 存取 Milvus WebUI，以進一步了解您的 Milvus 執行個體。詳細資訊請參閱<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>若要在 Milvus 啟動後變更其使用的 GPU 裝置，請依照步驟 1 所示，編輯 docker-compose.yml 檔案中<code translate="no">standalone</code> 服務的<code translate="no">deploy.resources.reservations.devices</code> 下的<code translate="no">device_ids</code> 欄位，然後執行以下指令。由於服務設定已變更，<code translate="no">docker compose up</code> 會停止並重新建立<strong>milvus-standalone</strong>容器。 詳細資訊請參閱《<a href="https://docs.docker.com/compose/how-tos/gpu-support/">執行具備 GPU 存取權限的 Docker Compose 服務</a>》。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以依照以下步驟停止並刪除此容器。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Stop Milvus</span>
@@ -180,37 +176,37 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 啟動並運行後，您可以透過修改 `<code translate="no">milvus.yaml</code> ` 檔案中的 `<code translate="no">initMemSize</code> ` 和 `<code translate="no">maxMemSize</code> ` 設定，來自訂記憶體池。</p>
+    </button></h2><p>在 Milvus 啟動並運行後，您可以透過修改 Milvus 配置中<code translate="no">gpu</code> 區段的<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 設定，來自訂記憶體池。</p>
 <div class="alert note">
-<p><code translate="no">milvus.yaml</code> 檔案位於 Milvus 容器內的<code translate="no">/milvus/configs/</code> 目錄中。</p>
+<p><code translate="no">milvus.yaml</code> 檔案位於 Milvus 容器內的<code translate="no">/milvus/configs/</code> 目錄中。同一目錄下的<code translate="no">user.yaml</code> 檔案中的設定會覆寫<code translate="no">milvus.yaml</code> 中的值。</p>
 </div>
-<p>若要設定記憶體池，請依照以下方式修改<code translate="no">milvus.yaml</code> 檔案中的<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 設定。</p>
+<p>若要在重新建立容器時保留設定，請將設定儲存於主機上的<code translate="no">user.yaml</code> 檔案中，並依照以下方式將該檔案掛載至容器內。</p>
 <ol>
-<li><p>請使用以下指令，將 Milvus 容器中的<code translate="no">milvus.yaml</code> 複製到您的本地電腦。請將<code translate="no">&lt;milvus_container_id&gt;</code> 替換為您實際的 Milvus 容器 ID。</p>
-<pre><code translate="no" class="language-shell">docker cp &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用您偏好的文字編輯器開啟複製的<code translate="no">milvus.yaml</code> 檔案。例如，使用 vim：</p>
-<pre><code translate="no" class="language-shell">vim milvus.yaml
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>根據需要編輯<code translate="no">initMemSize</code> 和<code translate="no">maxMemSize</code> 的設定，並儲存變更：</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
-<span class="hljs-attr">gpu:</span>
-  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span>
-  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span>
-<span class="hljs-string">...</span>
+<li><p>在存放 docker-compose.yml 的目錄中，建立一個名為<code translate="no">user.yaml</code> 的檔案，並填入您要變更的設定。以下範例顯示<code translate="no">gpu</code> 區段及其預設值。請將其替換為您所需的大小：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">2048</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">4096</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">initMemSize</code>: 記憶體池的初始大小。預設值為 1024。</li>
-<li><code translate="no">maxMemSize</code>: 記憶體池的最大大小。預設值為 2048。</li>
+<li><code translate="no">initMemSize</code>: 記憶體池的初始大小，單位為 MB。預設值為 2048。</li>
+<li><code translate="no">maxMemSize</code>: 記憶體池的最大大小，單位為 MB。預設值為 4096。</li>
 </ul></li>
-<li><p>請使用以下指令，將修改後的<code translate="no">milvus.yaml</code> 檔案複製回 Milvus 容器中。請將<code translate="no">&lt;milvus_container_id&gt;</code> 替換為您實際的 Milvus 容器 ID。</p>
-<pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
+<li><p>在 docker-compose.yml 中，將<code translate="no">user.yaml</code> 檔案新增至<code translate="no">standalone</code> 服務的<code translate="no">volumes</code> 清單中：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
+<span class="hljs-attr">standalone:</span>
+  <span class="hljs-string">...</span>
+  <span class="hljs-attr">volumes:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">./user.yaml:/milvus/configs/user.yaml</span>
+<span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>重新啟動 Milvus 容器以套用變更：</p>
-<pre><code translate="no" class="language-shell">docker stop &lt;milvus_container_id&gt;
-docker start &lt;milvus_container_id&gt;
+<li><p>重新建立 Milvus 容器以套用變更：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
+<p>檔案掛載完成後，重新啟動<code translate="no">standalone</code> 服務以套用後續對<code translate="no">user.yaml</code> 所做的變更：</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose restart standalone</span>
+<button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Storage V3 預設為停用狀態。在使用依賴此功能的服務前，請先啟用它。有關需求與相容性考量，請參閱<a href="/docs/zh-hant/storage-v3.md">Storage V3</a>。</p>
 </div>
@@ -242,15 +238,15 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/upgrade_milvus_cluster-helm.md">使用 Helm 圖表升級 Milvus</a>。</p></li>
-<li><p><a href="/docs/zh-hant/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
-<li><p>在雲端部署您的 Milvus 叢集：</p>
+<li><p><a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立執行版本</a>。該頁面會顯示 CPU 映像檔標籤。針對此 GPU 部署，請保留「<code translate="no">-gpu</code> 」後綴（<code translate="no">milvusdb/milvus:v3.0.5-gpu</code> ），並維持您的<code translate="no">deploy</code> 及<code translate="no">user.yaml</code> 設定。</p></li>
+<li><p>在 Kubernetes<a href="/docs/zh-hant/scaleout.md">上擴展 Milvus 叢集</a>。該程序使用 Helm，不適用於此 Docker 部署。</p></li>
+<li><p>在雲端平台上部署您的 Milvus 叢集：</p>
 <ul>
 <li><a href="/docs/zh-hant/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh-hant/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI，</a>這是用於 Milvus 可觀察性與管理的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

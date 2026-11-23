@@ -477,7 +477,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتيح لك العوامل الحسابية إنشاء شروط بناءً على حسابات تتضمن الحقول الرقمية.</p>
+    </button></h2><p>تتيح لك العوامل الحسابية إنشاء شروط بناءً على حسابات تتضمن حقولًا رقمية.</p>
 <h3 id="Supported-arithmetic-operators" class="common-anchor-header">المُشغِّلات الحسابية المدعومة<button data-href="#Supported-arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -603,8 +603,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تُعد العوامل البتية مفيدة عندما يشفر حقل عدد صحيح عدة علامات، مثل الأذونات أو علامات الميزات أو بتات الحالة. يمكنك استخدام هذه العوامل في تعبيرات التصفية للتحقق من البتات الفردية في قيمة عدد صحيح أو دمجها أو مقارنتها.</p>
-<p>بالنسبة للحقول العددية، تنطبق عوامل التشغيل البتية على أنواع الحقول الصحيحة، مثل <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code>.</p>
+    </button></h2><p>تُعد العوامل البتية مفيدة عندما يقوم حقل عدد صحيح بترميز علامات متعددة، مثل الأذونات أو علامات الميزات أو بتات الحالة. يمكنك استخدام هذه العوامل في تعبيرات التصفية للتحقق من البتات الفردية في قيمة عدد صحيح أو دمجها أو مقارنتها.</p>
+<p>بالنسبة للحقول القياسية، تنطبق عوامل التشغيل البتية على أنواع الحقول الصحيحة، مثل <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">المشغلات البتية المدعومة<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -712,7 +712,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للعثور على الكيانات التي تختلف بتات أذوناتها عن <code translate="no">READ + WRITE + SHARE</code> في بت <code translate="no">WRITE</code> فقط، استخدم عملية XOR على مستوى البتات (<code translate="no">^</code>):</p>
+<p>للعثور على الكيانات التي تختلف بتات أذوناتها عن <code translate="no">READ + WRITE + SHARE</code> فقط في بت <code translate="no">WRITE</code> ، استخدم عملية XOR على مستوى البتات (<code translate="no">^</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -934,8 +934,9 @@ summary: >-
 </table>
 <p>تشمل الحقول القياسية المدعومة الحقول المنطقية (Boolean) والرقمية و <code translate="no">VARCHAR</code> و <code translate="no">JSON</code> و <code translate="no">ARRAY</code>. لا تدعم هذه العوامل <a href="/docs/ar/text.md">الحقول النصية (TEXT)</a>.</p>
 <p>بدءًا من Milvus 3.0.3، تدعم العوامل أيضًا الحقول المتجهة العادية: <code translate="no">FLOAT_VECTOR</code> و <code translate="no">BINARY_VECTOR</code> و <code translate="no">FLOAT16_VECTOR</code> و <code translate="no">BFLOAT16_VECTOR</code> و <code translate="no">SPARSE_FLOAT_VECTOR</code> و <code translate="no">INT8_VECTOR</code>.</p>
-<p>لا تراعي علامات التشغيل حالة الأحرف: <code translate="no">IS NULL</code> و <code translate="no">is null</code> متطابقان، وكذلك <code translate="no">IS NOT NULL</code> و <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">مثال: البحث عن الكيانات ذات القيم المفقودة أو المتوفرة<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p>لا تميز علامات التشغيل بين الأحرف الكبيرة والصغيرة: <code translate="no">IS NULL</code> و <code translate="no">is null</code> متطابقان، وكذلك <code translate="no">IS NOT NULL</code> و <code translate="no">is not null</code>.</p>
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">مثال: البحث عن الكيانات ذات المتجهات المفقودة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لنفترض أن مجموعة باسم <code translate="no">products</code> قد تم فهرستها وتحميلها على Milvus 3.0.3 أو إصدار أحدث. تحتوي المجموعة على مفتاح أساسي <code translate="no">INT64</code> باسم <code translate="no">id</code> ، وحقل <code translate="no">VARCHAR</code> قابل للقيمة الفارغة باسم <code translate="no">category</code> ، وحقل <code translate="no">FLOAT_VECTOR</code> ثلاثي الأبعاد قابل للقيمة الفارغة باسم <code translate="no">embedding</code>. وهي تحتوي بالفعل على الكيانات التالية:</p>
+    </button></h3><p>لنفترض أنك أضفت منتجات إلى مجموعة قبل إنشاء متجهاتها. في هذا المثال، تم فهرسة مجموعة <code translate="no">products</code> وتحميلها. وتحتوي على مفتاح أساسي <code translate="no">INT64</code> باسم <code translate="no">id</code> ، وحقل <code translate="no">VARCHAR</code> قابل للقيمة الفارغة باسم <code translate="no">category</code> ، وحقل <code translate="no">FLOAT_VECTOR</code> ثلاثي الأبعاد قابل للقيمة الفارغة باسم <code translate="no">embedding</code>. يوضح الجدول التالي المنتجات التي تحتوي على متجه.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -961,8 +962,8 @@ summary: >-
 <tr><td><code translate="no">3</code></td><td><code translate="no">&quot;book&quot;</code></td><td>NULL</td></tr>
 </tbody>
 </table>
-<p>تم حذف خطوات إنشاء المجموعة وإدراج البيانات. للاطلاع على هذه الخطوات، راجع <a href="/docs/ar/nullable-and-default.md">الحقول القابلة للقيمة الفارغة</a>.</p>
-<p>للعثور على الكيانات التي لا تزال بحاجة إلى تضمين، قم بالاستعلام عن <code translate="no">embedding IS NULL</code>. اضبط إعدادات الاتصال الخاصة بخادمك.</p>
+<p>تم حذف إنشاء المجموعة وإدراج البيانات. للاطلاع على هذه الخطوات، راجع <a href="/docs/ar/nullable-and-default.md">الحقول القابلة للقيمة الفارغة</a>.</p>
+<p>للعثور على المنتجات التي لا تزال بحاجة إلى متجه، استدعِ <code translate="no">query()</code> مع عامل التصفية <code translate="no">embedding IS NULL</code>. استبدل <code translate="no">embedding</code> باسم حقل المتجه الخاص بك وقم بتعديل إعدادات الاتصال الخاصة بخادمك. في هذا المثال، يُرجع الاستعلام المعرّف <code translate="no">3</code> لأن متجه هذا المنتج هو NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1134,7 +1135,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>استبدل <code translate="no">filter</code> في نفس الاستعلام للتحقق من أي حقل أو دمج الشروط:</p>
+<p>استبدل <code translate="no">filter</code> في نفس الاستعلام للتحقق من أحد الحقول أو الجمع بين الشروط:</p>
 <table>
 <thead>
 <tr><th>تعبير التصفية</th><th>معرفات مطابقة</th><th>الغرض</th></tr>
@@ -1147,6 +1148,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>البحث عن الكيانات التي تحتوي على كلتا القيمتين</td></tr>
 </tbody>
 </table>
+<p>إذا كان لكل منتج عدة أجزاء وكان كل جزء يخزن متجهه الخاص، فاستخدم <a href="/docs/ar/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">مرشح StructArray للعثور على المنتجات التي ينقصها متجه جزء</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1171,10 +1173,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><th>نوع الحقل</th><th>سلوك NULL</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">VARCHAR</code></td><td>تعتبر السلسلة الفارغة <code translate="no">&quot;&quot;</code> قيمة غير NULL.</td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>تُعتبر السلسلة الفارغة <code translate="no">&quot;&quot;</code> قيمة غير NULL.</td></tr>
 <tr><td><code translate="no">JSON</code></td><td>تتطابق القيمة NULL للحقل بأكمله مع <code translate="no">IS NULL</code>. يُعد كائن JSON مثل <code translate="no">{&quot;category&quot;: null}</code> غير NULL، حتى لو كانت إحدى القيم بداخله NULL.</td></tr>
-<tr><td><code translate="no">ARRAY</code></td><td>تتطابق القيمة NULL للحقل بأكمله مع <code translate="no">IS NULL</code>. لا يمكن أن تكون العناصر الفردية NULL، ولا يدعم <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> الوصول إلى عناصر المصفوفة مثل <code translate="no">tags[0]</code>. انظر <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</td></tr>
-<tr><td>أنواع المتجهات العادية</td><td>تعني القيمة NULL أن قيمة المتجه غير موجودة. المتجه الذي تكون مكوناته صفرًا ليس NULL.</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>تتطابق القيمة NULL للحقل بأكمله مع <code translate="no">IS NULL</code>. لا يمكن أن تكون العناصر الفردية NULL، ولا يدعم كل من <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> الوصول إلى عناصر المصفوفة مثل <code translate="no">tags[0]</code>. انظر <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</td></tr>
+<tr><td>أنواع المتجهات العادية</td><td>تعني NULL أن قيمة المتجه غير موجودة. المتجه الذي تكون مكوناته صفرًا ليس NULL.</td></tr>
 </tbody>
 </table>
 <p>بالنسبة للحقل المدعوم المُعرَّف باستخدام <code translate="no">nullable=False</code> ، فإن <code translate="no">IS NULL</code> لا يطابق أي كيانات، بينما يطابق <code translate="no">IS NOT NULL</code> جميع الكيانات المرئية. ولا تزال الشروط الأخرى في المرشح سارية.</p>

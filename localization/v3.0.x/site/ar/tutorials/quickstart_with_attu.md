@@ -58,7 +58,7 @@ title: البدء السريع مع Attu - واجهة المستخدم على ا
 <li>إصدار Attu متوافق مع الخادم الخاص بك. يدعم Attu 3.0 Milvus 2.6.0 والإصدارات الأحدث، بما في ذلك Milvus 3.x؛ استخدم <a href="https://github.com/zilliztech/attu#compatibility">جدول التوافق</a> للخوادم الأقدم.</li>
 <li>بيئة Python بها إصدار PyMilvus متوافق مع الخادم الخاص بك. راجع <a href="/docs/ar/install-pymilvus.md">«تثبيت Milvus Python SDK</a> » <a href="/docs/ar/release_notes.md">و«ملاحظات الإصدار</a>». بالنسبة لإصدار SDK المستخدم في فرع الوثائق هذا، قم بتثبيت التبعيات model extra و progress-bar:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>تستخدم خطوات إعداد البيانات أيضًا <code translate="no">wget</code> و <code translate="no">unzip</code>. تقوم وظيفة التضمين بتنزيل نموذجها عند الاستخدام الأول، لذا اسمح بالوصول عبر الشبكة إلى مضيف النموذج أو قم بإعداد ذاكرة التخزين المؤقت للنموذج مسبقًا. توضح لقطات الشاشة سير العمل؛ وقد تختلف التسميات والتخطيطات بين إصدارات Attu.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. تثبيت تطبيق سطح المكتب<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">

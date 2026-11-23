@@ -54,12 +54,26 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Docker Compose를 사용하여 Pulsar를 구성하려면, milvus/configs 경로에 있는 <code translate="no">milvus.yaml</code> 파일의 ` <code translate="no">pulsar</code> ` 섹션에 값을 지정하십시오.</p>
-<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
-  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
+    </button></h3><p>Milvus 릴리스에 포함된 Docker Compose 구성에는 Pulsar 서비스가 포함되어 있지 않습니다. Milvus 독립 실행형(standalone) 환경에서 기존 Pulsar 서비스를 사용하려면 <code translate="no">user.yaml</code> 파일을 생성하고, <code translate="no">pulsar</code> 섹션에 해당 값을 입력하십시오.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_pulsar_address&gt;</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
-  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">2097152</span> <span class="hljs-comment"># 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Docker Compose 파일에서, ` <code translate="no">standalone</code> ` 서비스의 ` <code translate="no">environment</code> ` 섹션에 ` <code translate="no">MQ_TYPE</code> `을 ` <code translate="no">pulsar</code> `으로 설정하고, ` <code translate="no">volumes</code> ` 섹션에서 ` <code translate="no">user.yaml</code> ` 파일의 로컬 경로를 ` <code translate="no">/milvus/configs/user.yaml</code> `에 매핑하십시오. 두 섹션의 기존 항목은 그대로 유지하십시오:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">MINIO_REGION:</span> <span class="hljs-string">us-east-1</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+      <span class="hljs-attr">MQ_TYPE:</span> <span class="hljs-string">pulsar</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus는 <code translate="no">milvus.yaml</code> 다음으로 <code translate="no">/milvus/configs/user.yaml</code> 를 읽으므로, <code translate="no">user.yaml</code> 의 값이 기본값보다 우선 적용됩니다. <code translate="no">MQ_TYPE</code> 환경 변수는 메시지 큐를 선택하는 <code translate="no">mq.type</code> 를 설정하며, 구성 파일보다 우선 순위가 높습니다.</p>
+<p>새로운 배포를 처음 시작하기 전에 메시지 큐를 설정하십시오. Milvus는 처음 시작될 때 <code translate="no">mq.type</code> 를 etcd에 기록하며, 나중에 기록된 값을 덮어쓰지 않습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하십시오.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Milvus 실행<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +93,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
     </button></h3><p>다음 명령어를 실행하여 Pulsar 구성을 사용하는 Milvus를 시작하십시오.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">설정은 Milvus가 시작된 후에만 적용됩니다. 자세한 내용은 <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Milvus 시작을</a> 참조하십시오.</div>
+<div class="alert note">구성은 Milvus가 시작된 후에만 적용됩니다. 자세한 내용은 <a href="/docs/ko/install_standalone-docker-compose.md#Install-Milvus">Milvus 설치를</a> 참조하십시오.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Helm을 사용하여 Pulsar 구성<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,9 +109,12 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s상의 Milvus 클러스터의 경우, Milvus를 시작하는 동일한 명령어에서 Pulsar를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 저장소의 /charts/milvus 경로에 있는 ` <code translate="no">values.yml</code> ` 파일을 사용하여 Pulsar를 구성할 수도 있습니다.</p>
-<p>Helm을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">‘Helm 차트를 사용하여 Milvus 구성’을</a> 참조하십시오. Pulsar 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">‘Pulsar 관련 구성’을</a> 참조하십시오.
-|</p>
+    </button></h2><p>K8s상의 Milvus 클러스터의 경우, Milvus를 시작하는 동일한 명령어에서 Pulsar를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> 저장소의 /charts/milvus 경로에 있는 ` <code translate="no">values.yaml</code> ` 파일을 사용하여 Pulsar를 구성할 수도 있습니다.</p>
+<p>Helm을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">‘Helm 차트를 사용하여 Milvus 구성’을</a> 참조하십시오. Pulsar 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">‘Pulsar 관련 구성’을</a> 참조하십시오.</p>
+<p>이 페이지에 나와 있는 Helm 명령어 중 하나를 사용하여 Milvus를 설치하기 전에 Milvus Helm 차트 저장소를 추가하고 로컬 차트 인덱스를 업데이트하십시오.</p>
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,22 +131,22 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
         ></path>
       </svg>
     </button></h3><ol>
-<li><code translate="no">values.yaml</code> 파일의 <code translate="no">externalConfigFiles</code> 섹션을 구성합니다.</li>
+<li><code translate="no">values.yaml</code> 파일의 <code translate="no">extraConfigFiles</code> 섹션을 구성하십시오.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     pulsar:
       address: localhost # Address of pulsar
       port: 6650 # Port of Pulsar
-      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
-      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      webport: 80 # Web port of pulsar, if you connect directly without proxy, should use 8080
+      maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>앞서 설명한 섹션을 구성하고 ` <code translate="no">values.yaml</code> ` 파일을 저장한 후, 다음 명령어를 실행하여 Pulsar 구성을 사용하는 Milvus를 설치하십시오.</li>
+<li>앞서 설명한 섹션을 구성하고 <code translate="no">values.yaml</code> 파일을 저장한 후, 다음 명령을 실행하여 Pulsar 구성을 사용하는 Milvus를 설치하십시오.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">Helm을 사용하여 Woodpecker 구성<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,9 +163,8 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s상의 Milvus 클러스터의 경우, Milvus를 시작하는 동일한 명령어에서 Woodpecker를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 저장소의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Woodpecker를 구성할 수도 있습니다.</p>
-<p>Helm을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">Helm 차트를 사용하여 Milvus 구성하기를</a> 참조하십시오. Woodpecker 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/woodpecker.md">woodpecker 관련 구성을</a> 참조하십시오.
-|</p>
+    </button></h2><p>K8s상의 Milvus 클러스터의 경우, Milvus를 시작하는 동일한 명령어로 Woodpecker를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> 저장소의 /charts/milvus 경로에 있는 <code translate="no">values.yaml</code> 파일을 사용하여 Woodpecker를 구성할 수도 있습니다.</p>
+<p>Helm을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">Helm 차트를 사용하여 Milvus 구성하기를</a> 참조하십시오. Woodpecker 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/woodpecker.md">woodpecker 관련 구성을</a> 참조하십시오.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +181,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
         ></path>
       </svg>
     </button></h3><ol>
-<li><code translate="no">values.yaml</code> 파일의 <code translate="no">externalConfigFiles</code> 섹션을 구성하십시오.</li>
+<li><code translate="no">values.yaml</code> 파일의 <code translate="no">extraConfigFiles</code> 섹션을 구성하십시오.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -207,7 +223,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
 <ol start="2">
 <li>앞서 설명한 섹션을 구성하고 ` <code translate="no">values.yaml</code> ` 파일을 저장한 후, 다음 명령어를 실행하여 Woodpecker 구성을 사용하는 Milvus를 설치하십시오.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">Helm을 사용하여 Kafka 구성<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +240,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>K8s상의 Milvus 클러스터의 경우, Milvus를 시작하는 동일한 명령어에서 Kafka를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> 저장소의 /charts/milvus 경로에 있는 <code translate="no">values.yml</code> 파일을 사용하여 Kafka를 구성할 수도 있습니다.</p>
+    </button></h2><p>K8s상의 Milvus 클러스터의 경우, Milvus를 시작하는 동일한 명령어에서 Kafka를 구성할 수 있습니다. 또는 Milvus를 시작하기 전에 <a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a> 저장소의 /charts/milvus 경로에 있는 <code translate="no">values.yaml</code> 파일을 사용하여 Kafka를 구성할 수도 있습니다.</p>
 <p>Helm을 사용하여 Milvus를 구성하는 방법에 대한 자세한 내용은 <a href="/docs/ko/configure-helm.md">Helm 차트를 사용하여 Milvus 구성하기를</a> 참조하십시오. Pulsar 관련 구성 항목에 대한 자세한 내용은 <a href="/docs/ko/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하십시오.</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">YAML 파일 사용<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +258,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
         ></path>
       </svg>
     </button></h3><ol>
-<li>Kafka를 메시지 저장 시스템으로 사용하려면 <code translate="no">values.yaml</code> 파일의 <code translate="no">externalConfigFiles</code> 섹션을 구성하십시오.</li>
+<li>Kafka를 메시지 저장 시스템으로 사용하려면 <code translate="no">values.yaml</code> 파일의 <code translate="no">extraConfigFiles</code> 섹션을 구성하십시오.</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -257,7 +273,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
 <ol start="2">
 <li>앞서 설명한 섹션을 구성하고 ` <code translate="no">values.yaml</code> ` 파일을 저장한 후, 다음 명령어를 실행하여 Kafka 구성을 사용하는 Milvus를 설치하십시오.</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-RocksMQ-with-Helm" class="common-anchor-header">Helm을 사용하여 RocksMQ 구성<button data-href="#Configure-RocksMQ-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,7 +312,7 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>메시지 저장소를 변경하는 것은 권장되지 않습니다. 그래도 변경을 원하신다면, 모든 DDL 작업을 중지한 후 FlushAll API를 호출하여 모든 컬렉션을 플러시하고, 마지막으로 Milvus를 중지한 다음 메시지 저장소를 실제로 변경하십시오.</p>
+<p>메시지 저장소를 변경하는 것은 권장되지 않습니다. 그래도 변경을 원하신다면, 모든 DDL 작업을 중지한 후 FlushAll API를 호출하여 모든 컬렉션을 플러시하고, 마지막으로 Milvus를 중지한 다음 메시지 저장소를 변경하십시오.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -316,5 +332,5 @@ summary: Docker Compose 또는 Helm을 사용하여 메시지 저장소를 구�
     </button></h2><p>Docker Compose 또는 Helm을 사용하여 다른 Milvus 종속성을 구성하는 방법을 알아보세요:</p>
 <ul>
 <li><a href="/docs/ko/deploy_s3.md">Docker Compose 또는 Helm을 사용하여 객체 스토리지 구성</a></li>
-<li><a href="/docs/ko/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토어 구성하기</a></li>
+<li><a href="/docs/ko/deploy_etcd.md">Docker Compose 또는 Helm을 사용하여 메타 스토어 구성</a></li>
 </ul>

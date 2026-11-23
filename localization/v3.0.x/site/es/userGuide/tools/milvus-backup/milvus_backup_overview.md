@@ -22,7 +22,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h1><p>Milvus Backup realiza copias de seguridad de las colecciones de Milvus y las restaura en la misma instancia o en otra. Ofrece una interfaz de línea de comandos (CLI) y una API HTTP.</p>
-<p>Milvus Backup <strong>0.6.0</strong> incorpora copias de seguridad de instantáneas para Milvus 3.0, un esquema de configuración v2 con versiones y ajustes preestablecidos específicos para la creación de copias de seguridad. La compatibilidad oficial con la copia de seguridad y la restauración para Milvus 3.0 comienza con <strong>la versión Milvus 3.0.1</strong>.</p>
+<p>Milvus Backup <strong>0.6.0</strong> incorpora copias de seguridad de instantáneas para Milvus 3.0, un esquema de configuración v2 con versiones y ajustes preestablecidos específicos para crear copias de seguridad. La compatibilidad oficial con la copia de seguridad y la restauración para Milvus 3.0 comienza con <strong>la versión Milvus 3.0.1</strong>.</p>
 <h2 id="Choose-your-guide" class="common-anchor-header">Elige tu guía<button data-href="#Choose-your-guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,12 +99,12 @@ title: Milvus Backup
 </thead>
 <tbody>
 <tr><td><code translate="no">snapshot</code></td><td>Milvus exporta un paquete de instantáneas de la colección. Milvus Backup registra la información del paquete, y la restauración importa el paquete a través de Milvus. El servidor gestiona la estructura de datos resultante.</td></tr>
-<tr><td><code translate="no">binlog</code></td><td>Milvus Backup copia los archivos de datos y los metadatos de la colección; a continuación, vuelve a crear las colecciones e importa los datos de la copia de seguridad durante la restauración.</td></tr>
+<tr><td><code translate="no">binlog</code></td><td>Milvus Backup copia los archivos de datos y los metadatos de la colección; a continuación, recrea las colecciones e importa los datos de la copia de seguridad durante la restauración.</td></tr>
 <tr><td><code translate="no">auto</code></td><td>Selecciona el formato en función de las características compatibles con el servidor. En Milvus 3.0, selecciona «instantánea».</td></tr>
 </tbody>
 </table>
 <p>Un directorio de copia de seguridad contiene metadatos y los archivos requeridos por su formato. Conserva el directorio completo al archivarlo o moverlo. No des por sentado que una copia de seguridad de instantánea utiliza la estructura del directorio binlog.</p>
-<p>En la versión 0.6.0, los ajustes preestablecidos de « <code translate="no">create --for</code> » configuran opciones específicas para cada finalidad: « <code translate="no">clone</code> » mantiene el formato elegido, mientras que « <code translate="no">archive</code> » y « <code translate="no">secondary</code> » requieren el binlog. Un servidor secundario también requiere una topología de replicación configurada; la migración ordinaria entre instancias no requiere un servidor secundario. Véase <a href="/docs/es/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Elegir un formato de copia de seguridad o una finalidad</a>».</p>
+<p>En la versión 0.6.0, los ajustes preestablecidos de « <code translate="no">create --for</code> » configuran opciones específicas para cada finalidad: « <code translate="no">clone</code> » mantiene el formato elegido, mientras que « <code translate="no">archive</code> » y « <code translate="no">secondary</code> » requieren binlog. Un servidor secundario también requiere una topología de replicación configurada; la migración ordinaria entre instancias no requiere un servidor secundario. Véase <a href="/docs/es/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Elegir un formato de copia de seguridad o una finalidad</a>».</p>
 <p>La versión 0.6.0 de Backup omite las colecciones externas durante la copia de seguridad. El hecho de que una tarea se haya completado con éxito no implica que se hayan incluido los datos de las colecciones externas.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Matriz de compatibilidad<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,5 +153,5 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">v0.6.0</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.2">v0.6.2</a></li>
 </ul>

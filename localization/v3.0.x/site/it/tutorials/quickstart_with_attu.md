@@ -58,9 +58,9 @@ title: 'Guida rapida ad Attu: l''interfaccia utente web di Milvus'
 <li>Una versione di Attu compatibile con il proprio server. Attu 3.0 supporta Milvus 2.6.0 e versioni successive, incluso Milvus 3.x; per i server meno recenti, consultare la <a href="https://github.com/zilliztech/attu#compatibility">tabella di compatibilità</a>.</li>
 <li>Un ambiente Python con una versione di PyMilvus compatibile con il tuo server. Consulta <a href="/docs/it/install-pymilvus.md">Installare l’SDK Python di Milvus</a> e <a href="/docs/it/release_notes.md">le Note di rilascio</a>. Per la versione dell’SDK utilizzata in questo ramo della documentazione, installa le dipendenze model extra e progress-bar:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>Le fasi di preparazione dei dati utilizzano anche <code translate="no">wget</code> e <code translate="no">unzip</code>. La funzione di embedding scarica il proprio modello al primo utilizzo, quindi consentire l’accesso di rete all’host del modello o preparare in anticipo la cache del modello. Le schermate illustrano il flusso di lavoro; le etichette e i layout possono variare a seconda delle versioni di Attu.</p>
+<p>I passaggi di preparazione dei dati utilizzano anche <code translate="no">wget</code> e <code translate="no">unzip</code>. La funzione di embedding scarica il proprio modello al primo utilizzo, quindi consentire l’accesso di rete all’host del modello o preparare in anticipo la cache del modello. Le schermate illustrano il flusso di lavoro; le etichette e i layout possono variare a seconda delle versioni di Attu.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Installare l’applicazione desktop<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,7 +114,7 @@ title: 'Guida rapida ad Attu: l''interfaccia utente web di Milvus'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu supporta la connessione sia a <strong>Milvus Standalone</strong> che a <strong>Zilliz Cloud</strong>, offrendo la flessibilità di lavorare con database locali o ospitati nel cloud.</p>
+    </button></h2><p>Attu supporta la connessione sia a <strong>Milvus Standalone</strong> che a <strong>Zilliz Cloud</strong>, offrendo la flessibilità di lavorare con database locali o ospitati su cloud.</p>
 <p>Per utilizzare Milvus Standalone in locale:</p>
 <ol>
 <li>Avvia Milvus Standalone seguendo la <a href="https://milvus.io/docs/install_standalone-docker.md">guida all'installazione di Milvus</a>.</li>
@@ -288,8 +288,8 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In Attu, aggiorna l'elenco delle collezioni e apri <code translate="no">attu_tutorial</code>. Lo schema di configurazione rapida include una chiave primaria <code translate="no">id</code> e un campo <code translate="no">vector</code> la cui dimensione è <code translate="no">embedding_dim</code>, con una metrica <code translate="no">Inner Product (IP)</code>. I valori <code translate="no">text</code> sono memorizzati nel campo dinamico. Per le opzioni esplicite dello schema, consultare <a href="/docs/it/create-collection.md">Creare una raccolta</a> e <a href="/docs/it/enable-dynamic-field.md">un campo dinamico</a>. Il numero di entità dipende dal testo di esempio estratto, pertanto si consiglia di utilizzare il numero di righe inserite anziché il numero riportato nelle schermate.</p>
-<p>Inoltre, è possibile visualizzare i dati inseriti, inclusi ID, embedding vettoriali e campi dinamici che memorizzano metadati quali il contenuto testuale. L’interfaccia supporta il filtraggio e l’esecuzione di query in base a condizioni specificate o a campi dinamici.</p>
+    </button></h3><p>In Attu, aggiorna l’elenco delle collezioni e apri <code translate="no">attu_tutorial</code>. Lo schema di configurazione rapida include una chiave primaria <code translate="no">id</code> e un campo <code translate="no">vector</code> la cui dimensione è <code translate="no">embedding_dim</code>, con una metrica <code translate="no">Inner Product (IP)</code>. I valori <code translate="no">text</code> sono memorizzati nel campo dinamico. Per le opzioni esplicite dello schema, consultare <a href="/docs/it/create-collection.md">Creare una raccolta</a> e <a href="/docs/it/enable-dynamic-field.md">un campo dinamico</a>. Il numero di entità dipende dal testo di esempio estratto, pertanto si consiglia di utilizzare il numero di righe inserite anziché il numero riportato nelle schermate.</p>
+<p>Inoltre, è possibile visualizzare i dati inseriti, inclusi ID, embedding vettoriali e campi dinamici che memorizzano metadati quali il contenuto testuale. L’interfaccia supporta il filtraggio e l’esecuzione di query in base a condizioni specificate o campi dinamici.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
@@ -375,7 +375,7 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h3><p>Fare doppio clic su un qualsiasi nodo dei risultati per espanderne le connessioni. Questa azione rivela ulteriori relazioni tra il nodo selezionato e altri punti dati presenti nella raccolta, creando un <strong>grafico di conoscenza più ampio e interconnesso</strong>.</p>
-<p>Questa vista espansa consente un'esplorazione più approfondita di come i punti dati sono correlati, sulla base della somiglianza vettoriale.</p>
+<p>Questa vista espansa consente un'esplorazione più approfondita di come i punti dati sono correlati, in base alla somiglianza vettoriale.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">
 </p>
@@ -395,6 +395,6 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu semplifica la gestione e la visualizzazione dei dati vettoriali archiviati in Milvus. Dall’inserimento dei dati all’esecuzione delle query e all’esplorazione interattiva, offre un’interfaccia intuitiva per gestire complesse attività di ricerca vettoriale. Grazie a funzionalità quali il supporto dinamico degli schemi, le visualizzazioni grafiche delle ricerche e i filtri di query flessibili, Attu consente agli utenti di analizzare in modo efficace set di dati su larga scala.</p>
+    </button></h2><p>Attu semplifica la gestione e la visualizzazione dei dati vettoriali archiviati in Milvus. Dall’inserimento dei dati all’esecuzione delle query e all’esplorazione interattiva, offre un’interfaccia intuitiva per gestire complesse attività di ricerca vettoriale. Grazie a funzionalità quali il supporto per schemi dinamici, le visualizzazioni grafiche delle ricerche e i filtri di query flessibili, Attu consente agli utenti di analizzare in modo efficace set di dati su larga scala.</p>
 <p>Sfruttando gli strumenti di esplorazione visiva di Attu, gli utenti possono comprendere meglio i propri dati, identificare relazioni nascoste e prendere decisioni basate sui dati. Iniziate oggi stesso a esplorare i vostri set di dati con Attu e Milvus!</p>
 <hr>

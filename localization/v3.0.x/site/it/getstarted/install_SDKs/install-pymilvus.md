@@ -37,9 +37,9 @@ title: Installazione dell'SDK Python di Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>PyMilvus 3.0.2 richiede Python 3.9 o versioni successive per connettersi a un server Milvus remoto.</li>
+<li>PyMilvus 3.0.3 richiede Python 3.9 o versioni successive per connettersi a un server Milvus remoto.</li>
 <li>Gli esempi locali di Milvus Lite 3.2.2 richiedono Python 3.10 o versioni successive e una piattaforma supportata. Vedere <a href="/docs/it/milvus_lite.md">Eseguire Milvus Lite localmente</a>.</li>
-<li>Installare le dipendenze tramite <code translate="no">pip</code>. PyMilvus 3.0.2 richiede <code translate="no">protobuf&gt;=5.27.2</code>; non specificare separatamente <code translate="no">protobuf==3.20.0</code>. Non è necessario <code translate="no">grpcio-tools</code> per utilizzare l'SDK.</li>
+<li>Installare le dipendenze tramite <code translate="no">pip</code>. PyMilvus 3.0.3 richiede <code translate="no">protobuf&gt;=5.27.2</code>; non specificare separatamente <code translate="no">protobuf==3.20.0</code>. Non è necessario <code translate="no">grpcio-tools</code> per utilizzare l'SDK.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">Installare PyMilvus tramite pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,16 +60,16 @@ title: Installazione dell'SDK Python di Milvus
 <div class="alert note">
 Si consiglia di installare una versione di PyMilvus compatibile con quella del server Milvus installato. Per ulteriori informazioni, consultare <a href="/docs/it/release_notes.md">le Note di rilascio</a>.
 </div>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>In questo modo si installa il client per un server Milvus remoto. Non vengono installati né Milvus Lite né un modello di integrazione.</p>
 <p>Per il database locale utilizzato nella <a href="/docs/it/quickstart.md">Guida rapida</a>, installare l’extra <code translate="no">milvus-lite</code> e il pacchetto Lite corrispondente:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Per gli helper di embedding, installare l’extra separato <code translate="no">model</code>:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Su Windows, pip ignora l’extra “ <code translate="no">milvus-lite</code> ” di PyMilvus 3.0.2 a causa del suo marcatore di piattaforma. Il comando sopra riportato specifica esplicitamente “ <code translate="no">milvus-lite</code> ”, quindi l’installazione su Windows avviene a condizione che siano disponibili i file wheel per <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code> per la versione di Python in uso.</p>
+<p>Su Windows, pip ignora l’extra “ <code translate="no">milvus-lite</code> ” di PyMilvus 3.0.3 a causa del suo marcatore di piattaforma. Il comando sopra riportato specifica esplicitamente “ <code translate="no">milvus-lite</code> ”, quindi l’installazione su Windows avviene a condizione che esistano i file wheel per <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code> compatibili con la versione di Python in uso.</p>
 <h2 id="Verify-installation" class="common-anchor-header">Verifica dell’installazione<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

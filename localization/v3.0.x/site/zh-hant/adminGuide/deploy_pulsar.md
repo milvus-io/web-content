@@ -54,12 +54,26 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要透過 Docker Compose 配置 Pulsar，請在 milvus/configs 路徑下的<code translate="no">milvus.yaml</code> 檔案中，為 `<code translate="no">pulsar</code> ` 區段提供您的設定值。</p>
-<pre><code translate="no"><span class="hljs-attr">pulsar:</span>
-  <span class="hljs-attr">address:</span> <span class="hljs-string">localhost</span> <span class="hljs-comment"># Address of pulsar</span>
+    </button></h3><p>Milvus 發行版附帶的 Docker Compose 配置檔中未包含 Pulsar 服務。若要將現有的 Pulsar 服務與 Milvus 獨立模式搭配使用，請建立一個 `<code translate="no">user.yaml</code> ` 檔案，並在 `<code translate="no">pulsar</code> ` 區段中填入您的設定值：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsar:</span>
+  <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;your_pulsar_address&gt;</span> <span class="hljs-comment"># Address of pulsar</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span> <span class="hljs-comment"># Port of pulsar</span>
-  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">5242880</span> <span class="hljs-comment"># 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
+  <span class="hljs-attr">maxMessageSize:</span> <span class="hljs-number">2097152</span> <span class="hljs-comment"># 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>在您的 Docker Compose 檔案中，於<code translate="no">standalone</code> 服務的<code translate="no">environment</code> 區段中，將<code translate="no">MQ_TYPE</code> 設定為<code translate="no">pulsar</code> ，並在<code translate="no">volumes</code> 區段中，將您<code translate="no">user.yaml</code> 檔案的本地路徑映射至<code translate="no">/milvus/configs/user.yaml</code> 。請保留這兩部分中的既有項目：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">MINIO_REGION:</span> <span class="hljs-string">us-east-1</span>
+      <span class="hljs-attr">ETCD_ENDPOINTS:</span> <span class="hljs-string">etcd:2379</span>
+      <span class="hljs-attr">MINIO_ADDRESS:</span> <span class="hljs-string">minio:9000</span>
+      <span class="hljs-attr">MQ_TYPE:</span> <span class="hljs-string">pulsar</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/local/path/to/your/user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus 會先讀取<code translate="no">milvus.yaml</code> 中的<code translate="no">/milvus/configs/user.yaml</code> ，因此<code translate="no">user.yaml</code> 中的值會覆寫預設值。<code translate="no">MQ_TYPE</code> 環境變數會設定<code translate="no">mq.type</code> ，該變數用於選取訊息佇列，且其優先級高於配置檔案。</p>
+<p>在首次啟動新部署之前，請先設定訊息佇列。Milvus 在首次啟動時會將<code translate="no">mq.type</code> 記錄在 etcd 中，且之後不會覆寫該記錄值。</p>
 <p>如需更多資訊，請參閱<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關設定</a>。</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. 執行 Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +93,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
     </button></h3><p>執行以下指令以啟動採用 Pulsar 設定的 Milvus。</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">設定僅在 Milvus 啟動後才會生效。詳情請參閱「<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">啟動 Milvus</a>」。</div>
+<div class="alert note">配置僅在 Milvus 啟動後才會生效。如需更多資訊，請參閱《<a href="/docs/zh-hant/install_standalone-docker-compose.md#Install-Milvus">安裝 Milvus</a>》。</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">使用 Helm 配置 Pulsar<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,9 +109,12 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於部署在 K8s 上的 Milvus 叢集，您可以在啟動 Milvus 的同一條指令中配置 Pulsar。此外，您也可以在啟動 Milvus 之前，透過<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>儲存庫中 /charts/milvus 路徑下的 `<code translate="no">values.yml</code> ` 檔案來配置 Pulsar。</p>
-<p>有關如何使用 Helm 配置 Milvus 的詳細資訊，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。有關 Pulsar 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關配置</a>》。
-|</p>
+    </button></h2><p>對於部署在 K8s 上的 Milvus 叢集，您可以在啟動 Milvus 的同一條指令中配置 Pulsar。或者，您也可以在啟動 Milvus 之前，透過<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a>儲存庫中 /charts/milvus 路徑下的 `<code translate="no">values.yaml</code> ` 檔案來配置 Pulsar。</p>
+<p>有關如何使用 Helm 配置 Milvus 的詳細資訊，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。有關 Pulsar 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關配置</a>》。</p>
+<p>在使用本頁面的任何 Helm 指令安裝 Milvus 之前，請先新增 Milvus Helm 圖表儲存庫並更新本機圖表索引：</p>
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 檔案<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,22 +131,22 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
         ></path>
       </svg>
     </button></h3><ol>
-<li>請在<code translate="no">values.yaml</code> 檔案中設定<code translate="no">externalConfigFiles</code> 區段。</li>
+<li>請在<code translate="no">values.yaml</code> 檔案中設定<code translate="no">extraConfigFiles</code> 區段。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     pulsar:
       address: localhost # Address of pulsar
       port: 6650 # Port of Pulsar
-      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
-      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      webport: 80 # Web port of pulsar, if you connect directly without proxy, should use 8080
+      maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>在配置完上述區段並儲存<code translate="no">values.yaml</code> 檔案後，請執行以下指令以安裝採用 Pulsar 配置的 Milvus。</li>
+<li>配置完上述區段並儲存<code translate="no">values.yaml</code> 檔案後，請執行以下命令以安裝採用 Pulsar 設定的 Milvus。</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">使用 Helm 配置 Woodpecker<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,9 +163,8 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於部署在 K8s 上的 Milvus 叢集，您可以在啟動 Milvus 的同一條指令中配置 Woodpecker。或者，您也可以在啟動 Milvus 之前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>儲存庫中 /charts/milvus 路徑下的<code translate="no">values.yml</code> 檔案來配置 Woodpecker。</p>
-<p>有關如何使用 Helm 配置 Milvus 的詳細資訊，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。有關 Woodpecker 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/woodpecker.md">Woodpecker 相關配置</a>》。
-|</p>
+    </button></h2><p>對於部署於 K8s 上的 Milvus 叢集，您可以在啟動 Milvus 的同一條指令中配置 Woodpecker。或者，您也可以在啟動 Milvus 之前，透過<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a>儲存庫中 /charts/milvus 路徑下的<code translate="no">values.yaml</code> 檔案來配置 Woodpecker。</p>
+<p>有關如何使用 Helm 配置 Milvus 的詳細資訊，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。有關 Woodpecker 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/woodpecker.md">Woodpecker 相關配置</a>》。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 檔案<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +181,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
         ></path>
       </svg>
     </button></h3><ol>
-<li>請在<code translate="no">values.yaml</code> 檔案中設定<code translate="no">externalConfigFiles</code> 區段。</li>
+<li>請在<code translate="no">values.yaml</code> 檔案中設定<code translate="no">extraConfigFiles</code> 區段。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -207,7 +223,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
 <ol start="2">
 <li>配置完上述區段並儲存<code translate="no">values.yaml</code> 檔案後，請執行以下指令以安裝採用 Woodpecker 設定的 Milvus。</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka-with-Helm" class="common-anchor-header">使用 Helm 配置 Kafka<button data-href="#Configure-Kafka-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +240,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於部署於 K8s 上的 Milvus 叢集，您可以在啟動 Milvus 的同一條指令中配置 Kafka。或者，您也可以在啟動 Milvus 之前，透過<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>儲存庫中 /charts/milvus 路徑下的<code translate="no">values.yml</code> 檔案來配置 Kafka。</p>
+    </button></h2><p>對於部署在 K8s 上的 Milvus 叢集，您可以在啟動 Milvus 的同一條指令中配置 Kafka。或者，您也可以在啟動 Milvus 之前，透過<a href="https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus">milvus-helm</a>儲存庫中 /charts/milvus 路徑下的<code translate="no">values.yaml</code> 檔案來配置 Kafka。</p>
 <p>有關如何使用 Helm 配置 Milvus 的詳細資訊，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。有關 Pulsar 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/configure_pulsar.md">Pulsar 相關配置</a>》。</p>
 <h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 檔案<button data-href="#Using-the-YAML-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -242,7 +258,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
         ></path>
       </svg>
     </button></h3><ol>
-<li>若要使用 Kafka 作為訊息儲存系統，請在<code translate="no">values.yaml</code> 檔案中設定<code translate="no">externalConfigFiles</code> 區段。</li>
+<li>若要使用 Kafka 作為訊息儲存系統，請在<code translate="no">values.yaml</code> 檔案中設定<code translate="no">extraConfigFiles</code> 區段。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -257,7 +273,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
 <ol start="2">
 <li>在配置上述區段並儲存<code translate="no">values.yaml</code> 檔案後，請執行以下指令以安裝採用 Kafka 配置的 Milvus。</li>
 </ol>
-<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; zilliztech/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-RocksMQ-with-Helm" class="common-anchor-header">使用 Helm 配置 RocksMQ<button data-href="#Configure-RocksMQ-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -274,10 +290,10 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 來設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 獨立部署版本 2.5.x 之前，RocksMQ 是預設的訊息儲存系統；自 2.6.x 起，預設則改為 Woodpecker。有關如何使用 Helm 配置 Milvus 的詳細步驟，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。 有關 RocksMQ 相關配置項目的詳細資訊，請參閱《<a href="/docs/zh-hant/configure_rocksmq.md">RocksMQ 相關配置</a>》。</p>
+    </button></h2><p>在 Milvus 獨立部署版本 2.5.x 之前，RocksMQ 是預設的訊息儲存系統；自 2.6.x 起，預設則改為 Woodpecker。有關如何使用 Helm 配置 Milvus 的詳細步驟，請參閱《<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>》。 有關 RocksMQ 相關設定項目的詳細資訊，請參閱《<a href="/docs/zh-hant/configure_rocksmq.md">RocksMQ 相關設定</a>》。</p>
 <ul>
 <li><p>若您已使用 RocksMQ 啟動 Milvus 並希望變更其設定，可執行 `<code translate="no">helm upgrade -f</code> ` 指令，並在以下 YAML 檔案中載入已修改的設定。</p></li>
-<li><p>若您曾透過 Helm 以獨立模式安裝 Milvus，且使用 RocksMQ 以外的訊息儲存庫，現欲將其改回 RocksMQ，請先清空所有集合並停止 Milvus，再執行<code translate="no">helm upgrade -f</code> 並使用以下 YAML 檔案。</p></li>
+<li><p>若您曾透過 Helm 以獨立模式安裝 Milvus，且使用 RocksMQ 以外的訊息儲存庫，而欲將其改回 RocksMQ，請先清空所有集合並停止 Milvus，再執行<code translate="no">helm upgrade -f</code> 並使用以下 YAML 檔案。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

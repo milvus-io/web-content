@@ -21,7 +21,7 @@ title: Schnellstart
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Vektoren, das Ausgabeformat von neuronalen Netzmodellen, können Informationen effektiv kodieren und spielen eine zentrale Rolle in KI-Anwendungen wie Wissensdatenbanken, semantischer Suche, Retrieval Augmented Generation (RAG) und vielem mehr.</p>
-<p>Milvus ist eine Open-Source-Vektordatenbank, die sich für KI-Anwendungen jeder Größenordnung eignet – vom Betrieb eines Demo-Chatbots in einem Jupyter-Notebook bis hin zur Entwicklung einer Web-Scale-Suchfunktion für Milliarden von Nutzern. In dieser Anleitung zeigen wir Ihnen, wie Sie Milvus innerhalb weniger Minuten lokal einrichten und mithilfe der Python-Client-Bibliothek Vektoren generieren, speichern und durchsuchen können.</p>
+<p>Milvus ist eine Open-Source-Vektordatenbank, die sich für KI-Anwendungen jeder Größenordnung eignet – vom Betrieb eines Demo-Chatbots in einem Jupyter-Notebook bis hin zur Entwicklung einer Suchfunktion im Web-Maßstab, die Milliarden von Nutzern bedient. In dieser Anleitung zeigen wir Ihnen, wie Sie Milvus innerhalb weniger Minuten lokal einrichten und mithilfe der Python-Client-Bibliothek Vektoren generieren, speichern und durchsuchen können.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus installieren<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,13 +54,13 @@ title: Schnellstart
         ></path>
       </svg>
     </button></h3><p>In dieser Anleitung wird Milvus Lite verwendet, eine optionale Abhängigkeit des PyMilvus-Python-SDK, die lokal ausgeführt wird. Informationen zur Serverbereitstellung finden Sie unter <a href="/docs/de/install_standalone-docker.md">Docker</a> oder <a href="/docs/de/install_cluster-milvusoperator.md">Kubernetes</a>.</p>
-<p>Verwenden Sie Python 3.10 oder höher unter macOS, Linux oder Windows, wobei Binär-Wheels für die Abhängigkeiten von Milvus Lite wie <code translate="no">faiss-cpu</code> und <code translate="no">pyarrow</code> verfügbar sind. Die Beispiele verwenden PyMilvus 3.0.2 und Milvus Lite 3.2.2. Installieren Sie beide Pakete explizit:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<p>Verwenden Sie Python 3.10 oder höher unter macOS, Linux oder Windows, wobei Binär-Wheels für die Abhängigkeiten von Milvus Lite wie <code translate="no">faiss-cpu</code> und <code translate="no">pyarrow</code> verfügbar sind. Die Beispiele verwenden PyMilvus 3.0.3 und Milvus Lite 3.2.2. Installieren Sie beide Pakete explizit:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Unter Windows überspringt pip das Zusatzmodul „ <code translate="no">milvus-lite</code> “ von PyMilvus 3.0.2; der obige Befehl nennt „ <code translate="no">milvus-lite</code> “ explizit, sodass der lokale Pfad dort ebenfalls funktioniert. Informationen zu den Installationsanforderungen für das SDK allein finden Sie unter <a href="/docs/de/install-pymilvus.md">„Install Milvus Python SDK</a>“.</p>
+<p>Unter Windows überspringt pip das Zusatzmodul „ <code translate="no">milvus-lite</code> “ von PyMilvus 3.0.3; der obige Befehl nennt „ <code translate="no">milvus-lite</code> “ explizit, sodass der lokale Pfad dort ebenfalls funktioniert. Informationen zu den Installationsanforderungen für das SDK allein finden Sie unter <a href="/docs/de/install-pymilvus.md">„Install Milvus Python SDK</a>“.</p>
 <div class="alert note">
 <blockquote>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, damit die soeben installierten Abhängigkeiten verfügbar sind. (Klicken Sie oben auf dem Bildschirm auf das Menü „Runtime“ und wählen Sie im Dropdown-Menü „Restart session“ aus).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren. (Klicken Sie oben auf dem Bildschirm auf das Menü „Runtime“ und wählen Sie im Dropdown-Menü „Restart session“ aus).</p>
 </blockquote>
 </div>
 <h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">Verwenden Sie einen vorhandenen Milvus-Server<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
@@ -78,10 +78,10 @@ title: Schnellstart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie Milvus bereits mit Docker oder Kubernetes installiert haben oder über einen Zilliz-Cloud-Endpunkt verfügen, installieren Sie nur das SDK. PyMilvus 3.0.2 erfordert Python 3.9 oder höher; für diesen Weg benötigen Sie die lokale Lite-Abhängigkeit nicht:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+    </button></h3><p>Wenn Sie Milvus bereits mit Docker oder Kubernetes installiert haben oder über einen Zilliz-Cloud-Endpunkt verfügen, installieren Sie nur das SDK. PyMilvus 3.0.3 erfordert Python 3.9 oder höher; für diesen Weg benötigen Sie die lokale Lite-Abhängigkeit nicht:</p>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verwenden Sie den Serververbindungsblock im nächsten Abschnitt, anstatt einen Pfad „ <code translate="no">.db</code> “ zu öffnen. Vergewissern Sie sich, dass die SDK-Version mit Ihrem Server kompatibel ist; siehe <a href="/docs/de/release_notes.md">Release Notes</a>.</p>
+<p>Verwenden Sie den Serververbindungsblock im nächsten Abschnitt, anstatt einen Pfad „ <code translate="no">.db</code> “ zu öffnen. Vergewissern Sie sich, dass die SDK-Version mit Ihrem Server kompatibel ist; siehe <a href="/docs/de/release_notes.md">Versionshinweise</a>.</p>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Vektordatenbank einrichten<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +168,7 @@ client.create_collection(
 <li>verwenden der Primärschlüssel und die Vektorfelder ihre Standardnamen („id“ und „vector“).</li>
 <li>Der Metriktyp (Definition des Vektorabstands) ist auf seinen Standardwert (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>) gesetzt.</li>
 <li>Das Primärschlüsselfeld akzeptiert Ganzzahlen und wird nicht automatisch inkrementiert (d. h., <a href="https://milvus.io/docs/schema.md">die Auto-ID-Funktion</a> wird nicht verwendet).
-Alternativ können Sie das Schema der Sammlung gemäß dieser <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">Anleitung</a> formal definieren.</li>
+Alternativ können Sie das Schema der Sammlung gemäß dieser <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/create_schema.md">Anleitung</a> formal definieren.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Daten vorbereiten<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -185,7 +185,7 @@ Alternativ können Sie das Schema der Sammlung gemäß dieser <a href="https://m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In dieser Anleitung verwenden wir Vektoren, um eine semantische Suche in Textdaten durchzuführen. Wir müssen Vektoren für Textdaten generieren, indem wir Einbettungsmodelle herunterladen. Dies lässt sich ganz einfach mit den Hilfsfunktionen aus der Bibliothek „ <code translate="no">pymilvus[model]</code> “ bewerkstelligen.</p>
+    </button></h2><p>In dieser Anleitung verwenden wir Vektoren, um eine semantische Suche in Text durchzuführen. Wir müssen Vektoren für Text generieren, indem wir Einbettungsmodelle herunterladen. Dies lässt sich ganz einfach mit den Hilfsfunktionen aus der Bibliothek „ <code translate="no">pymilvus[model]</code> “ bewerkstelligen.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">Text durch Vektoren darstellen<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -202,7 +202,7 @@ Alternativ können Sie das Schema der Sammlung gemäß dieser <a href="https://m
         ></path>
       </svg>
     </button></h2><p>Installieren Sie zunächst die Modellbibliothek. Dieses Paket enthält wichtige ML-Tools wie PyTorch. Der Download des Pakets kann einige Zeit in Anspruch nehmen, wenn PyTorch in Ihrer lokalen Umgebung noch nicht installiert ist.</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Generieren Sie Vektor-Embeddings mit dem Standardmodell. Milvus erwartet, dass die Daten als Liste von Dictionaries eingefügt werden, wobei jedes Dictionary einen Datensatz darstellt, der als Entität bezeichnet wird.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
@@ -327,7 +327,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nun können wir semantische Suchen durchführen, indem wir den Suchtext als Vektor darstellen und eine Vektorähnlichkeitssuche in Milvus durchführen.</p>
+    </button></h2><p>Jetzt können wir semantische Suchen durchführen, indem wir den Suchtext als Vektor darstellen und eine Vektorähnlichkeitssuche in Milvus durchführen.</p>
 <h3 id="Vector-search" class="common-anchor-header">Vektorsuche<button data-href="#Vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -529,7 +529,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <li>Entwerfen Sie Felder und Filter für Ihre eigenen Daten mit <a href="/docs/de/schema-hands-on.md">„Data Model Design for Search</a>“.</li>
 <li>Vergleichen Sie die lokalen und Server-Anforderungen mit <a href="/docs/de/install-overview.md">den Milvus-Bereitstellungsoptionen</a>.</li>
 </ul>
-<p>Milvus Lite eignet sich hervorragend für den Einstieg mit einem lokalen Python-Programm. Wenn Sie über große Datenmengen verfügen oder Milvus in der Produktion einsetzen möchten, können Sie sich über die Bereitstellung von Milvus auf <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> und <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> informieren. Alle Bereitstellungsmodi von Milvus nutzen dieselbe API, sodass Ihr clientseitiger Code bei einem Wechsel zu einem anderen Bereitstellungsmodus kaum angepasst werden muss. Geben Sie einfach die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI und das Token</a> eines beliebig bereitgestellten Milvus-Servers an:</p>
+<p>Milvus Lite eignet sich hervorragend für den Einstieg mit einem lokalen Python-Programm. Wenn Sie über große Datenmengen verfügen oder Milvus in der Produktion einsetzen möchten, können Sie sich über die Bereitstellung von Milvus auf <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> und <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> informieren. Alle Bereitstellungsmodi von Milvus nutzen dieselbe API, sodass Ihr clientseitiger Code bei einem Wechsel zu einem anderen Bereitstellungsmodus kaum angepasst werden muss. Geben Sie einfach die <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Client/MilvusClient.md">URI und das Token</a> eines beliebig bereitgestellten Milvus-Servers an:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Informationen zur Migration von Daten aus Milvus Lite zu Milvus, das auf Docker oder Kubernetes bereitgestellt wird, finden Sie unter <a href="/docs/de/milvus_lite.md#Migrating-data-from-Milvus-Lite">„Daten aus Milvus Lite migrieren</a>“.</p>

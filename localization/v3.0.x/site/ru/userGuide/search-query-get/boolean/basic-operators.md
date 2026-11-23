@@ -79,7 +79,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Предположим, у вас есть поле с именем <code translate="no">status</code>, и вы хотите найти все сущности, у которых <code translate="no">status</code> имеет значение «active». Для этого можно использовать оператор равенства <code translate="no">==</code>:</p>
+    </button></h3><p>Предположим, у вас есть поле с именем <code translate="no">status</code>, и вы хотите найти все сущности, для которых значение <code translate="no">status</code> равно «active». Для этого можно использовать оператор равенства <code translate="no">==</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -148,7 +148,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">Пример 3: Фильтрация по условию «больше, чем» (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
+<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">Пример 3: Фильтрация по условию «больше» (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -289,7 +289,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы найти сущности, у которых <code translate="no">discount</code> меньше или равно 10%:</p>
+    </button></h3><p>Чтобы найти объекты, у которых <code translate="no">discount</code> меньше или равно 10%:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -657,7 +657,7 @@ summary: >-
 <tr><td><code translate="no">ADMIN</code></td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
-<p>Например, значение « <code translate="no">permissions = 5</code> » означает, что установлены биты « <code translate="no">READ</code> » и « <code translate="no">SHARE</code> », поскольку <code translate="no">5 = 1 + 4</code>.</p>
+<p>Например, значение <code translate="no">permissions = 5</code> означает, что установлены биты <code translate="no">READ</code> и <code translate="no">SHARE</code>, поскольку <code translate="no">5 = 1 + 4</code>.</p>
 <p>Чтобы найти объекты, у которых установлен бит <code translate="no">SHARE</code>, используйте побитовое AND (<code translate="no">&amp;</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -922,7 +922,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте операторы ` <code translate="no">IS NULL</code> ` и ` <code translate="no">IS NOT NULL</code> ` для поиска объектов с отсутствующими или имеющимися значениями полей. Например, вы можете найти товары без категории или объекты, вложения которых готовы к поиску. Оба оператора работают с поддерживаемыми скалярными и векторными полями и имеют одинаковое значение:</p>
+    </button></h2><p>Используйте операторы ` <code translate="no">IS NULL</code> ` и ` <code translate="no">IS NOT NULL</code> ` для поиска объектов с отсутствующими или имеющимися значениями полей. Например, можно найти товары без категории или объекты, встроенные данные которых готовы к поиску. Оба оператора работают с поддерживаемыми скалярными и векторными полями и имеют одинаковое значение:</p>
 <table>
 <thead>
 <tr><th>Оператор</th><th>Соответствует</th></tr>
@@ -935,7 +935,8 @@ summary: >-
 <p>К поддерживаемым скалярным полям относятся поля типа Boolean, numeric, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> и <code translate="no">ARRAY</code>. Эти операторы не поддерживают <a href="/docs/ru/text.md">поля типа TEXT</a>.</p>
 <p>Начиная с версии Milvus 3.0.3, операторы также поддерживают обычные векторные поля: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> и <code translate="no">INT8_VECTOR</code>.</p>
 <p>Операторы нечувствительны к регистру: <code translate="no">IS NULL</code> и <code translate="no">is null</code> эквивалентны, как и <code translate="no">IS NOT NULL</code> и <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Пример: поиск сущностей с отсутствующими или имеющимися значениями<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Пример: поиск сущностей с отсутствующими векторами<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Предположим, что коллекция с именем <code translate="no">products</code> проиндексирована и загружена в Milvus версии 3.0.3 или более поздней. Коллекция имеет первичный ключ <code translate="no">INT64</code> с именем <code translate="no">id</code>, поле <code translate="no">VARCHAR</code>, допускающее значение null, с именем <code translate="no">category</code>, а также трехмерное поле <code translate="no">FLOAT_VECTOR</code>, допускающее значение null, с именем <code translate="no">embedding</code>. Она уже содержит следующие сущности:</p>
+    </button></h3><p>Предположим, что вы добавляете продукты в коллекцию до генерации их векторов. В этом примере коллекция <code translate="no">products</code> проиндексирована и загружена. Она имеет первичный ключ <code translate="no">INT64</code> с именем <code translate="no">id</code>, поле <code translate="no">VARCHAR</code> с возможностью принятия значения NULL и именем <code translate="no">category</code>, а также трехмерное поле <code translate="no">FLOAT_VECTOR</code> с возможностью принятия значения NULL и именем <code translate="no">embedding</code>. В следующей таблице показано, для каких продуктов имеется вектор.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -962,7 +963,7 @@ summary: >-
 </tbody>
 </table>
 <p>Создание коллекции и вставка данных опущены. Информацию об этих шагах см. в разделе <a href="/docs/ru/nullable-and-default.md">«Поля, допускающие значение null</a>».</p>
-<p>Чтобы найти сущности, которым ещё требуется встраивание, выполните запрос <code translate="no">embedding IS NULL</code>. Настройте параметры подключения в соответствии с вашим сервером.</p>
+<p>Чтобы найти продукты, для которых ещё требуется вектор, вызовите метод ` <code translate="no">query()</code> ` с фильтром ` <code translate="no">embedding IS NULL</code>`. Замените ` <code translate="no">embedding</code> ` на имя вашего векторного поля и настройте параметры подключения в соответствии с вашим сервером. В этом примере запрос возвращает ID ` <code translate="no">3</code> `, поскольку вектор этого продукта равен NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1134,7 +1135,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Замените <code translate="no">filter</code> в том же запросе, чтобы проверить отдельное поле или объединить условия:</p>
+<p>Замените <code translate="no">filter</code> в том же запросе, чтобы проверить любое поле или объединить условия:</p>
 <table>
 <thead>
 <tr><th>Выражение фильтра</th><th>Соответствующие ID</th><th>Цель</th></tr>
@@ -1144,9 +1145,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">3</code></td><td>Найти сущности с категорией</td></tr>
 <tr><td><code translate="no">embedding IS NULL</code></td><td><code translate="no">3</code></td><td>Найти объекты без вложения</td></tr>
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Найти объекты с вложением</td></tr>
-<tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Найти сущности, имеющие оба значения</td></tr>
+<tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Поиск сущностей, имеющих оба значения</td></tr>
 </tbody>
 </table>
+<p>Если каждый продукт имеет несколько фрагментов, и каждый фрагмент хранит свой собственный вектор, используйте <a href="/docs/ru/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">фильтр StructArray для поиска продуктов с отсутствующим вектором фрагмента</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1172,7 +1174,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>Пустая строка <code translate="no">&quot;&quot;</code> является значением, отличным от NULL.</td></tr>
-<tr><td><code translate="no">JSON</code></td><td>Значение NULL для всего поля соответствует <code translate="no">IS NULL</code>. Объект JSON, например <code translate="no">{&quot;category&quot;: null}</code>, является значением, отличным от NULL, даже если одно из его значений равно NULL.</td></tr>
+<tr><td><code translate="no">JSON</code></td><td>Значение NULL для всего поля соответствует <code translate="no">IS NULL</code>. Объект JSON, например <code translate="no">{&quot;category&quot;: null}</code>, не является NULL, даже если значение внутри него равно NULL.</td></tr>
 <tr><td><code translate="no">ARRAY</code></td><td>Значение NULL для всего поля соответствует <code translate="no">IS NULL</code>. Отдельные элементы не могут быть NULL, а <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> не поддерживают доступ к элементам массива, например <code translate="no">tags[0]</code>. См. <a href="/docs/ru/array_data_type.md">раздел «Массивное поле</a>».</td></tr>
 <tr><td>Обычные векторные типы</td><td>NULL означает отсутствие значения вектора. Вектор, компоненты которого равны нулю, не является NULL.</td></tr>
 </tbody>
@@ -1224,7 +1226,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ссылайтесь на ключ JSON или элемент ARRAY непосредственно в выражении. Например, чтобы отфильтровать ключ <code translate="no">price</code> в поле JSON с именем <code translate="no">product</code>:</p>
+    </button></h2><p>Ссылайтесь на ключ JSON или элемент ARRAY напрямую в выражении. Например, чтобы отфильтровать ключ <code translate="no">price</code> в поле JSON с именем <code translate="no">product</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

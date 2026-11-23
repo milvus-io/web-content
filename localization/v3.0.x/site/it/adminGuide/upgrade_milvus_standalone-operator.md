@@ -49,7 +49,7 @@ title: Aggiornamento di Milvus Standalone con Milvus Operator
 <li>Il metodo di installazione e i manifest utilizzati per l’attuale Milvus Operator</li>
 <li>Un backup aggiornato dei metadati e dei dati persistenti di Milvus</li>
 </ul>
-<p><strong>Limiti della coda dei messaggi</strong>: durante l’aggiornamento a Milvus v3.0.5, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di code dei messaggi diversi durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
+<p><strong>Limiti della coda dei messaggi</strong>: durante l'aggiornamento a Milvus v3.0.5, è necessario mantenere la coda dei messaggi attualmente in uso. Il passaggio a sistemi di code dei messaggi diversi durante l'aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code dei messaggi sarà disponibile nelle versioni future.</p>
 <div class="alert warning">
 <p>Questa procedura non convalida un downgrade o un rollback che comporti il ripristino dell’immagine di Milvus alla versione 2.6.x. Dopo che la versione v3.0.5 ha scritto i dati, un rollback che riguarda solo l’immagine potrebbe non riuscire a leggere lo stato aggiornato. Se l’aggiornamento fallisce, interrompere le operazioni di scrittura e utilizzare un piano di ripristino che ripristini i backup dei metadati e dei dati persistenti precedenti all’aggiornamento. Verificare prima il piano di ripristino in un ambiente non di produzione.</p>
 </div>
@@ -88,7 +88,7 @@ title: Aggiornamento di Milvus Standalone con Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizzare il manifesto di origine della distribuzione esistente come manifesto di aggiornamento. Non applicare direttamente il file di backup esportato senza aver prima rimosso i metadati gestiti dal server e i campi di stato.</p>
+<p>Utilizzare il manifesto di origine della distribuzione esistente (<code translate="no">milvus.yaml</code> in questa guida) come manifesto di aggiornamento. Non applicare direttamente il file di backup esportato senza aver prima rimosso i metadati gestiti dal server e i campi di stato.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Passaggio 2: Verifica della versione di Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,4 +163,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verificare che il CR di Milvus riporti <code translate="no">Healthy</code>, che l’immagine corrente sia <code translate="no">milvusdb/milvus:v3.0.5</code> e che le raccolte esistenti rimangano interrogabili e ricercabili. Completare questi controlli prima di abilitare qualsiasi funzionalità specifica della versione v3.0.5.</p>
+<p>Verificare che il CR di Milvus riporti <code translate="no">Healthy</code>, che l’immagine corrente sia <code translate="no">milvusdb/milvus:v3.0.5</code> e che le raccolte esistenti rimangano interrogabili e ricercabili. Completare questi controlli prima di abilitare qualsiasi funzionalità specifica della versione 3.0.5.</p>
+<div class="alert note">
+<p>L’aggiornamento a Milvus 3.0 non abilita Storage V3. Dopo aver verificato l’aggiornamento, esamina <a href="/docs/it/storage-v3.md">Storage V3</a> prima di abilitare le funzionalità che dipendono da esso. Una volta che Milvus ha scritto i dati in Storage V3, il downgrade a una versione precedente di Milvus che non è in grado di leggere Storage V3 non è supportato.</p>
+</div>

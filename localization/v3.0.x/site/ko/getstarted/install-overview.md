@@ -38,7 +38,7 @@ title: Milvus 배포 옵션 개요
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite는</a> 애플리케이션에 임포트할 수 있는 Python 라이브러리입니다. Milvus의 경량 버전으로서, Jupyter Notebook에서 신속하게 프로토타입을 제작하거나 리소스가 제한된 스마트 기기에서 실행하는 데 이상적입니다. Milvus Lite는 다른 Milvus 배포 방식과 동일한 API를 지원합니다. Milvus Lite와 상호작용하는 클라이언트 측 코드는 다른 배포 모드의 Milvus 인스턴스에서도 작동할 수 있습니다.</p>
 <p>로컬 예제의 경우 Python 3.10 이상을 사용하고, 선택적 Lite 종속성을 명시적으로 설치하십시오. Windows에서는 pip가 ` <code translate="no">milvus-lite</code> ` 추가 항목을 건너뛰므로, 패키지 이름을 명시적으로 지정해야 합니다:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 를 사용하여 로컬 스토리지를 열 수 있습니다. Milvus Lite 3.x는 이 경로에 디렉터리를 생성하며, 기존 Milvus Lite 2.x 데이터베이스 파일은 내보내기 및 마이그레이션이 필요합니다. 플랫폼 요구 사항은 <a href="/docs/ko/milvus_lite.md">‘Milvus Lite 실행’을</a>, 삽입 및 검색에 대한 전체 예제는 <a href="/docs/ko/quickstart.md">‘빠른 시작’을</a> 참조하십시오.</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus Standalone<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: Milvus 배포 옵션 개요
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone은 단일 머신 서버 배포 방식입니다. Milvus Standalone의 모든 구성 요소가 단일 <a href="https://milvus.io/docs/install_standalone-docker.md">Docker 이미지에</a> 포함되어 있어 배포가 편리합니다. 프로덕션 워크로드를 처리해야 하지만 쿠버네티스를 사용하지 않으려는 경우, 충분한 메모리를 갖춘 단일 머신에서 Milvus Standalone을 실행하는 것이 좋은 선택입니다. 기본적으로 Milvus Standalone은 메시지 큐로 <strong>Woodpecker</strong> (내장형)를 사용하므로 별도의 메시징 서비스를 운영할 필요가 없습니다.</p>
+    </button></h2><p>Milvus Standalone은 단일 머신 서버 배포 방식입니다. Milvus Standalone의 모든 구성 요소가 단일 <a href="https://milvus.io/docs/install_standalone-docker.md">Docker 이미지에</a> 포함되어 있어 배포가 편리합니다. 프로덕션 워크로드를 처리해야 하지만 쿠버네티스를 사용하지 않으려는 경우, 충분한 메모리를 갖춘 단일 머신에서 Milvus Standalone을 실행하는 것이 좋은 선택입니다. 기본적으로 Milvus Standalone은 메시지 큐로 <strong>Woodpecker</strong> (임베디드)를 사용하므로, 별도로 운영해야 할 메시징 서비스가 없습니다.</p>
 <h2 id="Milvus-Distributed" class="common-anchor-header">Milvus Distributed<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,7 +90,7 @@ title: Milvus 배포 옵션 개요
       </svg>
     </button></h2><p>배포 모드의 선택은 일반적으로 애플리케이션의 개발 단계에 따라 달라집니다:</p>
 <ul>
-<li><p><strong>신속한 프로토타이핑을 위한 경우</strong></p>
+<li><p><strong>빠른 프로토타이핑을 위한 경우</strong></p>
 <p>노트북에서 Milvus Lite를 사용하여 임베딩, RAG 청킹 전략 및 검색 동작을 테스트하십시오. 공유 서버가 필요하거나 측정된 메모리 및 쿼리 부하가 로컬 환경을 초과할 경우 Milvus Standalone으로 전환하십시오. 클라이언트 API는 유사하지만, 기능 차이를 확인하고 저장된 데이터는 별도로 마이그레이션해야 합니다.</p></li>
 <li><p><strong>소규모 프로덕션 배포</strong></p>
 <p>단일 서버로 워크로드 및 가용성 요구 사항을 충족할 수 있고, Kubernetes 없이 운영하기를 원할 경우 Milvus Standalone을 사용하십시오. 벡터 차원, 스칼라 필드, 인덱스 설정 및 복제본 수를 바탕으로 메모리 용량을 추정한 다음, 예상 쿼리 동시 처리량과 쓰기 속도를 벤치마킹하십시오. 벡터 개수만으로는 용량을 확정할 수 없습니다.</p></li>

@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus bietet Vergleichs-, Bereichs-, arithmetische, logische und NULL-Operatoren zum Filtern von Entitäten. Jeder Operator unterstützt bestimmte Feldtypen.</p>
 <div class="alert note">
-<p>Der linke Operand kann ein Sammlungsfeld sein, wie z. B. „ <code translate="no">status</code> “, oder ein StructArray-Unterfeld an einem bestimmten Elementindex, wie z. B. „ <code translate="no">struct[0][subfield] &gt; 10</code> “. Siehe <a href="/docs/de/struct-array-operators.md">StructArray-Operatoren</a>.</p>
+<p>Der linke Operand kann ein Sammlungsfeld sein, wie z. B. ` <code translate="no">status</code>`, oder ein StructArray-Unterfeld an einem bestimmten Elementindex, wie z. B. ` <code translate="no">struct[0][subfield] &gt; 10</code>`. Siehe <a href="/docs/de/struct-array-operators.md">StructArray-Operatoren</a>.</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">Vergleichsoperatoren<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -247,7 +247,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie alle Entitäten finden möchten, bei denen „ <code translate="no">rating</code> “ größer oder gleich 4 ist:</p>
+    </button></h3><p>Wenn Sie alle Entitäten suchen möchten, bei denen „ <code translate="no">rating</code> “ größer oder gleich 4 ist:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -657,7 +657,7 @@ summary: >-
 <tr><td><code translate="no">ADMIN</code></td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
-<p>Beispielsweise bedeutet „ <code translate="no">permissions = 5</code> “, dass die Bits „ <code translate="no">READ</code> “ und „ <code translate="no">SHARE</code> “ gesetzt sind, da „ <code translate="no">5 = 1 + 4</code> “ gilt.</p>
+<p>Beispielsweise bedeutet „ <code translate="no">permissions = 5</code> “, dass die Bits „ <code translate="no">READ</code> “ und „ <code translate="no">SHARE</code> “ gesetzt sind, da <code translate="no">5 = 1 + 4</code> gilt.</p>
 <p>Um Entitäten zu finden, bei denen das Bit „ <code translate="no">SHARE</code> “ gesetzt ist, verwenden Sie die bitweise UND-Verknüpfung (<code translate="no">&amp;</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -935,7 +935,8 @@ summary: >-
 <p>Zu den unterstützten Skalarfeldern gehören boolesche, numerische, „ <code translate="no">VARCHAR</code> “, „ <code translate="no">JSON</code> “ und „ <code translate="no">ARRAY</code> “-Felder. Diese Operatoren unterstützen keine <a href="/docs/de/text.md">TEXT-Felder</a>.</p>
 <p>Ab Milvus 3.0.3 unterstützen die Operatoren auch gewöhnliche Vektorfelder: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> und <code translate="no">INT8_VECTOR</code>.</p>
 <p>Bei den Operatoren wird die Groß-/Kleinschreibung nicht berücksichtigt: „ <code translate="no">IS NULL</code> “ und „ <code translate="no">is null</code> “ sind gleichbedeutend, ebenso wie „ <code translate="no">IS NOT NULL</code> “ und „ <code translate="no">is not null</code> “.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Beispiel: Entitäten mit fehlenden oder vorhandenen Werten suchen<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Beispiel: Entitäten mit fehlenden Vektoren finden<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Angenommen, eine Sammlung namens „ <code translate="no">products</code> “ ist in Milvus 3.0.3 oder höher indiziert und geladen. Die Sammlung verfügt über einen Primärschlüssel vom Typ „ <code translate="no">INT64</code> “ mit dem Namen „ <code translate="no">id</code> “, ein nullfähiges Feld vom Typ „ <code translate="no">VARCHAR</code> “ mit dem Namen „ <code translate="no">category</code> “ sowie ein nullfähiges, dreidimensionales Feld vom Typ „ <code translate="no">FLOAT_VECTOR</code> “ mit dem Namen „ <code translate="no">embedding</code> “. Sie enthält bereits die folgenden Entitäten:</p>
+    </button></h3><p>Angenommen, Sie fügen einer Sammlung Produkte hinzu, bevor deren Vektoren generiert werden. In diesem Beispiel ist die Sammlung „ <code translate="no">products</code> “ indiziert und geladen. Sie verfügt über einen Primärschlüssel vom Typ „ <code translate="no">INT64</code> “ mit dem Namen „ <code translate="no">id</code> “, ein nullfähiges Feld vom Typ „ <code translate="no">VARCHAR</code> “ mit dem Namen „ <code translate="no">category</code> “ sowie ein nullfähiges, dreidimensionales Feld vom Typ „ <code translate="no">FLOAT_VECTOR</code> “ mit dem Namen „ <code translate="no">embedding</code> “. Die folgende Tabelle zeigt, welche Produkte über einen Vektor verfügen.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -962,7 +963,7 @@ summary: >-
 </tbody>
 </table>
 <p>Die Erstellung der Sammlung und das Einfügen von Daten werden hier ausgelassen. Informationen zu diesen Schritten finden Sie unter <a href="/docs/de/nullable-and-default.md">„Nullfähige Felder</a>“.</p>
-<p>Um Entitäten zu finden, die noch eine Einbettung benötigen, führen Sie eine Abfrage nach „ <code translate="no">embedding IS NULL</code> “ durch. Passen Sie die Verbindungseinstellungen an Ihren Server an.</p>
+<p>Um Produkte zu finden, für die noch ein Vektor fehlt, rufen Sie „ <code translate="no">query()</code> “ mit dem Filter „ <code translate="no">embedding IS NULL</code> “ auf. Ersetzen Sie „ <code translate="no">embedding</code> “ durch den Namen Ihres Vektorfeldes und passen Sie die Verbindungseinstellungen an Ihren Server an. In diesem Beispiel gibt die Abfrage die ID „ <code translate="no">3</code> “ zurück, da der Vektor dieses Produkts NULL ist.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1147,6 +1148,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Entitäten mit beiden Werten suchen</td></tr>
 </tbody>
 </table>
+<p>Wenn jedes Produkt mehrere Chunks hat und jeder Chunk seinen eigenen Vektor speichert, verwenden Sie einen <a href="/docs/de/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">StructArray-Filter, um Produkte mit einem fehlenden Chunk-Vektor zu finden</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1165,7 +1167,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Operatoren prüfen den gespeicherten Feldwert. Bei einem nullfähigen Feld ohne Standardwert wird NULL gespeichert, wenn das Feld beim Einfügen weggelassen oder explizit auf NULL gesetzt wird. Ein konfigurierter Standardwert kann beeinflussen, was gespeichert wird. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">„Nullfähige Felder</a> und <a href="/docs/de/default-values.md">Standardwerte</a>“.</p>
+    </button></h3><p>Die Operatoren prüfen den gespeicherten Feldwert. Bei einem nullfähigen Feld ohne Standardwert wird NULL gespeichert, wenn das Feld beim Einfügen weggelassen oder explizit auf NULL gesetzt wird. Ein konfigurierter Standardwert kann den gespeicherten Wert ändern. Weitere Informationen finden Sie unter <a href="/docs/de/nullable-and-default.md">„Nullfähige Felder</a> und <a href="/docs/de/default-values.md">Standardwerte</a>“.</p>
 <table>
 <thead>
 <tr><th>Feldtyp</th><th>NULL-Verhalten</th></tr>
@@ -1208,7 +1210,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Beide Entitäten verfügen über einen „ <code translate="no">embedding</code> “-Vektor.</td></tr>
 </tbody>
 </table>
-<p>Um fehlende Einbettungen abzurufen, verwenden Sie „ <code translate="no">query()</code> “; eine Suche nach „ <code translate="no">embedding</code> “ mit „ <code translate="no">embedding IS NULL</code> “ ist gültig, liefert jedoch keine Treffer. Die Vektorsuche überspringt bereits NULL-Einbettungen, sodass „ <code translate="no">embedding IS NOT NULL</code> “ die Kandidaten nicht weiter eingrenzt. Das Ranking, andere Filter und das Suchlimit bestimmen weiterhin die zurückgegebenen Treffer.</p>
+<p>Um fehlende Einbettungen abzurufen, verwenden Sie „ <code translate="no">query()</code> “; eine Suche nach „ <code translate="no">embedding</code> “ mit „ <code translate="no">embedding IS NULL</code> “ ist gültig, liefert jedoch keine Treffer. Die Vektorsuche überspringt bereits NULL-Einbettungen, sodass „ <code translate="no">embedding IS NOT NULL</code> “ die Kandidaten nicht weiter einschränkt. Das Ranking, andere Filter und das Suchlimit bestimmen weiterhin die zurückgegebenen Treffer.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Tipps zur Verwendung grundlegender Operatoren mit JSON- und ARRAY-Feldern<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

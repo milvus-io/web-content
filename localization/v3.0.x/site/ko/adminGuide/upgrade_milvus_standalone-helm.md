@@ -44,7 +44,7 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
       </svg>
     </button></h2><ul>
 <li>Helm 3.14.0 이상</li>
-<li>Helm으로 관리되는 기존 Milvus 2.6.x 배포 환경</li>
+<li>Helm으로 관리되는 기존 Milvus 2.6.x 배포</li>
 <li>기존 배포에 사용된 Helm 값</li>
 <li>Milvus 메타데이터 및 영구 데이터의 최신 백업</li>
 </ul>
@@ -68,7 +68,7 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">1단계: Helm 리포지토리 업데이트<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">1단계: 현재 Helm 값 백업<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,13 +83,34 @@ title: Helm 차트를 사용하여 Milvus 독립형 버전 업그레이드
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus Helm 저장소를 추가하거나 업데이트하십시오.</p>
+    </button></h3><p>배포를 변경하기 전에 현재 릴리스의 전체 값을 저장하십시오:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">2단계: Helm 리포지토리 업데이트<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus Helm 저장소를 추가하거나 업데이트하십시오:</p>
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> 에 있는 Milvus Helm 차트 저장소는 아카이브 처리되었습니다. 차트 버전 4.0.31 이상은 새로운 저장소 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 를 사용하십시오.
+<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> 에 있던 Milvus Helm 차트 저장소는 아카이브 처리되었습니다. 차트 버전 4.0.31 이상은 새로운 저장소 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 를 사용하십시오.
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">2단계: Milvus 업그레이드<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">3단계: Milvus 업그레이드<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

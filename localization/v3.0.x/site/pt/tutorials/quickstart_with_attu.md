@@ -58,7 +58,7 @@ title: Introdução rápida ao Attu — a interface de utilizador web do Milvus
 <li>Uma versão do Attu compatível com o seu servidor. O Attu 3.0 suporta o Milvus 2.6.0 e versões posteriores, incluindo o Milvus 3.x; consulte a <a href="https://github.com/zilliztech/attu#compatibility">tabela de compatibilidade</a> para servidores mais antigos.</li>
 <li>Um ambiente Python com uma versão do PyMilvus compatível com o seu servidor. Consulte <a href="/docs/pt/install-pymilvus.md">«Instalar o SDK do Milvus para Python</a> » e <a href="/docs/pt/release_notes.md">as «Notas de Lançamento</a>». Para a versão do SDK utilizada neste ramo da documentação, instale as dependências «model extra» e «progress-bar»:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>Os passos de preparação de dados também utilizam <code translate="no">wget</code> e <code translate="no">unzip</code>. A função de incorporação descarrega o seu modelo na primeira utilização; por isso, permita o acesso à rede ao anfitrião do modelo ou prepare a cache do modelo com antecedência. As capturas de ecrã ilustram o fluxo de trabalho; as etiquetas e os layouts podem variar entre as versões do Attu.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Instalar a aplicação para computador<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -330,7 +330,7 @@ client.insert(collection_name=collection_name, data=data)
 <li>Clique no botão <strong>«Gerar dados aleatórios</strong> » para criar consultas de teste.</li>
 <li>Clique em <strong>«Pesquisar»</strong> para obter resultados com base nos dados gerados.</li>
 </ol>
-<p>Os resultados são apresentados numa tabela, mostrando IDs, pontuações de semelhança e campos dinâmicos para cada entidade correspondente. Os vetores aleatórios testam o fluxo de trabalho de pesquisa, não a relevância semântica. Para uma consulta de texto significativa, codifique-a com a mesma função ` <code translate="no">embedding_model.encode_queries()</code> ` utilizada para esta coleção e, em seguida, efetue a pesquisa com esse vetor. Consulte <a href="/docs/pt/single-vector-search.md">«Pesquisa de Vetor Único»</a> para ver um exemplo em Python.</p>
+<p>Os resultados são apresentados numa tabela, mostrando IDs, pontuações de semelhança e campos dinâmicos para cada entidade correspondente. Os vetores aleatórios testam o fluxo de trabalho de pesquisa, não a relevância semântica. Para uma consulta de texto significativa, codifique-a com a mesma função « <code translate="no">embedding_model.encode_queries()</code> » utilizada para esta coleção e, em seguida, efetue a pesquisa com esse vetor. Consulte <a href="/docs/pt/single-vector-search.md">«Pesquisa de Vetor Único»</a> para ver um exemplo em Python.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
@@ -350,7 +350,7 @@ client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Clique no botão <strong>«Explorar»</strong> no painel de resultados para visualizar as relações entre o vetor de consulta e os resultados da pesquisa numa <strong>estrutura semelhante a um gráfico de conhecimento</strong>.</p>
+    </button></h3><p>Clique no botão <strong>«Explorar»</strong> no painel de resultados para visualizar as relações entre o vetor de consulta e os resultados da pesquisa numa <strong>estrutura semelhante a um grafo de conhecimento</strong>.</p>
 <ul>
 <li><strong>O nó central</strong> representa o vetor de pesquisa.</li>
 <li><strong>Os nós ligados</strong> representam os resultados da pesquisa; ao clicar neles, são apresentadas as informações detalhadas do nó correspondente.</li>

@@ -1,15 +1,15 @@
 ---
 id: schema-hands-on.md
-title: Conception d'un modèle de données pour la recherche
+title: Conception de modèles de données pour la recherche
 summary: >-
-  Les systèmes de recherche d'informations, également connus sous le nom de
-  moteurs de recherche, sont essentiels pour diverses applications
-  d'intelligence artificielle telles que la génération augmentée par la
-  recherche (RAG), la recherche visuelle et la recommandation de produits. Au
-  cœur de ces systèmes se trouve un modèle de données soigneusement conçu pour
-  organiser, indexer et récupérer les informations.
+  Les systèmes de recherche d'informations, également appelés « moteurs de
+  recherche », sont indispensables à diverses applications d'intelligence
+  artificielle telles que la génération augmentée par la recherche (RAG), la
+  recherche visuelle et la recommandation de produits. Au cœur de ces systèmes
+  se trouve un modèle de données soigneusement conçu pour organiser, indexer et
+  extraire les informations.
 ---
-<h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Conception d'un modèle de données pour la recherche<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
+<h1 id="Data-Model-Design-for-Search" class="common-anchor-header">Conception de modèles de données pour la recherche<button data-href="#Data-Model-Design-for-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,12 +24,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Les systèmes de recherche d'informations, également connus sous le nom de moteurs de recherche, sont essentiels pour diverses applications d'intelligence artificielle telles que la génération augmentée par la recherche (RAG), la recherche visuelle et la recommandation de produits. Au cœur de ces systèmes se trouve un modèle de données soigneusement conçu pour organiser, indexer et récupérer les informations.</p>
-<p>Milvus vous permet de spécifier le modèle de données de recherche par le biais d'un schéma de collection, organisant les données non structurées, leurs représentations vectorielles denses ou éparses et les métadonnées structurées. Que vous travailliez avec du texte, des images ou d'autres types de données, ce guide pratique vous aidera à comprendre et à appliquer les concepts clés des schémas pour concevoir un modèle de données de recherche dans la pratique.</p>
-<p>
+    </button></h1><p>Les systèmes de recherche d’informations, également appelés moteurs de recherche, sont essentiels pour diverses applications d’IA telles que la génération augmentée par la recherche (RAG), la recherche visuelle et la recommandation de produits. Au cœur de ces systèmes se trouve un modèle de données soigneusement conçu pour organiser, indexer et extraire les informations.</p>
+<p>Milvus vous permet de définir le modèle de données de recherche via un schéma de collection, en organisant les données non structurées, leurs représentations vectorielles denses ou clairsemées, ainsi que les métadonnées structurées. Que vous travailliez avec du texte, des images ou d’autres types de données, ce guide pratique vous aidera à comprendre et à appliquer les concepts clés du schéma pour concevoir un modèle de données de recherche dans la pratique.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" />
-   </span> <span class="img-wrapper"> <span>Anatomie du modèle de données</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/data-model-anatomy.png" alt="Data Model Anatomy" class="doc-image" id="data-model-anatomy" /> 
+   <span>Anatomie du modèle de données</span>
+  
+ </span></p>
 <h2 id="Data-Model" class="common-anchor-header">Modèle de données<button data-href="#Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,8 +47,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La conception du modèle de données d'un système de recherche implique l'analyse des besoins de l'entreprise et l'abstraction des informations dans un modèle de données exprimé par un schéma. Un schéma bien défini est important pour aligner le modèle de données sur les objectifs de l'entreprise et garantir la cohérence des données et la qualité du service.  En outre, le choix des types de données et de l'index appropriés est important pour atteindre l'objectif de l'entreprise de manière économique.</p>
-<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analyse des besoins de l'entreprise<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
+    </button></h2><p>La conception du modèle de données d’un système de recherche implique l’analyse des besoins métier et l’abstraction des informations en un modèle de données exprimé sous forme de schéma. Un schéma bien défini est essentiel pour aligner le modèle de données sur les objectifs métier, garantissant ainsi la cohérence des données et la qualité du service. De plus, le choix de types de données et d’index appropriés est crucial pour atteindre l’objectif métier de manière économique.</p>
+<h3 id="Analyzing-Business-Needs" class="common-anchor-header">Analyse des besoins métier<button data-href="#Analyzing-Business-Needs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,24 +63,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour répondre efficacement aux besoins de l'entreprise, il faut d'abord analyser les types de requêtes que les utilisateurs effectueront et déterminer les méthodes de recherche les plus appropriées.</p>
+    </button></h3><p>Pour répondre efficacement aux besoins métier, il faut commencer par analyser les types de requêtes que les utilisateurs effectueront et déterminer les méthodes de recherche les plus adaptées.</p>
 <ul>
-<li><p><strong>Requêtes des utilisateurs :</strong> Identifiez les types de requêtes que les utilisateurs sont censés effectuer. Cela permet de s'assurer que votre schéma prend en charge les cas d'utilisation réels et optimise les performances de recherche. Il peut s'agir de</p>
+<li><p><strong>Requêtes des utilisateurs :</strong> identifiez les types de requêtes que les utilisateurs sont susceptibles d’effectuer. Cela permet de s’assurer que votre schéma prend en charge les cas d’utilisation réels et d’optimiser les performances de recherche. Il peut s’agir notamment de :</p>
 <ul>
 <li><p>la récupération de documents correspondant à une requête en langage naturel</p></li>
-<li><p>la recherche d'images similaires à une image de référence ou correspondant à une description textuelle</p></li>
-<li><p>la recherche de produits en fonction d'attributs tels que le nom, la catégorie ou la marque</p></li>
-<li><p>le filtrage d'éléments sur la base de métadonnées structurées (par exemple, la date de publication, les étiquettes, les évaluations)</p></li>
-<li><p>Combinaison de plusieurs critères dans des requêtes hybrides (par exemple, dans le cas d'une recherche visuelle, prise en compte de la similarité sémantique des images et de leurs légendes).</p></li>
+<li><p>Recherche d’images similaires à une image de référence ou correspondant à une description textuelle</p></li>
+<li><p>Rechercher des produits selon des attributs tels que le nom, la catégorie ou la marque</p></li>
+<li><p>Filtrer des éléments en fonction de métadonnées structurées (par exemple, date de publication, balises, notes)</p></li>
+<li><p>Combiner plusieurs critères dans des requêtes hybrides (par exemple, dans la recherche visuelle, en tenant compte de la similarité sémantique à la fois des images et de leurs légendes)</p></li>
 </ul></li>
-<li><p><strong>Méthodes de recherche :</strong> Choisissez les techniques de recherche appropriées qui correspondent aux types de requêtes que vos utilisateurs effectueront. Les différentes méthodes ont des objectifs différents et peuvent souvent être combinées pour obtenir des résultats plus performants :</p>
+<li><p><strong>Méthodes de recherche :</strong> choisissez les techniques de recherche adaptées aux types de requêtes que vos utilisateurs effectueront. Différentes méthodes répondent à différents objectifs et peuvent souvent être combinées pour obtenir des résultats plus pertinents :</p>
 <ul>
-<li><p><strong>Recherche sémantique</strong>: Elle utilise la similarité vectorielle dense pour trouver des éléments ayant une signification similaire, ce qui est idéal pour les données non structurées telles que les textes ou les images.</p></li>
-<li><p><strong>Recherche en texte intégral</strong>: Complète la recherche sémantique avec la recherche par mots-clés.  La recherche en texte intégral peut utiliser l'analyse lexicale pour éviter de diviser les mots longs en jetons fragmentés, en saisissant les termes spéciaux lors de la recherche.</p></li>
-<li><p><strong>Filtrage des métadonnées</strong>: En plus de la recherche vectorielle, il s'agit d'appliquer des contraintes telles que des plages de dates, des catégories ou des étiquettes.</p></li>
+<li><p><strong>Recherche sémantique</strong>: utilise la similarité vectorielle dense pour trouver des éléments ayant une signification similaire ; idéale pour les données non structurées telles que le texte ou les images.</p></li>
+<li><p><strong>Recherche en texte intégral</strong>: elle complète la recherche sémantique par la correspondance de mots-clés. La recherche en texte intégral peut recourir à l’analyse lexicale pour éviter de fragmenter les mots longs en tokens, ce qui permet de saisir les termes spécifiques lors de la récupération.</p></li>
+<li><p><strong>Filtrage par métadonnées</strong>: en plus de la recherche vectorielle, application de contraintes telles que des plages de dates, des catégories ou des balises.</p></li>
 </ul></li>
 </ul>
-<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traduire les besoins de l'entreprise en un modèle de données de recherche<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
+<h3 id="Translates-Business-Requirements-into-a-Search-Data-Model" class="common-anchor-header">Traduire les besoins métier en un modèle de données de recherche<button data-href="#Translates-Business-Requirements-into-a-Search-Data-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,19 +95,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>L'étape suivante consiste à traduire vos exigences professionnelles en un modèle de données concret, en identifiant les principaux composants de vos informations et leurs méthodes de recherche :</p>
+    </button></h3><p>L’étape suivante consiste à traduire vos besoins métier en un modèle de données concret, en identifiant les composants essentiels de vos informations et leurs méthodes de recherche :</p>
 <ul>
-<li><p>Définir les données à stocker, telles que le contenu brut (texte, images, audio), les métadonnées associées (titres, balises, auteur) et les attributs contextuels (horodatage, comportement de l'utilisateur, etc.).</p></li>
-<li><p>Déterminer les types et formats de données appropriés pour chaque élément. Par exemple :</p>
+<li><p>Définissez les données que vous devez stocker, telles que le contenu brut (texte, images, audio), les métadonnées associées (titres, balises, auteurs) et les attributs contextuels (horodatages, comportement des utilisateurs, etc.)</p></li>
+<li><p>Déterminez les types et formats de données appropriés pour chaque élément. Par exemple :</p>
 <ul>
-<li><p>Description de texte → chaîne de caractères</p></li>
-<li><p>Incrustations d'images ou de documents → vecteurs denses ou épars</p></li>
-<li><p>Catégories, étiquettes ou drapeaux → chaîne, tableau et bool</p></li>
-<li><p>Attributs numériques tels que le prix ou l'évaluation → integer ou float</p></li>
-<li><p>Informations structurées telles que les détails de l'auteur -&gt; json</p></li>
+<li><p>Descriptions textuelles → chaîne de caractères</p></li>
+<li><p>Intégrations d’images ou de documents → vecteurs denses ou clairsemés</p></li>
+<li><p>Catégories, balises ou indicateurs → chaîne de caractères, tableau et booléen</p></li>
+<li><p>Attributs numériques tels que le prix ou la note → entier ou nombre à virgule flottante</p></li>
+<li><p>Informations structurées telles que les détails de l'auteur → JSON</p></li>
 </ul></li>
 </ul>
-<p>Une définition claire de ces éléments garantit la cohérence des données, la précision des résultats de recherche et la facilité d'intégration avec les logiques d'application en aval.</p>
+<p>Une définition claire de ces éléments garantit la cohérence des données, la précision des résultats de recherche et une intégration aisée avec les logiques applicatives en aval.</p>
 <h2 id="Schema-Design" class="common-anchor-header">Conception du schéma<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,8 +123,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, le modèle de données est exprimé par un schéma de collection. La conception des champs appropriés dans un schéma de collection est essentielle pour permettre une recherche efficace. Chaque champ définit un type particulier de données stockées dans la collection et joue un rôle distinct dans le processus de recherche. Au niveau le plus élevé, Milvus prend en charge deux types principaux de champs : les <strong>champs vectoriels</strong> et les <strong>champs scalaires</strong>.</p>
-<p>Vous pouvez maintenant mapper votre modèle de données dans un schéma de champs, y compris les vecteurs et tous les champs scalaires auxiliaires. Assurez-vous que chaque champ est en corrélation avec les attributs de votre modèle de données, en accordant une attention particulière à votre type de vecteur (dense ou spase) et à sa dimension.</p>
+    </button></h2><p>Dans Milvus, le modèle de données s’exprime à travers un schéma de collection. La conception des champs appropriés au sein d’un schéma de collection est essentielle pour permettre une récupération efficace. Chaque champ définit un type particulier de données stockées dans la collection et joue un rôle distinct dans le processus de recherche. À un niveau général, Milvus prend en charge deux types principaux de champs : <strong>les champs vectoriels</strong> et <strong>les champs scalaires</strong>.</p>
+<p>Vous pouvez désormais mapper votre modèle de données dans un schéma de champs, comprenant des vecteurs et d’éventuels champs scalaires auxiliaires. Assurez-vous que chaque champ correspond aux attributs de votre modèle de données, en prêtant particulièrement attention au type de votre vecteur (dense ou clairsemé) et à sa dimension.</p>
 <h3 id="Vector-Field" class="common-anchor-header">Champ vectoriel<button data-href="#Vector-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,8 +140,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les champs vectoriels stockent les données intégrées pour les types de données non structurées tels que le texte, les images et l'audio. Ces encastrements peuvent être denses, épars ou binaires, en fonction du type de données et de la méthode d'extraction utilisée. En règle générale, les vecteurs denses sont utilisés pour la recherche sémantique, tandis que les vecteurs épars conviennent mieux à la recherche plein texte ou à la recherche lexicale. Les vecteurs binaires sont utiles lorsque les ressources de stockage et de calcul sont limitées. Une collection peut contenir plusieurs champs de vecteurs pour permettre des stratégies de recherche multimodales ou hybrides. Pour un guide détaillé sur ce sujet, veuillez vous référer à la <a href="/docs/fr/multi-vector-search.md">Recherche hybride multi-vecteurs</a>.</p>
-<p>Milvus prend en charge les types de données vectorielles : <code translate="no">FLOAT_VECTOR</code> pour <a href="/docs/fr/dense-vector.md">Dense Vector</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> pour <a href="/docs/fr/sparse_vector.md">Sparse Vector</a> et <code translate="no">BINARY_VECTOR</code> pour <a href="/docs/fr/binary-vector.md">Binary Vector</a>.</p>
+    </button></h3><p>Les champs vectoriels stockent des représentations pour des types de données non structurées telles que le texte, les images et l’audio. Ces représentations peuvent être denses, clairsemées ou binaires, selon le type de données et la méthode de recherche utilisée. En général, les vecteurs denses sont utilisés pour la recherche sémantique, tandis que les vecteurs clairsemés sont mieux adaptés à la recherche en texte intégral ou à la correspondance lexicale. Les vecteurs binaires sont utiles lorsque les ressources de stockage et de calcul sont limitées. Une collection peut contenir plusieurs champs vectoriels afin de permettre des stratégies de recherche multimodales ou hybrides. Pour un guide détaillé sur ce sujet, veuillez vous reporter à la section « <a href="/docs/fr/multi-vector-search.md">Recherche hybride multi-vectorielle</a> ».</p>
+<p>Milvus prend en charge les types de données vectorielles suivants : <code translate="no">FLOAT_VECTOR</code> pour <a href="/docs/fr/dense-vector.md">les vecteurs denses</a>, <code translate="no">SPARSE_FLOAT_VECTOR</code> pour <a href="/docs/fr/sparse_vector.md">les vecteurs creux</a> et <code translate="no">BINARY_VECTOR</code> pour <a href="/docs/fr/binary-vector.md">les vecteurs binaires</a></p>
 <h3 id="Scalar-Field" class="common-anchor-header">Champ scalaire<button data-href="#Scalar-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,9 +157,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les champs scalaires stockent des valeurs primitives et structurées, communément appelées métadonnées, telles que des nombres, des chaînes de caractères ou des dates. Ces valeurs peuvent être renvoyées avec les résultats d'une recherche vectorielle et sont essentielles pour le filtrage et le tri. Elles permettent de restreindre les résultats de la recherche en fonction d'attributs spécifiques, par exemple en limitant les documents à une catégorie particulière ou à une période définie.</p>
-<p>Milvus prend en charge les types scalaires tels que <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> et <code translate="no">ARRAY</code> pour le stockage et le filtrage des données non vectorielles. Ces types améliorent la précision et la personnalisation des opérations de recherche.</p>
-<h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Exploiter les fonctionnalités avancées dans la conception des schémas<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
+    </button></h3><p>Les champs scalaires stockent des valeurs primitives et structurées — communément appelées métadonnées — telles que des nombres, des chaînes de caractères ou des dates. Ces valeurs peuvent être renvoyées en même temps que les résultats de recherche vectorielle et sont essentielles pour le filtrage et le tri. Elles vous permettent d’affiner les résultats de recherche en fonction d’attributs spécifiques, par exemple en limitant les documents à une catégorie particulière ou à une plage de dates définie.</p>
+<p>Milvus prend en charge des types scalaires tels que <code translate="no">BOOL</code>, <code translate="no">INT8/16/32/64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> et <code translate="no">ARRAY</code> pour le stockage et le filtrage de données non vectorielles. Ces types améliorent la précision et la personnalisation des opérations de recherche.</p>
+<h2 id="Leverage-Advanced-Features-in-Schema-Design" class="common-anchor-header">Tirer parti des fonctionnalités avancées lors de la conception du schéma<button data-href="#Leverage-Advanced-Features-in-Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,7 +174,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lors de la conception d'un schéma, il ne suffit pas de faire correspondre vos données aux champs en utilisant les types de données pris en charge. Il est essentiel de bien comprendre les relations entre les champs et les stratégies disponibles pour la configuration. Le fait de garder à l'esprit les caractéristiques clés pendant la phase de conception garantit que le schéma répond non seulement aux exigences immédiates en matière de traitement des données, mais qu'il est également évolutif et adaptable aux besoins futurs. En intégrant soigneusement ces fonctionnalités, vous pouvez construire une architecture de données solide qui maximise les capacités de Milvus et prend en charge votre stratégie et vos objectifs plus larges en matière de données. Voici une vue d'ensemble des principales caractéristiques permettant de créer un schéma de collecte :</p>
+    </button></h2><p>Lors de la conception d’un schéma, il ne suffit pas de mapper simplement vos données à des champs en utilisant les types de données pris en charge. Il est essentiel d’avoir une compréhension approfondie des relations entre les champs et des stratégies disponibles pour la configuration. Garder à l’esprit les fonctionnalités clés pendant la phase de conception garantit que le schéma répond non seulement aux exigences immédiates en matière de traitement des données, mais qu’il est également évolutif et adaptable aux besoins futurs. En intégrant soigneusement ces fonctionnalités, vous pouvez construire une architecture de données solide qui maximise les capacités de Milvus et soutient votre stratégie et vos objectifs globaux en matière de données. Voici un aperçu des fonctionnalités clés permettant de créer un schéma de collection :</p>
 <h3 id="Primary-Key" class="common-anchor-header">Clé primaire<button data-href="#Primary-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -188,8 +190,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Un champ de clé primaire est un composant fondamental d'un schéma, car il identifie de manière unique chaque entité au sein d'une collection. La définition d'une clé primaire est obligatoire. Il doit s'agir d'un champ scalaire de type entier ou chaîne et marqué comme <code translate="no">is_primary=True</code>. En option, vous pouvez activer <code translate="no">auto_id</code> pour la clé primaire, qui se voit automatiquement attribuer des nombres entiers qui augmentent de manière monolithique au fur et à mesure que des données sont ingérées dans la collection.</p>
-<p>Pour plus de détails, voir <a href="/docs/fr/primary-field.md">Champ primaire et AutoID</a>.</p>
+    </button></h3><p>Un champ de clé primaire est un élément fondamental d’un schéma, car il identifie de manière unique chaque entité au sein d’une collection. La définition d’une clé primaire est obligatoire. Il doit s’agir d’un champ scalaire de type entier ou chaîne de caractères, marqué comme « <code translate="no">is_primary=True</code> ». Vous pouvez éventuellement activer la fonctionnalité « <code translate="no">auto_id</code> » pour la clé primaire ; celle-ci se voit alors attribuer automatiquement des nombres entiers qui augmentent de manière monolithique à mesure que de nouvelles données sont ingérées dans la collection.</p>
+<p>Pour plus de détails, reportez-vous aux sections « <a href="/docs/fr/primary-field.md">Champ principal » et « AutoID</a> ».</p>
 <h3 id="Partitioning" class="common-anchor-header">Partitionnement<button data-href="#Partitioning" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,8 +207,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour accélérer la recherche, vous pouvez activer le partitionnement. En désignant un champ scalaire spécifique pour le partitionnement et en spécifiant des critères de filtrage basés sur ce champ pendant les recherches, l'étendue de la recherche peut être efficacement limitée aux seules partitions pertinentes. Cette méthode améliore considérablement l'efficacité des opérations de recherche en réduisant le domaine de recherche.</p>
-<p>Pour plus de détails, voir <a href="/docs/fr/use-partition-key.md">Utiliser la clé de partition</a>.</p>
+    </button></h3><p>Pour accélérer la recherche, vous pouvez, si vous le souhaitez, activer le partitionnement. En désignant un champ scalaire spécifique pour le partitionnement et en spécifiant des critères de filtrage basés sur ce champ lors des recherches, le champ d’application de la recherche peut être efficacement limité aux seules partitions pertinentes. Cette méthode améliore considérablement l’efficacité des opérations de récupération en réduisant le domaine de recherche.</p>
+<p>Pour plus de détails, consultez la section « <a href="/docs/fr/use-partition-key.md">Utilisation</a> de <a href="/docs/fr/use-partition-key.md">la clé de partition</a> ».</p>
 <h3 id="Analyzer" class="common-anchor-header">Analyseur<button data-href="#Analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,8 +224,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Un analyseur est un outil essentiel pour le traitement et la transformation des données textuelles. Sa fonction principale est de convertir le texte brut en jetons et de les structurer pour l'indexation et la recherche. Pour ce faire, l'analyseur procède à la tokenisation de la chaîne de caractères, à la suppression des mots vides et à la troncature des mots individuels en tokens.</p>
-<p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a>.</p>
+    </button></h3><p>Un analyseur est un outil essentiel pour le traitement et la transformation des données textuelles. Sa fonction principale est de convertir le texte brut en tokens et de les structurer en vue de l'indexation et de la recherche. Pour ce faire, il tokenise la chaîne de caractères, supprime les mots vides et effectue le stemming des mots individuels pour les transformer en tokens.</p>
+<p>Pour plus de détails, consultez la section <a href="/docs/fr/analyzer-overview.md">Présentation</a> de <a href="/docs/fr/analyzer-overview.md">l’analyseur</a>.</p>
 <h3 id="Function" class="common-anchor-header">Fonction<button data-href="#Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -239,8 +241,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus vous permet de définir des fonctions intégrées dans le cadre du schéma pour dériver automatiquement certains champs. Par exemple, vous pouvez ajouter une fonction BM25 intégrée qui génère un vecteur épars à partir d'un champ <code translate="no">VARCHAR</code> pour prendre en charge la recherche en texte intégral. Ces champs dérivés de fonctions simplifient le prétraitement et garantissent que la collection reste autonome et prête à être interrogée.</p>
-<p>Pour plus de détails, voir <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p>
+    </button></h3><p>Milvus vous permet de définir des fonctions intégrées dans le schéma afin de dériver automatiquement certains champs. Par exemple, vous pouvez ajouter une fonction BM25 intégrée qui génère un vecteur creux à partir d’un champ « <code translate="no">VARCHAR</code> » pour prendre en charge la recherche en texte intégral. Ces champs dérivés de fonctions rationalisent le prétraitement et garantissent que la collection reste autonome et prête pour les requêtes.</p>
+<p>Pour plus de détails, consultez la section « <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a> ».</p>
 <h2 id="A-Real-World-Example" class="common-anchor-header">Un exemple concret<button data-href="#A-Real-World-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,21 +258,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans cette section, nous décrirons la conception du schéma et l'exemple de code pour une application de recherche de documents multimédias illustrée dans le diagramme ci-dessus. Ce schéma est conçu pour gérer un ensemble de données contenant des articles dont les données correspondent aux champs suivants :</p>
+    </button></h2><p>Dans cette section, nous présenterons la conception du schéma et un exemple de code pour une application de recherche de documents multimédias illustrée dans le diagramme ci-dessus. Ce schéma est conçu pour gérer un ensemble de données contenant des articles dont les données sont mappées aux champs suivants :</p>
 <table>
    <tr>
      <th><p><strong>Champ</strong></p></th>
-     <th><p><strong>Source des données</strong></p></th>
+     <th><p><strong>Source de données</strong></p></th>
      <th><p><strong>Utilisé par les méthodes de recherche</strong></p></th>
      <th><p><strong>Clé primaire</strong></p></th>
      <th><p><strong>Clé de partition</strong></p></th>
      <th><p><strong>Analyseur</strong></p></th>
-     <th><p><strong>Fonction Entrée/Sortie</strong></p></th>
+     <th><p><strong>Entrée/sortie de fonction</strong></p></th>
    </tr>
    <tr>
      <td><p>article_id (<code translate="no">INT64</code>)</p></td>
-     <td><p>auto-généré avec activé <code translate="no">auto_id</code></p></td>
-     <td><p><a href="/docs/fr/get-and-scalar-query.md">Requête à l'aide de Get</a></p></td>
+     <td><p>générée automatiquement lorsque la fonction est activée <code translate="no">auto_id</code></p></td>
+     <td><p><a href="/docs/fr/get-and-scalar-query.md">Requête utilisant Get</a></p></td>
      <td><p>Y</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
@@ -297,14 +299,14 @@ summary: >-
    <tr>
      <td><p>texte (<code translate="no">VARCHAR</code>)</p></td>
      <td><p>texte brut de l'article</p></td>
-     <td><p><a href="/docs/fr/multi-vector-search.md">Recherche hybride multisectorielle</a></p></td>
+     <td><p><a href="/docs/fr/multi-vector-search.md">Recherche hybride multivectorielle</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>Y</p></td>
      <td><p>entrée</p></td>
    </tr>
    <tr>
-     <td><p>vecteur_dense_texte (<code translate="no">FLOAT_VECTOR</code>)</p></td>
+     <td><p>text_dense_vector (<code translate="no">FLOAT_VECTOR</code>)</p></td>
      <td><p>vecteur dense généré par un modèle d'intégration de texte</p></td>
      <td><p><a href="/docs/fr/single-vector-search.md">Recherche vectorielle de base</a></p></td>
      <td><p>N</p></td>
@@ -313,16 +315,16 @@ summary: >-
      <td><p>N</p></td>
    </tr>
    <tr>
-     <td><p>vecteur_sparse_texte (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
+     <td><p>text_sparse_vector (<code translate="no">SPARSE_FLOAT_VECTOR</code>)</p></td>
      <td><p>vecteur clairsemé généré automatiquement par une fonction BM25 intégrée</p></td>
-     <td><p><a href="/docs/fr/full-text-search.md">Recherche de texte intégral</a></p></td>
+     <td><p><a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a></p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
      <td><p>N</p></td>
-     <td><p>sortie</p></td>
+     <td><p>Sortie</p></td>
    </tr>
 </table>
-<p>Pour plus d'informations sur les schémas et des conseils détaillés sur l'ajout de différents types de champs, veuillez vous référer au document <a href="/docs/fr/schema.md">Schema Explained.</a></p>
+<p>Pour plus d’informations sur les schémas et des conseils détaillés sur l’ajout de différents types de champs, veuillez consulter la section « <a href="/docs/fr/schema.md">Explication des schémas</a> ».</p>
 <h3 id="Initialize-schema" class="common-anchor-header">Initialisation du schéma<button data-href="#Initialize-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -340,7 +342,12 @@ summary: >-
       </svg>
     </button></h3><p>Pour commencer, nous devons créer un schéma vide. Cette étape permet d'établir une structure de base pour définir le modèle de données.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 schema = MilvusClient.create_schema()
@@ -363,7 +370,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 
 <span class="hljs-comment">//Skip this step using JavaScript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
 
 schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>
@@ -384,9 +391,14 @@ schema := entity.NewSchema()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois le schéma créé, l'étape suivante consiste à spécifier les champs qui composeront vos données. Chaque champ est associé à un type de données et à des attributs.</p>
+    </button></h3><p>Une fois le schéma créé, l'étape suivante consiste à spécifier les champs qui composeront vos données. Chaque champ est associé à ses types de données et attributs respectifs.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
 
 schema.add_field(field_name=<span class="hljs-string">&quot;article_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;article id&quot;</span>)
@@ -548,9 +560,9 @@ schema.addField(AddFieldReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <p>Dans cet exemple, les attributs suivants sont spécifiés pour les champs :</p>
 <ul>
-<li><p>Clé primaire : le site <code translate="no">article_id</code> est utilisé comme clé primaire, ce qui permet d'attribuer automatiquement des clés primaires aux entités entrantes.</p></li>
-<li><p>Clé de partition : le site <code translate="no">timestamp</code> est utilisé comme clé de partition, ce qui permet de filtrer les entités par partition. Il peut s'agir</p></li>
-<li><p>Analyseur de texte : l'analyseur de texte est appliqué à deux champs de chaîne <code translate="no">title</code> et <code translate="no">text</code> pour prendre en charge respectivement la correspondance de texte et la recherche en texte intégral.</p></li>
+<li><p>Clé primaire : l'<code translate="no">article_id</code> est utilisée comme clé primaire, ce qui permet l'attribution automatique de clés primaires aux entités entrantes.</p></li>
+<li><p>Clé de partition : l'<code translate="no">timestamp</code> est attribué comme clé de partition, ce qui permet un filtrage par partitions. Il peut s'agir de</p></li>
+<li><p>Analyseur de texte : un analyseur de texte est appliqué à deux champs de type chaîne de caractères, « <code translate="no">title</code> » et « <code translate="no">text</code> », afin de prendre en charge respectivement la correspondance de texte et la recherche en texte intégral.</p></li>
 </ul>
 <h3 id="Optional-Add-functions" class="common-anchor-header">(Facultatif) Ajouter des fonctions<button data-href="#Optional-Add-functions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -567,9 +579,14 @@ schema.addField(AddFieldReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour améliorer les capacités d'interrogation des données, des fonctions peuvent être incorporées dans le schéma. Par exemple, une fonction peut être créée pour traiter des champs spécifiques.</p>
+    </button></h3><p>Pour améliorer les capacités d’interrogation des données, des fonctions peuvent être intégrées au schéma. Par exemple, une fonction peut être créée pour traiter des champs spécifiques.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 bm25_function = Function(
@@ -629,8 +646,8 @@ schema.WithFunction(function)
     \&quot;functions\&quot;: <span class="hljs-variable">$myFunctions</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Cet exemple ajoute une fonction BM25 intégrée au schéma, utilisant le champ <code translate="no">text</code> comme entrée et stockant les vecteurs épars résultants dans le champ <code translate="no">text_sparse_vector</code>.</p>
-<h2 id="Next-Steps" class="common-anchor-header">Prochaines étapes<button data-href="#Next-Steps" class="anchor-icon" translate="no">
+<p>Cet exemple ajoute une fonction BM25 intégrée au schéma, en utilisant le champ <code translate="no">text</code> comme entrée et en stockant les vecteurs creux résultants dans le champ <code translate="no">text_sparse_vector</code>.</p>
+<h2 id="Next-Steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-Steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -647,5 +664,5 @@ schema.WithFunction(function)
       </svg>
     </button></h2><ul>
 <li><p><a href="/docs/fr/create-collection.md">Créer une collection</a></p></li>
-<li><p><a href="/docs/fr/alter-collection-field.md">Modifier le champ de la collection</a></p></li>
+<li><p><a href="/docs/fr/alter-collection-field.md">Modifier un champ de collection</a></p></li>
 </ul>

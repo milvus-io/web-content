@@ -50,7 +50,7 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
 </ul>
 <p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.5로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert warning">
-<p>이 절차의 일환으로 Helm 차트를 변경하거나 다운그레이드하지 마십시오. Helm 릴리스에 이미 설치된 차트 버전을 유지하십시오. 테스트된 기준 환경에서는 Helm 차트 5.0.22를 유지한 채 Milvus 이미지 태그만 <code translate="no">v3.0.5</code> 로 변경했습니다.</p>
+<p>이 절차의 일환으로 Helm 차트를 변경하거나 다운그레이드하지 마십시오. Helm 릴리스에 이미 설치된 차트 버전을 유지하십시오. 테스트된 기준 환경에서는 Helm 차트 5.0.22를 그대로 유지하고 Milvus 이미지 태그만 <code translate="no">v3.0.5</code> 로 변경했습니다.</p>
 <p>이 절차는 Milvus 이미지를 2.6.x로 되돌리는 다운그레이드 또는 롤백을 검증하지 않습니다. v3.0.5가 데이터를 기록한 후에는, 이미지만 롤백할 경우 업데이트된 상태를 읽지 못할 수 있습니다. 업그레이드가 실패하면 쓰기 작업을 중지하고, 업그레이드 전 메타데이터와 영구 데이터 백업을 복원하는 복구 계획을 사용하십시오. 복구 계획은 먼저 비생산 환경에서 검증하십시오.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
@@ -87,7 +87,8 @@ title: Helm 차트를 사용하여 Milvus 클러스터 업그레이드하기
     </button></h3><p>현재 릴리스의 전체 값을 저장하고 실행 중인 Pod를 확인하십시오:</p>
 <pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
   --namespace &lt;namespace&gt; \
-  --all &gt; milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
@@ -111,7 +112,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm --force-update
 helm repo update zilliztech
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> 에 있는 Milvus Helm 차트 저장소는 아카이브 처리되었습니다. 차트 버전 4.0.31 이상은 새로운 저장소 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 를 사용하십시오.
+<div class="alert note"><code translate="no">https://milvus-io.github.io/milvus-helm/</code> 에 있던 Milvus Helm 차트 저장소는 아카이브 처리되었습니다. 차트 버전 4.0.31 이상은 새로운 저장소 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 를 사용하십시오.
 </div>
 <h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">3단계: Milvus 업그레이드<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +132,7 @@ helm repo update zilliztech
     </button></h3><p>Helm 릴리스에 설치된 차트 버전을 확인하십시오:</p>
 <pre><code translate="no" class="language-bash">helm list --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">CHART</code> 열에서 값의 <code translate="no">milvus-</code> 접두사를 제거하고, 남은 버전을 <code translate="no">&lt;current-chart-version&gt;</code> 형식으로 사용합니다. 그런 다음 업그레이드 명령을 실행합니다:</p>
+<p><code translate="no">CHART</code> 열에서 값의 <code translate="no">milvus-</code> 접두사를 제거하고, 남은 버전을 <code translate="no">&lt;current-chart-version&gt;</code> 형식으로 사용하십시오. 그런 다음 업그레이드 명령을 실행하십시오:</p>
 <pre><code translate="no" class="language-bash">helm upgrade &lt;release-name&gt; zilliztech/milvus \
   --namespace &lt;namespace&gt; \
   --version &lt;current-chart-version&gt; \
@@ -164,7 +165,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>모든 필수 워크로드가 준비되었는지, 모든 Milvus 구성 요소가 ` <code translate="no">v3.0.5</code>`를 사용하는지, 기존 컬렉션을 계속 쿼리하고 검색할 수 있는지 확인하십시오. v3.0.5 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
+<p>모든 필수 워크로드가 준비되었는지, 모든 Milvus 구성 요소가 ` <code translate="no">v3.0.5</code>`를 사용하는지, 기존 컬렉션에 대한 쿼리 및 검색이 가능한지 확인하십시오. v3.0.5 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
 <div class="alert note">
 <p>Milvus 3.0으로 업그레이드한다고 해서 Storage V3가 활성화되는 것은 아닙니다. 업그레이드를 확인한 후, Storage V3에 의존하는 기능을 활성화하기 전에 <a href="/docs/ko/storage-v3.md">Storage V3에 대해</a> 검토하십시오. Milvus가 Storage V3 데이터를 기록한 후에는 Storage V3를 읽을 수 없는 이전 Milvus 버전으로 다운그레이드하는 것이 지원되지 않습니다.</p>
 </div>

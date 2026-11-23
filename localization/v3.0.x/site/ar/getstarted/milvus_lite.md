@@ -1,8 +1,8 @@
 ---
 id: milvus_lite.md
 summary: >-
-  قم بتثبيت Milvus Lite وقم بإجراء بحث متجه محلي باستخدام مسار قاعدة بيانات
-  ثابت.
+  قم بتثبيت Milvus Lite وقم بتشغيل البحث المتجه المحلي باستخدام مسار قاعدة
+  بيانات ثابت.
 title: تشغيل Milvus Lite محليًّا
 ---
 <h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">تشغيل Milvus Lite محليًّا<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
@@ -59,13 +59,13 @@ title: تشغيل Milvus Lite محليًّا
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم هذا الدليل PyMilvus <strong>3.0.2</strong> و Milvus Lite <strong>3.2.2</strong>. قم بإعداد البيئة التالية:</p>
+    </button></h2><p>يستخدم هذا الدليل PyMilvus <strong>3.0.3</strong> و Milvus Lite <strong>3.2.2</strong>. قم بإعداد البيئة التالية:</p>
 <ul>
 <li>Python 3.10 أو أحدث. يتطلب الخادم الخلفي المحلي لـ Lite إصدارًا أدنى من Python أعلى من إصدار عميل PyMilvus البعيد.</li>
 <li>macOS أو Linux أو Windows، مع عجلات متوافقة للتبعيات مثل <code translate="no">faiss-cpu</code> و <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 عبارة عن حزمة Python خالصة، لذا يجب أن يفي نظام التشغيل والبنية بهذه التبعيات بدلاً من حزمة Lite نفسها.</li>
 <li>دليل محلي قابل للكتابة لتخزين قاعدة البيانات.</li>
 </ul>
-<p>في نظام Windows، يتخطى pip المكون الإضافي <code translate="no">milvus-lite</code> الخاص بـ PyMilvus 3.0.2 بسبب علامة النظام الأساسي الخاصة به، لذا يجب تسمية <code translate="no">milvus-lite</code> صراحةً. يقوم الأمر install أدناه بذلك بالفعل. بالنسبة لتركيبات الحزم والأنظمة الأساسية الأخرى، راجع <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">متطلبات إصدار Milvus Lite</a>.</p>
+<p>في نظام Windows، يتخطى pip المكون الإضافي <code translate="no">milvus-lite</code> الخاص بـ PyMilvus 3.0.3 بسبب علامة النظام الأساسي الخاصة به، لذا يجب تسمية <code translate="no">milvus-lite</code> بشكل صريح. يقوم الأمر install أدناه بذلك بالفعل. بالنسبة لتركيبات الحزم والأنظمة الأساسية الأخرى، راجع <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">متطلبات إصدار Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">إعداد Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ title: تشغيل Milvus Lite محليًّا
     </button></h2><p>قم بإنشاء بيئة Python معزولة وقم بتثبيت كلتا الحزمتين:</p>
 <pre><code translate="no" class="language-bash">python3 -m venv .venv
 <span class="hljs-built_in">source</span> .venv/bin/activate
-python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>ضع تعبير الإضافات بين علامتي اقتباس حتى لا تفسر الأوامر النصية مثل zsh الأقواس. في Windows PowerShell، قم بتنشيط البيئة باستخدام <code translate="no">.venv\Scripts\Activate.ps1</code> بدلاً من <code translate="no">source .venv/bin/activate</code>. تضمن الإصدارات المحددة صراحةً توافق SDK والواجهة الخلفية المحلية مع هذا الدليل.</p>
 <div class="alert note">
@@ -196,7 +196,7 @@ client.close()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُنفذ Milvus Lite 3.2.2 مجموعة فرعية من عمليات Milvus من خلال محول PyMilvus المحلي الخاص به. ويصف <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features">دليل الميزات المُصنف حسب الإصدار</a> الإمكانات التالية:</p>
+    </button></h2><p>يُنفذ Milvus Lite 3.2.2 مجموعة فرعية من عمليات Milvus من خلال محول PyMilvus المحلي الخاص به. ويصف <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features">دليل الميزات المُصنف حسب الإصدارات</a> الإمكانات التالية:</p>
 <table>
 <thead>
 <tr><th>المجال</th><th>الدعم في إصدار Lite هذا</th></tr>
@@ -206,8 +206,8 @@ client.close()
 <tr><td>فهارس المتجهات</td><td><code translate="no">FLAT</code>، <code translate="no">BRUTE_FORCE</code> ، <code translate="no">IVF_FLAT</code> ، <code translate="no">IVF_SQ8</code> ، <code translate="no">HNSW</code> ، <code translate="no">HNSW_SQ</code> ، و <code translate="no">AUTOINDEX</code></td></tr>
 <tr><td>الفهارس القياسية والمتفرقة</td><td><code translate="no">INVERTED</code> الفهارس القياسية و <code translate="no">SPARSE_INVERTED_INDEX</code></td></tr>
 <tr><td>عمليات البيانات</td><td>الإدراج، والتحديث والإدراج، والاسترجاع، والاستعلام، والبحث المتجه، والحذف</td></tr>
-<tr><td>البحث</td><td>البحث الكثيف والمتفرق، وفلاتر البيانات الوصفية، وحقول المتجهات المتعددة، والبحث الهجين</td></tr>
-<tr><td>تنظيم المجموعات</td><td>المجموعات، وقواعد البيانات المسماة، والأسماء المستعارة، والأقسام، ضمن العمليات التي يدعمها المحول المحلي</td></tr>
+<tr><td>البحث</td><td>البحث الكثيف والمتفرق، وفلاتر البيانات الوصفية، والحقول المتجهة المتعددة، والبحث المختلط</td></tr>
+<tr><td>تنظيم المجموعات</td><td>المجموعات، وقواعد البيانات المسماة، والأسماء المستعارة، والأقسام، ضمن العمليات المدعومة من قبل المحول المحلي</td></tr>
 </tbody>
 </table>
 <p>لا يقتصر هذا الإصدار على فهارس <code translate="no">FLAT</code>. يعتمد توفر الفهرس وسلوكه على إصدار Lite؛ لا تقم بتطبيق القيود من الخلفية الأصلية 2.x على المحرك 3.x.</p>
@@ -238,7 +238,7 @@ client.close()
       </svg>
     </button></h2><p>استخدم <code translate="no">milvus-lite dump</code> لتصدير مجموعة كملفات JSON لـ Milvus BulkWriter. يمكن استيراد هذه الملفات إلى نشر Milvus مستضاف ذاتيًا أو إلى Zilliz Cloud.</p>
 <p>قم بتثبيت تبعيات أداة الكتابة المجمعة (bulk writer) الخاصة بـ SDK في البيئة التي تفتح قاعدة البيانات المصدر:</p>
-<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.3&quot;</span>
 milvus-lite dump -h
 <button class="copy-code-btn"></button></code></pre>
 <p>أغلق تطبيق Python الذي يمتلك قاعدة البيانات المحلية قبل تشغيل الأمر في عملية أخرى. قم بتصدير المجموعة من المثال السابق:</p>

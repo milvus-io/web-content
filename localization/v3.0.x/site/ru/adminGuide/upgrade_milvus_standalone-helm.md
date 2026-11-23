@@ -25,7 +25,7 @@ title: Обновление автономной версии Milvus с помо
       </svg>
     </button></h1><p>В данном руководстве описано, как обновить автономную версию Milvus 2.6.x до версии v3.0.5 с помощью Helm.</p>
 <div class="alert note">
-<p>Эта процедура проверена для обновления с Milvus 2.6.20 до Milvus v3.0.5 с использованием диаграммы Helm для Milvus версии 5.0.22. Если вы используете другой патч-релиз Milvus 2.6.x или другую версию диаграммы Helm, сначала проверьте обновление в тестовой среде.</p>
+<p>Эта процедура проверена для обновления с Milvus 2.6.20 до Milvus v3.0.5 с использованием Helm-чарта Milvus версии 5.0.22. Если вы используете другой патч-релиз Milvus 2.6.x или другую версию Helm-чарта, сначала проверьте обновление в тестовой среде.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -50,8 +50,8 @@ title: Обновление автономной версии Milvus с помо
 </ul>
 <p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v3.0.5 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</p>
 <div class="alert warning">
-<p>Не изменяйте и не понижайте версию диаграммы Helm в рамках этой процедуры. Сохраните версию диаграммы, уже установленную для вашего выпуска Helm. В протестированном базовом сценарии была сохранена диаграмма Helm версии 5.0.22, а был изменен только тег образа Milvus на <code translate="no">v3.0.5</code>.</p>
-<p>Данная процедура не предусматривает перехода на более раннюю версию или отката путем смены образа Milvus обратно на версию 2.6.x. После записи данных версией v3.0.5 откат, выполняемый только для образа, может не смочь прочитать обновлённое состояние. Если обновление завершится сбоем, остановите запись данных и воспользуйтесь планом восстановления, который восстанавливает метаданные, существовавшие до обновления, и резервные копии постоянных данных. Сначала проверьте план восстановления в тестовой среде.</p>
+<p>Не изменяйте и не понижайте версию диаграммы Helm в рамках этой процедуры. Сохраните версию диаграммы, уже установленную для вашего выпуска Helm. В протестированном базовом сценарии была сохранена диаграмма Helm 5.0.22, а был изменен только тег образа Milvus на <code translate="no">v3.0.5</code>.</p>
+<p>Данная процедура не проверяет возможность перехода на более раннюю версию или отката путем смены образа Milvus обратно на версию 2.6.x. После записи данных версией v3.0.5 откат, выполняемый только для образа, может не смочь прочитать обновлённое состояние. Если обновление завершится сбоем, остановите запись данных и воспользуйтесь планом восстановления, который восстанавливает метаданные, существовавшие до обновления, и резервные копии постоянных данных. Сначала проверьте план восстановления в тестовой среде.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Процесс обновления<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,28 @@ title: Обновление автономной версии Milvus с помо
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">Шаг 1: Обновите репозиторий Helm<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">Шаг 1: Сделайте резервную копию текущих значений Helm<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Перед изменением развертывания сохраните полный набор значений текущего релиза:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">Шаг 2: Обновите репозиторий Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +111,7 @@ helm repo update zilliztech
 <div class="alert note">
 Репозиторий диаграмм Helm для Milvus по адресу <code translate="no">https://milvus-io.github.io/milvus-helm/</code> был заархивирован. Для версий диаграмм 4.0.31 и более поздних используйте новый репозиторий <code translate="no">https://zilliztech.github.io/milvus-helm/</code>.
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">Шаг 2: Обновление Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Шаг 3: Обновление Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,5 +164,5 @@ kubectl get pods --namespace &lt;namespace&gt; \
 <button class="copy-code-btn"></button></code></pre>
 <p>Убедитесь, что все необходимые рабочие нагрузки готовы, Milvus использует « <code translate="no">v3.0.5</code> », а существующие коллекции по-прежнему доступны для запросов и поиска. Завершите эти проверки, прежде чем включать какие-либо функции, специфичные для версии 3.0.5.</p>
 <div class="alert note">
-<p>Обновление до Milvus 3.0 не приводит к включению Storage V3. После проверки обновления ознакомьтесь с <a href="/docs/ru/storage-v3.md">Storage V3</a>, прежде чем включать функции, зависящие от него. После того как Milvus запишет данные в Storage V3, переход на более старую версию Milvus, не поддерживающую чтение данных из Storage V3, не допускается.</p>
+<p>Обновление до Milvus 3.0 не включает Storage V3. После проверки обновления ознакомьтесь с <a href="/docs/ru/storage-v3.md">Storage V3</a>, прежде чем включать функции, зависящие от него. После того как Milvus запишет данные в Storage V3, переход на более старую версию Milvus, не поддерживающую чтение данных из Storage V3, не допускается.</p>
 </div>

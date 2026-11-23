@@ -922,7 +922,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan ` <code translate="no">IS NULL</code> ` dan ` <code translate="no">IS NOT NULL</code> ` untuk menemukan entitas dengan nilai bidang yang hilang atau tersedia. Misalnya, Anda dapat menemukan produk tanpa kategori atau entitas yang embedding-nya siap untuk dicari. Kedua operator ini berfungsi pada bidang skalar dan vektor yang didukung, dengan arti yang sama:</p>
+    </button></h2><p>Gunakan ` <code translate="no">IS NULL</code> ` dan ` <code translate="no">IS NOT NULL</code> ` untuk menemukan entitas dengan nilai bidang yang hilang atau tersedia. Misalnya, Anda dapat menemukan produk tanpa kategori atau entitas yang embedding-nya siap untuk pencarian. Kedua operator ini berfungsi pada bidang skalar dan vektor yang didukung, dengan arti yang sama:</p>
 <table>
 <thead>
 <tr><th>Operator</th><th>Mencocokkan</th></tr>
@@ -934,8 +934,9 @@ summary: >-
 </table>
 <p>Bidang skalar yang didukung meliputi bidang Boolean, numerik, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, dan <code translate="no">ARRAY</code>. Operator-operator ini tidak mendukung <a href="/docs/id/text.md">bidang TEXT</a>.</p>
 <p>Mulai dari Milvus 3.0.3, operator-operator ini juga mendukung bidang vektor biasa: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code>, dan <code translate="no">INT8_VECTOR</code>.</p>
-<p>Operator-operator ini tidak membedakan huruf besar dan kecil: <code translate="no">IS NULL</code> dan <code translate="no">is null</code> setara, begitu pula <code translate="no">IS NOT NULL</code> dan <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Contoh: Mencari entitas dengan nilai yang hilang atau tersedia<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p>Operator-operator ini tidak membedakan huruf besar dan kecil: <code translate="no">IS NULL</code> dan <code translate="no">is null</code> sama saja, begitu pula <code translate="no">IS NOT NULL</code> dan <code translate="no">is not null</code>.</p>
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Contoh: Mencari entitas dengan vektor yang hilang<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Asumsikan sebuah koleksi bernama <code translate="no">products</code> telah diindeks dan dimuat di Milvus 3.0.3 atau versi yang lebih baru. Koleksi tersebut memiliki kunci utama <code translate="no">INT64</code> bernama <code translate="no">id</code>, bidang <code translate="no">VARCHAR</code> yang dapat bernilai null bernama <code translate="no">category</code>, dan bidang <code translate="no">FLOAT_VECTOR</code> tiga dimensi yang dapat bernilai null bernama <code translate="no">embedding</code>. Koleksi tersebut sudah berisi entitas-entitas berikut:</p>
+    </button></h3><p>Misalkan Anda menambahkan produk ke koleksi sebelum menghasilkan vektornya. Dalam contoh ini, koleksi <code translate="no">products</code> telah diindeks dan dimuat. Koleksi ini memiliki kunci utama <code translate="no">INT64</code> bernama <code translate="no">id</code>, bidang <code translate="no">VARCHAR</code> yang dapat bernilai null bernama <code translate="no">category</code>, dan bidang <code translate="no">FLOAT_VECTOR</code> tiga dimensi yang dapat bernilai null bernama <code translate="no">embedding</code>. Tabel berikut menunjukkan produk mana yang memiliki vektor.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -961,8 +962,8 @@ summary: >-
 <tr><td><code translate="no">3</code></td><td><code translate="no">&quot;book&quot;</code></td><td>NULL</td></tr>
 </tbody>
 </table>
-<p>Proses pembuatan koleksi dan penyisipan data diabaikan. Untuk langkah-langkah tersebut, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai NULL</a>.</p>
-<p>Untuk menemukan entitas yang masih memerlukan embedding, jalankan kueri ` <code translate="no">embedding IS NULL</code>`. Sesuaikan pengaturan koneksi sesuai dengan server Anda.</p>
+<p>Pembuatan koleksi dan penyisipan data diabaikan. Untuk langkah-langkah tersebut, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai NULL</a>.</p>
+<p>Untuk menemukan produk yang masih memerlukan vektor, panggil ` <code translate="no">query()</code> ` dengan filter ` <code translate="no">embedding IS NULL</code>`. Ganti ` <code translate="no">embedding</code> ` dengan nama bidang vektor Anda dan sesuaikan pengaturan koneksi untuk server Anda. Dalam contoh ini, kueri mengembalikan ID ` <code translate="no">3</code> ` karena vektor produk tersebut bernilai NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1134,10 +1135,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
     &quot;limit&quot;: 10
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ganti ` <code translate="no">filter</code> ` dalam kueri yang sama untuk memeriksa salah satu bidang atau menggabungkan kondisi:</p>
+<p>Ganti <code translate="no">filter</code> dalam kueri yang sama untuk memeriksa salah satu bidang atau menggabungkan kondisi:</p>
 <table>
 <thead>
-<tr><th>Ekspresi filter</th><th>ID yang Cocok</th><th>Tujuan</th></tr>
+<tr><th>Ekspresi filter</th><th>ID yang cocok</th><th>Tujuan</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>Temukan entitas tanpa kategori</td></tr>
@@ -1147,10 +1148,11 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Temukan entitas yang memiliki kedua nilai tersebut</td></tr>
 </tbody>
 </table>
+<p>Jika setiap produk memiliki beberapa chunk dan setiap chunk menyimpan vektornya sendiri, gunakan <a href="/docs/id/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">filter StructArray untuk mencari produk yang vektor chunk-nya hilang</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
-<h3 id="How-field-values-are-treated" class="common-anchor-header">Bagaimana nilai bidang diolah<button data-href="#How-field-values-are-treated" class="anchor-icon" translate="no">
+<h3 id="How-field-values-are-treated" class="common-anchor-header">Bagaimana nilai bidang ditangani<button data-href="#How-field-values-are-treated" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1165,10 +1167,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Operator memeriksa nilai bidang yang disimpan. Untuk bidang yang dapat bernilai NULL tanpa nilai default, mengabaikan bidang tersebut saat penyisipan atau secara eksplisit menetapkannya ke NULL akan menyimpan nilai NULL. Nilai default yang dikonfigurasi dapat mengubah nilai yang disimpan. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai NULL</a> dan <a href="/docs/id/default-values.md">Nilai Default</a>.</p>
+    </button></h3><p>Operator memeriksa nilai bidang yang disimpan. Untuk bidang yang dapat bernilai null tanpa nilai default, mengabaikan bidang tersebut saat penyisipan atau secara eksplisit menetapkannya ke NULL akan menyimpan NULL. Nilai default yang dikonfigurasi dapat mengubah apa yang disimpan. Untuk detailnya, lihat <a href="/docs/id/nullable-and-default.md">Bidang yang Dapat Bernilai Null</a> dan <a href="/docs/id/default-values.md">Nilai Default</a>.</p>
 <table>
 <thead>
-<tr><th>Tipe bidang</th><th>Perilaku NULL</th></tr>
+<tr><th>Jenis bidang</th><th>Perilaku NULL</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>String kosong <code translate="no">&quot;&quot;</code> adalah nilai non-NULL.</td></tr>
@@ -1294,6 +1296,6 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Apakah ada batasan panjang daftar nilai pencocokan dalam kondisi filter (misalnya, filter='color in ["red", "green", “blue”]')? Apa yang harus saya lakukan jika daftar tersebut terlalu panjang?</strong></p>
+    </button></h2><p><strong>Apakah ada batasan panjang daftar nilai pencocokan dalam kondisi filter (misalnya, filter=’color in ["red", "green", “blue”]')? Apa yang harus saya lakukan jika daftar tersebut terlalu panjang?</strong></p>
 <p>Milvus tidak memberlakukan batasan panjang pada daftar nilai pencocokan dalam kondisi filter. Namun, daftar yang terlalu panjang dapat berdampak signifikan terhadap kinerja kueri.
-Jika kondisi filter Anda mencakup daftar nilai pencocokan yang panjang atau ekspresi kompleks dengan banyak elemen, kami menyarankan penggunaan <a href="/docs/id/filtering-templating.md">Filter Templating</a> untuk meningkatkan kinerja kueri.</p>
+Jika kondisi filter Anda mencakup daftar nilai pencocokan yang panjang atau ekspresi kompleks dengan banyak elemen, kami menyarankan untuk menggunakan <a href="/docs/id/filtering-templating.md">Filter Templating</a> guna meningkatkan kinerja kueri.</p>

@@ -52,7 +52,7 @@ title: Actualización del clúster de Milvus con Milvus Operator
 <p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.5, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alert warning">
 <p>Aplica el CR completo de Milvus para esta actualización. No utilices un parche de fusión que solo incluya la imagen. El Operador puede restablecer por defecto los campos de componentes omitidos con cero réplicas, lo que puede volver a habilitar un componente que la implementación 2.6.x existente hubiera deshabilitado.</p>
-<p>Este procedimiento no valida una degradación o una reversión mediante el cambio de la imagen de Milvus a la versión 2.6.x. Una vez que la versión 3.0.5 haya escrito los datos, es posible que una reversión que solo afecte a la imagen no pueda leer el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
+<p>Este procedimiento no valida una degradación o una reversión mediante el cambio de la imagen de Milvus a la versión 2.6.x. Una vez que la versión 3.0.5 haya escrito los datos, una reversión que afecte únicamente a la imagen podría no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure los metadatos previos a la actualización y las copias de seguridad de los datos persistentes. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,8 +89,8 @@ title: Actualización del clúster de Milvus con Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice el manifiesto de origen de su implementación actual como manifiesto de actualización. No aplique directamente el archivo de copia de seguridad exportado sin eliminar primero los metadatos gestionados por el servidor y los campos de estado.</p>
-<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Paso 2: Confirma la versión de Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
+<p>Utilice el manifiesto de origen de su implementación existente (<code translate="no">milvus.yaml</code> en esta guía) como manifiesto de actualización. No aplique directamente el archivo de copia de seguridad exportado sin eliminar primero los metadatos gestionados por el servidor y los campos de estado.</p>
+<h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Paso 2: Confirmar la versión de Milvus Operator<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,7 +110,7 @@ title: Actualización del clúster de Milvus con Milvus Operator
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>La actualización validada mantuvo Milvus Operator en la versión 1.3.0. Mantén la versión de Operator que gestiona actualmente tu implementación de Milvus 2.6.x, a menos que tu política de soporte requiera una actualización independiente de Operator. No rebajes la versión de un Operator más reciente a la versión probada. Si necesitas cambiar la versión del Operator, utiliza el mismo método de instalación (Helm o <code translate="no">kubectl</code> ) y el mismo nombre de versión y espacio de nombres que la instalación existente; a continuación, valida el cambio del Operator antes de actualizar el CR de Milvus.</p>
+<p>La actualización validada mantuvo Milvus Operator en la versión 1.3.0. Mantén la versión de Operator que gestiona actualmente tu despliegue de Milvus 2.6.x, a menos que tu política de soporte técnico requiera una actualización independiente de Operator. No rebajes la versión de un Operator más reciente a la versión probada. Si necesitas cambiar la versión del Operator, utiliza el mismo método de instalación (Helm o <code translate="no">kubectl</code> ) y el mismo nombre de versión y espacio de nombres que la instalación existente; a continuación, valida el cambio del Operator antes de actualizar el CR de Milvus.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">Paso 3: Actualizar la imagen de Milvus<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,3 +168,6 @@ kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Comprueba que el CR de Milvus indique « <code translate="no">Healthy</code> », que todos los componentes de Milvus utilicen « <code translate="no">milvusdb/milvus:v3.0.5</code> », que no haya ningún pod de IndexNode en ejecución y que las colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier función específica de la versión 3.0.5.</p>
+<div class="alert note">
+<p>La actualización a Milvus 3.0 no habilita Storage V3. Una vez verificada la actualización, revisa <a href="/docs/es/storage-v3.md">Storage V3</a> antes de habilitar las funciones que dependen de él. Una vez que Milvus haya escrito datos en Storage V3, no se admite la vuelta a una versión anterior de Milvus que no pueda leer Storage V3.</p>
+</div>

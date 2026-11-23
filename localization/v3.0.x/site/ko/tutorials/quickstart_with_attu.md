@@ -54,9 +54,9 @@ title: Attu(Milvus의 웹 UI) 빠른 시작
 <ul>
 <li>Attu와 Python 환경 모두에서 접근할 수 있는 실행 중인 Milvus 서버. 이 튜토리얼에서는 <code translate="no">http://localhost:19530</code> 의 Milvus Standalone을 사용하며, 로컬 Milvus Lite <code translate="no">.db</code> 파일은 사용하지 않습니다.</li>
 <li>사용 중인 서버와 호환되는 Attu 릴리스. Attu 3.0은 Milvus 2.6.0 이상(Milvus 3.x 포함)을 지원합니다. 구형 서버의 경우 <a href="https://github.com/zilliztech/attu#compatibility">호환성 표를</a> 참조하십시오.</li>
-<li>사용 중인 서버와 호환되는 PyMilvus 버전이 설치된 Python 환경이 필요합니다. <a href="/docs/ko/install-pymilvus.md">‘Milvus Python SDK 설치’</a> 및 <a href="/docs/ko/release_notes.md">‘릴리스 노트’를</a> 참조하십시오. 이 문서 브랜치에서 사용되는 SDK 버전의 경우, model extra 및 progress-bar 종속성을 설치하십시오:</li>
+<li>사용 중인 서버와 호환되는 PyMilvus 버전이 설치된 Python 환경. <a href="/docs/ko/install-pymilvus.md">‘Milvus Python SDK 설치’</a> 및 <a href="/docs/ko/release_notes.md">‘릴리스 노트’를</a> 참조하십시오. 이 문서 브랜치에서 사용되는 SDK 버전의 경우, model extra 및 progress-bar 종속성을 설치하십시오:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>데이터 준비 단계에서는 <code translate="no">wget</code> 및 <code translate="no">unzip</code> 도 사용합니다. embedding 함수는 첫 사용 시 모델을 다운로드하므로, 모델 호스트에 대한 네트워크 액세스를 허용하거나 모델 캐시를 미리 준비해 두십시오. 스크린샷은 워크플로를 보여줍니다. 레이블과 레이아웃은 Attu 릴리스에 따라 다를 수 있습니다.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. 데스크톱 애플리케이션 설치<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">
@@ -112,7 +112,7 @@ title: Attu(Milvus의 웹 UI) 빠른 시작
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attu는 <strong>Milvus Standalone</strong> 과 <strong>Zilliz Cloud</strong> 모두에 연결을 지원하여, 로컬 또는 클라우드 호스팅 데이터베이스와 유연하게 작업할 수 있도록 합니다.</p>
+    </button></h2><p>Attu는 <strong>Milvus Standalone</strong> 과 <strong>Zilliz Cloud</strong> 모두에 연결할 수 있어, 로컬 또는 클라우드 호스팅 데이터베이스와 유연하게 작업할 수 있습니다.</p>
 <p>로컬에서 Milvus Standalone을 사용하려면:</p>
 <ol>
 <li><a href="https://milvus.io/docs/install_standalone-docker.md">Milvus 설치 가이드를</a> 따라 Milvus Standalone을 시작하십시오.</li>
@@ -259,7 +259,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>텍스트 행을 순차적으로 처리하여 임베딩을 생성하고, 데이터를 Milvus에 삽입합니다:</p>
+    </button></h3><p>텍스트 줄을 순차적으로 처리하여 임베딩을 생성하고, 데이터를 Milvus에 삽입합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -287,7 +287,7 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h3><p>Attu에서 컬렉션 목록을 새로 고치고 <code translate="no">attu_tutorial</code> 를 엽니다. 빠른 설정 스키마에는 ' <code translate="no">id</code> ' 기본 키와, 차원이 ' <code translate="no">embedding_dim</code>'이며 ' <code translate="no">Inner Product (IP)</code> ' 메트릭을 가진 ' <code translate="no">vector</code> ' 필드가 포함되어 있습니다. ' <code translate="no">text</code> ' 값은 동적 필드에 저장됩니다. 명시적인 스키마 옵션에 대해서는 <a href="/docs/ko/create-collection.md">‘컬렉션</a> 및 <a href="/docs/ko/enable-dynamic-field.md">동적 필드</a> <a href="/docs/ko/create-collection.md">생성’을</a> 참조하십시오. 엔티티 수는 추출된 샘플 텍스트에 따라 달라지므로, 스크린샷에 표시된 숫자보다는 삽입한 행 수를 기준으로 삼으십시오.</p>
-<p>또한 ID, 벡터 임베딩, 텍스트 콘텐츠와 같은 메타데이터를 저장하는 동적 필드를 포함하여 삽입된 데이터를 확인할 수 있습니다. 이 인터페이스는 지정된 조건이나 동적 필드를 기반으로 필터링 및 쿼리 기능을 지원합니다.</p>
+<p>또한 ID, 벡터 임베딩, 텍스트 콘텐츠와 같은 메타데이터를 저장하는 동적 필드를 포함하여 삽입된 데이터를 확인할 수 있습니다. 이 인터페이스는 지정된 조건이나 동적 필드를 기반으로 필터링 및 쿼리를 지원합니다.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_after_data_insertion_2.png" alt="Data View" width="45%" />
@@ -328,7 +328,7 @@ client.insert(collection_name=collection_name, data=data)
 <li><strong>'무작위 데이터 생성'</strong> 버튼을 클릭하여 테스트 쿼리를 생성합니다.</li>
 <li><strong>'검색'을</strong> 클릭하여 생성된 데이터를 기반으로 결과를 가져옵니다.</li>
 </ol>
-<p>결과는 표 형식으로 표시되며, 각 일치 항목에 대한 ID, 유사도 점수 및 동적 필드가 나타납니다. 무작위 벡터는 검색 워크플로를 테스트하는 용도일 뿐, 의미적 관련성을 평가하는 것은 아닙니다. 의미 있는 텍스트 쿼리를 사용하려면, 이 컬렉션에 사용된 것과 동일한 ‘ <code translate="no">embedding_model.encode_queries()</code> ’ 함수를 사용하여 인코딩한 후, 해당 벡터로 검색하십시오. Python 예제는 <a href="/docs/ko/single-vector-search.md">‘단일 벡터 검색’을</a> 참조하십시오.</p>
+<p>결과는 표 형식으로 표시되며, 일치하는 각 엔티티에 대한 ID, 유사도 점수 및 동적 필드가 나타납니다. 무작위 벡터는 검색 워크플로를 테스트하는 용도일 뿐, 의미적 관련성을 평가하는 것은 아닙니다. 의미 있는 텍스트 쿼리를 사용하려면, 이 컬렉션에 사용된 것과 동일한 ‘ <code translate="no">embedding_model.encode_queries()</code> ’ 함수를 사용하여 인코딩한 후, 해당 벡터로 검색하십시오. Python 예제는 <a href="/docs/ko/single-vector-search.md">‘단일 벡터 검색’을</a> 참조하십시오.</p>
 <p align="center">
   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>

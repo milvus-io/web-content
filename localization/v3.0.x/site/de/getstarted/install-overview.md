@@ -38,7 +38,7 @@ title: Übersicht über die Milvus-Bereitstellungsoptionen
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> ist eine Python-Bibliothek, die in Ihre Anwendungen importiert werden kann. Als leichtgewichtige Version von Milvus eignet sie sich ideal für die schnelle Prototypenerstellung in Jupyter-Notebooks oder für den Einsatz auf Smart-Geräten mit begrenzten Ressourcen. Milvus Lite unterstützt dieselben APIs wie andere Milvus-Bereitstellungsarten. Der clientseitige Code, der mit Milvus Lite interagiert, kann auch mit Milvus-Instanzen in anderen Bereitstellungsmodi verwendet werden.</p>
 <p>Verwenden Sie für die lokalen Beispiele Python 3.10 oder höher und installieren Sie die optionale Lite-Abhängigkeit explizit. Unter Windows überspringt pip den Zusatz „ <code translate="no">milvus-lite</code> “, daher ist die Angabe des vollständigen Paketnamens erforderlich:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Verwenden Sie „ <code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> “, um den lokalen Speicher zu öffnen. Milvus Lite 3.x erstellt ein Verzeichnis unter diesem Pfad; eine vorhandene Milvus Lite 2.x-Datenbankdatei muss exportiert und migriert werden. Informationen zu den Plattformanforderungen finden Sie unter <a href="/docs/de/milvus_lite.md">„Milvus Lite ausführen“</a> und ein vollständiges Beispiel zum Einfügen und Suchen unter <a href="/docs/de/quickstart.md">„Schnellstart</a> “.</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus Standalone<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
@@ -110,7 +110,7 @@ title: Übersicht über die Milvus-Bereitstellungsoptionen
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/select-deployment-option.png" alt="Select deployment option for your use case" class="doc-image" id="select-deployment-option-for-your-use-case" /> 
-   <span>Wählen Sie die Bereitstellungsoption für Ihren Anwendungsfall</span>
+   <span>Wählen Sie die für Ihren Anwendungsfall geeignete Bereitstellungsoption</span>
   
  </span></p>
 <h2 id="Comparison-on-functionalities" class="common-anchor-header">Vergleich der Funktionen<button data-href="#Comparison-on-functionalities" class="anchor-icon" translate="no">
@@ -135,7 +135,7 @@ title: Übersicht über die Milvus-Bereitstellungsoptionen
 </thead>
 <tbody>
 <tr><td>SDK / Client-Bibliothek</td><td>Python (lokaler PyMilvus-Adapter)</td><td>Python<br/>Go<br/>Java<br/>Node.js<br/>C#<br/>RESTful</td><td>Python<br/>Java<br/>Go<br/>Node.js<br/>C#<br/>RESTful</td></tr>
-<tr><td>Datentypen</td><td>Dichter Vektor<br/>Sparse-Vektor<br/>Boolescher Wert<br/>Ganzzahl<br/>Gleitkomma<br/>VarChar<br/>Array<br/>JSON</td><td>Dichter Vektor<br/>Sparse-Vektor<br/>Binärvektor<br/>Boolescher Wert<br/>Ganzzahl<br/>Gleitkomma<br/>VarChar<br/>Array<br/>JSON</td><td>Dichter Vektor<br/>Sparse-Vektor<br/>Binärvektor<br/>Boolesche Werte<br/>Ganzzahlen<br/>Gleitkommazahlen<br/>VarChar<br/>Array<br/>JSON</td></tr>
+<tr><td>Datentypen</td><td>Dichter Vektor<br/>Sparse-Vektor<br/>Boolescher Wert<br/>Ganzzahl<br/>Gleitkomma<br/>VarChar<br/>Array<br/>JSON</td><td>Dichter Vektor<br/>Sparse-Vektor<br/>Binärer Vektor<br/>Boolescher Wert<br/>Ganzzahl<br/>Gleitkomma<br/>VarChar<br/>Array<br/>JSON</td><td>Dichter Vektor<br/>Sparse-Vektor<br/>Binärvektor<br/>Boolesche Werte<br/>Ganzzahlen<br/>Gleitkommazahlen<br/>VarChar<br/>Array<br/>JSON</td></tr>
 <tr><td>Suchfunktionen</td><td>Vektorsuche (ANN-Suche)<br/>Metadatenfilterung<br/>Bereichssuche<br/>Skalare Abfrage<br/>Entitäten nach Primärschlüssel abrufen<br/>Hybride Suche</td><td>Vektorsuche (ANN-Suche)<br/>Metadatenfilterung<br/>Bereichssuche<br/>Skalare Abfrage<br/>Entitäten nach Primärschlüssel abrufen<br/>Hybride Suche</td><td>Vektorsuche (ANN-Suche)<br/>Metadatenfilterung<br/>Bereichssuche<br/>Skalare Abfrage<br/>Entitäten nach Primärschlüssel abrufen<br/>Hybride Suche</td></tr>
 <tr><td>CRUD-Operationen</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>Erweiterte Datenverwaltung</td><td>Datenbanken<br/>Partitionen<br/>Aliase<br/>Keine Zugriffskontrolle</td><td>Zugriffskontrolle<br/>Partition<br/>Partitionsschlüssel</td><td>Zugriffskontrolle<br/>Partition<br/>Partitionsschlüssel<br/>Physische Ressourcengruppierung</td></tr>

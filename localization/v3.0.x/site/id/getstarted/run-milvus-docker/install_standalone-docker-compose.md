@@ -56,20 +56,16 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Unduh konfigurasi untuk v3.0.5 dan mulai penyebaran baru:</p>
+    </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Unduh konfigurasi untuk v3.0.5 menggunakan perintah <code translate="no">wget</code> di bawah ini. Segera setelah unduhan selesai, sebelum Anda mengedit berkas atau menjalankan Milvus dengan <code translate="no">sudo docker compose up -d</code>, jalankan <code translate="no">sha256sum docker-compose.yaml</code> dan bandingkan hasilnya dengan ringkasan <code translate="no">sha256</code> yang tercantum untuk <code translate="no">milvus-standalone-docker-compose.yaml</code> di <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">halaman rilis v3.0.5</a>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
-
-Creating milvus-etcd  ... done
-Creating milvus-minio ... done
-Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Deploymen default (v3.0.5):</strong> <code translate="no">docker compose up -d</code> memulai tiga kontainer yang berjalan dalam jangka panjang — <code translate="no">milvus-etcd</code> (metadata), <code translate="no">milvus-minio</code> (penyimpanan objek), dan <code translate="no">milvus-standalone</code>. Antrian pesan menggunakan <strong>Woodpecker (terintegrasi, dengan MinIO / penyimpanan objek sebagai backend WAL-nya)</strong>, sehingga tidak diperlukan kontainer antrian pesan terpisah.</p>
-<p>Konfigurasi ini juga menjalankan layanan satu kali <code translate="no">milvus-volume-init</code> untuk menyiapkan kepemilikan direktori data. Layanan ini akan berhenti setelah menyelesaikan tugas tersebut.</p>
+<p><strong>Penerapan default (v3.0.5):</strong> <code translate="no">docker compose up -d</code> memulai tiga kontainer yang berjalan dalam waktu lama — <code translate="no">milvus-etcd</code> (metadata), <code translate="no">milvus-minio</code> (penyimpanan objek), dan <code translate="no">milvus-standalone</code>. Antrian pesan yang digunakan adalah <strong>Woodpecker (terintegrasi, dengan MinIO / penyimpanan objek sebagai backend WAL-nya)</strong>, sehingga tidak diperlukan kontainer antrian pesan terpisah.</p>
+<p>Konfigurasi ini juga menjalankan layanan satu kali <code translate="no">milvus-volume-init</code> untuk mempersiapkan kepemilikan direktori data. Layanan ini akan berhenti setelah menyelesaikan tugas tersebut.</p>
 <p><strong>Antrian pesan default berdasarkan versi:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — antrian pesan default adalah <strong>RocksMQ</strong>.</li>
@@ -86,18 +82,25 @@ Creating milvus-standalone ... done
 <li>kontainer bernama <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, dan <strong>milvus-etcd</strong> sudah aktif.
 <ul>
 <li>Kontainer <strong>milvus-etcd</strong> tidak mengekspos port apa pun ke host dan memetakan datanya ke <strong>volumes/etcd</strong> di folder saat ini.</li>
-<li>Kontainer <strong>milvus-minio</strong> melayani port <strong>9000</strong> dan <strong>9001</strong> secara lokal dengan kredensial otentikasi default dan memetakan datanya ke <strong>volumes/minio</strong> di folder saat ini.</li>
-<li>Kontainer <strong>milvus-standalone</strong> melayani port <strong>19530</strong> secara lokal dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.</li>
+<li>Kontainer <strong>milvus-minio</strong> menerbitkan port <strong>9000</strong> dan <strong>9001</strong> dengan kredensial otentikasi default dan memetakan datanya ke <strong>volumes/minio</strong> di folder saat ini.</li>
+<li>Kontainer <strong>milvus-standalone</strong> membuka port <strong>19530</strong> dan <strong>9091</strong> dengan pengaturan default dan memetakan datanya ke <strong>volumes/milvus</strong> di folder saat ini.</li>
 </ul></li>
 </ul>
-<p>Anda dapat memeriksa apakah kontainer-kontainer tersebut aktif dan berjalan menggunakan perintah berikut:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose ps</span>
+<p>Layanan <code translate="no">standalone</code> menetapkan ` <code translate="no">security_opt: seccomp:unconfined</code>`, sehingga kontainer Milvus berjalan tanpa profil seccomp Docker default.</p>
+<div class="alert warning">
+<blockquote>
+<p>Berkas konfigurasi menerbitkan port-port ini tanpa alamat host. Docker menerbitkan port tanpa alamat host ke semua alamat host, sehingga mesin lain yang dapat menjangkau host ini juga dapat terhubung ke Milvus dan MinIO. MinIO menggunakan kunci akses dan kunci rahasia <code translate="no">minioadmin</code>, yang ditetapkan dalam berkas konfigurasi. Untuk membatasi akses ke host ini, tambahkan <code translate="no">127.0.0.1:</code> ke entri <code translate="no">ports</code> pada layanan <code translate="no">minio</code> dan <code translate="no">standalone</code> di <code translate="no">docker-compose.yaml</code>, misalnya <code translate="no">&quot;127.0.0.1:19530:19530&quot;</code>, lalu jalankan kembali perintah <code translate="no">sudo docker compose up -d</code>. Untuk menggunakan kredensial MinIO lainnya, ubah <code translate="no">MINIO_ACCESS_KEY</code> dan <code translate="no">MINIO_SECRET_KEY</code> pada layanan <code translate="no">minio</code>, serta tetapkan nilai yang sama di <code translate="no">minio.accessKeyID</code> dan <code translate="no">minio.secretAccessKey</code> pada konfigurasi Milvus. Untuk mewajibkan kredensial pada koneksi Milvus, lihat bagian <a href="/docs/id/authenticate.md">"Authenticate User Access"</a>.</p>
+</blockquote>
+</div>
+<p>Anda dapat memeriksa apakah kontainer sudah aktif dan berjalan menggunakan perintah berikut:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose ps</span>
 
 NAME                IMAGE   COMMAND                  SERVICE      CREATED         STATUS                   PORTS
 milvus-etcd         …       &quot;etcd -advertise-cli…&quot;   etcd         2 minutes ago   Up 2 minutes (healthy)   2379-2380/tcp
-milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
+milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9000-9001-&gt;9000-9001/tcp
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
+<p>Kolom " <code translate="no">PORTS</code> " juga dapat mencantumkan setiap port yang dipublikasikan dengan alamat IPv6 <code translate="no">[::]</code>, misalnya <code translate="no">[::]:19530-&gt;19530/tcp</code>, karena Docker mempublikasikan port tanpa alamat host baik di <code translate="no">0.0.0.0</code> maupun <code translate="no">[::]</code>.</p>
 <p>Anda juga dapat mengakses Milvus WebUI di <code translate="no">http://127.0.0.1:9091/webui/</code> untuk mempelajari lebih lanjut tentang instance Milvus Anda. Untuk detailnya, lihat <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Untuk mencoba server yang sedang berjalan, ikuti jalur <strong>Gunakan server Milvus yang sudah ada</strong> di <a href="/docs/id/quickstart.md">Panduan Cepat</a> dan sambungkan ke <code translate="no">http://localhost:19530</code>. Jangan gunakan blok koneksi <code translate="no">.db</code> lokal, yang akan memulai database Milvus Lite terpisah.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Opsional) Perbarui konfigurasi Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
@@ -115,23 +118,30 @@ milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk memperbarui konfigurasi Milvus agar sesuai dengan kebutuhan Anda, Anda perlu memodifikasi berkas <code translate="no">/milvus/configs/user.yaml</code> di dalam kontainer <code translate="no">milvus-standalone</code>.</p>
+    </button></h2><p>Untuk memperbarui konfigurasi Milvus sesuai kebutuhan Anda, simpan pengaturan Anda dalam berkas <code translate="no">user.yaml</code> di host dan pasang berkas tersebut di <code translate="no">/milvus/configs/user.yaml</code> dalam kontainer <code translate="no">milvus-standalone</code>. Berkas konfigurasi hanya memasang <code translate="no">/var/lib/milvus</code> ke dalam kontainer ini, sehingga berkas <code translate="no">user.yaml</code> yang Anda edit di dalam kontainer akan hilang saat Compose membuat ulang kontainer, misalnya setelah perubahan pada <code translate="no">docker-compose.yaml</code> atau pada gambar Milvus.</p>
 <ol>
-<li><p>Akses kontainer <code translate="no">milvus-standalone</code>.</p>
-<pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Tambahkan konfigurasi tambahan untuk menggantikan konfigurasi default.
-Berikut ini mengasumsikan bahwa Anda perlu mengganti konfigurasi default <code translate="no">proxy.healthCheckTimeout</code>. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a>.</p>
-<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; /milvus/configs/user.yaml
+<li><p>Buat <code translate="no">user.yaml</code> di folder yang berisi <code translate="no">docker-compose.yaml</code>. Buat berkas tersebut sebelum Anda menautkannya: jika jalur sumber tidak ada, Compose akan membuat direktori dengan nama tersebut sebagai gantinya.
+Berikut ini mengasumsikan bahwa Anda perlu mengganti pengaturan default <code translate="no">proxy.healthCheckTimeout</code>. Untuk item konfigurasi yang berlaku, lihat <a href="/docs/id/system_configuration.md">Konfigurasi Sistem</a>.</p>
+<pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
   healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
 EOF
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Mulai ulang kontainer <code translate="no">milvus-standalone</code> untuk menerapkan perubahan.</p>
-<pre><code translate="no" class="language-shell">docker restart milvus-standalone
+<li><p>Di <code translate="no">docker-compose.yaml</code>, tambahkan berkas tersebut ke daftar <code translate="no">volumes</code> pada layanan <code translate="no">standalone</code>. Biarkan pengaturan lain dari layanan tersebut, seperti <code translate="no">security_opt</code>, <code translate="no">healthcheck</code>, dan <code translate="no">depends_on</code>, tetap seperti semula.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">standalone:</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">./user.yaml:/milvus/configs/user.yaml</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Terapkan perubahan tersebut. Karena konfigurasi layanan telah berubah, Compose akan membuat ulang kontainer <code translate="no">milvus-standalone</code> dan mempertahankan data di dalam volume yang dipasang.</p>
+<pre><code translate="no" class="language-shell">sudo docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
+<p>Setelah berkas dipasang, mulai ulang layanan <code translate="no">standalone</code> untuk menerapkan perubahan selanjutnya pada <code translate="no">user.yaml</code>:</p>
+<pre><code translate="no" class="language-shell">sudo docker compose restart standalone
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Hentikan dan hapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,9 +179,9 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk penyebaran Milvus 2.6.x mandiri, ikuti <a href="/docs/id/upgrade_milvus_standalone-docker.md">Panduan Peningkatan Milvus Mandiri dengan Docker Compose</a>. Cadangkan metadata dan data persisten, pertahankan dependensi dan konfigurasi yang ada, serta validasi jalur peningkatan dari sumber ke tujuan yang terdokumentasi sebelum mengubah gambar Milvus. Jangan mengganti berkas Compose dari deployment versi lama dengan konfigurasi instalasi baru di atas.</p>
+    </button></h2><p>Untuk penyebaran Milvus 2.6.x standalone, ikuti panduan <a href="/docs/id/upgrade_milvus_standalone-docker.md">"Memperbarui Milvus Standalone dengan Docker Compose</a>". Cadangkan metadata dan data persisten, pertahankan dependensi dan konfigurasi yang ada, serta validasi jalur pembaruan dari sumber ke tujuan yang tercantum dalam dokumentasi sebelum mengubah gambar Milvus. Jangan mengganti berkas Compose dari penyebaran versi lama dengan konfigurasi instalasi baru di atas.</p>
 <p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v3.0.5, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
-<p>Milvus 2.6.x dan yang lebih baru secara default menggunakan Woodpecker, sedangkan deployment 2.5.x secara default menggunakan <strong>RocksMQ</strong>. Jika deployment yang Anda perbarui masih menggunakan RocksMQ, tetapkan sistem antrian pesan tersebut di ` <code translate="no">user.yaml</code> ` sebelum mengubah gambar Milvus, sehingga instance yang telah diperbarui tetap menggunakan antrian pesan yang ada alih-alih memulai dengan default baru:</p>
+<p>Milvus 2.6.x dan versi selanjutnya secara default menggunakan Woodpecker, sedangkan deployment 2.5.x secara default menggunakan <strong>RocksMQ</strong>. Jika deployment yang Anda perbarui masih menggunakan RocksMQ, tetapkan sistem antrian pesan tersebut di ` <code translate="no">user.yaml</code> ` sebelum mengubah gambar Milvus, sehingga instance yang telah diperbarui tetap menggunakan antrian pesan yang ada alih-alih memulai dengan default baru:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
@@ -229,7 +239,7 @@ EOF
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>
 <li><p><a href="/docs/id/upgrade_milvus_standalone-docker.md">Tingkatkan Milvus Standalone dengan Docker Compose</a>.</p></li>
-<li><p><a href="/docs/id/scaleout.md">Skalakan kluster Milvus Anda</a>.</p></li>
+<li><p><a href="/docs/id/scaleout.md">Skalakan kluster Milvus</a> di Kubernetes. Prosedur tersebut menggunakan Helm dan tidak berlaku untuk penyebaran Docker ini.</p></li>
 <li><p>Terapkan kluster Milvus Anda di cloud:</p>
 <ul>
 <li><a href="/docs/id/eks.md">Amazon EKS</a></li>

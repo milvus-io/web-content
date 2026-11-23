@@ -28,7 +28,7 @@ summary: >-
 <tr><th>フィルタ形式</th><th>主な目的</th><th>結果の挙動</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">element_filter</code></td><td>スカラー述語を満たすStruct要素に一致します。</td><td>要素レベルの検索では、一致したヒットに要素のオフセットが含まれる場合があります。行レベルのクエリまたはフィルタリング検索では、結果の形状はAPIおよび出力フィールドによって異なります。</td></tr>
+<tr><td><code translate="no">element_filter</code></td><td>スカラー述語を満たすStruct要素に一致します。</td><td>要素レベルの検索では、一致したヒットに要素オフセットが含まれる場合があります。行レベルのクエリまたはフィルタリング検索では、結果の形状はAPIおよび出力フィールドによって異なります。</td></tr>
 <tr><td><code translate="no">MATCH_*</code></td><td>スカラー述語を満たす Struct 要素の数に基づいてエンティティを選択します。</td><td>行レベルのフィルタリング。これらの演算子は、それ自体では要素オフセットを返しません。</td></tr>
 <tr><td>行レベルのパス述語</td><td><code translate="no">$[...]</code> 述語を使用せずに、1つの要素の位置をテストしたり、Struct要素の数を数えたり、要素間のサブフィールド値をテストしたりします。</td><td>行レベルのフィルタリング。これらの述語は要素オフセットを返しません。</td></tr>
 </tbody>
@@ -151,7 +151,7 @@ summary: >-
 <p>述語内で複数の条件が使用される場合、すべての `<code translate="no">$[subfield]</code> ` 参照は同じ Struct 要素に適用されます：</p>
 <pre><code translate="no" class="language-text">element_filter(chunks, $[section] == &quot;index&quot; &amp;&amp; $[quality_score] &gt; 0.9)
 <button class="copy-code-btn"></button></code></pre>
-<p>エンティティ B のみが一致します。その 3 つの要素すべてが両方の条件を満たしています。</p>
+<p>エンティティ B のみが条件に一致します。その 3 つの要素すべてが、両方の条件を満たしています。</p>
 <p>エンティティレベルの述語と<code translate="no">element_filter</code> を組み合わせる場合は、式の一番最後に<code translate="no">element_filter</code> を配置します：</p>
 <pre><code translate="no" class="language-text"># Correct
 category == &quot;index&quot; &amp;&amp; element_filter(chunks, $[quality_score] &gt; 0.9)
@@ -338,8 +338,8 @@ chunks[0][page] in [1, 2, 3]
 # Chained range on a positional path.
 0.8 &lt; chunks[0][quality_score] &lt; 0.95
 <button class="copy-code-btn"></button></code></pre>
-<p>エンティティ A とエンティティ B について、最初のセクション述語は両方のエンティティに一致し、2 番目のスコア述語はエンティティ B にのみ一致し、厳密なスコア範囲はどちらにも一致しません。<code translate="no">page</code> 述語は一般的な例であり、このサンプルデータでは<code translate="no">page</code> は定義されていません。</p>
-<p>位置パスは、スカラーサブフィールドに対する比較、<code translate="no">in</code> 、<code translate="no">not in</code> 、および連鎖範囲述語をサポートしています。エンティティのStructArrayフィールドにその位置に要素がない場合、そのエンティティは一致しません。</p>
+<p>エンティティ A とエンティティ B について、最初のセクション述語は両方のエンティティに一致し、2 番目のスコア述語はエンティティ B にのみ一致し、厳密なスコア範囲はどちらにも一致しません。<code translate="no">page</code> 述語は一般的な例であり、この例示データでは<code translate="no">page</code> は定義されていません。</p>
+<p>位置パスは、スカラーサブフィールドに対する比較、<code translate="no">in</code> 、<code translate="no">not in</code> 、および連鎖範囲述語をサポートしています。エンティティの StructArray フィールドにその位置に要素がない場合、そのエンティティは一致しません。</p>
 <h3 id="ARRAY-operators" class="common-anchor-header">ARRAY演算子<button data-href="#ARRAY-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -355,7 +355,7 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">位置による配列サブフィールドへのアクセス<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p><code translate="no">ARRAY</code> <code translate="no">chunks[0][tags]</code> <code translate="no">==</code> <code translate="no">!=</code> <code translate="no">array_contains</code> <code translate="no">array_contains_any</code> <code translate="no">array_contains_all</code> <code translate="no">array_length</code> <code translate="no">in</code> <code translate="no">like</code></p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">位置による配列サブフィールドへのアクセス<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>Milvus 3.0.6 以降、位置指定パスはスカラーの `<code translate="no">ARRAY</code> ` サブフィールドも参照できるようになりました。`<code translate="no">chunks[0][tags]</code> ` は、最初の Struct 要素の内部配列です。配列リテラルを用いた `<code translate="no">==</code> ` および `<code translate="no">!=</code> `、`<code translate="no">array_contains</code>`、`<code translate="no">array_contains_any</code>`、`<code translate="no">array_contains_all</code>`、`<code translate="no">array_length</code>` をサポートしています。これに対する比較演算子 `<code translate="no">in</code>`、`<code translate="no">like</code>`、および算術演算は拒否されます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
 array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
 
@@ -432,7 +432,7 @@ chunks is not null
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">$[...]</code> 構文は、現在のStruct要素のスカラー値を表します。述語のサポート状況は、スカラーサブフィールドの型によって異なります：</p>
+    </button></h2><p><code translate="no">$[...]</code> 構文は、現在のStruct要素のスカラー値を表します。述語のサポートは、スカラーサブフィールドの型によって異なります：</p>
 <table>
 <thead>
 <tr><th>サブフィールドの型</th><th>要素レベルの述語のサポート</th></tr>
@@ -444,7 +444,7 @@ chunks is not null
 <tr><td><code translate="no">VARCHAR</code></td><td>文字列比較、連鎖範囲、<code translate="no">in</code> 、<code translate="no">not in</code> 、<code translate="no">like</code> 、<code translate="no">=~</code> 、<code translate="no">!~</code> 、および論理演算の組み合わせ。</td></tr>
 <tr><td>スカラーの<code translate="no">ARRAY</code> サブフィールド（Milvus 3.0.6以降）</td><td><code translate="no">array_contains</code>、<code translate="no">array_contains_any</code> 、<code translate="no">array_contains_all</code> 、および<code translate="no">$[tags]</code> 上の<code translate="no">array_length</code> 、さらに<code translate="no">$[tags] is null</code> および<code translate="no">$[tags] is not null</code> 。<code translate="no">$[tags]</code> 上の比較演算子、<code translate="no">in</code> 、および<code translate="no">like</code> は拒否されます。</td></tr>
 <tr><td>要素がnull可能であるサブフィールド（Milvus 3.0.6以降）</td><td><code translate="no">$[subfield] is null</code> および<code translate="no">$[subfield] is not null</code> は、現在の Struct 要素の値が null であるかどうかを判定します。null 値を保持できないサブフィールドでは、<code translate="no">is null</code> は常に false となります。</td></tr>
-<tr><td>ベクトルサブフィールド</td><td><code translate="no">$[...]</code> のスカラー述語の入力としてサポートされていません。ただし、Milvus 3.0.6以降の要素がNULL許容のベクトルサブフィールドに対する<code translate="no">$[emb] is null</code> および<code translate="no">$[emb] is not null</code> は例外です。代わりに、EmbeddingList検索または要素レベルのベクトル検索を通じてベクトルサブフィールドを使用してください。</td></tr>
+<tr><td>ベクトルサブフィールド</td><td><code translate="no">$[...]</code> のスカラー述語の入力としてはサポートされていません。ただし、Milvus 3.0.6以降の要素がNULL許容であるベクトルサブフィールドに対する<code translate="no">$[emb] is null</code> および<code translate="no">$[emb] is not null</code> は例外です。代わりに、EmbeddingList検索または要素レベルのベクトル検索を通じてベクトルサブフィールドを使用してください。</td></tr>
 </tbody>
 </table>
 <p><code translate="no">&amp;&amp;</code> 、<code translate="no">||</code> 、<code translate="no">!</code> などの論理演算子は、述語式に適用されます。たとえば、<code translate="no">!$[has_code]</code> の代わりに<code translate="no">!($[has_code] == true)</code> と記述します。</p>
@@ -480,7 +480,28 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 <span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<p>行レベルの位置指定パスも同様のルールに従います。<code translate="no">chunks[0][lang] == &quot;en&quot;</code> は、最初の要素の<code translate="no">lang</code> 値が null の場合、その位置に要素が存在しない場合、または StructArray フィールドが null の場合、結果が不明となるため、エンティティは一致しません。</p>
+<p>行レベルの位置指定パスも同様のルールに従います。<code translate="no">chunks[0][lang] == &quot;en&quot;</code> は、最初の要素の<code translate="no">lang</code> 値がnullの場合、その位置に要素が存在しない場合、またはStructArrayフィールドがnullの場合、結果が不明となるため、エンティティは一致しません。</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">StructArray要素にベクトルが欠落しているエンティティを検索する<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>各製品が、<code translate="no">chunks</code> という名前のStructArrayフィールドに説明の断片を格納していると仮定します。各チャンクには<code translate="no">embedding</code> という名前のベクトルサブフィールドがあり、ベクトルが存在しない場合はNULLが許可されます。製品Aには2つのチャンクがあり、そのうち1つにはベクトルがありません。製品Bの2つのチャンクの両方ともベクトルを持っています。</p>
+<p>スキーマの設定については、「<a href="/docs/ja/create-structarray-field.md#Allow-null-values-in-Struct-elements">Struct要素でのNULL値の許可</a>」を参照してください。</p>
+<p>少なくとも1つのチャンクでベクトルが欠落している製品を検索するには、このフィルターを<code translate="no">query()</code> に渡します。</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> は、現在のチャンク内のベクトルを指します。<code translate="no">MATCH_ANY</code> は、チャンクのうち少なくとも1つでベクトルがNULLである製品を選択します。このクエリは製品Aを返します。</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">サポートされていない述語<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -496,11 +517,11 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要素レベルの `<code translate="no">$[...]</code> ` 述語では、以下はサポートされていません：</p>
+    </button></h2><p>要素レベルの<code translate="no">$[...]</code> 述語では、以下はサポートされていません：</p>
 <ul>
 <li><p><code translate="no">text_match(field, &quot;...&quot;)</code> や<code translate="no">phrase_match(field, &quot;...&quot;)</code> などのテキスト一致関数。</p></li>
 <li><p>JSONパス構文、JSONパスに対する<code translate="no">exists</code> 、または<code translate="no">json_contains</code> 、<code translate="no">json_contains_all</code> 、<code translate="no">json_contains_any</code> などのJSON関数。</p></li>
-<li><p><code translate="no">array_contains</code> 、<code translate="no">array_contains_all</code> 、<code translate="no">array_contains_any</code> 、または<code translate="no">array_length</code> といった配列コンテナ関数を、スカラーサブフィールドの<code translate="no">$[subfield]</code> に対して使用すること。代わりに、行レベルの述語内で<code translate="no">chunks[section]</code> のようなサブフィールドパスに対してこれらの関数を使用してください。Milvus 3.0.6 以降では、スカラー<code translate="no">ARRAY</code> サブフィールドの<code translate="no">$[tags]</code> に対してもこれらの関数がサポートされています。</p></li>
+<li><p><code translate="no">array_contains</code> <code translate="no">array_contains_all</code> <code translate="no">array_contains_any</code> 、または といった配列コンテナ関数を、スカラーサブフィールドの に対して使用すること。代わりに、行レベルの述語内で のようなサブフィールドパスに対してこれらの関数を使用してください。Milvus 3.0.6 以降では、スカラー サブフィールドの に対してもこれらの関数がサポートされています。<code translate="no">array_length</code> <code translate="no">$[subfield]</code> <code translate="no">chunks[section]</code> <code translate="no">ARRAY</code> <code translate="no">$[tags]</code> </p></li>
 <li><p><code translate="no">$[subfield] is null</code> Milvus 3.0.6 以前では、<code translate="no">$[subfield] is not null</code> を使用してください。</p></li>
 </ul>
 <ul>

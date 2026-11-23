@@ -5,10 +5,10 @@ order: 1
 group: upgrade_milvus_cluster-operator.md
 related_key: upgrade Milvus Cluster
 summary: Pelajari cara meng-upgrade kluster Milvus menggunakan Helm Chart.
-title: Meningkatkan Kluster Milvus dengan Helm Chart
+title: Memperbarui Kluster Milvus dengan Helm Chart
 ---
 <div class="tab-wrapper"><a href="/docs/id/upgrade_milvus_cluster-operator.md" class=''>Milvus</a><a href="/docs/id/upgrade_milvus_cluster-helm.md" class='active '>OperatorHelm</a></div>
-<h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Meningkatkan Kluster Milvus dengan Helm Chart<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
+<h1 id="Upgrade-Milvus-Cluster-with-Helm-Chart" class="common-anchor-header">Memperbarui Kluster Milvus dengan Helm Chart<button data-href="#Upgrade-Milvus-Cluster-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,7 +25,7 @@ title: Meningkatkan Kluster Milvus dengan Helm Chart
       </svg>
     </button></h1><p>Panduan ini menjelaskan cara memperbarui kluster Milvus 2.6.x Anda ke v3.0.5 menggunakan Helm.</p>
 <div class="alert note">
-<p>Prosedur ini telah diverifikasi dari Milvus 2.6.20 hingga Milvus v3.0.5 dengan Milvus Helm Chart 5.0.22. Jika Anda menggunakan rilis patch Milvus 2.6.x lain atau versi Helm Chart yang berbeda, lakukan verifikasi pembaruan terlebih dahulu di lingkungan non-produksi.</p>
+<p>Prosedur ini telah diverifikasi dari Milvus 2.6.20 hingga Milvus v3.0.5 dengan Milvus Helm Chart 5.0.22. Jika Anda menggunakan rilis patch Milvus 2.6.x lain atau versi Helm Chart yang berbeda, lakukan verifikasi peningkatan versi terlebih dahulu di lingkungan non-produksi.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Persyaratan<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,7 +87,8 @@ title: Meningkatkan Kluster Milvus dengan Helm Chart
     </button></h3><p>Simpan nilai lengkap dari rilis saat ini dan periksa Pod yang sedang berjalan:</p>
 <pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
   --namespace &lt;namespace&gt; \
-  --all &gt; milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>

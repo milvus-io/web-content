@@ -26,7 +26,7 @@ summary: >-
 <p>El filtrado de StructArray cuenta con dos familias de operadores y un conjunto de predicados de ruta a nivel de fila:</p>
 <table>
 <thead>
-<tr><th>Formulario de filtro</th><th>Finalidad principal</th><th>Comportamiento del resultado</th></tr>
+<tr><th>Formulario de filtrado</th><th>Finalidad principal</th><th>Comportamiento del resultado</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">element_filter</code></td><td>Coincidencia Elementos Struct que satisfacen un predicado escalar.</td><td>En la búsqueda a nivel de elemento, los resultados coincidentes pueden incluir desplazamientos de elementos. En la consulta a nivel de fila o en la búsqueda filtrada, la forma del resultado depende de la API y de los campos de salida.</td></tr>
@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Predicados de ruta a nivel de fila</td><td>Comprueba la posición de un elemento, cuenta elementos de Struct o comprueba valores de subcampos en distintos elementos sin un predicado « <code translate="no">$[...]</code> ».</td><td>Filtrado a nivel de fila. Estos predicados no devuelven desplazamientos de elementos.</td></tr>
 </tbody>
 </table>
-<p>Utiliza subcampos escalares y subcampos de matriz en Milvus 3.0.6 y versiones posteriores, en los operadores StructArray. Los subcampos vectoriales se utilizan en las rutas de búsqueda vectoriales y no son entradas de predicados escalares.</p>
+<p>Utiliza subcampos escalares y subcampos de matriz en Milvus 3.0.6 y versiones posteriores, en los operadores StructArray. Los subcampos vectoriales se utilizan en las rutas de búsqueda vectorial y no son entradas de predicados escalares.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">Cuándo utilizar cada operador<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -269,7 +269,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
     </button></h3><p><code translate="no">MATCH_MOST</code> devuelve el valor <code translate="no">true</code> si el número de elementos que satisfacen el predicado es menor o igual que <code translate="no">threshold</code>.</p>
 <pre><code translate="no" class="language-text">MATCH_MOST(chunks, $[has_code] == true, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
-<p>Ninguna de las entidades cumple los requisitos: la entidad A tiene cuatro elementos que cumplen los requisitos y la entidad B tiene tres.</p>
+<p>Ninguna de las entidades cumple el criterio: la entidad A tiene cuatro elementos que cumplen el criterio y la entidad B tiene tres.</p>
 <p>Para <code translate="no">MATCH_MOST</code>, <code translate="no">threshold</code> puede ser cero o un entero positivo.</p>
 <h3 id="MATCHEXACT" class="common-anchor-header">MATCH_EXACT<button data-href="#MATCHEXACT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +286,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_EXACT</code> devuelve el valor de <code translate="no">true</code> si el número de elementos que cumplen el predicado es exactamente igual a <code translate="no">threshold</code>.</p>
+    </button></h3><p><code translate="no">MATCH_EXACT</code> devuelve el valor de <code translate="no">true</code> si el número de elementos que satisfacen el predicado es exactamente igual a <code translate="no">threshold</code>.</p>
 <pre><code translate="no" class="language-text">MATCH_EXACT(chunks, $[section] == &quot;filter&quot;, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
 <p>Ninguna de las entidades coincide, ya que ninguna tiene un elemento con <code translate="no">section</code> establecido en <code translate="no">&quot;filter&quot;</code>.</p>
@@ -481,7 +481,28 @@ MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs
 <span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
 MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<p>Las rutas posicionales a nivel de fila siguen la misma regla: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> es desconocido cuando el valor de <code translate="no">lang</code> del primer elemento es nulo, cuando la entidad no tiene ningún elemento en esa posición o cuando el campo StructArray es nulo, por lo que la entidad no coincide.</p>
+<p>Las rutas posicionales a nivel de fila siguen la misma regla: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> es desconocido cuando el valor <code translate="no">lang</code> del primer elemento es nulo, cuando la entidad no tiene ningún elemento en esa posición o cuando el campo StructArray es nulo, por lo que la entidad no coincide.</p>
+<h3 id="Find-entities-with-missing-vectors-in-StructArray-elements" class="common-anchor-header">Buscar entidades con vectores que faltan en los elementos de StructArray<button data-href="#Find-entities-with-missing-vectors-in-StructArray-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Supongamos que cada producto almacena fragmentos de su descripción en un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento tiene un subcampo vectorial denominado « <code translate="no">embedding</code> » que admite el valor NULL cuando falta su vector. El producto A tiene dos fragmentos y a uno de ellos le falta el vector. Ambos fragmentos del producto B tienen vectores.</p>
+<p>Para la configuración del esquema, consulta <a href="/docs/es/create-structarray-field.md#Allow-null-values-in-Struct-elements">«Permitir valores nulos en elementos Struct</a>».</p>
+<p>Para encontrar productos en los que al menos a una parte le falte el vector, pasa este filtro a ` <code translate="no">query()</code>`.</p>
+<pre><code translate="no" class="language-text">MATCH_ANY(chunks, $[embedding] IS NULL)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">$[embedding]</code> se refiere al vector del fragmento actual. <code translate="no">MATCH_ANY</code> selecciona un producto cuando al menos uno de sus fragmentos tiene un vector NULL. La consulta devuelve el producto A.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Predicados no admitidos<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -499,8 +520,8 @@ MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning
       </svg>
     </button></h2><p>Los predicados de « <code translate="no">$[...]</code> » a nivel de elemento no admiten:</p>
 <ul>
-<li><p>Funciones de coincidencia de texto, como <code translate="no">text_match(field, &quot;...&quot;)</code> o <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
-<li><p>La sintaxis de ruta JSON, la función « <code translate="no">exists</code> » aplicada a rutas JSON, o funciones JSON como « <code translate="no">json_contains</code> », « <code translate="no">json_contains_all</code> » o « <code translate="no">json_contains_any</code> ».</p></li>
+<li><p>Funciones de coincidencia de texto, como ` <code translate="no">text_match(field, &quot;...&quot;)</code> ` o ` <code translate="no">phrase_match(field, &quot;...&quot;)</code>`.</p></li>
+<li><p>La sintaxis de rutas JSON, la función « <code translate="no">exists</code> » aplicada a rutas JSON, o funciones JSON como « <code translate="no">json_contains</code> », « <code translate="no">json_contains_all</code> » o « <code translate="no">json_contains_any</code> ».</p></li>
 <li><p>Funciones de contenedores de matrices como <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_length</code> en <code translate="no">$[subfield]</code> de un subcampo escalar. Utilice estas funciones en una ruta de subcampo como <code translate="no">chunks[section]</code> en un predicado a nivel de fila. A partir de Milvus 3.0.6, son compatibles con <code translate="no">$[tags]</code> para subcampos escalares <code translate="no">ARRAY</code>.</p></li>
 <li><p><code translate="no">$[subfield] is null</code> o <code translate="no">$[subfield] is not null</code> antes de Milvus 3.0.6.</p></li>
 </ul>

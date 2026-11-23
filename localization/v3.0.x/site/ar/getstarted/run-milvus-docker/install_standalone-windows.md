@@ -51,7 +51,7 @@ title: تشغيل Milvus في Docker (ويندوز)
 docker info --format &quot;{{.OSType}}&quot;
 docker compose version
 </code></pre>
-<p>يجب أن يكون نوع نظام التشغيل Docker هو " <code translate="no">linux</code>". تستخدم أمثلة Compose المكون الإضافي " <code translate="no">docker compose</code> " (الإصدار 2 أو الأحدث)، وليس الأمر القديم " <code translate="no">docker-compose</code> " الإصدار 1.</p>
+<p>يجب أن يكون نوع نظام التشغيل Docker هو " <code translate="no">linux</code>". تستخدم أمثلة Compose المكون الإضافي " <code translate="no">docker compose</code> " (الإصدار 2 أو أحدث)، وليس الأمر القديم " <code translate="no">docker-compose</code> " الإصدار 1.</p>
 <h2 id="Run-Milvus-in-Docker" class="common-anchor-header">تشغيل Milvus في Docker<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,7 +68,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>اختر أحد المحطات الطرفية التالية. قم بتشغيل الأوامر في دليل عمل قابل للكتابة؛ حيث يقوم البرنامج النصي بتخزين ملفات التكوين ودليل <code translate="no">volumes</code> هناك.</p>
-<p>يتم تنزيل البرنامج النصي من فرع Milvus <code translate="no">master</code>. يتم تعريف علامة صورة Docker الخاصة به في البرنامج النصي وقد تختلف عن الإصدار v3.0.5. لنشر هذا الإصدار بالضبط، استخدم تكوين Docker Compose المحدد الإصدار أدناه.</p>
+<p>يتم تنزيل البرنامج النصي من فرع Milvus <code translate="no">master</code>. يتم تعريف علامة صورة Docker الخاصة به في البرنامج النصي وقد تختلف عن الإصدار v3.0.5. لنشر هذا الإصدار بالضبط، استخدم تكوين Docker Compose المحدد بالإصدار أدناه.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">من PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,11 +115,17 @@ standalone.bat start
 <li>يخزن Milvus البيانات في مجلد <strong>volumes/milvus</strong> في دليل العمل.</li>
 <li>توجد تعليلات التكوين في <strong>ملف user.yaml</strong> الموجود في دليل العمل. أعد تشغيل الحاوية بعد تغييرها.</li>
 </ul>
-<p>تحقق من حالة الصورة والحاوية في أي من المحطات الطرفية:</p>
+<p>يُخرج الأمر ` <code translate="no">start</code> ` الرسالة ` <code translate="no">Wait for Milvus Starting...</code> ` ثم يقوم بالتحقق مرة كل ثانية حتى يُبلغ ` <code translate="no">docker ps</code> ` بأن الحاوية في حالة جيدة. لا يوجد حد زمني لهذا الفحص. إذا لم يُرجع الأمر أي نتيجة، فافحص سجلات الحاوية من محطة طرفية أخرى باستخدام ` <code translate="no">docker logs milvus-standalone</code>`. يقوم البرنامج النصي بتشغيل الحاوية باستخدام ` <code translate="no">--security-opt seccomp:unconfined</code>`، وبالتالي تعمل الحاوية بدون ملف تعريف seccomp الافتراضي لـ Docker.</p>
+<div class="alert warning">
+<blockquote>
+<p>ينشر البرنامج النصي المنافذ <strong>19530</strong> <strong>و9091</strong> <strong>و2379</strong> بدون عنوان مضيف، ويقوم <strong>ملف embedEtcd.yaml</strong> بتعيين etcd للاستماع على <code translate="no">http://0.0.0.0:2379</code>. بشكل افتراضي، ينشر Docker Desktop هذه المنافذ على جميع واجهات الشبكة، لذا يمكن للأجهزة الأخرى التي يمكنها الوصول إلى هذا الكمبيوتر الاتصال أيضًا بـ Milvus و etcd. لتقييد الوصول إلى هذا الكمبيوتر، قم بتحرير خيارات <code translate="no">-p</code> في <code translate="no">standalone.bat</code> قبل أول <code translate="no">start</code> ، على سبيل المثال <code translate="no">-p 127.0.0.1:19530:19530</code> ، وقم بإزالة <code translate="no">-p 2379:2379</code> إذا كنت لا تتصل بـ etcd من خارج الحاوية. إذا كانت حاوية <code translate="no">milvus-standalone</code> موجودة بالفعل، فسيقوم <code translate="no">start</code> بتشغيلها مرة أخرى باستخدام خياراتها الأصلية. لربط المنافذ المنشورة بـ localhost بشكل افتراضي، راجع <a href="https://docs.docker.com/desktop/features/networking/">الشبكات على Docker Desktop</a>.</p>
+</blockquote>
+</div>
+<p>تحقق من حالة الصورة والحاوية في أي من المحطتين الطرفيتين:</p>
 <pre><code translate="no" class="language-powershell">docker inspect --format &quot;{{.Config.Image}}&quot; milvus-standalone
 docker ps --filter name=milvus-standalone
 </code></pre>
-<p>لإيقاف Milvus من PowerShell، قم بتشغيل الأمر « <code translate="no">.\standalone.bat stop</code> »؛ ومن موجه الأوامر، قم بتشغيل الأمر « <code translate="no">standalone.bat stop</code> ». يقوم الأمر « <code translate="no">delete</code> » بإزالة كل من الحاوية والبيانات المخزنة فيها. قم بعمل نسخة احتياطية من البيانات قبل استخدامها.</p>
+<p>لإيقاف Milvus من PowerShell، قم بتشغيل <code translate="no">.\standalone.bat stop</code> ؛ ومن موجه الأوامر، قم بتشغيل <code translate="no">standalone.bat stop</code>. قم بتشغيل <code translate="no">stop</code> قبل <code translate="no">delete</code>: بعد التأكيد، يحاول الأمر <code translate="no">delete</code> إزالة الحاوية ثم يحذف مجلد <strong>volumes</strong> وملف <strong>embedEtcd.yaml</strong> <strong>وملف user.yaml،</strong> حتى إذا كانت الحاوية لا تزال قيد التشغيل ولم تتم إزالتها. قم بعمل نسخة احتياطية من البيانات قبل استخدامها.</p>
 <h3 id="From-WSL-2" class="common-anchor-header">من WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,6 +149,7 @@ docker ps --filter name=milvus-standalone
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
 <p>لإيقاف Milvus، قم بتشغيل الأمر <code translate="no">bash standalone_embed.sh stop</code>. يقوم الأمر <code translate="no">bash standalone_embed.sh delete</code> بإزالة الحاوية والتكوين والبيانات؛ قم بعمل نسخة احتياطية من البيانات قبل استخدامها.</p>
+<p>يعمل البرنامج النصي لـ Linux على تشغيل Docker باستخدام الأمر <code translate="no">sudo</code> ، وينشر منافذه بدون عنوان مضيف، ويبدأ تشغيل الحاوية باستخدام الأمر <code translate="no">--security-opt seccomp:unconfined</code>. تنطبق الملاحظات المتعلقة بهذه الإعدادات الواردة في <a href="/docs/ar/install_standalone-docker.md">«تشغيل Milvus في Docker (Linux)</a> » أيضًا عند تشغيله في WSL 2.</p>
 <h2 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">تشغيل Milvus باستخدام Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,7 +165,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم التكوين المرفق بالإصدار v3.0.5. قم بتشغيل تسلسل الأوامر الخاص بمحطة العمل الخاصة بك فقط.</p>
+    </button></h2><p>استخدم التكوين المرفق بالإصدار v3.0.5. قم بتشغيل تسلسل الأوامر الخاص بـ«terminal» الخاص بك فقط.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">من PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,10 +181,9 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتنزيل التكوين وابدأ تشغيل Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>قم بتنزيل ملف التكوين واطبع قيمة التجزئة SHA-256 الخاصة به:</p>
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yaml
+Get-FileHash docker-compose.yaml -Algorithm SHA256
 </code></pre>
 <h3 id="From-Windows-Command-Prompt" class="common-anchor-header">من موجه أوامر Windows<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -194,10 +200,9 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتنزيل ملف التكوين وابدأ تشغيل Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
-docker compose up -d
-docker compose ps
+    </button></h3><p>قم بتنزيل ملف التكوين واطبع قيمة التجزئة SHA-256 الخاصة به:</p>
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yaml
+certutil -hashfile docker-compose.yaml SHA256
 </code></pre>
 <h3 id="From-WSL-2" class="common-anchor-header">من WSL 2<button data-href="#From-WSL-2" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -214,12 +219,30 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>افتح توزيع WSL الخاص بك، ثم قم بتشغيل أوامر Linux التالية:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
-docker compose up -d
+    </button></h3><p>افتح توزيع WSL الخاص بك، ثم قم بتنزيل ملف التكوين واطبع قيمة التجزئة SHA-256 الخاصة به:</p>
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml
+<span class="hljs-built_in">sha256sum</span> docker-compose.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Start-Milvus" class="common-anchor-header">ابدأ تشغيل Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قارن التجزئة مع ملخص <code translate="no">sha256</code> المدرج لـ <code translate="no">milvus-standalone-docker-compose.yaml</code> على <a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.5">صفحة إصدار v3.0.5</a>. يُطبع <code translate="no">Get-FileHash</code> التجزئة بأحرف كبيرة، بينما تدرجها صفحة الإصدار بأحرف صغيرة، لذا تجاهل حالة الأحرف عند المقارنة. ثم قم بتشغيل Milvus وتحقق من الحاويات من نفس المحطة الطرفية:</p>
+<pre><code translate="no" class="language-shell">docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
-<p>يبدأ التكوين تشغيل ثلاث حاويات طويلة الأمد: <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong>. كما يقوم بتشغيل خدمة <code translate="no">milvus-volume-init</code> لمرة واحدة لإعداد ملكية دليل البيانات. يتم تعيين بياناتها إلى <strong>volumes/milvus</strong> و <strong>volumes/minio</strong> و <strong>volumes/etcd</strong> في دليل العمل. يُتيح MinIO المنفذين <strong>9000</strong> <strong>و9001</strong>؛ بينما يُتيح Milvus المنفذين <strong>19530</strong> <strong>و9091</strong>. للاطلاع على أوامر التكوين ودورة الحياة، راجع <a href="/docs/ar/install_standalone-docker-compose.md">«تشغيل Milvus باستخدام Docker Compose</a>».</p>
+<p>يبدأ التكوين بتشغيل ثلاث حاويات طويلة الأمد: <strong>milvus-standalone</strong> <strong>وmilvus-minio</strong> <strong>وmilvus-etcd</strong>. كما يقوم بتشغيل خدمة <code translate="no">milvus-volume-init</code> لمرة واحدة لإعداد ملكية دليل البيانات. يتم تعيين بياناتها إلى <strong>volumes/milvus</strong> و <strong>volumes/minio</strong> و <strong>volumes/etcd</strong> في دليل العمل. يعرض MinIO المنفذين <strong>9000</strong> و <strong>9001</strong>؛ بينما يعرض Milvus المنفذين <strong>19530</strong> و <strong>9091</strong>. ينشر التكوين هذه المنافذ على جميع واجهات الشبكة، ويستخدم MinIO بيانات الاعتماد الافتراضية <code translate="no">minioadmin</code> ، وتقوم خدمة <code translate="no">standalone</code> بتعيين <code translate="no">security_opt: seccomp:unconfined</code>. لتقييد الوصول، وتغيير بيانات الاعتماد، وللحصول على أوامر التكوين ودورة الحياة، راجع <a href="/docs/ar/install_standalone-docker-compose.md">تشغيل Milvus باستخدام Docker Compose</a>.</p>
 <h2 id="FAQs" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -235,7 +258,7 @@ docker compose ps
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error" class="common-anchor-header">كيف يمكنني التعامل مع خطأ « <code translate="no">Docker Engine stopped</code> »؟<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error" class="common-anchor-header">كيف يمكنني التعامل مع الخطأ « <code translate="no">Docker Engine stopped</code> »؟<button data-href="#How-can-I-deal-with-the-Docker-Engine-stopped-error" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,7 +285,7 @@ wsl --update
 <li><p>قم بتشغيل الفحص التالي في محطة العمل التي تستخدمها للتثبيت:</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>
-<p>يجب أن يُرجع النتيجة « <code translate="no">linux</code> ». إذا تعذر الاتصال بالخدمة الخلفية، فاتبع <a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/">إرشادات استكشاف الأخطاء وإصلاحها في Docker Desktop</a> قبل إعادة تشغيل البرنامج النصي لـ Milvus. لا يُثبت تشغيل « <code translate="no">com.docker.service</code> » وحده أن محرك Linux الخاص بـ WSL 2 قيد التشغيل.</p></li>
+<p>يجب أن يُرجع النتيجة « <code translate="no">linux</code> ». إذا تعذر الاتصال بالبرنامج الخفي، فاتبع <a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/">إرشادات استكشاف الأخطاء وإصلاحها في Docker Desktop</a> قبل إعادة تشغيل البرنامج النصي لـ Milvus. لا يُثبت تشغيل « <code translate="no">com.docker.service</code> » وحده أن محرك Linux الخاص بـ WSL 2 قيد التشغيل.</p></li>
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="common-anchor-header">كيف يمكنني التعامل مع المشكلات المتعلقة بـ WSL أثناء نشر Milvus؟<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -356,7 +379,7 @@ wsl --update
 <li><a href="/docs/ar/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
 <li><p>بالنسبة لعمليات النشر باستخدام Compose، اتبع <a href="/docs/ar/upgrade_milvus_standalone-docker.md">إرشادات ترقية Milvus Standalone باستخدام Docker Compose؛</a> وتحقق من صحة الإجراء في بيئتك قبل الترقية.</p></li>
-<li><p><a href="/docs/ar/scaleout.md">قم بتوسيع نطاق مجموعة Milvus الخاصة بك</a>.</p></li>
+<li><p><a href="/docs/ar/scaleout.md">قم بتوسيع نطاق مجموعة Milvus</a> على Kubernetes. يستخدم هذا الإجراء Helm ولا ينطبق على عملية النشر هذه باستخدام Docker.</p></li>
 <li><p>انشر مجموعة Milvus الخاصة بك على السحابة:</p>
 <ul>
 <li><a href="/docs/ar/eks.md">Amazon EKS</a></li>

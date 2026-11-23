@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ofrece operadores de comparación, de rango, aritméticos, lógicos y de valor NULL para filtrar entidades. Cada operador admite tipos de campo específicos.</p>
+    </button></h1><p>Milvus proporciona operadores de comparación, de rango, aritméticos, lógicos y de valor NULL para filtrar entidades. Cada operador admite tipos de campo específicos.</p>
 <div class="alert note">
 <p>El operando de la izquierda puede ser un campo de colección, como <code translate="no">status</code>, o un subcampo de StructArray en un índice de elemento específico, como <code translate="no">struct[0][subfield] &gt; 10</code>. Véase <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
 </div>
@@ -376,7 +376,7 @@ summary: >-
       </svg>
     </button></h2><p>Los operadores de coincidencia de patrones ayudan a filtrar valores de cadena basándose en patrones con comodines o expresiones regulares.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: Se utiliza para buscar patrones de comodín sencillos en valores de cadena. Por ejemplo, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » coincide con valores que empiezan por « <code translate="no">Prod</code> ».</p></li>
+<li><p><code translate="no">LIKE</code>: Se utiliza para buscar patrones simples con comodines en valores de cadena. Por ejemplo, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » coincide con valores que empiezan por « <code translate="no">Prod</code> ».</p></li>
 <li><p><code translate="no">=~</code>: Se utiliza para buscar coincidencias entre un valor de cadena y una expresión regular RE2. Por ejemplo, « <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> » encuentra valores que contienen un código de error como « <code translate="no">E1001</code> ».</p></li>
 <li><p><code translate="no">!~</code>: Se utiliza para excluir valores de cadena que coincidan con una expresión regular RE2. Esto equivale a « <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> ».</p></li>
 </ul>
@@ -604,7 +604,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Los operadores bit a bit resultan útiles cuando un campo entero codifica varios indicadores, como permisos, indicadores de características o bits de estado. Puede utilizar estos operadores en expresiones de filtro para comprobar, combinar o comparar bits individuales de un valor entero.</p>
-<p>En el caso de los campos escalares, los operadores bit a bit se aplican a los tipos de campo entero, como <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> y <code translate="no">INT64</code>.</p>
+<p>En el caso de los campos escalares, los operadores bit a bit se aplican a los tipos de campo enteros, como <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code> y <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Operadores bit a bit admitidos<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -626,7 +626,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">&amp;</code></td><td>Y bit a bit</td><td>Comprueba si están activados determinados bits.</td></tr>
-<tr><td><code translate="no">|</code></td><td>OR bit a bit</td><td>Combina los bits antes de la comparación.</td></tr>
+<tr><td><code translate="no">|</code></td><td>OR bit a bit</td><td>Combinar bits antes de la comparación.</td></tr>
 <tr><td><code translate="no">^</code></td><td>XOR bit a bit</td><td>Compara las diferencias de bits entre dos valores.</td></tr>
 </tbody>
 </table>
@@ -759,7 +759,7 @@ summary: >-
       </svg>
     </button></h2><p>Los operadores lógicos se utilizan para combinar varias condiciones en una expresión de filtro más compleja. Entre ellos se incluyen <code translate="no">AND</code>, <code translate="no">OR</code> y <code translate="no">NOT</code>.</p>
 <div class="alert note">
-<p>Cada condición puede utilizar su propio índice o ruta de exploración válidos; no es necesario que un único tipo de índice sirva para toda la expresión. Véase <a href="/docs/es/scalar_index.md">«Índice escalar</a>».</p>
+<p>Cada condición puede utilizar su propio índice o ruta de exploración válida; no es necesario que un único tipo de índice sirva para toda la expresión. Véase <a href="/docs/es/scalar_index.md">«Índice escalar</a>».</p>
 </div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">Operadores lógicos admitidos<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -935,7 +935,8 @@ summary: >-
 <p>Los campos escalares compatibles incluyen los campos booleanos, numéricos, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> y <code translate="no">ARRAY</code>. Estos operadores no admiten <a href="/docs/es/text.md">campos TEXT</a>.</p>
 <p>A partir de Milvus 3.0.3, los operadores también admiten campos vectoriales ordinarios: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> y <code translate="no">INT8_VECTOR</code>.</p>
 <p>Los operadores no distinguen entre mayúsculas y minúsculas: <code translate="no">IS NULL</code> y <code translate="no">is null</code> son equivalentes, al igual que <code translate="no">IS NOT NULL</code> y <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Ejemplo: Buscar entidades con valores que faltan o que están disponibles<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p><a id="Example-Find-entities-with-missing-or-available-values"></a></p>
+<h3 id="Example-Find-entities-with-missing-vectors" class="common-anchor-header">Ejemplo: Buscar entidades con vectores que faltan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.3</span><button data-href="#Example-Find-entities-with-missing-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Supongamos que una colección denominada <code translate="no">products</code> está indexada y cargada en Milvus 3.0.3 o posterior. La colección tiene una clave primaria de tipo <code translate="no">INT64</code> denominada <code translate="no">id</code>, un campo de tipo <code translate="no">VARCHAR</code> que admite valores nulos denominado <code translate="no">category</code> y un campo tridimensional de tipo <code translate="no">FLOAT_VECTOR</code> que admite valores nulos denominado <code translate="no">embedding</code>. Ya contiene las siguientes entidades:</p>
+    </button></h3><p>Supongamos que se añaden productos a una colección antes de generar sus vectores. En este ejemplo, la colección <code translate="no">products</code> está indexada y cargada. Tiene una clave primaria <code translate="no">INT64</code> denominada <code translate="no">id</code>, un campo <code translate="no">VARCHAR</code> nulo denominado <code translate="no">category</code> y un campo <code translate="no">FLOAT_VECTOR</code> tridimensional y nulo denominado <code translate="no">embedding</code>. La siguiente tabla muestra qué productos tienen un vector.</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -962,7 +963,7 @@ summary: >-
 </tbody>
 </table>
 <p>Se omiten la creación de la colección y la inserción de datos. Para conocer esos pasos, consulta <a href="/docs/es/nullable-and-default.md">«Campos nulos</a>».</p>
-<p>Para encontrar las entidades que aún necesitan una incrustación, realiza una consulta con ` <code translate="no">embedding IS NULL</code>`. Ajusta la configuración de conexión según tu servidor.</p>
+<p>Para encontrar los productos que aún necesitan un vector, llama a <code translate="no">query()</code> con el filtro <code translate="no">embedding IS NULL</code>. Sustituye <code translate="no">embedding</code> por el nombre de tu campo vectorial y ajusta la configuración de conexión para tu servidor. En este ejemplo, la consulta devuelve el ID <code translate="no">3</code> porque el vector de ese producto es NULL.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1147,6 +1148,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>Buscar entidades con ambos valores</td></tr>
 </tbody>
 </table>
+<p>Si cada producto tiene varios fragmentos y cada fragmento almacena su propio vector, utiliza un <a href="/docs/es/struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements">filtro StructArray para buscar productos a los que les falte un vector de fragmento</a>.</p>
 <p><a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>
 <a id="ARRAY-fields-with-null-values"></a></p>
@@ -1165,7 +1167,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Los operadores comprueban el valor almacenado en el campo. En el caso de un campo nulo sin valor por defecto, si se omite el campo durante la inserción o se establece explícitamente en NULL, se almacena NULL. Un valor por defecto configurado puede modificar lo que se almacena. Para obtener más información, consulta <a href="/docs/es/nullable-and-default.md">«Campos nulos</a> y <a href="/docs/es/default-values.md">valores por defecto</a>».</p>
+    </button></h3><p>Los operadores comprueban el valor almacenado del campo. En el caso de un campo nulo sin valor por defecto, si se omite el campo durante la inserción o se establece explícitamente en NULL, se almacena NULL. Un valor por defecto configurado puede modificar lo que se almacena. Para más detalles, consulta <a href="/docs/es/nullable-and-default.md">«Campos nulos</a> y <a href="/docs/es/default-values.md">valores por defecto</a>».</p>
 <table>
 <thead>
 <tr><th>Tipo de campo</th><th>Comportamiento de NULL</th></tr>
@@ -1177,7 +1179,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td>Tipos de vectores comunes</td><td>NULL significa que el valor del vector está ausente. Un vector cuyos componentes sean cero no es NULL.</td></tr>
 </tbody>
 </table>
-<p>Para un campo compatible definido con <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> no encuentra ninguna entidad y <code translate="no">IS NOT NULL</code> encuentra todas las entidades visibles. Las demás condiciones del filtro siguen siendo aplicables.</p>
+<p>Para un campo compatible definido con <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> no encuentra ninguna entidad y <code translate="no">IS NOT NULL</code> encuentra todas las entidades visibles. El resto de condiciones del filtro siguen siendo aplicables.</p>
 <div class="alert note">
 <p>Los filtros escalares NULL utilizan la información de validez de un índice o datos de campo elegibles; no requieren un tipo de índice escalar concreto. Un campo no nulo puede producir un resultado constante.</p>
 </div>
@@ -1208,7 +1210,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Ambas entidades tienen un vector « <code translate="no">embedding</code> ».</td></tr>
 </tbody>
 </table>
-<p>Para recuperar las incrustaciones que faltan, utiliza « <code translate="no">query()</code> »; una búsqueda en « <code translate="no">embedding</code> » con « <code translate="no">embedding IS NULL</code> » es válida, pero no devuelve ningún resultado. La búsqueda vectorial ya omite las incrustaciones NULL, por lo que « <code translate="no">embedding IS NOT NULL</code> » no reduce aún más el número de candidatos. La clasificación, otros filtros y el límite de búsqueda siguen determinando los resultados devueltos.</p>
+<p>Para recuperar incrustaciones que faltan, utilice « <code translate="no">query()</code> »; una búsqueda en « <code translate="no">embedding</code> » con « <code translate="no">embedding IS NULL</code> » es válida, pero no devuelve resultados. La búsqueda vectorial ya omite las incrustaciones NULL, por lo que « <code translate="no">embedding IS NOT NULL</code> » no reduce aún más el número de candidatos. La clasificación, otros filtros y el límite de búsqueda siguen determinando los resultados devueltos.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Consejos para utilizar operadores básicos con campos JSON y ARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

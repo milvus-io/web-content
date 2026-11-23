@@ -68,7 +68,28 @@ title: Memperbarui Milvus Standalone dengan Helm Chart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Update-the-Helm-repository" class="common-anchor-header">Langkah 1: Perbarui repositori Helm<button data-href="#Step-1-Update-the-Helm-repository" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Back-up-the-current-Helm-values" class="common-anchor-header">Langkah 1: Cadangkan nilai Helm saat ini<button data-href="#Step-1-Back-up-the-current-Helm-values" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Simpan nilai lengkap dari rilis saat ini sebelum mengubah penyebaran:</p>
+<pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
+  --namespace &lt;namespace&gt; \
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Step-2-Update-the-Helm-repository" class="common-anchor-header">Langkah 2: Perbarui repositori Helm<button data-href="#Step-2-Update-the-Helm-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +111,7 @@ helm repo update zilliztech
 <div class="alert note">
 Repositori Milvus Helm Charts di <code translate="no">https://milvus-io.github.io/milvus-helm/</code> telah diarsipkan. Gunakan repositori baru <code translate="no">https://zilliztech.github.io/milvus-helm/</code> untuk versi chart 4.0.31 dan yang lebih baru.
 </div>
-<h3 id="Step-2-Upgrade-Milvus" class="common-anchor-header">Langkah 2: Tingkatkan Milvus<button data-href="#Step-2-Upgrade-Milvus" class="anchor-icon" translate="no">
+<h3 id="Step-3-Upgrade-Milvus" class="common-anchor-header">Langkah 3: Tingkatkan Milvus<button data-href="#Step-3-Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,5 +164,5 @@ kubectl get pods --namespace &lt;namespace&gt; \
 <button class="copy-code-btn"></button></code></pre>
 <p>Pastikan semua beban kerja yang diperlukan sudah siap, Milvus menggunakan opsi ` <code translate="no">v3.0.5</code>`, dan koleksi yang ada tetap dapat diakses dan dicari. Selesaikan pemeriksaan ini sebelum mengaktifkan fitur apa pun yang spesifik untuk v3.0.5.</p>
 <div class="alert note">
-<p>Peningkatan ke Milvus 3.0 tidak mengaktifkan Storage V3. Setelah Anda memverifikasi peningkatan, tinjau <a href="/docs/id/storage-v3.md">Storage V3</a> sebelum mengaktifkan fitur yang bergantung padanya. Setelah Milvus menulis data Storage V3, penurunan versi ke versi Milvus yang lebih lama yang tidak dapat membaca Storage V3 tidak didukung.</p>
+<p>Peningkatan ke Milvus 3.0 tidak mengaktifkan Storage V3. Setelah Anda memverifikasi peningkatan, tinjau <a href="/docs/id/storage-v3.md">Storage V3</a> sebelum mengaktifkan fitur yang bergantung padanya. Setelah Milvus menulis data Storage V3, penurunan versi ke Milvus versi lama yang tidak dapat membaca Storage V3 tidak didukung.</p>
 </div>

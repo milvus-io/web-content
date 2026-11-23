@@ -78,12 +78,21 @@ title: Eseguire Milvus in Docker (Linux)
 <li>Per modificare la configurazione predefinita di Milvus, aggiungi le tue impostazioni al file <strong>user.yaml</strong> nella cartella corrente, quindi riavvia il servizio.</li>
 <li>Il volume di dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.</li>
 </ul>
-<p>Verifica l'immagine effettiva e lo stato di integrità:</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<p>Il comando ` <code translate="no">start</code> ` visualizza il messaggio ` <code translate="no">Wait for Milvus Starting...</code> ` e quindi esegue un controllo ogni secondo finché <code translate="no">docker ps</code> non segnala che il container è in stato sano. Questo controllo non ha limiti di tempo. Se il comando non restituisce alcun risultato, controllare i log del container da un altro terminale:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Attendere che venga visualizzato il messaggio " <code translate="no">healthy</code> " prima di seguire <a href="/docs/it/quickstart.md">la guida rapida</a>. Quando si utilizza questo server, collegare l'SDK a <code translate="no">http://localhost:19530</code>; un URI locale <code translate="no">.db</code> avvia invece Milvus Lite.</p>
-<p>È possibile accedere all’interfaccia utente web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ottenere ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/milvus-webui.md">all’interfaccia utente web di Milvus</a>.</p>
+<p>Lo script esegue i comandi ` <code translate="no">docker</code> ` con ` <code translate="no">sudo</code>`. Ogni ` <code translate="no">start</code> ` avvia innanzitutto un container a breve durata dall’immagine Milvus come ` <code translate="no">root</code>`, che modifica ricorsivamente il proprietario di <strong>`volumes/milvus`</strong> nell’utente ` <code translate="no">milvus</code> ` dell’immagine, a meno che un file marcatore ` <code translate="no">.milvus-volume-owner-*</code> ` in quella cartella non indichi che l’operazione sia già stata eseguita. Lo script avvia il container Milvus con ` <code translate="no">--security-opt seccomp:unconfined</code>`, in modo che il container venga eseguito senza il profilo seccomp predefinito di Docker.</p>
+<div class="alert warning">
+<blockquote>
+<p>Lo script espone le porte <strong>19530</strong>, <strong>9091</strong> e <strong>2379</strong> senza un indirizzo host, mentre il file ` <strong>embedEtcd.yaml</strong> ` configura etcd affinché ascolti su <code translate="no">http://0.0.0.0:2379</code>. Docker pubblica una porta senza indirizzo host su tutti gli indirizzi host, quindi anche altre macchine in grado di raggiungere questo host possono connettersi a Milvus e a etcd. Per limitare l’accesso a questo host, modificare le opzioni <code translate="no">-p</code> nel file <code translate="no">standalone_embed.sh</code> prima del primo <code translate="no">start</code>, ad esempio <code translate="no">-p 127.0.0.1:19530:19530</code>, e rimuovere <code translate="no">-p 2379:2379</code> se non ci si connette a etcd dall’esterno del container. Se esiste già un container <code translate="no">milvus-standalone</code>, <code translate="no">start</code> lo riavvia con le opzioni originali. Per richiedere credenziali per le connessioni Milvus, consultare <a href="/docs/it/authenticate.md">Autenticazione dell'accesso utente</a>.</p>
+</blockquote>
+</div>
+<p>Verifica l'immagine effettiva e lo stato di integrità:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>Attendere che <code translate="no">healthy</code> sia disponibile prima di seguire <a href="/docs/it/quickstart.md">la Guida rapida</a>. Quando si utilizza questo server, collegare l’SDK a <code translate="no">http://localhost:19530</code>; un URI locale <code translate="no">.db</code> avvia invece Milvus Lite.</p>
+<p>È possibile accedere all’interfaccia utente web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ulteriori informazioni sull’istanza di Milvus. Per i dettagli, consultare <a href="/docs/it/milvus-webui.md">Interfaccia utente web di Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornamento delle configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +108,7 @@ docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <strong>user.yaml</strong> presente nella cartella corrente. Ad esempio, per cambiare l'URI da <code translate="no">proxy.healthCheckTimeout</code> a <code translate="no">1000</code> ms, è possibile modificare il file come segue:</p>
+    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <strong>user.yaml</strong> presente nella cartella corrente. Ad esempio, per cambiare l'URI <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile modificare il file come segue:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -164,7 +173,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per impostazione predefinita, questa distribuzione utilizza <strong>Woodpecker</strong> (WAL su filesystem locale) come coda dei messaggi e un <strong>etcd incorporato</strong> per i metadati — non è necessario installare altro. Per utilizzare una coda dei messaggi diversa o collegare un sistema di archiviazione oggetti/metadati esterno, consultare:</p>
+    </button></h2><p>Per impostazione predefinita, questa distribuzione utilizza <strong>Woodpecker</strong> (WAL su filesystem locale) come coda dei messaggi e un <strong>etcd incorporato</strong> per i metadati: non è necessario installare altro. Per utilizzare una coda dei messaggi diversa o collegare un sistema di archiviazione oggetti/metadati esterno, consultare:</p>
 <ul>
 <li>Coda di messaggi: <a href="/docs/it/woodpecker.md">Woodpecker</a> (impostazione predefinita) · <a href="/docs/it/mq_pulsar.md">Pulsar</a> · <a href="/docs/it/mq_kafka.md">Kafka</a> · <a href="/docs/it/mq_rocksmq.md">RocksMQ</a></li>
 <li>Archiviazione a oggetti: <a href="/docs/it/deploy_s3.md">MinIO</a> (predefinito) · <a href="/docs/it/deploy_s3.md">AWS S3</a> · <a href="/docs/it/abs.md">Azure Blob</a> · <a href="/docs/it/gcs.md">GCP Cloud Storage</a> · <a href="/docs/it/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/it/deploy_s3.md">Tencent COS</a> · <a href="/docs/it/deploy_s3.md">Huawei OBS</a> · <a href="/docs/it/deploy_s3.md">Compatibile con S3</a></li>
@@ -194,21 +203,21 @@ EOF
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/manage-collections.md">Gestire le raccolte</a></li>
 <li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
 <li><a href="/docs/it/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p>Prima di cambiare la versione di Milvus, consulta le considerazioni relative all'aggiornamento riportate in questa pagina.</p></li>
-<li><p><a href="/docs/it/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
+<li><p>Prima di modificare la versione di Milvus, consultare le considerazioni relative all'aggiornamento riportate in questa pagina.</p></li>
+<li><p><a href="/docs/it/scaleout.md">Scalare un cluster Milvus</a> su Kubernetes. Tale procedura utilizza Helm e non si applica a questa distribuzione Docker.</p></li>
 <li><p>Distribuisci il tuo cluster Milvus su cloud:</p>
 <ul>
 <li><a href="/docs/it/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/it/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/it/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Scopri <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
+<li><p>Scopri <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per il monitoraggio e la gestione di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open source per il backup dei dati di Milvus.</p></li>
 <li><p>Scopri <a href="/docs/it/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Scopri <a href="https://github.com/zilliztech/attu">Attu</a>, uno strumento GUI open source per una gestione intuitiva di Milvus.</p></li>

@@ -37,9 +37,9 @@ title: تثبيت حزمة SDK لـ Milvus بلغة Python
         ></path>
       </svg>
     </button></h2><ul>
-<li>يتطلب PyMilvus 3.0.2 استخدام Python 3.9 أو إصدار أحدث للاتصال بخادم Milvus عن بُعد.</li>
+<li>يتطلب PyMilvus 3.0.3 استخدام Python 3.9 أو إصدار أحدث للاتصال بخادم Milvus عن بُعد.</li>
 <li>تتطلب أمثلة Milvus Lite 3.2.2 المحلية Python 3.10 أو إصدارًا أحدث ومنصة مدعومة. راجع <a href="/docs/ar/milvus_lite.md">تشغيل Milvus Lite محليًا</a>.</li>
-<li>قم بتثبيت التبعيات عبر <code translate="no">pip</code>. يتطلب PyMilvus 3.0.2 <code translate="no">protobuf&gt;=5.27.2</code> ؛ لا تقم بتثبيت <code translate="no">protobuf==3.20.0</code> بشكل منفصل. لا تحتاج إلى <code translate="no">grpcio-tools</code> لاستخدام SDK.</li>
+<li>قم بتثبيت التبعيات عبر <code translate="no">pip</code>. يتطلب PyMilvus 3.0.3 <code translate="no">protobuf&gt;=5.27.2</code> ؛ لا تقم بتثبيت <code translate="no">protobuf==3.20.0</code> بشكل منفصل. لا تحتاج إلى <code translate="no">grpcio-tools</code> لاستخدام SDK.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">تثبيت PyMilvus عبر pip<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,16 +60,16 @@ title: تثبيت حزمة SDK لـ Milvus بلغة Python
 <div class="alert note">
 يُنصح بتثبيت إصدار PyMilvus الذي يتوافق مع إصدار خادم Milvus الذي قمت بتثبيته. لمزيد من المعلومات، راجع <a href="/docs/ar/release_notes.md">ملاحظات الإصدار</a>.
 </div>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>يؤدي هذا إلى تثبيت العميل لخادم Milvus عن بُعد. ولا يؤدي إلى تثبيت Milvus Lite أو نموذج التضمين.</p>
 <p>بالنسبة للقاعدة البيانات المحلية المستخدمة في <a href="/docs/ar/quickstart.md">«البدء السريع</a>»، قم بتثبيت المكون الإضافي « <code translate="no">milvus-lite</code> » وحزمة Lite المطابقة:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>بالنسبة لمساعدات التضمين، قم بتثبيت المكون الإضافي <code translate="no">model</code> بشكل منفصل:</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في نظام Windows، يتخطى pip المكون الإضافي <code translate="no">milvus-lite</code> الخاص بـ PyMilvus 3.0.2 بسبب علامة النظام الأساسي الخاصة به. يحدد الأمر أعلاه اسم <code translate="no">milvus-lite</code> بشكل صريح، لذا يتم تثبيته على نظام Windows طالما توجد ملفات wheels لـ <code translate="no">faiss-cpu</code> و <code translate="no">pyarrow</code> لإصدار Python الخاص بك.</p>
+<p>في نظام Windows، يتخطى pip المكون الإضافي <code translate="no">milvus-lite</code> الخاص بـ PyMilvus 3.0.3 بسبب علامة النظام الأساسي الخاصة به. يحدد الأمر أعلاه اسم <code translate="no">milvus-lite</code> بشكل صريح، لذا يتم تثبيته على نظام Windows طالما توجد ملفات wheels لـ <code translate="no">faiss-cpu</code> و <code translate="no">pyarrow</code> لإصدار Python الخاص بك.</p>
 <h2 id="Verify-installation" class="common-anchor-header">التحقق من التثبيت<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

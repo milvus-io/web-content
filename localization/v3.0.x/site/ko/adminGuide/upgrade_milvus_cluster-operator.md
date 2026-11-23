@@ -89,7 +89,7 @@ title: Milvus Operator를 사용하여 Milvus 클러스터 업그레이드하기
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>기존 배포의 소스 매니페스트를 업그레이드 매니페스트로 사용하십시오. 서버에서 관리하는 메타데이터 및 상태 필드를 먼저 제거하지 않고는 내보낸 백업 파일을 직접 적용하지 마십시오.</p>
+<p>기존 배포의 소스 매니페스트(이 가이드에서는<code translate="no">milvus.yaml</code> )를 업그레이드 매니페스트로 사용하십시오. 서버에서 관리하는 메타데이터 및 상태 필드를 먼저 제거하지 않고는 내보낸 백업 파일을 직접 적용하지 마십시오.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">2단계: Milvus Operator 버전 확인<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +110,7 @@ title: Milvus Operator를 사용하여 Milvus 클러스터 업그레이드하기
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.namespace}{&quot;\t&quot;}{.metadata.name}{&quot;\t&quot;}{range .spec.template.spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span> \
   | grep milvus-operator
 <button class="copy-code-btn"></button></code></pre>
-<p>검증된 업그레이드에서는 Milvus Operator 버전을 1.3.0으로 유지했습니다. 지원 정책에 따라 별도의 Operator 업그레이드가 필요한 경우가 아니라면, 현재 Milvus 2.6.x 배포를 관리하고 있는 Operator 버전을 그대로 유지하십시오. 최신 버전의 Operator를 테스트된 버전으로 다운그레이드하지 마십시오. Operator 버전을 변경해야 하는 경우, 기존 설치와 동일한 Helm 또는 <code translate="no">kubectl</code> 설치 방법과 동일한 릴리스 이름 및 네임스페이스를 사용한 다음, Milvus CR을 업데이트하기 전에 Operator 변경 사항을 검증하십시오.</p>
+<p>검증된 업그레이드에서는 Milvus Operator 버전을 1.3.0으로 유지했습니다. 지원 정책에 따라 별도의 Operator 업그레이드가 필요한 경우가 아니라면, 현재 Milvus 2.6.x 배포를 관리하고 있는 Operator 버전을 그대로 유지하십시오. 최신 버전의 Operator를 테스트된 버전으로 다운그레이드하지 마십시오. Operator 버전을 변경해야 하는 경우, 기존 설치와 동일한 Helm 또는 <code translate="no">kubectl</code> 설치 방법을 사용하고 동일한 릴리스 이름 및 네임스페이스를 지정한 다음, Milvus CR을 업데이트하기 전에 Operator 변경 사항을 검증하십시오.</p>
 <h3 id="Step-3-Update-the-Milvus-image" class="common-anchor-header">3단계: Milvus 이미지 업데이트<button data-href="#Step-3-Update-the-Milvus-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +126,7 @@ title: Milvus Operator를 사용하여 Milvus 클러스터 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>완성된 Milvus CR 매니페스트에서 <code translate="no">spec.components.image</code> 을 대상 버전으로 변경하십시오. 현재 모드, 컴포넌트 토폴로지, 메시지 큐, etcd, 스토리지 및 기타 종속성 설정은 그대로 유지하십시오. 다음 발췌문은 확인해야 할 필드를 보여줍니다. 전체 CR을 이 발췌문으로 대체하지 마십시오.</p>
+    </button></h3><p>완성된 Milvus CR 매니페스트에서 ` <code translate="no">spec.components.image</code> `을 대상 버전으로 변경하십시오. 현재 모드, 컴포넌트 토폴로지, 메시지 큐, etcd, 스토리지 및 기타 종속성 설정은 그대로 유지하십시오. 다음 발췌문은 확인해야 할 필드를 보여줍니다. 전체 CR을 이 발췌문으로 대체하지 마십시오.</p>
 <p>대상 CR을 적용하기 전에 <code translate="no">indexNode.replicas</code> 가 <code translate="no">0</code> 인지 확인하십시오. 검증된 Milvus 2.6.20 구성에서는 이미 이 설정이 사용되었습니다. 대상 CR에서 명시적인 0-replica 설정을 유지하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -168,3 +168,6 @@ kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus CR이 <code translate="no">Healthy</code> 를 보고하는지, 모든 Milvus 구성 요소가 <code translate="no">milvusdb/milvus:v3.0.5</code> 를 사용하는지, 실행 중인 IndexNode Pod가 없는지, 기존 컬렉션에 대한 쿼리 및 검색이 가능한지 확인하십시오. v3.0.5 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
+<div class="alert note">
+<p>Milvus 3.0으로 업그레이드한다고 해서 Storage V3가 활성화되는 것은 아닙니다. 업그레이드를 확인한 후, <a href="/docs/ko/storage-v3.md">Storage</a> V3에 의존하는 기능을 활성화하기 전에 <a href="/docs/ko/storage-v3.md">Storage V3에 대해</a> 검토하십시오. Milvus가 Storage V3 데이터를 한 번 기록하면, Storage V3를 읽을 수 없는 이전 Milvus 버전으로 다운그레이드하는 것은 지원되지 않습니다.</p>
+</div>

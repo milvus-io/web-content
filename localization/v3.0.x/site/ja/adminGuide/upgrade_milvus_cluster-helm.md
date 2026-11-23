@@ -87,7 +87,8 @@ title: Helmチャートを使用したMilvusクラスタのアップグレード
     </button></h3><p>現在のリリースの全値を保存し、実行中のPodを確認します:</p>
 <pre><code translate="no" class="language-bash">helm get values &lt;release-name&gt; \
   --namespace &lt;namespace&gt; \
-  --all &gt; milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml &gt; milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace &lt;namespace&gt;
 <button class="copy-code-btn"></button></code></pre>
@@ -164,7 +165,7 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>必要なすべてのワークロードが利用可能であり、すべての Milvus コンポーネントが `<code translate="no">v3.0.5</code>` を使用しており、既存のコレクションに対してクエリや検索が引き続き可能であることを確認してください。v3.0.5 固有の機能を有効にする前に、これらの確認を完了させてください。</p>
+<p>必要なすべてのワークロードが利用可能であり、すべての Milvus コンポーネントが `<code translate="no">v3.0.5</code>` を使用しており、既存のコレクションに対してクエリや検索が可能であることを確認してください。v3.0.5 固有の機能を有効にする前に、これらの確認を完了してください。</p>
 <div class="alert note">
-<p>Milvus 3.0 へのアップグレードを行っても、Storage V3 は有効になりません。アップグレードを確認した後、<a href="/docs/ja/storage-v3.md">Storage V3</a>に依存する機能を有効にする前に、<a href="/docs/ja/storage-v3.md">Storage V3</a>について確認してください。Milvus が Storage V3 データを書き込んだ後は、Storage V3 を読み取れない古いバージョンの Milvus へのダウングレードはサポートされません。</p>
+<p>Milvus 3.0 へのアップグレードでは、Storage V3 は有効になりません。アップグレードを確認した後、<a href="/docs/ja/storage-v3.md">Storage V3</a>に依存する機能を有効にする前に、<a href="/docs/ja/storage-v3.md">Storage V3</a>について確認してください。Milvus が Storage V3 データを書き込んだ後は、Storage V3 を読み取れない古いバージョンの Milvus へのダウングレードはサポートされません。</p>
 </div>

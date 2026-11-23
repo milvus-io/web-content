@@ -37,9 +37,9 @@ title: 安裝 Milvus Python SDK
         ></path>
       </svg>
     </button></h2><ul>
-<li>PyMilvus 3.0.2 需使用 Python 3.9 或更新版本，才能連線至遠端 Milvus 伺服器。</li>
+<li>若要連線至遠端 Milvus 伺服器，PyMilvus 3.0.3 需使用 Python 3.9 或更新版本。</li>
 <li>本地的 Milvus Lite 3.2.2 範例程式需使用 Python 3.10 或更高版本，並需在受支援的平台上<a href="/docs/zh-hant/milvus_lite.md">執行</a>。請參閱《<a href="/docs/zh-hant/milvus_lite.md">在本地執行 Milvus Lite</a>》。</li>
-<li>請透過 `<code translate="no">pip</code>` 安裝依賴項。PyMilvus 3.0.2 需要 `<code translate="no">protobuf&gt;=5.27.2</code>`；請勿另行指定 `<code translate="no">protobuf==3.20.0</code>`。使用此 SDK 時無需 `<code translate="no">grpcio-tools</code> `。</li>
+<li>請透過 `<code translate="no">pip</code>` 安裝依賴項。PyMilvus 3.0.3 需要 `<code translate="no">protobuf&gt;=5.27.2</code>`；請勿另行指定 `<code translate="no">protobuf==3.20.0</code>`。使用此 SDK 時無需安裝 `<code translate="no">grpcio-tools</code> `。</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">透過 pip 安裝 PyMilvus<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,16 +60,16 @@ title: 安裝 Milvus Python SDK
 <div class="alert note">
 建議安裝與您已安裝的 Milvus 伺服器版本相符的 PyMilvus 版本。如需更多資訊，請參閱《<a href="/docs/zh-hant/release_notes.md">發行說明》</a>。
 </div>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>此安裝程序會安裝用於連線至遠端 Milvus 伺服器的客戶端，但不會安裝 Milvus Lite 或嵌入式模型。</p>
 <p>若要使用<a href="/docs/zh-hant/quickstart.md">「快速入門」</a>中的本機資料庫，請安裝<code translate="no">milvus-lite</code> 附加元件及對應的 Lite 套件：</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>若需嵌入式輔助工具，請安裝獨立的<code translate="no">model</code> 附加套件：</p>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Windows 系統上，由於平台標記的關係，pip 會跳過 PyMilvus 3.0.2 的「<code translate="no">milvus-lite</code> 」附加元件。上述指令明確指定了 `<code translate="no">milvus-lite</code> `，因此只要您的 Python 版本中存在<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> 的 wheels 檔案，即可在 Windows 上完成安裝。</p>
+<p>在 Windows 系統上，由於平台標記的關係，pip 會跳過 PyMilvus 3.0.3 的「<code translate="no">milvus-lite</code> 」附加元件。上述指令明確指定了 `<code translate="no">milvus-lite</code> `，因此只要您的 Python 版本存在 `<code translate="no">faiss-cpu</code> ` 和 `<code translate="no">pyarrow</code> ` 的 wheels 檔案，即可在 Windows 上完成安裝。</p>
 <h2 id="Verify-installation" class="common-anchor-header">驗證安裝<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

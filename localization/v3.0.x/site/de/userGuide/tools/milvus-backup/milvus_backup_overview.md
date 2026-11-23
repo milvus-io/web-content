@@ -66,7 +66,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li>Verwenden Sie eine Backup-Binärdatei und Konfigurationsbeispiele aus derselben Version. Das <a href="/docs/de/milvus_backup_cli.md#Obtain-Milvus-Backup">Handbuch für 0.5.x</a> bezieht sich auf Version 0.5.16; das <a href="/docs/de/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">aktuelle Handbuch</a> bezieht sich auf Version 0.6.0.</li>
+<li>Verwenden Sie eine Backup-Binärdatei und Konfigurationsbeispiele aus derselben Version. Das <a href="/docs/de/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x-Handbuch</a> bezieht sich auf Version 0.5.16; das <a href="/docs/de/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">aktuelle Handbuch</a> bezieht sich auf Version 0.6.0.</li>
 <li>Stellen Sie Netzwerkzugriff auf Milvus, dessen Speicher und das Backup-Ziel bereit. Für Snapshot-Vorgänge muss der Milvus-Server zudem den Backup-Speicher erreichen können.</li>
 <li>Überprüfen Sie die Serverkompatibilität unten. Go ist nur erforderlich, wenn Sie aus dem Quellcode kompilieren: Version 1.25 oder höher für Backup 0.5.16 und 1.26 oder höher für 0.6.0.</li>
 </ul>
@@ -103,7 +103,7 @@ title: Milvus Backup
 </tbody>
 </table>
 <p>Ein Sicherungsverzeichnis enthält Metadaten und die für das jeweilige Format erforderlichen Dateien. Behalten Sie das gesamte Verzeichnis bei, wenn Sie es archivieren oder verschieben. Gehen Sie nicht davon aus, dass eine Snapshot-Sicherung die Verzeichnisstruktur des Binlogs verwendet.</p>
-<p>In Version 0.6.0 konfigurieren die Voreinstellungen unter „ <code translate="no">create --for</code> “ zweckgebundene Optionen: „ <code translate="no">clone</code> “ behält das gewählte Format bei, während „ <code translate="no">archive</code> “ und „ <code translate="no">secondary</code> “ das „binlog“-Verzeichnis erfordern. Ein Sekundärserver erfordert zudem eine konfigurierte Replikationstopologie; eine gewöhnliche Migration zwischen Instanzen erfordert keinen Sekundärserver. Siehe <a href="/docs/de/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">„Wählen Sie ein Sicherungsformat oder einen Zweck</a>“.</p>
+<p>In Version 0.6.0 konfigurieren die Voreinstellungen unter „ <code translate="no">create --for</code> “ zweckgebundene Optionen: „ <code translate="no">clone</code> “ behält das gewählte Format bei, während „ <code translate="no">archive</code> “ und „ <code translate="no">secondary</code> “ ein Binlog erfordern. Ein Sekundärserver erfordert zudem eine konfigurierte Replikationstopologie; eine gewöhnliche Migration zwischen Instanzen erfordert keinen Sekundärserver. Siehe <a href="/docs/de/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">„Wählen Sie ein Sicherungsformat oder einen Zweck</a>“.</p>
 <p>Backup 0.6.0 überspringt externe Sammlungen während der Sicherung. Eine erfolgreich abgeschlossene Aufgabe bedeutet nicht, dass Daten aus externen Sammlungen einbezogen wurden.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Kompatibilitätsmatrix<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,7 +121,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><p><strong>Backup 0.6.0 erfordert kein Upgrade jeder Milvus-Installation auf 3.0.</strong> Es unterstützt Binlog-Workflows auf unterstützten Milvus 2.x-Versionen. Die offizielle Unterstützung für Backup und Wiederherstellung der Milvus 3.0-Reihe beginnt mit <strong>Milvus 3.0.1</strong>; das Snapshot-Beispiel verwendet diese Reihe.</p>
-<p>Die <a href="/docs/de/milvus_backup_upgrade.md">Upgrade-Anleitung</a> wurde mit Backup 0.5.16 und 0.6.0 auf Milvus 2.6.11 validiert, einschließlich der Wiederherstellung eines Backups aus Version 0.5.16 mit Version 0.6.0. Diese getestete Kombination erweitert die untenstehende Matrix nicht.</p>
+<p>Die <a href="/docs/de/milvus_backup_upgrade.md">Upgrade-Anleitung</a> wurde mit Backup 0.5.16 und 0.6.0 auf Milvus 2.6.11 validiert, einschließlich der Wiederherstellung eines Backups aus 0.5.16 mit 0.6.0. Diese getestete Kombination erweitert die untenstehende Matrix nicht.</p>
 <p>Die Quell- und Zielversionen von Milvus müssen ein unterstütztes Paar bilden. Eine neuere Zielversion allein gewährleistet noch keine Kompatibilität. Die folgende Kompatibilitätsmatrix für ältere Versionen deckt Milvus 2.x ab, wie seit Milvus Backup 0.5.7 dokumentiert; sie gewährleistet keine Kompatibilität bei der Migration von 2.x auf 3.0.</p>
 <table>
 <thead>
@@ -152,5 +152,5 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0">v0.6.0</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.2">v0.6.2</a></li>
 </ul>

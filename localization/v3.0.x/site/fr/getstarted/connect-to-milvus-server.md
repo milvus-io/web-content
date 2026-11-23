@@ -2,8 +2,8 @@
 id: connect-to-milvus-server.md
 title: Connexion au serveur Milvus
 summary: >-
-  Cette rubrique décrit comment établir une connexion client à un serveur Milvus
-  et configurer les options de connexion courantes.
+  Cette rubrique explique comment établir une connexion client à un serveur
+  Milvus et configurer les options de connexion courantes.
 ---
 <h1 id="Connect-to-Milvus-Server" class="common-anchor-header">Connexion au serveur Milvus<button data-href="#Connect-to-Milvus-Server" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Cette rubrique décrit comment établir une connexion client à un serveur Milvus et configurer les options de connexion courantes.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,11 +37,11 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Le SDK de votre langue est installé. Pour plus de détails, reportez-vous à <a href="/docs/fr/install-pymilvus.md">Python SDK</a>, <a href="/docs/fr/install-java.md">Java SDK</a>, <a href="/docs/fr/install-go.md">Go SDK</a> ou <a href="/docs/fr/install-node.md">Nodejs SDK</a>.</p></li>
-<li><p>Une adresse de serveur Milvus (pour le local, par défaut : <code translate="no">http://localhost:19530</code>, port proxy <strong>19530</strong>).</p></li>
-<li><p>Si <a href="/docs/fr/authenticate.md">l'authentification est activée</a>, fournir un <strong>jeton</strong> ou un <strong>nom d'utilisateur + mot de passe</strong>. Un jeton peut être <code translate="no">username:password</code> (par exemple, <code translate="no">root:Milvus</code>). Voir <a href="/docs/fr/authenticate.md">Authentifier l'accès de l'utilisateur</a> et <a href="/docs/fr/users_and_roles.md">Créer des utilisateurs et des rôles</a> pour plus de détails.</p></li>
+<li><p>Le SDK correspondant à votre langage doit être installé. Pour plus de détails, reportez-vous aux sections <a href="/docs/fr/install-pymilvus.md">SDK Python</a>, <a href="/docs/fr/install-java.md">SDK Java</a>, <a href="/docs/fr/install-go.md">SDK Go</a> ou <a href="/docs/fr/install-node.md">SDK Node.js</a>.</p></li>
+<li><p>Une adresse de serveur Milvus (par défaut en local : <code translate="no">http://localhost:19530</code>, port proxy <strong>19530</strong>).</p></li>
+<li><p>Si <a href="/docs/fr/authenticate.md">l'authentification est activée</a>, fournissez soit un <strong>jeton</strong>, soit un <strong>nom d'utilisateur et un mot de passe</strong>. Un jeton peut être <code translate="no">username:password</code> (par exemple, <code translate="no">root:Milvus</code>). Pour plus de détails, consultez les sections <a href="/docs/fr/authenticate.md">Authentification de l'accès utilisateur</a> et <a href="/docs/fr/users_and_roles.md">Création d'utilisateurs et de rôles</a>.</p></li>
 </ul>
-<h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Connexion par URI (authentification désactivée)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
+<h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Connexion via une URI (authentification désactivée)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,9 +56,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utiliser l'adresse du serveur Milvus (par exemple <code translate="no">http://localhost:19530</code>) pour établir une connexion.</p>
+    </button></h2><p>Utilisez l’adresse du serveur Milvus (par exemple <code translate="no">http://localhost:19530</code>) pour établir une connexion.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -77,7 +82,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
@@ -93,7 +98,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
     -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">Se connecter avec des informations d'identification (authentification activée)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
+<h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">Connexion avec des identifiants (authentification activée)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,9 +113,14 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Fournir un <strong>jeton</strong> sous la forme <code translate="no">&quot;username:password&quot;</code> ou des adresses distinctes <code translate="no">user</code> et <code translate="no">password</code>. L'administrateur intégré par défaut est <code translate="no">root:Milvus</code> (à modifier pour la production).</p>
+    </button></h2><p>Fournissez soit un <strong>jeton</strong> sous la forme <code translate="no">&quot;username:password&quot;</code>, soit les adresses distinctes <code translate="no">user</code> et <code translate="no">password</code>. L'identifiant administrateur intégré par défaut est <code translate="no">root:Milvus</code> (modifiez-le pour l'environnement de production).</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Token form</span>
@@ -144,7 +154,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
    <span class="hljs-attr">password</span>: <span class="hljs-string">&#x27;Milvus&#x27;</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
@@ -162,9 +172,9 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
     -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Le format du jeton est <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. La documentation mentionne explicitement <code translate="no">root:Milvus</code> comme identifiant par défaut, et le guide <a href="/docs/fr/users_and_roles.md">Créer des utilisateurs et des rôles</a> couvre la gestion des utilisateurs.</p>
+<p>Le format du jeton est <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. La documentation indique explicitement <code translate="no">root:Milvus</code> comme identifiant par défaut, et le guide « <a href="/docs/fr/users_and_roles.md">Créer des utilisateurs et des rôles</a> » explique comment gérer les utilisateurs.</p>
 </div>
-<h2 id="Configure-a-timeout" class="common-anchor-header">Configurer un délai d'attente<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
+<h2 id="Configure-a-timeout" class="common-anchor-header">Configurer un délai d’expiration<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,12 +189,17 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Définir un délai d'attente par défaut pour la connexion du client :</p>
+    </button></h2><p>Définissez un délai d’expiration par défaut pour la connexion client :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, timeout=<span class="hljs-number">1000</span>) <span class="hljs-comment"># If not set, the timeout defaults to 10s</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, timeout=<span class="hljs-number">1</span>) <span class="hljs-comment"># Unit: seconds. If not set, the client waits up to 10 seconds to connect.</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -206,7 +221,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 });
 <span class="hljs-comment">// await client.listCollections({ timeout: 2000})</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 <span class="hljs-keyword">defer</span> cancel()
@@ -229,8 +244,8 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Pour les SDK énumérés ci-dessus, ce délai est utilisé uniquement lors de l'établissement des connexions et ne sert pas de délai par défaut pour d'autres opérations de l'API.</p></li>
-<li><p>Pour l'API RESTful, <code translate="no">Request-Timeout</code> est un délai par demande en secondes (contrairement à <code translate="no">rpcDeadlineMs</code> de Java et <code translate="no">timeout</code> de Node.js, qui sont en millisecondes), donc incluez-le dans chaque appel qui nécessite un délai.</p></li>
+<li><p>Pour les SDK répertoriés ci-dessus, ce délai d’expiration n’est utilisé que lors de l’établissement des connexions et ne sert pas de délai d’expiration par défaut pour les autres opérations de l’API.</p></li>
+<li><p>Pour l’API RESTful, ` <code translate="no">Request-Timeout</code> ` correspond à un délai par requête exprimé en secondes (contrairement à ` <code translate="no">rpcDeadlineMs</code> ` en Java et à ` <code translate="no">timeout</code>` en Node.js, qui sont exprimés en millisecondes) ; veillez donc à l’inclure dans chaque appel nécessitant un délai.</p></li>
 </ul>
 </div>
 <h2 id="Connect-to-a-specific-database" class="common-anchor-header">Se connecter à une base de données spécifique<button data-href="#Connect-to-a-specific-database" class="anchor-icon" translate="no">
@@ -248,9 +263,14 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Choisissez la base de données cible pendant la construction à l'aide de <code translate="no">db_name</code>. Vous pouvez également changer plus tard à l'aide de <code translate="no">using_database()</code>.</p>
+    </button></h2><p>Choisissez la base de données cible lors de la construction à l’aide de ` <code translate="no">db_name</code>`. Vous pouvez également changer de base de données ultérieurement à l’aide de ` <code translate="no">using_database()</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Set the database when creating the client</span>
@@ -287,7 +307,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 <span class="hljs-comment">//   db_name: &#x27;reports&#x27;,</span>
 <span class="hljs-comment">//});</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
@@ -312,7 +332,7 @@ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Voir le guide <a href="/docs/fr/manage_databases.md">Base de données</a> pour la création, l'énumération et la description des bases de données, ainsi que pour les tâches plus générales de gestion des bases de données.</p>
+<p>Consultez le guide <a href="/docs/fr/manage_databases.md">des bases de données</a> pour créer, répertorier et décrire des bases de données, ainsi que pour effectuer des tâches plus générales de gestion des bases de données.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
