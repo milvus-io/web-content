@@ -217,33 +217,7 @@ await milvusClient.createCollection({
 
 - **functions** ([FunctionObject](FunctionObject.md)[])
 
-    Converts data into vector embeddings. This function will be added to the schema of a collection. Each entry is a `FunctionObject` with the following members.
-
-    - **name** (*string*)
-
-        The name of the function. This identifier is used to reference the function within queries and collections.
-
-    - **description** (*string*)
-
-        A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
-
-    - **type** (*[FunctionType](FunctionType.md)*)
-
-        The type of function for processing raw data. Possible values:
-
-        - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
-
-    - **input_field_names** (*string[]*)
-
-        The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
-
-    - **output_field_names** (*string[]*)
-
-        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
-
-    - **params** (*Record<string, any>*)
-
-        The parameters of the function.
+    Converts data into vector embeddings. This function will be added to the schema of a collection. For the member list, see [FunctionObject](FunctionObject.md).
 
 - **num_partitions** (*number)* -
 
@@ -431,33 +405,7 @@ await milvusClient.createCollection({
 
 - **functions** ([FunctionObject](FunctionObject.md)[])
 
-    Converts data into vector embeddings. This function will be added to the schema of a collection. Each entry is a `FunctionObject` with the following members.
-
-    - **name** (*string*)
-
-        The name of the function. This identifier is used to reference the function within queries and collections.
-
-    - **description** (*string*)
-
-        A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
-
-    - **type** (*[FunctionType](FunctionType.md)*)
-
-        The type of function for processing raw data. Possible values:
-
-        - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
-
-    - **input_field_names** (*string[]*)
-
-        The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
-
-    - **output_field_names** (*string[]*)
-
-        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
-
-    - **params** (*Record<string, any>*)
-
-        The parameters of the function.
+    Converts data into vector embeddings. This function will be added to the schema of a collection. For the member list, see [FunctionObject](FunctionObject.md).
 
 - **num_partitions** (*number)* -
 

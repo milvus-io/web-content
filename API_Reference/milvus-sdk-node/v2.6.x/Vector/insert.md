@@ -153,15 +153,7 @@ The hybrid timestamp at which the write became visible. Use this value for time-
 
 - **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
 
-The primary keys assigned to the inserted rows. For autoID collections, Milvus generates these values; otherwise, they echo the input keys. The following members belong to `IDs`.
-
-    - **int_id** (*{ data: number[] }*) -
-
-        Set when the primary key is an integer field.
-
-    - **str_id** (*{ data: string[] }*) -
-
-        Set when the primary key is a VARCHAR field.
+The primary keys assigned to the inserted rows. For autoID collections, Milvus generates these values; otherwise, they echo the input keys. For the member list, see [StringArrayId](StringArrayId.md) and [NumberArrayId](NumberArrayId.md).
 
 - **status** (*ResStatus*)
 
