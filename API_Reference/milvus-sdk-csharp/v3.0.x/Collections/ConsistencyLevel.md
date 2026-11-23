@@ -7,6 +7,7 @@ public enum ConsistencyLevel
 {
     Strong = 0,
     Session = 1,
+    Bounded = 2,
     BoundedStaleness = 2,
     Eventually = 3,
     Customized = 4
@@ -23,9 +24,13 @@ public enum ConsistencyLevel
 
     Ensures that all data writes can be immediately perceived in reads during the same session.
 
-- **BoundedStaleness** (2)
+- **Bounded** (2)
 
     Allows data inconsistency during a certain period of time, after which data is generally globally consistent.
+
+- **BoundedStaleness** (2)
+
+    The previous name of `Bounded`. Deprecated: renamed to `Bounded`, sharing the same numeric value (2); kept for source compatibility.
 
 - **Eventually** (3)
 
@@ -33,7 +38,7 @@ public enum ConsistencyLevel
 
 - **Customized** (4)
 
-    A customized consistency level with a guarantee timestamp supplied by the caller. Deprecated: the Java and C++ V2 SDKs no longer expose a Customized level.
+    A customized consistency level with a guarantee timestamp supplied by the caller. Deprecated: prefer `Strong`, `Session`, `Bounded` or `Eventually`.
 
 ## Example
 

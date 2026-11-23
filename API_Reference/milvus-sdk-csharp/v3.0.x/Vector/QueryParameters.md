@@ -16,6 +16,8 @@ public sealed class QueryParameters
     public string? Timezone { get; set; }
     public IDictionary<string, object> FilterTemplates { get; }
     public IReadOnlyList<object>? Ids { get; set; }
+    public IList<OrderByField> OrderByFields { get; }
+    public IList<string> GroupByFields { get; }
     public IDictionary<string, string> ExtraParameters { get; }
 }
 ```
@@ -66,6 +68,14 @@ public sealed class QueryParameters
 
     The primary key values identifying the rows to return. Mutually exclusive with the query's expression; when set, an expression is generated from the collection's primary key field.
 
+- `OrderByFields` (*IList\<OrderByField\>*) -
+
+    The ordered list of fields to sort the query results by, carried on the wire `order_by_fields` key. Entries are added via the collection-initializer syntax `OrderByFields = { ... }`. See [OrderByField](OrderByField.md).
+
+- `GroupByFields` (*IList\<string\>*) -
+
+    The fields to group the query results by, carried on the wire `group_by_fields` key (a comma-separated list of field names). Entries are added via the collection-initializer syntax `GroupByFields = { ... }`.
+
 - `ExtraParameters` (*IDictionary\<string, string\>*) -
 
     Additional query parameters passed through to the server verbatim, mirroring the Java SDK's `QueryReq.queryParams` map. Entries are added via the collection-initializer syntax `ExtraParameters = { ... }`.
@@ -93,7 +103,7 @@ QueryResp results = await client.QueryAsync(new QueryReq
     {
         Limit = 10,
         OutputFields = { "title", "pages" },
-        ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
+        ConsistencyLevel = ConsistencyLevel.Bounded,
         FilterTemplates = { ["minPages"] = 100 }
     }
 });

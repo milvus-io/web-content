@@ -66,6 +66,12 @@ MutationResp result = await client.UpsertAsync(request);
 
         - `ArrayRemove` (2) - Remove the upserted elements from the stored array field.
 
+        - `PathReplace` (3) - Replace an existing value selected by `Path`. The supported paths are relative to the field name and use either `[index]` (replace one complete struct element) or `[index][child]` (replace one child of that element) syntax.
+
+    - `Path` (*string?*) -
+
+        The path for a `PathReplace` operation on a struct field. The path is relative to the parent field and uses `[index]` to replace one complete struct element or `[index][child]` to replace one child of that element. Required for `PathReplace`.
+
 - `RlsPrincipal` (*string?*) -
 
     The row-level security (RLS) principal for the operation. When set, Milvus applies the row policies of the collection to this operation.

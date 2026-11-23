@@ -24,6 +24,7 @@ public sealed class FieldSchema
     public int? MaxCapacity { get; set; }
     public DataType? ElementDataType { get; set; }
     public bool Nullable { get; set; }
+    public bool ElementNullable { get; set; }
     public object? DefaultValue { get; set; }
     public bool EnableAnalyzer { get; set; }
     public IReadOnlyDictionary<string, object>? AnalyzerParams { get; set; }
@@ -32,6 +33,7 @@ public sealed class FieldSchema
     public bool IsFunctionOutput { get; internal set; }
     public bool IsClusteringKey { get; set; }
     public bool IsDynamic { get; internal set; }
+    public string? ExternalField { get; set; }
     public long FieldId { get; internal set; }
     public IReadOnlyDictionary<string, string>? RawTypeParams { get; internal set; }
     public IDictionary<string, string> TypeParams { get; }
@@ -82,7 +84,11 @@ public sealed class FieldSchema
 
 - `Nullable` (*bool*) -
 
-    Whether the field is nullable.
+    Whether the field is nullable. For a struct field, element-level nullability of the inner arrays is controlled by `ElementNullable`.
+
+- `ElementNullable` (*bool*) -
+
+    Whether a struct's `Array` sub-field permits null elements inside each inner array. Only meaningful for a nested Array sub-field of a `StructFieldSchema`; ignored elsewhere. Maps to the wire `element_nullable` of the recursive `type_schema` leaf.
 
 - `DefaultValue` (*object?*) -
 
@@ -115,6 +121,10 @@ public sealed class FieldSchema
 - `IsDynamic` (*bool*) -
 
     Whether this field is the dynamic (`$meta`) field. Only populated when the schema is read back via `DescribeCollection`.
+
+- `ExternalField` (*string?*) -
+
+    The external field name mapping used by external (federated) collections, carried on the wire as the proto `schema.FieldSchema.external_field`. Also populated when the schema is read back via `DescribeCollection`.
 
 - `FieldId` (*long*) -
 

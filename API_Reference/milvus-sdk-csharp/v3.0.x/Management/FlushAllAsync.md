@@ -25,7 +25,7 @@ FlushAllResp result = await client.FlushAllAsync(request);
 
 - `WaitFlushedMs` (*int*) -
 
-    When greater than zero, `FlushAllAsync` waits for the flush-all operation to complete by polling `GetFlushAllStateAsync` for up to this many milliseconds, throwing on timeout. When zero (default), the RPC returns immediately.
+    The number of milliseconds to wait (polling `GetFlushAllStateAsync`) for the flush-all operation to complete. Zero (default) waits until the flush-all completes with no timeout; a positive value caps the wait and throws on timeout.
 
 **RETURN TYPE:**
 

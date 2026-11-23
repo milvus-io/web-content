@@ -38,6 +38,10 @@ await client.UpdatePasswordAsync(request);
 
     An optional description for the user, updated together with the password.
 
+- `ResetConnection` (*bool*) -
+
+    When true, the client's connection is reset with the new credentials after the password change so subsequent RPCs authenticate as the updated user. When false (default), the connection is untouched, except an own-password change auto-refreshes the authorization header.
+
 **RETURN TYPE:**
 
 *Task*
