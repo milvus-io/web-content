@@ -108,7 +108,7 @@ QueryResponse
 
     - `rows()` (*Result<ResultRowIter>*) -
 
-        Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data.
+        Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data. See [ResultRowIter](ResultRowIter.md).
 
 - `session_timestamp()` (*u64*) -
 
