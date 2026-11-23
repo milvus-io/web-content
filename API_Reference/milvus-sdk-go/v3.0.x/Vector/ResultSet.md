@@ -30,7 +30,27 @@ The primary-key column of the matched entities.
 The output field columns.
 
 - **AggregationBuckets** (*[]AggregationBucket*) -
-Search aggregation results for this query, when an aggregation was requested.
+Search aggregation results for this query, when an aggregation was requested. Each **AggregationBucket** has the following members:
+
+    - **Key** (*[]BucketKeyEntry*) -
+
+        The group-by key entries defining this bucket.
+
+    - **Count** (*int64*) -
+
+        The number of entities in this bucket.
+
+    - **Metrics** (*map[string]any*) -
+
+        The computed metric values keyed by alias.
+
+    - **Hits** (*[]AggregationHit*) -
+
+        The top hits of this bucket when `top_hits` was configured.
+
+    - **SubGroups** (*[]AggregationBucket*) -
+
+        The nested sub-aggregation buckets, when the request configured a `sub_aggregation`.
 
 - **Scores** (*[]float32*) -
 The distance to the target vector for each match.

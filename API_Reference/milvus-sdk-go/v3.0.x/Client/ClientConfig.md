@@ -74,7 +74,27 @@ Configuration for creating a Milvus client, including address, authentication, T
 
 - **TelemetryConfig** (**TelemetryConfig*) -
 
-    This configures client telemetry settings.
+    This configures client telemetry settings. A **TelemetryConfig** has the following members:
+
+    - **Enabled** (*bool*) -
+
+        Whether telemetry is enabled at connection startup. A `false` value opts out explicitly and starts no heartbeat.
+
+    - **HeartbeatInterval** (*time.Duration*) -
+
+        How often to send heartbeats to the server (default: 10 seconds). It is also the metrics window: each heartbeat carries the operations since the last one.
+
+    - **SamplingRate** (*float64*) -
+
+        The sampling rate for all operations (0.0-1.0, default: 1.0, i.e. 100%). Can be adjusted dynamically.
+
+    - **ErrorMaxCount** (*int*) -
+
+        The maximum number of errors to keep.
+
+    - **ClientID** (*string*) -
+
+        Identifies this client to the server across process restarts. When empty, a random UUID is generated per client. Set a stable value (for example a pod name) for continuity; it must be unique per process.
 
 - **ServerVersion** (*string*) -
 

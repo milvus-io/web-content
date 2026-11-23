@@ -16,19 +16,35 @@ type ResourceGroupConfig struct {
 
 - **Requests** (*ResourceGroupLimit*)
 
-    The requests.
+    The requests. A **ResourceGroupLimit** specifies the number of nodes; it has one member:
+
+    - **NodeNum** (*int32*) -
+
+        The number of nodes requested.
 
 - **Limits** (*ResourceGroupLimit*)
 
-    The limits.
+    The limits. A **ResourceGroupLimit** specifies the number of nodes; it has one member:
+
+    - **NodeNum** (*int32*) -
+
+        The maximum number of nodes allowed.
 
 - **TransferFrom** (*[]*ResourceGroupTransfer*)
 
-    The transfer from.
+    The transfer from. Each **ResourceGroupTransfer** has one member:
+
+    - **ResourceGroup** (*string*) -
+
+        The name of the source resource group.
 
 - **TransferTo** (*[]*ResourceGroupTransfer*)
 
-    The transfer to.
+    The transfer to. Each **ResourceGroupTransfer** has one member:
+
+    - **ResourceGroup** (*string*) -
+
+        The name of the target resource group.
 
 - **NodeFilter** (*ResourceGroupNodeFilter*)
 
