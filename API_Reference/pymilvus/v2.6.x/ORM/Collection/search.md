@@ -187,7 +187,7 @@ A **SearchResult** object that contains a list of **Hits** objects.
     │           ├── score
     │           ├── vector
     │           └── get()
-    ```
+```
 
 - Properties and methods
 
