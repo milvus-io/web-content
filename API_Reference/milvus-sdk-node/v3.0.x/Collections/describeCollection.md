@@ -93,7 +93,83 @@ The schema of the collection.
 
     - **fields** (*FieldSchema[]*) -
 
-        All scalar and vector fields declared on the collection. For the full **FieldSchema** field reference, refer to the `FieldSchema` class doc.
+        All scalar and vector fields declared on the collection. Each **FieldSchema** has the following members:
+
+        - **fieldID** (*string* | *number*) -
+
+            The ID of the field.
+
+        - **name** (*string*) -
+
+            The name of the field.
+
+        - **description** (*string*) -
+
+            An optional description of the field.
+
+        - **data_type** (*keyof typeof DataType*) -
+
+            The data type of the field.
+
+        - **dataType** (*DataType*) -
+
+            The numeric data type of the field.
+
+        - **element_type** (*keyof typeof DataType*) -
+
+            The element type of an array field.
+
+        - **is_primary_key** (*boolean*) -
+
+            Whether the field is the primary key.
+
+        - **autoID** (*boolean*) -
+
+            Whether the primary-key value is auto-generated.
+
+        - **is_partition_key** (*boolean*) -
+
+            Whether the field is a partition key.
+
+        - **is_clustering_key** (*boolean*) -
+
+            Whether the field is a clustering key.
+
+        - **is_dynamic** (*boolean*) -
+
+            Whether the field is the dynamic field.
+
+        - **is_function_output** (*boolean*) -
+
+            Whether the field is produced by a function.
+
+        - **nullable** (*boolean*) -
+
+            Whether the field is nullable.
+
+        - **default_value** (*number* | *string* | *null*) -
+
+            The default value of the field.
+
+        - **state** (*string*) -
+
+            The state of the field.
+
+        - **external_field** (*string*) -
+
+            The external field mapping name.
+
+        - **type_params** (*KeyValuePair<TypeParamKey, TypeParam>[]*) -
+
+            The type parameters of the field.
+
+        - **index_params** (*KeyValuePair[]*) -
+
+            The index parameters of the field.
+
+        - **fields** (*FieldSchema[]*) -
+
+            The sub-fields of a struct or array field.
 
     - **functions** (*[FunctionObject](FunctionObject.md)[]*) -
 
@@ -101,7 +177,7 @@ The schema of the collection.
 
     - **struct_array_fields** (*FieldSchema[]*) -
 
-        All struct and array fields declared on the collection.
+        All struct and array fields declared on the collection. Each entry has the same members as a **FieldSchema**.
 
     - **external_source** (*string*) -
 

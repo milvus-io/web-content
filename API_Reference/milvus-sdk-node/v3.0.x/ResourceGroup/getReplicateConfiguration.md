@@ -41,11 +41,11 @@ This method returns a promise that resolves to a **GetReplicateConfigurationResp
 
     - **clusters** (*ReplicateCluster[]*) -
 
-        The clusters participating in replication.
+        The clusters participating in replication. See [ReplicateCluster](ReplicateCluster.md).
 
     - **cross_cluster_topology** (*CrossClusterTopology[]*) -
 
-        The cross-cluster topology, when configured.
+        The cross-cluster topology, when configured. See [CrossClusterTopology](CrossClusterTopology.md).
 
 - **status** (*ResStatus*) -
 

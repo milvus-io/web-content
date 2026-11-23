@@ -160,7 +160,27 @@ new MilvusClient(config: ClientConfig)
 
     - **telemetry** (*TelemetryConfig*) -
 
-        Configuration for client metrics, heartbeat, and server-pushed commands.
+        Configuration for client metrics, heartbeat, and server-pushed commands. A **TelemetryConfig** has the following members:
+
+        - **enabled** (*boolean*) -
+
+            Whether client telemetry is enabled.
+
+        - **heartbeatIntervalMs** (*number*) -
+
+            The heartbeat interval in milliseconds.
+
+        - **samplingRate** (*number*) -
+
+            The sampling rate for operations (0.0-1.0).
+
+        - **errorMaxCount** (*number*) -
+
+            The maximum number of errors to keep.
+
+        - **clientId** (*string*) -
+
+            Pins the telemetry identity across process restarts.
 
     - **isGlobal** (*boolean*) -
 

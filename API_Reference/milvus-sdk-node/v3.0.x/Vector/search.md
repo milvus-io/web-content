@@ -262,7 +262,7 @@ await milvusClient.search({
 
 - **highlighter** (*Highlighter*) -
 
-    A highlighter for the search results.
+    A highlighter for the search results. See [Highlighter](Highlighter.md).
 
 - **timeout** (*number*) -
 
@@ -310,7 +310,15 @@ The hits returned for each query vector. When a single query vector is supplied,
 
     - **highlight** (*HighlightResult*) -
 
-        Set when a **highlighter** was supplied on the request; carries the highlighted fragments for matching fields.
+        Set when a **highlighter** was supplied on the request; carries the highlighted fragments for matching fields. It is a record that maps each field name to a **HighlightData** object with the following members:
+
+        - **fragments** (*string[]*) -
+
+            The highlighted fragments for the field.
+
+        - **scores** (*number[]*) -
+
+            The relevance scores of the fragments.
 
     - **<output_field>** (*FieldData*) -
 
@@ -329,7 +337,27 @@ The collection that was searched.
 Optional. Set when the search reports the total candidate count examined.
 
 - **agg_buckets** (*AggregationBucket[]* | *undefined*) -
-Optional. Set when **search_aggregation** was supplied; contains aggregation buckets, nested metrics, top hits, and sub-groups.
+Optional. Set when **search_aggregation** was supplied; contains aggregation buckets, nested metrics, top hits, and sub-groups. Each **AggregationBucket** has the following members:
+
+    - **key** (*AggregationBucketKey[]*) -
+
+        The group-by key entries that define the bucket.
+
+    - **count** (*string* | *number*) -
+
+        The number of entities in the bucket.
+
+    - **metrics** (*Record<string, AggregationValue | undefined>*) -
+
+        The computed metric values keyed by alias.
+
+    - **hits** (*AggregationHit[]*) -
+
+        The representative top hits of the bucket, each carrying its score and field values.
+
+    - **sub_groups** (*AggregationBucket[]*) -
+
+        The nested sub-aggregation buckets.
 
 - **search_iterator_v2_results** (*Record<string, any>*) -
 Optional. Internal results produced by a V2 search iterator.

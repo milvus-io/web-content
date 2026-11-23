@@ -142,7 +142,7 @@ await milvusClient.searchIterator({
 
 - **highlighter** (*Highlighter*) -
 
-    A highlighter for the search results.
+    A highlighter for the search results. See [Highlighter](Highlighter.md).
 
 - **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 

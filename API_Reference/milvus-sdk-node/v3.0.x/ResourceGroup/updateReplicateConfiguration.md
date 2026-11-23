@@ -23,11 +23,11 @@ await milvusClient.updateReplicateConfiguration({
 
     **[REQUIRED]**
 
-    Cluster connection and channel configuration used by replication.
+    Cluster connection and channel configuration used by replication. See [ReplicateCluster](ReplicateCluster.md).
 
 - **cross_cluster_topology** (*CrossClusterTopology[]*) -
 
-    Replication links between source and target clusters.
+    Replication links between source and target clusters. See [CrossClusterTopology](CrossClusterTopology.md).
 
 - **force_promote** (*boolean*) -
 
