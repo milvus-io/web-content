@@ -85,7 +85,7 @@ The following table explains how to specify the resource in the `client.grantV2(
    </tr>
 </table>
 
-- **Privilege**: The specific privilege or [privilege group](privilege_group.md) that you need to grant to a role. Currently, Milvus provides 56 types of privileges that you can grant. The table below lists the privileges in Milvus.
+- **Privilege**: The specific privilege or [privilege group](privilege_group.md) that you need to grant to a role. The table below lists privileges that you can grant.
 
     <div class="alert note">
     
@@ -130,17 +130,17 @@ The following table explains how to specify the resource in the `client.grantV2(
          <td rowspan="18"><p>Collection Privileges</p></td>
          <td><p>GetFlushState</p></td>
          <td><p>Check the status of the collection flush operation</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
        </tr>
        <tr>
          <td><p>GetLoadState</p></td>
          <td><p>Check the load status of a collection</p></td>
-         <td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/restful/v3.0.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
        </tr>
        <tr>
          <td><p>GetLoadingProgress</p></td>
          <td><p>Check the loading progress of a collection</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
        </tr>
        <tr>
          <td><p>ShowCollections</p></td>
@@ -150,22 +150,22 @@ The following table explains how to specify the resource in the `client.grantV2(
        <tr>
          <td><p>ListAliases</p></td>
          <td><p>View all aliases of a collection</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
        </tr>
        <tr>
          <td><p>DescribeCollection</p></td>
          <td><p>View the details of a collection</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/describe_collection.md">DescribeCollection</a></p></td>
        </tr>
        <tr>
          <td><p>DescribeAlias</p></td>
          <td><p>View the details of an alias</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">DescribeAlias</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/describe_alias.md">DescribeAlias</a></p></td>
        </tr>
        <tr>
          <td><p>GetStatistics</p></td>
          <td><p>Obtain the statistics of a collection (eg. The number of entities in a collection)</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
        </tr>
        <tr>
          <td><p>CreateCollection</p></td>
@@ -180,7 +180,7 @@ The following table explains how to specify the resource in the `client.grantV2(
        <tr>
          <td><p>Load</p></td>
          <td><p>Load a collection</p></td>
-         <td><p><a href="load-and-release.md">LoadCollection</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a>/<a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+         <td><p><a href="load-and-release.md">LoadCollection</a>/<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/loading_progress.md">GetLoadingProgress</a>/<a href="https://milvus.io/api-reference/restful/v3.0.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
        </tr>
        <tr>
          <td><p>Release</p></td>
@@ -190,12 +190,12 @@ The following table explains how to specify the resource in the `client.grantV2(
        <tr>
          <td><p>Flush</p></td>
          <td><p>Persist all entities in a collection to a sealed segment. Any entity inserted after the flush operation will be stored in a new segment.</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush</a>/<a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">Flush</a>/<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
        </tr>
        <tr>
          <td><p>Compaction</p></td>
          <td><p>Manually trigger compaction</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Compact</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Management/compact.md">Compact</a></p></td>
        </tr>
        <tr>
          <td><p>RenameCollection</p></td>
@@ -215,7 +215,7 @@ The following table explains how to specify the resource in the `client.grantV2(
        <tr>
          <td><p>FlushAll</p></td>
          <td><p>Flush all collections in a database</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
        </tr>
        <tr>
          <td rowspan="4"><p>Partition Privileges</p></td>
@@ -263,7 +263,7 @@ The following table explains how to specify the resource in the `client.grantV2(
        <tr>
          <td><p>CreateResourceGroup</p></td>
          <td><p>Create a resource group</p></td>
-         <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
+         <td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
        </tr>
        <tr>
          <td><p>DropResourceGroup</p></td>
@@ -430,7 +430,7 @@ client.grant_privilege_v2(
 ```
 
 ```java
-import io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
+import io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2;
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
         .roleName("role_a")
@@ -459,7 +459,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -503,22 +503,22 @@ const client = new MilvusClient({address, token});
 
 await client.grantPrivilegeV2({
     role: "role_a",
-    privilege: "Search"
-    collection_name: 'collection_01'
+    privilege: "Search",
+    collection_name: 'collection_01',
     db_name: 'default',
 });
     
 await client.grantPrivilegeV2({
     role: "role_a",
-    privilege: "privilege_group_1"
-    collection_name: 'collection_01'
+    privilege: "privilege_group_1",
+    collection_name: 'collection_01',
     db_name: 'default',
 });
 
 await client.grantPrivilegeV2({
     role: "role_a",
-    privilege: "ClusterReadOnly"
-    collection_name: '*'
+    privilege: "ClusterReadOnly",
+    collection_name: '*',
     db_name: '*',
 });
 ```
@@ -582,7 +582,7 @@ client.describe_role(role_name="role_a")
 
 ```java
 import io.milvus.v2.service.rbac.response.DescribeRoleResp;
-import io.milvus.v2.service.rbac.request.DescribeRoleReq
+import io.milvus.v2.service.rbac.request.DescribeRoleReq;
 
 DescribeRoleReq describeRoleReq = DescribeRoleReq.builder()
         .roleName("role_a")
@@ -592,7 +592,7 @@ List<DescribeRoleResp.GrantInfo> infos = resp.getGrantInfos();
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption("role_a"))
 if err != nil {
@@ -670,7 +670,7 @@ client.revoke_privilege_v2(
 ```
 
 ```java
-import io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
+import io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2;
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()
         .roleName("role_a")
@@ -728,7 +728,7 @@ await client.revokePrivilegeV2({
 await client.revokePrivilegeV2({
     role: 'role_a',
     collection_name: 'collection_01',
-    privilege: 'Search',
+    privilege: 'privilege_group_1',
     db_name: 'default'
 });
 
@@ -760,7 +760,7 @@ curl --request POST \
 --header "Request-Timeout: 10" \
 -d '{
     "roleName": "role_a",
-    "privilege": "Search",
+    "privilege": "privilege_group_1",
     "collectionName": "collection_01",
     "dbName":"default"
 }'

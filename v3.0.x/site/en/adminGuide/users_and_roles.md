@@ -1,7 +1,7 @@
 ---
 id: users_and_roles.md
 title: "Create Users & Roles"
-summary: "Milvus achieves fine-grained access control through RBAC. You can start by creating users and roles, then assign privileges or privilege groups to roles, and finally manage access control by granting roles to users. This method ensures the efficiency and security of access management. This page introduces how to create users and roles in Milvus."
+summary: "Milvus controls access through RBAC: privileges are granted to roles, and roles to users. This page introduces how to create users and roles."
 ---
 
 # Create Users & Roles
@@ -10,7 +10,7 @@ Milvus achieves fine-grained access control through RBAC. You can start by creat
 
 ## User
 
-After initializing a Milvus instance, a root user is automatically generated for authentication when connecting to Milvus for the first time. The username of the root user is `root` and the password is `Milvus`. The default role of the root user is `admin`, which has access to all resources. To ensure data security, please keep your root user's credentials safe to prevent unauthorized access.
+After initializing a Milvus instance, a root user is automatically generated for authentication when connecting to Milvus for the first time. The username of the root user is `root` and the password is `Milvus`. By default, the root user is not bound to any role and skips privilege checks, so it has access to all resources. The `common.security.rootShouldBindRole` setting, which defaults to `false`, controls this behavior. To ensure data security, please keep your root user's credentials safe to prevent unauthorized access.
 
 For daily operations, we recommend creating users instead of using the root user.
 
@@ -18,7 +18,7 @@ For daily operations, we recommend creating users instead of using the root user
 
 Connect as `root` and create a user with the username `user_1` and password `P@ssw0rd`. When choosing credentials, follow these rules:
 
-- Username: Must start with a letter and can only include uppercase or lowercase letters, numbers, and underscores.
+- Username: Must start with a letter or underscore and can only include uppercase or lowercase letters, numbers, underscores (`_`), and any extra characters configured in `proxy.nameValidation.allowedChars` (`$` by default).
 
 - Password: Must be 6–72 UTF-8 bytes long by default. Your deployment may configure different [password length limits](authenticate.md#Password-requirements).
 
@@ -66,7 +66,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -242,7 +242,7 @@ The following example demonstrates how to create a role named `role_a`.
 
 The role name must follow the following rule:
 
-- Must start with a letter and can only include uppercase or lowercase letters, numbers, and underscores.
+- Must start with a letter or an underscore and can only include uppercase or lowercase letters, numbers, underscores, and the characters in `proxy.roleNameValidation.allowedChars` (`$` by default).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -265,6 +265,7 @@ CreateRoleReq createRoleReq = CreateRoleReq.builder()
         .roleName("role_a")
         .build();
        
+client.createRole(createRoleReq);
 ```
 
 ```go
@@ -337,9 +338,9 @@ curl --request POST \
 -d '{}'
 ```
 
-Below is an example output. `admin` is the default role in Milvus. `role_a` is the new role that is just created.
+Below is an example output. `admin` and `public` are the default roles that Milvus creates. `role_a` is the new role that is just created.
 
 ```plaintext
-['admin', 'role_a']
+['admin', 'public', 'role_a']
 ```
 

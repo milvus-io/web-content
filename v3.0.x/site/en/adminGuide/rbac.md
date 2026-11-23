@@ -1,7 +1,7 @@
 ---
 id: rbac.md
 title: "RBAC Explained"
-summary: "RBAC (Role-Based Access Control) is an access control method based on roles. With RBAC, you can finely control the operations users can perform at the collection, database, and instance levels, enhancing data security."
+summary: "RBAC (Role-Based Access Control) controls the operations users can perform at the collection, database, and instance levels based on roles."
 ---
 
 # RBAC Explained
@@ -16,7 +16,7 @@ The RBAC model can improve the efficiency of access control management. For exam
 
 ![Users Roles Privileges](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/users-roles-privileges.png)
 
-There are four major components in the RBAC model.
+There are five major components in the RBAC model.
 
 - **Resource:** The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.
 
@@ -30,7 +30,7 @@ There are four major components in the RBAC model.
 
 ## Procedures
 
-The achieve access control via RBAC, you need to follow the steps below:
+To achieve access control via RBAC, you need to follow the steps below:
 
 1. **[Create a user](users_and_roles.md#Create-a-user)**: In addition to the default user `root` in Milvus, you can create new users and set passwords to protect data security.
 

@@ -31,7 +31,7 @@ Basic configuration involves enabling access logs and defining the log filename 
 proxy:
   accessLog:
     enable: true
-    # If `filename` is emtpy, logs will be printed to stdout.
+    # If `filename` is empty, logs will be printed to stdout.
     filename: ""
     # Additional formatter configurations...
 ```
@@ -50,17 +50,17 @@ proxy:
     filename: "access_log.txt" # Name of the access log file
     localPath: "/var/logs/milvus" # Local file path where the access log file is stored
     maxSize: 500 # Max size for each single access log file. Unit: MB
-    rotatedTime: 24 # Time interval for log rotation. Unit: seconds
+    rotatedTime: 86400 # Time interval for log rotation. Unit: seconds
     maxBackups: 7 # Max number of sealed access log files that can be retained
     # Additional formatter configurations...
 ```
 
 These parameters are specified when `filename` is not empty.
 
-- `proxy.accessLog.localPath`: The local file path where the access log file is stored.
-- `proxy.accessLog.maxSize`: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file.
-- `proxy.accessLog.rotatedTime`: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one.
-- `proxy.accessLog.maxBackups`: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted.
+- `proxy.accessLog.localPath`: The local file path where the access log file is stored. Defaults to `/tmp/milvus_access`.
+- `proxy.accessLog.maxSize`: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file. Defaults to **64**.
+- `proxy.accessLog.rotatedTime`: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one. Defaults to **0**.
+- `proxy.accessLog.maxBackups`: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted. Defaults to **8**.
 
 ### Config for uploading local access log files to MinIO
 
@@ -73,7 +73,7 @@ proxy:
     filename: "access_log.txt"
     localPath: "/var/logs/milvus"
     maxSize: 500
-    rotatedTime: 24 
+    rotatedTime: 86400
     maxBackups: 7
     minioEnable: true
     remotePath: "/milvus/logs/access_logs"
@@ -84,8 +84,8 @@ proxy:
 When configuring MinIO parameters, ensure that you have set either `maxSize` or `rotatedTime`. Failure to do so may result in unsuccessful uploads of local access log files to MinIO.
 
 - `proxy.accessLog.minioEnable`: Whether to upload local access log files to MinIO. Defaults to **false**.
-- `proxy.accessLog.remotePath`: The path of the object storage for uploading access log files.
-- `proxy.accessLog.remoteMaxTime`: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.
+- `proxy.accessLog.remotePath`: The path of the object storage for uploading access log files. Defaults to `access_log/`.
+- `proxy.accessLog.remoteMaxTime`: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature. Defaults to **0**.
 
 ## Formatter config
 
@@ -111,8 +111,8 @@ proxy:
         methods: ["Query", "Search"]
 ```
 
-- `proxy.accessLog.<formatter_name>.format`: Defines the log format with dynamic metrics. For more information, see [Supported metrics](#reference-supported-metrics).
-- `proxy.accessLog.<formatter_name>.methods`: Lists Milvus operations using this formatter. To obtain method names, see **MilvusService** in [Milvus methods](https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto).
+- `proxy.accessLog.formatters.<formatter_name>.format`: Defines the log format with dynamic metrics. For more information, see [Supported metrics](#reference-supported-metrics).
+- `proxy.accessLog.formatters.<formatter_name>.methods`: Lists Milvus operations using this formatter. To obtain method names, see **MilvusService** in [Milvus methods](https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto).
 
 ## Reference: Supported metrics
 
@@ -135,3 +135,14 @@ proxy:
 | `$time_start`      | Time at which the access starts                                             |
 | `$time_end`        | Time at which the access ends                                               |
 | `$sdk_version`     | Version of the Milvus SDK used by the user                                  |
+| `$error_type`      | Type of the error: **system_error** or **input_error**                      |
+| `$output_fields`   | Output fields of the request                                                |
+| `$cluster_prefix`  | Cluster prefix set in `msgChannel.chanNamePrefix.cluster`                   |
+| `$consistency_level` | Consistency level of the request                                            |
+| `$anns_field`      | Vector field of a search or hybrid search request                           |
+| `$nq`              | Number of query vectors of a search or hybrid search request                |
+| `$search_params`   | Search parameters of a search or hybrid search request                      |
+| `$query_params`    | Query parameters of a query request                                         |
+| `$client_request_time` | Request time that the client sets in the gRPC metadata                      |
+| `$template_value_length` | Length of each expression template value                                    |
+| `$partial_update`  | Whether an upsert request is a partial update                               |

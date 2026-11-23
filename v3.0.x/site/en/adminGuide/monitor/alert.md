@@ -52,7 +52,7 @@ Grafana alert query does not support template variables. Therefore, you should a
 ![Alert_query](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_query.png "The newly added query.")
 
 ### 3. Add alert notifications
-To receive alert notifications, add a "notification channel". Then, specify the channel in the field "Send to".
+To receive alert notifications, create a contact point. In Grafana, go to **Alerts & IRM** > **Alerting** > **Notification configuration**, select the **Contact points** tab, and click **+ New contact point**. Then, in the **Configure notifications** section of the alert rule, select the contact point, or route the notifications through notification policies.
 
 ![Alert_notification](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/alert_notification.png "Specify the notification channel.")
 

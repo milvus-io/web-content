@@ -28,7 +28,7 @@ services:
     restart: always
 
   kafka:
-    image: wurstmeister/kafka:latest
+    image: wurstmeister/kafka:2.13-2.8.1
     container_name: kafka
     ports:
       - 9092:9092
@@ -36,8 +36,6 @@ services:
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
       - KAFKA_LISTENERS=PLAINTEXT://:9092
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 ```
 
@@ -66,16 +64,10 @@ services:
     ......
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml
 ```
 
-Use the following command to download a Milvus configuration file template:
-
-```shell
-$ wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml
-```
-
-And set the following parameters:
+Create a `user.yaml` file in the same directory as your `docker-compose.yaml` file and set the following parameters in it. Milvus loads `configs/user.yaml` after `configs/milvus.yaml`, so the values in `user.yaml` override the defaults:
 
 ```yaml
 mq:
@@ -102,9 +94,9 @@ Then you can start Milvus with the following command:
 $ docker compose up -d
 ```
 
-## Connect Milus to Kafka with SASL/PLAIN Alone
+## Connect Milvus to Kafka with SASL/PLAIN Alone
 
-To start Kafka with SASL/PLAIN authentication, you need to add the `kafka_server_jass.conf` file with proper settings.
+To start Kafka with SASL/PLAIN authentication, you need to add the `kafka_server_jaas.conf` file with proper settings.
 
 ### 1. Start a Kafka service with SASL/PLAIN
 
@@ -143,12 +135,12 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_DEFAULT_REPLICATION_FACTOR: 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf"
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf"
     volumes:
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf
 ```
 
-In the `kafka_server_jass.conf` file, set the following parameters:
+In the `kafka_server_jaas.conf` file, set the following parameters:
 
 ```conf
 KafkaServer {
@@ -184,16 +176,10 @@ services:
     ......
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml
 ```
 
-Use the following command to download a Milvus configuration file template:
-
-```shell
-$ wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml
-```
-
-And set the following parameters:
+Create a `user.yaml` file in the same directory as your `docker-compose.yaml` file and set the following parameters in it. Milvus loads `configs/user.yaml` after `configs/milvus.yaml`, so the values in `user.yaml` override the defaults:
 
 ```yaml
 mq:
@@ -511,17 +497,11 @@ services:
     ......
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml
       - ${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets
 ```
 
-Use the following command to download a Milvus configuration file template:
-
-```shell
-$ wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml
-```
-
-And set the following parameters:
+Create a `user.yaml` file in the same directory as your `docker-compose.yaml` file and set the following parameters in it. Milvus loads `configs/user.yaml` after `configs/milvus.yaml`, so the values in `user.yaml` override the defaults:
 
 ```yaml
 mq:
@@ -550,11 +530,11 @@ $ docker compose up -d
 
 ## Connect Milvus to Kafka with SASL/PLAIN and SSL
 
-To connect Milvus to Kafka with SASL/PLAIN and SSL, you need to repeat the steps in [Connect Milus to Kafka with SASL/PLAIN Alone](#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone) and [Connect Milus to Kafka with SSL Alone](#Connect-Milus-to-Kafka-with-SSL-Alone).
+To connect Milvus to Kafka with SASL/PLAIN and SSL, you need to repeat the steps in [Connect Milvus to Kafka with SASL/PLAIN Alone](#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone) and [Connect Milvus to Kafka with SSL Alone](#Connect-Milvus-to-Kafka-with-SSL-Alone).
 
 ### 1. Start a Kafka service with SASL/PLAIN and SSL
 
-Use the `kafka_server_jass.conf` file mentioned in [Connect Milus to Kafka with SASL/PLAIN Alone](#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone) and the `my_secrets` folder generated in [Connect Milus to Kafka with SSL Alone](#Connect-Milus-to-Kafka-with-SSL-Alone) to start a Kafka service with SASL/PLAIN and SSL.
+Use the `kafka_server_jaas.conf` file mentioned in [Connect Milvus to Kafka with SASL/PLAIN Alone](#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone) and the `my_secrets` folder generated in [Connect Milvus to Kafka with SSL Alone](#Connect-Milvus-to-Kafka-with-SSL-Alone) to start a Kafka service with SASL/PLAIN and SSL.
 
 The following `docker-compose.yaml` file can be used to start a Kafka service with SASL/PLAIN and SSL:
 
@@ -602,11 +582,11 @@ services:
       KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_DEFAULT_REPLICATION_FACTOR: 1
-      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf"
+      KAFKA_OPTS: "-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf"
 
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf
 ```
 
 Then start the Kafka service with the following command:
@@ -634,17 +614,11 @@ services:
     ......
     volumes:
       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      - ${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml
       - ${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets
 ```
 
-Use the following command to download a Milvus configuration file template:
-
-```shell
-$ wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml
-```
-
-And set the following parameters:
+Create a `user.yaml` file in the same directory as your `docker-compose.yaml` file and set the following parameters in it. Milvus loads `configs/user.yaml` after `configs/milvus.yaml`, so the values in `user.yaml` override the defaults:
 
 ```yaml
 mq:

@@ -36,7 +36,7 @@ sudo apt install openssl
 
 1. Create the `gen.sh` file.
 
-```
+```shell
 mkdir cert && cd cert
 touch gen.sh
 ```
@@ -59,9 +59,9 @@ CommonName="localhost"
 ExpireDays=3650 # 10 years
 
 # generate private key for ca, server and client
-openssl genpkey -quiet -algorithm rsa:2048 -out ca.key
-openssl genpkey -quiet -algorithm rsa:2048 -out server.key
-openssl genpkey -quiet -algorithm rsa:2048 -out client.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out ca.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out server.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out client.key
 
 # create a new ca certificate
 openssl req -x509 -new -nodes -key ca.key -sha256 -days 36500 -out ca.pem \
@@ -72,6 +72,11 @@ echo '[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[v3_client]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
 subjectAltName = @alt_names
 [alt_names]
 DNS = '$CommonName > openssl.cnf
@@ -86,7 +91,7 @@ openssl req -new -key server.key\
 openssl req -new -key client.key\
   -subj "/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName"\
   | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
-    -extfile ./openssl.cnf -extensions v3_req
+    -extfile ./openssl.cnf -extensions v3_client
 
 ```
 </details>
@@ -126,14 +131,19 @@ CommonName="localhost"
 ExpireDays=3650 # 10 years
 
 # generate private key for ca, server and client
-openssl genpkey -quiet -algorithm rsa:2048 -out server.key
-openssl genpkey -quiet -algorithm rsa:2048 -out client.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out server.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out client.key
 
 # prepare extension config for signing certificates
 echo '[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[v3_client]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
 subjectAltName = @alt_names
 [alt_names]
 DNS = '$CommonName > openssl.cnf
@@ -148,7 +158,7 @@ openssl req -new -key server.key\
 openssl req -new -key client.key\
   -subj "/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName"\
   | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
-    -extfile ./openssl.cnf -extensions v3_req
+    -extfile ./openssl.cnf -extensions v3_client
 ```
 </details>
 
@@ -213,6 +223,12 @@ Parameters:
 - `serverKeyPath`: The path to the server key file.
 - `caPemPath`: The path to the CA certificate file.
 - `internaltlsEnabled`: Whether to enable internal TLS. For now only one-way tls is supported.
+
+<div class="alert note">
+
+> By default, the `tls` and `internaltls` paths in `milvus.yaml` point to the sample certificate and key files under `configs/cert`. These files, including their private keys, are published in the Milvus source repository. Do not use them in your deployment. Set `serverPemPath`, `serverKeyPath`, and `caPemPath` to the files that you generated.
+
+</div>
 
 #### 2. Map certificate files to the container
 
@@ -415,9 +431,9 @@ volumeMounts:
 
 Create the milvus release:
 ```bash
-helm repo add milvus https://zilliztech.github.io/milvus-helm/
-helm repo update milvus
-helm install my-release milvus/milvus -f values.yaml
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update zilliztech
+helm install my-release zilliztech/milvus --version 5.0.22 -f values.yaml
 ```
 
 ## Verify Internal TLS enabled

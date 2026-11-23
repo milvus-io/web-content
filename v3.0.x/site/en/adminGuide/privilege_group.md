@@ -24,7 +24,7 @@ By using a privilege group, you can grant multiple privileges in bulk to a role.
 
 ## Built-in privilege groups
 
-For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.
+For ease-of-use, Milvus provides a total of 9 built-in privilege groups on the collection, database, and instance level: CollectionReadOnly, CollectionReadWrite, CollectionAdmin, DatabaseReadOnly, DatabaseReadWrite, DatabaseAdmin, ClusterReadOnly, ClusterReadWrite and ClusterAdmin.
 
 <div class="alert note">
 
@@ -213,6 +213,66 @@ The table below lists the specific privileges included in the three built-in pri
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
+   <tr>
+     <td><p>GetImportProgress</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListImport</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>DescribeSnapshot</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListSnapshots</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AddCollectionField</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AlterCollectionSchema</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RefreshExternalCollection</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>CreateSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>DropSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RestoreSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
 </table>
 
 ### Database level
@@ -246,8 +306,8 @@ The table below lists the specific privileges included in the three built-in pri
    </tr>
    <tr>
      <td><p>CreateCollection</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -260,6 +320,12 @@ The table below lists the specific privileges included in the three built-in pri
      <td><p>AlterDatabase</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RenameCollection</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
@@ -285,12 +351,6 @@ The table below lists the specific privileges included in the three built-in pri
      <td><p>ListDatabases</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>RenameCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -415,12 +475,72 @@ The table below lists the specific privileges included in the three built-in pri
    </tr>
    <tr>
      <td><p>ListPrivilegeGroups</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>OperatePrivilegeGroup</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>OperatePrivilegeGroup</p></td>
+     <td><p>GetReplicateConfiguration</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListFileResources</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AddFileResource</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RemoveFileResource</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>PinSnapshotData</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>UnpinSnapshotData</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>UpdateReplicateConfiguration</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RestoreExternalSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ExportSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ImportBinlog</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -445,11 +565,11 @@ The following example demonstrates how to create a privilege group named `privil
 
 ```python
 from pymilvus import MilvusClient
-client.create_privilege_group(group_name='privilege_group_1'）
+client.create_privilege_group(group_name='privilege_group_1')
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 err = client.CreatePrivilegeGroup(ctx, milvusclient.NewCreatePrivilegeGroupOption("privilege_group_1"))
 if err != nil {
@@ -485,7 +605,7 @@ curl --request POST \
 
 ### Add privileges to a privilege group
 
-The following example demonstrates how to add privileges `PrivilegeBackupRBAC` and `PrivilegeRestoreRBAC` to the privilege group `privilege_group_1` that is just created.
+The following example demonstrates how to add privileges `Query` and `Search` to the privilege group `privilege_group_1` that is just created.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -501,7 +621,7 @@ client.add_privileges_to_group(group_name='privilege_group_1', privileges=['Quer
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 privileges := []string{"Query", "Search"}
 err = client.AddPrivilegesToGroup(ctx, milvusclient.NewAddPrivilegesToGroupOption("privilege_group_1", privileges...))
@@ -522,7 +642,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
 
 ```javascript
 await client.addPrivilegesToGroup({
-  group_name: privilege_group_1,
+  group_name: 'privilege_group_1',
   privileges: ['Query', 'Search'],
 });
 
@@ -542,7 +662,7 @@ curl --request POST \
 
 ### Remove privileges from a privilege group
 
-The following example demonstrates how to remove the privilege `PrivilegeRestoreRBAC` from the privilege group `privilege_group_1`.
+The following example demonstrates how to remove the privilege `Search` from the privilege group `privilege_group_1`.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -554,11 +674,11 @@ The following example demonstrates how to remove the privilege `PrivilegeRestore
 
 ```python
 from pymilvus import MilvusClient
-client.remove_privileges_from_group(group_name='privilege_group_1', privileges='Search')
+client.remove_privileges_from_group(group_name='privilege_group_1', privileges=['Search'])
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 err = client.RemovePrivilegesFromGroup(ctx, milvusclient.NewRemovePrivilegesFromGroupOption("privilege_group_1", []string{"Search"}...))
 if err != nil {
@@ -613,7 +733,7 @@ client.list_privilege_groups()
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 groups, err := client.ListPrivilegeGroups(ctx, milvusclient.NewListPrivilegeGroupsOption())
 if err != nil {
@@ -669,7 +789,7 @@ client.drop_privilege_group(group_name='privilege_group_1')
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 err = client.DropPrivilegeGroup(ctx, milvusclient.NewDropPrivilegeGroupOption("privilege_group_1"))
 if err != nil {

@@ -12,98 +12,82 @@ This guide provides instructions on how to configure Jaeger to collect traces fo
 ## Prerequisites
 
 - You have installed necessary tools, including [Helm](https://helm.sh/docs/intro/install/) and [Kubectl](https://kubernetes.io/docs/tasks/tools/).
-- Cert-manager version 1.6.1 or higher must be installed. An installation guide can be found [here](https://cert-manager.io/v1.6-docs/installation/#default-static-install).
 
-## Deply Jaeger
+## Deploy Jaeger
 
 Jaeger is a distributed tracing platform released as open source by [Uber Technologies](http://uber.github.io/).
 
-### 1. Installing the Jaeger Operator on Kubernetes
+This guide deploys Jaeger v2 with the [Jaeger Helm chart](https://github.com/jaegertracing/helm-charts). By default, the chart deploys Jaeger with the all-in-one model and in-memory storage, which is suitable for testing. For other ways to run Jaeger on Kubernetes, see [Deploying on Kubernetes](https://www.jaegertracing.io/docs/2.23/deployment/kubernetes/).
 
-To install the operator, run:
+### 1. Install Jaeger
 
-```shell
-$ kubectl create namespace observability
-$ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability
-```
-
-At this point, there should be a `jaeger-operator` deployment available. You can view it by running the following command:
+Install Jaeger in the namespace where you install Milvus. The Milvus settings in the next section refer to the Jaeger service by its short name, `jaeger`, and Kubernetes resolves a service name without a namespace only within the namespace of the pod that makes the query.
 
 ```shell
-$ kubectl get deployment jaeger-operator -n observability
-
-NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-jaeger-operator   1         1         1            1           48s
+$ helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+$ helm repo update
+$ helm install jaeger jaegertracing/jaeger --version 4.19.0
 ```
 
-### 2. Deploy Jaeger
+The chart README marks the chart as experimental and says that breaking changes may occur in minor versions, so the command pins the chart version. Chart version 4.19.0 deploys Jaeger 2.23.0.
 
-The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example. This will install the default AllInOne strategy, which deploys the **all-in-one** image (combining **jaeger-agent**, **jaeger-collector**, **jaeger-query**, and Jaeger UI) in a single pod, using **in-memory storage** by default.
+### 2. Check the Jaeger pod
 
-If you want to store traces for a long time, please refer to [production-strategy](https://www.jaegertracing.io/docs/1.62/operator/#production-strategy).
-
-```yaml
-apiVersion: jaegertracing.io/v1
-kind: Jaeger
-metadata:
-  name: jaeger
-```
-
-The YAML file can then be used with `kubectl`:
+To check that the Jaeger pod is running, run the following command:
 
 ```shell
-$ kubectl apply -f simplest.yaml
+$ kubectl get pods -l app.kubernetes.io/instance=jaeger,app.kubernetes.io/component=all-in-one
 ```
 
-In a few seconds, a new in-memory all-in-one instance of Jaeger will be available, suitable for quick demos and development purposes. To check the instances that were created, list the jaeger objects:
-
-```shell
-$ kubectl get jaegers
-
-NAME     STATUS    VERSION   STRATEGY   STORAGE   AGE
-jaeger   Running   1.62.0    allinone   memory    13s
-```
+The chart creates a service named `jaeger`. The service exposes the OTLP gRPC receiver on port `4317` and the Jaeger UI on port `16686`.
 
 ## Install Milvus with Helm Chart
 
-You can install or upgrade Milvus with Helm Chart with the following settings:
+To send traces from Milvus to Jaeger over OTLP, save the following settings in a file named `values.yaml`:
 
 ```yaml
 extraConfigFiles:
   user.yaml: |+
     trace:
-      exporter: jaeger
+      exporter: otlp
       sampleFraction: 1
-      jaeger:
-        url: "http://jaeger-collector:14268/api/traces"
+      otlp:
+        endpoint: "jaeger:4317"
+        method: grpc
+        secure: false
 ```
 
-To apply the above settings to a new Milvus deployment , you can run the following command:
+With these settings, Milvus samples every request (`sampleFraction: 1`) and exports the traces over OTLP gRPC without TLS (`secure: false`) to port `4317` of the `jaeger` service.
+
+To apply the above settings to a new Milvus deployment, run the following commands:
 
 ```shell
-$ helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+$ helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 $ helm repo update
-$ helm upgrade --install -f values.yaml my-release milvus/milvus
+$ helm upgrade --install my-release zilliztech/milvus --version 5.0.22 -f values.yaml
 ```
 
-To apply the above settings to an existing Milvus deployment, you can run the following command:
+To apply the above settings to an existing Milvus deployment, run the following command:
 
 ```shell
-$ helm upgrade my-release -f values.yaml milvus/milvus
+$ helm upgrade my-release zilliztech/milvus --version <current-chart-version> --reset-then-reuse-values -f values.yaml
 ```
+
+<div class="alert note">
+
+This command uses `--reset-then-reuse-values`, which requires Helm 3.14 or later. With this option, Helm resets the values to the defaults of the chart version set in `--version`, applies the values of your current release, and then applies the values from `-f`. Every value in `values.yaml` therefore overrides the value of your current release, and the `user.yaml` entry under `extraConfigFiles` is replaced as a whole. To find `<current-chart-version>`, run `helm list` and remove the `milvus-` prefix from the value in the `CHART` column. If you run `helm upgrade` with `-f` or `--set` but without `--reset-then-reuse-values` or `--reuse-values`, Helm does not keep the values that you set at install time.
+
+</div>
 
 ## View Traces
 
-Once you have deployed Jaeger and Milvus with Helm Chart, an ingress has been enabled by dfault. You can view the ingress by running the following command:
+The `jaeger` service is of type `ClusterIP`, and the chart does not create an ingress by default. To open the Jaeger UI from your local machine, forward the UI port:
 
 ```shell
-$ kubectl get ingress
-
-NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
-jaeger-query   <none>   *       192.168.122.34  80      14m
+$ kubectl port-forward svc/jaeger 16686:16686
 ```
 
-Once the ingress is available, you can access the Jaeger UI by navigating to `http://${ADDRESS}`. Replace `${ADDRESS}` with the actual IP address of the ingress. 
+Then open `http://localhost:16686` in a browser.
 
 The following screenshot shows the Jaeger UI with the traces of Milvus during a search operation and a load-collection operation:
 

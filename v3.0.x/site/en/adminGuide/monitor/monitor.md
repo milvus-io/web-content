@@ -30,8 +30,10 @@ Kube-prometheus collects Kubernetes manifests, [Grafana](http://grafana.com/) da
 
 Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory.
 
-```
-$ git clone https://github.com/prometheus-operator/kube-prometheus.git
+The following commands use the `release-0.19` branch of kube-prometheus, which supports Kubernetes 1.35, 1.36, and 1.37. To choose the branch for your Kubernetes version, see the [kube-prometheus compatibility matrix](https://github.com/prometheus-operator/kube-prometheus#compatibility).
+
+```bash
+$ git clone --branch release-0.19 https://github.com/prometheus-operator/kube-prometheus.git
 $ cd kube-prometheus
 $ kubectl apply --server-side -f manifests/setup
 $ kubectl wait \
@@ -57,9 +59,9 @@ To delete a stack, run `kubectl delete --ignore-not-found=true -f manifests/ -f 
 
 Forward the Prometheus service to port `9090`, and Grafana service to port `3000`.
 
-```
-$ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090
-$ kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000
+```bash
+$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+$ kubectl --namespace monitoring port-forward svc/grafana 3000
 ```
 
 ### 2. Enable ServiceMonitor
@@ -70,15 +72,21 @@ The ServiceMonitor is not enabled for Milvus Helm by default. After installing t
 
 You can enable the ServiceMonitor by setting the parameter `metrics.serviceMonitor.enabled=true` as follows if you have installed Milvus Helm chart.
 
-    ```
-    $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
-    ```
+```bash
+$ helm upgrade my-release zilliztech/milvus --version <current-chart-version> --reset-then-reuse-values --set metrics.serviceMonitor.enabled=true
+```
+
+<div class="alert note">
+
+This command uses `--reset-then-reuse-values`, which requires Helm 3.14 or later. With this option, Helm resets the values to the defaults of the chart version set in `--version`, applies the values of your current release, and then applies the values from `--set`. To find `<current-chart-version>`, run `helm list` and remove the `milvus-` prefix from the value in the `CHART` column. If you run `helm upgrade` with `-f` or `--set` but without `--reset-then-reuse-values` or `--reuse-values`, Helm does not keep the values that you set at install time.
+
+</div>
 
 When the installation completes, use `kubectl` to check the ServiceMonitor resource.
 
 #### With Milvus Operator
 
-You can enable the ServiceMonitor as follows if you have installed Milvus using the Milvus Operator.
+If you have installed Milvus using the Milvus Operator, the operator creates a PodMonitor instead of a ServiceMonitor. The PodMonitor has the same name as the Milvus custom resource. The operator creates it only when metrics are not disabled in the custom resource and the PodMonitor CRD exists in the cluster. The kube-prometheus `manifests/setup` directory installs this CRD. To make sure that metrics are enabled, do as follows.
 
 1. Run the following command to edit the MIlvus custom resource. The following command assumes that the custom resource is named `my-release`.
 
@@ -98,34 +106,32 @@ You can enable the ServiceMonitor as follows if you have installed Milvus using 
 
 3. Save and exit the editor.
 
-4. Wait for the operator to reconcile the changes. You can check the status of the Milvus custom resource by running the following command.
+4. Wait for the operator to reconcile the changes. You can check the PodMonitor by running the following command.
 
+    ```bash
+    $ kubectl get podmonitor my-release
     ```
-    $ kubectl get milvus my-release -o yaml
-    ```
-
-The `status.components.metrics.serviceMonitor.enabled` field should be `true`.
 
 ### 3. Check the metrics
 
-After enabling the ServiceMonitor, you can access the Prometheus dashboard at `http://localhost:9090/`.
+After enabling the ServiceMonitor or the PodMonitor, you can access the Prometheus dashboard at `http://localhost:9090/`.
 
 Click on the `Status` tab and then `Targets`. You should see the targets of the Milvus components.
 
 ![Prometheus_targets](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_targets.png "The Prometheus targets.")
 
-Click on the `Graph` tab and enter the expression `up{job="default/my-release"}` in the expression input box. You should see the metrics of the Milvus components.
+Click on the `Graph` tab and enter the expression `up{app_kubernetes_io_instance="my-release"}` in the expression input box. You should see the metrics of the Milvus components.
 
 ![Prometheus_graph](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_graph.png "The Prometheus graph.")
 
 ### 4. Check the ServiceMonitor
 
+If you have installed Milvus with Helm, run the following command to list the ServiceMonitor. The chart names it `my-release-milvus` for a Milvus cluster and `my-release-milvus-standalone` for a Milvus standalone.
 
-
-```
+```bash
 $ kubectl get servicemonitor
 ```
-```
+```text
 NAME                           AGE
 my-release-milvus              54s
 ```

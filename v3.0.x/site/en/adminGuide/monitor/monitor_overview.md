@@ -21,7 +21,7 @@ Currently Milvus uses the following components of Prometheus:
 
 A valid metric name in Prometheus contains three elements: namespace, subsystem, and name. These three elements are connected with "_". 
 
-The namespace of Milvus metrics monitored by Prometheus is "milvus". Depending on the role that a metric belongs to, its subsystem should be one of the following eight roles: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".
+The namespace of Milvus metrics monitored by Prometheus is "milvus". The subsystem of a metric is one of the following: "cdc", "cgo", "datacoord", "datanode", "indexnode", "logging", "meta", "msg_queue", "msgstream", "proxy", "querycoord", "querynode", "rootcoord", "storage", "streaming", "streamingcoord", "streamingnode", and "wal". A few metrics, such as `milvus_build_info` and `milvus_num_node`, have no subsystem.
 
 For instance, the Milvus metric that calculates the total number of vectors queried is named `milvus_proxy_search_vectors_count`.
 

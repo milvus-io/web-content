@@ -12,7 +12,7 @@ This guide explains how to manage user authentication in Milvus, including enabl
 
 - TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you must provide a username, password, and certificate file paths. For information on how to enable TLS, refer to [Encryption in Transit](tls.md).
 
-- The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+- The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient</a> (Python) to interact with Milvus.
 
 </div>
 
@@ -95,6 +95,18 @@ client = MilvusClient(
 If you fail to provide a valid token when connecting to Milvus with authentication enabled, you will receive a gRPC error.
 </div>
 
+Milvus uses the `common.security.defaultRootPassword` setting only to create the `root` user when no `root` user exists. Changing this setting later does not change the password of an existing `root` user. To change the `root` password, call `update_password()` while connected as `root`:
+
+```python
+client.update_password(
+    user_name="root",
+    old_password="Milvus",
+    new_password="<your_new_password>",
+    reset_connection=True
+)
+```
+
+With `reset_connection=True`, the client uses the new password for subsequent requests.
 
 ## Create a new user
 
@@ -115,7 +127,7 @@ client.describe_user("user_1")
 # {'user_name': 'user_1', 'roles': ()}
 ```
 
-For more information on creating users, refer to [create_user()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md).
+For more information on creating users, refer to [create_user()](https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md).
 
     
 ## Connect to Milvus with a new user
@@ -145,7 +157,7 @@ client.update_password(
 )
 ```
 
-For more information on updating user passwords, refer to [update_password()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md).
+For more information on updating user passwords, refer to [update_password()](https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md).
 
 If you forget your old password, Milvus provides a configuration item that allows you to designate certain users as super users. This eliminates the need for the old password when you reset the password.
 
@@ -181,11 +193,23 @@ List all the users.
 client.list_users()
 ```
 
+## Protect the metrics port
+
+The metrics port (default `9091`) serves `/management/*`, `/log/level`, `/eventlog`, `/telemetry`, `/debug/pprof/*`, and the web console. The `common.security.adminAuthEnabled` setting controls whether these endpoints require `root` HTTP Basic authentication. It defaults to `false`. To turn it on, add the following to the Milvus configuration file:
+
+```yaml
+common:
+  security:
+    adminAuthEnabled: true
+```
+
+With this setting, health probes and metrics scrapes remain open. Requests that carry neither an `Origin` header nor Fetch Metadata headers must include the `X-Milvus-Admin-Request: true` header. Update the clients that call these endpoints, such as graceful shutdown and profiling scripts, before you turn the setting on. The metrics port still uses plain HTTP, so expose it only on a trusted network or behind a TLS proxy. This setting cannot be changed through `/management/config/alter`.
+
 ## Limitations
 
 ### Username requirements
 
-Usernames must not be empty or exceed 32 characters. They must start with a letter and contain only letters, numbers, or underscores.
+Usernames must not be empty or exceed 32 characters. They must start with a letter or underscore and contain only letters, numbers, underscores (`_`), and any extra characters configured in `proxy.nameValidation.allowedChars` (`$` by default).
 
 ### Password requirements
 
