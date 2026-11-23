@@ -13,7 +13,8 @@ public enum MilvusErrorCode
     CollectionNotFound = 100,
     SchemaMismatch = 109,
     SegmentNotFound = 600,
-    IndexNotFound = 700
+    IndexNotFound = 700,
+    RequestCanceled = 3002
 }
 ```
 
@@ -54,6 +55,10 @@ public enum MilvusErrorCode
 - **IndexNotFound** (700)
 
     The index was not found.
+
+- **RequestCanceled** (3002)
+
+    The request was canceled by an operator via `CancelRequests` (or the server canceled it); returned to the client of the canceled Search/HybridSearch/Query request, carrying the operator's reason.
 
 ## Example
 

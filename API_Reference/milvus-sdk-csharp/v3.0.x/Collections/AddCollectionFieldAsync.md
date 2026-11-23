@@ -30,7 +30,7 @@ await client.AddCollectionFieldAsync(request);
 
 - `Field` (*FieldSchema*) -
 
-    The schema of the field to add. The field must be nullable or have a default value. See [FieldSchema](FieldSchema.md).
+    The schema of the field to add. The field must be nullable or have a default value. A struct sub-field add uses a bracketed path like `clips[note]` on `FieldSchema.Name`, with `FieldSchema.Nullable` set to true for element-level null. See [FieldSchema](FieldSchema.md).
 
 **RETURN TYPE:**
 

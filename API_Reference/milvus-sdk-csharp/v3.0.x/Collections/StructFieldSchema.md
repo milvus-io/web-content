@@ -32,7 +32,7 @@ public sealed class StructFieldSchema
 
 - `Nullable` (*bool*) -
 
-    Whether the struct field is nullable. A struct field added to an existing collection (via `AddCollectionStructFieldAsync`) must be nullable. The nullable flag is also applied to every sub-field on the wire.
+    Whether the struct field is nullable (row-level nullability: a whole struct row may be null). A struct field added to an existing collection (via `AddCollectionStructFieldAsync`) must be nullable. The nullable flag is propagated to every sub-field's wire `nullable` flag; a sub-field's own element-level nullability travels independently on the wire `element_nullable`, see [FieldSchema](FieldSchema.md).
 
 - `TypeParams` (*IDictionary\<string, string\>*) -
 
@@ -40,7 +40,7 @@ public sealed class StructFieldSchema
 
 - `Fields` (*IList\<FieldSchema\>*) -
 
-    The sub-fields of the struct. Sub-fields cannot be primary/partition/clustering keys, cannot be auto-id, nullable, or have a default value. See [FieldSchema](FieldSchema.md).
+    The sub-fields of the struct. Sub-fields can be scalar, vector, or nested Array types. A scalar/vector sub-field uses its own `FieldSchema.Nullable` to allow null element values; a nested Array sub-field additionally uses `FieldSchema.ElementNullable` to allow null values inside each inner array and requires `FieldSchema.MaxCapacity` for the inner array capacity. Sub-fields cannot be primary/partition/clustering keys, auto-id, or have a default value. See [FieldSchema](FieldSchema.md).
 
 **METHODS:**
 

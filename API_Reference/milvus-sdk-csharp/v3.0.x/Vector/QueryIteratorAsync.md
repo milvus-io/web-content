@@ -35,7 +35,7 @@ QueryIterator iterator = client.QueryIteratorAsync(request);
 
 - `Parameters` (*QueryParameters?*) -
 
-    The optional query parameters. See [QueryParameters](QueryParameters.md).
+    The optional query parameters. See [QueryParameters](QueryParameters.md). `OrderByFields` and `GroupByFields` are rejected for iterators: the primary-key cursor protocol pages independently of ordering.
 
 - `BatchSize` (*int*) -
 
@@ -53,6 +53,26 @@ QueryIterator iterator = client.QueryIteratorAsync(request);
 
     Whether the operation should skip row-level security (RLS) enforcement. When `null`, the server default applies.
 
+- `Cursor` (*QueryIteratorCursor?*) -
+
+    An optional cursor from a previous `QueryIteratorAsync` (via `QueryIterator.GetCursor`), resuming pagination from that position on the captured MVCC snapshot. When set, the iterator skips the offset seek. A **QueryIteratorCursor** has the following members:
+
+    - `SessionTs` (*ulong*) -
+
+        The session timestamp of the iterator that produced this cursor, pinning the MVCC snapshot the resumed iterator continues on.
+
+    - `IntPk` (*long?*) -
+
+        The last returned integer primary key, or `null` when the primary key is a string.
+
+    - `StrPk` (*string?*) -
+
+        The last returned string primary key, or `null` when the primary key is an integer.
+
+    - `LastElementOffset` (*long?*) -
+
+        For an `element_filter` iterator, the last matched element offset; `null` for ordinary iterators.
+
 **RETURN TYPE:**
 
 *QueryIterator*
@@ -68,6 +88,10 @@ The **QueryIterator** exposes the following members:
 - `GetAsyncEnumerator(CancellationToken cancellationToken = default)` -
 
     Returns an async enumerator that yields each page of query results as a batch of `FieldData`. See [FieldData](FieldData.md).
+
+- `GetCursor()` -
+
+    Captures the current iterator position as a resumable cursor, which can be passed back through `QueryIteratorReq.Cursor` to continue pagination from this point on the same MVCC snapshot. The cursor carries the members described under `Cursor` above (`SessionTs`, `IntPk`/`StrPk` and, for element-filter iterators, `LastElementOffset`). Returns `null` when no snapshot has been established yet (no page consumed, or a fresh iterator whose first page is still in flight).
 
 **EXCEPTIONS:**
 

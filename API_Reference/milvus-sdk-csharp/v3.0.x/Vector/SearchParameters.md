@@ -11,9 +11,18 @@ public sealed class SearchParameters
     public ulong? TimeTravelTimestamp { get; set; }
     public string? Expression { get; set; }
     public long? RoundDecimal { get; set; }
+    public int? Ef { get; set; }
+    public int? Nprobe { get; set; }
+    public double? DropRatioSearch { get; set; }
+    public string? AnalyzerName { get; set; }
+    public string? Hints { get; set; }
+    public string? JsonPath { get; set; }
+    public string? JsonType { get; set; }
+    public bool? PageRetainOrder { get; set; }
     public IDictionary<string, string> ExtraParameters { get; }
     public bool? IgnoreGrowing { get; set; }
     public string? GroupByField { get; set; }
+    public IList<OrderByField> OrderByFields { get; }
     public int? GroupSize { get; set; }
     public bool? StrictGroupSize { get; set; }
     public IList<string> OutputFields { get; }
@@ -98,6 +107,10 @@ public sealed class SearchParameters
 - `GroupByField` (*string?*) -
 
     The field to group the search results by.
+
+- `OrderByFields` (*IList\<OrderByField\>*) -
+
+    The ordered list of fields to sort the search results by, carried on the wire `order_by_fields` key. Entries are added via the collection-initializer syntax `OrderByFields = { ... }`. See [OrderByField](OrderByField.md).
 
 - `GroupSize` (*int?*) -
 

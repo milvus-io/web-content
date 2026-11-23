@@ -28,6 +28,10 @@ GetPersistentSegmentInfoResp result = await client.GetPersistentSegmentInfoAsync
 
     The name of the collection whose persistent segment info to retrieve.
 
+- `States` (*IReadOnlyList\<SegmentState\>?*) -
+
+    Optional segment states to filter by. When empty, the server returns persistent segments of every state (legacy behavior). See [SegmentState](SegmentState.md).
+
 **RETURN TYPE:**
 
 *Task\<GetPersistentSegmentInfoResp\>*

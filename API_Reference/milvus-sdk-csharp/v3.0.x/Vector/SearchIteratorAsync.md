@@ -78,7 +78,7 @@ SearchIterator iterator = client.SearchIteratorAsync(request);
 
 - `Parameters` (*SearchParameters?*) -
 
-    The optional search parameters. See [SearchParameters](SearchParameters.md).
+    The optional search parameters. See [SearchParameters](SearchParameters.md). `OrderByFields` is rejected for iterators: the `search_iter_v2` token protocol pages independently of ordering.
 
 - `BatchSize` (*int*) -
 

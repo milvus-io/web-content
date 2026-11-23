@@ -7,7 +7,7 @@ The .NET SDK of Milvus, provided by the `Milvus.Client.V2` NuGet package. Its so
 You can use [.NET CLI](https://learn.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-using-the-dotnet-cli) to install and use the SDK.
 
 ```shell
-dotnet add package Milvus.Client.V2 --version 3.0.0
+dotnet add package Milvus.Client.V2 --version 3.0.1
 ```
 
 ## Quick Start
@@ -86,7 +86,7 @@ Milvus proto is backward compatible — later SDK versions can work with earlier
 
 | Milvus version | NuGet package | Recommended version |
 | --- | --- | --- |
-| 3.0.x | Milvus.Client.V2 | 3.0.0 |
+| 3.0.x | Milvus.Client.V2 | 3.0.1 |
 | 2.3.x | Milvus.Client (V1) | 2.3.0-preview.1 |
 | 2.2.x | Milvus.Client (V1) | 2.2.2-preview.6 |
 

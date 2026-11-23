@@ -39,6 +39,7 @@ public sealed class ConnectConfig
     public ILoggerFactory? LoggerFactory { get; set; }
     public GrpcChannelOptions? ChannelOptions { get; set; }
     public RetryConfig? Retry { get; set; }
+    public TelemetryConfig? Telemetry { get; set; }
 }
 ```
 
@@ -91,6 +92,10 @@ public sealed class ConnectConfig
 - `Retry` (*RetryConfig?*) -
 
     The retry policy applied to RPC calls. When `null`, a default [RetryConfig](#retryconfig) is used.
+
+- `Telemetry` (*TelemetryConfig?*) -
+
+    The client-side telemetry configuration. When `null`, telemetry is enabled with default settings. See [TelemetryConfig](TelemetryConfig.md).
 
 ## RetryConfig
 

@@ -8,7 +8,11 @@ public sealed class EmbeddingList
     public EmbeddingList() { }
     public EmbeddingList(IEnumerable<ReadOnlyMemory<float>> vectors) { ... }
     public EmbeddingList Add(ReadOnlyMemory<float> vector) { ... }
+    public EmbeddingList AddBinary(ReadOnlyMemory<byte> vector) { ... }
+    public EmbeddingList AddInt8(ReadOnlyMemory<sbyte> vector) { ... }
     public IReadOnlyList<ReadOnlyMemory<float>> Vectors { get; }
+    public IReadOnlyList<ReadOnlyMemory<byte>> BinaryVectors { get; }
+    public IReadOnlyList<ReadOnlyMemory<sbyte>> Int8Vectors { get; }
     public int Count { get; }
 }
 ```
@@ -17,7 +21,15 @@ public sealed class EmbeddingList
 
 - `Vectors` (*IReadOnlyList\<ReadOnlyMemory\<float\>\>*) -
 
-    The vectors in the list.
+    The float vectors in the list (empty when the list carries binary or int8 vectors).
+
+- `BinaryVectors` (*IReadOnlyList\<ReadOnlyMemory\<byte\>\>*) -
+
+    The binary vectors in the list (empty when the list carries float or int8 vectors).
+
+- `Int8Vectors` (*IReadOnlyList\<ReadOnlyMemory\<sbyte\>\>*) -
+
+    The int8 vectors in the list (empty when the list carries float or binary vectors).
 
 - `Count` (*int*) -
 
@@ -31,11 +43,19 @@ public sealed class EmbeddingList
 
 - `EmbeddingList(IEnumerable<ReadOnlyMemory<float>> vectors)` (*constructor*) -
 
-    Creates an embedding list from the given vectors.
+    Creates an embedding list from the given float vectors.
 
 - `Add(ReadOnlyMemory<float> vector)` -
 
-    Adds a vector to the list and returns this instance.
+    Adds a float vector to the list and returns this instance.
+
+- `AddBinary(ReadOnlyMemory<byte> vector)` -
+
+    Adds a binary vector to the list and returns this instance.
+
+- `AddInt8(ReadOnlyMemory<sbyte> vector)` -
+
+    Adds an int8 vector to the list and returns this instance.
 
 ## Example
 
