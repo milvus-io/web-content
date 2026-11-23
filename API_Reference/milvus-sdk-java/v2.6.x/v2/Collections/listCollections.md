@@ -26,15 +26,7 @@ A **ListCollectionsResp** object containing a list of collection names. If there
 
 - `getCollectionInfos()` (*List<CollectionInfo>*) -
 
-    A list of **CollectionInfo** objects. See [CollectionInfo](CollectionInfo.md). A **CollectionInfo** object has the following getters:
-
-    - `getCollectionName()` (*String*) -
-
-        The name of a collection.
-
-    - `getShardNum()` (*Integer*) -
-
-        The number of shards in the above collection.
+    A list of **CollectionInfo** objects. See [CollectionInfo](CollectionInfo.md).
 
 **EXCEPTIONS:**
 
