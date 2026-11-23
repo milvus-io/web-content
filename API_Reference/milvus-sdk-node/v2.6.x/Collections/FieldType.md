@@ -32,7 +32,7 @@ export type FieldType = {
 
 - **data_type** (*DataType | keyof typeof DataTypeMap*) -
 
-    The field data type.
+    The field data type. `DataTypeMap` maps each `DataType` key to its numeric value, so a key name is also accepted here.
 
 - **element_type** (*DataType | keyof typeof DataTypeMap*) -
 
