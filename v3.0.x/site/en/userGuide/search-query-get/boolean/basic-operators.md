@@ -970,9 +970,11 @@ Starting in Milvus 3.0.3, the operators also support ordinary vector fields: `FL
 
 The operators are case-insensitive: `IS NULL` and `is null` are equivalent, as are `IS NOT NULL` and `is not null`.
 
-### Example: Find entities with missing or available values
+<a id="Example-Find-entities-with-missing-or-available-values"></a>
 
-Assume a collection named `products` is indexed and loaded on Milvus 3.0.3 or later. The collection has an `INT64` primary key named `id`, a nullable `VARCHAR` field named `category`, and a nullable, three-dimensional `FLOAT_VECTOR` field named `embedding`. It already contains the following entities:
+### Example: Find entities with missing vectors | Milvus 3.0.3
+
+Suppose you add products to a collection before generating their vectors. In this example, the `products` collection is indexed and loaded. It has an `INT64` primary key named `id`, a nullable `VARCHAR` field named `category`, and a nullable, three-dimensional `FLOAT_VECTOR` field named `embedding`. The following table shows which products have a vector.
 
 | `id` | `category` | `embedding` |
 | --- | --- | --- |
@@ -982,7 +984,7 @@ Assume a collection named `products` is indexed and loaded on Milvus 3.0.3 or la
 
 Collection creation and data insertion are omitted. For those steps, see [Nullable Fields](nullable-and-default.md).
 
-To find entities that still need an embedding, query for `embedding IS NULL`. Adjust the connection settings for your server.
+To find products that still need a vector, call `query()` with the filter `embedding IS NULL`. Replace `embedding` with your vector field name and adjust the connection settings for your server. In this example, the query returns ID `3` because that product's vector is NULL.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1181,6 +1183,8 @@ Replace the `filter` in the same query to check either field or combine conditio
 | `embedding IS NULL` | `3` | Find entities without an embedding |
 | `embedding IS NOT NULL` | `1`, `2` | Find entities with an embedding |
 | `category IS NOT NULL AND embedding IS NOT NULL` | `1` | Find entities with both values |
+
+If each product has several chunks and each chunk stores its own vector, use a [StructArray filter to find products with a missing chunk vector](struct-array-operators.md#Find-entities-with-missing-vectors-in-StructArray-elements).
 
 <a id="Regular-scalar-fields-with-null-values"></a>
 <a id="JSON-fields-with-null-values"></a>

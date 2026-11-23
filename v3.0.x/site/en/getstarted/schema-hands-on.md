@@ -219,7 +219,7 @@ import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/entity"
+import "github.com/milvus-io/milvus/client/v3/entity"
 
 schema := entity.NewSchema()
 ```

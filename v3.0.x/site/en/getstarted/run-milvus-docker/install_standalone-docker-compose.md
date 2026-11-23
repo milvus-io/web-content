@@ -18,7 +18,7 @@ This page illustrates how to launch a Milvus instance in Docker using Docker Com
 
 ## Install Milvus
 
-Milvus provides a Docker Compose configuration file in the Milvus repository. Download the configuration for v3.0.5 and start a new deployment:
+Milvus provides a Docker Compose configuration file in the Milvus repository. Download the configuration for v3.0.5 with the `wget` command below. Right after the download, before you edit the file or start Milvus with `sudo docker compose up -d`, run `sha256sum docker-compose.yaml` and compare the result with the `sha256` digest listed for `milvus-standalone-docker-compose.yaml` on the [v3.0.5 release page](https://github.com/milvus-io/milvus/releases/tag/v3.0.5):
 
 ```shell
 # Download the configuration file
@@ -26,10 +26,6 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-stand
 
 # Start Milvus
 $ sudo docker compose up -d
-
-Creating milvus-etcd  ... done
-Creating milvus-minio ... done
-Creating milvus-standalone ... done
 ```
 
 <div class="alert note">
@@ -54,19 +50,29 @@ After starting up Milvus,
 
 - Containers named **milvus-standalone**, **milvus-minio**, and **milvus-etcd** are up.
   - The **milvus-etcd** container does not expose any ports to the host and maps its data to **volumes/etcd** in the current folder.
-  - The **milvus-minio** container serves ports **9000** and **9001** locally with the default authentication credentials and maps its data to **volumes/minio** in the current folder.
-  - The **milvus-standalone** container serves ports **19530** locally with the default settings and maps its data to **volumes/milvus** in the current folder.
+  - The **milvus-minio** container publishes ports **9000** and **9001** with the default authentication credentials and maps its data to **volumes/minio** in the current folder.
+  - The **milvus-standalone** container publishes ports **19530** and **9091** with the default settings and maps its data to **volumes/milvus** in the current folder.
+
+The `standalone` service sets `security_opt: seccomp:unconfined`, so the Milvus container runs without the default Docker seccomp profile.
+
+<div class="alert warning">
+
+> The configuration file publishes these ports without a host address. Docker publishes a port without a host address on all host addresses, so other machines that can reach this host can also connect to Milvus and MinIO. MinIO uses the access key and secret key `minioadmin`, which are set in the configuration file. To limit access to this host, add `127.0.0.1:` to the `ports` entries of the `minio` and `standalone` services in `docker-compose.yaml`, for example `"127.0.0.1:19530:19530"`, and run `sudo docker compose up -d` again. To use other MinIO credentials, change `MINIO_ACCESS_KEY` and `MINIO_SECRET_KEY` of the `minio` service, and set the same values in `minio.accessKeyID` and `minio.secretAccessKey` of the Milvus configuration. To require credentials for Milvus connections, see [Authenticate User Access](authenticate.md).
+
+</div>
 
 You can check if the containers are up and running using the following command:
 
 ```shell
-$ docker compose ps
+$ sudo docker compose ps
 
 NAME                IMAGE   COMMAND                  SERVICE      CREATED         STATUS                   PORTS
 milvus-etcd         …       "etcd -advertise-cli…"   etcd         2 minutes ago   Up 2 minutes (healthy)   2379-2380/tcp
-milvus-minio        …       "/usr/bin/docker-ent…"   minio        2 minutes ago   Up 2 minutes (healthy)   9000-9001/tcp
+milvus-minio        …       "/usr/bin/docker-ent…"   minio        2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9000-9001->9000-9001/tcp
 milvus-standalone   …       "/tini -- milvus run…"   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091->9091/tcp, 0.0.0.0:19530->19530/tcp
 ```
+
+The `PORTS` column can also list each published port with the IPv6 address `[::]`, for example `[::]:19530->19530/tcp`, because Docker publishes a port without a host address on both `0.0.0.0` and `[::]`.
 
 You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
 
@@ -74,30 +80,40 @@ To try the running server, follow the **Use an existing Milvus server** path in 
 
 ## (Optional) Update Milvus configurations
 
-To update Milvus configuration to suit your needs, you need to modify the `/milvus/configs/user.yaml` file within the `milvus-standalone` container.
+To update Milvus configuration to suit your needs, put your settings in a `user.yaml` file on the host and mount it at `/milvus/configs/user.yaml` in the `milvus-standalone` container. The configuration file mounts only `/var/lib/milvus` into this container, so a `user.yaml` that you edit inside the container is lost when Compose recreates the container, for example after a change to `docker-compose.yaml` or to the Milvus image.
 
-1. Access the `milvus-standalone` container.
-
-    ```shell
-    docker exec -it milvus-standalone bash
-    ```
-
-1. Add extra configurations to override the default ones. 
+1. Create `user.yaml` in the folder that contains `docker-compose.yaml`. Create the file before you mount it: if the source path does not exist, Compose creates a directory with that name instead.
   The following assumes that you need to override the default `proxy.healthCheckTimeout`. For applicable configuration items, refer to [System Configuration](system_configuration.md).
 
     ```shell
-    cat << EOF > /milvus/configs/user.yaml
+    cat << EOF > user.yaml
     # Extra config to override default milvus.yaml
     proxy:
       healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
     EOF
     ```
 
-1. Restart the `milvus-standalone` container to apply the changes.
+1. In `docker-compose.yaml`, add the file to the `volumes` list of the `standalone` service. Keep the other settings of the service, such as `security_opt`, `healthcheck`, and `depends_on`, as they are.
+
+    ```yaml
+    services:
+      standalone:
+        volumes:
+          - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+          - ./user.yaml:/milvus/configs/user.yaml
+    ```
+
+1. Apply the change. Because the service configuration changed, Compose recreates the `milvus-standalone` container and keeps the data in its mounted volumes.
 
     ```shell
-    docker restart milvus-standalone
+    sudo docker compose up -d
     ```
+
+After the file is mounted, restart the `standalone` service to apply later changes to `user.yaml`:
+
+```shell
+sudo docker compose restart standalone
+```
 
 ## Stop and delete Milvus
 
@@ -158,7 +174,7 @@ Having installed Milvus in Docker, you can:
   - [Hybrid Search](multi-vector-search.md)
 
 - [Upgrade Milvus Standalone with Docker Compose](upgrade_milvus_standalone-docker.md).
-- [Scale your Milvus cluster](scaleout.md).
+- [Scale a Milvus cluster](scaleout.md) on Kubernetes. That procedure uses Helm and does not apply to this Docker deployment.
 - Deploy your Milvus cluster on clouds:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)

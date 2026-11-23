@@ -177,7 +177,7 @@ Release date: September 20, 2026
 
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
 | -------------- | ------------------ | ------------------- | ---------------- | -------------- |
-| 3.0.2          | 3.0.2              | 3.0.6               | 3.0.10           | 3.0.2          |
+| 3.0.2          | 3.0.2              | 3.0.6               | 3.0.10           | 3.0.0          |
 
 We are excited to announce the release of Milvus v3.0.2! This release focuses on search and query performance — removing hot-path contention in filtered search, group-by, and index building — along with stronger external collection and Storage V2 support, and a broad set of stability fixes across streaming, compaction, and index management.
 
@@ -236,7 +236,7 @@ Release date: September 9, 2026
 
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
 | -------------- | ------------------ | ------------------- | ---------------- | -------------- |
-| 3.0.1          | 3.0.1              | 3.0.5               | 3.0.9            | 3.0.1          |
+| 3.0.1          | 3.0.1              | 3.0.5               | 3.0.9            | 3.0.0          |
 
 We are excited to announce the release of Milvus v3.0.1! This release adds REST v2 snapshot management, expanded reranking capabilities, and TEXT field support in the Go client and RESTful API, alongside performance improvements and fixes for Storage V3, data consistency, and security.
 

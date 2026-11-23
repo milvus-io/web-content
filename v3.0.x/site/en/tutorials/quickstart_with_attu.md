@@ -22,7 +22,7 @@ Before starting, prepare the following:
 - A Python environment with a PyMilvus version compatible with your server. See [Install Milvus Python SDK](install-pymilvus.md) and [Release Notes](release_notes.md). For the SDK version used in this documentation branch, install the model extra and progress-bar dependency:
 
 ```bash
-python3 -m pip install "pymilvus[model]==3.0.2" tqdm
+python3 -m pip install "pymilvus[model]==3.0.3" tqdm
 ```
 
 The data-preparation steps also use `wget` and `unzip`. The embedding function downloads its model on first use, so allow network access to the model host or prepare the model cache in advance. Screenshots illustrate the workflow; labels and layouts can differ between Attu releases.

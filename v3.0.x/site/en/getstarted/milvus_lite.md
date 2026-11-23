@@ -22,13 +22,13 @@ Milvus Lite uses the `MilvusClient` API for supported operations, including vect
 
 ## Prerequisites
 
-This guide uses PyMilvus **3.0.2** and Milvus Lite **3.2.2**. Prepare the following environment:
+This guide uses PyMilvus **3.0.3** and Milvus Lite **3.2.2**. Prepare the following environment:
 
 - Python 3.10 or newer. The local Lite backend has a higher minimum Python version than the remote PyMilvus client.
 - macOS, Linux, or Windows, with compatible wheels for dependencies such as `faiss-cpu` and `pyarrow`. Milvus Lite 3.2.2 is a pure-Python package, so the operating system and architecture must satisfy those dependencies rather than the Lite package itself.
 - A writable local directory for database storage.
 
-On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.2 because of its platform marker, so `milvus-lite` must be named explicitly. The install command below already does this. For other package and platform combinations, consult the [Milvus Lite release requirements](https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements).
+On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.3 because of its platform marker, so `milvus-lite` must be named explicitly. The install command below already does this. For other package and platform combinations, consult the [Milvus Lite release requirements](https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements).
 
 ## Set up Milvus Lite
 
@@ -37,7 +37,7 @@ Create an isolated Python environment and install both packages:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
+python -m pip install "pymilvus[milvus-lite]==3.0.3" "milvus-lite==3.2.2"
 ```
 
 Quote the extras expression so shells such as zsh do not interpret the brackets. On Windows PowerShell, activate the environment with `.venv\Scripts\Activate.ps1` instead of `source .venv/bin/activate`. The explicit versions keep the SDK and local backend aligned with this guide.
@@ -155,7 +155,7 @@ Use `milvus-lite dump` to export a collection as Milvus BulkWriter JSON files. T
 Install the SDK's bulk writer dependencies in the environment that opens the source database:
 
 ```bash
-python -m pip install "pymilvus[bulk_writer]==3.0.2"
+python -m pip install "pymilvus[bulk_writer]==3.0.3"
 milvus-lite dump -h
 ```
 

@@ -15,7 +15,7 @@ Milvus supports local prototypes and large-scale vector search services. Choose 
 For the local examples, use Python 3.10 or later and install the optional Lite dependency explicitly. On Windows, pip skips the `milvus-lite` extra, so the explicit package name is required:
 
 ```bash
-python3 -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
+python3 -m pip install "pymilvus[milvus-lite]==3.0.3" "milvus-lite==3.2.2"
 ```
 
 Use `MilvusClient("./demo.db")` to open local storage. Milvus Lite 3.x creates a directory at this path; an existing Milvus Lite 2.x database file requires export and migration. See [Run Milvus Lite](milvus_lite.md) for platform requirements and [Quickstart](quickstart.md) for a complete insert-and-search example.

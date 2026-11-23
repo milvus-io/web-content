@@ -12,9 +12,9 @@ This page describes how to install PyMilvus, the Python SDK for Milvus, and choo
 
 ## Requirements
 
-- PyMilvus 3.0.2 requires Python 3.9 or later for connecting to a remote Milvus server.
+- PyMilvus 3.0.3 requires Python 3.9 or later for connecting to a remote Milvus server.
 - The local Milvus Lite 3.2.2 examples require Python 3.10 or later and a supported platform. See [Run Milvus Lite Locally](milvus_lite.md).
-- Install dependencies through `pip`. PyMilvus 3.0.2 requires `protobuf>=5.27.2`; do not separately pin `protobuf==3.20.0`. You do not need `grpcio-tools` to use the SDK.
+- Install dependencies through `pip`. PyMilvus 3.0.3 requires `protobuf>=5.27.2`; do not separately pin `protobuf==3.20.0`. You do not need `grpcio-tools` to use the SDK.
 
 ## Install PyMilvus via pip
 
@@ -25,7 +25,7 @@ It is recommended to install a PyMilvus version that matches the version of the 
 </div>
 
 ```bash
-python3 -m pip install "pymilvus==3.0.2"
+python3 -m pip install "pymilvus==3.0.3"
 ```
 
 This installs the client for a remote Milvus server. It does not install Milvus Lite or an embedding model.
@@ -33,16 +33,16 @@ This installs the client for a remote Milvus server. It does not install Milvus 
 For the local database used in [Quickstart](quickstart.md), install the `milvus-lite` extra and the matching Lite package:
 
 ```bash
-python3 -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
+python3 -m pip install "pymilvus[milvus-lite]==3.0.3" "milvus-lite==3.2.2"
 ```
 
 For embedding helpers, install the separate `model` extra:
 
 ```bash
-python3 -m pip install "pymilvus[model]==3.0.2"
+python3 -m pip install "pymilvus[model]==3.0.3"
 ```
 
-On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.2 because of its platform marker. The command above names `milvus-lite` explicitly, so it installs on Windows as long as wheels for `faiss-cpu` and `pyarrow` exist for your Python version.
+On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.3 because of its platform marker. The command above names `milvus-lite` explicitly, so it installs on Windows as long as wheels for `faiss-cpu` and `pyarrow` exist for your Python version.
 
 ## Verify installation
 

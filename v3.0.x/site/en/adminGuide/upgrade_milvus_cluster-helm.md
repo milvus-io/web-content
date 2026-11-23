@@ -49,7 +49,8 @@ Save the complete values of the current release and check the running Pods:
 ```bash
 helm get values <release-name> \
   --namespace <namespace> \
-  --all > milvus-values-before-upgrade.yaml
+  --all \
+  --output yaml > milvus-values-before-upgrade.yaml
 
 kubectl get pods --namespace <namespace>
 ```

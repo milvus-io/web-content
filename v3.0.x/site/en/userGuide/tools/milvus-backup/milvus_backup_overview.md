@@ -67,4 +67,4 @@ Before a cross-version migration, verify the source version, target version, and
 
 ## Release notes
 
-- [v0.6.0](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0)
+- [v0.6.2](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.2)

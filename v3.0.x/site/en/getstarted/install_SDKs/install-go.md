@@ -10,18 +10,18 @@ title: Install Milvus Go SDK
 
 This topic describes how to install Milvus Go SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+Milvus provides SDKs for Python, Go, Java, Node.js, and C#, and a RESTful API.
 
 ## Requirement
 
-GO (1.17 or later) is required.
+GO (1.24.9 or later) is required.
 
 ## Install Milvus GO SDK
 
 Install the Milvus GO SDK and dependencies via `go get`.
 
 ```bash
-$ go get -u github.com/milvus-io/milvus/client/v2
+$ go get github.com/milvus-io/milvus/client/v3@v3.0.0
 ```
 
 ## What's next

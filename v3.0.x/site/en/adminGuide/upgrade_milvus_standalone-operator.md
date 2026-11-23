@@ -49,7 +49,7 @@ kubectl get milvus <instance-name> \
   --output yaml > milvus-before-upgrade.yaml
 ```
 
-Use the source manifest for your existing deployment as the upgrade manifest. Do not apply the exported backup file directly without first removing server-managed metadata and status fields.
+Use the source manifest for your existing deployment (`milvus.yaml` in this guide) as the upgrade manifest. Do not apply the exported backup file directly without first removing server-managed metadata and status fields.
 
 ### Step 2: Confirm the Milvus Operator version
 
@@ -100,3 +100,10 @@ kubectl get pods --namespace <namespace> \
 ```
 
 Verify that the Milvus CR reports `Healthy`, the current image is `milvusdb/milvus:v3.0.5`, and the existing collections remain queryable and searchable. Complete these checks before you enable any v3.0.5-specific feature.
+
+<div class="alert note">
+
+Upgrading to Milvus 3.0 does not enable Storage V3. After you verify the upgrade, review [Storage V3](storage-v3.md) before enabling features that depend on it. Once Milvus writes Storage V3 data, downgrading to an older Milvus version that cannot read Storage V3 is not supported.
+
+</div>
+

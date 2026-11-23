@@ -365,6 +365,20 @@ MATCH_ANY(chunks, array_contains($[tags], "tuning"))
 
 Row-level positional paths follow the same rule: `chunks[0][lang] == "en"` is unknown when the `lang` value of the first element is null, when the entity has no element at that position, or when the StructArray field is null, so the entity does not match.
 
+### Find entities with missing vectors in StructArray elements
+
+Suppose each product stores pieces of its description in a StructArray field named `chunks`. Each chunk has a vector subfield named `embedding` that allows NULL when its vector is missing. Product A has two chunks and one is missing its vector. Both chunks for product B have vectors.
+
+For schema setup, see [Allow null values in Struct elements](create-structarray-field.md#Allow-null-values-in-Struct-elements).
+
+To find products with at least one chunk missing its vector, pass this filter to `query()`.
+
+```text
+MATCH_ANY(chunks, $[embedding] IS NULL)
+```
+
+`$[embedding]` refers to the vector in the current chunk. `MATCH_ANY` selects a product when at least one of its chunks has a NULL vector. The query returns product A.
+
 ## Unsupported predicates
 
 Element-level `$[...]` predicates do not support:

@@ -21,13 +21,13 @@ Choose one path: use Milvus Lite for a local example, or connect to a Milvus ser
 
 This guide uses Milvus Lite, an optional dependency of the PyMilvus Python SDK that runs locally. For a server deployment, see [Docker](install_standalone-docker.md) or [Kubernetes](install_cluster-milvusoperator.md).
 
-Use Python 3.10 or later on macOS, Linux, or Windows, with binary wheels available for Milvus Lite's dependencies such as `faiss-cpu` and `pyarrow`. The examples use PyMilvus 3.0.2 and Milvus Lite 3.2.2. Install both packages explicitly:
+Use Python 3.10 or later on macOS, Linux, or Windows, with binary wheels available for Milvus Lite's dependencies such as `faiss-cpu` and `pyarrow`. The examples use PyMilvus 3.0.3 and Milvus Lite 3.2.2. Install both packages explicitly:
 
 ```bash
-python3 -m pip install "pymilvus[milvus-lite]==3.0.2" "milvus-lite==3.2.2"
+python3 -m pip install "pymilvus[milvus-lite]==3.0.3" "milvus-lite==3.2.2"
 ```
 
-On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.2; the command above names `milvus-lite` explicitly, so the local path works there as well. For SDK-only installation requirements, see [Install Milvus Python SDK](install-pymilvus.md).
+On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.3; the command above names `milvus-lite` explicitly, so the local path works there as well. For SDK-only installation requirements, see [Install Milvus Python SDK](install-pymilvus.md).
 
 <div class="alert note">
 
@@ -37,10 +37,10 @@ On Windows, pip skips the `milvus-lite` extra of PyMilvus 3.0.2; the command abo
 
 ### Use an existing Milvus server
 
-If you have already installed Milvus with Docker or Kubernetes, or have a Zilliz Cloud endpoint, install only the SDK. PyMilvus 3.0.2 requires Python 3.9 or later; you do not need the local Lite dependency for this path:
+If you have already installed Milvus with Docker or Kubernetes, or have a Zilliz Cloud endpoint, install only the SDK. PyMilvus 3.0.3 requires Python 3.9 or later; you do not need the local Lite dependency for this path:
 
 ```bash
-python3 -m pip install "pymilvus==3.0.2"
+python3 -m pip install "pymilvus==3.0.3"
 ```
 
 Use the server connection block in the next section instead of opening a `.db` path. Confirm that the SDK version is compatible with your server; see [Release Notes](release_notes.md).
@@ -91,7 +91,7 @@ In the above setup,
 - The primary key and vector fields use their default names ("id" and "vector").
 - The metric type (vector distance definition) is set to its default value ([COSINE](https://milvus.io/docs/metric.md#Cosine-Similarity)).
 - The primary key field accepts integers and does not automatically increment (namely, not using [auto-id feature](https://milvus.io/docs/schema.md)).
-  Alternatively, you can formally define the schema of the collection by following this [instruction](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md).
+  Alternatively, you can formally define the schema of the collection by following this [instruction](https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/create_schema.md).
 
 ## Prepare Data
 
@@ -102,7 +102,7 @@ In this guide, we use vectors to perform semantic search on text. We need to gen
 First, install the model library. This package includes essential ML tools such as PyTorch. The package download may take some time if your local environment has never installed PyTorch.
 
 ```bash
-python3 -m pip install "pymilvus[model]==3.0.2"
+python3 -m pip install "pymilvus[model]==3.0.3"
 ```
 
 Generate vector embeddings with default model. Milvus expects data to be inserted organized as a list of dictionaries, where each dictionary represents a data record, termed as an entity.
@@ -348,7 +348,7 @@ After completing the local example, choose a next step:
 - Design fields and filters for your own data with [Data Model Design for Search](schema-hands-on.md).
 - Compare local and server requirements with [Milvus Deployment Options](install-overview.md).
 
-Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
+Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on [Docker](https://milvus.io/docs/install_standalone-docker.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md). All deployment modes of Milvus share the same API, so your client side code doesn't need to change much if moving to another deployment mode. Simply specify the [URI and Token](https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Client/MilvusClient.md) of a Milvus server deployed anywhere:
 
 ```python
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")

@@ -53,7 +53,7 @@ const client = new MilvusClient({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 c, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
@@ -124,7 +124,7 @@ const client = new MilvusClient({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 c, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
@@ -165,7 +165,7 @@ Set a default timeout on the client connection:
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri="http://localhost:19530", timeout=1000) # If not set, the timeout defaults to 10s
+client = MilvusClient(uri="http://localhost:19530", timeout=1) # Unit: seconds. If not set, the client waits up to 10 seconds to connect.
 ```
 
 ```java
@@ -193,7 +193,7 @@ const client = new MilvusClient({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 defer cancel()
@@ -280,7 +280,7 @@ const client = new MilvusClient({
 ```
 
 ```go
-import "github.com/milvus-io/milvus/client/v2/milvusclient"
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
 
 c, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",

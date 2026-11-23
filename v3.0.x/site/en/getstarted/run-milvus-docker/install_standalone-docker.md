@@ -51,11 +51,25 @@ After running the installation script:
 - To change the default Milvus configuration, add your settings to the **user.yaml** file in the current folder and then restart the service.
 - The Milvus data volume is mapped to **volumes/milvus** in the current folder.
 
+The `start` command prints `Wait for Milvus Starting...` and then checks once per second until `docker ps` reports the container as healthy. This check has no time limit. If the command does not return, check the container logs from another terminal:
+
+```bash
+sudo docker logs milvus-standalone
+```
+
+The script runs its `docker` commands with `sudo`. Each `start` first runs a short-lived container from the Milvus image as `root`, which recursively changes the owner of **volumes/milvus** to the `milvus` user of the image unless a `.milvus-volume-owner-*` marker file in that folder shows that this was already done. The script starts the Milvus container with `--security-opt seccomp:unconfined`, so the container runs without the default Docker seccomp profile.
+
+<div class="alert warning">
+
+> The script publishes ports **19530**, **9091**, and **2379** without a host address, and **embedEtcd.yaml** sets etcd to listen on `http://0.0.0.0:2379`. Docker publishes a port without a host address on all host addresses, so other machines that can reach this host can also connect to Milvus and etcd. To limit access to this host, edit the `-p` options in `standalone_embed.sh` before the first `start`, for example `-p 127.0.0.1:19530:19530`, and remove `-p 2379:2379` if you do not connect to etcd from outside the container. If a `milvus-standalone` container already exists, `start` starts it again with its original options. To require credentials for Milvus connections, see [Authenticate User Access](authenticate.md).
+
+</div>
+
 Verify the actual image and health status:
 
 ```bash
-docker inspect --format '{{.Config.Image}}' milvus-standalone
-docker inspect --format '{{.State.Health.Status}}' milvus-standalone
+sudo docker inspect --format '{{.Config.Image}}' milvus-standalone
+sudo docker inspect --format '{{.State.Health.Status}}' milvus-standalone
 ```
 
 Wait for `healthy` before following [Quickstart](quickstart.md). When using this server, connect the SDK to `http://localhost:19530`; a local `.db` URI starts Milvus Lite instead.
@@ -130,7 +144,7 @@ Having installed Milvus in Docker, you can:
   - [Hybrid Search](multi-vector-search.md)
 
 - Review the upgrade considerations on this page before changing the Milvus version.
-- [Scale your Milvus cluster](scaleout.md).
+- [Scale a Milvus cluster](scaleout.md) on Kubernetes. That procedure uses Helm and does not apply to this Docker deployment.
 - Deploy your Milvu cluster on clouds:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)

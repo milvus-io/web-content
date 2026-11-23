@@ -10,7 +10,7 @@ title: Install Milvus Java SDK
 
 This topic describes how to install Milvus Java SDK for Milvus.
 
-Current version of Milvus supports SDKs in Python, Node.js, GO, and Java.
+Milvus provides SDKs for Python, Go, Java, Node.js, and C#, and a RESTful API.
 
 ## Requirement
 
@@ -27,14 +27,14 @@ Run the following command to install Milvus Java SDK.
 <dependency>
     <groupId>io.milvus</groupId>
     <artifactId>milvus-sdk-java</artifactId>
-    <version>3.0.12</version>
+    <version>3.0.13</version>
 </dependency>
 ```
 
 - Gradle/Grails
 
 ```
-implementation 'io.milvus:milvus-sdk-java:3.0.12'
+implementation 'io.milvus:milvus-sdk-java:3.0.13'
 ```
 
 ## What's next

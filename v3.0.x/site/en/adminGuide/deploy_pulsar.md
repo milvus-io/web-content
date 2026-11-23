@@ -22,14 +22,33 @@ You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-start
 
 ### 1. Configure Pulsar
 
-To configure Pulsar with Docker Compose, provide your values for the `pulsar` section in the `milvus.yaml` file on the milvus/configs path.
+The Docker Compose configuration attached to the Milvus release does not include a Pulsar service. To use an existing Pulsar service with Milvus standalone, create a `user.yaml` file and provide your values for the `pulsar` section:
 
-```
+```yaml
 pulsar:
-  address: localhost # Address of pulsar
+  address: <your_pulsar_address> # Address of pulsar
   port: 6650 # Port of pulsar
-  maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+  maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
 ```
+
+In your Docker Compose file, set `MQ_TYPE` to `pulsar` in the `environment` section of the `standalone` service, and map the local path to your `user.yaml` file onto `/milvus/configs/user.yaml` in its `volumes` section. Keep the existing entries in both sections:
+
+```yaml
+services:
+  standalone:
+    environment:
+      MINIO_REGION: us-east-1
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+      MQ_TYPE: pulsar
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+      - /local/path/to/your/user.yaml:/milvus/configs/user.yaml
+```
+
+Milvus reads `/milvus/configs/user.yaml` after `milvus.yaml`, so the values in `user.yaml` override the defaults. The `MQ_TYPE` environment variable sets `mq.type`, which selects the message queue, and takes precedence over the configuration files.
+
+Set the message queue before you start a new deployment for the first time. Milvus records `mq.type` in etcd when it first starts and does not overwrite the recorded value later.
 
 See [Pulsar-related configurations](configure_pulsar.md) for more information.
 
@@ -41,18 +60,25 @@ Run the following command to start Milvus that uses the Pulsar configurations.
 docker compose up
 ```
 
-<div class="alert note">Configurations only take effect after Milvus starts. See <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Start Milvus</a> for more information.</div>
+<div class="alert note">Configurations only take effect after Milvus starts. See <a href="install_standalone-docker-compose.md#Install-Milvus">Install Milvus</a> for more information.</div>
 
 
 ## Configure Pulsar with Helm
 
-For Milvus clusters on K8s, you can configure Pulsar in the same command that starts Milvus. Alternatively, you can configure Pulsar using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
+For Milvus clusters on K8s, you can configure Pulsar in the same command that starts Milvus. Alternatively, you can configure Pulsar using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) repository before you start Milvus.
 
 For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
-                                    |
+
+Add the Milvus Helm chart repository and update the local chart index before you install Milvus with any of the Helm commands on this page:
+
+```shell
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update
+```
+
 ### Using the YAML file
 
-1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file.
+1. Configure the <code>extraConfigFiles</code> section in the <code>values.yaml</code> file.
 
 ```yaml
 extraConfigFiles:
@@ -60,8 +86,8 @@ extraConfigFiles:
     pulsar:
       address: localhost # Address of pulsar
       port: 6650 # Port of Pulsar
-      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
-      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      webport: 80 # Web port of pulsar, if you connect directly without proxy, should use 8080
+      maxMessageSize: 2097152 # 2 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
       tenant: public
       namespace: default    
 ```
@@ -69,18 +95,18 @@ extraConfigFiles:
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Pulsar configurations.
 
 ```shell
-helm install <your_release_name> milvus/milvus -f values.yaml
+helm install <your_release_name> zilliztech/milvus -f values.yaml
 ```
 
 ## Configure Woodpecker with Helm
 
-For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
+For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) repository before you start Milvus.
 
 For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](woodpecker.md).
-                                    |
+
 ### Using the YAML file
 
-1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file.
+1. Configure the <code>extraConfigFiles</code> section in the <code>values.yaml</code> file.
 
 ```yaml
 extraConfigFiles:
@@ -124,18 +150,18 @@ extraConfigFiles:
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Woodpecker configurations.
 
 ```shell
-helm install <your_release_name> milvus/milvus -f values.yaml
+helm install <your_release_name> zilliztech/milvus -f values.yaml
 ```
 
 ## Configure Kafka with Helm
 
-For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
+For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yaml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/zilliztech/milvus-helm/tree/master/charts/milvus) repository before you start Milvus.
 
 For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
 
 ### Using the YAML file
 
-1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file if you want to use Kafka as the message storage system.
+1. Configure the <code>extraConfigFiles</code> section in the <code>values.yaml</code> file if you want to use Kafka as the message storage system.
 
 ```yaml
 extraConfigFiles:
@@ -152,7 +178,7 @@ extraConfigFiles:
 2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the Kafka configurations.
 
 ```shell
-helm install <your_release_name> milvus/milvus -f values.yaml
+helm install <your_release_name> zilliztech/milvus -f values.yaml
 ```
 
 ## Configure RocksMQ with Helm

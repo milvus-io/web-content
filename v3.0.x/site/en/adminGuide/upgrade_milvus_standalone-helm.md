@@ -40,7 +40,18 @@ This procedure does not validate a downgrade or rollback by changing the Milvus 
 
 ## Upgrade process
 
-### Step 1: Update the Helm repository
+### Step 1: Back up the current Helm values
+
+Save the complete values of the current release before changing the deployment:
+
+```bash
+helm get values <release-name> \
+  --namespace <namespace> \
+  --all \
+  --output yaml > milvus-values-before-upgrade.yaml
+```
+
+### Step 2: Update the Helm repository
 
 Add or update the Milvus Helm repository:
 
@@ -53,7 +64,7 @@ helm repo update zilliztech
 The Milvus Helm Charts repo at <code>https://milvus-io.github.io/milvus-helm/</code> has been archived. Use the new repo <code>https://zilliztech.github.io/milvus-helm/</code> for chart versions 4.0.31 and later.
 </div>
 
-### Step 2: Upgrade Milvus
+### Step 3: Upgrade Milvus
 
 Check the Chart version installed for your Helm release:
 
