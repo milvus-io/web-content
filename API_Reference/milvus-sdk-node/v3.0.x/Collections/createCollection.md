@@ -326,6 +326,8 @@ await milvusClient.createCollection({
 
     <!-- doc:block:start id="node-create-collection-external-spec-createcollectionreq" -->
     The external spec configuration. This applies to the creation of external collections.
+
+    The spec is a JSON string of secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
     <!-- doc:block:end id="node-create-collection-external-spec-createcollectionreq" -->
 
 - **file_resource_ids** (*Array<number | string>*) -
@@ -573,6 +575,8 @@ await milvusClient.createCollection({
 
     <!-- doc:block:start id="node-create-collection-external-spec-createcolwithschema" -->
     The external spec configuration. This applies to the creation of external collections.
+
+    The spec is a JSON string of secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
     <!-- doc:block:end id="node-create-collection-external-spec-createcolwithschema" -->
 
 - **file_resource_ids** (*Array<number | string>*) -

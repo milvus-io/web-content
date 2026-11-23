@@ -32,11 +32,13 @@ refreshExternalCollection(RefreshExternalCollectionReq.builder()
 
 - `externalSource(String externalSource)` -
 
-    The external data source identifier (e.g., `"s3"`, `"oss"`).
+    The external source URI.
+
+    Provide `externalSource` and `externalSpec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
 
 - `externalSpec(JsonObject externalSpec)` -
 
-    A JSON object describing the external storage configuration. Fields depend on `externalSource` (typically include `endpoint`, `bucket`, `path`, credentials).
+    A JSON object that carries the external source specifications, such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `externalSource` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 **RETURN TYPE:**
 

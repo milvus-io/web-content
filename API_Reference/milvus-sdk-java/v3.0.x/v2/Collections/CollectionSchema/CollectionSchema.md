@@ -47,6 +47,8 @@ CreateCollectionReq.CollectionSchema.builder()
 
     Specification for the external source — typically JSON describing connection details and refresh policy. Used together with `externalSource`.
 
+    The specification carries secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `externalSource` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
+
 **RETURN TYPE:**
 
 *CollectionSchema*

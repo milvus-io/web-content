@@ -18,7 +18,7 @@ class io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo
 
 - **getState()** (*String*) -
 
-    The refresh job state.
+    The refresh job state. Possible values are `RefreshPending`, `RefreshInProgress`, `RefreshCompleted`, and `RefreshFailed`. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`.
 
 - **getProgress()** (*int*) -
 

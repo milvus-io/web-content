@@ -1,6 +1,6 @@
 # RefreshExternalCollectionState
 
-Enumerates the possible states of a refresh external collection job.
+Enumerates the possible states of a refresh external collection job. A refresh job transitions from `RefreshStateInProgress` to `RefreshStateCompleted` or `RefreshStateFailed`.
 
 ```go
 type RefreshExternalCollectionState milvuspb.RefreshExternalCollectionState

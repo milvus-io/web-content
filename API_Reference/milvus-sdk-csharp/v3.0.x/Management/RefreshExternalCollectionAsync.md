@@ -31,9 +31,13 @@ RefreshExternalCollectionResp result = await client.RefreshExternalCollectionAsy
 
     An optional new external data source path (e.g. an S3 path). When empty, the collection's existing external source is kept.
 
+    Provide `ExternalSource` and `ExternalSpec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
+
 - `ExternalSpec` (*string?*) -
 
     An optional new external spec configuration (as a JSON string). When empty, the collection's existing external spec is kept.
+
+    The spec carries secondary parameters such as `format`. Possible `format` values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `ExternalSource` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
 **RETURN TYPE:**
 

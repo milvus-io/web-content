@@ -333,12 +333,12 @@ You can choose between a quick setup or a customized setup as follows:
     
     # connect the database
     client = MilvusClient(
-        uri="https://{project-id}.{region}.api.zillizcloud.com",
-        token="YOUR_API_KEY"
+        uri="http://localhost:19530",
+        token="root:Milvus"
     )
     
     schema = MilvusClient.create_schema(
-        external_source='volume://my_volume/path/to/a/folder/',
+        external_source='s3://my_bucket/path/to/a/folder/',
         external_spec='{"format": "parquet"}'
     )
     

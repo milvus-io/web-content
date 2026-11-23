@@ -57,7 +57,7 @@ The current state of the refresh job.
 
     - **state** (*RefreshExternalCollectionState*) -
 
-        The current job state. Possible values are **RefreshPending**, **RefreshInProgress**, **RefreshCompleted**, and **RefreshFailed**.
+        The current job state. Possible values are **RefreshPending**, **RefreshInProgress**, **RefreshCompleted**, and **RefreshFailed**. A refresh job transitions from **RefreshInProgress** to **RefreshCompleted** or **RefreshFailed**.
 
     - **progress** (*string*) -
 

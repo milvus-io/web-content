@@ -26,6 +26,8 @@ refresh_external_collection(
 
     The external source URI, which is similar to an AWS S3 object path.
 
+    Provide `external_source` and `external_spec` together, or omit both; when both are omitted, the refresh reuses the persisted source and spec.
+
 - **external_spec** (*str*) -
 
     The external source specifications, which are a set of secondary parameters:
@@ -34,7 +36,7 @@ refresh_external_collection(
 
         The format of the target source data files.
 
-        Possible values are `parquet`, `vortex`, `lance-table`, and `iceberg-table`.
+        Possible values are `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`. For `milvus-table`, set `external_source` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.
 
     - **snapshot_id** (*str*) -
 
