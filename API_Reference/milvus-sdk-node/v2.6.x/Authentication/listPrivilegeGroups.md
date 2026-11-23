@@ -39,15 +39,7 @@ This method returns a promise that resolves to a **ListPrivilegeGroupsResponse**
 
 - **privilege_groups** ([PrivelegeGroup](PrivelegeGroup.md)[]) -
 
-A list of privilege groups defined in the current Milvus instance. Each entry is a `PrivelegeGroup` with the following members.
-
-    - **group_name** (*string*) -
-
-        The name of the privilege group.
-
-    - **privileges** ([PrivilegeEntity](PrivilegeEntity.md)[]) -
-
-        The privileges contained in the group.
+A list of privilege groups defined in the current Milvus instance. For the member list, see [PrivelegeGroup](PrivelegeGroup.md).
 
 - **status** (*ResStatus*) -
 A **ResStatus** object with the following members.

@@ -67,41 +67,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## FunctionObject
 
-A **FunctionObject** defines a server-side function that automatically transforms data into vector embeddings during insert and search.
-
-**PARAMETERS:**
-
-- **name** (*string*) -
-
-    **[REQUIRED]**
-
-    The name of the function. Used to reference the function within queries and collections.
-
-- **type** (*FunctionType*) -
-
-    **[REQUIRED]**
-
-    The function type. Possible values: `FunctionType.BM25` (sparse embeddings from text using BM25), `FunctionType.TEXTEMBEDDING` (dense embeddings from text), `FunctionType.RERANK` (reranking function).
-
-    See [FunctionType](FunctionType.md).
-
-- **input_field_names** (*string[]*) -
-
-    **[REQUIRED]**
-
-    The names of the fields containing the raw data to transform. For `FunctionType.BM25`, exactly one field name is expected.
-
-- **output_field_names** (*string[]*) -
-
-    The names of the fields where the generated embeddings will be stored. For `FunctionType.BM25`, exactly one field name is expected.
-
-- **params** (*object*) -
-
-    Additional function parameters in key-value pairs.
-
-- **description** (*string*) -
-
-    A brief description of the function's purpose. Defaults to an empty string.
+The **function** parameter accepts a [FunctionObject](FunctionObject.md) that defines a server-side function which automatically transforms data into vector embeddings during insert and search. For the member list, see [FunctionObject](FunctionObject.md).
 
 ## Example
 

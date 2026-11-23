@@ -59,43 +59,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 - **index_descriptions** ([IndexDescription](IndexDescription.md)[]) -
 
-A list of index descriptions for the requested collection. When **field_name** or **index_name** is supplied, the list contains only the matching entry. Each entry is an `IndexDescription` with the following members.
-
-    - **index_name** (*string*) -
-
-        The index name.
-
-    - **indexID** (*number*) -
-
-        The internal index identifier.
-
-    - **params** (*KeyValuePair[]*) -
-
-        The index parameters captured at creation (for example, **index_type**, **metric_type**, **params**).
-
-    - **field_name** (*string*) -
-
-        The field on which the index is built.
-
-    - **indexed_rows** (*string*) -
-
-        The number of rows that have been indexed so far.
-
-    - **total_rows** (*string*) -
-
-        The total number of rows the index covers.
-
-    - **state** (*string*) -
-
-        The build state of the index. Possible values are **IndexStateNone**, **Unissued**, **InProgress**, **Finished**, and **Failed**.
-
-    - **index_state_fail_reason** (*string*) -
-
-        The failure reason when **state** is **Failed**, otherwise an empty string.
-
-    - **pending_index_rows** (*string*) -
-
-        The number of rows still waiting to be indexed.
+A list of index descriptions for the requested collection. When **field_name** or **index_name** is supplied, the list contains only the matching entry. For the member list, see [IndexDescription](IndexDescription.md).
 
 - **status** (*ResStatus*) -
 A **ResStatus** object with the following members.
