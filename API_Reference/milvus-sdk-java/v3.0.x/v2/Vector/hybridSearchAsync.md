@@ -73,11 +73,7 @@ A future completed with a **SearchResp** object that contains search results, re
 
 - `getAggregationBuckets()` (*List\<List\<AggregationBucket\>\>*) -
 
-    The aggregation buckets, one list per query vector. Each **AggregationBucket** has the following getters:
-
-    - `getKey()` (*List\<KeyEntry\>*) -
-
-        The bucket key entries that define the bucket. See [KeyEntry](AggregationBucket.md).
+    The aggregation buckets, one list per query vector. See [AggregationBucket](AggregationBucket.md).
 
 **EXCEPTIONS:**
 

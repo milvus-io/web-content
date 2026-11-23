@@ -36,43 +36,7 @@ A **ListRestoreSnapshotJobsResp** object containing the restore snapshot jobs th
 
 - `getJobs()` (*List\<RestoreSnapshotJobInfo\>*) -
 
-    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the following getters (see [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md)):
-
-    - `getJobId()` (*Long*) -
-
-        The ID of the restore job.
-
-    - `getSnapshotName()` (*String*) -
-
-        The name of the snapshot to restore.
-
-    - `getDbName()` (*String*) -
-
-        The name of the database.
-
-    - `getCollectionName()` (*String*) -
-
-        The name of the collection.
-
-    - `getState()` (*String*) -
-
-        The state of the restore job.
-
-    - `getProgress()` (*Integer*) -
-
-        The progress of the restore job, expressed as a percentage.
-
-    - `getReason()` (*String*) -
-
-        The reason the restore job failed, if any.
-
-    - `getStartTime()` (*Long*) -
-
-        The start time of the restore job.
-
-    - `getTimeCost()` (*Long*) -
-
-        The time cost of the restore job, in seconds.
+    The restore jobs that match the request filter. Each **RestoreSnapshotJobInfo** has the getters listed in [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
 **EXCEPTIONS:**
 
