@@ -8,9 +8,9 @@ public void add(BaseVector vector)
 
 **PARAMETERS:**
 
-- **vector** (*BaseVector*) -
+- **vector** (*[BaseVector](../BaseVector/BaseVector.md)*) -
 
-    A vector embedding to be added to the current EmbeddingList.
+    A vector embedding to be added to the current EmbeddingList. The parameter accepts any **BaseVector** implementation, such as `FloatVec`, `Int8Vec`, or `BinaryVec`. See [BaseVector](../BaseVector/BaseVector.md).
 
 **RETURN TYPE:**
 
