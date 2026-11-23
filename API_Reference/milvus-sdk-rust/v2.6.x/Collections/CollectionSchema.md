@@ -24,7 +24,7 @@ pub struct CollectionSchema
 
     The struct (nested) fields of the collection. See [StructFieldSchema](StructFieldSchema.md).
 
-- `functions: Vec<Function>`
+- `functions: Vec<[Function](Function.md)>`
 
     The functions of the collection, such as BM25 or text-embedding functions.
 

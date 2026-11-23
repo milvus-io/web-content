@@ -37,7 +37,7 @@ let request = DumpMessagesRequest::builder()
 
 - `start_message_id: ReplicateMessageId`
 
-    Message ID from which the dump starts. Required; `id` must not be empty and `wal_name` must be specified.
+    Message ID from which the dump starts. Required; `id` must not be empty and `wal_name` must be a [WalName](WalName.md) value.
 
 - `start_time_tick: u64`
 

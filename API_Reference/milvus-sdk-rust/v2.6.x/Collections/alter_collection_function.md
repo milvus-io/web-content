@@ -30,7 +30,7 @@ let request = AlterCollectionFunctionRequest::builder()
 
     Name of the collection that owns the function. Required.
 
-- `function: Option<Function>`
+- `function: Option<[Function](Function.md)>`
 
     The updated function definition. Required.
 
