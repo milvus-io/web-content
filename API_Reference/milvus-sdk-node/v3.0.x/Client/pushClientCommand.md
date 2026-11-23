@@ -1,6 +1,6 @@
 # pushClientCommand()
 
-This operation queues a telemetry command for the selected clients or database.
+This operation queues a telemetry command for the selected clients or database. Queued commands are delivered to the target clients through their next telemetry heartbeat. This operation requires a root connection when authorization is enabled on the server.
 
 ```javascript
 await milvusClient.pushClientCommand(data: PushClientCommandReq)
@@ -35,6 +35,8 @@ await milvusClient.pushClientCommand({
 - **target_client_id** (*string*) -
 
     The ID of the client to receive the command. Optional.
+
+    This must match the ID that the target client reports through its telemetry heartbeats — clients that have telemetry disabled or have not reported a heartbeat yet cannot receive the command. Prefer a stable `clientId` configured on the target client, because randomly generated IDs change whenever the client restarts.
 
 - **target_database** (*string*) -
 

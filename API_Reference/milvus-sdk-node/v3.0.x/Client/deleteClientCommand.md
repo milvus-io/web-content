@@ -1,6 +1,6 @@
 # deleteClientCommand()
 
-This operation removes a previously queued or persistent telemetry command.
+This operation removes a previously queued or persistent telemetry command. This operation requires a root connection when authorization is enabled on the server.
 
 ```javascript
 await milvusClient.deleteClientCommand(data: DeleteClientCommandReq)

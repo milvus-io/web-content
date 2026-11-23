@@ -2,6 +2,8 @@
 
 This operation lists connected clients and optionally their aggregated telemetry metrics.
 
+Clients appear in the response after they have reported their first telemetry heartbeat (every 10 seconds by default, unless telemetry is disabled on the client). This operation requires a root connection when authorization is enabled on the server, and it goes through the telemetry transport established at connect time — on servers that do not expose a telemetry endpoint it fails with a `telemetry client is not connected` error.
+
 ```javascript
 await milvusClient.getClientTelemetry(data?: GetClientTelemetryReq)
 ```
@@ -26,6 +28,8 @@ await milvusClient.getClientTelemetry({
 - **client_id** (*string*) -
 
     The ID of the client to look up. Optional.
+
+    A client generates its own ID: either the stable `clientId` configured in the client's `telemetry` settings, or a randomly generated UUID that changes whenever the client restarts. The ID is reported to the server through the `client_info.reserved` map of the client's telemetry heartbeats. To target a client reliably across restarts, configure a stable `clientId` on that client. To discover the IDs of connected clients, call this operation without filters and read the `client_id` entry in the `reserved` map of each returned client.
 
 - **include_metrics** (*boolean*) -
 
@@ -57,7 +61,7 @@ This method returns a promise that resolves to a **GetClientTelemetryResponse** 
 
     - **client_info** (*{ sdk_type: string, sdk_version: string, local_time: string, user: string, host: string, reserved: Record<string, string> }* | *null*) -
 
-        The client metadata reported by the SDK.
+        The client metadata reported by the SDK. The `reserved` map carries the client's identity as reported in its heartbeats: `client_id`, `client_id_stable` (whether the client configured a stable ID), and `db_name`.
 
     - **last_heartbeat_time** (*string*) -
 
@@ -114,5 +118,7 @@ const client = new MilvusClient({
 const res = await client.getClientTelemetry({
     include_metrics: true,
 });
-console.log(res.clients);
+for (const c of res.clients) {
+    console.log(c.client_info?.reserved?.client_id, c.status);
+}
 ```
