@@ -1,6 +1,6 @@
 # CompactionState
 
-Represents the state of a compaction job returned by `getCompactionState()` and `getCompactionPlans()`.
+Represents the state of a compaction job returned by `getCompactionState()` and `getCompactionPlans()`. The plans returned by `getCompactionPlans()` are [CompactionPlan](CompactionPlan.md) objects.
 
 ```java
 public enum CompactionState

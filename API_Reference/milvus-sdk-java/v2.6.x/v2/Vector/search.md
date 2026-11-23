@@ -77,7 +77,7 @@ search(SearchReq.builder()
 
 - `data(List<BaseVector> data)` -
 
-    A list of query vectors.
+    A list of query vectors. See [BaseVector](BaseVector/BaseVector.md).
 
 - `ids(List<Object> ids)` -
 

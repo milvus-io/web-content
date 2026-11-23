@@ -61,23 +61,23 @@ A **DescribeResourceGroupResp** object contains the following getters:
 
     - `getRequests()` (*ResourceGroupLimit*) -
 
-        The number of nodes required by a resource group
+        The number of nodes required by a resource group. See [ResourceGroupLimit](ResourceGroupLimit.md).
 
     - `getLimits()` (*ResourceGroupLimit*) -
 
-        The maximum number of nodes required by a resource group.
+        The maximum number of nodes required by a resource group. See [ResourceGroupLimit](ResourceGroupLimit.md).
 
     - `getFrom()` (*List\<ResourceGroupTransfer>*) -
 
-        The source resource groups for necessary transfers.
+        The source resource groups for necessary transfers. See [ResourceGroupTransfer](ResourceGroupTransfer.md).
 
     - `getTo()` (*List\<ResourceGroupTransfer>*) -
 
-        The target resource groups for necessary transfers.
+        The target resource groups for necessary transfers. See [ResourceGroupTransfer](ResourceGroupTransfer.md).
 
     - `getNodeFilter()` (*ResourceGroupNodeFilter*) -
 
-        A filter used to filter the query nodes with specified node labels.
+        A filter used to filter the query nodes with specified node labels. See [ResourceGroupNodeFilter](ResourceGroupNodeFilter.md).
 
 - `getNodes()` (*List\<NodeInfo>*) -
 
