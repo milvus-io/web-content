@@ -450,11 +450,11 @@ auto request = SearchIteratorRequest()
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
-    Sets the highlighter applied to the search results.
+    Sets the highlighter applied to the search results. See [Highlighter](Highlighter.md).
 
 - `SetHighlighter(const HighlighterPtr& highlighter)`
 
-    Set highlighter.
+    Set the search highlighter. See [Highlighter](Highlighter.md).
 
 Vector request payloads use [FieldData](FieldData.md) instances.
 
