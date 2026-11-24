@@ -139,7 +139,7 @@ await milvusClient.hybridSearch({
 
 - **highlighter** (*Highlighter*) -
 
-    A highlighter for the search results.
+    A highlighter for the search results. See [Highlighter](Highlighter.md).
 
 - **db_name** (*string*) -
 

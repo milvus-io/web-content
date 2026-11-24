@@ -10,7 +10,15 @@ export type OrderByFields = string | OrderByField[];
 
 - **OrderByField** (*OrderByField*) -
 
-    One order-by field entry.
+    One order-by field entry. It can be either a field name string or an object with the following members:
+
+    - **field** (*string*) -
+
+        The name of the field to sort by.
+
+    - **order** (*OrderByOrder*) -
+
+        The sort order. Possible values are `asc`, `desc`, `ascending`, and `descending`.
 
 ## Example
 
