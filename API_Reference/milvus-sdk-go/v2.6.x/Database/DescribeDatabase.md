@@ -28,6 +28,23 @@ result, err := client.DescribeDatabase(ctx, option)
 
 The database description including properties. Returns an error if the operation fails.
 
+```go
+type Database struct {
+    Name       string
+    Properties map[string]string
+}
+```
+
+**PARAMETERS:**
+
+- **Name** (*string*)
+
+    The name of the database.
+
+- **Properties** (*map[string]string*)
+
+    The properties of the database.
+
 **ERROR HANDLING:**
 
 - **error**

@@ -20,11 +20,11 @@ type ResultSet struct {
 
     the returning entry count
 
-- **GroupByValue** (*column.Column*)
+- **GroupByValue** (*[column.Column](Column.md)*)
 
     The group-by column used for grouped results.
 
-- **IDs** (*column.Column*)
+- **IDs** (*[column.Column](Column.md)*)
 
     auto generated id, can be mapped to the columns from `Insert` API
 
@@ -46,7 +46,7 @@ type ResultSet struct {
 
 **METHODS:**
 
-- `GetColumn(fieldName string) column.Column`
+- `GetColumn(fieldName string) [column.Column](Column.md)`
 
     GetColumn returns column with provided field name.
 

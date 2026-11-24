@@ -14,11 +14,11 @@ type ResourceGroupConfig struct {
 
 **PARAMETERS:**
 
-- **Requests** (*ResourceGroupLimit*)
+- **Requests** (*[ResourceGroupLimit](ResourceGroupLimit.md)*)
 
     The requests.
 
-- **Limits** (*ResourceGroupLimit*)
+- **Limits** (*[ResourceGroupLimit](ResourceGroupLimit.md)*)
 
     The limits.
 

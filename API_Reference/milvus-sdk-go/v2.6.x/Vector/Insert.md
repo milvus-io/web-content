@@ -22,7 +22,7 @@ func (c *Client) Insert(ctx context.Context, option InsertOption, callOptions ..
 
 **BUILDER METHODS:**
 
-- `NewColumnBasedInsertOption(collName string, columns ...column.Column)`
+- `NewColumnBasedInsertOption(collName string, columns ...[column.Column](Column.md))`
 
     This creates an insert option from columns. Build the request with the `With*Column` methods below.
 
@@ -30,7 +30,7 @@ func (c *Client) Insert(ctx context.Context, option InsertOption, callOptions ..
 
     This creates an insert option from row values. Chain `WithPartition`, `WithPartialUpdate`, `WithArrayAppend`, `WithArrayRemove`, `WithFieldPartialOp`, or `WithKeepAutoIDPk`.
 
-- `WithColumns(columns ...column.Column)`
+- `WithColumns(columns ...[column.Column](Column.md))`
 
     This appends the supplied columns to the write request.
 
@@ -127,7 +127,7 @@ type InsertResult struct {
 
     The number of affected entities.
 
-- **IDs** (*column.Column*)
+- **IDs** (*[column.Column](Column.md)*)
 
     The IDs of the affected entities.
 

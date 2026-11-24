@@ -22,7 +22,7 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
 **BUILDER METHODS:**
 
-- `NewColumnBasedInsertOption(collName string, columns ...column.Column)`
+- `NewColumnBasedInsertOption(collName string, columns ...[column.Column](Column.md))`
 
     This creates an upsert option from columns. Build the request with the `With*Column` methods below.
 
@@ -30,7 +30,7 @@ func (c *Client) Upsert(ctx context.Context, option UpsertOption, callOptions ..
 
     This creates an upsert option from row values. Chain `WithPartition`, `WithPartialUpdate`, `WithArrayAppend`, `WithArrayRemove`, `WithFieldPartialOp`, or `WithKeepAutoIDPk`.
 
-- `WithColumns(columns ...column.Column)`
+- `WithColumns(columns ...[column.Column](Column.md))`
 
     This appends the supplied columns to the write request.
 
@@ -127,7 +127,7 @@ type UpsertResult struct {
 
     The number of affected entities.
 
-- **IDs** (*column.Column*)
+- **IDs** (*[column.Column](Column.md)*)
 
     The IDs of the affected entities.
 
