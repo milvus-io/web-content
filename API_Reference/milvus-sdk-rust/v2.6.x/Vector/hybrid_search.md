@@ -41,7 +41,7 @@ let request = HybridSearchRequest::builder()
 
     Child vector searches, each with its own vector field, query vectors, filter, and metric. At least one sub-search is required.
 
-- `rerank: Option<Function>`
+- `rerank: Option<[Function](../Collections/Function.md)>`
 
     Reranking strategy applied to the combined results, such as RRF or weighted reranking. Use `RRFRerank::new()` or `WeightedRerank::new()`.
 
@@ -139,6 +139,26 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
     Timezone applied when filtering on Timestamptz fields.
 
+### RRFRerank
+
+Reciprocal-rank-fusion reranking configuration, built with `RRFRerank::new()` and passed to `rerank(...)`. It derefs to [Function](../Collections/Function.md), so all [Function](../Collections/Function.md) members are available.
+
+**METHODS:**
+
+- `new()` - Creates a value initialized with its SDK defaults (the RRF reranker with `k = 60`).
+- `k(value)` - Sets the `k` parameter and returns the updated value.
+- `function(value)` / `set_function(value)` / `get_function()` - Sets or returns the underlying function.
+
+### WeightedRerank
+
+Weighted-score reranking configuration, built with `WeightedRerank::new()` and passed to `rerank(...)`. It derefs to [Function](../Collections/Function.md), so all [Function](../Collections/Function.md) members are available.
+
+**METHODS:**
+
+- `new()` - Creates a value initialized with its SDK defaults (the weighted reranker with empty weights).
+- `weights(value)` - Sets the per-sub-request weights and returns the updated value.
+- `function(value)` / `set_function(value)` / `get_function()` - Sets or returns the underlying function.
+
 **RETURN TYPE:**
 
 *Result\<SearchResponse\>*
@@ -231,7 +251,7 @@ SearchResponse
 
             The hit at the given index as an entity row. See [EntityRow](EntityRow.md).
 
-        - `rows()` (*Result<ResultRowIter>*) -
+        - `rows()` (*Result<[ResultRowIter](ResultRowIter.md)>*) -
 
             Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data.
 

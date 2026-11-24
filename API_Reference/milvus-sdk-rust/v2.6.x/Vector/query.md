@@ -127,7 +127,7 @@ QueryResponse
 
         The row at the given index as an entity value. See [EntityRow](EntityRow.md).
 
-    - `rows()` (*Result<ResultRowIter>*) -
+    - `rows()` (*Result<[ResultRowIter](ResultRowIter.md)>*) -
 
         Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data.
 

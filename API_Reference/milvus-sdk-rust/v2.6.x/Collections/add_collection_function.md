@@ -29,7 +29,7 @@ let request = AddCollectionFunctionRequest::builder()
 
     Name of the collection to alter. Required.
 
-- `function: Option<Function>`
+- `function: Option<[Function](Function.md)>`
 
     The function to add, including its name and type. Required.
 

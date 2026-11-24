@@ -64,7 +64,7 @@ GetReplicateInfoResponse
 
             The message ID.
 
-        - `get_wal_name()` (*WalName*) -
+        - `get_wal_name()` (*[WalName](WalName.md)*) -
 
             The WAL name of the message.
 
@@ -92,7 +92,7 @@ GetReplicateInfoResponse
 
             The message ID.
 
-        - `get_wal_name()` (*WalName*) -
+        - `get_wal_name()` (*[WalName](WalName.md)*) -
 
             The WAL name of the message.
 
