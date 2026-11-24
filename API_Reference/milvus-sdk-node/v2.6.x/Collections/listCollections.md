@@ -55,7 +55,23 @@ This method returns a promise that resolves to a **ShowCollectionsResponse** obj
 **PARAMETERS:**
 
 - **data** (*CollectionData[]*) -
-A list of collection data objects. Each entry contains the collection name, ID, timestamp, and loaded percentage.
+A list of collection data objects. Each entry provides the following fields:
+
+    - **name** (*string*) -
+
+        The collection name.
+
+    - **id** (*string*) -
+
+        The collection ID.
+
+    - **timestamp** (*string*) -
+
+        A hybrid timestamp indicating when the collection was created.
+
+    - **loadedPercentage** (*string*) -
+
+        The percentage of the collection's data that is loaded.
 
 - **created_timestamps** (*string[]*) -
 A list of hybrid timestamps indicating when each collection was created.

@@ -77,7 +77,35 @@ This method returns a promise that resolves to a **HttpImportProgressResponse** 
 
 - **data.details** (*ImportJobDetailType[]*) -
 
-    Lists per-file import progress details when available.
+    Lists per-file import progress details when available. Each entry provides the following fields:
+
+    - **completeTime** (*string*) -
+
+        The time when the file import completed.
+
+    - **fileName** (*string*) -
+
+        The name of the imported file.
+
+    - **fileSize** (*number*) -
+
+        The size of the imported file.
+
+    - **importedRows** (*number*) -
+
+        The number of rows imported from the file.
+
+    - **progress** (*number*) -
+
+        The import progress.
+
+    - **state** (*string*) -
+
+        The current state of the file import.
+
+    - **totalRows** (*number*) -
+
+        The total number of rows in the file.
 
 - **data.reason** (*string*) -
 

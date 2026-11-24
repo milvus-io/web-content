@@ -77,7 +77,19 @@ The resource group descriptor. The following members belong to `ResourceGroup`.
 
     - **nodes** (*NodeInfo[]*) -
 
-        Optional. The current member nodes of the group, with their IDs, addresses, and hostnames.
+        Optional. The current member nodes of the group. Each entry provides the following fields:
+
+        - **node_id** (*number*) -
+
+            The ID of the node.
+
+        - **address** (*string*) -
+
+            The address of the node.
+
+        - **hostname** (*string*) -
+
+            The hostname of the node.
 
 - **status** (*ResStatus*) -
 A **ResStatus** object with the following members.

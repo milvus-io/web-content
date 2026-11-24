@@ -41,7 +41,23 @@ This method returns a promise that resolves to a **HttpImportListResponse** obje
 
 - **data.records** (*ImportJobType[]*) -
 
-    Lists import jobs with collection name, job ID, progress, and state.
+    Lists import jobs. Each entry provides the following fields:
+
+    - **collectionName** (*string*) -
+
+        The name of the collection the import job belongs to.
+
+    - **jobId** (*string*) -
+
+        The ID of the import job.
+
+    - **progress** (*number*) -
+
+        The import progress.
+
+    - **state** (*string*) -
+
+        The current state of the import job.
 
 - **message** (*string*) -
 

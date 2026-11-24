@@ -12,7 +12,7 @@ export interface RowData {
 
 - **[field: string]** (*FieldData*) -
 
-    The field value, keyed by the field name.
+    The field value, keyed by the field name. The value must match the field's data type: a scalar value (`boolean`, `number`, `string`, or `JSON` object), an array value, or a vector value (`number[]`, `Uint8Array`, `Int8Array`, or a sparse vector dictionary/COO/CSR form).
 
 ## Example
 

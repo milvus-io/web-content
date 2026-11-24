@@ -495,7 +495,7 @@ await milvusClient.createCollection({
 
         The metric type used to measure similarity between vector embeddings.
 
-    - **params** (*KeyValueObj*) -
+    - **params** (*keyValueObj*) -
 
         Extra index-related parameters in key-value pairs.
 
