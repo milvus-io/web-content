@@ -110,7 +110,27 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, FunctionType } from "@zilliz/milvus2-sdk-node";
+
+// Connect to your Milvus server
+const client = new MilvusClient({
+  address: "http://localhost:19530",    // Replace with your Milvus server URI
+});
+
+// Create a vLLM Ranker function
+const vllm_ranker = {
+  name: "vllm_semantic_ranker",         // Choose a descriptive name
+  input_field_names: ["document"],      // Field containing text to rerank
+  type: FunctionType.RERANK,            // Must be RERANK
+  params: {
+    reranker: "model",                  // Specifies model-based reranking
+    provider: "vllm",                   // Specifies vLLM service
+    queries: ["renewable energy developments"], // Query text
+    endpoint: "http://localhost:8080",  // vLLM service address
+    max_client_batch_size: 32,          // Optional: batch size
+    truncate_prompt_tokens: 256,        // Optional: Use last 256 tokens
+  },
+};
 ```
 
 ```go
@@ -299,7 +319,19 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// Execute search with vLLM reranking
+const results = await client.search({
+  collection_name: "your_collection",
+  data: [your_query_vector],            // Replace with your query vector
+  anns_field: "dense_vector",           // Vector field to search
+  limit: 5,                             // Number of results to return
+  output_fields: ["document"],          // Include text field for reranking
+  // highlight-next-line
+  rerank: vllm_ranker,                  // Apply vLLM reranking
+  consistency_level: ConsistencyLevelEnum.Bounded,
+});
 ```
 
 ```go

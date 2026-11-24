@@ -180,7 +180,25 @@ ModelRanker ranker = ModelRanker.builder()
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, FunctionType } from "@zilliz/milvus2-sdk-node";
+
+// Connect to your Milvus server
+const client = new MilvusClient({
+  address: "http://localhost:19530",    // Replace with your Milvus server URI
+});
+
+// Create a model ranker function
+const model_ranker = {
+  name: "semantic_ranker",              // Function identifier
+  input_field_names: ["document"],      // VARCHAR field to use for reranking
+  type: FunctionType.RERANK,            // Must be set to RERANK
+  params: {
+    reranker: "model",                  // Specify model reranker. Must be "model"
+    provider: "tei",                    // Choose provider: "tei", "vllm", etc.
+    queries: ["machine learning for time series"], // Query text
+    endpoint: "http://model-service:8080", // Model service endpoint
+  },
+};
 ```
 
 ```go
@@ -361,11 +379,11 @@ import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 SearchReq searchReq = SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName("your_collection")
         .data(Collections.singletonList(new EmbeddedText("machine learning for time series")))
         .annsField("dense_vector")
         .limit(10)
-        .outputFields(Collections.singletonList(document))
+        .outputFields(Collections.singletonList("document"))
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
                 .build())
@@ -375,7 +393,19 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// Use the model ranker in standard vector search
+const results = await client.search({
+  collection_name: collection_name,
+  data: [your_query_vector],            // Number of query vectors must match that specified in model_ranker.params.queries
+  anns_field: "dense_vector",
+  limit: 10,
+  output_fields: ["document"],          // Include the text field in outputs
+  // highlight-next-line
+  rerank: model_ranker,                 // Apply the model ranker here
+  consistency_level: ConsistencyLevelEnum.Bounded,
+});
 ```
 
 ```go

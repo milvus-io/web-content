@@ -74,8 +74,8 @@ CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSche
 
 ```go
 import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    client "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 schema := entity.NewSchema().
@@ -85,7 +85,16 @@ schema := entity.NewSchema().
 ```
 
 ```javascript
-// node
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+// The Node.js SDK takes these values as createCollection() parameters
+const external_source = "s3://s3.<region-id>.amazonaws.com/<bucket>/";
+const external_spec = JSON.stringify({
+    format: "parquet",
+    extfs: {
+        // ...
+    },
+});
 ```
 
 ```bash
@@ -466,8 +475,8 @@ schema.addField(AddFieldReq.builder()
 
 ```go
 import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    client "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 schema = schema.
@@ -494,7 +503,28 @@ schema = schema.
 ```
 
 ```javascript
-// node
+const fields = [
+    {
+        name: "product_id",
+        data_type: DataType.Int64,
+        // highlight-next-line
+        external_field: "id", // field name in the external data file
+    },
+    {
+        name: "product_name",
+        data_type: DataType.VarChar,
+        max_length: 512,
+        // highlight-next-line
+        external_field: "name",
+    },
+    {
+        name: "embedding",
+        data_type: DataType.FloatVector,
+        dim: 768,
+        // highlight-next-line
+        external_field: "vector",
+    },
+];
 ```
 
 ```bash
@@ -549,8 +579,8 @@ client.createCollection(createReq);
 
 ```go
 import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    client "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -561,7 +591,7 @@ token := "root:Milvus"
 
 client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: milvusAddr,
-    APIKey: token
+    APIKey: token,
 })
 
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("test_collection", schema))
@@ -573,12 +603,22 @@ if err != nil {
 ```
 
 ```javascript
-// node
+const client = new MilvusClient({
+    address: "http://localhost:19530",
+    token: "root:Milvus",
+});
+
+await client.createCollection({
+    collection_name: "test_collection",
+    fields: fields,
+    external_source: external_source,
+    external_spec: external_spec,
+});
 ```
 
 ```bash
 curl --request POST \
---url "${PROJECT_ENDPOINT}/v2/vectordb/collections/create" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
@@ -638,7 +678,7 @@ List<IndexParam> indexParams = new ArrayList<>();
 indexParams.add(indexParamForIdField);
 indexParams.add(indexParamForVectorField);
 CreateIndexReq createIndexReq = CreateIndexReq.builder()
-        .dbName("my_database")
+        .databaseName("my_database")
         .collectionName("test_collection")
         .indexParams(indexParams)
         .build();
@@ -647,23 +687,25 @@ client.createIndex(createIndexReq);
 
 ```go
 import (
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 collectionName := "test_collection"
 indexOptions := []milvusclient.CreateIndexOption{
     milvusclient.NewCreateIndexOption(collectionName, "embedding", index.NewAutoIndex(entity.COSINE)),
-    milvusclient.NewCreateIndexOption(collectionName, "product_name", index.NewAutoIndex(index.AUTOINDEX)),
+    milvusclient.NewCreateIndexOption(collectionName, "product_name", index.NewGenericIndex("", map[string]string{"index_type": "AUTOINDEX"})),
 }
-indexTask, err := client.CreateIndex(ctx, indexOptions)
-if err != nil {
-    // handler err
-}
-err = indexTask.Await(ctx)
-if err != nil {
-    // handler err
+for _, indexOption := range indexOptions {
+    indexTask, err := client.CreateIndex(ctx, indexOption)
+    if err != nil {
+        // handler err
+    }
+    err = indexTask.Await(ctx)
+    if err != nil {
+        // handler err
+    }
 }
 ```
 
@@ -698,7 +740,7 @@ export indexParams='[
     ]'
 
 curl --request POST \
---url "${PROJECT_ENDPOINT}/v2/vectordb/indexes/create" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \
@@ -747,7 +789,14 @@ import io.milvus.v2.service.utility.response.GetRefreshExternalCollectionProgres
 import io.milvus.v2.service.utility.response.ListRefreshExternalCollectionJobsResp;
 import io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
 import io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
+import java.util.concurrent.TimeUnit;
 
+RefreshExternalCollectionResp refreshResp = client.refreshExternalCollection(
+        RefreshExternalCollectionReq.builder()
+                .databaseName("my_database")
+                .collectionName("test_collection")
+                .build());
+long jobId = refreshResp.getJobId();
 while (true) {
     GetRefreshExternalCollectionProgressResp resp = client.getRefreshExternalCollectionProgress(
             GetRefreshExternalCollectionProgressReq.builder()
@@ -760,6 +809,7 @@ while (true) {
         break;
     } else if ("RefreshFailed".equals(jobInfo.getState())) {
         System.out.printf("  Refresh failed: %s%n", jobInfo.getReason());
+        break;
     }
     TimeUnit.SECONDS.sleep(2);
 }
@@ -767,11 +817,11 @@ while (true) {
 
 ```go
 refreshResult, err := client.RefreshExternalCollection(ctx,
-    client.NewRefreshExternalCollectionOption("test_collection"))
+    milvusclient.NewRefreshExternalCollectionOption("test_collection"))
 jobID := refreshResult.JobID
 for {
     progress, _ := client.GetRefreshExternalCollectionProgress(ctx,
-        client.NewGetRefreshExternalCollectionProgressOption(jobID))
+        milvusclient.NewGetRefreshExternalCollectionProgressOption(jobID))
     fmt.Printf("State: %s\n", progress.State)
     if progress.State == entity.RefreshStateCompleted {
         fmt.Println("Refresh completed!")
@@ -786,12 +836,30 @@ for {
 ```
 
 ```javascript
-// node
+const { job_id } = await client.refreshExternalCollection({
+    db_name: "my_database",
+    collection_name: "test_collection",
+});
+while (true) {
+    const { job_info: progress } = await client.getRefreshExternalCollectionProgress({
+        job_id: job_id,
+    });
+    console.log(`  ${progress.state}: ${progress.progress}%`);
+    if (progress.state === "RefreshCompleted") {
+        const elapsed = Number(progress.end_time) - Number(progress.start_time);
+        console.log(`  Completed in ${elapsed}ms`);
+        break;
+    } else if (progress.state === "RefreshFailed") {
+        console.log(`  Failed: ${progress.reason}`);
+        break;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+}
 ```
 
 ```bash
 curl --request POST \
---url "${PROJECT_ENDPOINT}/v2/vectordb/jobs/external_collection/refresh" \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/external_collection/refresh" \
 --header "Authorization: Bearer ${TOKEN}" \
 --header "Content-Type: application/json" \
 --header "Request-Timeout: 10" \

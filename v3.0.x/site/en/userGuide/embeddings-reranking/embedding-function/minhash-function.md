@@ -106,11 +106,65 @@ schema.add_field(field_name="binary_vector", datatype=DataType.BINARY_VECTOR, di
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530")
+        .token("root:Milvus")
+        .build());
+
+CreateCollectionReq.CollectionSchema schema = MilvusClientV2.CreateSchema();
+
+schema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(true)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("document_content")
+        .dataType(DataType.VarChar)
+        .maxLength(9000)
+        .enableAnalyzer(true)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("binary_vector")
+        .dataType(DataType.BinaryVector)
+        .dimension(8192)
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530",
+    token: "root:Milvus",
+});
+
+const schema = [
+    {
+        name: "id",
+        data_type: DataType.Int64,
+        is_primary_key: true,
+        autoID: true,
+    },
+    {
+        name: "document_content",
+        data_type: DataType.VarChar,
+        max_length: 9000,
+        enable_analyzer: true,
+    },
+    {
+        name: "binary_vector",
+        data_type: DataType.BinaryVector,
+        dim: 8192,
+    },
+];
 ```
 
 ```go
@@ -203,11 +257,38 @@ schema.add_function(minhash_function)
 ```
 
 ```java
-// java
+import java.util.Collections;
+
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+Function minhashFunction = Function.builder()
+        .name("minhash_function")
+        .inputFieldNames(Collections.singletonList("document_content")) // Name of the VARCHAR field containing raw text
+        .outputFieldNames(Collections.singletonList("binary_vector")) // Name of the BINARY_VECTOR field for generated signatures
+        .functionType(FunctionType.MINHASH)
+        .param("num_hashes", "256") // Number of hash functions; produces dim = 32 * 256 = 8192
+        .param("shingle_size", "3") // N-gram size for shingling
+        .build();
+
+schema.addFunction(minhashFunction);
 ```
 
 ```javascript
-// nodejs
+import { FunctionType } from "@zilliz/milvus2-sdk-node";
+
+const functions = [
+    {
+        name: "minhash_function",
+        input_field_names: ["document_content"], // Name of the VARCHAR field containing raw text
+        output_field_names: ["binary_vector"], // Name of the BINARY_VECTOR field for generated signatures
+        type: FunctionType.MINHASH,
+        params: {
+            num_hashes: 256, // Number of hash functions; produces dim = 32 * 256 = 8192
+            shingle_size: 3, // N-gram size for shingling
+        },
+    },
+];
 ```
 
 ```go
@@ -315,11 +396,42 @@ index_params.add_index(
 ```
 
 ```java
-// java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.milvus.v2.common.IndexParam;
+
+Map<String, Object> extraParams = new HashMap<>();
+extraParams.put("mh_lsh_band", 128);
+extraParams.put("mh_element_bit_width", 32);
+extraParams.put("with_raw_data", true);
+
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(IndexParam.builder()
+        .fieldName("binary_vector")
+        .indexType(IndexParam.IndexType.MINHASH_LSH)
+        .metricType(IndexParam.MetricType.MHJACCARD)
+        .extraParams(extraParams)
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { IndexType, MetricType } from "@zilliz/milvus2-sdk-node";
+
+const index_params = [
+    {
+        field_name: "binary_vector",
+        index_type: IndexType.MINHASH_LSH,
+        metric_type: MetricType.MHJACCARD,
+        params: {
+            mh_lsh_band: 128,
+            mh_element_bit_width: 32,
+            with_raw_data: true,
+        },
+    },
+];
 ```
 
 ```go
@@ -373,11 +485,22 @@ client.create_collection(
 ```
 
 ```java
-// java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("dedup_collection")
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build());
 ```
 
 ```javascript
-// nodejs
+await client.createCollection({
+    collection_name: "dedup_collection",
+    schema: schema,
+    index_params: index_params,
+    functions: functions,
+});
 ```
 
 ```go
@@ -448,11 +571,41 @@ client.insert(
 ```
 
 ```java
-// java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.gson.JsonObject;
+import io.milvus.v2.service.vector.request.InsertReq;
+
+List<String> documents = Arrays.asList(
+        "information retrieval is a field of study that helps users find relevant information in large datasets",
+        "information retrieval is a research field focused on helping users find relevant data in large collections",
+        "information retrieval is a field of research helping users search for relevant information in large datasets"
+);
+
+List<JsonObject> rows = new ArrayList<>();
+for (String document : documents) {
+    JsonObject row = new JsonObject();
+    row.addProperty("document_content", document);
+    rows.add(row);
+}
+
+client.insert(InsertReq.builder()
+        .collectionName("dedup_collection")
+        .data(rows)
+        .build());
 ```
 
 ```javascript
-// nodejs
+await client.insert({
+    collection_name: "dedup_collection",
+    data: [
+        { document_content: "information retrieval is a field of study that helps users find relevant information in large datasets" },
+        { document_content: "information retrieval is a research field focused on helping users find relevant data in large collections" },
+        { document_content: "information retrieval is a field of research helping users search for relevant information in large datasets" },
+    ],
+});
 ```
 
 ```go
@@ -530,11 +683,55 @@ for hits in results:
 ```
 
 ```java
-// java
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+Map<String, Object> searchParams = new HashMap<>();
+searchParams.put("metric_type", "MHJACCARD");
+searchParams.put("mh_search_with_jaccard", true);
+searchParams.put("refine_k", 3);
+
+SearchResp results = client.search(SearchReq.builder()
+        .collectionName("dedup_collection")
+        .data(Collections.singletonList(new EmbeddedText("information retrieval is a research field focused on helping users find relevant data in large collections")))
+        .annsField("binary_vector")
+        .limit(3)
+        .outputFields(Collections.singletonList("document_content"))
+        .searchParams(searchParams)
+        .build());
+
+for (List<SearchResp.SearchResult> hits : results.getSearchResults()) {
+    for (SearchResp.SearchResult hit : hits) {
+        System.out.println("ID: " + hit.getId() + ", Distance: " + hit.getScore());
+        System.out.println("Document: " + hit.getEntity().get("document_content"));
+    }
+}
 ```
 
 ```javascript
-// nodejs
+const results = await client.search({
+    collection_name: "dedup_collection",
+    data: "information retrieval is a research field focused on helping users find relevant data in large collections",
+    anns_field: "binary_vector",
+    limit: 3,
+    output_fields: ["document_content"],
+    metric_type: "MHJACCARD",
+    params: {
+        mh_search_with_jaccard: true,
+        refine_k: 3,
+    },
+});
+
+for (const hit of results.results) {
+    console.log(`ID: ${hit.id}, Distance: ${hit.score}`);
+    console.log(`Document: ${hit.document_content}`);
+}
 ```
 
 ```go

@@ -67,7 +67,7 @@ MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
 CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
         .functionType(FunctionType.RERANK)
         .name("vllm_semantic_ranker")
-        .inputFieldNames(Collections.singletonList(NAME_FIELD))
+        .inputFieldNames(Collections.singletonList("document"))
         .param("reranker", "model")
         .param("provider", "tei")
         .param("queries", "[\"renewable energy developments\"]")
@@ -76,11 +76,31 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
         .param("truncate", "true")
         .param("truncation_direction", "Right")
         .build();
-searchWithRanker(scientists, ranker);
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, FunctionType } from "@zilliz/milvus2-sdk-node";
+
+// Connect to your Milvus server
+const client = new MilvusClient({
+  address: "http://localhost:19530",    // Replace with your Milvus server URI
+});
+
+// Configure TEI Ranker
+const tei_ranker = {
+  name: "tei_semantic_ranker",          // Unique identifier for your ranker
+  input_field_names: ["document"],      // VARCHAR field containing text to rerank
+  type: FunctionType.RERANK,            // Must be RERANK for reranking functions
+  params: {
+    reranker: "model",                  // Enables model-based reranking
+    provider: "tei",                    // Specifies TEI as the service provider
+    queries: ["renewable energy developments"], // Query text for relevance evaluation
+    endpoint: "http://localhost:8080",  // Your TEI service URL
+    max_client_batch_size: 32,          // Optional: batch size for processing (default: 32)
+    truncate: true,                     // Optional: Truncate the inputs that are longer than the maximum supported size
+    truncation_direction: "Right",      // Optional: Direction to truncate the inputs
+  },
+};
 ```
 
 ```go
@@ -276,7 +296,19 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// Execute search with TEI reranking
+const results = await client.search({
+  collection_name: "your_collection",
+  data: [your_query_vector],            // Replace with your query vector
+  anns_field: "dense_vector",           // Vector field to search
+  limit: 5,                             // Number of results to return
+  output_fields: ["document"],          // Include text field for reranking
+  // highlight-next-line
+  rerank: tei_ranker,                   // Apply TEI reranking
+  consistency_level: ConsistencyLevelEnum.Bounded,
+});
 ```
 
 ```go

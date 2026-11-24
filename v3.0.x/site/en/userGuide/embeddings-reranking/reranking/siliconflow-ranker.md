@@ -95,7 +95,29 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, FunctionType } from "@zilliz/milvus2-sdk-node";
+
+// Connect to your Milvus server
+const client = new MilvusClient({
+  address: "http://localhost:19530",    // Replace with your Milvus server URI
+});
+
+// Configure SiliconFlow Ranker
+const siliconflow_ranker = {
+  name: "siliconflow_semantic_ranker",  // Unique identifier for your ranker
+  input_field_names: ["document"],      // VARCHAR field containing text to rerank
+  type: FunctionType.RERANK,            // Must be RERANK for reranking functions
+  params: {
+    reranker: "model",                  // Enables model-based reranking
+    provider: "siliconflow",            // Specifies SiliconFlow as the service provider
+    model_name: "BAAI/bge-reranker-v2-m3", // SiliconFlow reranking model to use
+    queries: ["renewable energy developments"], // Query text for relevance evaluation
+    max_client_batch_size: 128,         // Optional: batch size for model service requests (default: 128)
+    max_chunks_per_doc: 5,              // Optional: max chunks per document for supported models
+    overlap_tokens: 50,                 // Optional: token overlap between chunks for supported models
+    // credential: "your-siliconflow-api-key", // Optional: if not set, uses SILICONFLOW_API_KEY env var
+  },
+};
 ```
 
 ```go
@@ -299,7 +321,19 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// Execute search with SiliconFlow reranking
+const results = await client.search({
+  collection_name: "your_collection",
+  data: [your_query_vector],            // Replace with your query vector
+  anns_field: "dense_vector",           // Vector field to search
+  limit: 5,                             // Number of results to return
+  output_fields: ["document"],          // Include text field for reranking
+  // highlight-next-line
+  rerank: siliconflow_ranker,           // Apply SiliconFlow reranking
+  consistency_level: ConsistencyLevelEnum.Bounded,
+});
 ```
 
 ```go

@@ -122,6 +122,16 @@ Curated prompts that help AI coding assistants write correct Milvus code. Each p
 
 </div>
 
+The cards for AGENTS.md and the four topic prompts open the Python version. Each of them also has a Node.js, Go, and RESTful API v2 version:
+
+| Prompt          | Python                       | Node.js                              | Go                          | RESTful API v2                               |
+| --------------- | ---------------------------- | ------------------------------------ | --------------------------- | -------------------------------------------- |
+| AGENTS.md       | [Python](agents_overview.md) | [Node.js](agents_overview_nodejs.md) | [Go](agents_overview_go.md) | [RESTful API v2](agents_overview_restful.md) |
+| Schema Design   | [Python](schema_design.md)   | [Node.js](schema_design_nodejs.md)   | [Go](schema_design_go.md)   | [RESTful API v2](schema_design_restful.md)   |
+| Search Patterns | [Python](search_patterns.md) | [Node.js](search_patterns_nodejs.md) | [Go](search_patterns_go.md) | [RESTful API v2](search_patterns_restful.md) |
+| Index Selection | [Python](index_selection.md) | [Node.js](index_selection_nodejs.md) | [Go](index_selection_go.md) | [RESTful API v2](index_selection_restful.md) |
+| RAG Pipeline    | [Python](rag_pipeline.md)    | [Node.js](rag_pipeline_nodejs.md)    | [Go](rag_pipeline_go.md)    | [RESTful API v2](rag_pipeline_restful.md)    |
+
 ### Use in different environments
 
 | Environment    | Where to put prompt                            | Instructions                                                                                                            |

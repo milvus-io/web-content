@@ -93,7 +93,28 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient, FunctionType } from "@zilliz/milvus2-sdk-node";
+
+// Connect to your Milvus server
+const client = new MilvusClient({
+  address: "http://localhost:19530",    // Replace with your Milvus server URI
+});
+
+// Configure Cohere Ranker
+const cohere_ranker = {
+  name: "cohere_semantic_ranker",       // Unique identifier for your ranker
+  input_field_names: ["document"],      // VARCHAR field containing text to rerank
+  type: FunctionType.RERANK,            // Must be RERANK for reranking functions
+  params: {
+    reranker: "model",                  // Enables model-based reranking
+    provider: "cohere",                 // Specifies Cohere as the service provider
+    model_name: "rerank-english-v3.0",  // Cohere rerank model to use
+    queries: ["renewable energy developments"], // Query text for relevance evaluation
+    max_client_batch_size: 128,         // Optional: batch size for model service requests (default: 128)
+    max_tokens_per_doc: 4096,           // Optional: max tokens per document (default: 4096)
+    // credential: "your-cohere-api-key", // Optional: authentication credential for Cohere API
+  },
+};
 ```
 
 ```go
@@ -274,7 +295,7 @@ import io.milvus.v2.service.vector.response.SearchResp;
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 SearchReq searchReq = SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName("your_collection")
         .data(Arrays.asList(new EmbeddedText("AI Research Progress"), new EmbeddedText("What is AI")))
         .annsField("vector_field")
         .limit(10)
@@ -288,7 +309,19 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// Execute search with Cohere reranking
+const results = await client.search({
+  collection_name: "your_collection",
+  data: [your_query_vector],            // Replace with your query vector
+  anns_field: "dense_vector",           // Vector field to search
+  limit: 5,                             // Number of results to return
+  output_fields: ["document"],          // Include text field for reranking
+  // highlight-next-line
+  rerank: cohere_ranker,                // Apply Cohere reranking
+  consistency_level: ConsistencyLevelEnum.Bounded,
+});
 ```
 
 ```go

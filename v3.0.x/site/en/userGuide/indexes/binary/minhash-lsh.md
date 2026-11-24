@@ -235,7 +235,6 @@ Once your MinHash vectors and original token sets are ready, you can store, inde
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
 </div>
 
 ```python
@@ -245,19 +244,41 @@ client = MilvusClient(uri="http://localhost:19530")  # Update if your URI is dif
 ```
 
 ```java
-// java
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.client.MilvusClientV2;
+
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()
+        .uri("http://localhost:19530") // Update if your URI is different
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { MilvusClient } from "@zilliz/milvus2-sdk-node";
+
+const client = new MilvusClient({
+    address: "http://localhost:19530", // Update if your URI is different
+});
 ```
 
 ```go
-// go
-```
+import (
+    "context"
+    "fmt"
 
-```bash
-# restful
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530", // Update if your URI is different
+})
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+defer client.Close(ctx)
 ```
 
 ### Define collection schema
@@ -293,19 +314,110 @@ schema.add_field("document", DataType.VARCHAR, max_length=1000)
 ```
 
 ```java
-// java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.CollectionSchema schema = client.createSchema();
+schema.setEnableDynamicField(false);
+
+schema.addField(AddFieldReq.builder()
+        .fieldName("doc_id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(false)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("minhash_signature")
+        .dataType(DataType.BinaryVector)
+        .dimension(16384) // 256 hash values × 64 bits
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("token_set") // required for refinement
+        .dataType(DataType.VarChar)
+        .maxLength(1000)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("document")
+        .dataType(DataType.VarChar)
+        .maxLength(1000)
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { DataType } from "@zilliz/milvus2-sdk-node";
+
+const schema = [
+    {
+        name: "doc_id",
+        data_type: DataType.Int64,
+        is_primary_key: true,
+        autoID: false,
+    },
+    {
+        name: "minhash_signature",
+        data_type: DataType.BinaryVector,
+        dim: 16384, // 256 hash values × 64 bits
+    },
+    {
+        name: "token_set", // required for refinement
+        data_type: DataType.VarChar,
+        max_length: 1000,
+    },
+    {
+        name: "document",
+        data_type: DataType.VarChar,
+        max_length: 1000,
+    },
+];
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/entity"
+
+schema := entity.NewSchema().WithAutoID(false).WithDynamicFieldEnabled(false).
+    WithField(entity.NewField().WithName("doc_id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("minhash_signature").WithDataType(entity.FieldTypeBinaryVector).WithDim(16384)). // 256 hash values × 64 bits
+    WithField(entity.NewField().WithName("token_set").WithDataType(entity.FieldTypeVarChar).WithMaxLength(1000)).        // required for refinement
+    WithField(entity.NewField().WithName("document").WithDataType(entity.FieldTypeVarChar).WithMaxLength(1000))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export schema='{
+    "autoID": false,
+    "enableDynamicField": false,
+    "fields": [
+        {
+            "fieldName": "doc_id",
+            "dataType": "Int64",
+            "isPrimary": true
+        },
+        {
+            "fieldName": "minhash_signature",
+            "dataType": "BinaryVector",
+            "elementTypeParams": {
+                "dim": 16384
+            }
+        },
+        {
+            "fieldName": "token_set",
+            "dataType": "VarChar",
+            "elementTypeParams": {
+                "max_length": 1000
+            }
+        },
+        {
+            "fieldName": "document",
+            "dataType": "VarChar",
+            "elementTypeParams": {
+                "max_length": 1000
+            }
+        }
+    ]
+}'
 ```
 
 ### Build index parameters and create collection
@@ -337,19 +449,112 @@ client.create_collection("minhash_demo", schema=schema, index_params=index_param
 ```
 
 ```java
-// java
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.milvus.v2.common.IndexParam;
+
+Map<String, Object> extraParams = new HashMap<>();
+extraParams.put("mh_element_bit_width", 64); // Must match signature bit width
+extraParams.put("mh_lsh_band", 16);          // Band count
+extraParams.put("with_raw_data", true);      // Required for Jaccard refinement
+
+List<IndexParam> indexParams = new ArrayList<>();
+indexParams.add(IndexParam.builder()
+        .fieldName("minhash_signature")
+        .indexType(IndexParam.IndexType.MINHASH_LSH)
+        .metricType(IndexParam.MetricType.MHJACCARD)
+        .extraParams(extraParams)
+        .build());
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName("minhash_demo")
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build());
 ```
 
 ```javascript
-// nodejs
+import { IndexType, MetricType } from "@zilliz/milvus2-sdk-node";
+
+const index_params = [
+    {
+        field_name: "minhash_signature",
+        index_type: IndexType.MINHASH_LSH,
+        metric_type: MetricType.MHJACCARD,
+        params: {
+            mh_element_bit_width: 64, // Must match signature bit width
+            mh_lsh_band: 16,          // Band count
+            with_raw_data: true,      // Required for Jaccard refinement
+        },
+    },
+];
+
+await client.createCollection({
+    collection_name: "minhash_demo",
+    schema,
+    index_params,
+    enable_dynamic_field: false,
+});
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+indexOption := milvusclient.NewCreateIndexOption("minhash_demo", "minhash_signature",
+    index.NewMinHashLSHIndex(entity.MHJACCARD, 16). // mh_lsh_band: band count
+        WithElementBitWidth(64).                    // Must match signature bit width
+        WithRawData(true))                          // Required for Jaccard refinement
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("minhash_demo", schema).
+    WithIndexOptions(indexOption))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("minhash_demo"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+err = loadTask.Await(ctx)
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export indexParams='[
+    {
+        "fieldName": "minhash_signature",
+        "metricType": "MHJACCARD",
+        "indexType": "MINHASH_LSH",
+        "params": {
+            "mh_element_bit_width": 64,
+            "mh_lsh_band": 16,
+            "with_raw_data": true
+        }
+    }
+]'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "{
+    \"collectionName\": \"minhash_demo\",
+    \"schema\": $schema,
+    \"indexParams\": $indexParams
+}"
 ```
 
 For more information on index building parameters, refer to [Index building params](minhash-lsh.md#Index-building-params).
@@ -363,14 +568,6 @@ For each document, prepare:
 - A serialized token set string
 
 - (Optionally) the original text
-
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
 
 ```python
 documents = [
@@ -393,22 +590,6 @@ client.insert("minhash_demo", insert_data)
 client.flush("minhash_demo")
 ```
 
-```java
-// java
-```
-
-```javascript
-// nodejs
-```
-
-```go
-// go
-```
-
-```bash
-# restful
-```
-
 ### Perform similarity search
 
 Milvus supports two modes of similarity search using MinHash LSH:
@@ -421,33 +602,9 @@ Milvus supports two modes of similarity search using MinHash LSH:
 
 To perform a similarity search, generate a MinHash signature for the query document. This signature must match the same dimension and encoding format used during data insertion.
 
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-    <a href="#javascript">NodeJS</a>
-    <a href="#go">Go</a>
-    <a href="#bash">cURL</a>
-</div>
-
 ```python
 query_text = "neural networks model patterns in data"
 query_sig = generate_minhash_signature(query_text)
-```
-
-```java
-// java
-```
-
-```javascript
-// nodejs
-```
-
-```go
-// go
-```
-
-```bash
-# restful
 ```
 
 #### 5.2 Approximate search (LSH-only)
@@ -487,19 +644,110 @@ for i, hit in enumerate(approx_results[0]):
 ```
 
 ```java
-// java
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.BinaryVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// highlight-start
+Map<String, Object> searchParams = new HashMap<>();
+searchParams.put("metric_type", "MHJACCARD");
+// highlight-end
+
+// querySig holds the query signature as a byte[]
+SearchResp approxResults = client.search(SearchReq.builder()
+        .collectionName("minhash_demo")
+        .data(Collections.singletonList(new BinaryVec(querySig)))
+        .annsField("minhash_signature")
+        // highlight-next-line
+        .searchParams(searchParams)
+        .limit(3)
+        .outputFields(Arrays.asList("doc_id", "document"))
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+
+List<SearchResp.SearchResult> hits = approxResults.getSearchResults().get(0);
+for (int i = 0; i < hits.size(); i++) {
+    float sim = 1 - hits.get(i).getScore();
+    System.out.printf("%d. Similarity: %.3f | %s%n", i + 1, sim, hits.get(i).getEntity().get("document"));
+}
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// querySig holds the query signature as an array of byte values (0-255)
+const approxResults = await client.search({
+    collection_name: "minhash_demo",
+    data: querySig,
+    anns_field: "minhash_signature",
+    // highlight-start
+    metric_type: "MHJACCARD",
+    params: {},
+    // highlight-end
+    limit: 3,
+    output_fields: ["doc_id", "document"],
+    consistency_level: ConsistencyLevelEnum.Strong,
+});
+
+approxResults.results.forEach((hit, i) => {
+    const sim = 1 - hit.score;
+    console.log(`${i + 1}. Similarity: ${sim.toFixed(3)} | ${hit.document}`);
+});
 ```
 
 ```go
-// go
+// querySig holds the query signature as a []byte
+approxResults, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "minhash_demo",
+    3,
+    []entity.Vector{entity.BinaryVector(querySig)},
+).WithANNSField("minhash_signature").
+    // highlight-next-line
+    WithSearchParam("metric_type", "MHJACCARD").
+    WithOutputFields("doc_id", "document").
+    WithConsistencyLevel(entity.ClStrong))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+for i := 0; i < approxResults[0].ResultCount; i++ {
+    document, _ := approxResults[0].GetColumn("document").GetAsString(i)
+    fmt.Printf("%d. Similarity: %.3f | %s\n", i+1, 1-approxResults[0].Scores[i], document)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export searchParams='{
+    "metric_type": "MHJACCARD",
+    "params": {}
+}'
+
+# querySig holds the query signature as a base64-encoded string
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "{
+    \"collectionName\": \"minhash_demo\",
+    \"data\": [\"$querySig\"],
+    \"annsField\": \"minhash_signature\",
+    \"searchParams\": $searchParams,
+    \"limit\": 3,
+    \"outputFields\": [\"doc_id\", \"document\"],
+    \"consistencyLevel\": \"Strong\"
+}"
 ```
 
 #### 5.3 Refined search (recommended for accuracy):
@@ -542,19 +790,128 @@ for i, hit in enumerate(refined_results[0]):
 ```
 
 ```java
-// java
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.BinaryVec;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+// highlight-start
+Map<String, Object> searchParams = new HashMap<>();
+searchParams.put("metric_type", "MHJACCARD");
+searchParams.put("mh_search_with_jaccard", true); // Enable real Jaccard computation
+searchParams.put("refine_k", 5);                  // Refine top 5 candidates
+// highlight-end
+
+// querySig holds the query signature as a byte[]
+SearchResp refinedResults = client.search(SearchReq.builder()
+        .collectionName("minhash_demo")
+        .data(Collections.singletonList(new BinaryVec(querySig)))
+        .annsField("minhash_signature")
+        // highlight-next-line
+        .searchParams(searchParams)
+        .limit(3)
+        .outputFields(Arrays.asList("doc_id", "document"))
+        .consistencyLevel(ConsistencyLevel.STRONG)
+        .build());
+
+List<SearchResp.SearchResult> hits = refinedResults.getSearchResults().get(0);
+for (int i = 0; i < hits.size(); i++) {
+    float sim = 1 - hits.get(i).getScore();
+    System.out.printf("%d. Similarity: %.3f | %s%n", i + 1, sim, hits.get(i).getEntity().get("document"));
+}
 ```
 
 ```javascript
-// nodejs
+import { ConsistencyLevelEnum } from "@zilliz/milvus2-sdk-node";
+
+// querySig holds the query signature as an array of byte values (0-255)
+const refinedResults = await client.search({
+    collection_name: "minhash_demo",
+    data: querySig,
+    anns_field: "minhash_signature",
+    // highlight-start
+    metric_type: "MHJACCARD",
+    params: {
+        mh_search_with_jaccard: true, // Enable real Jaccard computation
+        refine_k: 5,                  // Refine top 5 candidates
+    },
+    // highlight-end
+    limit: 3,
+    output_fields: ["doc_id", "document"],
+    consistency_level: ConsistencyLevelEnum.Strong,
+});
+
+refinedResults.results.forEach((hit, i) => {
+    const sim = 1 - hit.score;
+    console.log(`${i + 1}. Similarity: ${sim.toFixed(3)} | ${hit.document}`);
+});
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+// highlight-start
+annParam := index.NewMinHashLSHAnnParam().
+    WithSearchWithJACCARD(true). // Enable real Jaccard computation
+    WithRefineK(5)               // Refine top 5 candidates
+// highlight-end
+
+// querySig holds the query signature as a []byte
+refinedResults, err := client.Search(ctx, milvusclient.NewSearchOption(
+    "minhash_demo",
+    3,
+    []entity.Vector{entity.BinaryVector(querySig)},
+).WithANNSField("minhash_signature").
+    // highlight-start
+    WithSearchParam("metric_type", "MHJACCARD").
+    WithAnnParam(annParam).
+    // highlight-end
+    WithOutputFields("doc_id", "document").
+    WithConsistencyLevel(entity.ClStrong))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+for i := 0; i < refinedResults[0].ResultCount; i++ {
+    document, _ := refinedResults[0].GetColumn("document").GetAsString(i)
+    fmt.Printf("%d. Similarity: %.3f | %s\n", i+1, 1-refinedResults[0].Scores[i], document)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export searchParams='{
+    "metric_type": "MHJACCARD",
+    "params": {
+        "mh_search_with_jaccard": true,
+        "refine_k": 5
+    }
+}'
+
+# querySig holds the query signature as a base64-encoded string
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "{
+    \"collectionName\": \"minhash_demo\",
+    \"data\": [\"$querySig\"],
+    \"annsField\": \"minhash_signature\",
+    \"searchParams\": $searchParams,
+    \"limit\": 3,
+    \"outputFields\": [\"doc_id\", \"document\"],
+    \"consistencyLevel\": \"Strong\"
+}"
 ```
 
 ## Index params
