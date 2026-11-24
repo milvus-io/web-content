@@ -21,7 +21,7 @@ title: Performance FAQ
         ></path>
       </svg>
     </button></h1><h4 id="How-to-set-nlist-and-nprobe-for-IVF-indexes" class="common-anchor-header">How to set <code translate="no">nlist</code> and <code translate="no">nprobe</code> for IVF indexes?</h4><p>Setting <code translate="no">nlist</code> is scenario-specific. As a rule of thumb, the recommended value of <code translate="no">nlist</code> is <code translate="no">4 × sqrt(n)</code>, where <code translate="no">n</code> is the total number of entities in a segment.</p>
-<p>The size of each segment is determined by the <code translate="no">datacoord.segment.maxSize</code> parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing <code translate="no">datacoord.segment.maxSize</code> by the size of each entity.</p>
+<p>The size of each segment is determined by the <code translate="no">datacoord.segment.maxSize</code> parameter, which is set to 1024 MB by default. The total number of entities in a segment n can be estimated by dividing <code translate="no">datacoord.segment.maxSize</code> by the size of each entity.</p>
 <p>Setting <code translate="no">nprobe</code> is specific to the dataset and scenario, and involves a trade-off between accuracy and query performance. We recommend finding the ideal value through repeated experimentation.</p>
 <p>The following charts are results from a test running on the sift50m dataset and IVF_SQ8 index, which compares recall and query performance of different <code translate="no">nlist</code>/<code translate="no">nprobe</code> pairs.</p>
 <p>
