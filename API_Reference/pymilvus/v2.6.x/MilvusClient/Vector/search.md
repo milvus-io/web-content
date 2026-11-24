@@ -167,7 +167,7 @@ search(
 
     For details, refer to [Decay Ranker Overview](https://milvus.io/docs/decay-ranker-overview.md) and [Model Ranker Overview](https://milvus.io/docs/model-ranker-overview.md).
 
-- **highlighter** (*Highlighter*) -
+- **highlighter** (*[LexicalHighlighter](Highlighter/LexicalHighlighter.md)* | *[SemanticHighlighter](Highlighter/SemanticHighlighter.md)*) -
 
     The highlighter to highlight matched terms in search operations. For details, refer to [Lexical Highlighter](https://milvus.io/docs/text-highlighter.md).
 

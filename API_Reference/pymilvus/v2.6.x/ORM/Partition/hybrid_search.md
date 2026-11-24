@@ -39,7 +39,7 @@ hybrid_search(
         │   └── param 
         │   └── limit 
         │   └── expr
-        ```
+```
 
         - **data** (*List*): The query vector to search in the request. This parameter accepts a list containing one element.
 
@@ -51,9 +51,9 @@ hybrid_search(
 
         - **expr** (*str*): (Optional) The expression to filter the results.
 
-- **rerank** (*BaseRanker*) -
+- **rerank** (*[BaseRanker](../../MilvusClient/Vector/BaseRanker.md)*) -
 
-    The reranking strategy to use for hybrid search. Valid values: `WeightedRanker` and `RRFRanker`.
+    The reranking strategy to use for hybrid search. Pass a [BaseRanker](../../MilvusClient/Vector/BaseRanker.md) subclass — `WeightedRanker` or `RRFRanker`.
 
     - `WeightedRanker`: The Average Weighted Scoring reranking strategy, which prioritizes vectors based on relevance, averaging their significance.
 
@@ -118,7 +118,7 @@ A **SearchResult** object that contains a list of **Hits** objects.
     │           ├── score
     │           ├── vector
     │           └── get()
-    ```
+```
 
 - Properties and methods
 
