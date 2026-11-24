@@ -1,6 +1,6 @@
 # HybridSearch()
 
-This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as an [RRFRerank](../Collections/Function.md) or [WeightedRerank](../Collections/Function.md)). Each sub-search targets one vector field with its own query vector, filter, and limit.
+This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as an [RRFRerank](../Collections/Function/RRFRerank.md) or [WeightedRerank](../Collections/Function/WeightedRerank.md)). Each sub-search targets one vector field with its own query vector, filter, and limit.
 
 ```cpp
 Status HybridSearch(const HybridSearchRequest& request, HybridSearchResponse& response)
@@ -112,7 +112,7 @@ auto request = HybridSearchRequest()
 
 - `WithRerank(const FunctionPtr& rerank)`
 
-    Sets the reranking function that fuses the sub-search results, such as an [RRFRerank](../Collections/Function.md) or [WeightedRerank](../Collections/Function.md) function.
+    Sets the reranking function that fuses the sub-search results, such as an [RRFRerank](../Collections/Function/RRFRerank.md) or [WeightedRerank](../Collections/Function/WeightedRerank.md) function.
 
 - `SetRerank(const FunctionPtr& rerank)`
 
@@ -224,7 +224,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
       <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
@@ -441,7 +441,7 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
 ## Example
 
-Run two sub-searches on different vector fields, fuse their results with a [WeightedRerank](../Collections/Function.md) ranker, and return the top 10 entities after connecting a MilvusClientV2.
+Run two sub-searches on different vector fields, fuse their results with a [WeightedRerank](../Collections/Function/WeightedRerank.md) ranker, and return the top 10 entities after connecting a MilvusClientV2.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();

@@ -76,13 +76,15 @@ local directory via this table before editing. Current latest version line is
   - `MilvusClient.h` / `MilvusClientV2.h` → pages under `Client/`.
   - `Status.h` (with its `StatusCode` member enum) → `Client/Status.md` — the
     shared status type page documenting the return code/status of every operation.
-  - **C++ groups related types in ONE page**: when a header declares a primary
-    type plus related classes (e.g. `Function.h` has `Function` +
-    `RRFRerank`/`WeightedRerank`/`BoostRerank`/`DecayRerank`/`ModelRerank`;
-    `FunctionChain.h` has `FunctionChain` + `FunctionChainStage`/`ColumnRef`/
-    `ExprArg`/`Expr`/`Op`), document them all in **one `<Type>.md` page with a
-    full `##` section per related type** — NOT separate pages and NOT a brief
-    one-line list. `Collections/Function.md` is the precedent.
+  - **C++ related-type clusters use the java subdirectory layout**: when a
+    header declares a primary type plus related classes (e.g. `Function.h` has
+    `Function` + `RRFRerank`/`WeightedRerank`/`BoostRerank`/`DecayRerank`/
+    `ModelRerank`; `FunctionChain.h` has `FunctionChain` +
+    `FunctionChainStage`/`ColumnRef`/`ExprArg`/`Expr`/`Op`), document each type
+    in **its own page inside a `<Type>/` subdirectory** — main type at
+    `<Type>/<Type>.md` with a "Related types" list linking each sibling. Do NOT
+    merge related types into one page as `##` sections.
+    `Collections/Function/` is the precedent.
 - **Base classes**: a page documents methods inherited from `RequestBase.h`,
   `CollectionRequestBase.h`, `DMLRequestBase.h`, `DQLRequestBase.h`,
   `SearchRequestBase.h`, `IndexRequestBase.h`, etc. — always include base-class
@@ -415,12 +417,11 @@ local directory via this table before editing. Current latest version line is
   Document the union type on a single page — `# <Union>` with the union
   declaration, then a `## <Member>` section per member interface (each with its
   own ```` ```typescript ```` declaration and `**FIELDS:**` block), then one
-  `## Example`. Do **not** create a separate page per union member. This is the
-  node counterpart of the C++ "related types in one page" rule (SKILL.md), and
-  overrides the generic "Highlighter / LexicalHighlighter / SemanticHighlighter
-  never merged" guidance, which applies to Java V2's inheritance model, not TS
-  unions. Precedent: `Vector/Highlighter.md` (union + `## LexicalHighlighter` +
-  `## SemanticHighlighter`).
+  `## Example`. Do **not** create a separate page per union member. This node
+  union rule overrides the generic "Highlighter / LexicalHighlighter /
+  SemanticHighlighter never merged" guidance, which applies to Java V2's
+  inheritance model, not TS unions. Precedent: `Vector/Highlighter.md` (union +
+  `## LexicalHighlighter` + `## SemanticHighlighter`).
 - **Language tags**: the SDK is written in TypeScript. Use `javascript` for
   runnable examples and `## Request Syntax` blocks, and `typescript` for
   type-declaration blocks (enum/interface/type declarations), never an

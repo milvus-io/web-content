@@ -744,11 +744,14 @@ page-mapping rules in `references/sdk-map.md`):
   (`Vector/DataType.md`). So a `FunctionChain` cluster (+
   `FunctionChainArg`/`Expr`/`Op`/`Stage`/`ParamValue`) goes under
   `Vector/FunctionChain/FunctionChain.md` + sibling pages — NOT flattened.
-- **cpp**: a header's primary type **plus its related classes are all documented
-  in ONE `<Type>.md` page**, with a full `##` section per related type (see
-  `Collections/Function.md` — `Function` + `RRFRerank`/`WeightedRerank`/...).
-  Do NOT create separate pages, and do NOT reduce related types to a one-line
-  list — give each a proper `##` section.
+- **cpp**: related-type clusters use the same subdirectory layout as java — the
+  primary type goes at `<Type>/<Type>.md` and each related type gets **its own
+  page** as a sibling (e.g. `Collections/Function/Function.md` +
+  `RRFRerank.md`/`WeightedRerank.md`/`BoostRerank.md`/`DecayRerank.md`/
+  `ModelRerank.md`; `Vector/FunctionChain/FunctionChain.md` +
+  `FunctionChainStage.md`/`FunctionChainColumnRef.md`/...). Do NOT merge a
+  related type into the primary page as a `##` section, and do NOT reduce
+  related types to a one-line list.
 
 ### Step 4 — Update pages (generative, AI-edited)
 
@@ -1818,8 +1821,8 @@ to node unions.
   SDK root or a generic top-level directory (pymilvus's
   `MilvusClient/FunctionScore.md` and `MilvusClient/EmbeddingList/...` placement
   is the anti-pattern to avoid). Follow the per-SDK directory convention in
-  `references/sdk-map.md` (java nests clusters under the primary type, cpp
-  documents related classes in one page, ...). Reconciliation moves existing
+  `references/sdk-map.md` (java and cpp nest related-type clusters under the
+  primary type, ...). Reconciliation moves existing
   misplaced type pages into their owning category (see Reconciliation Pass 1).
 - **Link every reference**: anywhere an operation/request/response page names a
   type that has a dedicated page — a request parameter type, a return type, a

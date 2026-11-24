@@ -462,11 +462,11 @@ auto request = SearchRequest()
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
-    Sets the highlighter used to highlight matched text in the results. Optional. See [Highlighter](Highlighter.md).
+    Sets the highlighter used to highlight matched text in the results. Optional. See [Highlighter](Highlighter/Highlighter.md).
 
 - `SetHighlighter(const HighlighterPtr& highlighter)`
 
-    Set the search highlighter. See [Highlighter](Highlighter.md).
+    Set the search highlighter. See [Highlighter](Highlighter/Highlighter.md).
 
 Vector request payloads use [FieldData](FieldData.md) instances.
 
@@ -514,7 +514,7 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
