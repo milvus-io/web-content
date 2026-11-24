@@ -50,7 +50,7 @@ An **OptimizeTask** handle used to monitor or cancel the asynchronous optimizati
 
 ```rust
 OptimizeTask
-    get_result() // -> Result<response::utility::OptimizeResponse>
+    get_result(timeout_ms) // -> Result<response::utility::OptimizeResponse>
     cancel() // -> bool
     is_done() // -> bool
     is_cancelled() // -> bool
@@ -60,7 +60,7 @@ OptimizeTask
 
 **METHODS:**
 
-- `get_result()` (*Result<response::utility::OptimizeResponse>*) -
+- `get_result(timeout_ms)` (*Result<response::utility::OptimizeResponse>*) -
 
     Waits for the optimization result, blocking until it completes or the timeout elapses.
 
