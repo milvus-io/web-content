@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
 <p>Voyage AI Ranker 對於需要以下功能的應用特別有價值：</p>
 <ul>
 <li><p>具備針對重新排序任務特別訓練之模型，以實現進階語義理解</p></li>
-<li><p>針對生產環境工作負載進行優化推論，實現高效能處理</p></li>
+<li><p>針對生產環境工作負載進行優化推論的高效能處理</p></li>
 <li><p>靈活的截斷控制，以處理長度各異的文件</p></li>
 <li><p>針對不同模型變體（如 rerank-2、rerank-lite 等）進行微調以優化效能</p></li>
 </ul>
@@ -46,8 +46,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>在 Milvus 中實作 Voyage AI Ranker 之前，請確保您具備以下條件：</p>
 <ul>
-<li><p>一個 Milvus 集合，其中包含名為 `<code translate="no">VARCHAR</code> ` 的欄位，該欄位存有待重新排序的文字</p></li>
-<li><p>一個具有重新排序器存取權限的有效 Voyage AI API 金鑰。請至<a href="https://www.voyageai.com/">Voyage AI 平台註冊</a>以取得您的 API 憑證。您可以：</p>
+<li><p>一個 Milvus 集合，其中包含名為「<code translate="no">VARCHAR</code> 」的欄位，該欄位存有待重新排序的文字</p></li>
+<li><p>一個可存取重新排序器的有效 Voyage AI API 金鑰。請至<a href="https://www.voyageai.com/">Voyage AI 平台註冊</a>以取得您的 API 憑證。您可以：</p>
 <ul>
 <li><p>設定<code translate="no">VOYAGE_API_KEY</code> 環境變數，或</p></li>
 <li><p>在排序器配置中直接指定 API 金鑰</p></li>
@@ -121,7 +121,28 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;truncation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Configure Voyage AI Ranker</span>
+<span class="hljs-keyword">const</span> voyageai_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;voyageai_semantic_ranker&quot;</span>,     <span class="hljs-comment">// Unique identifier for your ranker</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK for reranking functions</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Enables model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;voyageai&quot;</span>,               <span class="hljs-comment">// Specifies Voyage AI as the service provider</span>
+    <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;rerank-2.5&quot;</span>,           <span class="hljs-comment">// Voyage AI reranker to use</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text for relevance evaluation</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">128</span>,         <span class="hljs-comment">// Optional: batch size for model service requests (default: 128)</span>
+    <span class="hljs-attr">truncation</span>: <span class="hljs-literal">true</span>,                   <span class="hljs-comment">// Optional: enable input truncation (default: true)</span>
+    <span class="hljs-comment">// credential: &quot;your-voyage-api-key&quot;, // Optional: if not set, uses VOYAGE_API_KEY env var</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -324,7 +345,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with Voyage AI reranker</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: voyageai_ranker,              <span class="hljs-comment">// Apply Voyage AI reranker</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

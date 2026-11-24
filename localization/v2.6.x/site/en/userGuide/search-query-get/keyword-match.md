@@ -224,7 +224,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.</p>
-<p>By default, Milvus uses the <code translate="no">standard</code> analyzer, which tokenizes text based on whitespace and punctuation and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to <a href="/docs/v2.6.x/standard-analyzer.md">Standard</a>.</p>
+<p>By default, Milvus uses the <code translate="no">standard</code> analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to <a href="/docs/v2.6.x/standard-analyzer.md">Standard</a>.</p>
 <p>In cases where a different analyzer is required, you can configure one using the <code translate="no">analyzer_params</code> parameter. For example, to apply the <code translate="no">english</code> analyzer for processing English text:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

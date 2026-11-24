@@ -66,7 +66,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>文本匹配适用于 <a href="/docs/zh/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> 字段类型上运行，该类型本质上是 Milvus 中的字符串数据类型。要启用文本匹配，请将 `<code translate="no">enable_analyzer</code> ` 和 `<code translate="no">enable_match</code> ` 均设置为 `<code translate="no">True</code> `，然后在定义 Collection Schema 时，可选地配置一个<a href="/docs/zh/v2.6.x/analyzer-overview.md">分析器</a>用于文本分析。</p>
+    </button></h2><p>文本匹配适用于 <a href="/docs/zh/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> 字段类型上运行，该类型本质上是 Milvus 中的字符串数据类型。要启用文本匹配，请将 `<code translate="no">enable_analyzer</code> ` 和 `<code translate="no">enable_match</code> ` 均设置为 `<code translate="no">True</code> `，然后在定义 Collection Schema 时，可选地配置一个<a href="/docs/zh/v2.6.x/analyzer-overview.md">分析器</a>来执行文本分析。</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,8 +221,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>关键词匹配的性能和准确性取决于所选的分析器。不同的分析器针对不同的语言和文本结构进行了优化，因此选择合适的分析器会对您特定用例的搜索结果产生显著影响。</p>
-<p>默认情况下，Milvus 使用<code translate="no">standard</code> 分析器，该分析器基于空格和标点符号对文本进行分词，并将文本转换为小写。应用此默认设置无需额外参数。有关更多信息，请参阅<a href="/docs/zh/v2.6.x/standard-analyzer.md">“标准”</a>。</p>
+    </button></h3><p>关键词匹配的性能和准确性取决于所选的分析器。不同的分析器针对不同的语言和文本结构进行了优化，因此选择合适的分析器将对您特定用例的搜索结果产生显著影响。</p>
+<p>默认情况下，Milvus 使用<code translate="no">standard</code> 分析器，该分析器基于空格和标点符号对文本进行分词，移除长度超过 40 个字符的词元，并将文本转换为小写。应用此默认设置无需额外参数。有关更多信息，请参阅<a href="/docs/zh/v2.6.x/standard-analyzer.md">“标准”</a>。</p>
 <p>如果需要使用其他分析器，您可以通过<code translate="no">analyzer_params</code> 参数进行配置。例如，要应用<code translate="no">english</code> 分析器来处理英文文本：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -426,7 +426,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>文本匹配可与向量相似度搜索结合使用，以缩小搜索范围并提升搜索性能。通过在进行向量相似度搜索前使用文本匹配对Collection进行过滤，您可以减少需要搜索的文档数量，从而加快查询速度。</p>
-<p>在此示例中，表达式 `<code translate="no">filter</code> ` 将搜索结果过滤为仅包含与指定术语 `<code translate="no">keyword1</code> ` 或 `<code translate="no">keyword2</code>` 匹配的文档。随后，系统将针对这一经过过滤的文档子集执行向量相似度搜索。</p>
+<p>在此示例中，表达式 `<code translate="no">filter</code> ` 将搜索结果过滤为仅包含与指定术语 `<code translate="no">keyword1</code> ` 或 `<code translate="no">keyword2</code>` 匹配的文档。随后，系统将针对这部分经过过滤的文档子集执行向量相似度搜索。</p>
 <div class="alert note">
 <p>您可以通过配置文本高亮器，在搜索结果中突出显示匹配的术语。详情请参阅<a href="/docs/zh/v2.6.x/text-highlighter.md">“文本高亮器”</a>。</p>
 </div>

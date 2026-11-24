@@ -2,7 +2,8 @@
 id: single-vector-search.md
 title: 基本ベクトル検索
 summary: >-
-  近似最近傍(ANN)検索は、ベクトル埋め込みデータのソート順を記録したインデックスファイルに基づいて、受信した検索リクエストに含まれるクエリベクトルに基づいてベクトル埋め込みデータのサブセットを検索し、クエリベクトルとサブグループ内のベクトル埋め込みデータを比較し、最も類似した結果を返します。ANN検索により、Milvusは効率的な検索体験を提供します。このページでは、基本的なANN検索の方法をご紹介します。
+  ベクトル埋め込みのソート順を記録したインデックスファイルに基づき、近似最近傍法（ANN）検索は、受信した検索リクエストに含まれるクエリベクトルに基づいてベクトル埋め込みのサブセットを特定し、クエリベクトルとサブセット内のベクトルを比較して、最も類似性の高い結果を返します。
+  Milvusは、ANN検索により効率的な検索体験を提供します。このページでは、基本的なANN検索の実行方法について解説します。
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">基本ベクトル検索<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>近似最近傍(ANN)検索は、ベクトル埋込みのソート順を記録したインデックスファイルに基づいて、受信した検索リクエストに含まれるクエリベクトルからベクトル埋込みの部分集合を探し出し、その部分集合内のベクトルとクエリベクトルを比較し、最も類似した結果を返します。ANN検索により、Milvusは効率的な検索体験を提供します。このページでは、基本的なANN検索の方法を説明します。</p>
+    </button></h1><p>ベクトル埋め込みのソート順を記録したインデックスファイルに基づき、近似最近傍法（ANN）検索は、受信した検索リクエストに含まれるクエリベクトルに基づいてベクトル埋め込みのサブセットを特定し、クエリベクトルとサブセット内のベクトルを比較して、最も類似性の高い結果を返します。 Milvusは、ANN検索により効率的な検索体験を提供します。このページでは、基本的なANN検索の実行方法について解説します。</p>
 <div class="alert note">
-<p>コレクション作成後に新しいフィールドを動的に追加した場合、これらのフィールドを含む検索は、定義されたデフォルト値または明示的に値が設定されていないエンティティのNULLを返します。詳細は、"<a href="/docs/ja/v2.6.x/add-fields-to-an-existing-collection.md">Add Fields to an Existing Collection</a>" を参照してください。</p>
+<p>コレクションの作成後に動的に新しいフィールドを追加した場合、これらのフィールドを含む検索では、明示的に値が設定されていないエンティティに対して、定義されたデフォルト値またはNULLが返されます。詳細については、「<a href="/docs/ja/v2.6.x/add-fields-to-an-existing-collection.md">既存のコレクションへのフィールドの追加</a>」を参照してください。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,19 +39,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ANN および k-Nearest Neighbors (kNN) 検索は、ベクトル類似性検索の通常の手法です。kNN検索では、ベクトル空間内のすべてのベクトルを、検索リクエストに含まれるクエリベクトルと比較してから、最も類似したものを見つけ出す必要があり、時間とリソースを消費します。</p>
-<p>kNN検索とは異なり、ANN検索アルゴリズムは、ベクトルの埋め込み順をソートした<strong>インデックス</strong>ファイルを要求します。検索要求が来たとき、インデックスファイルを参照として使用することで、クエリ・ベクトルに最も類似したベクトル埋め込みを含むサブグループを素早く見つけることができます。次に、指定された<strong>メトリックタイプを</strong>使用して、クエリベクトルとサブグループ内の類似度を測定し、クエリベクトルとの類似度に基づいてグループメンバーをソートし、<strong>上位K個の</strong>グループメンバーを割り出すことができます。</p>
-<p>ANN検索は事前に構築されたインデックスに依存しており、検索スループット、メモリ使用量、検索の正しさは、選択したインデックスタイプによって異なる可能性があります。検索の性能と正しさのバランスをとる必要がある。</p>
-<p>Milvusは学習曲線を減らすために、<strong>AUTOINDEXを</strong>提供しています。<strong>AUTOINDEXを</strong>使用すると、Milvusはインデックスを構築する際にコレクション内のデータ分布を分析し、その分析に基づいて最も最適化されたインデックスパラメータを設定し、検索性能と正しさのバランスを取ることができます。</p>
-<p>このセクションでは、以下のトピックに関する詳細情報をご覧いただけます：</p>
+    </button></h2><p>ANN検索とk-最近傍（kNN）検索は、ベクトル類似度検索における一般的な手法です。kNN検索では、最も類似度の高いものを特定する前に、ベクトル空間内のすべてのベクトルを検索リクエストに含まれるクエリベクトルと比較する必要があり、時間がかかり、リソースを大量に消費します。</p>
+<p>kNN検索とは異なり、ANN検索アルゴリズムでは、ベクトル埋め込みのソート順を記録した<strong>インデックス</strong>ファイルを必要とします。検索リクエストが到着すると、このインデックスファイルを参照して、クエリベクトルに最も類似したベクトル埋め込みを含む可能性が高いサブグループを迅速に特定できます。 その後、指定された<strong>メトリックタイプ</strong>を使用して、クエリベクトルとサブグループ内のベクトルとの類似度を測定し、クエリベクトルとの類似度に基づいてグループ内の要素を並べ替え、<strong>上位K個の</strong>グループ要素を特定することができます。</p>
+<p>ANN検索は事前に構築されたインデックスに依存しており、検索スループット、メモリ使用量、および検索の正確性は、選択したインデックスの種類によって異なる場合があります。検索パフォーマンスと正確性のバランスを考慮する必要があります。</p>
+<p>学習曲線を緩和するため、Milvus は<strong>AUTOINDEX</strong> 機能を提供しています。<strong>AUTOINDEX</strong> を使用すると、Milvus はインデックスの構築中にコレクション内のデータ分布を分析し、その分析結果に基づいて最適化されたインデックスパラメータを設定することで、検索パフォーマンスと正確性のバランスを調整します。</p>
+<p>このセクションでは、以下のトピックに関する詳細情報を確認できます：</p>
 <ul>
 <li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Single-Vector-Search">単一ベクトル検索</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Bulk-Vector-Search">バルク・ベクトル検索</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">パーティションでのANN検索</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Bulk-Vector-Search">一括ベクトル検索</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#ANN-Search-in-Partition">パーティション内でのANN検索</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Use-Output-Fields">出力フィールドの使用</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">リミットとオフセットの使用</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Use-Level">レベルを使う</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Get-Recall-Rate">再現率を得る</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Use-Limit-and-Offset">limit および offset の使用</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Use-Level">レベルを使用</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Get-Recall-Rate">リコール率の取得</a></p></li>
 <li><p><a href="/docs/ja/v2.6.x/single-vector-search.md#Enhancing-ANN-Search">ANN検索の強化</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">単一ベクトル検索<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
@@ -68,10 +69,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ANN検索において、単一ベクトル検索とは1つのクエリベクトルのみを含む検索を指す。Milvusは事前に構築されたインデックスと検索要求に含まれるメトリックタイプに基づいて、クエリベクトルに最も類似した上位K個のベクトルを検索します。</p>
-<p>このセクションでは、単一ベクトル検索の方法を学びます。検索リクエストは1つのクエリベクトルを運び、MilvusにInner Product (IP)を使ってクエリベクトルとコレクション内のベクトル間の類似度を計算し、最も類似した3つのベクトルを返すよう依頼します。</p>
+    </button></h2><p>ANN検索において、単一ベクトル検索とは、クエリベクトルが1つだけ使用される検索を指します。Milvusは、事前に構築されたインデックスと検索リクエストに含まれるメトリックタイプに基づいて、クエリベクトルに最も類似した上位K個のベクトルを特定します。</p>
+<p>このセクションでは、単一ベクトル検索の実行方法について学びます。検索リクエストには単一のクエリベクトルが含まれており、Milvusに対し、内積（IP）を用いてクエリベクトルとコレクション内のベクトルとの類似度を計算し、最も類似度の高い3つのベクトルを返すよう要求します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -250,8 +256,8 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvusはクエリベクトルとの類似度スコアによって検索結果を降順にランク付けします。類似度スコアはクエリベクトルに対する距離とも呼ばれ、その値の範囲は使用するメトリックタイプによって異なります。</p>
-<p>以下の表は、適用可能なメトリックタイプと対応する距離範囲の一覧です。</p>
+<p>Milvusは、検索結果をクエリベクトルとの類似度スコアの降順で並べ替えます。類似度スコアは「クエリベクトルまでの距離」とも呼ばれ、その値の範囲は使用されるメトリックの種類によって異なります。</p>
+<p>以下の表に、適用可能なメトリックタイプと、それに対応する距離の範囲を示します。</p>
 <table>
    <tr>
      <th><p>メトリックタイプ</p></th>
@@ -260,28 +266,28 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>値が小さいほど類似度が高いことを示す。</p></td>
+     <td><p>値が小さいほど、類似度が高いことを示します。</p></td>
      <td><p>[0, ∞)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
-     <td><p>値が大きいほど類似性が高い。</p></td>
+     <td><p>値が大きいほど、類似度が高いことを示します。[0, ∞)</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
-     <td><p>値が大きいほど類似度が高いことを示す。</p></td>
+     <td><p>値が大きいほど、類似度が高いことを示します。</p></td>
      <td><p>[-1, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>値が小さいほど類似度が高い。</p></td>
+     <td><p>値が小さいほど、類似度が高いことを示します。</p></td>
      <td><p>[0, 1]</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>値が小さいほど類似度が高いことを示す。</p></td>
-     <td><p>[0, dim(ベクトル)].</p></td>
+     <td><p>値が小さいほど、類似度が高いことを示します。</p></td>
+     <td><p>[0, dim(vector)]</p></td>
    </tr>
 </table>
 <h2 id="Bulk-Vector-Search" class="common-anchor-header">一括ベクトル検索<button data-href="#Bulk-Vector-Search" class="anchor-icon" translate="no">
@@ -299,9 +305,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>同様に、検索リクエストに複数のクエリベクトルを含めることができます。milvusはクエリベクトルに対してANN検索を並行して行い、2組の結果を返します。</p>
+    </button></h2><p>同様に、検索リクエストに複数のクエリベクトルを含めることができます。Milvusは、クエリベクトルに対してANN検索を並列で実行し、2つの結果セットを返します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Search with multiple vectors</span>
 <span class="hljs-comment"># 7.1. Prepare query vectors</span>
 query_vectors = [
@@ -499,7 +510,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">プライマリ・キー検索<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+<h2 id="Primary-Key-Search" class="common-anchor-header">主キーによる検索<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -514,9 +525,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>クエリ・ベクタを設定する代わりに、クエリ・ベクタがターゲット・コレクションに既に存在する場合、プライマリ・キーを使用することができます。</p>
+    </button></h2><p>クエリベクトルを設定する代わりに、クエリベクトルが対象のコレクションにすでに存在している場合は、主キーを使用することができます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -537,7 +553,7 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="ANN-Search-in-Partition" class="common-anchor-header">パーティション内のANN検索<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
+<h2 id="ANN-Search-in-Partition" class="common-anchor-header">ANN パーティション内検索<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -552,10 +568,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションに複数のパーティションを作成し、検索範囲を特定の数のパーティションに絞ることができるとします。その場合、検索リクエストに対象のパーティション名を含めることで、指定したパーティション内に検索範囲を限定することができます。検索に関わるパーティション数を減らすことで、検索のパフォーマンスが向上します。</p>
-<p>次のコード・スニペットは、コレクションに<strong>PartitionAという</strong>パーティションを想定しています。</p>
+    </button></h2><p>コレクション内に複数のパーティションを作成しており、検索範囲を特定の数のパーティションに絞り込める場合、検索リクエストに対象のパーティション名を含めることで、指定したパーティション内でのみ検索を行うことができます。検索対象となるパーティションの数を減らすことで、検索パフォーマンスが向上します。</p>
+<p>以下のコードスニペットは、コレクション内に「<strong>PartitionA</strong>」という名前のパーティションが存在することを前提としています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 res = client.search(
@@ -707,9 +728,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusの検索結果には、デフォルトでトップKベクトル埋め込みを含むエンティティのプライマリフィールド値と類似距離/スコアが含まれます。ベクトルフィールドとスカラーフィールドの両方を含む対象フィールドの名前を出力フィールドとして検索リクエストに含めることで、検索結果にこれらのエンティティの他のフィールドの値を持たせることができます。</p>
+    </button></h2><p>検索結果において、Milvusはデフォルトで、上位K個のベクトル埋め込みを含むエンティティの主要フィールドの値および類似度距離／スコアを含めます。検索リクエストに、ベクトルフィールドとスカラーフィールドの両方を含むターゲットフィールド名を「出力フィールド」として指定することで、検索結果にこれらのエンティティの他のフィールドの値を含めることができます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -855,7 +881,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Limit-and-Offset" class="common-anchor-header">Limit と Offset の使用<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
+<h2 id="Use-Limit-and-Offset" class="common-anchor-header">使用制限とオフセット<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -870,39 +896,44 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>検索リクエストに含まれるパラメータ<code translate="no">limit</code> が、検索結果に含めるエンティティの数を決定していることにお気づきでしょうか。このパラメータは、1回の検索で返すエンティティの最大数を指定するもので、通常は<strong>top-K</strong> と呼ばれます。</p>
-<p>ページ分割されたクエリを実行したい場合は、ループを使用して複数の Search 要求を送信し、<strong>Limit</strong>パラメータと<strong>Offset</strong>パラメータを各クエリ要求に含めることができます。具体的には、<strong>Limit</strong>パラメータを現在のクエリ結果に含めたいエンティティの数に設定し、<strong>Offset</strong>パラメータをすでに返されたエンティティの総数に設定します。</p>
-<p>以下の表は、一度に 100 のエンティティを返すページ分割クエリの<strong>Limit</strong>および<strong>Offset</strong>パラメータの設定方法の概要です。</p>
+    </button></h2><p>検索リクエストに含まれるパラメータ「<code translate="no">limit</code> 」が、検索結果に含まれるエンティティの数を決定していることに気づくかもしれません。このパラメータは、1回の検索で返すエンティティの最大数を指定するもので、通常「<strong>トップK」</strong>と呼ばれます。</p>
+<p>ページネーションされたクエリを実行したい場合は、ループを使用して複数の検索リクエストを送信し、各リクエストに<strong>Limit</strong>および<strong>Offset</strong>パラメータを含めることができます。具体的には、<strong>Limit</strong>パラメータを現在のクエリ結果に含めたいエンティティの数に設定し、<strong>Offset</strong>をすでに返されたエンティティの総数に設定します。</p>
+<p>以下の表は、一度に100個のエンティティを返す場合、<strong>ページネーションクエリのLimitおよびOffsetパラメータ</strong> <strong>の設定</strong>方法をまとめたものです。</p>
 <table>
    <tr>
      <th><p>クエリ</p></th>
-     <th><p>クエリごとに返すエンティティ</p></th>
-     <th><p>合計で既に返されたエンティティ</p></th>
+     <th><p>1回のクエリで返すエンティティ数</p></th>
+     <th><p>これまでに返されたエンティティの総数</p></th>
    </tr>
    <tr>
-     <td><p><strong>最初の</strong>クエリ</p></td>
+     <td><p><strong>1回目の</strong>クエリ</p></td>
      <td><p>100</p></td>
      <td><p>0</p></td>
    </tr>
    <tr>
-     <td><p><strong>2回目の</strong>クエリー</p></td>
+     <td><p><strong>2番目の</strong>クエリ</p></td>
      <td><p>100</p></td>
      <td><p>100</p></td>
    </tr>
    <tr>
-     <td><p><strong>第3</strong>クエリ</p></td>
+     <td><p><strong>3番目の</strong>クエリ</p></td>
      <td><p>100</p></td>
      <td><p>200</p></td>
    </tr>
    <tr>
-     <td><p><strong>n番目の</strong>クエリー</p></td>
+     <td><p><strong>n番目の</strong>クエリ</p></td>
      <td><p>100</p></td>
-     <td><p>100 x (n-1)</p></td>
+     <td><p>100 × (n-1)</p></td>
    </tr>
 </table>
-<p>なお、1回のANN検索における<code translate="no">limit</code> と<code translate="no">offset</code> の合計は、16,384以下でなければならない。</p>
+<p>なお、1回のANN検索における<code translate="no">limit</code> と<code translate="no">offset</code> の合計は、16,384未満でなければなりません。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -991,7 +1022,7 @@ curl --request POST \
     &quot;offset&quot;: 10
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">検索にタイムゾーンを一時的に設定する<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
+<h2 id="Temporarily-set-a-timezone-for-a-search" class="common-anchor-header">検索のタイムゾーンを一時的に設定する<button data-href="#Temporarily-set-a-timezone-for-a-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1006,11 +1037,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、検索コールで<code translate="no">timezone</code> パラメータを設定することで、1回の操作でデータベースまたはコレクションのデフォルトタイムゾーンを一時的にオーバーライドできます。これは、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかを制御します。</p>
-<p><code translate="no">timezone</code> 、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/v2.6.x/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
-<p>以下の例では、検索操作でタイムゾーンを一時的に設定する方法を示している：</p>
+    </button></h2><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、検索呼び出しで<code translate="no">timezone</code> パラメータを設定することで、単一の操作においてデータベースまたはコレクションのデフォルトタイムゾーンを一時的に上書きできます。これにより、操作中に<code translate="no">TIMESTAMPTZ</code> の値の表示方法および比較方法が制御されます。</p>
+<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（例：<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>またはUTC</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、<a href="/docs/ja/v2.6.x/timestamptz-field.md">「TIMESTAMPTZフィールド</a>」を参照してください。</p>
+<p>以下の例は、検索操作に対してタイムゾーンを一時的に設定する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
@@ -1043,36 +1079,34 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AUTOINDEX は ANN 検索の学習曲線をかなり平坦にする。しかし、TOP-Kが大きくなるにつれて、検索結果が必ずしも正しいとは限らない。Milvusは、検索範囲の縮小、検索結果の関連性の向上、検索結果の多様化により、以下のような検索機能の強化を図っている。</p>
+    </button></h2><p>AUTOINDEXは、ANN検索の学習曲線を大幅に平坦化します。しかし、トップKが増加するにつれて、検索結果が常に正しいとは限りません。Milvusは、検索範囲を絞り込み、検索結果の関連性を高め、検索結果の多様性を高めることで、以下の検索機能の強化を実現しています。</p>
 <ul>
 <li><p>フィルタリング検索</p>
-<p>MilvusがANN検索を行う前にメタデータのフィルタリングを行い、検索範囲をコレクション全体から指定されたフィルタリング条件に一致するエンティティのみに縮小するように、検索リクエストにフィルタリング条件を含めることができます。</p>
-<p>メタデータのフィルタリングとフィルタリング条件の詳細については、<a href="/docs/ja/v2.6.x/filtered-search.md">フィルタリング検索</a>、<a href="/docs/ja/v2.6.x/boolean.md">フィルタリングの説明</a>、および関連するトピックを参照してください。</p></li>
+<p>検索リクエストにフィルタリング条件を含めることで、MilvusはANN検索を実行する前にメタデータフィルタリングを行い、検索範囲をコレクション全体から、指定されたフィルタリング条件に一致するエンティティのみに絞り込むことができます。</p>
+<p>メタデータフィルタリングおよびフィルタリング条件の詳細については、「<a href="/docs/ja/v2.6.x/filtered-search.md">フィルタリング検索</a>」、「<a href="/docs/ja/v2.6.x/boolean.md">フィルタリングの解説</a>」、および関連トピックを参照してください。</p></li>
 <li><p>範囲検索</p>
-<p>特定の範囲内で返されるエンティティの距離またはスコアを制限することにより、検索結果の関連性を向上させることができます。Milvusでは、範囲検索では、クエリベクトルに最も近いベクトル埋め込みを中心として2つの同心円を描きます。検索リクエストは両円の半径を指定し、Milvusは外側の円に含まれ、内側の円に含まれないすべてのベクトル埋め込みを返します。</p>
-<p>範囲検索の詳細については、<a href="/docs/ja/v2.6.x/range-search.md">範囲検索を</a>参照してください。</p></li>
+<p>返されるエンティティの距離またはスコアを特定の範囲内に制限することで、検索結果の関連性を高めることができます。 Milvus における範囲検索では、クエリベクトルに最も類似したベクトル埋め込みを中心として、2 つの同心円が描かれます。検索リクエストでは両方の円の半径が指定され、Milvus は外側の円には含まれるが内側の円には含まれないすべてのベクトル埋め込みを返します。</p>
+<p>範囲検索の詳細については、「<a href="/docs/ja/v2.6.x/range-search.md">範囲検索</a>」を参照してください。</p></li>
 <li><p>グループ化検索</p>
-<p>返されたエンティティが特定のフィールドで同じ値を保持している場合、検索結果はベクトル空間内のすべてのベクトル埋め込み値の分布を表していない可能性があります。検索結果を多様化するには、グルーピング検索の使用を検討する。</p>
-<p>グループ化検索の詳細については、<a href="/docs/ja/v2.6.x/grouping-search.md">グループ化検索を</a>参照してください、</p></li>
+<p>返されるエンティティが特定のフィールドで同じ値を持つ場合、検索結果はベクトル空間内のすべてのベクトル埋め込みの分布を正確に反映していない可能性があります。検索結果の多様性を高めるには、グループ化検索の使用を検討してください。</p>
+<p>グループ化検索の詳細については、「<a href="/docs/ja/v2.6.x/grouping-search.md">グループ化検索</a>」を参照してください。</p></li>
 <li><p>ハイブリッド検索</p>
-<p>コレクションは、異なる埋め込みモデルを使用して生成されたベクトル埋め込みを保存するために、複数のベクトルフィールドを含むことができます。そうすることで、ハイブリッド検索を使用して、これらのベクトル・フィールドからの検索結果を再ランク付けし、想起率を向上させることができます。</p>
-<p>ハイブリッド検索については、<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p></li>
+<p>コレクションには、異なる埋め込みモデルを使用して生成されたベクトル埋め込みを保存するために、複数のベクトルフィールドを含めることができます。これにより、ハイブリッド検索を使用してこれらのベクトルフィールドからの検索結果を再ランク付けし、リコール率を向上させることができます。</p>
+<p>ハイブリッド検索の詳細については、「<a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a>」を参照してください。</p></li>
 <li><p>検索イテレータ</p>
-<p>単一の ANN 検索では、最大 16,384 のエンティティが返されます。1回の検索でより多くのエンティティを返す必要がある場合は、検索イテレータの使用を検討する。</p>
+<p>1回のANN検索で返されるエンティティの最大数は16,384件です。1回の検索でより多くのエンティティを返す必要がある場合は、検索イテレータの使用をご検討ください。</p>
 <p>検索イテレータの詳細については、「<a href="/docs/ja/v2.6.x/with-iterators.md">検索イテレータ</a>」を参照してください。</p></li>
 <li><p>全文検索</p>
-<p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能である。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取ることができます。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
-<p>全文検索の詳細については、<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索を</a>参照してください。</p></li>
+<p>全文検索は、テキストデータセットの中から特定の用語やフレーズを含むドキュメントを検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の限界を克服し、最も正確で文脈に即した結果が得られるようにします。 さらに、生のテキスト入力を受け付け、手動でベクトル埋め込みを生成する必要なく、テキストデータを自動的にスパース埋め込みに変換することで、ベクトル検索を簡素化します。</p>
+<p>全文検索の詳細については、「<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索</a>」を参照してください。</p></li>
 <li><p>テキストマッチ</p>
-<p>Milvusのキーワードマッチは、特定の用語に基づいた正確な文書検索を可能にします。この機能は、主に特定の条件を満たすフィルタリング検索に使用され、スカラーフィルタリングを組み込んでクエリ結果を絞り込むことができるため、スカラー条件を満たすベクトル内の類似検索が可能です。</p>
-<p>キーワードマッチの詳細については、<a href="/docs/ja/v2.6.x/keyword-match.md">キーワードマッチを</a>参照してください。</p></li>
-<li><p>パーティション・キーの使用</p>
-<p>複数のスカラー・フィールドをメタデータ・フィルタリングに関与させ、かなり複雑なフィルタリング条件を使用すると、検索効率に影響することがあります。スカラー・フィールドをパーティション・キーに設定し、検索リクエストでパーティション・キーを含むフィルタリング条件を使用すると、指定されたパーティション・キーの値に対応するパーティション内に検索範囲を制限することができます。</p>
-<p>パーティション・キーの詳細については、「<a href="/docs/ja/v2.6.x/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p></li>
-<li><p>mmapを使用する</p>
-<p>mmap-settingsの詳細については、「<a href="/docs/ja/v2.6.x/mmap.md">mmapを使用する</a>」を参照してください。</p></li>
-<li><p>クラスタリング・コンパクション</p>
-<p>クラスタリング・コンパクションの詳細については、<a href="/docs/ja/v2.6.x/clustering-compaction.md">クラスタリング・コンパクションを</a>参照してください。</p></li>
-<li><p>リランキングの使用</p>
-<p>検索結果の関連性を高めるためにランカーを使用することについての詳細は<a href="/docs/ja/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a>と<a href="/docs/ja/v2.6.x/model-ranker-overview.md">Model Ranker Overview</a> を参照してください。</p></li>
+<p>Milvusのキーワードマッチ機能は、特定の用語に基づいて文書を正確に検索することを可能にします。この機能は主に、特定の条件を満たすためのフィルタリング検索に使用され、スカラーフィルタリングを組み合わせてクエリ結果を絞り込むことができます。これにより、スカラー基準を満たすベクトル内での類似度検索が可能になります。</p>
+<p>キーワードマッチの詳細については、「<a href="/docs/ja/v2.6.x/keyword-match.md">キーワードマッチ</a>」を参照してください。</p></li>
+<li><p>パーティションキーの使用</p>
+<p>メタデータフィルタリングに複数のスカラーフィールドを関与させたり、かなり複雑なフィルタリング条件を使用したりすると、検索効率に影響が出る可能性があります。スカラーフィールドをパーティションキーとして設定し、検索リクエストでそのパーティションキーを含むフィルタリング条件を使用すると、指定されたパーティションキーの値に対応するパーティション内に検索範囲を限定するのに役立ちます。</p>
+<p>パーティションキーの詳細については、「<a href="/docs/ja/v2.6.x/use-partition-key.md">パーティションキーの使用</a>」を参照してください。</p></li>
+<li><p>mmap の使用</p>
+<p>mmap の設定の詳細については、「<a href="/docs/ja/v2.6.x/mmap.md">mmap の使用</a>」を参照してください。</p></li>
+<li><p>再ランク付けの使用</p>
+<p>ランカーを使用して検索結果の関連性を高める方法の詳細については、「<a href="/docs/ja/v2.6.x/decay-ranker-overview.md">Decay Rankerの概要</a>」および「<a href="/docs/ja/v2.6.x/model-ranker-overview.md">Model Rankerの概要</a>」を参照してください。</p></li>
 </ul>

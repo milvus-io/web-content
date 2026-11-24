@@ -1287,12 +1287,6 @@
             "children": []
           },
           {
-            "label": "Clustering Compaction",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Tiered Storage",
             "id": "tiered_storage",
             "order": 2,

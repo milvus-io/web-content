@@ -293,7 +293,7 @@
     ]
   },
   {
-    "label": "사용자 안내서",
+    "label": "사용자 가이드",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -950,7 +950,7 @@
             "children": []
           },
           {
-            "label": "기본 키 검색",
+            "label": "주키 검색",
             "id": "primary-key-search.md",
             "order": 4,
             "children": []
@@ -973,7 +973,7 @@
             "order": 7,
             "children": [
               {
-                "label": "필터링에 대한 설명",
+                "label": "필터링에 대해 알아보기",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1165,7 +1165,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "가중 순위 결정기",
+                "label": "가중 순위 산정기",
                 "id": "weighted-ranker.md",
                 "order": 0,
                 "children": []
@@ -1284,12 +1284,6 @@
             "label": "mmap 사용",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "클러스터링 압축",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1413,7 +1407,7 @@
         "children": []
       },
       {
-        "label": "Claude 코드용 MCP 서버",
+        "label": "클로드 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1452,7 +1446,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Operator를 사용하여",
+                "label": "Milvus Operator와 함께",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1608,7 +1602,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "오브젝트 스토리지",
+                "label": "객체 스토리지",
                 "id": "deploy_s3.md",
                 "order": 0,
                 "children": []
@@ -1628,13 +1622,13 @@
             ]
           },
           {
-            "label": "Milvus Operator를 사용하여",
+            "label": "Milvus Operator와 함께",
             "id": "milvus_operator_dependencies",
             "order": 1,
             "isMenu": true,
             "children": [
               {
-                "label": "오브젝트 스토리지",
+                "label": "객체 스토리지",
                 "id": "object_storage_operator.md",
                 "order": 0,
                 "children": []
@@ -1771,7 +1765,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "알림 생성",
+                "label": "알림 생성하기",
                 "id": "alert.md",
                 "order": 0,
                 "children": []
@@ -1858,7 +1852,7 @@
                 "children": []
               },
               {
-                "label": "프라이빌리지 그룹",
+                "label": "프릴리저 그룹",
                 "id": "privilege_group.md",
                 "order": 2,
                 "children": []
@@ -1915,7 +1909,7 @@
         "order": 14,
         "children": [
           {
-            "label": "Milvus 클러스터 스위치 MQ 유형",
+            "label": "Milvus 클러스터 스위치 MQ형",
             "id": "switch_milvus_cluster_mq_type-operator.md",
             "order": 0,
             "children": []
@@ -1985,7 +1979,7 @@
                 "children": []
               },
               {
-                "label": "버킷 간 인스턴스 간 마이그레이션",
+                "label": "버킷 간 인스턴스 마이그레이션",
                 "id": "cross-bucket-backup-and-restore.md",
                 "order": 2,
                 "children": []
@@ -2104,7 +2098,7 @@
         "children": []
       },
       {
-        "label": "Milvus 사이즈 측정 도구",
+        "label": "Milvus 크기 조정 도구",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2467,7 +2461,7 @@
         ]
       },
       {
-        "label": "에이전트",
+        "label": "요원들",
         "id": "integrate-agents",
         "order": 4,
         "children": [

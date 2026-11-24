@@ -1,7 +1,7 @@
 ---
 id: force-merge.md
 title: 強制合併壓縮Compatible with Milvus 3.0.x
-summary: 使用強制合併壓縮功能來整合小型區段，以提升查詢效能與儲存效率。
+summary: 使用強制合併壓縮功能來整合小型區段，藉此提升查詢效能與儲存效率。
 beta: Milvus 3.0.x
 ---
 <h1 id="Force-Merge-Compaction" class="common-anchor-header">強制合併壓縮<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Force-Merge-Compaction" class="anchor-icon" translate="no">
@@ -38,8 +38,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>標準<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">壓縮會</a>透過多對一合併，將區段大小維持在接近設定的<code translate="no">maxSize</code> ，但仍可能留下中型碎片，若要進一步合併這些碎片，可能會超過限制。 例如，如下圖所示，若某個集合有五個 2 MB 的區段，且 `<code translate="no">maxSize</code> ` 設定為 3 MB，則合併任意兩個區段都會超過此限制，因此標準壓縮無法進一步減少區段數量，碎片化的佈局仍將維持。</p>
-<p>強制合併新增了<code translate="no">target_size</code> 參數，並在可能的情況下，支援將區段重新組織為目標大小，且容差範圍極小。 如下圖所示，若指定的<code translate="no">target_size</code> 為 4 MB，則可將這五個 2 MB 的小區段進一步合併為較少數的較大區段。此舉可減少多餘的區段數量，支援大於預設<code translate="no">maxSize</code> 設定的目標值，且當目標值非常大時，可讓系統根據當前硬體與 QueryNode 拓撲，選擇實用的輸出大小與區段數量。</p>
+    </button></h2><p>標準<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">壓縮會</a>透過多對一合併，將區段大小維持在接近設定的<code translate="no">maxSize</code> ，但仍可能留下中型碎片，若要進一步合併這些碎片，可能會超過限制。 例如，如下圖所示，若某個集合有五個 2 MB 的區段，且 `<code translate="no">maxSize</code> ` 設定為 3 MB，則合併任意兩個區段都會超過此限制，因此標準壓縮無法進一步減少區段數量，碎片化的佈局仍將存在。</p>
+<p>強制合併新增了<code translate="no">target_size</code> 參數，並在可能的情況下，支援將區段重新組織為目標大小，且容差範圍極小。 如下圖所示，若指定的<code translate="no">target_size</code> 為 4 MB，則可將這五個 2 MB 的小區段進一步合併為較少數的較大區段。此舉可減少多餘的區段數量、支援大於預設<code translate="no">maxSize</code> 設定的目標值，且當目標值非常大時，可讓系統根據當前硬體與 QueryNode 拓撲，選擇實用的輸出大小與區段數量。</p>
 <p>若要了解應使用哪種壓縮方法，請參閱<a href="#faq">常見問題解答 (FAQ)</a>。</p>
 <p><span class="img-wrapper">
   
@@ -126,8 +126,8 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
-     <td><p>預設區段最大大小（單位：MB）。當 `<code translate="no">target_size</code> ` 設為 0 或未指定時，此值將作為目標。同時也是明示設定 `<code translate="no">target_size</code>` 時允許的最小值。</p></td>
+     <td><p>1024</p></td>
+     <td><p>預設區段最大大小（單位：MB）。當 `<code translate="no">target_size</code> ` 為 0 或未指定時，此值將作為目標。同時也是顯式設定 `<code translate="no">target_size</code>` 時允許的最小值。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
@@ -142,7 +142,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>QueryNode 的最小記憶體將被此係數除以。用於自動大小計算（<code translate="no">target_size=max_int64</code> ）期間，以確保合併後的區段可由 QueryNodes 載入。</p><ul><li><p>數值越大，產生的區段越小，QueryNode 便越容易載入。</p></li><li><p>較小的數值雖可產生較大的區段，但可能會導致記憶體受限的 QueryNodes 發生載入失敗。</p></li><li><p>例如，若預設係數為 4.0，且最小的 QueryNode 具備 16 GB 記憶體，則自動計算出的目標大小將不會超過 4 GB。此設定可防止「強制合併」產生過大的區段，以致 QueryNodes 無法載入。</p></li></ul></td>
+     <td><p>QueryNode 的最小記憶體將被此係數除以。用於自動大小計算（<code translate="no">target_size=max_int64</code> ）期間，以確保合併後的區段能被 QueryNodes 載入。</p><ul><li><p>數值越大，產生的區段越小，QueryNode 便越容易載入。</p></li><li><p>較小的數值雖可產生較大的區段，但可能會導致記憶體受限的 QueryNodes 發生載入失敗。</p></li><li><p>舉例來說，若預設係數為 4.0，且最小的 QueryNode 具備 16 GB 記憶體，則自動計算出的目標大小將不會超過 4 GB。此設定可防止「強制合併」產生過大的區段，導致 QueryNodes 無法載入。</p></li></ul></td>
    </tr>
 </table>
 <p>若要將上述變更套用至您的 Milvus 叢集，請依照《<a href="/docs/zh-hant/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>》及《<a href="/docs/zh-hant/configure_operator.md">使用 Milvus Operators 配置 Milvus</a>》中的步驟操作。</p>
@@ -166,7 +166,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -185,7 +185,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">顯式目標大小</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -217,11 +217,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>可選。目標區段大小（單位：MB）。此參數值有 3 種選項：</p><ul><li><p><strong>0 或省略</strong>：使用已設定的<code translate="no">dataCoord.segment.maxSize</code> （預設值：512 MB）。等同於標準壓縮。</p></li><li><p><strong>明確值</strong>：將區段合併至約為指定大小（以 MB 為單位，例如 2048）。必須大於或等於已設定的<code translate="no">dataCoord.segment.maxSize</code> 。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>：根據當前區段分佈及可用節點資源，自動計算最佳大小。</p></li></ul></td>
+     <td><p>可選。目標區段大小（單位：MB）。此參數值有 3 種選項：</p><ul><li><p><strong>0 或省略</strong>：使用已設定的<code translate="no">dataCoord.segment.maxSize</code> （預設值：1024 MB）。等同於標準壓縮。</p></li><li><p><strong>明確值</strong>：將區段合併至約為指定大小（以 MB 為單位，例如 2048）。必須大於或等於已設定的<code translate="no">dataCoord.segment.maxSize</code> 。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>：根據當前分段分布及可用節點資源，自動計算最佳大小。</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>若指定的<code translate="no">target_size</code> 小於已設定的<code translate="no">dataCoord.segment.maxSize</code> ，則會回絕該請求並產生錯誤。</p>
+<p>若指定的<code translate="no">target_size</code> 小於已設定的<code translate="no">dataCoord.segment.maxSize</code> ，則會以錯誤訊息拒絕該請求。</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">檢查壓縮進度<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -262,7 +262,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>請勿在生產環境中使用強制合併壓縮。</strong></p></li>
 <li><p><strong>在大多數情況下，請使用自動大小計算模式。</strong>將 `<code translate="no">target_size</code> ` 設定為 `<code translate="no">max_int64</code> `，可讓 Milvus 分析您的分段分佈和節點資源，以確定最佳大小。除非您有特定的尺寸要求，否則這是建議的做法。</p></li>
 <li><p><strong>請權衡效能取捨。</strong>強制合併壓縮是一項資源密集型操作，其會讀取、合併並重寫分段資料。請安排在流量較低的時段執行，以將對查詢延遲的影響降至最低。</p></li>
-<li><p><strong>請監控緊縮操作前後的分段數量。</strong>使用<code translate="no">get_compaction_state()</code> 和<code translate="no">list_persistent_segments</code> 確認緊縮操作是否如預期般產生較少且較大的分段。</p></li>
+<li><p><strong>請監控緊縮前後的分段數量。</strong>使用<code translate="no">get_compaction_state()</code> 和<code translate="no">list_persistent_segments</code> 確認緊縮操作是否如預期般產生較少且較大的分段。</p></li>
 </ul>
 <p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -286,7 +286,7 @@ state = client.get_compaction_state(job_id)
 <li><p>標準壓縮（targetSize=0 或省略）是一種盡力而為的增量清理路徑。</p></li>
 <li><p>強制合併（targetSize&gt;0）是一種集合層級的重新封裝路徑，旨在產生數量較少、大小較大且接近目標大小的區段。</p></li>
 </ul>
-<p>關鍵差異在於合併形式：標準壓縮在每個任務中實質上是 m → 1，而強制合併則是跨分組輸入的 m → n。這就是為什麼強制合併能夠解決標準壓縮無法處理的區段佈局問題。下表比較了這兩種操作類型。</p>
+<p>關鍵差異在於合併形式：標準壓縮在每個任務中實質上是 m → 1，而強制合併則是跨分組輸入的 m → n。這正是為什麼強制合併能夠解決標準壓縮無法處理的區段佈局問題。下表比較了這兩種操作類型。</p>
 <table>
    <tr>
      <th><p><strong>維度</strong></p></th>
@@ -362,6 +362,6 @@ state = client.get_compaction_state(job_id)
 <p><strong>「強制合併」與「叢集式壓縮」有何不同？</strong></p>
 <p>叢集緊湊化 (<code translate="no">is_clustering=True</code>) 會根據叢集鍵重新組織區段內的資料，以改善搜尋剪枝效能。強制合併 (<code translate="no">target_size=N</code>) 則在不改變資料分佈的情況下，優化區段大小。這兩者用途不同，但可搭配使用——先執行叢集緊湊化來組織資料，再執行強制合併以整合所得的區段。</p>
 <p><strong>我可以在正在被查詢的集合上執行強制合併嗎？</strong></p>
-<p>可以。強制合併以非同步方式執行，不會阻塞查詢。不過，此操作會消耗 DataNode 和磁碟 I/O 資源，因此在壓縮期間查詢延遲可能會增加。建議在流量較低的時段排程執行強制合併，以獲得最佳效果。</p>
+<p>可以。強制合併以非同步方式執行，不會阻塞查詢。不過，此操作會消耗 DataNode 和磁碟 I/O 資源，因此在緊縮期間，查詢延遲可能會增加。建議在流量較低的時段排程執行強制合併，以獲得最佳效果。</p>
 <p><strong>若將 target_size 設定為小於 maxSize 會發生什麼情況？</strong></p>
 <p>系統會以錯誤訊息拒絕該請求。目標大小必須大於或等於已設定的<code translate="no">dataCoord.segment.maxSize</code> 。</p>

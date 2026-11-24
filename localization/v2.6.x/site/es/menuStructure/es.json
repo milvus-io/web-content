@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Adoptantes de Milvus",
+        "label": "Usuarios de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Comunicados",
+        "label": "Comunicados de prensa",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -44,7 +44,7 @@
     "order": 1,
     "children": [
       {
-        "label": "Inicio rápido",
+        "label": "Guía de inicio rápido",
         "id": "quickstart.md",
         "order": 0,
         "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "Descomposición de JSON",
+                "label": "Análisis de JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -835,7 +835,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_DISPARSO",
+                "label": "ÍNDICE_INVERTIDO_ESCASO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -926,7 +926,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales",
+            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1183,7 +1183,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de decadencia",
+                "label": "Clasificación de descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1251,7 +1251,7 @@
                     "children": []
                   },
                   {
-                    "label": "Ranker de Voyage AI",
+                    "label": "Ranker de IA de Voyage",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1281,15 +1281,9 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Utilizar mmap",
+            "label": "Utiliza mmap",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "Compactación por agrupamiento",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1391,7 +1385,7 @@
             "children": []
           },
           {
-            "label": "Canal de RAG",
+            "label": "Proceso RAG",
             "id": "rag_pipeline.md",
             "order": 5,
             "children": []
@@ -1694,7 +1688,7 @@
             "children": []
           },
           {
-            "label": "Ampliar con HPA",
+            "label": "Escala con HPA",
             "id": "hpa.md",
             "order": 2,
             "children": []
@@ -1799,7 +1793,7 @@
             ]
           },
           {
-            "label": "Trace",
+            "label": "Traza",
             "id": "trace",
             "order": 3,
             "isMenu": true,
@@ -2043,7 +2037,7 @@
             "children": []
           },
           {
-            "label": "Cambio",
+            "label": "Transición",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []
@@ -2131,7 +2125,7 @@
         "order": 10,
         "children": [
           {
-            "label": "Incrustaciones",
+            "label": "Representaciones",
             "id": "embeddings",
             "order": 0,
             "isMenu": true,
@@ -2223,7 +2217,7 @@
             ]
           },
           {
-            "label": "Reclasificadores",
+            "label": "Reordenadores",
             "id": "rerankers",
             "order": 1,
             "isMenu": true,
@@ -2884,7 +2878,7 @@
         "children": []
       },
       {
-        "label": "Recuperación contextual",
+        "label": "Búsqueda contextual",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -2939,7 +2933,7 @@
         "children": []
       },
       {
-        "label": "Generación de expresiones de filtro de consultas de Milvus con modelos de lenguaje de gran tamaño",
+        "label": "Generación de expresiones de filtro de consultas de Milvus con modelos de lenguaje a gran escala",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

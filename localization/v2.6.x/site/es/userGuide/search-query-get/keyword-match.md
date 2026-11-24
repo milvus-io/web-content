@@ -48,7 +48,7 @@ summary: >-
 <li><p><a href="/docs/es/v2.6.x/analyzer-overview.md">Analizador</a>: El analizador procesa el texto de entrada dividiéndolo en palabras individuales, o tokens, y aplicando luego los filtros necesarios. Esto permite a Milvus crear un índice basado en estos tokens.</p></li>
 <li><p><a href="/docs/es/v2.6.x/index-explained.md">Indexación</a>: Tras el análisis del texto, Milvus crea un índice invertido que asocia cada token único a los documentos que lo contienen.</p></li>
 </ol>
-<p>Cuando un usuario realiza una búsqueda de texto, se utiliza el índice invertido para recuperar rápidamente todos los documentos que contienen los términos. Esto es mucho más rápido que examinar cada documento de forma individual.</p>
+<p>Cuando un usuario realiza una búsqueda de texto, se utiliza el índice invertido para recuperar rápidamente todos los documentos que contienen los términos. Esto es mucho más rápido que examinar cada documento individualmente.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -70,7 +70,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La búsqueda de texto funciona en el <a href="/docs/es/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> tipo de campo, que es esencialmente el tipo de datos de cadena en Milvus. Para habilitar la búsqueda de texto, establece tanto <code translate="no">enable_analyzer</code> como <code translate="no">enable_match</code> en <code translate="no">True</code> y, a continuación, configura opcionalmente un <a href="/docs/es/v2.6.x/analyzer-overview.md">analizador</a> para el análisis de texto al definir el esquema de tu colección.</p>
+    </button></h2><p>La búsqueda de texto funciona con el <a href="/docs/es/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> tipo de campo, que es esencialmente el tipo de datos de cadena en Milvus. Para habilitar la búsqueda de texto, establece tanto <code translate="no">enable_analyzer</code> como <code translate="no">enable_match</code> en <code translate="no">True</code> y, a continuación, configura opcionalmente un <a href="/docs/es/v2.6.x/analyzer-overview.md">analizador</a> para el análisis de texto al definir el esquema de tu colección.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Establece <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -226,7 +226,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>El rendimiento y la precisión de la búsqueda por palabras clave dependen del analizador seleccionado. Los distintos analizadores están adaptados a diversos idiomas y estructuras de texto, por lo que elegir el adecuado puede influir significativamente en los resultados de búsqueda para tu caso de uso específico.</p>
-<p>Por defecto, Milvus utiliza el analizador « <code translate="no">standard</code> », que tokeniza el texto basándose en los espacios en blanco y la puntuación, y convierte el texto a minúsculas. No se necesitan parámetros adicionales para aplicar esta configuración predeterminada. Para obtener más información, consulta <a href="/docs/es/v2.6.x/standard-analyzer.md">«Estándar</a>».</p>
+<p>Por defecto, Milvus utiliza el analizador « <code translate="no">standard</code> », que tokeniza el texto basándose en los espacios en blanco y la puntuación, elimina los tokens de más de 40 caracteres y convierte el texto a minúsculas. No se necesitan parámetros adicionales para aplicar esta configuración predeterminada. Para obtener más información, consulta <a href="/docs/es/v2.6.x/standard-analyzer.md">«Estándar</a>».</p>
 <p>En los casos en los que se requiera un analizador diferente, puede configurar uno utilizando el parámetro ` <code translate="no">analyzer_params</code> `. Por ejemplo, para aplicar el analizador ` <code translate="no">english</code> ` al procesamiento de texto en inglés:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -357,7 +357,7 @@ schema.WithField(entity.NewField().
 <li><p><code translate="no">field_name</code>: El nombre del campo VARCHAR en el que se va a realizar la búsqueda.</p></li>
 <li><p><code translate="no">text</code>: Los términos que se van a buscar. Se pueden separar varios términos mediante espacios u otros delimitadores adecuados, en función del idioma y del analizador configurado.</p></li>
 </ul>
-<p>De forma predeterminada, « <code translate="no">TEXT_MATCH</code> » utiliza la lógica de coincidencia <strong>«OR»</strong>, lo que significa que devolverá documentos que contengan cualquiera de los términos especificados. Por ejemplo, para buscar documentos que contengan el término « <code translate="no">machine</code> » o « <code translate="no">deep</code> » en el campo « <code translate="no">text</code> », utiliza la siguiente expresión:</p>
+<p>Por defecto, « <code translate="no">TEXT_MATCH</code> » utiliza la lógica de coincidencia <strong>«OR»</strong>, lo que significa que devolverá documentos que contengan cualquiera de los términos especificados. Por ejemplo, para buscar documentos que contengan el término « <code translate="no">machine</code> » o « <code translate="no">deep</code> » en el campo « <code translate="no">text</code> », utiliza la siguiente expresión:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -18,7 +18,7 @@ summary: 了解 AI 代理如何將 Milvus 作為向量資料庫，應用於 RAG�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供適合代理程式的介面，讓 AI 程式設計代理程式與自主代理系統能夠透過程式化方式與向量資料庫互動。無論您是建置 RAG 處理管線、語義搜尋，還是代理程式記憶體系統，Milvus 皆提供多種方式供代理程式進行連線與運作。</p>
+    </button></h1><p>Milvus 提供適合代理程式的介面，讓 AI 編碼代理程式和自主代理系統能夠透過程式化方式與向量資料庫互動。無論您是正在建置 RAG 處理管線、語義搜尋，還是代理程式記憶體系統，Milvus 皆提供多種方式供代理程式進行連線與運作。</p>
 <h2 id="Agent-tools" class="common-anchor-header">代理工具<button data-href="#Agent-tools" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,7 @@ summary: 了解 AI 代理如何將 Milvus 作為向量資料庫，應用於 RAG�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>經過精心整理的提示，可協助 AI 程式設計助手撰寫正確的 Milvus 程式碼。每個提示皆蘊含能避免最常見錯誤的規則與模式。</p>
+    </button></h2><p>經過精心整理的提示語，可協助 AI 程式設計助手撰寫正確的 Milvus 程式碼。每個提示語皆內建規則與模式，能有效避免最常見的錯誤。</p>
 <p><strong>使用方法：</strong></p>
 <ol>
 <li>從任何提示頁面的「完整提示」<strong>區段複製</strong>一個提示。</li>
@@ -151,6 +151,19 @@ summary: 了解 AI 代理如何將 Milvus 作為向量資料庫，應用於 RAG�
   </a>
 </div>
 </div>
+<p>AGENTS.md 及四個主題提示的卡片會開啟 Python 版本。每項提示亦提供 Node.js、Go 及 RESTful API v2 版本：</p>
+<table>
+<thead>
+<tr><th>提示</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/zh-hant/agents_overview.md">Python</a></td><td><a href="/docs/zh-hant/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/zh-hant/agents_overview_go.md">Go</a></td><td><a href="/docs/zh-hant/agents_overview_restful.md">RESTful API v2</a></td></tr>
+<tr><td>架構設計</td><td><a href="/docs/zh-hant/schema_design.md">Python</a></td><td><a href="/docs/zh-hant/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/zh-hant/schema_design_go.md">Go</a></td><td><a href="/docs/zh-hant/schema_design_restful.md">RESTful API v2</a></td></tr>
+<tr><td>搜尋模式</td><td><a href="/docs/zh-hant/search_patterns.md">Python</a></td><td><a href="/docs/zh-hant/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/zh-hant/search_patterns_go.md">Go</a></td><td><a href="/docs/zh-hant/search_patterns_restful.md">RESTful API v2</a></td></tr>
+<tr><td>索引選擇</td><td><a href="/docs/zh-hant/index_selection.md">Python</a></td><td><a href="/docs/zh-hant/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/zh-hant/index_selection_go.md">Go</a></td><td><a href="/docs/zh-hant/index_selection_restful.md">RESTful API v2</a></td></tr>
+<tr><td>RAG 處理流程</td><td><a href="/docs/zh-hant/rag_pipeline.md">Python</a></td><td><a href="/docs/zh-hant/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/zh-hant/rag_pipeline_go.md">Go</a></td><td><a href="/docs/zh-hant/rag_pipeline_restful.md">RESTful API v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">在不同環境中的應用<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +181,7 @@ summary: 了解 AI 代理如何將 Milvus 作為向量資料庫，應用於 RAG�
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>環境</th><th>提示語放置位置</th><th>操作說明</th></tr>
+<tr><th>環境</th><th>提示語應放置於何處</th><th>操作說明</th></tr>
 </thead>
 <tbody>
 <tr><td>游標</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">設定專案規則</a></td></tr>
@@ -204,7 +217,7 @@ summary: 了解 AI 代理如何將 Milvus 作為向量資料庫，應用於 RAG�
 <tr><td>原型開發</td><td><a href="/docs/zh-hant/milvus_lite.md">Milvus Lite</a></td><td>零配置、進程內運行。可在任何能執行 Python 的環境中運行——非常適合快速進行代理程式原型開發。</td></tr>
 <tr><td>開發</td><td><a href="/docs/zh-hant/install_standalone-docker.md">Milvus 獨立版</a></td><td>單節點 Docker 部署。適合在本地進行開發與測試，並可處理實際規模的資料量。</td></tr>
 <tr><td>生產環境</td><td><a href="https://cloud.zilliz.com/signup">Zilliz 雲端</a></td><td>完全託管、無伺服器的 Milvus。無需管理基礎架構——代理程式只需連線即可運作。</td></tr>
-<tr><td>自行託管生產環境</td><td><a href="/docs/zh-hant/install_cluster-helm.md">Milvus 分散式</a></td><td>專為需要完全掌控基礎架構的團隊設計的多節點 Kubernetes 部署方案。</td></tr>
+<tr><td>自建生產環境</td><td><a href="/docs/zh-hant/install_cluster-helm.md">Milvus 分散式</a></td><td>專為需要完全掌控基礎架構的團隊設計的多節點 Kubernetes 部署方案。</td></tr>
 </tbody>
 </table>
 <div class="alert note">

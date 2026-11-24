@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusのテキストマッチ機能は、特定の用語に基づいて文書を正確に検索することを可能にします。この機能は主に、特定の条件を満たすためのフィルタリング検索に使用され、スカラーフィルタリングを組み合わせてクエリ結果を絞り込むことも可能です。これにより、スカラー基準を満たすベクトル内での類似度検索が可能になります。</p>
+    </button></h1><p>Milvusのテキストマッチ機能は、特定の用語に基づいて文書を正確に検索することを可能にします。この機能は主に、特定の条件を満たすためのフィルタリング検索に使用され、スカラーフィルタリングを組み合わせてクエリ結果を絞り込むことができます。これにより、スカラー基準を満たすベクトル内での類似度検索が可能になります。</p>
 <div class="alert note">
 <p>テキストマッチは、一致したドキュメントの関連性を評価することなく、クエリ用語の完全一致を見つけることに重点を置いています。クエリ用語のセマンティックな意味や重要度に基づいて、最も関連性の高いドキュメントを取得したい場合は、<a href="/docs/ja/v2.6.x/full-text-search.md">フルテキスト検索</a>の使用をお勧めします。</p>
 </div>
@@ -43,7 +43,7 @@ summary: >-
 <li><p><a href="/docs/ja/v2.6.x/analyzer-overview.md">アナライザー</a>：アナライザーは、入力テキストを個々の単語（トークン）に分割し、必要に応じてフィルタを適用して処理します。これにより、Milvusはこれらのトークンに基づいてインデックスを構築できます。</p></li>
 <li><p><a href="/docs/ja/v2.6.x/index-explained.md">インデックス作成</a>：テキスト分析の後、Milvusは各一意のトークンを、それを含むドキュメントにマッピングする逆インデックスを作成します。</p></li>
 </ol>
-<p>ユーザーがテキスト検索を行うと、逆引きインデックスが使用され、その用語を含むすべてのドキュメントが迅速に検索されます。これは、ドキュメントを1つずつ個別にスキャンするよりもはるかに高速です。</p>
+<p>ユーザーがテキスト検索を行うと、逆引きインデックスが使用され、その用語を含むすべてのドキュメントが迅速に検索されます。これは、ドキュメントを1つずつスキャンするよりもはるかに高速です。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -81,7 +81,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>特定の<code translate="no">VARCHAR</code> フィールドでテキスト検索を有効にするには、フィールドスキーマを定義する際に、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定します。これにより、Milvusはテキストをトークン化し、指定されたフィールドの逆引きインデックスを作成するよう指示され、高速かつ効率的なテキスト検索が可能になります。</p>
+    </button></h3><p>特定の<code translate="no">VARCHAR</code> フィールドでテキスト検索を有効にするには、フィールドスキーマを定義する際に、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定します。これにより、Milvusはテキストをトークン化し、指定されたフィールドに対して逆引きインデックスを作成するよう指示され、高速かつ効率的なテキスト検索が可能になります。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -221,7 +221,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>キーワードマッチングのパフォーマンスと精度は、選択したアナライザーによって異なります。アナライザーは言語やテキスト構造に応じて最適化されているため、適切なアナライザーを選択することで、特定のユースケースにおける検索結果に大きな影響を与える可能性があります。</p>
-<p>デフォルトでは、Milvusは<code translate="no">standard</code> アナライザーを使用します。このアナライザーは、空白や句読点に基づいてテキストをトークン化し、テキストを小文字に変換します。このデフォルト設定を適用するために追加のパラメーターは必要ありません。詳細については、<a href="/docs/ja/v2.6.x/standard-analyzer.md">「Standard」</a>を参照してください。</p>
+<p>デフォルトでは、Milvusは<code translate="no">standard</code> アナライザーを使用します。このアナライザーは、空白や句読点に基づいてテキストをトークン化し、40文字を超えるトークンを削除し、テキストを小文字に変換します。このデフォルト設定を適用するために追加のパラメーターは必要ありません。詳細については、<a href="/docs/ja/v2.6.x/standard-analyzer.md">「Standard」</a>を参照してください。</p>
 <p>別のアナライザーが必要な場合は、<code translate="no">analyzer_params</code> パラメーターを使用して設定できます。たとえば、英語のテキストを処理するために<code translate="no">english</code> アナライザーを適用するには、次のようにします。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -349,10 +349,10 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: 検索対象の VARCHAR フィールド名。</p></li>
+<li><p><code translate="no">field_name</code>: 検索対象のVARCHARフィールド名。</p></li>
 <li><p><code translate="no">text</code>: 検索対象の用語。複数の用語は、スペース、または言語や設定されたアナライザーに基づいて適切な区切り文字で区切ることができます。</p></li>
 </ul>
-<p>デフォルトでは、<code translate="no">TEXT_MATCH</code> は<strong>OR</strong>マッチングロジックを使用します。つまり、指定された検索語のいずれかを含むドキュメントが返されます。たとえば、<code translate="no">text</code> フィールドに「<code translate="no">machine</code> 」または「<code translate="no">deep</code> 」という検索語を含むドキュメントを検索するには、次の式を使用します:</p>
+<p>デフォルトでは、<code translate="no">TEXT_MATCH</code> は<strong>OR</strong>マッチングロジックを使用します。つまり、指定された用語のいずれかを含むドキュメントが返されます。たとえば、<code translate="no">text</code> フィールドに「<code translate="no">machine</code> 」または「<code translate="no">deep</code> 」という用語を含むドキュメントを検索するには、次の式を使用します:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -529,7 +529,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>テキスト一致は、クエリ操作におけるスカラーフィルタリングにも使用できます。<code translate="no">query()</code> メソッドの<code translate="no">expr</code> パラメータに<code translate="no">TEXT_MATCH</code> 式を指定することで、指定された用語に一致するドキュメントを取得できます。</p>
-<p>以下の例では、<code translate="no">text</code> フィールドに「<code translate="no">keyword1</code> 」と「<code translate="no">keyword2</code> 」の両方の用語が含まれるドキュメントを取得します。</p>
+<p>以下の例では、<code translate="no">text</code> フィールドに「<code translate="no">keyword1</code> 」と「<code translate="no">keyword2</code> 」の両方の用語が含まれるドキュメントを取得しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -606,12 +606,12 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>フィールドで用語マッチングを有効にすると、逆引きインデックスが作成され、ストレージリソースを消費します。この機能を有効にする際は、テキストのサイズ、一意のトークン数、および使用するアナライザーによってストレージへの影響が異なるため、その点を考慮してください。</p></li>
+<li><p>フィールドで用語マッチングを有効にすると、逆引きインデックスが作成され、ストレージリソースを消費します。この機能を有効にするかどうかを決定する際は、テキストのサイズ、一意のトークン数、および使用するアナライザーによってストレージへの影響が異なるため、その点を考慮してください。</p></li>
 <li><p>スキーマでアナライザーを定義すると、その設定は当該コレクションに対して永続化されます。別のアナライザーの方がニーズに適していると判断した場合は、既存のコレクションを削除し、希望するアナライザー設定で新しいコレクションを作成することを検討してください。</p></li>
 <li><p><code translate="no">filter</code> 式におけるエスケープ規則：</p>
 <ul>
 <li><p>式内で二重引用符または単一引用符で囲まれた文字は、文字列定数として解釈されます。文字列定数にエスケープ文字が含まれる場合、そのエスケープ文字はエスケープシーケンスで表現する必要があります。たとえば、<code translate="no">\</code> を表現するには `<code translate="no">\\</code> `、タブを表現するには `<code translate="no">\\t</code> `、改行を表現するには `<code translate="no">\t</code>`、<code translate="no">\\n</code> を使用します。</p></li>
-<li><p>文字列定数が一重引用符で囲まれている場合、定数内の「'」は<code translate="no">\\'</code> で表し、「"」は<code translate="no">&quot;</code> または<code translate="no">\\&quot;</code> のいずれかで表すことができます。例：<code translate="no">'It\\'s milvus'</code> 。</p></li>
-<li><p>文字列定数が二重引用符で囲まれている場合、定数内の二重引用符は `<code translate="no">\\&quot;</code> ` と記述する必要がありますが、単一引用符は `<code translate="no">'</code> ` または `<code translate="no">\\'</code>` のいずれかで記述できます。例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</p></li>
+<li><p>文字列定数が一重引用符で囲まれている場合、定数内の「'」は「<code translate="no">\\'</code> 」として表現し、「"」は「<code translate="no">&quot;</code> 」または「<code translate="no">\\&quot;</code> 」のいずれかで表現できます。例：<code translate="no">'It\\'s milvus'</code> 。</p></li>
+<li><p>文字列定数が二重引用符で囲まれている場合、定数内の二重引用符は `<code translate="no">\\&quot;</code> ` と記述し、単一引用符は `<code translate="no">'</code> ` または `<code translate="no">\\'</code>` のいずれかで記述します。例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</p></li>
 </ul></li>
 </ul>

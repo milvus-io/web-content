@@ -5,7 +5,7 @@ summary: >-
   يعتمد البحث المتجهي التقليدي في ترتيب النتائج على التشابه الرياضي البحت — أي
   مدى تطابق المتجهات في الفضاء عالي الأبعاد. ورغم كفاءة هذه الطريقة، فإنها
   غالبًا ما تغفل الصلة الدلالية الحقيقية. لنفترض أنك تبحث عن «أفضل الممارسات
-  لتحسين قواعد البيانات»: قد تحصل على مستندات ذات تشابه متجهي عالٍ تذكر هذه
+  لتحسين قواعد البيانات»: فقد تحصل على مستندات ذات تشابه متجهي عالٍ تذكر هذه
   المصطلحات بشكل متكرر، لكنها لا تقدم في الواقع استراتيجيات تحسين قابلة للتطبيق.
 beta: Milvus 2.6.x
 ---
@@ -44,7 +44,7 @@ beta: Milvus 2.6.x
     </button></h2><ul>
 <li><p>لا يمكن استخدام «Model Ranker» مع عمليات البحث المجمعة.</p></li>
 <li><p>يجب أن تكون الحقول المستخدمة لإعادة ترتيب النماذج من النوع النصي (<code translate="no">VARCHAR</code>).</p></li>
-<li><p>يمكن لكل أداة ترتيب النماذج استخدام حقل نصي واحد فقط ( <code translate="no">VARCHAR</code> ) في كل مرة للتقييم.</p></li>
+<li><p>يمكن لكل أداة ترتيب النماذج استخدام حقل واحد فقط من نوع <code translate="no">VARCHAR</code> في كل مرة للتقييم.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">كيفية العمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ beta: Milvus 2.6.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" /> 
-   <span>نظرة عامة على أداة تصنيف النماذج</span>
+   <span>نظرة عامة على أداة ترتيب النماذج</span>
   
  </span></p>
 <ol>
@@ -131,7 +131,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>تطبيقات تعالج المستندات الطويلة مع إعطاء الأولوية للفعالية من حيث التكلفة</p></td>
-     <td><ul><li><p>تقسيم المستندات إلى أجزاء متقدمة مع تداخل قابل للتكوين</p></li><li><p>تقييم قائم على الأجزاء (الجزء الحاصل على أعلى تقييم يمثل المستند)</p></li><li><p>دعم نماذج إعادة الترتيب المتنوعة</p></li><li><p>فعالة من حيث التكلفة مع إصدارات نموذج قياسي ومحترف</p></li></ul></td>
+     <td><ul><li><p>تقسيم المستندات إلى أجزاء متقدمة مع تداخل قابل للتكوين</p></li><li><p>تقييم قائم على الأجزاء (الجزء الذي يحصل على أعلى تقييم يمثل المستند)</p></li><li><p>دعم نماذج إعادة الترتيب المتنوعة</p></li><li><p>فعالة من حيث التكلفة مع إصدارات نموذجية ومحترفة</p></li></ul></td>
      <td><p>نظام بحث في الوثائق الفنية يعالج الكتيبات والأوراق الطويلة التي تتطلب تقسيمًا ذكيًّا والتحكم في التداخل</p></td>
    </tr>
    <tr>
@@ -239,7 +239,25 @@ model_ranker = Function(
         .endpoint(<span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
         .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Create a model ranker function</span>
+<span class="hljs-keyword">const</span> model_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;semantic_ranker&quot;</span>,              <span class="hljs-comment">// Function identifier</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field to use for reranking</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be set to RERANK</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Specify model reranker. Must be &quot;model&quot;</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;tei&quot;</span>,                    <span class="hljs-comment">// Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>], <span class="hljs-comment">// Query text</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>, <span class="hljs-comment">// Model service endpoint</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -335,7 +353,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>اسم حقل النص الذي سيتم استخدامه لإعادة الترتيب.</p><p>يجب أن يكون حقلًا من نوع " <code translate="no">VARCHAR</code> ".</p></td>
+     <td><p>اسم حقل النص المراد استخدامه لإعادة الترتيب.</p><p>يجب أن يكون حقلًا من النوع " <code translate="no">VARCHAR</code> ".</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
@@ -421,11 +439,11 @@ results = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
         .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
-        .outputFields(Collections.singletonList(document))
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
                 .build())
@@ -433,7 +451,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Use the model ranker in standard vector search</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collection_name,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Number of query vectors must match that specified in model_ranker.params.queries</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include the text field in outputs</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: model_ranker,                 <span class="hljs-comment">// Apply the model ranker here</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

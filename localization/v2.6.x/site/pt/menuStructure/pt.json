@@ -340,7 +340,7 @@
             "children": []
           },
           {
-            "label": "Definir o TTL da coleção",
+            "label": "TTL da coleção de conjuntos",
             "id": "set-collection-ttl.md",
             "order": 6,
             "children": []
@@ -582,7 +582,7 @@
                     "children": []
                   },
                   {
-                    "label": "Alfanumérico",
+                    "label": "Apenas alfanumérico",
                     "id": "alphanumonly-filter.md",
                     "order": 2,
                     "children": []
@@ -624,7 +624,7 @@
                     "children": []
                   },
                   {
-                    "label": "Remover Punct",
+                    "label": "Remover ponto",
                     "id": "removepunct-filter.md",
                     "order": 9,
                     "children": []
@@ -697,7 +697,7 @@
             "children": []
           },
           {
-            "label": "Entidades Upsert",
+            "label": "Entidades «Upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -985,7 +985,7 @@
                 "children": []
               },
               {
-                "label": "Filtragem e Modelagem",
+                "label": "Filtragem e criação de modelos",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
@@ -1287,12 +1287,6 @@
             "children": []
           },
           {
-            "label": "Compactação por agrupamento",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Armazenamento em camadas",
             "id": "tiered_storage",
             "order": 2,
@@ -1385,7 +1379,7 @@
             "children": []
           },
           {
-            "label": "Seleção do Índice",
+            "label": "Seleção de índices",
             "id": "index_selection.md",
             "order": 4,
             "children": []
@@ -1413,7 +1407,7 @@
         "children": []
       },
       {
-        "label": "Servidor MCP para o Código Claude",
+        "label": "Servidor MCP para o código Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1654,7 +1648,7 @@
             ]
           },
           {
-            "label": "Utilize o Pulsar com o Milvus",
+            "label": "Utilizar o Pulsar com o Milvus",
             "id": "pulsar_dependencies",
             "order": 2,
             "isMenu": true,
@@ -1840,7 +1834,7 @@
             "children": []
           },
           {
-            "label": "Ativar RBAC",
+            "label": "Ativar o RBAC",
             "id": "rbac",
             "order": 1,
             "isMenu": true,
@@ -1884,7 +1878,7 @@
             ]
           },
           {
-            "label": "Criptografia em trânsito",
+            "label": "Encriptação em trânsito",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2037,7 +2031,7 @@
             "children": []
           },
           {
-            "label": "Configurar a replicação do CDC",
+            "label": "Configurar a replicação CDC",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []
@@ -2118,7 +2112,7 @@
         "children": []
       },
       {
-        "label": "Registo de exportação",
+        "label": "Registo de Exportação",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2842,7 +2836,7 @@
         "children": []
       },
       {
-        "label": "Criar um RAG com o Milvus",
+        "label": "Criar o RAG com o Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -2968,7 +2962,7 @@
             "children": []
           },
           {
-            "label": "Pesquisa por semelhança de áudio",
+            "label": "Pesquisa de semelhança de áudio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

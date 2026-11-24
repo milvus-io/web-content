@@ -126,7 +126,7 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>默认分段最大大小（单位：MB）。当<code translate="no">target_size</code> 为0或省略时，此值用作目标值。同时也是显式指定<code translate="no">target_size</code> 时的最小允许值。</p></td>
    </tr>
    <tr>
@@ -142,7 +142,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>QueryNode 的最小内存将除以该因子。在自动大小计算（<code translate="no">target_size=max_int64</code> ）期间使用，以确保合并后的分段能够被 QueryNodes 加载。</p><ul><li><p>该值越大，生成的分段越小，QueryNode 加载起来就越容易。</p></li><li><p>较小的值允许生成更大的分段，但可能会导致内存受限的 QueryNode 加载失败。</p></li><li><p>例如，当默认因子为 4.0 且最小 QueryNode 拥有 16 GB 内存时，自动计算出的目标大小将不超过 4 GB。这可防止“强制合并”生成过大而导致 QueryNode 无法加载的分段。</p></li></ul></td>
+     <td><p>QueryNode 的最小内存将除以该系数。在自动大小计算（<code translate="no">target_size=max_int64</code> ）期间使用，以确保合并后的分段能够被 QueryNode 加载。</p><ul><li><p>该值越大，生成的分段越小，QueryNode 加载起来就越容易。</p></li><li><p>较小的值允许生成更大的分段，但可能会导致内存受限的 QueryNode 加载失败。</p></li><li><p>例如，当默认因子为 4.0 且内存最小的 QueryNode 拥有 16 GB 内存时，自动计算的目标大小将不超过 4 GB。这可防止“强制合并”生成超出 QueryNode 加载能力的超大分段。</p></li></ul></td>
    </tr>
 </table>
 <p>若要将上述更改应用到您的 Milvus 集群，请按照《<a href="/docs/zh/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>》和《<a href="/docs/zh/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>》中的步骤操作。</p>
@@ -166,7 +166,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -185,7 +185,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">显式目标大小</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -217,7 +217,7 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>可选。目标分段大小（单位：MB）。该参数值有 3 种选项：</p><ul><li><p><strong>0 或省略</strong>：使用配置的<code translate="no">dataCoord.segment.maxSize</code> （默认：512 MB）。等同于标准压缩。</p></li><li><p><strong>显式值</strong>：将分段合并至大约指定大小（以 MB 为单位，例如 2048）。该值必须大于或等于配置的<code translate="no">dataCoord.segment.maxSize</code> 。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>：根据当前分段分布和可用节点资源自动计算最佳大小。</p></li></ul></td>
+     <td><p>可选。目标分段大小（单位：MB）。该参数值有 3 种选项：</p><ul><li><p><strong>0 或省略</strong>：使用配置的<code translate="no">dataCoord.segment.maxSize</code> （默认：1024 MB）。等同于标准压缩。</p></li><li><p><strong>显式值</strong>：将分段合并至大约指定大小（以 MB 为单位，例如 2048）。该值必须大于或等于配置的<code translate="no">dataCoord.segment.maxSize</code> 。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>：根据当前分段分布和可用节点资源自动计算最佳大小。</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
@@ -261,7 +261,7 @@ state = client.get_compaction_state(job_id)
     </button></h2><ul>
 <li><p><strong>请勿在生产环境中使用强制合并压缩。</strong></p></li>
 <li><p><strong>在大多数情况下，请使用自动大小计算模式。</strong>将<code translate="no">target_size</code> 设置为<code translate="no">max_int64</code> 可让Milvus分析您的分段分布和节点资源，从而确定最佳大小。除非您有特定的尺寸要求，否则这是推荐的做法。</p></li>
-<li><p><strong>请权衡性能取舍。</strong>强制合并压缩是一项资源密集型操作。它会读取、合并并重写分段数据。请在流量较低时段安排该操作，以最大限度地减少对查询延迟的影响。</p></li>
+<li><p><strong>请权衡性能取舍。</strong>强制合并压缩是一项资源密集型操作。它会读取、合并并重写分段数据。请在流量较低的时段安排该操作，以最大限度地减少对查询延迟的影响。</p></li>
 <li><p><strong>监控操作前后的分段数量。</strong>使用<code translate="no">get_compaction_state()</code> 和<code translate="no">list_persistent_segments</code> 验证压缩操作是否如预期般生成了数量更少、体积更大的分段。</p></li>
 </ul>
 <p><a id="faq"></a></p>
@@ -311,7 +311,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>参数有效性</p></td>
      <td><p>不支持用户调整大小</p></td>
-     <td><p>用户指定的 targetSize 必须 &gt;= dataCoord.segment.maxSize；否则将被拒绝</p></td>
+     <td><p>用户指定的 targetSize 必须 ≥ dataCoord.segment.maxSize；否则将被拒绝</p></td>
    </tr>
    <tr>
      <td><p>安全上限</p></td>
@@ -359,7 +359,7 @@ state = client.get_compaction_state(job_id)
 <li><p>选择标准压缩以实现低风险的增量清理。</p></li>
 <li><p>当您明确希望将Collection重塑为数量更少、体积更大的分段，且这些分段与搜索和加载行为相匹配时，请选择强制合并。</p></li>
 </ul>
-<p><strong>强制合并与聚类压缩有何区别？</strong></p>
+<p><strong>“强制合并”与“聚类压缩”有何区别？</strong></p>
 <p>聚类压缩（<code translate="no">is_clustering=True</code> ）基于聚类键对分段内的数据进行重组，以改善搜索剪枝效果。强制合并（<code translate="no">target_size=N</code> ）在不改变数据分布的情况下优化分段大小。它们服务于不同的目的，且可以结合使用——先运行聚类压缩来组织数据，然后运行强制合并来整合生成的分段。</p>
 <p><strong>可以在正在被查询的Collection上运行强制合并吗？</strong></p>
 <p>可以。强制合并以异步方式运行，不会阻塞查询。但是，它会消耗 DataNode 和磁盘 I/O 资源，因此在压缩期间查询延迟可能会增加。为获得最佳效果，请在流量较低的时段安排强制合并。</p>

@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "Новости",
+        "label": "Пресс-релизы",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -273,7 +273,7 @@
         "children": []
       },
       {
-        "label": "Типы метрических единиц",
+        "label": "Типы метрических величин",
         "id": "metric.md",
         "order": 7,
         "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "Сбор отходов",
+            "label": "Сбор отправлений",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -401,7 +401,7 @@
             "children": []
           },
           {
-            "label": "Редкий вектор",
+            "label": "Разреженный вектор",
             "id": "sparse_vector.md",
             "order": 4,
             "children": []
@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "Поле «Число»",
+            "label": "Числовое поле",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "Разделение JSON",
+                "label": "Разбор JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -624,13 +624,13 @@
                     "children": []
                   },
                   {
-                    "label": "Удалить прокол",
+                    "label": "Удалить пробел",
                     "id": "removepunct-filter.md",
                     "order": 9,
                     "children": []
                   },
                   {
-                    "label": "Регулярное выражение",
+                    "label": "Регулярные выражения",
                     "id": "regex-filter.md",
                     "order": 10,
                     "children": []
@@ -644,7 +644,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для ваших задач",
+                "label": "Выберите анализатор, подходящий для вашего сценария использования",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -697,7 +697,7 @@
             "children": []
           },
           {
-            "label": "Объекты с операцией «Upsert»",
+            "label": "Объекты с операцией «upsert»",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1023,7 +1023,7 @@
             ]
           },
           {
-            "label": "Полнотекстовый поиск",
+            "label": "Поиск по полному тексту",
             "id": "full-text-search.md",
             "order": 8,
             "children": []
@@ -1287,12 +1287,6 @@
             "children": []
           },
           {
-            "label": "Уплотнение с группировкой",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Многоуровневое хранение",
             "id": "tiered_storage",
             "order": 2,
@@ -1434,7 +1428,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "На месте",
+            "label": "На территории предприятия",
             "id": "on_premises",
             "order": 0,
             "isMenu": true,
@@ -1452,7 +1446,7 @@
                 "children": []
               },
               {
-                "label": "С оператором Milvus",
+                "label": "С помощью Milvus Operator",
                 "id": "configure_operator.md",
                 "order": 2,
                 "children": []
@@ -1496,7 +1490,7 @@
                 "children": []
               },
               {
-                "label": "Балансировка нагрузки на уровне 7",
+                "label": "Распределение нагрузки на уровне 7",
                 "id": "layer-7-lb",
                 "order": 5,
                 "isMenu": true,
@@ -1628,7 +1622,7 @@
             ]
           },
           {
-            "label": "С оператором Milvus",
+            "label": "С помощью Milvus Operator",
             "id": "milvus_operator_dependencies",
             "order": 1,
             "isMenu": true,
@@ -1876,7 +1870,7 @@
                 "children": []
               },
               {
-                "label": "Удаление пользователей и ролей",
+                "label": "Удалить пользователей и роли",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2118,7 +2112,7 @@
         "children": []
       },
       {
-        "label": "Журнал экспорта",
+        "label": "ExportLog",
         "id": "export-log",
         "order": 9,
         "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
@@ -2582,7 +2576,7 @@
             "children": []
           },
           {
-            "label": "Преобразователи предложений",
+            "label": "SentenceTransformers",
             "id": "integrate_with_sentencetransformers.md",
             "order": 4,
             "children": []
@@ -2600,7 +2594,7 @@
             "children": []
           },
           {
-            "label": "Twelve Labs",
+            "label": "«Twelve Labs»",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -2741,7 +2735,7 @@
             "children": []
           },
           {
-            "label": "Маскировщик персональных данных",
+            "label": "Маска PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -2783,7 +2777,7 @@
             "children": []
           },
           {
-            "label": "Доклинг",
+            "label": "Docling",
             "id": "build_RAG_with_milvus_and_docling.md",
             "order": 11,
             "children": []

@@ -235,7 +235,7 @@
             "children": []
           },
           {
-            "label": "الطائر النقار",
+            "label": "طائر النقار",
             "id": "woodpecker_architecture.md",
             "order": 5,
             "children": []
@@ -473,7 +473,7 @@
                 "children": []
               },
               {
-                "label": "إنشاء حقل StructArray",
+                "label": "إنشاء حقل من نوع StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -723,7 +723,7 @@
                 ]
               },
               {
-                "label": "أجهزة التحليل متعددة اللغات",
+                "label": "أدوات التحليل متعددة اللغات",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
@@ -1106,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "العمليات الأساسية",
+                "label": "العمليات الحسابية الأساسية",
                 "id": "basic-operators.md",
                 "order": 1,
                 "children": []
@@ -1303,7 +1303,7 @@
                 "children": []
               },
               {
-                "label": "Vertex AI",
+                "label": "فيرتكس إيه آي",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
@@ -1371,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "مُصنِّف RRF",
+                "label": "مصنف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1451,7 +1451,7 @@
                     "children": []
                   },
                   {
-                    "label": "مصنف Voyage AI",
+                    "label": "مُصنِّف Voyage AI",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "AGENTS.md لـ Milvus",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "بايثون",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "انطلق",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "واجهة برمجة التطبيقات RESTful الإصدار 2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "حزمة تطوير التطبيقات (SDK) لـ Python",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "تصميم المخطط",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "بايثون",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "انطلق",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "واجهة برمجة التطبيقات RESTful الإصدار 2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "أنماط البحث",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "بايثون",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "انطلق",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "واجهة برمجة التطبيقات RESTful الإصدار 2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "اختيار المؤشر",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "بايثون",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "انطلق",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "واجهة برمجة التطبيقات RESTful الإصدار 2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "خط أنابيب RAG",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "بايثون",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "انطلق",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "واجهة برمجة التطبيقات RESTful الإصدار 2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -2144,7 +2274,7 @@
                 "children": []
               },
               {
-                "label": "المستخدمون، والامتيازات، والأدوار",
+                "label": "المستخدمون، والصلاحيات، والأدوار",
                 "id": "users_and_roles.md",
                 "order": 1,
                 "children": []
@@ -2354,7 +2484,7 @@
             "children": []
           },
           {
-            "label": "الاستيراد الجماعي في عملية النسخ المتماثل لـ CDC",
+            "label": "الاستيراد الجماعي في عملية النسخ المتماثل في CDC",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -3355,7 +3485,7 @@
         "children": []
       },
       {
-        "label": "الأسئلة الشائعة المتعلقة بالعمليات",
+        "label": "الأسئلة الشائعة المتعلقة بالتشغيل",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

@@ -1,7 +1,7 @@
 ---
 id: milvus_for_agents.md
 title: 适用于 AI 代理的 Milvus
-summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记忆的向量数据库。
+summary: 了解 AI 代理如何将 Milvus 用作 RAG、语义搜索和长期记忆的向量数据库。
 ---
 <h1 id="Milvus-for-AI-Agents" class="common-anchor-header">适用于 AI 代理的 Milvus<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记
 <div class="start_card_container">
   <a href="https://github.com/zilliztech/milvus-skill" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Milvus 技能</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">一款适用于 Claude Code 的代理技能，用于指导 LLMs 使用 PyMilvus 进行向量数据库操作。</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">一款面向 Claude Code 的智能体技能，用于指导 LLMs 使用 PyMilvus 进行向量数据库操作。</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -73,7 +73,7 @@ summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记
 <p><strong>使用方法：</strong></p>
 <ol>
 <li>从任意提示页面上的“完整提示”部分<strong>复制</strong>一个提示。</li>
-<li>将其<strong>保存</strong>为您的 AI 工具所支持的文件格式（参见下方的<a href="#use-in-different-environments">环境对照表</a>）。</li>
+<li>将其<strong>保存</strong>为您的 AI 工具所支持的文件格式（请参阅下方的<a href="#use-in-different-environments">环境对照表</a>）。</li>
 <li>您的AI助手在生成或审查Milvus代码时，将自动应用这些规则。</li>
 </ol>
 <h3 id="Prompt-pages" class="common-anchor-header">提示词页面<button data-href="#Prompt-pages" class="anchor-icon" translate="no">
@@ -95,13 +95,13 @@ summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记
 <div class="start_card_container">
   <a href="/docs/zh/agents_overview.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">AGENTS.md</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">适用于任何 AI 编码代理的顶级规则。若您只需一个文件，请从这里开始。</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">适用于任何 AI 编码代理的顶级规则。若您仅需一个文件，请从这里开始。</p>
   </a>
 </div>
 <div class="start_card_container">
   <a href="/docs/zh/python_sdk.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Python SDK</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">正确的连接模式、MilvusClient 使用方法以及 ORM API 的禁用规定。</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">正确的连接模式、MilvusClient 使用方法以及 ORM API 禁用规则。</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -151,6 +151,19 @@ summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记
   </a>
 </div>
 </div>
+<p>Agents.md 以及四个主题提示对应的卡片将打开 Python 版本。其中每项还提供 Node.js、Go 以及 RESTful API v2 版本：</p>
+<table>
+<thead>
+<tr><th>提示</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/zh/agents_overview.md">Python</a></td><td><a href="/docs/zh/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/zh/agents_overview_go.md">Go</a></td><td><a href="/docs/zh/agents_overview_restful.md">RESTful API v2</a></td></tr>
+<tr><td>模式设计</td><td><a href="/docs/zh/schema_design.md">Python</a></td><td><a href="/docs/zh/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/zh/schema_design_go.md">Go</a></td><td><a href="/docs/zh/schema_design_restful.md">RESTful API v2</a></td></tr>
+<tr><td>搜索模式</td><td><a href="/docs/zh/search_patterns.md">Python</a></td><td><a href="/docs/zh/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/zh/search_patterns_go.md">Go</a></td><td><a href="/docs/zh/search_patterns_restful.md">RESTful API v2</a></td></tr>
+<tr><td>索引选择</td><td><a href="/docs/zh/index_selection.md">Python</a></td><td><a href="/docs/zh/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/zh/index_selection_go.md">Go</a></td><td><a href="/docs/zh/index_selection_restful.md">RESTful API v2</a></td></tr>
+<tr><td>RAG 管道</td><td><a href="/docs/zh/rag_pipeline.md">Python</a></td><td><a href="/docs/zh/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/zh/rag_pipeline_go.md">Go</a></td><td><a href="/docs/zh/rag_pipeline_restful.md">RESTful API v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">在不同环境中的应用<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +181,7 @@ summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>环境</th><th>提示信息放置位置</th><th>说明</th></tr>
+<tr><th>环境</th><th>提示语放置位置</th><th>说明</th></tr>
 </thead>
 <tbody>
 <tr><td>光标</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">配置项目规则</a></td></tr>
@@ -203,7 +216,7 @@ summary: 了解 AI Agents 如何将 Milvus 用作 RAG、语义搜索和长期记
 <tbody>
 <tr><td>原型开发</td><td><a href="/docs/zh/milvus_lite.md">Milvus Lite</a></td><td>零配置，进程内运行。可在任何支持 Python 的环境中运行——非常适合快速进行代理原型开发。</td></tr>
 <tr><td>开发</td><td><a href="/docs/zh/install_standalone-docker.md">Milvus Standalone</a></td><td>单节点 Docker 部署。适用于本地开发以及使用真实数据量进行测试。</td></tr>
-<tr><td>生产环境</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>全托管、无服务器模式的 Milvus。无需管理基础设施——Agents 只需连接并运行即可。</td></tr>
+<tr><td>生产环境</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>全托管、无服务器模式的 Milvus。无需管理基础设施——Agents只需连接并运行即可。</td></tr>
 <tr><td>自托管生产环境</td><td><a href="/docs/zh/install_cluster-helm.md">Milvus Distributed</a></td><td>面向需要完全掌控基础设施的团队的多节点 Kubernetes 部署方案。</td></tr>
 </tbody>
 </table>

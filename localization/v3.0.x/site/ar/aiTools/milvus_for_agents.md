@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يوفر Milvus واجهات سهلة الاستخدام للوكلاء، تتيح لوكلاء البرمجة في مجال الذكاء الاصطناعي وأنظمة الوكلاء المستقلة التفاعل مع قواعد البيانات المتجهة برمجياً. وسواء كنت تعمل على إنشاء مسارات RAG أو البحث الدلالي أو أنظمة ذاكرة الوكلاء، فإن Milvus يوفر طرقاً متعددة للوكلاء للاتصال والعمل.</p>
+    </button></h1><p>يوفر Milvus واجهات سهلة الاستخدام للوكلاء، مما يسمح لوكلاء البرمجة في مجال الذكاء الاصطناعي وأنظمة الوكلاء المستقلة بالتفاعل مع قواعد البيانات المتجهة برمجياً. وسواء كنت تقوم ببناء مسارات RAG أو البحث الدلالي أو أنظمة ذاكرة الوكلاء، فإن Milvus يوفر طرقاً متعددة للوكلاء للاتصال والعمل.</p>
 <h2 id="Agent-tools" class="common-anchor-header">أدوات الوكلاء<button data-href="#Agent-tools" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>تفتح البطاقات الخاصة بـ AGENTS.md والموضوعات الأربعة نسخة Python. كما تتوفر لكل منها نسخة Node.js وGo وواجهة برمجة التطبيقات RESTful v2:</p>
+<table>
+<thead>
+<tr><th>الموضوع</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/ar/agents_overview.md">بايثون</a></td><td><a href="/docs/ar/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/ar/agents_overview_go.md">Go</a></td><td><a href="/docs/ar/agents_overview_restful.md">واجهة برمجة التطبيقات RESTful الإصدار 2</a></td></tr>
+<tr><td>تصميم المخطط</td><td><a href="/docs/ar/schema_design.md">بايثون</a></td><td><a href="/docs/ar/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/ar/schema_design_go.md">Go</a></td><td><a href="/docs/ar/schema_design_restful.md">واجهة برمجة التطبيقات RESTful الإصدار 2</a></td></tr>
+<tr><td>أنماط البحث</td><td><a href="/docs/ar/search_patterns.md">بايثون</a></td><td><a href="/docs/ar/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/ar/search_patterns_go.md">Go</a></td><td><a href="/docs/ar/search_patterns_restful.md">واجهة برمجة التطبيقات RESTful الإصدار 2</a></td></tr>
+<tr><td>اختيار الفهرس</td><td><a href="/docs/ar/index_selection.md">بايثون</a></td><td><a href="/docs/ar/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/ar/index_selection_go.md">Go</a></td><td><a href="/docs/ar/index_selection_restful.md">واجهة برمجة التطبيقات RESTful الإصدار 2</a></td></tr>
+<tr><td>خط أنابيب RAG</td><td><a href="/docs/ar/rag_pipeline.md">بايثون</a></td><td><a href="/docs/ar/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/ar/rag_pipeline_go.md">Go</a></td><td><a href="/docs/ar/rag_pipeline_restful.md">واجهة برمجة التطبيقات RESTful الإصدار 2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">الاستخدام في بيئات مختلفة<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,5 +223,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>بالنسبة لأحمال عمل الوكلاء، يُوصى باستخدام <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> في بيئة الإنتاج. لا يدير الوكلاء عادةً البنية التحتية، لذا فإن النشر بدون خادم يلغي التكاليف التشغيلية الإضافية ويوفر التوسع التلقائي.</p>
+<p>بالنسبة لأحمال عمل الوكلاء، يُوصى باستخدام <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> في بيئة الإنتاج. لا تدير الوكلاء عادةً البنية التحتية، لذا فإن النشر بدون خادم يلغي التكاليف التشغيلية الإضافية ويوفر التوسع التلقائي.</p>
 </div>

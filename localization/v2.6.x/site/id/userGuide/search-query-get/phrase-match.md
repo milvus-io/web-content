@@ -139,8 +139,8 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Akurasi pencocokan frasa sangat bergantung pada penganalisis yang digunakan untuk menokenisasi data teks Anda. Penganalisis yang berbeda cocok untuk bahasa dan format teks yang berbeda, yang memengaruhi akurasi tokenisasi dan posisi. Memilih penganalisis yang sesuai untuk kasus penggunaan spesifik Anda akan mengoptimalkan hasil pencocokan frasa Anda.</p>
-<p>Secara default, Milvus menggunakan penganalisis standar, yang memecah teks berdasarkan spasi dan tanda baca serta mengubah teks menjadi huruf kecil. Tidak diperlukan parameter tambahan untuk penggunaan default. Lihat <a href="/docs/id/v2.6.x/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
-<p>Jika aplikasi Anda memerlukan analis tertentu, konfigurasikan menggunakan parameter ` <code translate="no">analyzer_params</code> `. Sebagai contoh, berikut cara mengonfigurasi analis ` <code translate="no">english</code> ` untuk pencocokan frasa pada teks bahasa Inggris:</p>
+<p>Secara default, Milvus menggunakan penganalisis standar, yang memecah teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak diperlukan parameter tambahan untuk penggunaan default. Lihat <a href="/docs/id/v2.6.x/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
+<p>Jika aplikasi Anda memerlukan penganalisis tertentu, konfigurasikan menggunakan parameter ` <code translate="no">analyzer_params</code> `. Sebagai contoh, berikut cara mengonfigurasi penganalisis ` <code translate="no">english</code> ` untuk pencocokan frasa pada teks bahasa Inggris:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -156,7 +156,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus mendukung beberapa penganalisis yang disesuaikan untuk berbagai bahasa dan kasus penggunaan. Untuk informasi terperinci, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
+<p>Milvus mendukung beberapa penganalisis yang dirancang khusus untuk berbagai bahasa dan kasus penggunaan. Untuk informasi terperinci, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">Gunakan pencocokan frasa<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -201,7 +201,7 @@ schema.add_field(
 <ul>
 <li><p><code translate="no">0</code> (default): Hanya mencocokkan frasa persis. Contoh: Filter untuk <strong>“machine learning”</strong> akan mencocokkan <strong>“machine learning”</strong> secara persis, tetapi tidak <strong>“machine boosts learning”</strong> atau <strong>“learning machine”.</strong></p></li>
 <li><p><code translate="no">1</code>: Memungkinkan variasi kecil, seperti satu istilah tambahan atau pergeseran posisi yang kecil. Contoh: Filter untuk <strong>“machine learning”</strong> akan mencocokkan <strong>“machine boosts learning”</strong> (satu token di antara <strong>“machine”</strong> dan <strong>“learning”</strong>) tetapi tidak <strong>“learning machine”</strong> (urutan istilah terbalik).</p></li>
-<li><p><code translate="no">2</code>: Memungkinkan fleksibilitas lebih besar, termasuk urutan istilah yang terbalik atau hingga dua token di antaranya. Contoh: Filter untuk <strong>“machine learning”</strong> akan mencocokkan <strong>“learning machine”</strong> (urutan istilah terbalik) atau <strong>“machine quickly boosts learning”</strong> (dua token di antara <strong>“machine”</strong> dan <strong>“learning”</strong>).</p></li>
+<li><p><code translate="no">2</code>: Memungkinkan fleksibilitas yang lebih besar, termasuk urutan istilah yang terbalik atau hingga dua token di antaranya. Contoh: Filter untuk <strong>“machine learning”</strong> akan mencocokkan <strong>“learning machine”</strong> (urutan istilah terbalik) atau <strong>“machine quickly boosts learning”</strong> (dua token di antara <strong>“machine”</strong> dan <strong>“learning”</strong>).</p></li>
 </ul></li>
 </ul>
 <h3 id="Example-dataset" class="common-anchor-header">Contoh kumpulan data<button data-href="#Example-dataset" class="anchor-icon" translate="no">
@@ -262,7 +262,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Saat menggunakan metode <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> berfungsi sebagai filter skalar. Hanya dokumen yang mengandung frasa yang ditentukan (dengan toleransi yang diizinkan) yang akan dikembalikan.</p>
-<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Contoh: slop = 0 (kecocokan persis)</h4><p>Contoh ini mengembalikan dokumen yang mengandung frasa persis <strong>“machine learning”</strong> tanpa token tambahan di antaranya.</p>
+<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Contoh: slop = 0 (kecocokan tepat)</h4><p>Contoh ini mengembalikan dokumen yang mengandung frasa persis <strong>“machine learning”</strong> tanpa token tambahan di antaranya.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
 
@@ -415,7 +415,7 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Mengaktifkan pencocokan frasa untuk suatu bidang akan memicu pembuatan indeks terbalik, yang menghabiskan sumber daya penyimpanan. Pertimbangkan dampak penyimpanan saat memutuskan untuk mengaktifkan fitur ini, karena dampaknya bervariasi tergantung pada ukuran teks, token unik, dan penganalisis yang digunakan.</p></li>
+<li><p>Mengaktifkan pencocokan frasa untuk suatu bidang akan memicu pembuatan indeks terbalik, yang menghabiskan sumber daya penyimpanan. Pertimbangkan dampak penyimpanan saat memutuskan untuk mengaktifkan fitur ini, karena dampaknya bervariasi berdasarkan ukuran teks, token unik, dan penganalisis yang digunakan.</p></li>
 <li><p>Setelah Anda mendefinisikan penganalisis dalam skema Anda, pengaturannya menjadi permanen untuk koleksi tersebut. Jika Anda memutuskan bahwa penganalisis lain lebih sesuai dengan kebutuhan Anda, Anda dapat mempertimbangkan untuk menghapus koleksi yang ada dan membuat yang baru dengan konfigurasi penganalisis yang diinginkan.</p></li>
 <li><p>Kinerja pencocokan frasa bergantung pada cara teks ditokenisasi. Sebelum menerapkan penganalisis ke seluruh koleksi Anda, gunakan metode ` <code translate="no">run_analyzer</code> ` untuk meninjau hasil tokenisasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Ikhtisar Penganalisis</a>.</p></li>
 <li><p>Aturan escape dalam ekspresi ` <code translate="no">filter</code> `:</p>

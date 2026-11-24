@@ -1,6 +1,6 @@
 ---
 id: model-ranker-overview.md
-title: Überblick über den Model RankerCompatible with Milvus 2.6.x
+title: Übersicht über den Model RankerCompatible with Milvus 2.6.x
 summary: >-
   Bei der herkömmlichen Vektorsuche werden die Ergebnisse ausschließlich nach
   ihrer mathematischen Ähnlichkeit sortiert – also danach, wie gut die Vektoren
@@ -12,7 +12,7 @@ summary: >-
   Optimierungsstrategien bieten.
 beta: Milvus 2.6.x
 ---
-<h1 id="Model-Ranker-Overview" class="common-anchor-header">Überblick über den Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
+<h1 id="Model-Ranker-Overview" class="common-anchor-header">Übersicht über den Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,8 +27,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bei der herkömmlichen Vektorsuche werden Ergebnisse ausschließlich nach mathematischer Ähnlichkeit sortiert – also danach, wie gut Vektoren im hochdimensionalen Raum übereinstimmen. Dieser Ansatz ist zwar effizient, lässt jedoch oft die tatsächliche semantische Relevanz außer Acht. Stellen Sie sich vor, Sie suchen nach <strong>„Best Practices für die Datenbankoptimierung“:</strong> Möglicherweise erhalten Sie Dokumente mit hoher Vektorähnlichkeit, in denen diese Begriffe häufig vorkommen, die jedoch keine tatsächlich umsetzbaren Optimierungsstrategien bieten.</p>
-<p>Model Ranker revolutioniert die Milvus-Suche durch die Integration fortschrittlicher Sprachmodelle, die semantische Beziehungen zwischen Suchanfragen und Dokumenten verstehen. Anstatt sich ausschließlich auf die Vektorähnlichkeit zu stützen, wertet das Modell die Bedeutung und den Kontext der Inhalte aus, um intelligentere und relevantere Ergebnisse zu liefern.</p>
+    </button></h1><p>Bei der herkömmlichen Vektorsuche werden Ergebnisse ausschließlich nach mathematischer Ähnlichkeit sortiert – also danach, wie gut Vektoren im hochdimensionalen Raum übereinstimmen. Dieser Ansatz ist zwar effizient, lässt jedoch oft die tatsächliche semantische Relevanz außer Acht. Stellen Sie sich vor, Sie suchen nach <strong>„Best Practices für die Datenbankoptimierung“:</strong> Möglicherweise erhalten Sie Dokumente mit hoher Vektorähnlichkeit, in denen diese Begriffe häufig vorkommen, die jedoch keine konkret umsetzbaren Optimierungsstrategien bieten.</p>
+<p>Model Ranker revolutioniert die Milvus-Suche durch die Integration fortschrittlicher Sprachmodelle, die semantische Beziehungen zwischen Suchanfragen und Dokumenten verstehen. Anstatt sich ausschließlich auf die Vektorähnlichkeit zu stützen, wertet es die Bedeutung und den Kontext der Inhalte aus, um intelligentere, relevantere Ergebnisse zu liefern.</p>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,7 +111,7 @@ beta: Milvus 2.6.x
      <td><p>vLLM</p></td>
      <td><p>Komplexe Anwendungen, die ein tiefes semantisches Verständnis und eine individuelle Anpassung erfordern</p></td>
      <td><ul><li><p>Unterstützt verschiedene große Sprachmodelle</p></li><li><p>Flexible Bereitstellungsoptionen</p></li><li><p>Höhere Rechenanforderungen</p></li><li><p>Größeres Anpassungspotenzial</p></li></ul></td>
-     <td><p>Rechtsforschungsplattform, die fachspezifische Modelle einsetzt, die juristische Terminologie und Zusammenhänge in der Rechtsprechung verstehen</p></td>
+     <td><p>Rechtsrechercheplattform, die fachspezifische Modelle einsetzt, die juristische Terminologie und Zusammenhänge in der Rechtsprechung verstehen</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
@@ -181,7 +181,7 @@ beta: Milvus 2.6.x
 <li><p>Ein laufender externer Modelldienst, auf den Ihre Milvus-Instanz zugreifen kann</p></li>
 <li><p>Eine geeignete Netzwerkverbindung zwischen Milvus und dem von Ihnen gewählten Modelldienst</p></li>
 </ul>
-<p>Model Ranker lassen sich nahtlos sowohl in Standard-Vektorsuchen als auch in hybride Suchvorgänge integrieren. Die Implementierung umfasst die Erstellung eines Function-Objekts, das Ihre Neukonfigurations-Einstellungen definiert, sowie dessen Übergabe an Suchvorgänge.</p>
+<p>Model Ranker lassen sich nahtlos sowohl in Standard-Vektorsuchen als auch in hybride Suchvorgänge integrieren. Die Implementierung umfasst die Erstellung eines Function-Objekts, das Ihre Konfiguration für die Neubewertung definiert, sowie die Übergabe dieses Objekts an Suchvorgänge.</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">Erstellen eines Model Rankers<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +242,25 @@ model_ranker = Function(
         .endpoint(<span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
         .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Create a model ranker function</span>
+<span class="hljs-keyword">const</span> model_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;semantic_ranker&quot;</span>,              <span class="hljs-comment">// Function identifier</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field to use for reranking</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be set to RERANK</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Specify model reranker. Must be &quot;model&quot;</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;tei&quot;</span>,                    <span class="hljs-comment">// Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>], <span class="hljs-comment">// Query text</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>, <span class="hljs-comment">// Model service endpoint</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -368,7 +386,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Liste der Suchbegriffe, die vom Neurangordnungsmodell zur Berechnung der Relevanzwerte verwendet werden.</p><p>Die Anzahl der Suchbegriffe muss exakt mit der Anzahl der Suchanfragen in Ihrem Suchvorgang übereinstimmen (auch bei Verwendung von Suchvektoren anstelle von Text), andernfalls wird ein Fehler gemeldet.</p></td>
+     <td><p>Liste der Suchbegriffe, die vom Neurangordnungsmodell zur Berechnung der Relevanzwerte verwendet werden.</p><p>Die Anzahl der Suchbegriffe muss exakt mit der Anzahl der Suchanfragen in Ihrem Suchvorgang übereinstimmen (auch wenn Suchvektoren anstelle von Text verwendet werden), andernfalls wird ein Fehler gemeldet.</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
@@ -424,11 +442,11 @@ results = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
         .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
-        .outputFields(Collections.singletonList(document))
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
                 .build())
@@ -436,7 +454,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Use the model ranker in standard vector search</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collection_name,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Number of query vectors must match that specified in model_ranker.params.queries</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include the text field in outputs</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: model_ranker,                 <span class="hljs-comment">// Apply the model ranker here</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

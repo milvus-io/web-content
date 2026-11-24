@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>具备可配置重叠度的先进文档分块功能，以处理长文档</p></li>
 <li><p>可访问多种再排序模型，包括 BAAI/bge-reranker 系列及其他专用模型</p></li>
-<li><p>灵活的片段评分机制，其中得分最高的片段代表文档的总分</p></li>
+<li><p>灵活的片段评分机制，其中得分最高的片段代表文档的总得分</p></li>
 <li><p>经济高效的重新排序，同时支持标准版和专业版模型</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ beta: Milvus 2.6.x
     </button></h2><p>在 Milvus 中实施 SiliconFlow Ranker 之前，请确保您具备以下条件：</p>
 <ul>
 <li><p>一个包含<code translate="no">VARCHAR</code> 字段的Milvus Collection，该字段中包含待重新排序的文本</p></li>
-<li><p>一个具有访问重新排序模型权限的有效 SiliconFlow API 密钥。请在<a href="https://www.siliconflow.com/">SiliconFlow 平台</a>注册以获取 API 凭据。您可以通过以下任一方式操作：</p>
+<li><p>一个具有访问重新排序模型权限的有效 SiliconFlow API 密钥。请在<a href="https://www.siliconflow.com/">SiliconFlow 平台</a>注册以获取您的 API 凭据。您可以通过以下任一方式操作：</p>
 <ul>
 <li><p>设置<code translate="no">SILICONFLOW_API_KEY</code> 环境变量，或</p></li>
 <li><p>在排名器配置中直接指定 API 密钥</p></li>
@@ -123,7 +123,29 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;overlap_tokens&quot;</span>, <span class="hljs-string">&quot;50&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Configure SiliconFlow Ranker</span>
+<span class="hljs-keyword">const</span> siliconflow_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;siliconflow_semantic_ranker&quot;</span>,  <span class="hljs-comment">// Unique identifier for your ranker</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK for reranking functions</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Enables model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;siliconflow&quot;</span>,            <span class="hljs-comment">// Specifies SiliconFlow as the service provider</span>
+    <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;BAAI/bge-reranker-v2-m3&quot;</span>, <span class="hljs-comment">// SiliconFlow reranking model to use</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text for relevance evaluation</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">128</span>,         <span class="hljs-comment">// Optional: batch size for model service requests (default: 128)</span>
+    <span class="hljs-attr">max_chunks_per_doc</span>: <span class="hljs-number">5</span>,              <span class="hljs-comment">// Optional: max chunks per document for supported models</span>
+    <span class="hljs-attr">overlap_tokens</span>: <span class="hljs-number">50</span>,                 <span class="hljs-comment">// Optional: token overlap between chunks for supported models</span>
+    <span class="hljs-comment">// credential: &quot;your-siliconflow-api-key&quot;, // Optional: if not set, uses SILICONFLOW_API_KEY env var</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -262,13 +284,13 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">max_chunks_per_doc</code></p></td>
      <td><p>否</p></td>
-     <td><p>从文档内部生成的最大分块数。长文档会被划分为多个分块进行计算，并取各分块中的最高得分作为该文档的得分。仅由特定模型支持：<code translate="no">BAAI/bge-reranker-v2-m3</code> 、<code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> 和<code translate="no">netease-youdao/bce-reranker-base_v1</code> 。</p></td>
+     <td><p>从文档内部生成的最大分块数。长文档会被划分为多个分块进行计算，并取各分块中的最高得分作为该文档的得分。仅受以下特定模型支持：<code translate="no">BAAI/bge-reranker-v2-m3</code> 、<code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> 和<code translate="no">netease-youdao/bce-reranker-base_v1</code> 。</p></td>
      <td><p><code translate="no">5</code>,<code translate="no">10</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">overlap_tokens</code></p></td>
      <td><p>否</p></td>
-     <td><p>对文档进行分块时，相邻分块之间重叠的词元数量。这可确保分块边界间的连续性，从而提升语义理解能力。仅由特定模型支持：<code translate="no">BAAI/bge-reranker-v2-m3</code> 、<code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> 和<code translate="no">netease-youdao/bce-reranker-base_v1</code> 。</p></td>
+     <td><p>对文档进行分块时，相邻分块之间重叠的词元数量。这可确保分块边界之间的连续性，从而提升语义理解能力。仅支持特定模型：<code translate="no">BAAI/bge-reranker-v2-m3</code> 、<code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> 和<code translate="no">netease-youdao/bce-reranker-base_v1</code> 。</p></td>
      <td><p><code translate="no">50</code></p></td>
    </tr>
    <tr>
@@ -334,7 +356,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with SiliconFlow reranking</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: siliconflow_ranker,           <span class="hljs-comment">// Apply SiliconFlow reranking</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

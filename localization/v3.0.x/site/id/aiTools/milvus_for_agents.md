@@ -72,7 +72,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Prompt yang telah dikurasi untuk membantu asisten pemrograman AI menulis kode Milvus yang benar. Setiap prompt mengkodekan aturan dan pola yang mencegah kesalahan paling umum.</p>
-<p><strong>Cara menggunakan:</strong></p>
+<p><strong>Cara penggunaan:</strong></p>
 <ol>
 <li><strong>Salin</strong> prompt dari bagian “Full prompt” pada halaman prompt mana pun.</li>
 <li><strong>Simpan</strong> ke dalam file yang didukung oleh alat AI Anda (lihat <a href="#use-in-different-environments">tabel lingkungan</a> di bawah).</li>
@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>Kartu untuk AGENTS.md dan empat prompt topik membuka versi Python. Masing-masing juga memiliki versi Node.js, Go, dan RESTful API v2:</p>
+<table>
+<thead>
+<tr><th>Prompt</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/id/agents_overview.md">Python</a></td><td><a href="/docs/id/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/id/agents_overview_go.md">Go</a></td><td><a href="/docs/id/agents_overview_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Desain Skema</td><td><a href="/docs/id/schema_design.md">Python</a></td><td><a href="/docs/id/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/id/schema_design_go.md">Go</a></td><td><a href="/docs/id/schema_design_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pola Pencarian</td><td><a href="/docs/id/search_patterns.md">Python</a></td><td><a href="/docs/id/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/id/search_patterns_go.md">Go</a></td><td><a href="/docs/id/search_patterns_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pilihan Indeks</td><td><a href="/docs/id/index_selection.md">Python</a></td><td><a href="/docs/id/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/id/index_selection_go.md">Go</a></td><td><a href="/docs/id/index_selection_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pipa RAG</td><td><a href="/docs/id/rag_pipeline.md">Python</a></td><td><a href="/docs/id/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/id/rag_pipeline_go.md">Go</a></td><td><a href="/docs/id/rag_pipeline_restful.md">API RESTful v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Penggunaan di lingkungan yang berbeda<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

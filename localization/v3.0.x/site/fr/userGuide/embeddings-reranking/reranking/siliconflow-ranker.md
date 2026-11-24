@@ -126,7 +126,29 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;overlap_tokens&quot;</span>, <span class="hljs-string">&quot;50&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Configure SiliconFlow Ranker</span>
+<span class="hljs-keyword">const</span> siliconflow_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;siliconflow_semantic_ranker&quot;</span>,  <span class="hljs-comment">// Unique identifier for your ranker</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK for reranking functions</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Enables model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;siliconflow&quot;</span>,            <span class="hljs-comment">// Specifies SiliconFlow as the service provider</span>
+    <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;BAAI/bge-reranker-v2-m3&quot;</span>, <span class="hljs-comment">// SiliconFlow reranking model to use</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text for relevance evaluation</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">128</span>,         <span class="hljs-comment">// Optional: batch size for model service requests (default: 128)</span>
+    <span class="hljs-attr">max_chunks_per_doc</span>: <span class="hljs-number">5</span>,              <span class="hljs-comment">// Optional: max chunks per document for supported models</span>
+    <span class="hljs-attr">overlap_tokens</span>: <span class="hljs-number">50</span>,                 <span class="hljs-comment">// Optional: token overlap between chunks for supported models</span>
+    <span class="hljs-comment">// credential: &quot;your-siliconflow-api-key&quot;, // Optional: if not set, uses SILICONFLOW_API_KEY env var</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -283,7 +305,7 @@ curl --request POST \
 </table>
 <p><strong>Prise en charge des fonctionnalités spécifiques aux modèles</strong>: les paramètres <code translate="no">max_chunks_per_doc</code> et <code translate="no">overlap_tokens</code> ne sont pris en charge que par certains modèles. Si vous utilisez d’autres modèles, ces paramètres seront ignorés.</p>
 <div class="alert note">
-<p>Pour les paramètres généraux communs à tous les classements de modèles (par exemple, <code translate="no">provider</code> et <code translate="no">queries</code>), reportez-vous à la section <a href="/docs/fr/model-ranker-overview.md#Create-a-model-ranker">Créer un classement de modèles</a>.</p>
+<p>Pour les paramètres généraux communs à tous les classements de modèles (par exemple, <code translate="no">provider</code>, <code translate="no">queries</code>), reportez-vous à la section <a href="/docs/fr/model-ranker-overview.md#Create-a-model-ranker">Créer un classement de modèles</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Application à une recherche vectorielle standard<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -337,7 +359,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with SiliconFlow reranking</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: siliconflow_ranker,           <span class="hljs-comment">// Apply SiliconFlow reranking</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

@@ -2,7 +2,7 @@
 id: phrase-match.md
 title: Correspondência de fraseCompatible with Milvus 2.5.17+
 summary: >-
-  A correspondência de frase permite-lhe pesquisar documentos que contenham os
+  A correspondência de frase permite-lhe procurar documentos que contenham os
   termos da sua consulta como uma frase exata. Por predefinição, as palavras têm
   de aparecer na mesma ordem e diretamente adjacentes umas às outras. Por
   exemplo, uma consulta por «robótica e aprendizagem automática» corresponde a
@@ -52,7 +52,7 @@ beta: Milvus 2.5.17+
  </span></p>
 <ol>
 <li><p><strong>Tokenização de documentos</strong>: Quando insere documentos no Milvus, o texto é dividido em tokens (palavras ou termos individuais) utilizando um analisador, sendo registadas as informações posicionais para cada token. Por exemplo, <strong>o doc_1</strong> é tokenizado em <strong>[«machine» (pos=0), «learning» (pos=1), «boosts» (pos=2), «efficiency» (pos=3)]</strong>. Para mais informações sobre analisadores, consulte a <a href="/docs/pt/v2.6.x/analyzer-overview.md">Visão Geral do Analisador</a>.</p></li>
-<li><p><strong>Criação do índice invertido</strong>: O Milvus cria um índice invertido, mapeando cada token para o(s) documento(s) em que aparece e as posições do token nesses documentos.</p></li>
+<li><p><strong>Criação do índice invertido</strong>: O Milvus constrói um índice invertido, mapeando cada token para o(s) documento(s) em que aparece e as posições do token nesses documentos.</p></li>
 <li><p><strong>Correspondência de frases</strong>: Quando é executada uma consulta de frase, o Milvus procura cada token no índice invertido e verifica as suas posições para determinar se aparecem na ordem e proximidade corretas. O parâmetro ` <code translate="no">slop</code> ` controla o número máximo de posições permitidas entre tokens correspondentes:</p>
 <ul>
 <li><p><strong>slop = 0</strong> significa que os tokens têm de aparecer <strong>na ordem exata e imediatamente adjacentes</strong> (ou seja, sem palavras adicionais entre eles).</p>
@@ -97,7 +97,7 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para ativar a correspondência de frases para um campo específico de tipo « <code translate="no">VARCHAR</code> », defina os parâmetros « <code translate="no">enable_analyzer</code> » e « <code translate="no">enable_match</code> » como « <code translate="no">True</code> » ao definir o esquema do campo. Esta configuração instrui o Milvus a tokenizar o texto e a criar um índice invertido com as informações posicionais necessárias para uma correspondência de frases eficiente.</p>
+    </button></h3><p>Para ativar a correspondência de frases para um campo específico « <code translate="no">VARCHAR</code> », defina os parâmetros « <code translate="no">enable_analyzer</code> » e « <code translate="no">enable_match</code> » como « <code translate="no">True</code> » ao definir o esquema do campo. Esta configuração instrui o Milvus a tokenizar o texto e a criar um índice invertido com as informações posicionais necessárias para uma correspondência de frases eficiente.</p>
 <p>Eis um exemplo de definição de esquema para ativar a correspondência de frases:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -139,8 +139,8 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>A precisão da correspondência de frases depende significativamente do analisador utilizado para tokenizar os seus dados de texto. Diferentes analisadores são adequados para diferentes idiomas e formatos de texto, afetando a tokenização e a precisão posicional. A seleção de um analisador adequado para o seu caso de utilização específico irá otimizar os resultados da correspondência de frases.</p>
-<p>Por predefinição, o Milvus utiliza o analisador padrão, que tokeniza o texto com base em espaços em branco e pontuação e converte o texto para minúsculas. Não são necessários parâmetros adicionais para a utilização por predefinição. Consulte <a href="/docs/pt/v2.6.x/standard-analyzer.md">Analisador Padrão</a> para obter mais detalhes.</p>
-<p>Se a sua aplicação necessitar de um analisador específico, configure-o utilizando o parâmetro « <code translate="no">analyzer_params</code> ». Por exemplo, eis como configurar o analisador « <code translate="no">english</code> » para a correspondência de frases em texto em inglês:</p>
+<p>Por predefinição, o Milvus utiliza o analisador padrão, que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Não são necessários parâmetros adicionais para a utilização por predefinição. Consulte <a href="/docs/pt/v2.6.x/standard-analyzer.md">«Analisador Padrão»</a> para obter mais detalhes.</p>
+<p>Se a sua aplicação necessitar de um analisador específico, configure-o utilizando o parâmetro ` <code translate="no">analyzer_params</code> `. Por exemplo, eis como configurar o analisador ` <code translate="no">english</code> ` para a correspondência de frases em texto em inglês:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -196,11 +196,11 @@ schema.add_field(
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code><strong>:</strong> O nome do campo « <code translate="no">VARCHAR</code> » no qual se realizam as correspondências de frase.</p></li>
-<li><p><code translate="no">phrase</code><strong>:</strong> A frase exata a pesquisar.</p></li>
+<li><p><code translate="no">phrase</code><strong>:</strong> A frase exata a procurar.</p></li>
 <li><p><code translate="no">slop</code> (opcional)<strong>:</strong> Um número inteiro que especifica o número máximo de posições permitidas nos tokens correspondentes.</p>
 <ul>
 <li><p><code translate="no">0</code> (padrão): Corresponde apenas a frases exatas. Exemplo: Um filtro para <strong>«machine learning»</strong> corresponderá exatamente a <strong>«machine learning»</strong>, mas não a <strong>«machine boosts learning»</strong> ou <strong>«learning machine».</strong></p></li>
-<li><p><code translate="no">1</code>: Permite pequenas variações, tais como um termo extra ou uma ligeira alteração na posição. Exemplo: Um filtro para <strong>«machine learning»</strong> irá corresponder a <strong>«machine boosts learning»</strong> (um token entre <strong>«machine»</strong> e <strong>«learning»</strong>), mas não <strong>a «learning machine»</strong> (termos invertidos).</p></li>
+<li><p><code translate="no">1</code>: Permite pequenas variações, tais como um termo adicional ou uma ligeira alteração na posição. Exemplo: Um filtro para <strong>«machine learning»</strong> irá corresponder a <strong>«machine boosts learning»</strong> (um token entre <strong>«machine»</strong> e <strong>«learning»</strong>), mas não <strong>a «learning machine»</strong> (termos invertidos).</p></li>
 <li><p><code translate="no">2</code>: Permite maior flexibilidade, incluindo a ordem invertida dos termos ou até dois tokens entre eles. Exemplo: Um filtro para <strong>«machine learning»</strong> corresponderá a <strong>«learning machine»</strong> (termos invertidos) ou a <strong>«machine quickly boosts learning»</strong> (dois tokens entre <strong>«machine»</strong> e <strong>«learning»</strong>).</p></li>
 </ul></li>
 </ul>
@@ -262,7 +262,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Ao utilizar o método ` <code translate="no">query()</code> `, <strong>`PHRASE_MATCH</strong> ` funciona como um filtro escalar. Apenas são devolvidos os documentos que contenham a frase especificada (sujeita à tolerância permitida).</p>
-<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Exemplo: slop = 0 (correspondência exata)</h4><p>Este exemplo devolve documentos que contenham a frase exata <strong>«machine learning»</strong>, sem quaisquer tokens adicionais entre as palavras.</p>
+<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Exemplo: slop = 0 (correspondência exata)</h4><p>Este exemplo devolve documentos que contenham a frase exata <strong>«machine learning»</strong>, sem quaisquer tokens adicionais entre elas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
 
@@ -333,7 +333,7 @@ result_slop1 = client.search(
      <td><p>«A aprendizagem de algoritmos avançados de máquinas amplia as capacidades da IA»</p></td>
    </tr>
 </table>
-<h4 id="Example-slop--2" class="common-anchor-header">Exemplo: slop = 2</h4><p>Este exemplo permite um slop de 2, o que significa que são permitidos até dois tokens adicionais (ou termos invertidos) entre as palavras <strong>«machine»</strong> e <strong>«learning».</strong></p>
+<h4 id="Example-slop--2" class="common-anchor-header">Exemplo: tolerância = 2</h4><p>Este exemplo permite um slop de 2, o que significa que são permitidos até dois tokens adicionais (ou termos invertidos) entre as palavras <strong>«machine»</strong> e <strong>«learning».</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
 filter_slop2 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>
 

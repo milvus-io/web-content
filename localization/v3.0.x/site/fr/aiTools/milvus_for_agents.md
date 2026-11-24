@@ -97,7 +97,7 @@ summary: >-
 <div class="start_card_container">
   <a href="/docs/fr/agents_overview.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">AGENTS.md</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Règles de niveau supérieur pour tout agent de codage IA. Commencez par ce fichier si vous ne souhaitez en créer qu’un seul.</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Règles de niveau supérieur pour tout agent de codage IA. Commencez par cette page si vous ne souhaitez utiliser qu'un seul fichier.</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>Les fiches relatives à AGENTS.md et aux quatre sujets proposés ouvrent la version Python. Chacune d’entre elles dispose également d’une version Node.js, Go et API RESTful v2 :</p>
+<table>
+<thead>
+<tr><th>Sujet</th><th>Python</th><th>Node.js</th><th>Go</th><th>API RESTful v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/fr/agents_overview.md">Python</a></td><td><a href="/docs/fr/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/fr/agents_overview_go.md">Go</a></td><td><a href="/docs/fr/agents_overview_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Conception de schémas</td><td><a href="/docs/fr/schema_design.md">Python</a></td><td><a href="/docs/fr/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/fr/schema_design_go.md">Go</a></td><td><a href="/docs/fr/schema_design_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Modèles de recherche</td><td><a href="/docs/fr/search_patterns.md">Python</a></td><td><a href="/docs/fr/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/fr/search_patterns_go.md">Go</a></td><td><a href="/docs/fr/search_patterns_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Sélection d'index</td><td><a href="/docs/fr/index_selection.md">Python</a></td><td><a href="/docs/fr/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/fr/index_selection_go.md">Go</a></td><td><a href="/docs/fr/index_selection_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pipeline RAG</td><td><a href="/docs/fr/rag_pipeline.md">Python</a></td><td><a href="/docs/fr/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/fr/rag_pipeline_go.md">Go</a></td><td><a href="/docs/fr/rag_pipeline_restful.md">API RESTful v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Utilisation dans différents environnements<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

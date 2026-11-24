@@ -19,7 +19,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>強制マージは、小規模で断片化されたセグメントを、より少ない数の大きなセグメントに統合し、クエリのパフォーマンスとストレージ効率を向上させるように設計されています。このガイドでは、強制マージ・コンパクテーションの使用方法について説明します。</p>
+    </button></h1><p>強制マージは、小規模で断片化されたセグメントを、より少ない数の大きなセグメントに統合し、クエリのパフォーマンスとストレージ効率を向上させることを目的としています。このガイドでは、強制マージ・コンパクテーションの使用方法について説明します。</p>
 <div class="alert note">
 <p>この機能はパブリック プレビュー段階です。本番環境では使用しないでください。</p>
 </div>
@@ -38,7 +38,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>標準の<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">コンパクテーションでは</a>、多対一のマージを通じてセグメントサイズを設定された<code translate="no">maxSize</code> 付近に維持しますが、制限を超えずにそれ以上マージできない中規模の断片が残ってしまう場合があります。 たとえば、下図に示すように、コレクションに 2 MB のセグメントが 5 つあり、<code translate="no">maxSize</code> が 3 MB の場合、任意の 2 つのセグメントをマージすると制限を超過してしまうため、標準のコンパクテーションではセグメント数をさらに減らすことができず、断片化されたレイアウトが残ってしまいます。</p>
+    </button></h2><p>標準の<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">コンパクテーションでは</a>、多対一のマージを通じてセグメントサイズを設定された<code translate="no">maxSize</code> に近い状態に保ちますが、制限を超えずにそれ以上マージできない中規模のフラグメントが残ってしまう場合があります。 たとえば、下図に示すように、コレクションに 2 MB のセグメントが 5 つあり、<code translate="no">maxSize</code> が 3 MB の場合、任意の 2 つのセグメントをマージすると制限を超過してしまうため、標準のコンパクテーションではセグメント数をさらに減らすことができず、断片化されたレイアウトが残ってしまいます。</p>
 <p>強制マージでは、<code translate="no">target_size</code> パラメータが追加され、可能な場合は、許容範囲内でセグメントを所望のサイズに再編成できるようになります。 以下に示すように、指定された<code translate="no">target_size</code> が4 MBの場合、5つの2 MBの小さなセグメントをさらに統合して、より少ない数の大きなセグメントにまとめることができます。これにより、余分なセグメント数が削減され、デフォルトの<code translate="no">maxSize</code> 設定よりも大きなターゲットサイズに対応できるようになります。また、ターゲットサイズが非常に大きい場合、システムは現在のハードウェアおよびQueryNodeトポロジに適した出力サイズとセグメント数を選択できるようになります。</p>
 <p>どの圧縮方式を使用すべきかについては、<a href="#faq">FAQを</a>参照してください。</p>
 <p><span class="img-wrapper">
@@ -98,7 +98,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の設定パラメータは、強制マージの動作を制御します。これらを Milvus の設定ファイルまたは環境変数で設定してください。</p>
+    </button></h3><p>以下の設定パラメータは、強制マージの動作を制御します。これらは、Milvusの設定ファイルまたは環境変数を通じて設定してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">dataCoord:</span>
   <span class="hljs-attr">segment:</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">512</span>         <span class="hljs-comment"># Default segment max size (MB).</span>
@@ -126,23 +126,23 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>セグメントのデフォルト最大サイズ（MB）。<code translate="no">target_size</code> が0の場合、または省略された場合に目標値として使用されます。また、明示的な<code translate="no">target_size</code> の最小許容値としても機能します。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>アルゴリズム選択のためのセグメント数しきい値。セグメント数がこの値を超えると、Milvusはマージ計画に高速な貪欲アルゴリズムを使用します。</p><ul><li><p><strong>標準アルゴリズム</strong>（segment_count &lt;=<code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> の場合に使用）：より最適なマージ結果を生成しますが、計算に時間がかかります。</p></li><li><p><strong>貪欲アルゴリズム</strong>（セグメント数が<code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> を超える場合に使用）：セグメントのグループ化が若干最適ではないという代償を払う代わりに、計画処理を大幅に高速に完了します。</p></li></ul></td>
+     <td><p>アルゴリズム選択のためのセグメント数しきい値。セグメント数がこの値を超えると、Milvusはマージ計画に高速な貪欲アルゴリズムを使用します。</p><ul><li><p><strong>標準アルゴリズム</strong>（セグメント数が<code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> 以下の場合に使用）：より最適なマージ結果を生成しますが、計算に時間がかかります。</p></li><li><p><strong>貪欲アルゴリズム</strong>（セグメント数が<code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> を超える場合に使用）：セグメントのグループ化が若干最適でなくなる代わりに、計画処理を大幅に高速に完了します。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>DataNode のメモリはこの係数で割られ、システムが許容できる最大のセグメントサイズが算出されます。</p><ul><li><p>値が大きいほど、マージに割り当てられるメモリは少なくなりますが、他の DataNode 操作に割り当てられるメモリが増えるため、ノードの安定性が向上します。</p></li><li><p>値を小さくすると、より大規模なマージが可能になりますが、メモリへの負荷が高まります。</p></li><li><p>たとえば、デフォルトの係数 4.0 で、16 GB のメモリを搭載した DataNode の場合、マージの予算は 4 GB になります。つまり、1 回の操作でマージされるセグメントの合計サイズは 4 GB を超えることはできません。</p></li></ul></td>
+     <td><p>DataNode のメモリはこの係数で割られ、システムが許容できる最大のセグメントサイズが算出されます。</p><ul><li><p>値が大きいほど、マージに割り当てられるメモリは少なくなりますが、他の DataNode 操作に割り当てられるメモリが増えるため、ノードの安定性が向上します。</p></li><li><p>値を小さくすると、より大規模なマージが可能になりますが、メモリへの負荷が高まります。</p></li><li><p>たとえば、デフォルトの係数 4.0、メモリ 16 GB の DataNode の場合、マージの予算は 4 GB になります。つまり、1 回の操作でマージされるセグメントの合計サイズは 4 GB を超えることはできません。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>QueryNode の最小メモリはこの係数で割られます。自動サイズ計算 (<code translate="no">target_size=max_int64</code>) 中に使用され、マージされたセグメントが QueryNode によって確実に読み込まれるようにします。</p><ul><li><p>値を大きくすると、セグメントのサイズが小さくなり、QueryNode による読み込みが容易になります。</p></li><li><p>値を小さくすると、より大きなセグメントが生成されますが、メモリに制約のある QueryNode では読み込みに失敗する可能性があります。</p></li><li><p>たとえば、デフォルトの係数 4.0 で、最小の QueryNode のメモリが 16 GB の場合、自動計算された目標サイズは 4 GB を超えません。これにより、Force Merge によって QueryNode が読み込めないほど大きなセグメントが生成されるのを防ぎます。</p></li></ul></td>
+     <td><p>QueryNode の最小メモリはこの係数で割られます。自動サイズ計算 (<code translate="no">target_size=max_int64</code>) 中に使用され、マージされたセグメントが QueryNode によって確実に読み込まれるようにします。</p><ul><li><p>値を大きくすると、セグメントのサイズが小さくなり、QueryNode による読み込みが容易になります。</p></li><li><p>値を小さくすると、より大きなセグメントが生成されますが、メモリに制約のある QueryNode では読み込みに失敗する可能性があります。</p></li><li><p>たとえば、デフォルトの係数 4.0 で、最小の QueryNode のメモリが 16 GB の場合、自動計算される目標サイズは 4 GB を超えません。これにより、Force Merge によって QueryNode が読み込めないほど大きなセグメントが生成されるのを防ぎます。</p></li></ul></td>
    </tr>
 </table>
 <p>上記の変更を Milvus クラスタに適用するには、「<a href="/docs/ja/configure-helm.md#Configure-Milvus-via-configuration-file">Helm を使用した Milvus の設定</a>」および「<a href="/docs/ja/configure_operator.md">Milvus Operator を使用した Milvus の設定</a>」の手順に従ってください。</p>
@@ -166,7 +166,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -185,7 +185,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">明示的なターゲットサイズ</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -217,7 +217,7 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>オプション。ターゲットのセグメントサイズ（MB単位）。このパラメータの値には3つのオプションがあります：</p><ul><li><p><strong>0 または省略</strong>：設定された<code translate="no">dataCoord.segment.maxSize</code> を使用します（デフォルト：512 MB）。標準の圧縮と同等です。</p></li><li><p><strong>明示的な値</strong>：セグメントを、指定されたサイズ（例：2048）に近くなるよう統合します。設定済みの<code translate="no">dataCoord.segment.maxSize</code> 以上である必要があります。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>：現在のセグメント分布と利用可能なノードリソースに基づいて、最適なサイズを自動的に計算します。</p></li></ul></td>
+     <td><p>オプション。ターゲットセグメントサイズ（MB単位）。このパラメータの値には3つのオプションがあります：</p><ul><li><p><strong>0 または省略</strong>：設定された<code translate="no">dataCoord.segment.maxSize</code> を使用します（デフォルト：1024 MB）。標準の圧縮と同等です。</p></li><li><p><strong>明示的な値</strong>：セグメントを、指定されたサイズ（例：2048）に近くなるよう統合します。設定済みの<code translate="no">dataCoord.segment.maxSize</code> 以上である必要があります。</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>：現在のセグメント分布と利用可能なノードリソースに基づいて、最適なサイズを自動的に計算します。</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
@@ -286,7 +286,7 @@ state = client.get_compaction_state(job_id)
 <li><p>標準のコンパクション（targetSize=0 または省略）は、ベストエフォート型の増分クリーンアップパスです。</p></li>
 <li><p>強制マージ（targetSize&gt;0）は、コレクションレベルの再パッキング処理であり、より少なく、より大きく、目標サイズに近いセグメントを生成します。</p></li>
 </ul>
-<p>主な違いはマージの形状です。標準の圧縮は、タスクごとに実質的に m → 1 となるのに対し、強制マージはグループ化された入力全体で m → n となります。これが、強制マージが標準の圧縮では解決できないセグメントのレイアウトを解決できる理由です。次の表は、これら 2 種類の操作を比較したものです。</p>
+<p>主な違いはマージの形状です。標準の圧縮は、タスクごとに実質的に m → 1 となるのに対し、強制マージはグループ化された入力全体で m → n となります。そのため、強制マージでは、標準の圧縮では解決できないセグメントのレイアウトを解決することができます。次の表は、これら 2 種類の操作を比較したものです。</p>
 <table>
    <tr>
      <th><p><strong>次元</strong></p></th>
@@ -310,7 +310,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>パラメータの有効性</p></td>
-     <td><p>ユーザーによるサイズ調整は不可</p></td>
+     <td><p>ユーザーによるサイズ調整不可</p></td>
      <td><p>ユーザーの targetSize は dataCoord.segment.maxSize 以上でなければならない。そうでない場合は拒否される</p></td>
    </tr>
    <tr>
@@ -325,7 +325,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>中セグメントの挙動</p></td>
-     <td><p>永久にスタックする可能性がある（例えば、2つの60%のセグメントは、規則上1つの120%のセグメントにはなれない）</p></td>
+     <td><p>永久にスタックする可能性がある（例えば、2つの60%セグメントは、規則上1つの120%セグメントにはなれない）</p></td>
      <td><p>再パッケージ化＋分割が機能する。「60%でスタックする」というパターンは発生しない</p></td>
    </tr>
    <tr>
@@ -341,7 +341,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>読み取りパス並列性のチューニング</p></td>
      <td><p>なし</p></td>
-     <td><p>有効な場合、queryNodeCount / (レプリカ数 × シャード数) を使用して出力数を調整します</p></td>
+     <td><p>有効な場合、queryNodeCount / (レプリカ数 × シャード数) を用いて出力件数を調整する</p></td>
    </tr>
    <tr>
      <td><p>代表的なユースケース</p></td>
@@ -359,7 +359,7 @@ state = client.get_compaction_state(job_id)
 <li><p>リスクが低く、段階的なクリーンアップを行う場合は、標準のコンパクションを選択してください。</p></li>
 <li><p>検索や読み込みの挙動に合わせて、コレクションを明示的により少ない数の大きなセグメントに再構成したい場合は、「強制マージ」を選択してください。</p></li>
 </ul>
-<p><strong>「強制マージ」と「クラスタリング・コンパクテーション」の違いは何ですか？</strong></p>
+<p><strong>「強制マージ」と「クラスタリング・コンパクション」の違いは何ですか？</strong></p>
 <p>クラスタリング・コンパクション（<code translate="no">is_clustering=True</code> ）は、検索のプリニングを改善するために、クラスタリング・キーに基づいてセグメント内のデータを再編成します。強制マージ（<code translate="no">target_size=N</code> ）は、データの分布を変更することなくセグメントサイズを最適化します。これらは異なる目的を果たし、併用することも可能です。まずクラスタリング・コンパクションを実行してデータを整理し、その後、強制マージを実行して結果として得られたセグメントを統合します。</p>
 <p><strong>クエリが実行中のコレクションに対してフォースマージを実行できますか？</strong></p>
 <p>はい。Force Merge は非同期で実行されるため、クエリをブロックすることはありません。ただし、DataNode およびディスク I/O リソースを消費するため、コンパクション中はクエリのレイテンシが増加する可能性があります。最良の結果を得るには、トラフィックが少ない時間帯に Force Merge をスケジュールしてください。</p>

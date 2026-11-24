@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "인메모리 복제본",
+        "label": "메모리 내 복제본",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -1100,7 +1100,7 @@
             "order": 8,
             "children": [
               {
-                "label": "필터링에 대해 알아보기",
+                "label": "필터링에 대한 설명",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1241,7 +1241,7 @@
             "children": []
           },
           {
-            "label": "검색 이터레이터",
+            "label": "검색 반복자",
             "id": "with-iterators.md",
             "order": 15,
             "children": []
@@ -1573,7 +1573,7 @@
         "children": []
       },
       {
-        "label": "항등적 대량 가져오기",
+        "label": "항등적 일괄 가져오기",
         "id": "idempotent-import.md",
         "order": 2,
         "children": []
@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "Milvus용 AGENTS.md",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "파이썬",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "가기",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "파이썬 SDK",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "스키마 설계",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "파이썬",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "가기",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "검색 패턴",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "파이썬",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "가기",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "지수 선정",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "파이썬",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "가기",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "RAG 파이프라인",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "파이썬",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "가기",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1669,7 +1799,7 @@
         "children": []
       },
       {
-        "label": "Claude 코드용 MCP 서버",
+        "label": "클로드 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1992,7 +2122,7 @@
             "children": []
           },
           {
-            "label": "스케일 의존성",
+            "label": "스케일 종속성",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -2276,7 +2406,7 @@
                     "children": []
                   },
                   {
-                    "label": "버킷 간 인스턴스 간 마이그레이션",
+                    "label": "버킷 간 인스턴스 마이그레이션",
                     "id": "cross-bucket-backup-and-restore.md",
                     "order": 2,
                     "children": []
@@ -2300,7 +2430,7 @@
         ]
       },
       {
-        "label": "조류 관찰가",
+        "label": "조류 관찰자",
         "id": "birdwatcher",
         "order": 3,
         "children": [

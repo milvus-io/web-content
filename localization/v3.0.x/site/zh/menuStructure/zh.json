@@ -310,7 +310,7 @@
         "order": 1,
         "children": [
           {
-            "label": "关于本Collection",
+            "label": "关于本系列 Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -328,13 +328,13 @@
             "children": []
           },
           {
-            "label": "View Collections",
+            "label": "查看 Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
           },
           {
-            "label": "修改 Collection",
+            "label": "修改Collection",
             "id": "modify-collection.md",
             "order": 4,
             "children": []
@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段中",
+                "label": "将数据插入 StructArray 字段",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "解聚剂",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "修改外部Collection Schema",
+            "label": "修改外部Schema",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -1191,7 +1191,7 @@
             "order": 13,
             "children": [
               {
-                "label": "使用 StructArray 进行基本的向量搜索",
+                "label": "使用 StructArray 进行基本向量搜索",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1371,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名系统",
+                "label": "RRF 排名器",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1599,10 +1599,36 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 版 Agents.md",
-            "id": "agents_overview.md",
+            "label": "Milvus 的 Agents.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "去",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Python SDK",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "模式设计",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "去",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "搜索模式",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "去",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "指数选择",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "去",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "RAG 管道",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "去",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1669,7 +1799,7 @@
         "children": []
       },
       {
-        "label": "Claude 代码的 MCP 服务器",
+        "label": "Claude Code 的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1968,7 +2098,7 @@
         ]
       },
       {
-        "label": "缩放",
+        "label": "扩展",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -2019,7 +2149,7 @@
         ]
       },
       {
-        "label": "监控、警报与日志",
+        "label": "监控、警报和日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2211,7 +2341,7 @@
         "children": []
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -3219,7 +3349,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 构建 RAG 图",
+        "label": "使用 Milvus 构建图 RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []

@@ -128,7 +128,7 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>Default segment max size in MB. Used as the target when <code translate="no">target_size</code> is 0 or omitted. Also serves as the minimum allowed value for explicit <code translate="no">target_size</code>.</p></td>
    </tr>
    <tr>
@@ -168,7 +168,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -187,7 +187,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">Explicit target size</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -219,7 +219,7 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Optional. The target segment size in MB. There are 3 options of the parameter value:</p><ul><li><p><strong>0 or omitted</strong>: Uses the configured <code translate="no">dataCoord.segment.maxSize</code> (default: 512 MB). Equivalent to standard compaction.</p></li><li><p><strong>Explicit value</strong> : Merges segments to approximately the specified size in MB (eg. 2048). Must be greater than or equal to the configured <code translate="no">dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 << 63) - 1)</strong>: Automatically calculates the optimal size based on current segment distribution and available node resources.</p></li></ul></td>
+     <td><p>Optional. The target segment size in MB. There are 3 options of the parameter value:</p><ul><li><p><strong>0 or omitted</strong>: Uses the configured <code translate="no">dataCoord.segment.maxSize</code> (default: 1024 MB). Equivalent to standard compaction.</p></li><li><p><strong>Explicit value</strong> : Merges segments to approximately the specified size in MB (eg. 2048). Must be greater than or equal to the configured <code translate="no">dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 << 63) - 1)</strong>: Automatically calculates the optimal size based on current segment distribution and available node resources.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">

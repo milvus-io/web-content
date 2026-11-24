@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: مطابقة العبارةCompatible with Milvus 2.5.17+
+title: المطابقة العبارةCompatible with Milvus 2.5.17+
 summary: >-
   تتيح لك «مطابقة العبارة» البحث عن المستندات التي تحتوي على مصطلحات استعلامك
   كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب وأن تكون متجاورة
@@ -9,7 +9,7 @@ summary: >-
   «robotics» و«machine» و«learning» بالتسلسل دون وجود كلمات أخرى بينها.
 beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">مطابقة العبارة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">المطابقة العبارة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,8 +24,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام الخاصة بك كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب ومتجاورة مباشرةً. على سبيل المثال، يتطابق الاستعلام عن <strong>"robotics machine learning"</strong> مع نص مثل <em>"...typical robotics machine learning models..."</em>، حيث تظهر الكلمات <strong>"robotics"</strong> و <strong>"machine"</strong> و <strong>"learning"</strong> بالتسلسل دون وجود كلمات أخرى بينها.</p>
-<p>ومع ذلك، في السيناريوهات الواقعية، قد تكون مطابقة العبارات الصارمة مفرطة في الصرامة. قد ترغب في مطابقة نص مثل <em>«…نماذج التعلم الآلي المعتمدة على نطاق واسع في مجال الروبوتات…».</em> هنا، توجد الكلمات الرئيسية نفسها ولكنها ليست متجاورة أو بالترتيب الأصلي. للتعامل مع هذا الأمر، تدعم مطابقة العبارات المعلمة « <code translate="no">slop</code> » (الحد الأقصى لعدد التغييرات الموضعية)، مما يوفر مرونة. تحدد قيمة « <code translate="no">slop</code> » عدد التغييرات المسموح بها في ترتيب الكلمات داخل العبارة. على سبيل المثال، إذا كانت قيمة « <code translate="no">slop</code> » تساوي 1، فإن استعلام <strong>«machine learning»</strong> يمكن أن يطابق نصًا مثل <em>«…machine deep learning…»،</em> حيث تفصل كلمة واحدة (<strong>«deep»</strong>) بين المصطلحات الأصلية.</p>
+    </button></h1><p>تتيح لك مطابقة العبارة البحث عن المستندات التي تحتوي على مصطلحات الاستعلام كعبارة دقيقة. بشكل افتراضي، يجب أن تظهر الكلمات بنفس الترتيب ومتجاورة مباشرةً. على سبيل المثال، يتطابق الاستعلام عن <strong>"robotics machine learning"</strong> مع نص مثل <em>"...typical robotics machine learning models..."</em>، حيث تظهر الكلمات <strong>"robotics"</strong> و <strong>"machine"</strong> و <strong>"learning"</strong> بالتسلسل دون وجود كلمات أخرى بينها.</p>
+<p>ومع ذلك، في السيناريوهات الواقعية، قد تكون مطابقة العبارات الصارمة مفرطة في الصرامة. قد ترغب في مطابقة نص مثل <em>«…نماذج التعلم الآلي المعتمدة على نطاق واسع في مجال الروبوتات…».</em> هنا، توجد الكلمات الرئيسية نفسها ولكنها ليست متجاورة أو بالترتيب الأصلي. للتعامل مع هذا الأمر، تدعم مطابقة العبارات المعلمة « <code translate="no">slop</code> »، التي توفر مرونة. تحدد قيمة « <code translate="no">slop</code> » عدد التغييرات المسموح بها في ترتيب الكلمات داخل العبارة. على سبيل المثال، إذا كانت قيمة « <code translate="no">slop</code> » تساوي 1، فإن استعلام <strong>«machine learning»</strong> يمكن أن يطابق نصًا مثل <em>«…machine deep learning…»،</em> حيث تفصل كلمة واحدة (<strong>«deep»</strong>) بين المصطلحات الأصلية.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ beta: Milvus 2.5.17+
  </span></p>
 <ol>
 <li><p><strong>تقسيم المستند إلى رموز</strong>: عند إدراج المستندات في Milvus، يتم تقسيم النص إلى رموز (كلمات أو مصطلحات فردية) باستخدام أداة تحليل، مع تسجيل معلومات الموضع لكل رمز. على سبيل المثال، يتم تجزئة <strong>doc_1</strong> إلى <strong>[“machine” (pos=0)، “learning” (pos=1)، “boosts” (pos=2)، “efficiency” (pos=3)]</strong>. لمزيد من المعلومات حول أدوات التحليل، راجع <a href="/docs/ar/v2.6.x/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/v2.6.x/analyzer-overview.md">أدوات التحليل</a>.</p></li>
-<li><p><strong>إنشاء الفهرس المعكوس</strong>: يقوم Milvus بإنشاء فهرس معكوس، حيث يربط كل رمز بالوثيقة (أو الوثائق) التي يظهر فيها ومواقع الرموز في تلك الوثائق.</p></li>
+<li><p><strong>إنشاء الفهرس المعكوس</strong>: يقوم Milvus بإنشاء فهرس معكوس، حيث يربط كل وحدة نصية بالوثيقة (أو الوثائق) التي تظهر فيها ومواقع الوحدة النصية في تلك الوثائق.</p></li>
 <li><p><strong>مطابقة العبارات</strong>: عند تنفيذ استعلام عبارة، يبحث Milvus عن كل رمز في الفهرس المعكوس ويتحقق من مواقعه لتحديد ما إذا كانت تظهر بالترتيب الصحيح والقرب الصحيح. يتحكم المعامل <code translate="no">slop</code> في الحد الأقصى لعدد المواقع المسموح بها بين الرموز المتطابقة:</p>
 <ul>
 <li><p><strong>slop = 0</strong> يعني أن الرموز يجب أن تظهر <strong>بالترتيب الدقيق وأن تكون متجاورة مباشرة</strong> (أي لا توجد كلمات إضافية بينها).</p>
@@ -137,7 +137,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>تعتمد دقة مطابقة العبارات بشكل كبير على المحلل المستخدم لتقسيم بيانات النص إلى رموز. تتناسب المحللات المختلفة مع اللغات وتنسيقات النص المختلفة، مما يؤثر على عملية التقسيم ودقة المواقع. سيؤدي اختيار محلل مناسب لحالة الاستخدام المحددة الخاصة بك إلى تحسين نتائج مطابقة العبارات.</p>
-<p>بشكل افتراضي، يستخدم Milvus المحلل القياسي، الذي يقوم بتقسيم النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة للاستخدام الافتراضي. راجع <a href="/docs/ar/v2.6.x/standard-analyzer.md">المحلل القياسي</a> للحصول على التفاصيل.</p>
+<p>بشكل افتراضي، يستخدم Milvus المحلل القياسي، الذي يقوم بتجزئة النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة للاستخدام الافتراضي. راجع <a href="/docs/ar/v2.6.x/standard-analyzer.md">المحلل القياسي</a> للحصول على التفاصيل.</p>
 <p>إذا كان تطبيقك يتطلب محللًا محددًا، فقم بتكوينه باستخدام المعلمة <code translate="no">analyzer_params</code>. على سبيل المثال، إليك كيفية تكوين محلل <code translate="no">english</code> لمطابقة العبارات في النص باللغة الإنجليزية:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -170,7 +170,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تمكين المطابقة لحقل « <code translate="no">VARCHAR</code> » في مخطط المجموعة الخاص بك، يمكنك إجراء مطابقات العبارات باستخدام تعبير « <code translate="no">PHRASE_MATCH</code> ».</p>
+    </button></h2><p>بمجرد تمكين المطابقة لحقل « <code translate="no">VARCHAR</code> » في مخطط المجموعة الخاص بك، يمكنك إجراء مطابقات العبارات باستخدام التعبير « <code translate="no">PHRASE_MATCH</code> ».</p>
 <div class="alert note">
 <p>التعبير <code translate="no">PHRASE_MATCH</code> لا يميز بين الأحرف الكبيرة والصغيرة. يمكنك استخدام إما <code translate="no">PHRASE_MATCH</code> أو <code translate="no">phrase_match</code>.</p>
 </div>
@@ -197,7 +197,7 @@ schema.add_field(
 <li><p><code translate="no">phrase</code><strong>:</strong> العبارة الدقيقة المراد البحث عنها.</p></li>
 <li><p><code translate="no">slop</code> (اختياري)<strong>:</strong> عدد صحيح يحدد الحد الأقصى لعدد المواضع المسموح بها في الرموز المطابقة.</p>
 <ul>
-<li><p><code translate="no">0</code> (الافتراضي): يطابق العبارات الدقيقة فقط. مثال: سيطابق مرشح عبارة <strong>"machine learning"</strong> <strong>عبارة "machine learning"</strong> بالضبط، ولكنه لن يطابق <strong>"machine boosts learning"</strong> أو <strong>"learning machine".</strong></p></li>
+<li><p><code translate="no">0</code> (الافتراضي): يطابق العبارات الدقيقة فقط. مثال: سيطابق مرشح عبارة <strong>«machine learning»</strong> <strong>عبارة «machine learning»</strong> بالضبط، ولكنه لن يطابق <strong>«machine boosts learning»</strong> أو <strong>«learning machine».</strong></p></li>
 <li><p><code translate="no">1</code>: يسمح باختلافات طفيفة، مثل مصطلح إضافي واحد أو تغيير بسيط في الموضع. مثال: سيطابق مرشح عبارة <strong>«machine learning»</strong> <strong>عبارة «machine boosts learning»</strong> (رمز واحد بين <strong>«machine»</strong> <strong>و«learning»</strong>) ولكنه لن يطابق <strong>«learning machine»</strong> (عكس ترتيب المصطلحين).</p></li>
 <li><p><code translate="no">2</code>: يسمح بمرونة أكبر، بما في ذلك عكس ترتيب المصطلحات أو وجود ما يصل إلى رمزين بينهما. مثال: سيطابق عامل التصفية الخاص بـ <strong>«machine learning»</strong> <strong>عبارة «learning machine»</strong> (عكس ترتيب المصطلحات) أو <strong>«machine quickly boosts learning»</strong> (وجود رمزين بين <strong>«machine»</strong> <strong>و«learning»</strong>).</p></li>
 </ul></li>
@@ -241,7 +241,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"يوسع تعلم خوارزميات الآلات المتقدمة من قدرات الذكاء الاصطناعي"</p></td>
+     <td><p>"يؤدي تعلم خوارزميات الآلات المتقدمة إلى توسيع قدرات الذكاء الاصطناعي"</p></td>
    </tr>
 </table>
 <h3 id="Query-with-phrase-match" class="common-anchor-header">الاستعلام باستخدام مطابقة العبارة<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
@@ -324,7 +324,7 @@ result_slop1 = client.search(
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"تعمل بنى التعلم العميق على تحسين الأحمال الحسابية"</p></td>
+     <td><p>"تعمل بنى التعلم العميق الآلي على تحسين الأحمال الحسابية"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>

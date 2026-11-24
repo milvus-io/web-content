@@ -3,7 +3,7 @@ id: create-an-external-collection.md
 title: 建立外部資料集Compatible with Milvus 3.0.x
 summary: >-
   外部資料集是 Milvus 中的資料集類型之一，可直接從外部儲存系統或資料庫表（例如 AWS S3 和 Iceberg）存取資料，而無需將資料複製到
-  Milvus 中。它作為資料湖上的查詢層，同時維持與 Milvus 查詢介面的相容性。
+  Milvus 中。它作為資料湖上的查詢層運作，同時維持與 Milvus 查詢介面的相容性。
 beta: Milvus 3.0.x
 ---
 <h1 id="Create-an-External-Collection" class="common-anchor-header">建立外部資料集<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Create-an-External-Collection" class="anchor-icon" translate="no">
@@ -41,7 +41,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><p>在典型的 AI 資料管線中，使用者可能已將資料以 Parquet 或其他格式儲存於其儲存系統（例如 AWS S3）中。為了讓 Milvus 能使用這些外部儲存的資料，使用者通常需要透過萃取-轉換-載入（ETL）管線，將資料匯入 Milvus 自身的儲存系統中。</p>
-<p>這種「將資料帶入 Milvus」的工作流程會產生難以同步的冗餘資料，並增加工程維護負擔，以確保資料的一致性。</p>
+<p>這種「將資料帶入 Milvus」的工作流程會產生難以同步的冗餘資料，並增加工程團隊為確保資料一致性而需承擔的維護負擔。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v3.0.x/assets/external-collection-bring-data-to-compute.png" alt="Bring data to compute workflow" class="doc-image" id="bring-data-to-compute-workflow" /> 
@@ -55,7 +55,7 @@ beta: Milvus 3.0.x
    </span>「<span class="img-wrapper"> <span>將運算帶到資料」工作流程</span>
   
  </span></p>
-<p>外部集合一旦建立，即可直接存取您的資料，並將其保留在您原始儲存的位置。在後台，Milvus 會建立清單檔案，用以記錄 Milvus 元資料與外部資料檔案中各列之間的對應關係。當清單檔案準備就緒後，您便能如同在任何受管集合中一樣，於外部集合中建立索引。</p>
+<p>外部集合一旦建立，即可直接存取您的資料，並將其保留在您原始儲存的位置。在後台，Milvus 會建立清單檔案，用以記錄 Milvus 元資料與外部資料檔案中各列之間的對應關係。清單檔案準備就緒後，您便能如同在任何受管集合中一樣，於外部集合中建立索引。</p>
 <p>當您的資料發生變更時，只需手動觸發不到一秒的刷新操作，即可更新元資料，確保 Milvus 始終保持最新狀態。</p>
 <h2 id="Step-1-Create-schema" class="common-anchor-header">步驟 1：建立資料結構<button data-href="#Step-1-Create-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,8 +105,8 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
         .build();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    client <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 schema := entity.NewSchema().
@@ -114,7 +114,16 @@ schema := entity.NewSchema().
     WithExternalSource(<span class="hljs-string">&quot;s3://my-bucket/embeddings/&quot;</span>).
     WithExternalSpec(<span class="hljs-string">`{&quot;format&quot;: &quot;parquet&quot;, &quot;extfs&quot;: { ... }}`</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// The Node.js SDK takes these values as createCollection() parameters</span>
+<span class="hljs-keyword">const</span> external_source = <span class="hljs-string">&quot;s3://s3.&lt;region-id&gt;.amazonaws.com/&lt;bucket&gt;/&quot;</span>;
+<span class="hljs-keyword">const</span> external_spec = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+    <span class="hljs-attr">format</span>: <span class="hljs-string">&quot;parquet&quot;</span>,
+    <span class="hljs-attr">extfs</span>: {
+        <span class="hljs-comment">// ...</span>
+    },
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> fields=<span class="hljs-string">&#x27;[
         {
@@ -162,7 +171,7 @@ schema := entity.NewSchema().
    </tr>
 </table>
 <p><details summary="Iceberg table example"></p>
-<p>對於位於 AWS S3 上的 Iceberg 資料表，以下<code translate="no">external_spec</code> 會使用 IAM 驗證。Milvus 部署必須已具備存取權限，才能讀取該資料表的元資料 JSON 檔案，以及其所引用的清單檔和資料檔。</p>
+<p>對於位於 AWS S3 上的 Iceberg 資料表，以下<code translate="no">external_spec</code> 會使用 IAM 驗證。Milvus 部署必須已具備存取該資料表的 JSON 元資料，以及其所引用的清單檔和資料檔的權限。</p>
 <p>將<code translate="no">external_source</code> 設定為您的元資料檔案，例如<code translate="no">s3://s3.us-west-2.amazonaws.com/my-bucket/my-table/metadata/v1.metadata.json</code> 。將<code translate="no">snapshot_id</code> 替換為該檔案中的現有快照 ID，並根據您的儲存環境調整<code translate="no">extfs</code> 。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;iceberg-table&quot;</span><span class="hljs-punctuation">,</span>
@@ -317,7 +326,7 @@ schema := entity.NewSchema().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>此選項適用於您將外部資料儲存於 Milvus 儲存桶的情況，此時可直接使用<code translate="no">milvus.yaml</code> 中指定的 MinIO 全局設定來存取資料。</p>
+    </button></h3><p>此選項適用於將外部資料儲存於 Milvus 儲存桶的情況，此時可直接使用<code translate="no">milvus.yaml</code> 中指定的 MinIO 全局設定來存取資料。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;extfs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -511,8 +520,8 @@ schema.addField(AddFieldReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    client <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 schema = schema.
@@ -537,7 +546,25 @@ schema = schema.
             WithExternalField(<span class="hljs-string">&quot;vector&quot;</span>),
     )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> fields = [
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;product_id&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">external_field</span>: <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-comment">// field name in the external data file</span></span>
+    },
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;product_name&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+        <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">external_field</span>: <span class="hljs-string">&quot;name&quot;</span>,</span>
+    },
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+        <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>,
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">external_field</span>: <span class="hljs-string">&quot;vector&quot;</span>,</span>
+    },
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&quot;{
     \&quot;externalSource\&quot;: \&quot;volume://my_volume/path/to/a/folder\&quot;,
@@ -595,8 +622,8 @@ client.create_collection(
 client.createCollection(createReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    client <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -607,7 +634,7 @@ token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
-    APIKey: token
+    APIKey: token,
 })
 
 err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>, schema))
@@ -617,10 +644,20 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
+    <span class="hljs-attr">fields</span>: fields,
+    <span class="hljs-attr">external_source</span>: external_source,
+    <span class="hljs-attr">external_spec</span>: external_spec,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
@@ -687,30 +724,32 @@ List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span
 indexParams.add(indexParamForIdField);
 indexParams.add(indexParamForVectorField);
 <span class="hljs-type">CreateIndexReq</span> <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
-        .dbName(<span class="hljs-string">&quot;my_database&quot;</span>)
+        .databaseName(<span class="hljs-string">&quot;my_database&quot;</span>)
         .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
         .indexParams(indexParams)
         .build();
 client.createIndex(createIndexReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 collectionName := <span class="hljs-string">&quot;test_collection&quot;</span>
 indexOptions := []milvusclient.CreateIndexOption{
     milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;embedding&quot;</span>, index.NewAutoIndex(entity.COSINE)),
-    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;product_name&quot;</span>, index.NewAutoIndex(index.AUTOINDEX)),
+    milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;product_name&quot;</span>, index.NewGenericIndex(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-type">string</span>{<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>})),
 }
-indexTask, err := client.CreateIndex(ctx, indexOptions)
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-comment">// handler err</span>
-}
-err = indexTask.Await(ctx)
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-comment">// handler err</span>
+<span class="hljs-keyword">for</span> _, indexOption := <span class="hljs-keyword">range</span> indexOptions {
+    indexTask, err := client.CreateIndex(ctx, indexOption)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-comment">// handler err</span>
+    }
+    err = indexTask.Await(ctx)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-comment">// handler err</span>
+    }
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">client.<span class="hljs-title function_">createIndex</span>({
@@ -741,7 +780,7 @@ client.<span class="hljs-title function_">createIndex</span>({
     ]&#x27;</span>
 
 curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
@@ -797,7 +836,14 @@ curl --request POST \
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.ListRefreshExternalCollectionJobsResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.RefreshExternalCollectionJobInfo;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.RefreshExternalCollectionResp;
+<span class="hljs-keyword">import</span> java.util.concurrent.TimeUnit;
 
+<span class="hljs-type">RefreshExternalCollectionResp</span> <span class="hljs-variable">refreshResp</span> <span class="hljs-operator">=</span> client.refreshExternalCollection(
+        RefreshExternalCollectionReq.builder()
+                .databaseName(<span class="hljs-string">&quot;my_database&quot;</span>)
+                .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+                .build());
+<span class="hljs-type">long</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> refreshResp.getJobId();
 <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
     <span class="hljs-type">GetRefreshExternalCollectionProgressResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.getRefreshExternalCollectionProgress(
             GetRefreshExternalCollectionProgressReq.builder()
@@ -810,16 +856,17 @@ curl --request POST \
         <span class="hljs-keyword">break</span>;
     } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;RefreshFailed&quot;</span>.equals(jobInfo.getState())) {
         System.out.printf(<span class="hljs-string">&quot;  Refresh failed: %s%n&quot;</span>, jobInfo.getReason());
+        <span class="hljs-keyword">break</span>;
     }
     TimeUnit.SECONDS.sleep(<span class="hljs-number">2</span>);
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">refreshResult, err := client.RefreshExternalCollection(ctx,
-    client.NewRefreshExternalCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>))
+    milvusclient.NewRefreshExternalCollectionOption(<span class="hljs-string">&quot;test_collection&quot;</span>))
 jobID := refreshResult.JobID
 <span class="hljs-keyword">for</span> {
     progress, _ := client.GetRefreshExternalCollectionProgress(ctx,
-        client.NewGetRefreshExternalCollectionProgressOption(jobID))
+        milvusclient.NewGetRefreshExternalCollectionProgressOption(jobID))
     fmt.Printf(<span class="hljs-string">&quot;State: %s\n&quot;</span>, progress.State)
     <span class="hljs-keyword">if</span> progress.State == entity.RefreshStateCompleted {
         fmt.Println(<span class="hljs-string">&quot;Refresh completed!&quot;</span>)
@@ -832,10 +879,28 @@ jobID := refreshResult.JobID
     time.Sleep(<span class="hljs-number">2</span> * time.Second)
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { job_id } = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">refreshExternalCollection</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
+});
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">const</span> { <span class="hljs-attr">job_info</span>: progress } = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">getRefreshExternalCollectionProgress</span>({
+        <span class="hljs-attr">job_id</span>: job_id,
+    });
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  <span class="hljs-subst">${progress.state}</span>: <span class="hljs-subst">${progress.progress}</span>%`</span>);
+    <span class="hljs-keyword">if</span> (progress.<span class="hljs-property">state</span> === <span class="hljs-string">&quot;RefreshCompleted&quot;</span>) {
+        <span class="hljs-keyword">const</span> elapsed = <span class="hljs-title class_">Number</span>(progress.<span class="hljs-property">end_time</span>) - <span class="hljs-title class_">Number</span>(progress.<span class="hljs-property">start_time</span>);
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  Completed in <span class="hljs-subst">${elapsed}</span>ms`</span>);
+        <span class="hljs-keyword">break</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (progress.<span class="hljs-property">state</span> === <span class="hljs-string">&quot;RefreshFailed&quot;</span>) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`  Failed: <span class="hljs-subst">${progress.reason}</span>`</span>);
+        <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">2000</span>));
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${PROJECT_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/jobs/external_collection/refresh&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
@@ -846,13 +911,13 @@ jobID := refreshResult.JobID
     \&quot;externalSpec\&quot;: \&quot;{\\\&quot;format\\\&quot;: \\\&quot;parquet\\\&quot;}\&quot;
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>刷新操作屬非同步處理，因此您需要設定一個迴圈來監控其進度。</p>
+<p>刷新操作是異步的，因此您需要設定一個迴圈來監控其進度。</p>
 <div class="alert note">
 <ul>
 <li><p>刷新操作會掃描資料檔案的元資料，並據此產生清單檔案。此過程通常需時 150 至 250 毫秒。</p></li>
 <li><p>清單檔案會記錄 Milvus 中的元資料與外部檔案中各列之間的對應關係。</p></li>
 <li><p>若來源資料有更新，您需要手動再次呼叫刷新操作，以確保 Milvus 保持最新狀態。</p></li>
-<li><p>若刷新操作需移除所有活躍的元資料且不進行任何插入，系統將拒絕該請求。</p></li>
+<li><p>若刷新操作需移除所有活躍的元資料且不進行任何新增，系統將拒絕該請求。</p></li>
 </ul>
 </div>
 <h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
@@ -870,6 +935,6 @@ jobID := refreshResult.JobID
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>刷新外部集合後，您可以載入並釋放該集合，並在外部集合中執行相似度搜尋和查詢，其操作方式與任何受管集合相同，惟用於隨需運算的資料庫中的集合，必須附加至隨需運算叢集才能進行搜尋和查詢。</p>
+    </button></h2><p>刷新外部集合後，您可以載入並釋放該集合，並像在任何受管集合中一樣，對外部集合執行相似度搜尋和查詢；惟用於隨需運算的資料庫中的集合，必須附加至隨需叢集才能進行搜尋和查詢。</p>
 <p>在執行 DQL 操作（例如搜尋、查詢、取得及混合搜尋）之前，您需要建立一個工作階段，以附加隨需運算叢集的運算資源。</p>
 <p>若外部資料來源日後包含您希望在 Milvus 中公開的另一個欄位，請在外部集合的資料結構中新增該欄位，並再次刷新外部集合。詳細資訊請參閱《<a href="/docs/zh-hant/alter-external-collection-schema.md">變更外部集合資料結構》</a>。</p>

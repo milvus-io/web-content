@@ -124,7 +124,7 @@
                 "children": []
               },
               {
-                "label": "Steuerhauskarte",
+                "label": "Kompasskarte",
                 "id": "install_cluster-helm.md",
                 "order": 2,
                 "children": []
@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Steuerhauskarte",
+                "label": "Kompasskarte",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -285,7 +285,7 @@
         "children": []
       },
       {
-        "label": "Begriffsbestimmungen",
+        "label": "Begriffsbestand",
         "id": "glossary.md",
         "order": 9,
         "children": []
@@ -364,7 +364,7 @@
             "children": []
           },
           {
-            "label": "Abgabe der Abholware",
+            "label": "Abgabestelle",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON-Aufteilung",
+                "label": "JSON-Aufspaltung",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -497,7 +497,7 @@
                 "children": []
               },
               {
-                "label": "Integrierte Analysatoren",
+                "label": "Integrierte Analysegeräte",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -557,7 +557,7 @@
                     "children": []
                   },
                   {
-                    "label": "Sprachkennung",
+                    "label": "Sprachkennzeichnung",
                     "id": "language-identifier.md",
                     "order": 5,
                     "children": []
@@ -588,7 +588,7 @@
                     "children": []
                   },
                   {
-                    "label": "Nur Cnalphanum",
+                    "label": "Cnalphanumonly",
                     "id": "cnalphanumonly-filter.md",
                     "order": 3,
                     "children": []
@@ -612,7 +612,7 @@
                     "children": []
                   },
                   {
-                    "label": "Entmischungsanlage",
+                    "label": "Entmischungsgerät",
                     "id": "decompounder-filter.md",
                     "order": 7,
                     "children": []
@@ -644,7 +644,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
+                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -843,7 +843,7 @@
             ]
           },
           {
-            "label": "Skalarindizes",
+            "label": "Skalare Indizes",
             "id": "scalar-indexes",
             "order": 4,
             "isMenu": true,
@@ -973,7 +973,7 @@
             "order": 7,
             "children": [
               {
-                "label": "Erläuterung zur Filterung",
+                "label": "Erläuterungen zur Filterung",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1073,7 +1073,7 @@
         ]
       },
       {
-        "label": "Einbettungen und Neuordnung",
+        "label": "Einbettungen und Neurangfolge",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1183,7 +1183,7 @@
                 "children": []
               },
               {
-                "label": "Verfall-Ranking",
+                "label": "Verfall-Rangliste",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1284,12 +1284,6 @@
             "label": "mmap verwenden",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "Cluster-Verdichtung",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1898,7 +1892,7 @@
         ]
       },
       {
-        "label": "Milvus-WebUI",
+        "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "12",
         "children": []
@@ -1991,7 +1985,7 @@
                 "children": []
               },
               {
-                "label": "Migration zwischen Instanzen über S3-Umgebungen hinweg",
+                "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2104,7 +2098,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Größenauswahl-Tool",
+        "label": "Milvus-Größenrechner",
         "id": "sizing",
         "order": 7,
         "externalLink": "https://milvus.io/tools/sizing/",
@@ -2354,7 +2348,7 @@
                 "children": []
               },
               {
-                "label": "Milvus-Async-API",
+                "label": "Milvus Async-API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2467,7 +2461,7 @@
         ]
       },
       {
-        "label": "Vertreter",
+        "label": "Agenten",
         "id": "integrate-agents",
         "order": 4,
         "children": [
@@ -2510,7 +2504,7 @@
         ]
       },
       {
-        "label": "Auswertung und Beobachtbarkeit",
+        "label": "Bewertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -2915,7 +2909,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matryoshka-Embeddings",
+        "label": "Trichter-Suche mit Matroschka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

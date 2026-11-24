@@ -52,7 +52,7 @@ summary: >-
 <div class="start_card_container">
   <a href="https://github.com/zilliztech/claude-context" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">MCP de contexto de Claude</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Servidor MCP diseñado para Claude Code, que proporciona acceso a la documentación de Milvus con reconocimiento de contexto.</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Servidor MCP diseñado para Claude Code, que proporciona acceso a la documentación de Milvus teniendo en cuenta el contexto.</p>
   </a>
 </div>
 </div>
@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>Las fichas de AGENTS.md y las cuatro sugerencias temáticas abren la versión en Python. Cada una de ellas cuenta además con una versión en Node.js, Go y API RESTful v2:</p>
+<table>
+<thead>
+<tr><th>Tema</th><th>Python</th><th>Node.js</th><th>Go</th><th>API RESTful v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/es/agents_overview.md">Python</a></td><td><a href="/docs/es/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/es/agents_overview_go.md">Go</a></td><td><a href="/docs/es/agents_overview_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Diseño de esquemas</td><td><a href="/docs/es/schema_design.md">Python</a></td><td><a href="/docs/es/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/es/schema_design_go.md">Go</a></td><td><a href="/docs/es/schema_design_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Patrones de búsqueda</td><td><a href="/docs/es/search_patterns.md">Python</a></td><td><a href="/docs/es/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/es/search_patterns_go.md">Go</a></td><td><a href="/docs/es/search_patterns_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Selección de índice</td><td><a href="/docs/es/index_selection.md">Python</a></td><td><a href="/docs/es/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/es/index_selection_go.md">Go</a></td><td><a href="/docs/es/index_selection_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pipeline RAG</td><td><a href="/docs/es/rag_pipeline.md">Python</a></td><td><a href="/docs/es/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/es/rag_pipeline_go.md">Go</a></td><td><a href="/docs/es/rag_pipeline_restful.md">API RESTful v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Uso en diferentes entornos<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +183,7 @@ summary: >-
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>Entorno</th><th>Dónde colocar el mensaje de solicitud</th><th>Instrucciones</th></tr>
+<tr><th>Entorno</th><th>Dónde colocar el indicador</th><th>Instrucciones</th></tr>
 </thead>
 <tbody>
 <tr><td>Cursor</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">Configurar las reglas del proyecto</a></td></tr>
@@ -210,5 +223,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Para las cargas de trabajo de los agentes, se recomienda <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> para su uso en producción. Los agentes no suelen gestionar la infraestructura, por lo que una implementación sin servidores elimina la sobrecarga operativa y proporciona un escalado automático.</p>
+<p>Para las cargas de trabajo de los agentes, se recomienda <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> para su uso en producción. Los agentes no suelen gestionar la infraestructura, por lo que una implementación sin servidores elimina los gastos operativos y proporciona un escalado automático.</p>
 </div>

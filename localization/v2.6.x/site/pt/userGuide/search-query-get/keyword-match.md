@@ -226,7 +226,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>O desempenho e a precisão da correspondência de palavras-chave dependem do analisador selecionado. Diferentes analisadores são adaptados a várias linguagens e estruturas de texto, pelo que a escolha do analisador certo pode ter um impacto significativo nos resultados de pesquisa para o seu caso de utilização específico.</p>
-<p>Por predefinição, o Milvus utiliza o analisador « <code translate="no">standard</code> », que tokeniza o texto com base em espaços em branco e pontuação e converte o texto para minúsculas. Não são necessários parâmetros adicionais para aplicar esta configuração predefinida. Para mais informações, consulte <a href="/docs/pt/v2.6.x/standard-analyzer.md">«Standard</a>».</p>
+<p>Por predefinição, o Milvus utiliza o analisador « <code translate="no">standard</code> », que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Não são necessários parâmetros adicionais para aplicar esta configuração predefinida. Para mais informações, consulte <a href="/docs/pt/v2.6.x/standard-analyzer.md">«Standard</a>».</p>
 <p>Nos casos em que for necessário um analisador diferente, pode configurar um utilizando o parâmetro ` <code translate="no">analyzer_params</code> `. Por exemplo, para aplicar o analisador ` <code translate="no">english</code> ` ao processamento de texto em inglês:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -355,7 +355,7 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: O nome do campo VARCHAR a pesquisar.</p></li>
-<li><p><code translate="no">text</code>: Os termos a pesquisar. É possível utilizar vários termos, separados por espaços ou outros delimitadores adequados, consoante o idioma e o analisador configurado.</p></li>
+<li><p><code translate="no">text</code>: Os termos a pesquisar. É possível utilizar vários termos, separados por espaços ou outros delimitadores adequados, consoante a língua e o analisador configurado.</p></li>
 </ul>
 <p>Por predefinição, a expressão « <code translate="no">TEXT_MATCH</code> » utiliza a lógica de correspondência <strong>«OR»</strong>, o que significa que irá devolver documentos que contenham qualquer um dos termos especificados. Por exemplo, para pesquisar documentos que contenham o termo « <code translate="no">machine</code> » ou « <code translate="no">deep</code> » no campo « <code translate="no">text</code> », utilize a seguinte expressão:</p>
 <div class="multipleCode">
@@ -611,8 +611,8 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Ativar a correspondência de termos para um campo aciona a criação de um índice invertido, o que consome recursos de armazenamento. Considere o impacto no armazenamento ao decidir ativar esta funcionalidade, uma vez que varia consoante o tamanho do texto, os tokens únicos e o analisador utilizado.</p></li>
-<li><p>Depois de definir um analisador no seu esquema, as suas definições tornam-se permanentes para essa coleção. Se decidir que um analisador diferente se adequaria melhor às suas necessidades, pode considerar eliminar a coleção existente e criar uma nova com a configuração de analisador pretendida.</p></li>
+<li><p>Ativar a correspondência de termos para um campo aciona a criação de um índice invertido, o que consome recursos de armazenamento. Tenha em conta o impacto no armazenamento ao decidir ativar esta funcionalidade, uma vez que varia consoante o tamanho do texto, os tokens únicos e o analisador utilizado.</p></li>
+<li><p>Depois de definir um analisador no seu esquema, as suas definições tornam-se permanentes para essa coleção. Se decidir que um analisador diferente se adequa melhor às suas necessidades, pode considerar eliminar a coleção existente e criar uma nova com a configuração de analisador pretendida.</p></li>
 <li><p>Regras de escape em expressões « <code translate="no">filter</code> »:</p>
 <ul>
 <li><p>Os caracteres entre aspas duplas ou simples dentro de expressões são interpretados como constantes de cadeia de caracteres. Se a constante de cadeia de caracteres incluir caracteres de escape, estes devem ser representados com uma sequência de escape. Por exemplo, utilize <code translate="no">\\</code> para representar <code translate="no">\</code>, <code translate="no">\\t</code> para representar uma tabulação <code translate="no">\t</code> e <code translate="no">\\n</code> para representar uma nova linha.</p></li>

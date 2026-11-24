@@ -2,7 +2,7 @@
 id: keyword-match.md
 title: 텍스트 일치
 summary: >-
-  Milvus의 텍스트 일치 기능은 특정 용어를 기반으로 정확한 문서를 검색할 수 있게 해줍니다. 이 기능은 주로 특정 조건을 충족하는 필터링
+  Milvus의 텍스트 일치 기능은 특정 용어를 기반으로 정확한 문서 검색을 가능하게 합니다. 이 기능은 주로 특정 조건을 충족하는 필터링
   검색에 사용되며, 스칼라 필터링을 적용하여 쿼리 결과를 세분화할 수 있어, 스칼라 기준을 충족하는 벡터 내에서 유사도 검색을 수행할 수
   있습니다.
 ---
@@ -223,7 +223,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>키워드 일치 검색의 성능과 정확도는 선택한 분석기에 따라 달라집니다. 분석기는 각기 다른 언어와 텍스트 구조에 맞게 설계되어 있으므로, 특정 사용 사례에 적합한 분석기를 선택하면 검색 결과에 상당한 영향을 미칠 수 있습니다.</p>
-<p>기본적으로 Milvus는 <code translate="no">standard</code> 분석기를 사용하며, 이 분석기는 공백과 구두점을 기준으로 텍스트를 토큰화하고 텍스트를 소문자로 변환합니다. 이 기본 설정을 적용하는 데 추가 매개변수는 필요하지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/standard-analyzer.md">‘표준(Standard</a>)’을 참조하십시오.</p>
+<p>기본적으로 Milvus는 <code translate="no">standard</code> 분석기를 사용하며, 이 분석기는 공백과 구두점을 기준으로 텍스트를 토큰화하고, 40자보다 긴 토큰을 제거하며, 텍스트를 소문자로 변환합니다. 이 기본 설정을 적용하는 데 추가 매개변수는 필요하지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/standard-analyzer.md">‘표준(Standard</a>)’을 참조하십시오.</p>
 <p>다른 분석기가 필요한 경우, ` <code translate="no">analyzer_params</code> ` 매개변수를 사용하여 분석기를 구성할 수 있습니다. 예를 들어, 영어 텍스트 처리에 ` <code translate="no">english</code> ` 분석기를 적용하려면 다음과 같이 합니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -315,7 +315,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus는 다양한 언어와 시나리오에 적합한 여러 분석기도 제공합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/analyzer-overview.md">‘분석기 개요’를</a> 참조하십시오.</p>
+<p>Milvus는 또한 다양한 언어와 시나리오에 적합한 여러 분석기를 제공합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/analyzer-overview.md">‘분석기 개요’를</a> 참조하십시오.</p>
 <h2 id="Use-text-match" class="common-anchor-header">텍스트 일치 사용<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -608,11 +608,11 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>필드에 용어 일치 기능을 활성화하면 역색인이 생성되며, 이는 스토리지 리소스를 소모합니다. 이 기능을 활성화할지 결정할 때는 텍스트 크기, 고유 토큰 수, 사용된 분석기에 따라 스토리지 영향이 달라질 수 있으므로 이를 고려해야 합니다.</p></li>
+<li><p>필드에 용어 일치 기능을 활성화하면 역색인이 생성되며, 이로 인해 스토리지 리소스가 소모됩니다. 이 기능을 활성화할지 결정할 때는 텍스트 크기, 고유 토큰 수, 사용된 분석기에 따라 스토리지 영향이 달라질 수 있으므로 이를 고려해야 합니다.</p></li>
 <li><p>스키마에서 분석기를 정의하면 해당 컬렉션에 대해 그 설정이 영구적으로 적용됩니다. 다른 분석기가 요구 사항에 더 적합하다고 판단되는 경우, 기존 컬렉션을 삭제하고 원하는 분석기 구성으로 새 컬렉션을 생성하는 것을 고려해 볼 수 있습니다.</p></li>
 <li><p><code translate="no">filter</code> 표현식의 이스케이프 규칙:</p>
 <ul>
-<li><p>표현식 내에서 큰따옴표나 작은따옴표로 묶인 문자는 문자열 상수로 해석됩니다. 문자열 상수에 이스케이프 문자가 포함된 경우, 해당 이스케이프 문자는 이스케이프 시퀀스로 표현해야 합니다. 예를 들어, <code translate="no">\</code> 을 표현하려면 <code translate="no">\\</code> 을, 탭을 표현하려면 <code translate="no">\\t</code> 을, 줄바꿈을 표현하려면 <code translate="no">\t</code> 을, 그리고 <code translate="no">\\n</code> 을 사용하십시오.</p></li>
+<li><p>표현식 내에서 큰따옴표나 작은따옴표로 묶인 문자는 문자열 상수로 해석됩니다. 문자열 상수에 이스케이프 문자가 포함된 경우, 해당 이스케이프 문자는 이스케이프 시퀀스로 표현해야 합니다. 예를 들어, <code translate="no">\</code> 을 표현하려면 <code translate="no">\\</code> 을, 탭을 표현하려면 <code translate="no">\\t</code> 을, 줄 바꿈을 표현하려면 <code translate="no">\t</code> 을, 그리고 <code translate="no">\\n</code> 을 사용하십시오.</p></li>
 <li><p>문자열 상수가 작은따옴표로 묶여 있는 경우, 상수 내의 작은따옴표는 <code translate="no">\\'</code> 로 표기해야 하며, 큰따옴표는 <code translate="no">&quot;</code> 또는 <code translate="no">\\&quot;</code> 로 표기할 수 있습니다. 예: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>문자열 상수가 큰따옴표로 묶여 있는 경우, 상수 내의 큰따옴표는 <code translate="no">\\&quot;</code> 로 표기해야 하며, 작은따옴표는 <code translate="no">'</code> 또는 <code translate="no">\\'</code> 중 하나로 표기할 수 있습니다. 예: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>

@@ -129,18 +129,18 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
-     <td><p>Standardmäßige maximale Segmentgröße in MB. Wird als Zielwert verwendet, wenn „ <code translate="no">target_size</code> “ auf 0 gesetzt oder weggelassen wird. Dient außerdem als minimal zulässiger Wert für explizite „ <code translate="no">target_size</code> “-Angaben.</p></td>
+     <td><p>1024</p></td>
+     <td><p>Standardmäßige maximale Segmentgröße in MB. Wird als Zielwert verwendet, wenn „ <code translate="no">target_size</code> “ den Wert 0 hat oder weggelassen wird. Dient außerdem als minimal zulässiger Wert für die explizite Angabe von „ <code translate="no">target_size</code> “.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Schwellenwert für die Segmentanzahl zur Algorithmusauswahl. Wenn die Anzahl der Segmente diesen Wert überschreitet, verwendet Milvus einen schnelleren Greedy-Algorithmus für die Zusammenführungsplanung.</p><ul><li><p><strong>Standardalgorithmus</strong> (wird verwendet, wenn die Segmentanzahl &lt;= „ <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> “ ist): liefert optimalere Zusammenführungsergebnisse, benötigt jedoch mehr Rechenzeit.</p></li><li><p><strong>Greedy-Algorithmus</strong> (wird verwendet, wenn die Segmentanzahl &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> ist): schließt die Planung wesentlich schneller ab, allerdings auf Kosten einer etwas weniger optimalen Segmentgruppierung.</p></li></ul></td>
+     <td><p>Schwellenwert für die Segmentanzahl bei der Algorithmusauswahl. Wenn die Anzahl der Segmente diesen Wert überschreitet, verwendet Milvus einen schnelleren Greedy-Algorithmus für die Zusammenführungsplanung.</p><ul><li><p><strong>Standardalgorithmus</strong> (wird verwendet, wenn die Segmentanzahl &lt;= „ <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> “ ist): liefert optimalere Zusammenführungsergebnisse, benötigt jedoch mehr Rechenzeit.</p></li><li><p><strong>Greedy-Algorithmus</strong> (wird verwendet, wenn die Segmentanzahl &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code> ist): schließt die Planung wesentlich schneller ab, allerdings auf Kosten einer etwas weniger optimalen Segmentgruppierung.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>Der DataNode-Speicher wird durch diesen Faktor geteilt, um die größte Segmentgröße zu berechnen, die das System zulassen kann.</p><ul><li><p>Ein größerer Wert weist der Zusammenführung weniger Speicher zu, lässt jedoch mehr für andere DataNode-Operationen übrig, was die Knotenstabilität verbessert.</p></li><li><p>Ein kleinerer Wert ermöglicht größere Zusammenführungen, erhöht jedoch die Speicherbelastung.</p></li><li><p>Beispielsweise beträgt bei dem Standardfaktor von 4,0 und einem DataNode mit 16 GB Arbeitsspeicher das Zusammenführungsbudget 4 GB. Das bedeutet, dass die Gesamtgröße der Segmente, die in einem einzigen Vorgang zusammengeführt werden, 4 GB nicht überschreiten darf.</p></li></ul></td>
+     <td><p>Der DataNode-Speicher wird durch diesen Faktor geteilt, um die größte Segmentgröße zu berechnen, die das System zulassen kann.</p><ul><li><p>Ein größerer Wert weist der Zusammenführung weniger Speicher zu, lässt jedoch mehr für andere DataNode-Operationen übrig, was die  Knotenstabilität verbessert.</p></li><li><p>Ein kleinerer Wert ermöglicht größere Zusammenführungen, erhöht jedoch die Speicherbelastung.</p></li><li><p>Beispielsweise beträgt bei dem Standardfaktor von 4,0 und einem DataNode mit 16 GB Speicher das Zusammenführungsbudget 4 GB. Das bedeutet, dass die Gesamtgröße der Segmente, die in einem einzigen Vorgang zusammengeführt werden, 4 GB nicht überschreiten darf.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
@@ -169,7 +169,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -188,7 +188,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">Explizite Zielgröße</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -220,11 +220,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Optional. Die Zielsegmentgröße in MB. Es gibt drei mögliche Werte für diesen Parameter:</p><ul><li><p><strong>0 oder weggelassen</strong>: Verwendet die konfigurierte „ <code translate="no">dataCoord.segment.maxSize</code> “ (Standard: 512 MB). Entspricht der Standardkomprimierung.</p></li><li><p><strong>Expliziter Wert</strong>: Führt eine Zusammenführung der Segmente auf ungefähr die angegebene Größe in MB durch (z. B. 2048). Muss größer oder gleich dem konfigurierten „ <code translate="no">dataCoord.segment.maxSize</code> “ sein.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Berechnet automatisch die optimale Größe basierend auf der aktuellen Segmentverteilung und den verfügbaren Knotenressourcen.</p></li></ul></td>
+     <td><p>Optional. Die Zielsegmentgröße in MB. Es gibt drei mögliche Werte für diesen Parameter:</p><ul><li><p><strong>0 oder weggelassen</strong>: Verwendet den konfigurierten Wert für „ <code translate="no">dataCoord.segment.maxSize</code> “ (Standard: 1024 MB). Entspricht der Standardkomprimierung.</p></li><li><p><strong>Expliziter Wert</strong>: Führt eine Zusammenführung der Segmente auf ungefähr die angegebene Größe in MB durch (z. B. 2048). Muss größer oder gleich dem konfigurierten „ <code translate="no">dataCoord.segment.maxSize</code> “ sein.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Berechnet automatisch die optimale Größe basierend auf der aktuellen Segmentverteilung und den verfügbaren Knotenressourcen.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Ist der angegebene Wert für „ <code translate="no">target_size</code> “ kleiner als der konfigurierte Wert für „ <code translate="no">dataCoord.segment.maxSize</code> “, wird die Anfrage mit einer Fehlermeldung abgelehnt.</p>
+<p>Wenn der angegebene Wert „ <code translate="no">target_size</code> “ kleiner ist als der konfigurierte Wert „ <code translate="no">dataCoord.segment.maxSize</code> “, wird die Anfrage mit einer Fehlermeldung abgelehnt.</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">Fortschritt der Komprimierung überprüfen<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,7 +265,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Verwenden Sie die „Force Merge“-Kompaktierung nicht in Produktionsumgebungen.</strong></p></li>
 <li><p><strong>Verwenden Sie in den meisten Fällen den automatischen Modus zur Größenberechnung.</strong> Wenn Sie „ <code translate="no">target_size</code> “ auf „ <code translate="no">max_int64</code> “ setzen, analysiert Milvus Ihre Segmentverteilung und Knotenressourcen, um die optimale Größe zu ermitteln. Dies ist der empfohlene Ansatz, sofern Sie keine spezifischen Anforderungen an die Größe haben.</p></li>
 <li><p><strong>Berücksichtigen Sie die Auswirkungen auf die Leistung.</strong> Die „Force Merge“-Kompaktierung ist ein ressourcenintensiver Vorgang. Dabei werden Segmentdaten gelesen, zusammengeführt und neu geschrieben. Planen Sie den Vorgang in Zeiten mit geringem Datenverkehr ein, um die Auswirkungen auf die Abfragelatenz zu minimieren.</p></li>
-<li><p><strong>Überwachen Sie die Segmentanzahl vor und nach der Komprimierung.</strong> Verwenden Sie „ <code translate="no">get_compaction_state()</code> “ und „ <code translate="no">list_persistent_segments</code> “, um zu überprüfen, ob die Komprimierung wie erwartet zu weniger, aber größeren Segmenten geführt hat.</p></li>
+<li><p><strong>Überwachen Sie die Segmentanzahl vor und nach der Komprimierung.</strong> Verwenden Sie <code translate="no">get_compaction_state()</code> und <code translate="no">list_persistent_segments</code>, um zu überprüfen, ob die Komprimierung wie erwartet zu weniger, aber größeren Segmenten geführt hat.</p></li>
 </ul>
 <p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -287,7 +287,7 @@ state = client.get_compaction_state(job_id)
 <p>Diese beiden Arten von Komprimierungsvorgängen dienen unterschiedlichen Zwecken.</p>
 <ul>
 <li><p>Die Standardverdichtung (targetSize=0 oder weggelassen) ist ein inkrementeller Bereinigungspfad nach bestem Bemühen.</p></li>
-<li><p>„Force Merge“ (targetSize &gt; 0) ist ein Repack-Vorgang auf Collection-Ebene, der weniger, aber größere Segmente erzeugt, die nahe am Zielwert liegen.</p></li>
+<li><p>„Force Merge“ (targetSize &gt; 0) ist ein Repack-Vorgang auf Collection-Ebene, der weniger, aber größere Segmente erzeugt, die näher am Zielwert liegen.</p></li>
 </ul>
 <p>Der wesentliche Unterschied liegt in der Art der Zusammenführung: Bei der Standardkomprimierung erfolgt effektiv eine Reduzierung von m → 1 pro Aufgabe, während beim „Force Merge“ eine Reduzierung von m → n über gruppierte Eingaben hinweg stattfindet. Aus diesem Grund kann „Force Merge“ Segmentanordnungen lösen, die mit der Standardkomprimierung nicht möglich sind. Die folgende Tabelle vergleicht die beiden Arten von Vorgängen.</p>
 <table>
@@ -323,7 +323,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>Zusammenführungsform</p></td>
-     <td><p>m → 1 pro Aufgabe, Ausgabe &lt;= configMaxSize</p></td>
+     <td><p>m → 1 pro Aufgabe, Ausgabe ≤ configMaxSize</p></td>
      <td><p>m → n, Ausgänge nahe targetSize</p></td>
    </tr>
    <tr>
@@ -332,7 +332,7 @@ state = client.get_compaction_state(job_id)
      <td><p>Neuverpacken + Aufteilen funktioniert; kein „Feststecken bei 60 %“-Muster</p></td>
    </tr>
    <tr>
-     <td><p>Fähigkeit zur Abflachung von Sammlungen</p></td>
+     <td><p>Fähigkeit zur Abflachung der Sammlung</p></td>
      <td><p>Eingeschränkt; wiederholte Durchläufe können dennoch viele mittlere Segmente hinterlassen</p></td>
      <td><p>Stark; darauf ausgelegt, die Segmentanzahl zu reduzieren und den Füllgrad zu erhöhen</p></td>
    </tr>
@@ -342,7 +342,7 @@ state = client.get_compaction_state(job_id)
      <td><p>Ja; nutzt das Layout von QueryNode, Replik und Shard</p></td>
    </tr>
    <tr>
-     <td><p>Optimierung der Parallelität im Lesepfad</p></td>
+     <td><p>Optimierung der Parallelität auf dem Lesepfad</p></td>
      <td><p>Keine</p></td>
      <td><p>Passt die Ausgabeanzahl anhand von queryNodeCount / (Replikate × Shards) an, sofern gültig</p></td>
    </tr>
@@ -363,8 +363,8 @@ state = client.get_compaction_state(job_id)
 <li><p>Wählen Sie die erzwungene Zusammenführung, wenn Sie die Sammlung explizit in weniger, größere Segmente umgestalten möchten, die auf das Such- und Ladeverhalten abgestimmt sind.</p></li>
 </ul>
 <p><strong>Wie unterscheidet sich die erzwungene Zusammenführung von der Clustering-Komprimierung?</strong></p>
-<p>Die Clustering-Kompaktierung (<code translate="no">is_clustering=True</code>) reorganisiert Daten innerhalb von Segmenten auf Basis eines Clustering-Schlüssels, um das Such-Pruning zu verbessern. „Force Merge“ (<code translate="no">target_size=N</code>) optimiert die Segmentgrößen, ohne die Datenverteilung zu verändern. Beide dienen unterschiedlichen Zwecken und können zusammen verwendet werden – führen Sie zunächst die Clustering-Kompaktierung durch, um die Daten zu organisieren, und anschließend „Force Merge“, um die resultierenden Segmente zu konsolidieren.</p>
+<p>Die Clustering-Kompaktierung (<code translate="no">is_clustering=True</code>) reorganisiert Daten innerhalb von Segmenten auf Basis eines Clustering-Schlüssels, um das Such-Pruning zu verbessern. „Force Merge“ (<code translate="no">target_size=N</code>) optimiert die Segmentgrößen, ohne die Datenverteilung zu verändern. Sie dienen unterschiedlichen Zwecken und können zusammen verwendet werden – führen Sie zunächst die Clustering-Kompaktierung durch, um die Daten zu organisieren, und anschließend „Force Merge“, um die resultierenden Segmente zu konsolidieren.</p>
 <p><strong>Kann ich „Force Merge“ für eine Sammlung ausführen, die gerade abgefragt wird?</strong></p>
-<p>Ja. „Force Merge“ läuft asynchron und blockiert keine Abfragen. Es beansprucht jedoch DataNode- und Festplatten-E/A-Ressourcen, sodass die Latenz bei Abfragen während der Komprimierung zunehmen kann. Planen Sie „Force Merge“ für optimale Ergebnisse in Zeiten mit geringem Datenverkehr ein.</p>
+<p>Ja. „Force Merge“ läuft asynchron und blockiert keine Abfragen. Es beansprucht jedoch DataNode- und Festplatten-E/A-Ressourcen, sodass sich die Abfragelatenz während der Komprimierung erhöhen kann. Planen Sie „Force Merge“ für optimale Ergebnisse in Zeiten mit geringem Datenverkehr ein.</p>
 <p><strong>Was passiert, wenn ich eine `target_size` festlege, die kleiner als `maxSize` ist?</strong></p>
-<p>Die Anforderung wird mit einer Fehlermeldung abgelehnt. Die Zielgröße muss größer oder gleich der konfigurierten „ <code translate="no">dataCoord.segment.maxSize</code> “ sein.</p>
+<p>Die Anfrage wird mit einer Fehlermeldung abgelehnt. Die Zielgröße muss größer oder gleich dem konfigurierten ` <code translate="no">dataCoord.segment.maxSize</code>` sein.</p>

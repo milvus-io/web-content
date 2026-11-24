@@ -47,7 +47,7 @@ beta: Milvus 3.0.x
    <span>R8eow3kaqhktokblcmocnvxmnee</span>
   
  </span></p>
-<p>강제 병합 압축은 기존 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md"><code translate="no">Compaction</code></a> API에 ` <code translate="no">target_size</code> ` 매개변수를 추가합니다. 이 기능은 완전한 하위 호환성을 갖습니다. 즉, ` <code translate="no">target_size</code> ` 매개변수가 없는 기존 압축 호출은 이전과 동일하게 작동합니다.</p>
+<p>강제 병합 압축은 기존 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md"><code translate="no">Compaction</code></a> API에 ` <code translate="no">target_size</code> ` 매개변수를 추가합니다. 이 기능은 완벽한 하위 호환성을 보장합니다. 즉, ` <code translate="no">target_size</code> ` 매개변수가 없는 기존 압축 호출은 이전과 동일하게 작동합니다.</p>
 <p>강제 병합은 비동기적으로 작동합니다. 실행 중에 I/O 및 메모리 리소스를 소모하지만, 검색이나 쿼리 작업을 차단하지는 않습니다.</p>
 <h2 id="Use-Force-Merge-Compaction" class="common-anchor-header">강제 병합 압축 사용<button data-href="#Use-Force-Merge-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -126,7 +126,7 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>MB 단위의 기본 세그먼트 최대 크기입니다. ` <code translate="no">target_size</code> `가 0이거나 생략된 경우 목표값으로 사용됩니다. 또한 명시적인 ` <code translate="no">target_size</code>`에 허용되는 최소값으로도 사용됩니다.</p></td>
    </tr>
    <tr>
@@ -137,7 +137,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>DataNode 메모리는 이 계수로 나뉘어 시스템이 허용할 수 있는 최대 세그먼트 크기를 계산합니다.</p><ul><li><p>값이 클수록 병합에 할당되는 메모리는 줄어들지만 다른 DataNode 작업에 더 많은 메모리를 할당할 수 있어 노드 안정성이 향상됩니다.</p></li><li><p>값이 작을수록 더 큰 병합이 가능하지만 메모리 부하가 증가합니다.</p></li><li><p>예를 들어, 기본 계수 4.0과 16GB 메모리를 가진 DataNode의 경우, 병합 예산은 4GB입니다. 즉, 단일 작업에서 병합되는 세그먼트의 총 크기는 4GB를 초과할 수 없습니다.</p></li></ul></td>
+     <td><p>DataNode 메모리는 이 계수로 나뉘어 시스템이 허용할 수 있는 최대 세그먼트 크기가 계산됩니다.</p><ul><li><p>값이 클수록 병합에 할당되는 메모리는 줄어들지만 다른 DataNode 작업에 더 많은 메모리를 할당할 수 있어 노드 안정성이 향상됩니다.</p></li><li><p>값이 작을수록 더 큰 병합이 가능하지만 메모리 부하가 증가합니다.</p></li><li><p>예를 들어, 기본 계수 4.0과 16GB 메모리를 가진 DataNode의 경우, 병합 예산은 4GB입니다. 즉, 단일 작업에서 병합되는 세그먼트의 총 크기는 4GB를 초과할 수 없습니다.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
@@ -166,7 +166,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -185,7 +185,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">명시적 대상 크기</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -217,11 +217,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>선택 사항. 대상 세그먼트 크기(MB 단위). 이 매개변수의 값에는 다음 3가지 옵션이 있습니다:</p><ul><li><p><strong>0 또는 생략</strong>: 구성된 ' <code translate="no">dataCoord.segment.maxSize</code> ' 값을 사용합니다(기본값: 512 MB). 표준 압축과 동일합니다.</p></li><li><p><strong>명시적 값</strong>: 세그먼트를 지정된 크기(예: 2048)에 가깝게 병합합니다. 이 값은 구성된 <code translate="no">dataCoord.segment.maxSize</code> 보다 크거나 같아야 합니다.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: 현재 세그먼트 분포와 사용 가능한 노드 리소스를 기반으로 최적의 크기를 자동으로 계산합니다.</p></li></ul></td>
+     <td><p>선택 사항. 대상 세그먼트 크기(MB 단위). 이 매개변수의 값에는 다음 3가지 옵션이 있습니다:</p><ul><li><p><strong>0 또는 생략</strong>: 구성된 세그먼트 크기( <code translate="no">dataCoord.segment.maxSize</code> )를 사용합니다(기본값: 1024 MB). 표준 압축과 동일합니다.</p></li><li><p><strong>명시적 값</strong>: 세그먼트를 지정된 크기(예: 2048)에 근사하게 병합합니다. 이 값은 구성된 <code translate="no">dataCoord.segment.maxSize</code> 보다 크거나 같아야 합니다.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: 현재 세그먼트 분포와 사용 가능한 노드 리소스를 기반으로 최적의 크기를 자동으로 계산합니다.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>지정된 <code translate="no">target_size</code> 가 구성된 <code translate="no">dataCoord.segment.maxSize</code> 보다 작으면 오류와 함께 요청이 거부됩니다.</p>
+<p>지정된 <code translate="no">target_size</code> 가 구성된 <code translate="no">dataCoord.segment.maxSize</code> 보다 작으면, 요청은 오류와 함께 거부됩니다.</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">압축 진행 상황 확인<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -281,7 +281,7 @@ state = client.get_compaction_state(job_id)
         ></path>
       </svg>
     </button></h2><p><strong>강제 병합(Force Merge)은 표준 압축과 어떻게 다른가요?</strong></p>
-<p>이 두 가지 압축 작업은 서로 다른 목적을 가집니다.</p>
+<p>이 두 가지 유형의 압축 작업은 서로 다른 목적을 가집니다.</p>
 <ul>
 <li><p>표준 압축(targetSize=0 또는 생략)은 최선의 노력을 다하는 증분 정리 경로입니다.</p></li>
 <li><p>강제 병합(targetSize&gt;0)은 컬렉션 수준의 재포장 경로로, 더 적고 더 크며 목표 크기에 가까운 세그먼트를 생성합니다.</p></li>
@@ -306,7 +306,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>세그먼트 크기 출처</p></td>
      <td><p>dataCoord.segment.maxSize 고정값 (서버 구성)</p></td>
-     <td><p>사용자가 지정한 targetSize를 기반으로 하며, 이후 maxSafeSize에 따라 안전하게 제한됨</p></td>
+     <td><p>사용자가 지정한 targetSize를 기반으로 하며, 이후 maxSafeSize에 의해 안전하게 제한됨</p></td>
    </tr>
    <tr>
      <td><p>매개변수 유효성</p></td>
@@ -339,7 +339,7 @@ state = client.get_compaction_state(job_id)
      <td><p>있음; QueryNode/복제본/샤드 레이아웃을 활용</p></td>
    </tr>
    <tr>
-     <td><p>읽기 경로 병렬 처리 조정</p></td>
+     <td><p>읽기 경로 병렬 처리 튜닝</p></td>
      <td><p>없음</p></td>
      <td><p>유효한 경우 queryNodeCount / (복제본 수 × 샤드 수)를 사용하여 출력 개수를 조정합니다</p></td>
    </tr>
@@ -357,7 +357,7 @@ state = client.get_compaction_state(job_id)
 <p><strong>선택 지침:</strong></p>
 <ul>
 <li><p>저위험의 점진적 정리에는 표준 압축을 선택하십시오.</p></li>
-<li><p>검색 및 로딩 동작에 맞춰 컬렉션을 더 적은 수의 더 큰 세그먼트로 명시적으로 재구성하고자 할 때는 강제 병합을 선택하십시오.</p></li>
+<li><p>검색 및 로딩 동작에 맞춰 컬렉션을 더 적은 수의 더 큰 세그먼트로 명시적으로 재구성하려는 경우 강제 병합을 선택하십시오.</p></li>
 </ul>
 <p><strong>강제 병합은 클러스터링 압축과 어떻게 다른가요?</strong></p>
 <p>클러스터링 압축(<code translate="no">is_clustering=True</code>)은 검색 프루닝을 개선하기 위해 클러스터링 키를 기반으로 세그먼트 내 데이터를 재구성합니다. 강제 병합(<code translate="no">target_size=N</code>)은 데이터 분포를 변경하지 않고 세그먼트 크기를 최적화합니다. 두 기능은 서로 다른 목적을 가지며 함께 사용할 수 있습니다. 먼저 클러스터링 압축을 실행하여 데이터를 정리한 다음, 강제 병합을 실행하여 결과 세그먼트를 통합하십시오.</p>

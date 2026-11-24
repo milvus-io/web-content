@@ -3,11 +3,11 @@ id: keyword-match.md
 title: Corrispondenza testuale
 summary: >-
   La funzione di corrispondenza testuale in Milvus consente il recupero preciso
-  di documenti in base a termini specifici. Questa funzionalità viene utilizzata
-  principalmente per effettuare ricerche filtrate che soddisfino condizioni
-  specifiche e può integrare il filtraggio scalare per affinare i risultati
-  della query, consentendo ricerche di similarità all’interno di vettori che
-  soddisfano criteri scalari.
+  di documenti sulla base di termini specifici. Questa funzionalità viene
+  utilizzata principalmente per effettuare ricerche filtrate in base a
+  condizioni specifiche e può integrare il filtraggio scalare per affinare i
+  risultati della query, consentendo ricerche di similarità all’interno di
+  vettori che soddisfano criteri scalari.
 ---
 <h1 id="Text-Match" class="common-anchor-header">Corrispondenza testuale<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
-   <span>Corrispondenza per parola chiave</span>
+   <span>Corrispondenza per parole chiave</span>
   
  </span></p>
 <h2 id="Enable-text-match" class="common-anchor-header">Abilita la ricerca testuale<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
@@ -70,7 +70,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La ricerca testuale funziona sul <a href="/docs/it/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> , che in Milvus corrisponde essenzialmente al tipo di dati stringa. Per abilitare la corrispondenza testuale, impostare sia ` <code translate="no">enable_analyzer</code> ` che ` <code translate="no">enable_match</code> ` su ` <code translate="no">True</code> ` e, facoltativamente, configurare un <a href="/docs/it/v2.6.x/analyzer-overview.md">analizzatore</a> per l’analisi testuale durante la definizione dello schema della collezione.</p>
+    </button></h2><p>La ricerca testuale funziona sul <a href="/docs/it/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> , che è essenzialmente il tipo di dati stringa in Milvus. Per abilitare la corrispondenza testuale, impostare sia <code translate="no">enable_analyzer</code> che <code translate="no">enable_match</code> su <code translate="no">True</code> e quindi, facoltativamente, configurare un <a href="/docs/it/v2.6.x/analyzer-overview.md">analizzatore</a> per l’analisi testuale durante la definizione dello schema della collezione.</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,8 +225,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Le prestazioni e la precisione della corrispondenza delle parole chiave dipendono dall’analizzatore selezionato. Analizzatori diversi sono ottimizzati per varie lingue e strutture di testo, quindi la scelta di quello giusto può influire in modo significativo sui risultati di ricerca per il vostro caso d’uso specifico.</p>
-<p>Per impostazione predefinita, Milvus utilizza l’analizzatore <code translate="no">standard</code>, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura e converte il testo in minuscolo. Non sono necessari parametri aggiuntivi per applicare questa impostazione predefinita. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/standard-analyzer.md">la sezione Standard</a>.</p>
+    </button></h3><p>Le prestazioni e la precisione della corrispondenza delle parole chiave dipendono dall’analizzatore selezionato. Analizzatori diversi sono ottimizzati per varie lingue e strutture di testo, pertanto la scelta di quello giusto può influire in modo significativo sui risultati di ricerca per il vostro caso d’uso specifico.</p>
+<p>Per impostazione predefinita, Milvus utilizza l’analizzatore ` <code translate="no">standard</code> `, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono necessari parametri aggiuntivi per applicare questa impostazione predefinita. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/standard-analyzer.md">la sezione Standard</a>.</p>
 <p>Nei casi in cui sia richiesto un analizzatore diverso, è possibile configurarne uno utilizzando il parametro ` <code translate="no">analyzer_params</code> `. Ad esempio, per applicare l’analizzatore ` <code translate="no">english</code> ` all’elaborazione di testo in inglese:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

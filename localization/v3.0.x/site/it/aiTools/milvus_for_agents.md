@@ -2,7 +2,7 @@
 id: milvus_for_agents.md
 title: Milvus per gli agenti IA
 summary: >-
-  Scopri come gli agenti basati sull’intelligenza artificiale possono utilizzare
+  Scopri come gli agenti basati sull'intelligenza artificiale possono utilizzare
   Milvus come database vettoriale per RAG, ricerca semantica e memoria a lungo
   termine.
 ---
@@ -41,7 +41,7 @@ summary: >-
 <div class="start_card_container">
   <a href="https://github.com/zilliztech/milvus-skill" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Milvus Skill</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Una skill per Claude Code che insegna ai modelli di linguaggio di grandi dimensioni (LLM) a utilizzare PyMilvus per le operazioni sui database vettoriali.</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Una skill per agenti destinata a Claude Code che insegna ai modelli di linguaggio di grandi dimensioni (LLM) a utilizzare PyMilvus per le operazioni sui database vettoriali.</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -154,6 +154,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>Le schede relative a AGENTS.md e ai quattro prompt tematici aprono la versione Python. Ciascuna di esse dispone anche di una versione Node.js, Go e API RESTful v2:</p>
+<table>
+<thead>
+<tr><th>Suggerimento</th><th>Python</th><th>Node.js</th><th>Go</th><th>API RESTful v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/it/agents_overview.md">Python</a></td><td><a href="/docs/it/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/it/agents_overview_go.md">Go</a></td><td><a href="/docs/it/agents_overview_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Progettazione dello schema</td><td><a href="/docs/it/schema_design.md">Python</a></td><td><a href="/docs/it/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/it/schema_design_go.md">Go</a></td><td><a href="/docs/it/schema_design_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Modelli di ricerca</td><td><a href="/docs/it/search_patterns.md">Python</a></td><td><a href="/docs/it/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/it/search_patterns_go.md">Go</a></td><td><a href="/docs/it/search_patterns_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Selezione indice</td><td><a href="/docs/it/index_selection.md">Python</a></td><td><a href="/docs/it/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/it/index_selection_go.md">Go</a></td><td><a href="/docs/it/index_selection_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pipeline RAG</td><td><a href="/docs/it/rag_pipeline.md">Python</a></td><td><a href="/docs/it/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/it/rag_pipeline_go.md">Go</a></td><td><a href="/docs/it/rag_pipeline_restful.md">API RESTful v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Utilizzo in diversi ambienti<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -204,9 +217,9 @@ summary: >-
 <tr><th>Fase</th><th>Distribuzione</th><th>Motivo</th></tr>
 </thead>
 <tbody>
-<tr><td>Prototipazione</td><td><a href="/docs/it/milvus_lite.md">Milvus Lite</a></td><td>Zero configurazione, in-process. Funziona ovunque sia disponibile Python — ideale per la prototipazione rapida di agenti.</td></tr>
-<tr><td>Sviluppo</td><td><a href="/docs/it/install_standalone-docker.md">Milvus Standalone</a></td><td>Distribuzione Docker su singolo nodo. Ottimo per lo sviluppo locale e i test con volumi di dati realistici.</td></tr>
-<tr><td>Produzione</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>Milvus completamente gestito e senza server. Nessuna infrastruttura da gestire: gli agenti si connettono e funzionano automaticamente.</td></tr>
+<tr><td>Prototipazione</td><td><a href="/docs/it/milvus_lite.md">Milvus Lite</a></td><td>Zero configurazione, integrato nel processo. Funziona ovunque sia disponibile Python: ideale per la prototipazione rapida di agenti.</td></tr>
+<tr><td>Sviluppo</td><td><a href="/docs/it/install_standalone-docker.md">Milvus Standalone</a></td><td>Distribuzione Docker su singolo nodo. Ottimo per lo sviluppo locale e il collaudo con volumi di dati realistici.</td></tr>
+<tr><td>Produzione</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>Milvus completamente gestito e serverless. Nessuna infrastruttura da gestire: gli agenti si connettono e funzionano automaticamente.</td></tr>
 <tr><td>Produzione self-hosted</td><td><a href="/docs/it/install_cluster-helm.md">Milvus distribuito</a></td><td>Distribuzione Kubernetes multi-nodo per i team che necessitano del pieno controllo sulla propria infrastruttura.</td></tr>
 </tbody>
 </table>

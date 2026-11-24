@@ -53,7 +53,7 @@ beta: Milvus 2.5.17+
  </span></p>
 <ol>
 <li><p><strong>Tokenisation du document</strong>: lorsque vous importez des documents dans Milvus, le texte est divisé en tokens (mots ou termes individuels) à l’aide d’un analyseur, et les informations de position sont enregistrées pour chaque token. Par exemple, <strong>doc_1</strong> est tokenisé en <strong>[« machine » (pos=0), « learning » (pos=1), « boosts » (pos=2), « efficiency » (pos=3)]</strong>. Pour plus d’informations sur les analyseurs, consultez <a href="/docs/fr/v2.6.x/analyzer-overview.md">la section Présentation des analyseurs</a>.</p></li>
-<li><p><strong>Création d’un index inversé</strong>: Milvus construit un index inversé, en associant chaque token au ou aux documents dans lesquels il apparaît, ainsi qu’aux positions de ce token dans ces documents.</p></li>
+<li><p><strong>Création d’un index inversé</strong>: Milvus construit un index inversé, en associant chaque token au(x) document(s) dans lequel (lesquels) il apparaît ainsi qu’aux positions de ce token dans ces documents.</p></li>
 <li><p><strong>Correspondance de phrases</strong>: Lorsqu’une requête par phrase est exécutée, Milvus recherche chaque token dans l’index inversé et vérifie leurs positions afin de déterminer s’ils apparaissent dans le bon ordre et à la bonne proximité. Le paramètre ` <code translate="no">slop</code> ` contrôle le nombre maximal de positions autorisées entre les tokens correspondants :</p>
 <ul>
 <li><p><strong>slop = 0</strong> signifie que les tokens doivent apparaître <strong>dans l’ordre exact et être immédiatement adjacents</strong> (c’est-à-dire sans mot supplémentaire entre eux).</p>
@@ -139,8 +139,8 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La précision de la correspondance de phrases dépend fortement de l’analyseur utilisé pour tokeniser vos données textuelles. Différents analyseurs conviennent à différentes langues et à différents formats de texte, ce qui influe sur la tokenisation et la précision positionnelle. Le choix d’un analyseur adapté à votre cas d’utilisation spécifique optimisera vos résultats de correspondance de phrases.</p>
-<p>Par défaut, Milvus utilise l’analyseur standard, qui tokenise le texte en fonction des espaces et de la ponctuation et convertit le texte en minuscules. Aucun paramètre supplémentaire n’est requis pour une utilisation par défaut. Reportez-vous à <a href="/docs/fr/v2.6.x/standard-analyzer.md">la section Analyseur standard</a> pour plus de détails.</p>
+    </button></h3><p>La précision de la correspondance de phrases dépend fortement de l’analyseur utilisé pour tokeniser vos données textuelles. Différents analyseurs conviennent à différentes langues et à différents formats de texte, ce qui influe sur la tokenisation et la précision positionnelle. Le choix d’un analyseur adapté à votre cas d’utilisation spécifique permettra d’optimiser vos résultats de correspondance de phrases.</p>
+<p>Par défaut, Milvus utilise l’analyseur standard, qui tokenise le texte en fonction des espaces et de la ponctuation, supprime les tokens de plus de 40 caractères et convertit le texte en minuscules. Aucun paramètre supplémentaire n’est requis pour une utilisation par défaut. Reportez-vous à <a href="/docs/fr/v2.6.x/standard-analyzer.md">la section Analyseur standard</a> pour plus de détails.</p>
 <p>Si votre application nécessite un analyseur spécifique, configurez-le à l’aide du paramètre ` <code translate="no">analyzer_params</code> `. Par exemple, voici comment configurer l’analyseur ` <code translate="no">english</code> ` pour la correspondance de phrases dans un texte en anglais :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -285,7 +285,7 @@ result = client.query(
    </tr>
 </table>
 <p>Seul le document 1 contient l'expression exacte <strong>« machine learning »</strong> dans l'ordre spécifié, sans aucun token supplémentaire.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">Recherche par correspondance de phrase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+<h3 id="Search-with-phrase-match" class="common-anchor-header">Recherche avec correspondance de phrase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -422,7 +422,7 @@ result_slop2 = client.search(
 <li><p>Règles d’échappement dans les expressions « <code translate="no">filter</code> » :</p>
 <ul>
 <li><p>Les caractères placés entre guillemets doubles ou simples au sein d’expressions sont interprétés comme des constantes de chaîne. Si la constante de chaîne contient des caractères d’échappement, ceux-ci doivent être représentés à l’aide d’une séquence d’échappement. Par exemple, utilisez ` <code translate="no">\\</code> ` pour représenter ` <code translate="no">\</code>`, ` <code translate="no">\\t</code> ` pour représenter une tabulation ` <code translate="no">\t</code>` et ` <code translate="no">\\n</code> ` pour représenter un saut de ligne.</p></li>
-<li><p>Si une constante de chaîne est placée entre guillemets simples, un guillemet simple à l’intérieur de la constante doit être représenté par <code translate="no">\\'</code>, tandis qu’un guillemet double peut être représenté soit par <code translate="no">&quot;</code>, soit par <code translate="no">\\&quot;</code>. Exemple : <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>Si une constante de chaîne est placée entre guillemets simples, un guillemet simple à l'intérieur de la constante doit être représenté par <code translate="no">\\'</code>, tandis qu'un guillemet double peut être représenté soit par <code translate="no">&quot;</code>, soit par <code translate="no">\\&quot;</code>. Exemple : <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Si une constante de chaîne est placée entre guillemets doubles, un guillemet double à l'intérieur de la constante doit être représenté par <code translate="no">\\&quot;</code>, tandis qu'un guillemet simple peut être représenté soit par <code translate="no">'</code>, soit par <code translate="no">\\'</code>. Exemple : <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

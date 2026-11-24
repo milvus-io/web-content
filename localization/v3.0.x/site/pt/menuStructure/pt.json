@@ -223,7 +223,7 @@
             "children": []
           },
           {
-            "label": "Tratamento de dados",
+            "label": "Processamento de dados",
             "id": "data_processing.md",
             "order": 3,
             "children": []
@@ -389,7 +389,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e identificação automática",
+            "label": "Campo principal e AutoID",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "Alterar o esquema de cobrança externo",
+            "label": "Alterar o esquema de cobrança externa",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -1191,7 +1191,7 @@
             "order": 13,
             "children": [
               {
-                "label": "Pesquisa básica em vetores com StructArray",
+                "label": "Pesquisa básica de vetores com StructArray",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "AGENTS.md para Milvus",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Vai",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "API RESTful v2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "SDK do Python",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "Conceção de esquemas",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Vai",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "API RESTful v2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Padrões de pesquisa",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Vai",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "API RESTful v2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Seleção de índices",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Vai",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "API RESTful v2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Pipeline RAG",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Vai",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "API RESTful v2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -3256,7 +3386,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com representações Matryoshka",
+        "label": "Pesquisa em funil com incorporações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

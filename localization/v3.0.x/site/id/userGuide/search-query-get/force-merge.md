@@ -128,18 +128,18 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
-     <td><p>Ukuran maksimum segmen default dalam MB. Digunakan sebagai target saat ` <code translate="no">target_size</code> ` bernilai 0 atau diabaikan. Juga berfungsi sebagai nilai minimum yang diperbolehkan untuk ` <code translate="no">target_size</code>` yang dinyatakan secara eksplisit.</p></td>
+     <td><p>1024</p></td>
+     <td><p>Ukuran maksimum segmen default dalam MB. Digunakan sebagai target saat ` <code translate="no">target_size</code> ` bernilai 0 atau diabaikan. Juga berfungsi sebagai nilai minimum yang diperbolehkan untuk ` <code translate="no">target_size</code>` yang ditentukan secara eksplisit.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Ambang batas jumlah segmen untuk pemilihan algoritma. Ketika jumlah segmen melebihi nilai ini, Milvus menggunakan algoritma rakus yang lebih cepat untuk perencanaan penggabungan.</p><ul><li><p><strong>Algoritma standar</strong> (digunakan saat jumlah segmen &lt;= ` <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>`): menghasilkan hasil penggabungan yang lebih optimal tetapi membutuhkan waktu komputasi yang lebih lama.</p></li><li><p><strong>Algoritma rakus</strong> (digunakan saat jumlah segmen &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menyelesaikan perencanaan jauh lebih cepat dengan mengorbankan pengelompokan segmen yang sedikit kurang optimal.</p></li></ul></td>
+     <td><p>Ambang batas jumlah segmen untuk pemilihan algoritma. Ketika jumlah segmen melebihi nilai ini, Milvus menggunakan algoritma rakus yang lebih cepat untuk perencanaan penggabungan.</p><ul><li><p><strong>Algoritma standar</strong> (digunakan saat jumlah segmen &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menghasilkan hasil penggabungan yang lebih optimal tetapi membutuhkan waktu komputasi yang lebih lama.</p></li><li><p><strong>Algoritma rakus</strong> (digunakan saat jumlah segmen &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): menyelesaikan perencanaan jauh lebih cepat dengan mengorbankan pengelompokan segmen yang sedikit kurang optimal.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>Memori DataNode dibagi dengan faktor ini untuk menghitung ukuran segmen terbesar yang dapat diizinkan oleh sistem.</p><ul><li><p>Nilai yang lebih besar mengalokasikan lebih sedikit memori untuk penggabungan tetapi menyisakan lebih banyak untuk operasi DataNode lainnya, sehingga meningkatkan stabilitas node.</p></li><li><p>Nilai yang lebih kecil memungkinkan penggabungan yang lebih besar tetapi meningkatkan tekanan memori.</p></li><li><p>Misalnya, dengan faktor default 4,0 dan DataNode dengan memori 16 GB, anggaran penggabungan adalah 4 GB. Ini berarti ukuran total segmen yang digabungkan dalam satu operasi tidak boleh melebihi 4 GB.</p></li></ul></td>
+     <td><p>Memori DataNode dibagi dengan faktor ini untuk menghitung ukuran segmen terbesar yang dapat diizinkan oleh sistem.</p><ul><li><p>Nilai yang lebih besar mengalokasikan lebih sedikit memori untuk penggabungan tetapi menyisakan lebih banyak untuk operasi DataNode lainnya, sehingga meningkatkan stabilitas node.</p></li><li><p>Nilai yang lebih kecil memungkinkan penggabungan yang lebih besar tetapi meningkatkan tekanan memori.</p></li><li><p>Misalnya, dengan faktor default 4.0 dan DataNode dengan memori 16 GB, anggaran penggabungan adalah 4 GB. Ini berarti ukuran total segmen yang digabungkan dalam satu operasi tidak boleh melebihi 4 GB.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
@@ -168,7 +168,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -187,7 +187,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">Ukuran target eksplisit</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -219,7 +219,7 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Opsional. Ukuran segmen target dalam MB. Terdapat 3 opsi nilai parameter:</p><ul><li><p><strong>0 atau diabaikan</strong>: Menggunakan ukuran segmen yang dikonfigurasi ( <code translate="no">dataCoord.segment.maxSize</code> ) (default: 512 MB). Setara dengan kompresi standar.</p></li><li><p><strong>Nilai eksplisit</strong>: Menggabungkan segmen hingga kira-kira ukuran yang ditentukan dalam MB (mis. 2048). Harus lebih besar dari atau sama dengan nilai ` <code translate="no">dataCoord.segment.maxSize</code>` yang dikonfigurasi.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Secara otomatis menghitung ukuran optimal berdasarkan distribusi segmen saat ini dan sumber daya node yang tersedia.</p></li></ul></td>
+     <td><p>Opsional. Ukuran segmen target dalam MB. Terdapat 3 opsi nilai parameter:</p><ul><li><p><strong>0 atau diabaikan</strong>: Menggunakan nilai " <code translate="no">dataCoord.segment.maxSize</code> " yang telah dikonfigurasi (default: 1024 MB). Setara dengan kompresi standar.</p></li><li><p><strong>Nilai eksplisit</strong>: Menggabungkan segmen hingga kira-kira ukuran yang ditentukan dalam MB (mis. 2048). Harus lebih besar dari atau sama dengan nilai ` <code translate="no">dataCoord.segment.maxSize</code>` yang dikonfigurasi.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Secara otomatis menghitung ukuran optimal berdasarkan distribusi segmen saat ini dan sumber daya node yang tersedia.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
@@ -261,10 +261,10 @@ state = client.get_compaction_state(job_id)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Jangan gunakan kompaksi force merge di lingkungan produksi.</strong></p></li>
-<li><p><strong>Gunakan mode perhitungan ukuran otomatis untuk sebagian besar kasus.</strong> Mengatur ` <code translate="no">target_size</code> ` ke ` <code translate="no">max_int64</code> ` memungkinkan Milvus menganalisis distribusi segmen dan sumber daya node Anda untuk menentukan ukuran terbaik. Ini adalah pendekatan yang direkomendasikan kecuali Anda memiliki persyaratan ukuran khusus.</p></li>
+<li><p><strong>Jangan gunakan pemadatan force merge di lingkungan produksi.</strong></p></li>
+<li><p><strong>Gunakan mode perhitungan ukuran otomatis untuk sebagian besar kasus.</strong> Mengatur ` <code translate="no">target_size</code> ` menjadi ` <code translate="no">max_int64</code> ` memungkinkan Milvus menganalisis distribusi segmen dan sumber daya node Anda untuk menentukan ukuran terbaik. Ini adalah pendekatan yang direkomendasikan kecuali Anda memiliki persyaratan ukuran khusus.</p></li>
 <li><p><strong>Pertimbangkan trade-off kinerja.</strong> Kompresi Force Merge adalah operasi yang memakan banyak sumber daya. Operasi ini membaca, menggabungkan, dan menulis ulang data segmen. Jadwalkan operasi ini selama periode lalu lintas rendah untuk meminimalkan dampak pada latensi kueri.</p></li>
-<li><p><strong>Pantau jumlah segmen sebelum dan sesudah.</strong> Gunakan <code translate="no">get_compaction_state()</code> dan <code translate="no">list_persistent_segments</code> untuk memverifikasi bahwa proses kompresi menghasilkan segmen yang lebih sedikit namun lebih besar, sesuai harapan.</p></li>
+<li><p><strong>Pantau jumlah segmen sebelum dan sesudah.</strong> Gunakan <code translate="no">get_compaction_state()</code> dan <code translate="no">list_persistent_segments</code> untuk memverifikasi bahwa proses kompaksi menghasilkan segmen yang lebih sedikit namun lebih besar, sesuai harapan.</p></li>
 </ul>
 <p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">Pertanyaan Umum<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -332,7 +332,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>Kemampuan meratakan koleksi</p></td>
-     <td><p>Terbatas; eksekusi berulang mungkin masih meninggalkan banyak segmen menengah</p></td>
+     <td><p>Terbatas; menjalankan proses berulang kali mungkin masih meninggalkan banyak segmen menengah</p></td>
      <td><p>Kuat; dirancang untuk mengurangi jumlah segmen dan meningkatkan tingkat kepenuhan</p></td>
    </tr>
    <tr>
@@ -359,11 +359,11 @@ state = client.get_compaction_state(job_id)
 <p><strong>Panduan pemilihan:</strong></p>
 <ul>
 <li><p>Pilih pemadatan standar untuk pembersihan bertahap dengan risiko rendah.</p></li>
-<li><p>Pilih penggabungan paksa (force merge) jika Anda secara eksplisit ingin mengubah bentuk koleksi menjadi segmen yang lebih sedikit dan lebih besar, yang selaras dengan perilaku pencarian dan pemuatan.</p></li>
+<li><p>Pilih penggabungan paksa (force merge) jika Anda secara eksplisit ingin mengubah bentuk koleksi menjadi segmen yang lebih sedikit namun lebih besar, yang selaras dengan perilaku pencarian dan pemuatan.</p></li>
 </ul>
 <p><strong>Apa perbedaan Force Merge dengan kompresi berbasis clustering?</strong></p>
 <p>Pemadatan pengelompokan (<code translate="no">is_clustering=True</code>) mengatur ulang data dalam segmen berdasarkan kunci pengelompokan untuk meningkatkan pemangkasan pencarian. Penggabungan Paksa (<code translate="no">target_size=N</code>) mengoptimalkan ukuran segmen tanpa mengubah distribusi data. Keduanya memiliki tujuan yang berbeda dan dapat digunakan bersamaan — jalankan pemadatan pengelompokan terlebih dahulu untuk mengatur data, lalu gunakan Penggabungan Paksa untuk mengkonsolidasikan segmen yang dihasilkan.</p>
 <p><strong>Apakah saya dapat menjalankan Force Merge pada koleksi yang sedang di-query?</strong></p>
-<p>Ya. Force Merge berjalan secara asinkron dan tidak memblokir kueri. Namun, proses ini mengonsumsi sumber daya DataNode dan I/O disk, sehingga latensi kueri mungkin meningkat selama proses pemadatan. Jadwalkan Force Merge selama periode lalu lintas rendah untuk hasil terbaik.</p>
+<p>Ya. Force Merge berjalan secara asinkron dan tidak menghalangi kueri. Namun, proses ini menghabiskan sumber daya DataNode dan I/O disk, sehingga latensi kueri mungkin meningkat selama proses pemadatan. Jadwalkan Force Merge selama periode lalu lintas rendah untuk hasil terbaik.</p>
 <p><strong>Apa yang terjadi jika saya menetapkan `target_size` lebih kecil dari `maxSize`?</strong></p>
 <p>Permintaan tersebut akan ditolak dengan pesan kesalahan. Ukuran target harus lebih besar dari atau sama dengan ` <code translate="no">dataCoord.segment.maxSize</code>` yang telah dikonfigurasi.</p>

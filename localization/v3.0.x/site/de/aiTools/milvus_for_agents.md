@@ -40,7 +40,7 @@ summary: >-
 <div class="start_card_container">
   <a href="https://github.com/zilliztech/milvus-skill" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Milvus-Skill</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Eine Agent-Funktion für Claude Code, die LLMs beibringt, PyMilvus für Operationen mit Vektordatenbanken zu nutzen.</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Eine Agenten-Funktion für Claude Code, die LLMs beibringt, PyMilvus für Operationen mit Vektordatenbanken zu nutzen.</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -148,11 +148,24 @@ summary: >-
 </div>
 <div class="start_card_container">
   <a href="/docs/de/restful_api.md" style="text-decoration: none; color: inherit;">
-    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RESTful-API v2</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">v2-Endpunkte, „camelCase“-Anfragefelder, Überprüfung von Antwortcodes und Abfrage des Ladestatus.</p>
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RESTful API v2</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">v2-Endpunkte, camelCase-Anfragefelder, Überprüfung von Antwortcodes und Abfrage des Ladestatus.</p>
   </a>
 </div>
 </div>
+<p>Die Karten für „AGENTS.md“ und die vier Themenvorgaben öffnen die Python-Version. Für jede davon gibt es außerdem eine Node.js-, Go- und RESTful-API-v2-Version:</p>
+<table>
+<thead>
+<tr><th>Vorgabe</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/de/agents_overview.md">Python</a></td><td><a href="/docs/de/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/de/agents_overview_go.md">Go</a></td><td><a href="/docs/de/agents_overview_restful.md">RESTful-API v2</a></td></tr>
+<tr><td>Schema-Entwurf</td><td><a href="/docs/de/schema_design.md">Python</a></td><td><a href="/docs/de/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/de/schema_design_go.md">Go</a></td><td><a href="/docs/de/schema_design_restful.md">RESTful-API v2</a></td></tr>
+<tr><td>Suchmuster</td><td><a href="/docs/de/search_patterns.md">Python</a></td><td><a href="/docs/de/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/de/search_patterns_go.md">Go</a></td><td><a href="/docs/de/search_patterns_restful.md">RESTful-API v2</a></td></tr>
+<tr><td>Indexauswahl</td><td><a href="/docs/de/index_selection.md">Python</a></td><td><a href="/docs/de/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/de/index_selection_go.md">Go</a></td><td><a href="/docs/de/index_selection_restful.md">RESTful-API v2</a></td></tr>
+<tr><td>RAG-Pipeline</td><td><a href="/docs/de/rag_pipeline.md">Python</a></td><td><a href="/docs/de/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/de/rag_pipeline_go.md">Go</a></td><td><a href="/docs/de/rag_pipeline_restful.md">RESTful-API v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Einsatz in verschiedenen Umgebungen<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +183,7 @@ summary: >-
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>Umgebung</th><th>Wo soll die Eingabeaufforderung platziert werden?</th><th>Anweisungen</th></tr>
+<tr><th>Umgebung</th><th>Wo soll die Eingabeaufforderung platziert werden?</th><th>Anleitung</th></tr>
 </thead>
 <tbody>
 <tr><td>Cursor</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">Projektregeln konfigurieren</a></td></tr>
@@ -210,5 +223,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Für Agent-Workloads wird <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> für den Produktionseinsatz empfohlen. Da Agenten in der Regel keine Infrastruktur verwalten, entfallen bei einer serverlosen Bereitstellung der Betriebsaufwand und es wird eine automatische Skalierung bereitgestellt.</p>
+<p>Für Agent-Workloads wird <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> für den Produktionseinsatz empfohlen. Da Agenten in der Regel keine Infrastruktur verwalten, entfallen bei einer serverlosen Bereitstellung der operative Aufwand und es wird eine automatische Skalierung bereitgestellt.</p>
 </div>

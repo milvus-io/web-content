@@ -21,13 +21,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cohere Ranker 利用<a href="https://cohere.com/">Cohere</a>强大的重新排序模型，通过语义重新排序来提升搜索相关性。它提供企业级重新排序功能，配备了稳健的 API 基础设施，并针对生产环境进行了性能优化。</p>
-<p>对于需要以下功能的应用，Cohere Ranker 尤为有用：</p>
+    </button></h1><p>Cohere Ranker 利用<a href="https://cohere.com/">Cohere</a>强大的重新排序模型，通过语义重新排序来提升搜索相关性。它提供企业级重新排序功能，配备稳健的 API 基础设施，并针对生产环境进行了性能优化。</p>
+<p>对于需要以下功能的应用程序而言，Cohere Ranker 尤为宝贵：</p>
 <ul>
 <li><p>借助最先进的重新排序模型实现高质量的语义理解</p></li>
 <li><p>面向生产工作负载的企业级可靠性和可扩展性</p></li>
 <li><p>跨多种内容类型的多语言重新排序能力</p></li>
-<li><p>内置速率限制和错误处理机制，确保 API 性能稳定</p></li>
+<li><p>内置速率限制和错误处理功能，确保 API 性能稳定</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,8 +46,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>在 Milvus 中部署 Cohere Ranker 之前，请确保您已具备：</p>
 <ul>
-<li><p>一个 Milvus Collection，其中包含名为 `<code translate="no">VARCHAR</code> ` 的字段，该字段存储待重新排序的文本</p></li>
-<li><p>一个具有重新排序模型访问权限的有效 Cohere API 密钥。请在<a href="https://dashboard.cohere.com/">Cohere 平台</a>注册以获取您的 API 凭据。您可以通过以下任一方式操作：</p>
+<li><p>一个 Milvus Collection，其中包含名为 `<code translate="no">VARCHAR</code> ` 的字段，该字段包含待重新排序的文本</p></li>
+<li><p>一个具有重新排序模型访问权限的有效 Cohere API 密钥。请在<a href="https://dashboard.cohere.com/">Cohere 平台</a>注册以获取 API 凭据。您可以通过以下任一方式操作：</p>
 <ul>
 <li><p>设置<code translate="no">COHERE_API_KEY</code> 环境变量，或</p></li>
 <li><p>在<a href="/docs/zh/cohere-ranker.md#Create-a-Cohere-ranker-function">排名器配置</a>的<code translate="no">credential</code> 字段中直接指定API密钥</p></li>
@@ -121,7 +121,28 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;max_tokens_per_doc&quot;</span>, <span class="hljs-string">&quot;4096&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Configure Cohere Ranker</span>
+<span class="hljs-keyword">const</span> cohere_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;cohere_semantic_ranker&quot;</span>,       <span class="hljs-comment">// Unique identifier for your ranker</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK for reranking functions</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Enables model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;cohere&quot;</span>,                 <span class="hljs-comment">// Specifies Cohere as the service provider</span>
+    <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;rerank-english-v3.0&quot;</span>,  <span class="hljs-comment">// Cohere rerank model to use</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text for relevance evaluation</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">128</span>,         <span class="hljs-comment">// Optional: batch size for model service requests (default: 128)</span>
+    <span class="hljs-attr">max_tokens_per_doc</span>: <span class="hljs-number">4096</span>,           <span class="hljs-comment">// Optional: max tokens per document (default: 4096)</span>
+    <span class="hljs-comment">// credential: &quot;your-cohere-api-key&quot;, // Optional: authentication credential for Cohere API</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -259,7 +280,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">max_tokens_per_doc</code></p></td>
      <td><p>否</p></td>
-     <td><p>每份文档的最大令牌数。长文档将自动截断为指定数量的令牌。</p></td>
+     <td><p>每个文档的最大令牌数。长文档将自动截断为指定数量的令牌。</p></td>
      <td><p><code translate="no">4096</code> (默认)</p></td>
    </tr>
    <tr>
@@ -312,7 +333,7 @@ results = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
         .data(Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;AI Research Progress&quot;</span>), <span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;What is AI&quot;</span>)))
         .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
@@ -324,7 +345,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with Cohere reranking</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: cohere_ranker,                <span class="hljs-comment">// Apply Cohere reranking</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

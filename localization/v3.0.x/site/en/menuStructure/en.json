@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "AGENTS.md for Milvus",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Python SDK",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "Schema Design",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Search Patterns",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Index Selection",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "RAG Pipeline",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },

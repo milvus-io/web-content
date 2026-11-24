@@ -25,7 +25,7 @@ beta: Milvus 2.6.x
 <p>SiliconFlow Ranker 對於需要以下功能的應用場景尤為實用：</p>
 <ul>
 <li><p>具備可配置重疊度的進階文件分段功能，以處理長篇文件</p></li>
-<li><p>可存取多元的重新排序模型，包括 BAAI/bge-reranker 系列及其他專用模型</p></li>
+<li><p>可存取多樣化的重新排序模型，包括 BAAI/bge-reranker 系列及其他專用模型</p></li>
 <li><p>靈活的片段式評分機制，其中得分最高的片段代表該文件的總分</p></li>
 <li><p>兼具成本效益的重新排序功能，同時支援標準版與專業版模型變體</p></li>
 </ul>
@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>在 Milvus 中實作 SiliconFlow Ranker 之前，請確保您具備以下條件：</p>
 <ul>
-<li><p>一個 Milvus 集合，其中包含名為「<code translate="no">VARCHAR</code> 」的欄位，且該欄位內有待重新排序的文字</p></li>
+<li><p>一個 Milvus 集合，其中包含名為「<code translate="no">VARCHAR</code> 」的欄位，該欄位存有待重新排序的文字</p></li>
 <li><p>一個具有重新排序模型存取權限的有效 SiliconFlow API 金鑰。請至<a href="https://www.siliconflow.com/">SiliconFlow 平台註冊</a>以取得您的 API 憑證。您可以：</p>
 <ul>
 <li><p>設定<code translate="no">SILICONFLOW_API_KEY</code> 環境變數，或</p></li>
@@ -68,7 +68,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要在您的 Milvus 應用程式中使用 SiliconFlow Ranker，請建立一個 Function 物件，用以指定重新排序的運作方式。此函式將傳遞至 Milvus 搜尋操作中，以提升結果的排序品質。</p>
+    </button></h2><p>若要在您的 Milvus 應用程式中使用 SiliconFlow Ranker，請建立一個 Function 物件，用以指定重新排序的運作方式。此函式將傳遞給 Milvus 搜尋操作，以提升結果的排序效果。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -123,7 +123,29 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;overlap_tokens&quot;</span>, <span class="hljs-string">&quot;50&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Configure SiliconFlow Ranker</span>
+<span class="hljs-keyword">const</span> siliconflow_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;siliconflow_semantic_ranker&quot;</span>,  <span class="hljs-comment">// Unique identifier for your ranker</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK for reranking functions</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Enables model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;siliconflow&quot;</span>,            <span class="hljs-comment">// Specifies SiliconFlow as the service provider</span>
+    <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;BAAI/bge-reranker-v2-m3&quot;</span>, <span class="hljs-comment">// SiliconFlow reranking model to use</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text for relevance evaluation</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">128</span>,         <span class="hljs-comment">// Optional: batch size for model service requests (default: 128)</span>
+    <span class="hljs-attr">max_chunks_per_doc</span>: <span class="hljs-number">5</span>,              <span class="hljs-comment">// Optional: max chunks per document for supported models</span>
+    <span class="hljs-attr">overlap_tokens</span>: <span class="hljs-number">50</span>,                 <span class="hljs-comment">// Optional: token overlap between chunks for supported models</span>
+    <span class="hljs-comment">// credential: &quot;your-siliconflow-api-key&quot;, // Optional: if not set, uses SILICONFLOW_API_KEY env var</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -268,7 +290,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">overlap_tokens</code></p></td>
      <td><p>否</p></td>
-     <td><p>將文件分割為區塊時，相鄰區塊間的標記重疊數量。此設定可確保區塊邊界之間的連續性，以提升語義理解能力。僅由特定模型支援：<code translate="no">BAAI/bge-reranker-v2-m3</code> 、<code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> 及<code translate="no">netease-youdao/bce-reranker-base_v1</code> 。</p></td>
+     <td><p>將文件分割為區塊時，相鄰區塊間的標記重疊數量。此設定可確保區塊邊界之間的連續性，以提升語義理解能力。僅受以下特定模型支援：<code translate="no">BAAI/bge-reranker-v2-m3</code> 、<code translate="no">Pro/BAAI/bge-reranker-v2-m3</code> 及<code translate="no">netease-youdao/bce-reranker-base_v1</code> 。</p></td>
      <td><p><code translate="no">50</code></p></td>
    </tr>
    <tr>
@@ -334,7 +356,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with SiliconFlow reranking</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: siliconflow_ranker,           <span class="hljs-comment">// Apply SiliconFlow reranking</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

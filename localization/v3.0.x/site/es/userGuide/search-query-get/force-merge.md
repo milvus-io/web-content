@@ -2,8 +2,9 @@
 id: force-merge.md
 title: Compactación con fusión forzadaCompatible with Milvus 3.0.x
 summary: >-
-  Utiliza la compactación por fusión forzada para consolidar segmentos pequeños
-  y mejorar el rendimiento de las consultas y la eficiencia del almacenamiento.
+  Utiliza la compactación mediante fusión forzada para consolidar segmentos
+  pequeños y mejorar el rendimiento de las consultas y la eficiencia del
+  almacenamiento.
 beta: Milvus 3.0.x
 ---
 <h1 id="Force-Merge-Compaction" class="common-anchor-header">Compactación con fusión forzada<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Force-Merge-Compaction" class="anchor-icon" translate="no">
@@ -128,13 +129,13 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>Tamaño máximo predeterminado de un segmento en MB. Se utiliza como valor de destino cuando ` <code translate="no">target_size</code> ` es 0 o se omite. También sirve como valor mínimo permitido para la opción explícita ` <code translate="no">target_size</code>`.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Umbral de recuento de segmentos para la selección del algoritmo. Cuando el número de segmentos supera este valor, Milvus utiliza un algoritmo codicioso más rápido para la planificación de la fusión.</p><ul><li><p><strong>Algoritmo estándar</strong> (utilizado cuando el número de segmentos es &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): produce resultados de fusión más óptimos, pero tarda más en calcularse.</p></li><li><p><strong>Algoritmo codicioso</strong> (utilizado cuando el número de segmentos &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): completa la planificación mucho más rápido a costa de una agrupación de segmentos ligeramente menos óptima.</p></li></ul></td>
+     <td><p>Umbral del número de segmentos para la selección del algoritmo. Cuando el número de segmentos supera este valor, Milvus utiliza un algoritmo codicioso más rápido para la planificación de la fusión.</p><ul><li><p><strong>Algoritmo estándar</strong> (utilizado cuando el número de segmentos es ≤ <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): produce resultados de fusión más óptimos, pero tarda más en calcularse.</p></li><li><p><strong>Algoritmo codicioso</strong> (utilizado cuando el número de segmentos &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): completa la planificación mucho más rápido a costa de una agrupación de segmentos ligeramente menos óptima.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
@@ -168,7 +169,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -179,7 +180,7 @@ beta: Milvus 3.0.x
    Auto-calculates optimal size based on
    segment distribution and node memory
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación se muestran ejemplos que ilustran cómo utilizar cada modo de compactación de fusión forzada.</p>
+<p>A continuación se muestran ejemplos que ilustran cómo utilizar cada modo de compactación por fusión forzada.</p>
 <h4 id="Default-standard-compaction" class="common-anchor-header">Predeterminado (compactación estándar)</h4><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -187,7 +188,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">Tamaño de destino explícito</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -219,11 +220,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Opcional. El tamaño del segmento de destino en MB. Hay tres opciones para el valor de este parámetro:</p><ul><li><p><strong>0 u omitido</strong>: utiliza el valor configurado en « <code translate="no">dataCoord.segment.maxSize</code> » (por defecto: 512 MB). Equivalente a la compactación estándar.</p></li><li><p><strong>Valor explícito</strong>: fusiona los segmentos hasta alcanzar aproximadamente el tamaño especificado en MB (p. ej., 2048). Debe ser mayor o igual que el valor de « <code translate="no">dataCoord.segment.maxSize</code> » configurado.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: calcula automáticamente el tamaño óptimo en función de la distribución actual de los segmentos y de los recursos disponibles del nodo.</p></li></ul></td>
+     <td><p>Opcional. El tamaño del segmento de destino en MB. Hay tres opciones para el valor de este parámetro:</p><ul><li><p><strong>0 u omitido</strong>: utiliza el valor configurado en « <code translate="no">dataCoord.segment.maxSize</code> » (por defecto: 1024 MB). Equivalente a la compactación estándar.</p></li><li><p><strong>Valor explícito</strong>: fusiona los segmentos hasta alcanzar aproximadamente el tamaño especificado en MB (p. ej., 2048). Debe ser mayor o igual que el valor de « <code translate="no">dataCoord.segment.maxSize</code> » configurado.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: calcula automáticamente el tamaño óptimo en función de la distribución actual de los segmentos y de los recursos disponibles del nodo.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Si el valor de « <code translate="no">target_size</code> » especificado es inferior al valor configurado de « <code translate="no">dataCoord.segment.maxSize</code> », la solicitud se rechaza con un error.</p>
+<p>Si el valor de « <code translate="no">target_size</code> » especificado es menor que el valor configurado de « <code translate="no">dataCoord.segment.maxSize</code> », la solicitud se rechaza con un error.</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">Comprobar el progreso de la compactación<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +287,7 @@ state = client.get_compaction_state(job_id)
 <p>Estos dos tipos de operaciones de compactación tienen fines distintos.</p>
 <ul>
 <li><p>La compactación estándar (targetSize=0 u omitido) es una ruta de limpieza incremental en la que se hace todo lo posible.</p></li>
-<li><p>La «fusión forzada» (targetSize &gt; 0) es un proceso de reempaquetado a nivel de colección para generar menos segmentos, pero más grandes, cercanos al tamaño objetivo.</p></li>
+<li><p>La «fusión forzada» (targetSize &gt; 0) es una ruta de reempaquetado a nivel de colección para generar segmentos más numerosos, más grandes y cercanos al tamaño objetivo.</p></li>
 </ul>
 <p>La diferencia clave radica en la forma de la fusión: la compactación estándar es, en la práctica, m → 1 por tarea, mientras que la fusión forzada es m → n entre entradas agrupadas. Por eso, la fusión forzada puede resolver distribuciones de segmentos que la compactación estándar no puede. La siguiente tabla compara los dos tipos de operaciones.</p>
 <table>
@@ -307,7 +308,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>Fuente del tamaño del segmento</p></td>
-     <td><p>Tamaño máximo fijo de «dataCoord.segment.maxSize» (configuración del servidor)</p></td>
+     <td><p>Tamaño máximo fijo de dataCoord.segment.maxSize (configuración del servidor)</p></td>
      <td><p>Valor «targetSize» del usuario, limitado posteriormente por «maxSafeSize» por motivos de seguridad</p></td>
    </tr>
    <tr>
@@ -328,7 +329,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>Comportamiento de los segmentos medios</p></td>
      <td><p>Puede quedarse atascado de forma permanente (por ejemplo, dos segmentos del 60 % no pueden convertirse legítimamente en un único segmento del 120 %)</p></td>
-     <td><p>Funciona el reempaquetado + división; no se produce el patrón de «atascado al 60 %»</p></td>
+     <td><p>Funciona el reempaquetado + división; no se produce el patrón de «atascamiento al 60 %»</p></td>
    </tr>
    <tr>
      <td><p>Capacidad de aplanamiento de la colección</p></td>
@@ -359,7 +360,7 @@ state = client.get_compaction_state(job_id)
 <p><strong>Orientación para la selección:</strong></p>
 <ul>
 <li><p>Elige la compactación estándar para una limpieza incremental de bajo riesgo.</p></li>
-<li><p>Elige la fusión forzada cuando desees explícitamente reestructurar la colección en un número menor de segmentos más grandes, alineados con el comportamiento de búsqueda y carga.</p></li>
+<li><p>Elige la fusión forzada cuando desees explícitamente reestructurar la colección en segmentos más grandes y menos numerosos, alineados con el comportamiento de búsqueda y carga.</p></li>
 </ul>
 <p><strong>¿En qué se diferencia la «fusión forzada» de la compactación por agrupamiento?</strong></p>
 <p>La compactación por clústeres (<code translate="no">is_clustering=True</code>) reorganiza los datos dentro de los segmentos basándose en una clave de agrupación para mejorar la poda de la búsqueda. La fusión forzada (<code translate="no">target_size=N</code>) optimiza el tamaño de los segmentos sin modificar la distribución de los datos. Ambas tienen fines distintos y pueden utilizarse conjuntamente: primero se ejecuta la compactación por clústeres para organizar los datos y, a continuación, la fusión forzada para consolidar los segmentos resultantes.</p>

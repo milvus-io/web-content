@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>The cards for AGENTS.md and the four topic prompts open the Python version. Each of them also has a Node.js, Go, and RESTful API v2 version:</p>
+<table>
+<thead>
+<tr><th>Prompt</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/agents_overview.md">Python</a></td><td><a href="/docs/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/agents_overview_go.md">Go</a></td><td><a href="/docs/agents_overview_restful.md">RESTful API v2</a></td></tr>
+<tr><td>Schema Design</td><td><a href="/docs/schema_design.md">Python</a></td><td><a href="/docs/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/schema_design_go.md">Go</a></td><td><a href="/docs/schema_design_restful.md">RESTful API v2</a></td></tr>
+<tr><td>Search Patterns</td><td><a href="/docs/search_patterns.md">Python</a></td><td><a href="/docs/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/search_patterns_go.md">Go</a></td><td><a href="/docs/search_patterns_restful.md">RESTful API v2</a></td></tr>
+<tr><td>Index Selection</td><td><a href="/docs/index_selection.md">Python</a></td><td><a href="/docs/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/index_selection_go.md">Go</a></td><td><a href="/docs/index_selection_restful.md">RESTful API v2</a></td></tr>
+<tr><td>RAG Pipeline</td><td><a href="/docs/rag_pipeline.md">Python</a></td><td><a href="/docs/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/rag_pipeline_go.md">Go</a></td><td><a href="/docs/rag_pipeline_restful.md">RESTful API v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Use in different environments<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

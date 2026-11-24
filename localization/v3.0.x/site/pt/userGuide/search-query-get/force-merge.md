@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">maxSize</code> A <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">compactação</a> padrão mantém os tamanhos dos segmentos próximos do valor configurado em « <code translate="no">maxSize</code> » através de fusões de muitos para um, mas pode ainda assim deixar fragmentos de tamanho médio que não podem ser fundidos sem exceder os limites. Por exemplo, conforme ilustrado abaixo, se uma coleção tiver cinco segmentos de 2 MB e o parâmetro « » for de 3 MB, a fusão de quaisquer dois segmentos excederia o limite; assim, a compactação padrão não consegue reduzir ainda mais o número de segmentos e o layout fragmentado permanece.</p>
+    </button></h2><p><code translate="no">maxSize</code> A <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">compactação</a> padrão mantém os tamanhos dos segmentos próximos do valor configurado em « <code translate="no">maxSize</code> » através de fusões de muitos para um, mas pode ainda assim deixar fragmentos de tamanho médio que não podem ser fundidos sem exceder os limites. Por exemplo, conforme ilustrado abaixo, se uma coleção tiver cinco segmentos de 2 MB e o parâmetro « » for de 3 MB, a fusão de quaisquer dois segmentos excederia o limite; por isso, a compactação padrão não consegue reduzir ainda mais o número de segmentos e o layout fragmentado permanece.</p>
 <p>A fusão forçada adiciona um parâmetro « <code translate="no">target_size</code> » e permite reorganizar os segmentos para o tamanho desejado, dentro de uma tolerância restrita, sempre que possível. Conforme ilustrado abaixo, se o « <code translate="no">target_size</code> » especificado for de 4 MB, os cinco segmentos pequenos de 2 MB podem ser ainda mais fundidos em menos segmentos maiores. Isto reduz o excesso de segmentos, suporta valores-alvo maiores do que as definições predefinidas de « <code translate="no">maxSize</code> » e, quando o valor-alvo é muito grande, permite que o sistema escolha um tamanho de saída e uma contagem de segmentos práticos para o hardware atual e a topologia do QueryNode.</p>
 <p>Para saber qual o método de compactação a utilizar, consulte <a href="#faq">as Perguntas Frequentes</a>.</p>
 <p><span class="img-wrapper">
@@ -128,13 +128,13 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
-     <td><p>Tamanho máximo predefinido do segmento em MB. Utilizado como valor-alvo quando ` <code translate="no">target_size</code> ` é igual a 0 ou está omitido. Serve também como valor mínimo permitido para a opção explícita ` <code translate="no">target_size</code>`.</p></td>
+     <td><p>1024</p></td>
+     <td><p>Tamanho máximo predefinido do segmento em MB. Utilizado como valor-alvo quando ` <code translate="no">target_size</code> ` é 0 ou está omitido. Serve também como valor mínimo permitido para ` <code translate="no">target_size</code>` explícito.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
      <td><p>100</p></td>
-     <td><p>Limite do número de segmentos para a seleção do algoritmo. Quando o número de segmentos excede este valor, o Milvus utiliza um algoritmo ganancioso mais rápido para o planeamento da fusão.</p><ul><li><p><strong>Algoritmo padrão</strong> (utilizado quando o número de segmentos é &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): produz resultados de fusão mais ótimos, mas demora mais tempo a calcular.</p></li><li><p><strong>Algoritmo ganancioso</strong> (utilizado quando o número de segmentos &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): conclui o planeamento muito mais rapidamente, em troca de um agrupamento de segmentos ligeiramente menos ótimo.</p></li></ul></td>
+     <td><p>Limiar do número de segmentos para a seleção do algoritmo. Quando o número de segmentos excede este valor, o Milvus utiliza um algoritmo ganancioso mais rápido para o planeamento da fusão.</p><ul><li><p><strong>Algoritmo padrão</strong> (utilizado quando o número de segmentos é &lt;= <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): produz resultados de fusão mais ótimos, mas demora mais tempo a calcular.</p></li><li><p><strong>Algoritmo ganancioso</strong> (utilizado quando o número de segmentos &gt; <code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code>): conclui o planeamento muito mais rapidamente, em troca de um agrupamento de segmentos ligeiramente menos ótimo.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
@@ -163,12 +163,12 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A compactação «Force Merge» é acionada chamando ` <code translate="no">compact()</code> ` com o parâmetro ` <code translate="no">target_size</code> `. Para obter detalhes sobre os parâmetros, consulte <a href="#parameter-reference">a «Referência de parâmetros»</a> abaixo.</p>
+    </button></h3><p>A compactação «Force Merge» é acionada chamando « <code translate="no">compact()</code> » com o parâmetro « <code translate="no">target_size</code> ». Para obter detalhes sobre os parâmetros, consulte <a href="#parameter-reference">a «Referência de parâmetros</a> » abaixo.</p>
 <p>Estão disponíveis três modos de compactação por fusão forçada:</p>
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -179,7 +179,7 @@ beta: Milvus 3.0.x
    Auto-calculates optimal size based on
    segment distribution and node memory
 <button class="copy-code-btn"></button></code></pre>
-<p>Seguem-se exemplos que mostram como utilizar cada modo de compactação por fusão forçada.</p>
+<p>Seguem-se exemplos que mostram como utilizar cada modo de compactação «Force Merge».</p>
 <h4 id="Default-standard-compaction" class="common-anchor-header">Padrão (compactação padrão)</h4><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -187,7 +187,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">Tamanho de destino explícito</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -219,11 +219,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Opcional. O tamanho do segmento de destino em MB. Existem 3 opções para o valor do parâmetro:</p><ul><li><p><strong>0 ou omitido</strong>: utiliza o valor configurado em « <code translate="no">dataCoord.segment.maxSize</code> » (predefinição: 512 MB). Equivalente à compactação padrão.</p></li><li><p><strong>Valor explícito</strong>: funde segmentos até aproximadamente o tamanho especificado em MB (por exemplo, 2048). Deve ser maior ou igual ao valor configurado para « <code translate="no">dataCoord.segment.maxSize</code> ».</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Calcula automaticamente o tamanho ideal com base na distribuição atual dos segmentos e nos recursos disponíveis do nó.</p></li></ul></td>
+     <td><p>Opcional. O tamanho do segmento de destino em MB. Existem 3 opções para o valor do parâmetro:</p><ul><li><p><strong>0 ou omitido</strong>: utiliza o valor configurado em « <code translate="no">dataCoord.segment.maxSize</code> » (predefinição: 1024 MB). Equivalente à compactação padrão.</p></li><li><p><strong>Valor explícito</strong>: funde segmentos até atingir aproximadamente o tamanho especificado em MB (por exemplo, 2048). Deve ser maior ou igual ao valor configurado para « <code translate="no">dataCoord.segment.maxSize</code> ».</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: Calcula automaticamente o tamanho ideal com base na distribuição atual dos segmentos e nos recursos disponíveis do nó.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Se o valor especificado para ` <code translate="no">target_size</code> ` for inferior ao valor configurado para ` <code translate="no">dataCoord.segment.maxSize</code>`, o pedido é rejeitado com um erro.</p>
+<p>Se o valor especificado para « <code translate="no">target_size</code> » for inferior ao valor configurado para « <code translate="no">dataCoord.segment.maxSize</code> », o pedido é rejeitado com um erro.</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">Verificar o progresso da compactação<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -264,7 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>Não utilize a compactação «Force Merge» em ambientes de produção.</strong></p></li>
 <li><p><strong>Utilize o modo de cálculo automático do tamanho na maioria dos casos.</strong> Definir ` <code translate="no">target_size</code> ` como ` <code translate="no">max_int64</code> ` permite que o Milvus analise a distribuição dos seus segmentos e os recursos dos nós para determinar o melhor tamanho. Esta é a abordagem recomendada, a menos que tenha requisitos específicos de dimensionamento.</p></li>
 <li><p><strong>Tenha em conta o compromisso em termos de desempenho.</strong> A compactação «Force Merge» é uma operação que consome muitos recursos. Lê, funde e reescreve os dados dos segmentos. Agende-a durante períodos de baixo tráfego para minimizar o impacto na latência das consultas.</p></li>
-<li><p><strong>Monitorize o número de segmentos antes e depois.</strong> Utilize <code translate="no">get_compaction_state()</code> e <code translate="no">list_persistent_segments</code> para verificar se a compactação produziu segmentos menos numerosos e maiores, tal como esperado.</p></li>
+<li><p><strong>Monitorize o número de segmentos antes e depois.</strong> Utilize <code translate="no">get_compaction_state()</code> e <code translate="no">list_persistent_segments</code> para verificar se a compactação produziu segmentos mais poucos e maiores, tal como esperado.</p></li>
 </ul>
 <p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -285,7 +285,7 @@ state = client.get_compaction_state(job_id)
     </button></h2><p><strong>Em que difere a compactação «Force Merge» da compactação padrão?</strong></p>
 <p>Estes dois tipos de operações de compactação têm finalidades diferentes.</p>
 <ul>
-<li><p>A compactação padrão (targetSize=0 ou omitida) é um percurso de limpeza incremental, no melhor dos casos.</p></li>
+<li><p>A compactação padrão (targetSize=0 ou omitida) é um percurso de limpeza incremental, no melhor esforço possível.</p></li>
 <li><p>A «Force Merge» (targetSize&gt;0) é um processo de reempacotamento ao nível da coleção, destinado a produzir segmentos mais poucos, maiores e próximos do tamanho-alvo.</p></li>
 </ul>
 <p>A principal diferença reside na forma da fusão: a compactação padrão é, efetivamente, m → 1 por tarefa, enquanto a fusão forçada é m → n entre entradas agrupadas. É por isso que a fusão forçada consegue resolver disposições de segmentos que a compactação padrão não consegue. A tabela seguinte compara os dois tipos de operações.</p>
@@ -352,7 +352,7 @@ state = client.get_compaction_state(job_id)
    </tr>
    <tr>
      <td><p>Expectativas de âmbito</p></td>
-     <td><p>Não se deve esperar um reempacotamento da coleção completa</p></td>
+     <td><p>Não se deve esperar um reempacotamento completo da coleção</p></td>
      <td><p>Destinado a resultados de reempacotamento ao nível da coleção</p></td>
    </tr>
 </table>

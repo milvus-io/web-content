@@ -132,7 +132,7 @@
             ]
           },
           {
-            "label": "Exécuter Milvus avec un GPU",
+            "label": "Exécuter Milvus avec le GPU",
             "id": "run_milvus_gpu",
             "order": 4,
             "isMenu": true,
@@ -177,7 +177,7 @@
             "children": []
           },
           {
-            "label": "Go SDK",
+            "label": "SDK Go",
             "id": "install-go.md",
             "order": 2,
             "children": []
@@ -293,7 +293,7 @@
     ]
   },
   {
-    "label": "Guide de l'utilisateur",
+    "label": "Guide d'utilisation",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -413,7 +413,7 @@
             "children": []
           },
           {
-            "label": "Champ « Nombre »",
+            "label": "Champ numérique",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "Analyse de JSON",
+                "label": "Analyse de fichiers JSON",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -533,7 +533,7 @@
                     "children": []
                   },
                   {
-                    "label": "Espace",
+                    "label": "Espace blanc",
                     "id": "whitespace-tokenizer.md",
                     "order": 1,
                     "children": []
@@ -985,7 +985,7 @@
                 "children": []
               },
               {
-                "label": "Filtrage et modèles",
+                "label": "Filtrage et création de modèles",
                 "id": "filtering-templating.md",
                 "order": 2,
                 "children": []
@@ -1183,7 +1183,7 @@
                 "children": []
               },
               {
-                "label": "Classement de la dégradation",
+                "label": "Classement de la décomposition",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1239,7 +1239,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI Ranker",
+                    "label": "Classement TEI",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1284,12 +1284,6 @@
             "label": "Utiliser mmap",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "Regroupement et compactage",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1708,7 +1702,7 @@
         ]
       },
       {
-        "label": "Mise à niveau",
+        "label": "Mise à jour",
         "id": "upgrade_milvus",
         "order": 7,
         "children": [
@@ -1973,7 +1967,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration dans une seule instance",
+                "label": "Sauvegarde et restauration au sein d'une même instance",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2043,7 +2037,7 @@
             "children": []
           },
           {
-            "label": "Passage",
+            "label": "Passage au numérique",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []
@@ -2680,7 +2674,7 @@
         "order": 5,
         "children": [
           {
-            "label": "PourquoiComment",
+            "label": "Pourquoi ? Comment ?",
             "id": "integrate_with_whyhow.md",
             "order": 0,
             "children": []
@@ -2842,7 +2836,7 @@
         "children": []
       },
       {
-        "label": "Développer RAG avec Milvus",
+        "label": "Créer un RAG avec Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -3014,7 +3008,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelles",
+        "label": "FAQ opérationnelle",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>Карточки для AGENTS.md и четырех тематических подсказок открывают версию на Python. Каждая из них также имеет версии на Node.js, Go и RESTful API v2:</p>
+<table>
+<thead>
+<tr><th>Запрос</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/ru/agents_overview.md">Python</a></td><td><a href="/docs/ru/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/ru/agents_overview_go.md">Go</a></td><td><a href="/docs/ru/agents_overview_restful.md">RESTful API v2</a></td></tr>
+<tr><td>Проектирование схем</td><td><a href="/docs/ru/schema_design.md">Python</a></td><td><a href="/docs/ru/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/ru/schema_design_go.md">Go</a></td><td><a href="/docs/ru/schema_design_restful.md">RESTful API версии 2</a></td></tr>
+<tr><td>Шаблоны поиска</td><td><a href="/docs/ru/search_patterns.md">Python</a></td><td><a href="/docs/ru/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/ru/search_patterns_go.md">Go</a></td><td><a href="/docs/ru/search_patterns_restful.md">RESTful API v2</a></td></tr>
+<tr><td>Выбор индекса</td><td><a href="/docs/ru/index_selection.md">Python</a></td><td><a href="/docs/ru/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/ru/index_selection_go.md">Go</a></td><td><a href="/docs/ru/index_selection_restful.md">RESTful API v2</a></td></tr>
+<tr><td>Конвейер RAG</td><td><a href="/docs/ru/rag_pipeline.md">Python</a></td><td><a href="/docs/ru/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/ru/rag_pipeline_go.md">Go</a></td><td><a href="/docs/ru/rag_pipeline_restful.md">RESTful API версии 2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Использование в различных средах<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +183,7 @@ summary: >-
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>Среда</th><th>Где разместить подсказку</th><th>Инструкции</th></tr>
+<tr><th>Среда</th><th>Где разместить запрос</th><th>Инструкции</th></tr>
 </thead>
 <tbody>
 <tr><td>Курсор</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">Настройка правил проекта</a></td></tr>
@@ -203,7 +216,7 @@ summary: >-
 <tr><th>Этап</th><th>Развертывание</th><th>Почему</th></tr>
 </thead>
 <tbody>
-<tr><td>Прототипирование</td><td><a href="/docs/ru/milvus_lite.md">Milvus Lite</a></td><td>Не требует настройки, работает в процессе. Запускается везде, где работает Python — идеально подходит для быстрого прототипирования агентов.</td></tr>
+<tr><td>Создание прототипа</td><td><a href="/docs/ru/milvus_lite.md">Milvus Lite</a></td><td>Не требует настройки, работает в процессе. Запускается везде, где работает Python — идеально подходит для быстрого прототипирования агентов.</td></tr>
 <tr><td>Разработка</td><td><a href="/docs/ru/install_standalone-docker.md">Milvus Standalone</a></td><td>Развертывание в Docker на одном узле. Подходит для локальной разработки и тестирования с реалистичными объемами данных.</td></tr>
 <tr><td>Производственная среда</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>Полностью управляемый Milvus без серверов. Не требуется управление инфраструктурой — агенты просто подключаются и работают.</td></tr>
 <tr><td>Самостоятельное развертывание в производственной среде</td><td><a href="/docs/ru/install_cluster-helm.md">Распределенная версия Milvus</a></td><td>Развертывание Kubernetes с несколькими узлами для команд, которым требуется полный контроль над своей инфраструктурой.</td></tr>

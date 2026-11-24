@@ -151,6 +151,19 @@ summary: 'AI 에이전트가 RAG, 시맨틱 검색 및 장기 기억을 위해 M
   </a>
 </div>
 </div>
+<p>AGENTS.md 및 네 가지 주제 프롬프트에 대한 카드는 Python 버전을 실행합니다. 또한 각각 Node.js, Go, RESTful API v2 버전도 제공합니다:</p>
+<table>
+<thead>
+<tr><th>프롬프트</th><th>파이썬</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/ko/agents_overview.md">Python</a></td><td><a href="/docs/ko/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/ko/agents_overview_go.md">Go</a></td><td><a href="/docs/ko/agents_overview_restful.md">RESTful API v2</a></td></tr>
+<tr><td>스키마 설계</td><td><a href="/docs/ko/schema_design.md">파이썬</a></td><td><a href="/docs/ko/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/ko/schema_design_go.md">Go</a></td><td><a href="/docs/ko/schema_design_restful.md">RESTful API v2</a></td></tr>
+<tr><td>검색 패턴</td><td><a href="/docs/ko/search_patterns.md">파이썬</a></td><td><a href="/docs/ko/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/ko/search_patterns_go.md">Go</a></td><td><a href="/docs/ko/search_patterns_restful.md">RESTful API v2</a></td></tr>
+<tr><td>인덱스 선택</td><td><a href="/docs/ko/index_selection.md">파이썬</a></td><td><a href="/docs/ko/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/ko/index_selection_go.md">Go</a></td><td><a href="/docs/ko/index_selection_restful.md">RESTful API v2</a></td></tr>
+<tr><td>RAG 파이프라인</td><td><a href="/docs/ko/rag_pipeline.md">Python</a></td><td><a href="/docs/ko/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/ko/rag_pipeline_go.md">Go</a></td><td><a href="/docs/ko/rag_pipeline_restful.md">RESTful API v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">다양한 환경에서의 사용<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,12 +181,12 @@ summary: 'AI 에이전트가 RAG, 시맨틱 검색 및 장기 기억을 위해 M
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>환경</th><th>프롬프트 배치 위치</th><th>지침</th></tr>
+<tr><th>환경</th><th>프롬프트 배치 위치</th><th>사용 방법</th></tr>
 </thead>
 <tbody>
 <tr><td>커서</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">프로젝트 규칙 구성</a></td></tr>
 <tr><td>GitHub Copilot</td><td><code translate="no">.github/copilot-instructions.md</code></td><td><a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions">사용자 지정 지침</a></td></tr>
-<tr><td>Claude Code</td><td><code translate="no">CLAUDE.md</code></td><td><a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code 문서</a></td></tr>
+<tr><td>Claude 코드</td><td><code translate="no">CLAUDE.md</code></td><td><a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code 문서</a></td></tr>
 <tr><td>JetBrains IDE</td><td><code translate="no">guidelines.md</code></td><td><a href="https://www.jetbrains.com/help/junie/customize-guidelines.html">가이드라인 사용자 지정</a></td></tr>
 <tr><td>Gemini CLI</td><td><code translate="no">GEMINI.md</code></td><td><a href="https://codelabs.developers.google.com/gemini-cli-hands-on">Gemini CLI 코드 랩</a></td></tr>
 <tr><td>VS Code</td><td><code translate="no">.instructions.md</code></td><td><a href="https://code.visualstudio.com/docs/copilot/copilot-customization">.instructions.md 구성</a></td></tr>
@@ -208,5 +221,5 @@ summary: 'AI 에이전트가 RAG, 시맨틱 검색 및 장기 기억을 위해 M
 </tbody>
 </table>
 <div class="alert note">
-<p>에이전트 워크로드의 경우, 프로덕션 환경에서는 <strong><a href="https://zilliz.com/cloud">Zilliz Cloud를</a></strong> 권장합니다. 에이전트는 일반적으로 인프라를 관리하지 않으므로, 서버리스 배포를 통해 운영 오버헤드를 제거하고 자동 스케일링을 제공합니다.</p>
+<p>에이전트 워크로드의 경우, 프로덕션 환경에서는 <strong><a href="https://zilliz.com/cloud">Zilliz Cloud를</a></strong> 권장합니다. 에이전트는 일반적으로 인프라를 관리하지 않으므로, 서버리스 배포를 통해 운영 부담을 줄이고 자동 스케일링을 제공합니다.</p>
 </div>

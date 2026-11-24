@@ -1111,8 +1111,6 @@ curl --request POST \
 <p>For details on the partition key, refer to <a href="/docs/v2.6.x/use-partition-key.md">Use Partition Key</a>.</p></li>
 <li><p>Use mmap</p>
 <p>For details on mmap-settings, refer to <a href="/docs/v2.6.x/mmap.md">Use mmap</a>.</p></li>
-<li><p>Clustering Compaction</p>
-<p>For details on clustering compactions, refer to <a href="/docs/v2.6.x/clustering-compaction.md">Clustering Compaction</a>.</p></li>
 <li><p>Use reranking</p>
 <p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/v2.6.x/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/v2.6.x/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

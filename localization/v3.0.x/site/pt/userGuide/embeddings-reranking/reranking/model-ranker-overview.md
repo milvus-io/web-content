@@ -134,20 +134,20 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Aplicações que processam documentos longos com prioridades de rentabilidade</p></td>
-     <td><ul><li><p>Segmentação avançada de documentos com sobreposição configurável</p></li><li><p>Pontuação baseada em fragmentos (o fragmento com a pontuação mais elevada representa o documento)</p></li><li><p>Suporte a diversos modelos de reclassificação</p></li><li><p>Económico, com variantes de modelo padrão e profissional</p></li></ul></td>
+     <td><ul><li><p>Divisão avançada de documentos em blocos com sobreposição configurável</p></li><li><p>Pontuação baseada em fragmentos (o fragmento com a pontuação mais elevada representa o documento)</p></li><li><p>Suporte a diversos modelos de reclassificação</p></li><li><p>Económico, com variantes de modelo padrão e profissional</p></li></ul></td>
      <td><p>Sistema de pesquisa de documentação técnica que processa manuais e artigos extensos que requerem segmentação inteligente e controlo de sobreposição</p></td>
    </tr>
    <tr>
      <td><p>DashScope</p></td>
      <td><p>Aplicações que utilizam modelos de reclassificação da Alibaba Cloud ou do Qwen</p></td>
-     <td><ul><li><p>API de reclassificação DashScope gerida</p></li><li><p>Suporta modelos de reclassificação, tais como <code translate="no">gte-rerank-v2</code></p></li><li><p>autenticação baseada em chave de API</p></li></ul></td>
+     <td><ul><li><p>API de reclassificação DashScope gerida</p></li><li><p>Suporta modelos de reclassificação, tais como <code translate="no">gte-rerank-v2</code></p></li><li><p>autenticação baseada em chave API</p></li></ul></td>
      <td><p>Aplicações RAG que pretendem reclassificar candidatos com modelos de reclassificação alojados na Alibaba Cloud</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
      <td><p>Aplicações que utilizam modelos de similaridade de frases do Hugging Face alojados</p></td>
      <td><ul><li><p>Utiliza o fornecedor « <code translate="no">hf-inference</code> » alojado</p></li><li><p>Seleciona modelos a partir do Hugging Face Hub</p></li><li><p>Calcula uma pontuação de similaridade de frases por candidato</p></li><li><p>Utiliza autenticação por chave de API</p></li></ul></td>
-     <td><p>Aplicações de pesquisa semântica que pretendem reclassificar textos candidatos com um modelo do Hugging Face sem terem de operar um serviço de inferência separado</p></td>
+     <td><p>Aplicações de pesquisa semântica que pretendem reclassificar textos candidatos com um modelo do Hugging Face sem ter de operar um serviço de inferência separado</p></td>
    </tr>
 </table>
 <p>Para obter informações detalhadas sobre a implementação de cada serviço de modelo, consulte a documentação dedicada:</p>
@@ -242,7 +242,25 @@ model_ranker = Function(
         .endpoint(<span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
         .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Create a model ranker function</span>
+<span class="hljs-keyword">const</span> model_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;semantic_ranker&quot;</span>,              <span class="hljs-comment">// Function identifier</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field to use for reranking</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be set to RERANK</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Specify model reranker. Must be &quot;model&quot;</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;tei&quot;</span>,                    <span class="hljs-comment">// Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>], <span class="hljs-comment">// Query text</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>, <span class="hljs-comment">// Model service endpoint</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -424,11 +442,11 @@ results = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
         .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
-        .outputFields(Collections.singletonList(document))
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
                 .build())
@@ -436,7 +454,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Use the model ranker in standard vector search</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collection_name,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Number of query vectors must match that specified in model_ranker.params.queries</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include the text field in outputs</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: model_ranker,                 <span class="hljs-comment">// Apply the model ranker here</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

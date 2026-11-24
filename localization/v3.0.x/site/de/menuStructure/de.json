@@ -729,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
+                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -826,7 +826,7 @@
             "children": []
           },
           {
-            "label": "Gleitkomma-Vektorindizes",
+            "label": "Gleitkommavektorindizes",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -1383,7 +1383,7 @@
                 "children": []
               },
               {
-                "label": "Verfalls-Ranking",
+                "label": "Verfall-Rangliste",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1413,7 +1413,7 @@
                     "children": []
                   },
                   {
-                    "label": "Anleitung: Implementierung einer zeitbasierten Rangfolge in Milvus",
+                    "label": "Anleitung: Implementierung eines zeitbasierten Rankings in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1463,7 +1463,7 @@
                     "children": []
                   },
                   {
-                    "label": "DashScope-Ranker",
+                    "label": "DashScope Ranker",
                     "id": "dashscope-ranker.md",
                     "order": 6,
                     "children": []
@@ -1493,7 +1493,7 @@
             "children": []
           },
           {
-            "label": "Zusammenführung und Verdichtung erzwingen",
+            "label": "Zusammenführung und Komprimierung erzwingen",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "AGENTS.md für Milvus",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Los",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful-API v2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Python-SDK",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "Schema-Entwurf",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Los",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful-API v2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Suchmuster",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Los",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful-API v2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Indexauswahl",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Los",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful-API v2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "RAG-Pipeline",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Los",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful-API v2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -2282,7 +2412,7 @@
                     "children": []
                   },
                   {
-                    "label": "Migration zwischen Instanzen über S3-Umgebungen hinweg",
+                    "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
                     "id": "multi-storage-backup-and-restore.md",
                     "order": 3,
                     "children": []
@@ -2317,7 +2447,7 @@
             "children": []
           },
           {
-            "label": "Anleitungen",
+            "label": "Anwendungshinweise",
             "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
@@ -2659,7 +2789,7 @@
                 "children": []
               },
               {
-                "label": "Milvus-Async-API",
+                "label": "Milvus Async-API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -3256,7 +3386,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matryoshka-Embeddings",
+        "label": "Trichter-Suche mit Matroschka-Einbettungen",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

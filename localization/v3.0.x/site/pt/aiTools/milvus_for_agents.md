@@ -153,6 +153,19 @@ summary: >-
   </a>
 </div>
 </div>
+<p>Os cartões para AGENTS.md e os quatro temas sugeridos abrem a versão em Python. Cada um deles dispõe também de uma versão em Node.js, Go e API RESTful v2:</p>
+<table>
+<thead>
+<tr><th>Tema</th><th>Python</th><th>Node.js</th><th>Go</th><th>API RESTful v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/pt/agents_overview.md">Python</a></td><td><a href="/docs/pt/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/pt/agents_overview_go.md">Go</a></td><td><a href="/docs/pt/agents_overview_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Conceção de esquemas</td><td><a href="/docs/pt/schema_design.md">Python</a></td><td><a href="/docs/pt/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/pt/schema_design_go.md">Go</a></td><td><a href="/docs/pt/schema_design_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Padrões de pesquisa</td><td><a href="/docs/pt/search_patterns.md">Python</a></td><td><a href="/docs/pt/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/pt/search_patterns_go.md">Go</a></td><td><a href="/docs/pt/search_patterns_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Seleção de índice</td><td><a href="/docs/pt/index_selection.md">Python</a></td><td><a href="/docs/pt/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/pt/index_selection_go.md">Go</a></td><td><a href="/docs/pt/index_selection_restful.md">API RESTful v2</a></td></tr>
+<tr><td>Pipeline RAG</td><td><a href="/docs/pt/rag_pipeline.md">Python</a></td><td><a href="/docs/pt/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/pt/rag_pipeline_go.md">Go</a></td><td><a href="/docs/pt/rag_pipeline_restful.md">API RESTful v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Utilização em diferentes ambientes<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

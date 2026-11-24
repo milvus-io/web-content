@@ -128,8 +128,8 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
-     <td><p>Taille maximale par défaut d'un segment en Mo. Utilisée comme valeur cible lorsque ` <code translate="no">target_size</code> ` est égal à 0 ou omis. Sert également de valeur minimale autorisée pour l'option explicite ` <code translate="no">target_size</code>`.</p></td>
+     <td><p>1024</p></td>
+     <td><p>Taille maximale par défaut d'un segment, en Mo. Utilisée comme valeur cible lorsque ` <code translate="no">target_size</code> ` est égal à 0 ou omis. Sert également de valeur minimale autorisée pour l'option explicite ` <code translate="no">target_size</code>`.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.maxFullSegmentThreshold</code></p></td>
@@ -168,7 +168,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -179,7 +179,7 @@ beta: Milvus 3.0.x
    Auto-calculates optimal size based on
    segment distribution and node memory
 <button class="copy-code-btn"></button></code></pre>
-<p>Voici quelques exemples illustrant l’utilisation de chaque mode de compactage par fusion forcée.</p>
+<p>Voici des exemples illustrant l’utilisation de chaque mode de compactage par fusion forcée.</p>
 <h4 id="Default-standard-compaction" class="common-anchor-header">Par défaut (compactage standard)</h4><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -187,7 +187,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">Taille cible explicite</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -219,11 +219,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Facultatif. Taille cible du segment en Mo. Il existe 3 options pour la valeur de ce paramètre :</p><ul><li><p><strong>0 ou omis</strong>: utilise la valeur configurée pour « <code translate="no">dataCoord.segment.maxSize</code> » (par défaut : 512 Mo). Équivaut à un compactage standard.</p></li><li><p><strong>Valeur explicite</strong>: fusionne les segments pour obtenir une taille approximative en Mo (par ex. 2048). Doit être supérieure ou égale à l’ <code translate="no">dataCoord.segment.maxSize</code> configurée.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: calcule automatiquement la taille optimale en fonction de la répartition actuelle des segments et des ressources disponibles sur le nœud.</p></li></ul></td>
+     <td><p>Facultatif. Taille cible du segment en Mo. Il existe 3 options pour la valeur de ce paramètre :</p><ul><li><p><strong>0 ou omis</strong>: utilise la valeur configurée pour « <code translate="no">dataCoord.segment.maxSize</code> » (par défaut : 1 024 Mo). Équivaut à une compaction standard.</p></li><li><p><strong>Valeur explicite</strong>: fusionne les segments pour obtenir une taille approximative en Mo (par ex. 2048). Doit être supérieure ou égale à l’ <code translate="no">dataCoord.segment.maxSize</code> configurée.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: calcule automatiquement la taille optimale en fonction de la répartition actuelle des segments et des ressources disponibles sur le nœud.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Si l’ <code translate="no">target_size</code> spécifiée est inférieure à la valeur configurée <code translate="no">dataCoord.segment.maxSize</code>, la requête est rejetée avec une erreur.</p>
+<p>Si l'<code translate="no">target_size</code> spécifiée est inférieure à la valeur configurée <code translate="no">dataCoord.segment.maxSize</code>, la requête est rejetée avec une erreur.</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">Vérifier la progression de la compaction<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -264,7 +264,7 @@ state = client.get_compaction_state(job_id)
 <li><p><strong>N’utilisez pas la compaction par fusion forcée dans les environnements de production.</strong></p></li>
 <li><p><strong>Utilisez le mode de calcul automatique de la taille dans la plupart des cas.</strong> En définissant ` <code translate="no">target_size</code> ` sur ` <code translate="no">max_int64</code> `, Milvus analyse la répartition de vos segments et les ressources des nœuds pour déterminer la taille optimale. C'est l'approche recommandée, sauf si vous avez des exigences spécifiques en matière de dimensionnement.</p></li>
 <li><p><strong>Tenez compte du compromis en termes de performances.</strong> La compaction par fusion forcée est une opération gourmande en ressources. Elle lit, fusionne et réécrit les données des segments. Planifiez-la pendant les périodes de faible trafic afin de minimiser l’impact sur la latence des requêtes.</p></li>
-<li><p><strong>Surveillez le nombre de segments avant et après l’opération.</strong> Utilisez <code translate="no">get_compaction_state()</code> et <code translate="no">list_persistent_segments</code> pour vérifier que la compaction a bien généré, comme prévu, un nombre réduit de segments plus volumineux.</p></li>
+<li><p><strong>Surveillez le nombre de segments avant et après l'opération.</strong> Utilisez <code translate="no">get_compaction_state()</code> et <code translate="no">list_persistent_segments</code> pour vérifier que la compaction a bien généré, comme prévu, un nombre réduit de segments plus volumineux.</p></li>
 </ul>
 <p><a id="faq"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -362,8 +362,8 @@ state = client.get_compaction_state(job_id)
 <li><p>Optez pour la fusion forcée lorsque vous souhaitez explicitement restructurer la collection en un nombre réduit de segments plus volumineux, adaptés au comportement de recherche et de chargement.</p></li>
 </ul>
 <p><strong>En quoi la « fusion forcée » diffère-t-elle de la compaction par regroupement ?</strong></p>
-<p>La compaction par regroupement (<code translate="no">is_clustering=True</code>) réorganise les données au sein des segments en fonction d’une clé de regroupement afin d’améliorer l’élagage des requêtes. La fusion forcée (<code translate="no">target_size=N</code>) optimise la taille des segments sans modifier la répartition des données. Ces deux opérations ont des objectifs différents et peuvent être utilisées conjointement : lancez d’abord la compaction par regroupement pour organiser les données, puis la fusion forcée pour consolider les segments obtenus.</p>
+<p>La compaction par regroupement (<code translate="no">is_clustering=True</code>) réorganise les données au sein des segments en fonction d’une clé de regroupement afin d’améliorer l’élagage des requêtes. La fusion forcée (<code translate="no">target_size=N</code>) optimise la taille des segments sans modifier la répartition des données. Ces deux opérations ont des objectifs différents et peuvent être utilisées conjointement : exécutez d’abord la compaction par regroupement pour organiser les données, puis la fusion forcée pour consolider les segments obtenus.</p>
 <p><strong>Puis-je exécuter « Force Merge » sur une collection en cours d’interrogation ?</strong></p>
-<p>Oui. « Force Merge » s’exécute de manière asynchrone et ne bloque pas les requêtes. Cependant, cette opération consomme des ressources DataNode et des ressources d’E/S disque ; la latence des requêtes peut donc augmenter pendant la compaction. Pour obtenir les meilleurs résultats, planifiez « Force Merge » pendant les périodes de faible trafic.</p>
+<p>Oui. Force Merge s’exécute de manière asynchrone et ne bloque pas les requêtes. Cependant, cette opération consomme des ressources DataNode et des ressources d’E/S disque ; la latence des requêtes peut donc augmenter pendant la compaction. Pour obtenir les meilleurs résultats, planifiez l’exécution de Force Merge pendant les périodes de faible trafic.</p>
 <p><strong>Que se passe-t-il si je définis une valeur target_size inférieure à maxSize ?</strong></p>
 <p>La requête est rejetée avec une erreur. La taille cible doit être supérieure ou égale à la valeur configurée pour ` <code translate="no">dataCoord.segment.maxSize</code>`.</p>

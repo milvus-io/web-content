@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース情報",
+        "label": "リリース",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "ノウヒア",
+            "label": "ノウウェア",
             "id": "knowhere.md",
             "order": 6,
             "children": []
@@ -485,7 +485,7 @@
                 "children": []
               },
               {
-                "label": "Index StructArray のフィールド",
+                "label": "インデックス、構造体配列のフィールド",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -540,7 +540,7 @@
                 "children": []
               },
               {
-                "label": "内蔵アナライザ",
+                "label": "組み込みアナライザ",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "デコンパウンダー",
+                    "label": "脱コンパウンド装置",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -1071,7 +1071,7 @@
             "children": []
           },
           {
-            "label": "検索の集約",
+            "label": "検索の集計",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1235,7 +1235,7 @@
             ]
           },
           {
-            "label": "Milvus への Elasticsearch クエリ",
+            "label": "Elasticsearch クエリを Milvus に送信",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1261,7 +1261,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "BM25 の機能",
+            "label": "BM25の機能",
             "id": "bm25-function.md",
             "order": 0,
             "children": []
@@ -1433,7 +1433,7 @@
                     "children": []
                   },
                   {
-                    "label": "vLLM ランカー",
+                    "label": "vLLMランカー",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "Milvus用 AGENTS.md",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Python SDK",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "スキーマ設計",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "検索パターン",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "インデックスの選択",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "RAGパイプライン",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Go",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API v2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -2043,7 +2173,7 @@
                 "children": []
               },
               {
-                "label": "指標を可視化する",
+                "label": "指標の可視化",
                 "id": "visualize.md",
                 "order": 2,
                 "children": []
@@ -2990,7 +3120,7 @@
             "children": []
           },
           {
-            "label": "オッラマ",
+            "label": "オラマ",
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
@@ -3219,7 +3349,7 @@
         "children": []
       },
       {
-        "label": "Milvus を使用したグラフ RAG",
+        "label": "Milvus を使用した RAG のグラフ化",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3361,7 +3491,7 @@
         "children": []
       },
       {
-        "label": "Milvus Limits",
+        "label": "Milvus リミッツ",
         "id": "limitations.md",
         "order": 3,
         "children": []

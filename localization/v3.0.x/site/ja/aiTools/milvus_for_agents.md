@@ -127,7 +127,7 @@ summary: AIエージェントが、RAG、セマンティック検索、長期記
 <div class="start_card_container">
   <a href="/docs/ja/rag_pipeline.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RAGパイプライン</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Milvusを用いたエンドツーエンドの検索強化生成フロー。</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Milvusを用いたエンドツーエンドの検索増強生成フロー。</p>
   </a>
 </div>
 </div>
@@ -151,6 +151,19 @@ summary: AIエージェントが、RAG、セマンティック検索、長期記
   </a>
 </div>
 </div>
+<p>AGENTS.md および 4 つのトピック・プロンプトのカードをクリックすると、Python バージョンが開きます。それぞれに、Node.js、Go、および RESTful API v2 バージョンも用意されています：</p>
+<table>
+<thead>
+<tr><th>プロンプト</th><th>Python</th><th>Node.js</th><th>Go</th><th>RESTful API v2</th></tr>
+</thead>
+<tbody>
+<tr><td>AGENTS.md</td><td><a href="/docs/ja/agents_overview.md">Python</a></td><td><a href="/docs/ja/agents_overview_nodejs.md">Node.js</a></td><td><a href="/docs/ja/agents_overview_go.md">Go</a></td><td><a href="/docs/ja/agents_overview_restful.md">RESTful API v2</a></td></tr>
+<tr><td>スキーマ設計</td><td><a href="/docs/ja/schema_design.md">Python</a></td><td><a href="/docs/ja/schema_design_nodejs.md">Node.js</a></td><td><a href="/docs/ja/schema_design_go.md">Go</a></td><td><a href="/docs/ja/schema_design_restful.md">RESTful API v2</a></td></tr>
+<tr><td>検索パターン</td><td><a href="/docs/ja/search_patterns.md">Python</a></td><td><a href="/docs/ja/search_patterns_nodejs.md">Node.js</a></td><td><a href="/docs/ja/search_patterns_go.md">Go</a></td><td><a href="/docs/ja/search_patterns_restful.md">RESTful API v2</a></td></tr>
+<tr><td>インデックスの選択</td><td><a href="/docs/ja/index_selection.md">Python</a></td><td><a href="/docs/ja/index_selection_nodejs.md">Node.js</a></td><td><a href="/docs/ja/index_selection_go.md">Go</a></td><td><a href="/docs/ja/index_selection_restful.md">RESTful API v2</a></td></tr>
+<tr><td>RAGパイプライン</td><td><a href="/docs/ja/rag_pipeline.md">Python</a></td><td><a href="/docs/ja/rag_pipeline_nodejs.md">Node.js</a></td><td><a href="/docs/ja/rag_pipeline_go.md">Go</a></td><td><a href="/docs/ja/rag_pipeline_restful.md">RESTful API v2</a></td></tr>
+</tbody>
+</table>
 <h3 id="Use-in-different-environments" class="common-anchor-header">さまざまな環境での利用<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +181,7 @@ summary: AIエージェントが、RAG、セマンティック検索、長期記
       </svg>
     </button></h3><table>
 <thead>
-<tr><th>環境</th><th>プロンプトの配置場所</th><th>手順</th></tr>
+<tr><th>環境</th><th>プロンプトの配置場所</th><th>操作手順</th></tr>
 </thead>
 <tbody>
 <tr><td>カーソル</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">プロジェクトルールの設定</a></td></tr>
@@ -180,7 +193,7 @@ summary: AIエージェントが、RAG、セマンティック検索、長期記
 <tr><td>Windsurf</td><td><code translate="no">guidelines.md</code></td><td><a href="https://docs.windsurf.com/windsurf/customize">guidelines.md の設定</a></td></tr>
 </tbody>
 </table>
-<h2 id="Recommended-deployment-for-agents" class="common-anchor-header">エージェントの推奨デプロイ方法<button data-href="#Recommended-deployment-for-agents" class="anchor-icon" translate="no">
+<h2 id="Recommended-deployment-for-agents" class="common-anchor-header">エージェント向けの推奨デプロイ方法<button data-href="#Recommended-deployment-for-agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,7 +214,7 @@ summary: AIエージェントが、RAG、セマンティック検索、長期記
 <tr><th>段階</th><th>デプロイメント</th><th>理由</th></tr>
 </thead>
 <tbody>
-<tr><td>プロトタイピング</td><td><a href="/docs/ja/milvus_lite.md">Milvus Lite</a></td><td>設定不要、インプロセス。Pythonが動作する環境ならどこでも実行可能 — エージェントの迅速なプロトタイピングに最適。</td></tr>
+<tr><td>プロトタイピング</td><td><a href="/docs/ja/milvus_lite.md">Milvus Lite</a></td><td>設定不要、インプロセス。Pythonが動作する環境ならどこでも実行可能 — エージェントのプロトタイピングを迅速に行うのに最適です。</td></tr>
 <tr><td>開発</td><td><a href="/docs/ja/install_standalone-docker.md">Milvus Standalone</a></td><td>シングルノードのDockerデプロイ。現実的なデータ量を用いたローカル開発やテストに適しています。</td></tr>
 <tr><td>本番環境</td><td><a href="https://cloud.zilliz.com/signup">Zilliz Cloud</a></td><td>フルマネージドのサーバーレス Milvus。インフラの管理は不要で、エージェントを接続するだけで動作します。</td></tr>
 <tr><td>セルフホスト型本番環境</td><td><a href="/docs/ja/install_cluster-helm.md">Milvus Distributed</a></td><td>インフラストラクチャを完全に制御する必要があるチーム向けの、マルチノードKubernetesデプロイメント。</td></tr>

@@ -138,7 +138,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Phrase matching accuracy depends significantly on the analyzer used to tokenize your text data. Different analyzers suit different languages and text formats, affecting tokenization and positional accuracy. Selecting an appropriate analyzer for your specific use case will optimize your phrase matching results.</p>
-<p>By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation and converts text to lowercase. No additional parameters are required for default usage. Refer to <a href="/docs/v2.6.x/standard-analyzer.md">Standard Analyzer</a> for details.</p>
+<p>By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to <a href="/docs/v2.6.x/standard-analyzer.md">Standard Analyzer</a> for details.</p>
 <p>If your application requires a specific analyzer, configure it using the <code translate="no">analyzer_params</code> parameter. For example, here’s how to configure the <code translate="no">english</code> analyzer for phrase matching in English text:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {

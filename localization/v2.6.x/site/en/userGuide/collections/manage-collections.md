@@ -174,7 +174,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/v2.6.x/use-partition-key.md">Use Partition Key</a></p></li>
 <li><p><a href="/docs/v2.6.x/mmap.md">Use mmap</a></p></li>
-<li><p><a href="/docs/v2.6.x/clustering-compaction.md">Clustering Compaction</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"

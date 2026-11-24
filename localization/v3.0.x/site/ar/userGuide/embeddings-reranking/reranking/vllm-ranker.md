@@ -26,7 +26,7 @@ beta: Milvus 2.6.x
 <p>يُعد vLLM Ranker ذا قيمة خاصة للتطبيقات التي تُعد فيها الدقة والسياق أمرين بالغي الأهمية، مثل:</p>
 <ul>
 <li><p>البحث في الوثائق الفنية التي تتطلب فهمًا عميقًا للمفاهيم</p></li>
-<li><p>قواعد البيانات البحثية التي تفوق فيها العلاقات الدلالية أهمية مطابقة الكلمات المفتاحية</p></li>
+<li><p>قواعد بيانات الأبحاث التي تفوق فيها العلاقات الدلالية أهمية مطابقة الكلمات المفتاحية</p></li>
 <li><p>أنظمة دعم العملاء التي تحتاج إلى مطابقة مشاكل المستخدمين مع الحلول ذات الصلة</p></li>
 <li><p>البحث في التجارة الإلكترونية الذي يجب أن يفهم خصائص المنتج ونية المستخدم</p></li>
 </ul>
@@ -84,7 +84,7 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام vLLM Ranker في تطبيق Milvus الخاص بك، قم بإنشاء كائن Function يحدد كيفية عمل إعادة الترتيب. سيتم تمرير هذه الوظيفة إلى عمليات البحث في Milvus لتحسين ترتيب النتائج.</p>
+    </button></h2><p>لاستخدام vLLM Ranker في تطبيق Milvus الخاص بك، قم بإنشاء كائن Function يحدد كيفية عمل إعادة الترتيب. سيتم تمرير هذه الدالة إلى عمليات البحث في Milvus لتحسين ترتيب النتائج.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -135,7 +135,27 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>, <span class="hljs-string">&quot;256&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Create a vLLM Ranker function</span>
+<span class="hljs-keyword">const</span> vllm_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;vllm_semantic_ranker&quot;</span>,         <span class="hljs-comment">// Choose a descriptive name</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// Field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Specifies model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;vllm&quot;</span>,                   <span class="hljs-comment">// Specifies vLLM service</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment">// vLLM service address</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">32</span>,          <span class="hljs-comment">// Optional: batch size</span>
+    <span class="hljs-attr">truncate_prompt_tokens</span>: <span class="hljs-number">256</span>,        <span class="hljs-comment">// Optional: Use last 256 tokens</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -217,7 +237,7 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">المعلمات الخاصة بـ vLLM Ranker<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">المعلمات الخاصة بـ vLLM ranker<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -243,7 +263,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يجب ضبطها على " <code translate="no">"model"</code> " لتمكين إعادة ترتيب النماذج.</p></td>
+     <td><p>يجب ضبطها على <code translate="no">"model"</code> لتمكين إعادة ترتيب النموذج.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
@@ -332,7 +352,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with vLLM reranking</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: vllm_ranker,                  <span class="hljs-comment">// Apply vLLM reranking</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

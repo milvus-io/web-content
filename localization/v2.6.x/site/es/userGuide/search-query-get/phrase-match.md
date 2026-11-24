@@ -1,17 +1,17 @@
 ---
 id: phrase-match.md
-title: Búsqueda de frasesCompatible with Milvus 2.5.17+
+title: Coincidencia de fraseCompatible with Milvus 2.5.17+
 summary: >-
   La búsqueda por frase te permite buscar documentos que contengan los términos
   de tu consulta como una frase exacta. Por defecto, las palabras deben aparecer
-  en el mismo orden y estar directamente una al lado de la otra. Por ejemplo,
-  una consulta como «robótica aprendizaje automático» encuentra coincidencias en
-  textos como «…modelos típicos de robótica y aprendizaje automático…», en los
-  que las palabras «robótica», «automático» y «aprendizaje» aparecen en
-  secuencia sin que haya otras palabras entre ellas.
+  en el mismo orden y una justo al lado de la otra. Por ejemplo, una consulta
+  como «robótica aprendizaje automático» encuentra coincidencias en textos como
+  «…modelos típicos de robótica y aprendizaje automático…», en los que las
+  palabras «robótica», «automático» y «aprendizaje» aparecen en secuencia sin
+  que haya otras palabras entre ellas.
 beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Búsqueda de frases<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Coincidencia de frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,8 +26,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La coincidencia de frases te permite buscar documentos que contengan los términos de tu consulta como una frase exacta. Por defecto, las palabras deben aparecer en el mismo orden y estar directamente una al lado de la otra. Por ejemplo, una consulta como <strong>«robótica aprendizaje automático»</strong> encuentra coincidencias en textos como <em>«…modelos típicos de aprendizaje automático en robótica…»</em>, donde las palabras <strong>«robótica»</strong>, <strong>«aprendizaje»</strong> y <strong>«automático»</strong> aparecen en secuencia sin que haya otras palabras entre ellas.</p>
-<p>Sin embargo, en situaciones reales, la coincidencia estricta de frases puede resultar demasiado rígida. Es posible que desees encontrar texto como <em>«…modelos de aprendizaje automático ampliamente adoptados en robótica…».</em> En este caso, las mismas palabras clave están presentes, pero no una al lado de la otra ni en el orden original. Para solucionar esto, la coincidencia de frases admite un parámetro « <code translate="no">slop</code> », que aporta flexibilidad. El valor « <code translate="no">slop</code> » define cuántos desplazamientos posicionales se permiten entre los términos de la frase. Por ejemplo, con un « <code translate="no">slop</code> » de 1, una consulta de <strong>«machine learning»</strong> puede coincidir con un texto como <em>«…machine deep learning…»</em>, donde una palabra (<strong>«deep»</strong>) separa los términos originales.</p>
+    </button></h1><p>La coincidencia de frases te permite buscar documentos que contengan los términos de tu consulta como una frase exacta. Por defecto, las palabras deben aparecer en el mismo orden y una justo al lado de la otra. Por ejemplo, una consulta como <strong>«robótica aprendizaje automático»</strong> encuentra coincidencias en textos como <em>«…modelos típicos de aprendizaje automático en robótica…»</em>, donde las palabras <strong>«robótica»</strong>, <strong>«automático»</strong> y <strong>«aprendizaje»</strong> aparecen en secuencia sin que haya otras palabras entre ellas.</p>
+<p>Sin embargo, en situaciones reales, la coincidencia estricta de frases puede resultar demasiado rígida. Es posible que desees encontrar texto como <em>«…modelos de aprendizaje automático ampliamente adoptados en robótica…».</em> En este caso, las mismas palabras clave están presentes, pero no una al lado de la otra ni en el orden original. Para solucionar esto, la coincidencia de frases admite un parámetro « <code translate="no">slop</code> », que aporta flexibilidad. El valor de « <code translate="no">slop</code> » define cuántos desplazamientos posicionales se permiten entre los términos de la frase. Por ejemplo, con un « <code translate="no">slop</code> » de 1, una consulta de <strong>«machine learning»</strong> puede coincidir con un texto como <em>«…machine deep learning…»</em>, donde una palabra (<strong>«deep»</strong>) separa los términos originales.</p>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -138,9 +138,9 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La precisión de la coincidencia de frases depende en gran medida del analizador utilizado para tokenizar los datos de texto. Los distintos analizadores se adaptan a diferentes idiomas y formatos de texto, lo que afecta a la tokenización y a la precisión posicional. Seleccionar un analizador adecuado para su caso de uso específico optimizará los resultados de la coincidencia de frases.</p>
-<p>De forma predeterminada, Milvus utiliza el analizador estándar, que segmenta el texto basándose en los espacios en blanco y la puntuación, y convierte el texto a minúsculas. No se requieren parámetros adicionales para el uso predeterminado. Consulta <a href="/docs/es/v2.6.x/standard-analyzer.md">«Analizador estándar»</a> para obtener más detalles.</p>
-<p>Si su aplicación requiere un analizador específico, configúrelo utilizando el parámetro « <code translate="no">analyzer_params</code> ». Por ejemplo, a continuación se explica cómo configurar el analizador « <code translate="no">english</code> » para la coincidencia de frases en texto en inglés:</p>
+    </button></h3><p>La precisión de la coincidencia de frases depende en gran medida del analizador utilizado para tokenizar los datos de texto. Los distintos analizadores se adaptan a diferentes idiomas y formatos de texto, lo que afecta a la tokenización y a la precisión posicional. Seleccionar un analizador adecuado para tu caso de uso específico optimizará los resultados de la coincidencia de frases.</p>
+<p>De forma predeterminada, Milvus utiliza el analizador estándar, que tokeniza el texto basándose en los espacios en blanco y la puntuación, elimina los tokens de más de 40 caracteres y convierte el texto a minúsculas. No se requieren parámetros adicionales para el uso predeterminado. Consulta <a href="/docs/es/v2.6.x/standard-analyzer.md">Analizador estándar</a> para obtener más detalles.</p>
+<p>Si su aplicación requiere un analizador específico, configúrelo utilizando el parámetro ` <code translate="no">analyzer_params</code> `. Por ejemplo, a continuación se explica cómo configurar el analizador ` <code translate="no">english</code> ` para la coincidencia de frases en texto en inglés:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -156,7 +156,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus admite varios analizadores adaptados a diferentes idiomas y casos de uso. Para obtener información detallada, consulta <a href="/docs/es/v2.6.x/analyzer-overview.md">la Descripción general del analizador</a>.</p>
+<p>Milvus admite varios analizadores adaptados a diferentes idiomas y casos de uso. Para obtener información detallada, consulta <a href="/docs/es/v2.6.x/analyzer-overview.md">la Descripción general de los analizadores</a>.</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">Utilizar la coincidencia de frases<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,8 +199,8 @@ schema.add_field(
 <li><p><code translate="no">phrase</code><strong>:</strong> La frase exacta que se va a buscar.</p></li>
 <li><p><code translate="no">slop</code> (opcional)<strong>:</strong> Un número entero que especifica el número máximo de posiciones permitidas en los tokens coincidentes.</p>
 <ul>
-<li><p><code translate="no">0</code> (por defecto): Solo busca coincidencias exactas de la frase. Ejemplo: un filtro para <strong>«machine learning»</strong> coincidirá exactamente con <strong>«machine learning»</strong>, pero no con <strong>«machine boosts learning»</strong> ni con <strong>«learning machine».</strong></p></li>
-<li><p><code translate="no">1</code>: Permite variaciones menores, como un término adicional o un ligero cambio de posición. Ejemplo: un filtro para <strong>«machine learning»</strong> coincidirá con <strong>«machine boosts learning»</strong> (un token entre <strong>«machine»</strong> y <strong>«learning»</strong>), pero no con <strong>«learning machine»</strong> (términos invertidos).</p></li>
+<li><p><code translate="no">0</code> (por defecto): Solo busca coincidencias exactas de frases. Ejemplo: un filtro para <strong>«machine learning»</strong> coincidirá exactamente con <strong>«machine learning»</strong>, pero no con <strong>«machine boosts learning»</strong> ni con <strong>«learning machine».</strong></p></li>
+<li><p><code translate="no">1</code>: Permite variaciones menores, como un término adicional o un pequeño cambio de posición. Ejemplo: un filtro para <strong>«machine learning»</strong> coincidirá con <strong>«machine boosts learning»</strong> (un token entre <strong>«machine»</strong> y <strong>«learning»</strong>), pero no con <strong>«learning machine»</strong> (términos invertidos).</p></li>
 <li><p><code translate="no">2</code>: Permite mayor flexibilidad, incluyendo el orden invertido de los términos o hasta dos tokens entre ellos. Ejemplo: un filtro para <strong>«machine learning»</strong> coincidirá con <strong>«learning machine»</strong> (términos invertidos) o <strong>«machine quickly boosts learning»</strong> (dos tokens entre <strong>«machine»</strong> y <strong>«learning»</strong>).</p></li>
 </ul></li>
 </ul>

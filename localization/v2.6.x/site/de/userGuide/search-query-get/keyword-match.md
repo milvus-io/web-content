@@ -2,7 +2,7 @@
 id: keyword-match.md
 title: Textabgleich
 summary: >-
-  Die Textübereinstimmungsfunktion in Milvus ermöglicht eine präzise
+  Die Textübereinstimmungssuche in Milvus ermöglicht eine präzise
   Dokumentensuche anhand bestimmter Begriffe. Diese Funktion wird in erster
   Linie für die gefilterte Suche verwendet, um bestimmte Bedingungen zu
   erfüllen, und kann skalare Filterung einbeziehen, um die Suchergebnisse zu
@@ -48,7 +48,7 @@ summary: >-
 <li><p><a href="/docs/de/v2.6.x/analyzer-overview.md">Analysator</a>: Der Analysator verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und anschließend bei Bedarf Filter anwendet. Auf diese Weise kann Milvus einen Index auf Basis dieser Token erstellen.</p></li>
 <li><p><a href="/docs/de/v2.6.x/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes eindeutige Token den Dokumenten zuordnet, in denen es vorkommt.</p></li>
 </ol>
-<p>Wenn ein Benutzer eine Textsuche durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente abzurufen, die die Suchbegriffe enthalten. Dies ist wesentlich schneller, als jedes Dokument einzeln zu durchsuchen.</p>
+<p>Wenn ein Benutzer eine Textabfrage durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente abzurufen, die die Suchbegriffe enthalten. Dies ist wesentlich schneller, als jedes Dokument einzeln zu durchsuchen.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -226,7 +226,7 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>Die Leistung und Genauigkeit des Schlüsselwortabgleichs hängen vom ausgewählten Analysator ab. Verschiedene Analysatoren sind auf unterschiedliche Sprachen und Textstrukturen zugeschnitten, sodass die Wahl des richtigen Analysators die Suchergebnisse für Ihren spezifischen Anwendungsfall erheblich beeinflussen kann.</p>
-<p>Standardmäßig verwendet Milvus den Analysator „ <code translate="no">standard</code> “, der Text anhand von Leerzeichen und Satzzeichen in Token zerlegt und den Text in Kleinbuchstaben umwandelt. Für die Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/standard-analyzer.md">„Standard</a>“.</p>
+<p>Standardmäßig verwendet Milvus den Analysator „ <code translate="no">standard</code> “, der Text anhand von Leerzeichen und Satzzeichen in Token zerlegt, Token mit mehr als 40 Zeichen entfernt und den Text in Kleinbuchstaben umwandelt. Für die Anwendung dieser Standardeinstellung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/standard-analyzer.md">„Standard</a>“.</p>
 <p>Falls ein anderer Analysator erforderlich ist, können Sie diesen mithilfe des Parameters „ <code translate="no">analyzer_params</code> “ konfigurieren. Um beispielsweise den Analysator „ <code translate="no">english</code> “ für die Verarbeitung von englischem Text anzuwenden:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -429,8 +429,8 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Textübereinstimmung kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchumfang einzugrenzen und die Suchleistung zu verbessern. Indem Sie die Sammlung vor der Vektorähnlichkeitssuche anhand der Textübereinstimmung filtern, können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
-<p>In diesem Beispiel filtert der Ausdruck „ <code translate="no">filter</code> “ die Suchergebnisse so, dass nur Dokumente berücksichtigt werden, die mit den angegebenen Begriffen „ <code translate="no">keyword1</code> “ oder „ <code translate="no">keyword2</code> “ übereinstimmen. Die Vektorähnlichkeitssuche wird dann auf diese gefilterte Teilmenge von Dokumenten angewendet.</p>
+    </button></h3><p>Die Textübereinstimmung kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchumfang einzugrenzen und die Suchleistung zu verbessern. Indem Sie die Sammlung vor der Vektorähnlichkeitssuche mithilfe der Textübereinstimmung filtern, können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
+<p>In diesem Beispiel filtert der Ausdruck „ <code translate="no">filter</code> “ die Suchergebnisse so, dass nur Dokumente berücksichtigt werden, die mit dem angegebenen Begriff „ <code translate="no">keyword1</code> “ oder „ <code translate="no">keyword2</code> “ übereinstimmen. Die Vektorähnlichkeitssuche wird dann auf diese gefilterte Teilmenge von Dokumenten angewendet.</p>
 <div class="alert note">
 <p>Sie können die übereinstimmenden Begriffe in den Suchergebnissen hervorheben, indem Sie einen Text-Highlighter konfigurieren. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/text-highlighter.md">„Text-Highlighter</a> “.</p>
 </div>
@@ -615,8 +615,8 @@ curl --request POST \
 <li><p>Sobald Sie einen Analysator in Ihrem Schema definiert haben, sind dessen Einstellungen für diese Sammlung dauerhaft festgelegt. Wenn Sie zu dem Schluss kommen, dass ein anderer Analysator Ihren Anforderungen besser entspricht, können Sie die bestehende Sammlung löschen und eine neue mit der gewünschten Analysatorkonfiguration erstellen.</p></li>
 <li><p>Escape-Regeln in „ <code translate="no">filter</code> “-Ausdrücken:</p>
 <ul>
-<li><p>Zeichen, die in Ausdrücken in doppelte oder einfache Anführungszeichen gesetzt sind, werden als Zeichenfolgenkonstanten interpretiert. Wenn die Zeichenfolgenkonstante Escape-Zeichen enthält, müssen diese mit einer Escape-Sequenz dargestellt werden. Verwenden Sie beispielsweise „ <code translate="no">\\</code> “, um „ <code translate="no">\</code> “ darzustellen, „ <code translate="no">\\t</code> “, um ein Tabulatorzeichen „ <code translate="no">\t</code> “ darzustellen, und „ <code translate="no">\\n</code> “, um einen Zeilenumbruch darzustellen.</p></li>
-<li><p>Wenn eine Zeichenfolgenkonstante in einfache Anführungszeichen gesetzt ist, sollte ein einfaches Anführungszeichen innerhalb der Konstante als „ <code translate="no">\\'</code> “ dargestellt werden, während ein doppeltes Anführungszeichen entweder als „ <code translate="no">&quot;</code> “ oder als „ <code translate="no">\\&quot;</code> “ dargestellt werden kann. Beispiel: „ <code translate="no">'It\\'s milvus'</code> “.</p></li>
+<li><p>Zeichen, die in Ausdrücken in doppelte oder einfache Anführungszeichen gesetzt sind, werden als Zeichenfolgenkonstanten interpretiert. Enthält die Zeichenfolgenkonstante Escape-Zeichen, müssen diese mit einer Escape-Sequenz dargestellt werden. Verwenden Sie beispielsweise „ <code translate="no">\\</code> “, um „ <code translate="no">\</code> “ darzustellen, „ <code translate="no">\\t</code> “, um ein Tabulatorzeichen „ <code translate="no">\t</code> “ darzustellen, und „ <code translate="no">\\n</code> “, um einen Zeilenumbruch darzustellen.</p></li>
+<li><p>Wenn eine Zeichenfolgenkonstante in einfache Anführungszeichen gesetzt ist, sollte ein einfaches Anführungszeichen innerhalb der Konstante als <code translate="no">\\'</code> dargestellt werden, während ein doppeltes Anführungszeichen entweder als <code translate="no">&quot;</code> oder als <code translate="no">\\&quot;</code> dargestellt werden kann. Beispiel: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Wenn eine Zeichenfolgenkonstante in doppelte Anführungszeichen gesetzt ist, sollte ein doppeltes Anführungszeichen innerhalb der Konstante als „ <code translate="no">\\&quot;</code> “ dargestellt werden, während ein einfaches Anführungszeichen entweder als „ <code translate="no">'</code> “ oder „ <code translate="no">\\'</code> “ dargestellt werden kann. Beispiel: „ <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> “.</p></li>
 </ul></li>
 </ul>

@@ -21,11 +21,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Voyage AI 排名器利用<a href="https://www.voyageai.com/">Voyage AI 的</a>专用 Rerankers，通过语义重新排序来提升搜索相关性。它提供了针对检索增强生成（RAG）和搜索应用进行优化的高性能重新排序功能。</p>
+    </button></h1><p>Voyage AI 排名器利用<a href="https://www.voyageai.com/">Voyage AI 专有的</a>Rerankers，通过语义重新排序来提升搜索相关性。它提供了针对检索增强生成（RAG）和搜索应用进行优化的高性能重新排序功能。</p>
 <p>对于需要以下功能的应用，Voyage AI 排名器尤为有用：</p>
 <ul>
 <li><p>针对重新排序任务专门训练的模型，具备先进的语义理解能力</p></li>
-<li><p>针对生产工作负载进行优化推理的高性能处理</p></li>
+<li><p>针对生产级工作负载进行优化推理的高性能处理</p></li>
 <li><p>灵活的截断控制，以处理不同长度的文档</p></li>
 <li><p>针对不同模型变体（rerank-2、rerank-lite 等）的精细调优性能</p></li>
 </ul>
@@ -44,7 +44,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中实施 Voyage AI Ranker 之前，请确保您具备以下条件：</p>
+    </button></h2><p>在 Milvus 中部署 Voyage AI Ranker 之前，请确保您已具备：</p>
 <ul>
 <li><p>一个 Milvus Collection，其中包含一个名为 `<code translate="no">VARCHAR</code> ` 的字段，该字段包含待重新排序的文本</p></li>
 <li><p>一个具有访问 Rerankers 权限的有效 Voyage AI API 密钥。请在<a href="https://www.voyageai.com/">Voyage AI 平台</a>注册以获取您的 API 凭据。您可以通过以下任一方式操作：</p>
@@ -121,7 +121,28 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;truncation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Configure Voyage AI Ranker</span>
+<span class="hljs-keyword">const</span> voyageai_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;voyageai_semantic_ranker&quot;</span>,     <span class="hljs-comment">// Unique identifier for your ranker</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK for reranking functions</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Enables model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;voyageai&quot;</span>,               <span class="hljs-comment">// Specifies Voyage AI as the service provider</span>
+    <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;rerank-2.5&quot;</span>,           <span class="hljs-comment">// Voyage AI reranker to use</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text for relevance evaluation</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">128</span>,         <span class="hljs-comment">// Optional: batch size for model service requests (default: 128)</span>
+    <span class="hljs-attr">truncation</span>: <span class="hljs-literal">true</span>,                   <span class="hljs-comment">// Optional: enable input truncation (default: true)</span>
+    <span class="hljs-comment">// credential: &quot;your-voyage-api-key&quot;, // Optional: if not set, uses VOYAGE_API_KEY env var</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -241,7 +262,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>是</p></td>
-     <td><p>从 Voyage AI 平台支持的模型中选择要使用的 Voyage AI Reranker。</p><p>有关可用 Rerankers 的列表，请参阅<a href="https://docs.voyageai.com/docs/reranker">Voyage AI</a><a href="https://docs.voyageai.com/docs/reranker"> 文档</a>。</p></td>
+     <td><p>从 Voyage AI 平台上的受支持模型中选择要使用的 Voyage AI Reranker。</p><p>有关可用 Rerankers 的列表，请参阅<a href="https://docs.voyageai.com/docs/reranker">Voyage AI</a><a href="https://docs.voyageai.com/docs/reranker"> 文档</a>。</p></td>
      <td><p><code translate="no">"rerank-2.5"</code></p></td>
    </tr>
    <tr>
@@ -253,13 +274,13 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>否</p></td>
-     <td><p>由于模型服务可能无法一次性处理所有数据，此参数用于设置分批调用模型服务时的批次大小。</p></td>
+     <td><p>由于模型服务可能无法一次性处理所有数据，此参数用于设置分批调用模型服务的批次大小。</p></td>
      <td><p><code translate="no">128</code> (默认)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">truncation</code></p></td>
      <td><p>否</p></td>
-     <td><p>是否截断输入以满足查询和文档的“上下文长度限制”。</p><ul><li><p>如果<code translate="no">True</code> ，查询和文档将在由重新排序模型处理之前被截断，以符合上下文长度限制。</p></li><li><p>如果<code translate="no">False</code> ，当查询超过 8,000 个令牌时，<code translate="no">rerank-2.5</code> 和<code translate="no">rerank-2.5-lite</code> 将引发错误；<code translate="no">rerank-2</code> 的查询超过 4,000 个令牌；<code translate="no">rerank-2-lite</code> 和<code translate="no">rerank-1</code> 的查询超过 2,000 个令牌；以及<code translate="no">rerank-lite-1</code> 的查询超过 1,000 个令牌，或者<code translate="no">rerank-2</code> 中查询的令牌数与任何单个文档的令牌数之和超过 16,000；<code translate="no">rerank-2-lite</code> 和<code translate="no">rerank-1</code> 的限制为 8,000 个令牌；<code translate="no">rerank-lite-1</code> 的限制为 4,000 个令牌。</p></li></ul></td>
+     <td><p>是否截断输入以满足查询和文档的“上下文长度限制”。</p><ul><li><p>如果<code translate="no">True</code> ，查询和文档将在由重新排序模型处理之前被截断，以符合上下文长度限制。</p></li><li><p>如果<code translate="no">False</code> ，当查询超过 8,000 个令牌时，<code translate="no">rerank-2.5</code> 和<code translate="no">rerank-2.5-lite</code> 将引发错误；<code translate="no">rerank-2</code> 的查询超过 4,000 个令牌；<code translate="no">rerank-2-lite</code> 和<code translate="no">rerank-1</code> 的查询超过 2,000 个令牌；以及<code translate="no">rerank-lite-1</code> 的查询超过 1,000 个令牌，或者<code translate="no">rerank-2</code> 中查询的令牌数与任何单个文档的令牌数之和超过 16,000； 对于<code translate="no">rerank-2-lite</code> 和<code translate="no">rerank-1</code> ，限制为 8,000 个令牌；对于<code translate="no">rerank-lite-1</code> ，限制为 4,000 个令牌。</p></li></ul></td>
      <td><p><code translate="no">True</code> （默认）或<code translate="no">False</code></p></td>
    </tr>
    <tr>
@@ -324,7 +345,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with Voyage AI reranker</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: voyageai_ranker,              <span class="hljs-comment">// Apply Voyage AI reranker</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>vLLM Ranker 利用<a href="https://docs.vllm.ai/en/latest/index.html">vLLM</a>推理框架，通过语义重新排序来提升搜索相关性。它代表了一种先进的搜索结果排序方法，超越了传统的向量相似度。</p>
-<p>vLLM Ranker 对于精度和上下文至关重要的应用场景尤为有用，例如：</p>
+<p>vLLM 排序器对于精度和上下文至关重要的应用场景尤为宝贵，例如：</p>
 <ul>
 <li><p>需要对概念有深刻理解的技术文档搜索</p></li>
 <li><p>语义关系比关键词匹配更重要的研究数据库</p></li>
@@ -132,7 +132,27 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
                        .param(<span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>, <span class="hljs-string">&quot;256&quot;</span>)
                        .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Create a vLLM Ranker function</span>
+<span class="hljs-keyword">const</span> vllm_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;vllm_semantic_ranker&quot;</span>,         <span class="hljs-comment">// Choose a descriptive name</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// Field containing text to rerank</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be RERANK</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Specifies model-based reranking</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;vllm&quot;</span>,                   <span class="hljs-comment">// Specifies vLLM service</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;renewable energy developments&quot;</span>], <span class="hljs-comment">// Query text</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://localhost:8080&quot;</span>,  <span class="hljs-comment">// vLLM service address</span>
+    <span class="hljs-attr">max_client_batch_size</span>: <span class="hljs-number">32</span>,          <span class="hljs-comment">// Optional: batch size</span>
+    <span class="hljs-attr">truncate_prompt_tokens</span>: <span class="hljs-number">256</span>,        <span class="hljs-comment">// Optional: Use last 256 tokens</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -275,7 +295,7 @@ curl --request POST \
    </tr>
 </table>
 <div class="alert note">
-<p>对于所有模型排序器共用的通用参数（例如，<code translate="no">provider</code> 、<code translate="no">queries</code> ），请参阅<a href="/docs/zh/model-ranker-overview.md#Create-a-model-ranker">“创建模型排序器”</a>。</p>
+<p>有关所有模型排序器共用的通用参数（例如<code translate="no">provider</code> 、<code translate="no">queries</code> ），请参阅<a href="/docs/zh/model-ranker-overview.md#Create-a-model-ranker">“创建模型排序器”</a>。</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">应用于标准向量搜索<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -329,7 +349,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Execute search with vLLM reranking</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Replace with your query vector</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,           <span class="hljs-comment">// Vector field to search</span>
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,                             <span class="hljs-comment">// Number of results to return</span>
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include text field for reranking</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: vllm_ranker,                  <span class="hljs-comment">// Apply vLLM reranking</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

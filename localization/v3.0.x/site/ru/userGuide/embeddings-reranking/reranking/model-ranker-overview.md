@@ -79,10 +79,10 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>отправляет исходный запрос и документы-кандидаты во внешний сервис модели</p></li>
 <li><p>Языковая модель оценивает семантическую релевантность между запросом и каждым документом</p></li>
-<li><p>Каждому документу присваивается оценка релевантности на основе семантического понимания</p></li>
+<li><p>Каждому документу присваивается оценка релевантности на основе семантического анализа</p></li>
 </ul></li>
 <li><p><strong>Интеллектуальное переранжирование</strong>: документы переупорядочиваются на основе оценок релевантности, сгенерированных моделью</p></li>
-<li><p><strong>Улучшенные результаты</strong>: ваше приложение получает результаты, отсортированные по семантической релевантности, а не только по векторному сходству</p></li>
+<li><p><strong>Улучшенные результаты</strong>: ваше приложение получает результаты, ранжированные по семантической релевантности, а не только по векторному сходству</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">Выберите поставщика моделей в соответствии с вашими потребностями<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -134,7 +134,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Приложения, обрабатывающие длинные документы с приоритетом экономической эффективности</p></td>
-     <td><ul><li><p>Расширенное разбиение документов на фрагменты с настраиваемым перекрытием</p></li><li><p>Оценка на основе фрагментов (фрагмент с наивысшей оценкой представляет документ)</p></li><li><p>Поддержка разнообразных моделей переранжирования</p></li><li><p>Экономичность благодаря наличию стандартной и профессиональной версий</p></li></ul></td>
+     <td><ul><li><p>Расширенное разбиение документов на фрагменты с настраиваемым перекрытием</p></li><li><p>Оценка на основе фрагментов (фрагмент с наивысшим баллом представляет документ)</p></li><li><p>Поддержка разнообразных моделей переранжирования</p></li><li><p>Экономичность благодаря наличию стандартной и профессиональной версий</p></li></ul></td>
      <td><p>Система поиска технической документации, обрабатывающая объемные руководства и статьи, требующие интеллектуальной сегментации и управления перекрытием</p></td>
    </tr>
    <tr>
@@ -147,7 +147,7 @@ beta: Milvus 2.6.x
      <td><p>Hugging Face</p></td>
      <td><p>Приложения, использующие размещенные на платформе Hugging Face модели оценки сходства предложений</p></td>
      <td><ul><li><p>Использует размещенный провайдер « <code translate="no">hf-inference</code> »</p></li><li><p>Выбирает модели из Hugging Face Hub</p></li><li><p>Вычисляет один показатель сходства предложений для каждого кандидата</p></li><li><p>Использует аутентификацию по API-ключу</p></li></ul></td>
-     <td><p>Приложения семантического поиска, в которых требуется переранжировать тексты-кандидаты с помощью модели Hugging Face без запуска отдельного сервиса вывода</p></td>
+     <td><p>Приложения семантического поиска, в которых требуется переранжировать тексты-кандидаты с помощью модели Hugging Face без запуска отдельного сервиса инференции</p></td>
    </tr>
 </table>
 <p>Подробную информацию о реализации каждого сервиса модели см. в соответствующей документации:</p>
@@ -178,7 +178,7 @@ beta: Milvus 2.6.x
     </button></h2><p>Перед реализацией Model Ranker убедитесь, что у вас есть:</p>
 <ul>
 <li><p>Коллекция Milvus с полем « <code translate="no">VARCHAR</code> », содержащим текст, который необходимо переранжировать</p></li>
-<li><p>Работающий внешний сервис модели, доступный для вашего экземпляра Milvus</p></li>
+<li><p>Работающий внешний сервис моделей, доступный для вашего экземпляра Milvus</p></li>
 <li><p>Надлежащее сетевое соединение между Milvus и выбранным вами сервисом модели</p></li>
 </ul>
 <p>Ранкеры моделей легко интегрируются как со стандартным векторным поиском, так и с гибридными поисковыми операциями. Реализация предполагает создание объекта Function, который определяет конфигурацию переранжирования, и передачу его в поисковые операции.</p>
@@ -242,7 +242,25 @@ model_ranker = Function(
         .endpoint(<span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
         .build();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Connect to your Milvus server</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,    <span class="hljs-comment">// Replace with your Milvus server URI</span>
+});
+
+<span class="hljs-comment">// Create a model ranker function</span>
+<span class="hljs-keyword">const</span> model_ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;semantic_ranker&quot;</span>,              <span class="hljs-comment">// Function identifier</span>
+  <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],      <span class="hljs-comment">// VARCHAR field to use for reranking</span>
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,            <span class="hljs-comment">// Must be set to RERANK</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;model&quot;</span>,                  <span class="hljs-comment">// Specify model reranker. Must be &quot;model&quot;</span>
+    <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;tei&quot;</span>,                    <span class="hljs-comment">// Choose provider: &quot;tei&quot;, &quot;vllm&quot;, etc.</span>
+    <span class="hljs-attr">queries</span>: [<span class="hljs-string">&quot;machine learning for time series&quot;</span>], <span class="hljs-comment">// Query text</span>
+    <span class="hljs-attr">endpoint</span>: <span class="hljs-string">&quot;http://model-service:8080&quot;</span>, <span class="hljs-comment">// Model service endpoint</span>
+  },
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -368,7 +386,7 @@ curl --request POST \
    <tr>
      <td><p><code translate="no">params.queries</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Список строк запроса, используемых моделью переранжирования для расчета оценок релевантности.</p><p>Количество строк запроса должно точно соответствовать количеству запросов в вашей операции поиска (даже при использовании векторов запросов вместо текста), в противном случае будет выдана ошибка.</p></td>
+     <td><p>Список строк запроса, используемых моделью переранжирования для расчета оценок релевантности.</p><p>Количество строк запроса должно точно соответствовать количеству запросов в вашей операции поиска (даже при использовании векторов запросов вместо текста), в противном случае будет выведено сообщение об ошибке.</p></td>
      <td><p><code translate="no">["search query"]</code></p></td>
    </tr>
    <tr>
@@ -399,7 +417,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После определения рангера на основе модели вы можете применять его во время поисковых операций, передавая его в параметр ranker:</p>
+    </button></h3><p>После определения ранжера на основе модели вы можете применять его во время поисковых операций, передавая его в параметр ranker:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -424,11 +442,11 @@ results = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
-        .collectionName(COLLECTION_NAME)
+        .collectionName(<span class="hljs-string">&quot;your_collection&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
         .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
-        .outputFields(Collections.singletonList(document))
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
                 .build())
@@ -436,7 +454,18 @@ results = client.search(
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ConsistencyLevelEnum</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Use the model ranker in standard vector search</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: collection_name,
+  <span class="hljs-attr">data</span>: [your_query_vector],            <span class="hljs-comment">// Number of query vectors must match that specified in model_ranker.params.queries</span>
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Include the text field in outputs</span>
+<span class="highlighted-wrapper-line">  <span class="hljs-attr">rerank</span>: model_ranker,                 <span class="hljs-comment">// Apply the model ranker here</span></span>
+  <span class="hljs-attr">consistency_level</span>: <span class="hljs-title class_">ConsistencyLevelEnum</span>.<span class="hljs-property">Bounded</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
 

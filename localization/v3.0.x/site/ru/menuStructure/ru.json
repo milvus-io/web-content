@@ -425,7 +425,7 @@
             "children": []
           },
           {
-            "label": "Поле «Число»",
+            "label": "Числовое поле",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдэра",
+                    "label": "Линдер",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -643,7 +643,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабоязычных текстов",
+                    "label": "Нормализация арабского языка",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -729,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для вашего сценария использования",
+                "label": "Выберите анализатор, подходящий для ваших задач",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -1203,7 +1203,7 @@
                 "children": []
               },
               {
-                "label": "Поиск по диапазону с использованием StructArray",
+                "label": "Поиск по диапазону с помощью StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1383,7 +1383,7 @@
                 "children": []
               },
               {
-                "label": "Рейтинг разложения",
+                "label": "Рейтинг распада",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1600,9 +1600,35 @@
         "children": [
           {
             "label": "AGENTS.md для Milvus",
-            "id": "agents_overview.md",
+            "id": "ai_prompts_agents_overview",
+            "isMenu": true,
             "order": 0,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "agents_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "agents_overview_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Вперед",
+                "id": "agents_overview_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API версии 2",
+                "id": "agents_overview_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "SDK для Python",
@@ -1630,27 +1656,131 @@
           },
           {
             "label": "Проектирование схемы",
-            "id": "schema_design.md",
+            "id": "ai_prompts_schema_design",
+            "isMenu": true,
             "order": 5,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "schema_design.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "schema_design_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Вперед",
+                "id": "schema_design_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API версии 2",
+                "id": "schema_design_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Шаблоны поиска",
-            "id": "search_patterns.md",
+            "id": "ai_prompts_search_patterns",
+            "isMenu": true,
             "order": 6,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "search_patterns.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "search_patterns_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Вперед",
+                "id": "search_patterns_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API версии 2",
+                "id": "search_patterns_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Выбор индекса",
-            "id": "index_selection.md",
+            "id": "ai_prompts_index_selection",
+            "isMenu": true,
             "order": 7,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "index_selection.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "index_selection_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Вперед",
+                "id": "index_selection_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API версии 2",
+                "id": "index_selection_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Конвейер RAG",
-            "id": "rag_pipeline.md",
+            "id": "ai_prompts_rag_pipeline",
+            "isMenu": true,
             "order": 8,
-            "children": []
+            "children": [
+              {
+                "label": "Python",
+                "id": "rag_pipeline.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Node.js",
+                "id": "rag_pipeline_nodejs.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Вперед",
+                "id": "rag_pipeline_go.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "RESTful API версии 2",
+                "id": "rag_pipeline_restful.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -2270,7 +2400,7 @@
                     "children": []
                   },
                   {
-                    "label": "Перенос данных между экземплярами в одном бакете",
+                    "label": "Перенос данных между экземплярами в одном хранилище",
                     "id": "shared-bucket-backup-and-restore.md",
                     "order": 1,
                     "children": []
@@ -3070,7 +3200,7 @@
             "children": []
           },
           {
-            "label": "Маскировщик персональных данных",
+            "label": "Маска PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3280,7 +3410,7 @@
         "children": []
       },
       {
-        "label": "Генерация выражений фильтров запросов Milvus с помощью крупных языковых моделей",
+        "label": "Генерация выражений фильтрации запросов Milvus с помощью крупных языковых моделей",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

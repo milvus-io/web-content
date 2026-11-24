@@ -66,7 +66,7 @@ beta: Milvus 2.5.17+
 </ul></li>
 </ul></li>
 </ol>
-<h2 id="Enable-phrase-match" class="common-anchor-header">Abilita la corrispondenza per frase<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
+<h2 id="Enable-phrase-match" class="common-anchor-header">Abilita la corrispondenza di frasi<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,7 +139,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>La precisione della corrispondenza delle frasi dipende in modo significativo dall’analizzatore utilizzato per tokenizzare i dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il proprio caso d’uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
-<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per ulteriori dettagli, consultare <a href="/docs/it/v2.6.x/standard-analyzer.md">Analizzatore standard</a>.</p>
+<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per ulteriori dettagli, consultare <a href="/docs/it/v2.6.x/standard-analyzer.md">Analizzatore standard</a>.</p>
 <p>Se la propria applicazione richiede un analizzatore specifico, è possibile configurarlo utilizzando il parametro ` <code translate="no">analyzer_params</code> `. Ad esempio, ecco come configurare l’analizzatore ` <code translate="no">english</code> ` per la corrispondenza delle frasi in un testo in inglese:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -157,7 +157,7 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus supporta diversi analizzatori su misura per diverse lingue e casi d’uso. Per informazioni dettagliate, consultare <a href="/docs/it/v2.6.x/analyzer-overview.md">la Panoramica degli analizzatori</a>.</p>
-<h2 id="Use-phrase-match" class="common-anchor-header">Utilizzare la corrispondenza delle frasi<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
+<h2 id="Use-phrase-match" class="common-anchor-header">Utilizzo della corrispondenza delle frasi<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -415,12 +415,12 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>L'abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l'impatto sull'archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all'analizzatore utilizzato.</p></li>
+<li><p>L’abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l’impatto sull’archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all’analizzatore utilizzato.</p></li>
 <li><p>Una volta definito un analizzatore nello schema, le relative impostazioni diventano permanenti per quella raccolta. Se si ritiene che un analizzatore diverso sia più adatto alle proprie esigenze, è possibile eliminare la raccolta esistente e crearne una nuova con la configurazione dell’analizzatore desiderata.</p></li>
 <li><p>Le prestazioni della corrispondenza delle frasi dipendono dal modo in cui il testo viene tokenizzato. Prima di applicare un analizzatore all’intera raccolta, utilizzare il metodo ` <code translate="no">run_analyzer</code> ` per esaminare l’output della tokenizzazione. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">la panoramica sugli analizzatori</a>.</p></li>
 <li><p>Regole di escape nelle espressioni di <code translate="no">filter</code>:</p>
 <ul>
-<li><p>I caratteri racchiusi tra virgolette doppie o singole all’interno delle espressioni vengono interpretati come costanti stringa. Se la costante stringa include caratteri di escape, questi devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare ` <code translate="no">\\</code> ` per rappresentare ` <code translate="no">\</code>`, ` <code translate="no">\\t</code> ` per rappresentare un tabulatore ` <code translate="no">\t</code>` e ` <code translate="no">\\n</code> ` per rappresentare un carattere di nuova riga.</p></li>
+<li><p>I caratteri racchiusi tra virgolette doppie o singole all’interno delle espressioni vengono interpretati come costanti stringa. Se la costante stringa include caratteri di escape, questi devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare <code translate="no">\\</code> per rappresentare <code translate="no">\</code>, <code translate="no">\\t</code> per rappresentare un tabulatore <code translate="no">\t</code> e <code translate="no">\\n</code> per rappresentare un carattere di nuova riga.</p></li>
 <li><p>Se una costante stringa è racchiusa tra virgolette singole, una virgoletta singola all’interno della costante deve essere rappresentata come <code translate="no">\\'</code>, mentre una virgoletta doppia può essere rappresentata sia come <code translate="no">&quot;</code> che come <code translate="no">\\&quot;</code>. Esempio: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Se una costante stringa è racchiusa tra virgolette doppie, una virgoletta doppia all’interno della costante deve essere rappresentata come <code translate="no">\\&quot;</code>, mentre una virgoletta singola può essere rappresentata sia come <code translate="no">'</code> che come <code translate="no">\\'</code>. Esempio: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>

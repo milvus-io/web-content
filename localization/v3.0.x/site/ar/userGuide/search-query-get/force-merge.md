@@ -40,8 +40,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">maxSize</code> يحافظ <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">الضغط</a> القياسي على أحجام المقاطع قريبة من الحد الأقصى المكون لـ " <code translate="no">maxSize</code> " من خلال عمليات دمج متعددة إلى واحدة، ولكنه قد يترك شظايا متوسطة الحجم لا يمكن دمجها أكثر دون تجاوز الحدود. على سبيل المثال، كما هو موضح أدناه، إذا كانت المجموعة تحتوي على خمسة شرائح بحجم 2 ميغابايت وكان الحد الأقصى المسموح به ( ) هو 3 ميغابايت، فإن دمج أي شريحتين سيتجاوز الحد، وبالتالي لا يمكن للضغط القياسي تقليل عدد الشرائح أكثر من ذلك ويبقى التخطيط المجزأ كما هو.</p>
-<p>يضيف الدمج القسري معلمة " <code translate="no">target_size</code> " ويدعم إعادة تنظيم المقاطع نحو الحجم المطلوب ضمن نطاق تفاوت ضيق عندما يكون ذلك ممكنًا. كما هو موضح أدناه، إذا كانت قيمة <code translate="no">target_size</code> المحددة هي 4 ميغابايت، فيمكن دمج المقاطع الصغيرة الخمسة التي يبلغ حجم كل منها 2 ميغابايت في عدد أقل من المقاطع الأكبر حجمًا. ويؤدي ذلك إلى تقليل عدد المقاطع الزائدة، ودعم الأهداف الأكبر من إعدادات <code translate="no">maxSize</code> الافتراضية، وعندما يكون الهدف كبيرًا جدًّا، فإنه يتيح للنظام اختيار حجم إخراج عملي وعدد مقاطع مناسب للأجهزة الحالية وطوبولوجيا QueryNode.</p>
+    </button></h2><p><code translate="no">maxSize</code> يحافظ <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/Management/compact.md">الضغط</a> القياسي على أحجام المقاطع قريبة من الحد الأقصى المكون لـ " <code translate="no">maxSize</code> " من خلال عمليات دمج متعددة إلى واحدة، ولكنه قد يترك شظايا متوسطة الحجم لا يمكن دمجها أكثر دون تجاوز الحدود. على سبيل المثال، كما هو موضح أدناه، إذا كانت المجموعة تحتوي على خمسة شرائح بحجم 2 ميغابايت وكان الحد الأقصى لحجم الشريحة ( ) هو 3 ميغابايت، فإن دمج أي شريحتين سيتجاوز الحد، وبالتالي لا يمكن للضغط القياسي تقليل عدد الشرائح أكثر من ذلك ويبقى التخطيط المجزأ كما هو.</p>
+<p>يضيف الدمج القسري معلمة " <code translate="no">target_size</code> " ويدعم إعادة تنظيم المقاطع نحو الحجم المطلوب ضمن نطاق تفاوت ضيق عندما يكون ذلك ممكنًا. كما هو موضح أدناه، إذا كانت قيمة <code translate="no">target_size</code> المحددة هي 4 ميغابايت، فيمكن دمج المقاطع الصغيرة الخمس التي يبلغ حجم كل منها 2 ميغابايت في عدد أقل من المقاطع الأكبر حجمًا. ويؤدي ذلك إلى تقليل عدد المقاطع الزائدة، ودعم الأهداف الأكبر من إعدادات <code translate="no">maxSize</code> الافتراضية، وعندما يكون الهدف كبيرًا جدًّا، يتيح للنظام اختيار حجم إخراج عملي وعدد مقاطع مناسب للأجهزة الحالية وطوبولوجيا QueryNode.</p>
 <p>لفهم طريقة الضغط التي يجب استخدامها، راجع <a href="#faq">الأسئلة الشائعة</a>.</p>
 <p><span class="img-wrapper">
   
@@ -128,7 +128,7 @@ beta: Milvus 3.0.x
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>الحجم الأقصى الافتراضي للمقطع بالميغابايت. تُستخدم كقيمة مستهدفة عندما تكون قيمة « <code translate="no">target_size</code> » تساوي 0 أو تم حذفها. كما تُستخدم كالقيمة الدنيا المسموح بها لـ « <code translate="no">target_size</code> » الصريحة.</p></td>
    </tr>
    <tr>
@@ -139,7 +139,7 @@ beta: Milvus 3.0.x
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.datanodeMemoryFactor</code></p></td>
      <td><p>4.0</p></td>
-     <td><p>يتم تقسيم ذاكرة DataNode على هذا العامل لحساب أكبر حجم للقطعة يمكن للنظام السماح به.</p><ul><li><p>كلما زادت القيمة، قلت الذاكرة المخصصة لعملية الدمج، ولكن يتبقى المزيد لعمليات DataNode الأخرى، مما يحسن  استقرار العقدة.</p></li><li><p>تسمح القيمة الأصغر بعمليات دمج أكبر، لكنها تزيد من الضغط على الذاكرة.</p></li><li><p>على سبيل المثال، باستخدام العامل الافتراضي 4.0 وعقدة DataNode ذات ذاكرة سعة 16 جيجابايت، تبلغ ميزانية الدمج 4 جيجابايت. وهذا يعني أن الحجم الإجمالي للمقاطع التي يتم دمجها في عملية واحدة لا يمكن أن يتجاوز 4 جيجابايت.</p></li></ul></td>
+     <td><p>يتم تقسيم ذاكرة DataNode على هذا العامل لحساب أكبر حجم مقطع يمكن للنظام السماح به.</p><ul><li><p>كلما زادت القيمة، قلت الذاكرة المخصصة لعملية الدمج، ولكن يتبقى المزيد لعمليات DataNode الأخرى، مما يحسن  استقرار العقدة.</p></li><li><p>تسمح القيمة الأصغر بعمليات دمج أكبر ولكنها تزيد من الضغط على الذاكرة.</p></li><li><p>على سبيل المثال، باستخدام العامل الافتراضي 4.0 وعقدة DataNode ذات ذاكرة سعة 16 جيجابايت، تبلغ ميزانية الدمج 4 جيجابايت. وهذا يعني أن الحجم الإجمالي للمقاطع التي يتم دمجها في عملية واحدة لا يمكن أن يتجاوز 4 جيجابايت.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">dataCoord.compaction.forceMerge.querynodeMemoryFactor</code></p></td>
@@ -168,7 +168,7 @@ beta: Milvus 3.0.x
 <pre><code translate="no" class="language-plaintext">compact(&quot;my_collection&quot;, target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -187,7 +187,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># Standard compaction — uses config maxSize (default 512 MB)</span>
+<span class="hljs-comment"># Standard compaction — uses config maxSize (default 1024 MB)</span>
 job_id = client.compact(<span class="hljs-string">&quot;target_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Explicit-target-size" class="common-anchor-header">الحجم المستهدف الصريح</h4><pre><code translate="no" class="language-python"><span class="hljs-comment"># Merge segments to approximately 2 GB each</span>
@@ -219,11 +219,11 @@ job_id = client.compact(
    <tr>
      <td><p><code translate="no">target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>اختياري. حجم المقطع المستهدف بالميغابايت. هناك 3 خيارات لقيمة المعلمة:</p><ul><li><p><strong>0 أو غير محدد</strong>: يستخدم القيمة المحددة لـ " <code translate="no">dataCoord.segment.maxSize</code> " (القيمة الافتراضية: 512 ميغابايت). يعادل الضغط القياسي.</p></li><li><p><strong>قيمة صريحة</strong>: يدمج المقاطع إلى الحجم المحدد تقريبًا بالميغابايت (على سبيل المثال، 2048). يجب أن يكون أكبر من أو يساوي القيمة المحددة لـ <code translate="no">dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: يحسب الحجم الأمثل تلقائيًا بناءً على التوزيع الحالي للشرائح وموارد العقدة المتاحة.</p></li></ul></td>
+     <td><p>اختياري. حجم المقطع المستهدف بالميغابايت. هناك 3 خيارات لقيمة المعلمة:</p><ul><li><p><strong>0 أو غير محدد</strong>: يستخدم القيمة المحددة لـ <code translate="no">dataCoord.segment.maxSize</code> (الافتراضي: 1024 ميغابايت). يعادل الضغط القياسي.</p></li><li><p><strong>قيمة صريحة</strong>: يدمج المقاطع إلى الحجم المحدد تقريبًا بالميغابايت (على سبيل المثال، 2048). يجب أن يكون أكبر من أو يساوي القيمة المحددة لـ <code translate="no">dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 &lt;&lt; 63) - 1)</strong>: يحسب الحجم الأمثل تلقائيًا بناءً على التوزيع الحالي للشرائح وموارد العقدة المتاحة.</p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>إذا كان <code translate="no">target_size</code> المحدد أقل من <code translate="no">dataCoord.segment.maxSize</code> المعيّن، فسيتم رفض الطلب مع ظهور خطأ.</p>
+<p>إذا كان الحجم المحدد لـ <code translate="no">target_size</code> أقل من القيمة المحددة لـ <code translate="no">dataCoord.segment.maxSize</code> ، فسيتم رفض الطلب مع ظهور رسالة خطأ.</p>
 </div>
 <h3 id="Check-Compaction-Progress" class="common-anchor-header">التحقق من تقدم عملية الضغط<button data-href="#Check-Compaction-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -240,7 +240,7 @@ job_id = client.compact(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يتم تشغيل عملية الضغط «Force Merge» بشكل غير متزامن. استخدم معرّف المهمة الذي تم إرجاعه للتحقق من التقدم:</p>
+    </button></h3><p>يتم تشغيل ضغط «Force Merge» بشكل غير متزامن. استخدم معرّف المهمة الذي تم إرجاعه للتحقق من التقدم:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Check compaction state</span>
 state = client.get_compaction_state(job_id)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;State: <span class="hljs-subst">{state}</span>&quot;</span>)
@@ -262,7 +262,7 @@ state = client.get_compaction_state(job_id)
       </svg>
     </button></h2><ul>
 <li><p><strong>لا تستخدم عملية الضغط بالدمج القسري في بيئات الإنتاج.</strong></p></li>
-<li><p><strong>استخدم وضع الحساب التلقائي للحجم في معظم الحالات.</strong> يتيح تعيين <code translate="no">target_size</code> إلى <code translate="no">max_int64</code> لـ Milvus تحليل توزيع المقاطع وموارد العقد لتحديد الحجم الأمثل. هذا هو النهج الموصى به ما لم تكن لديك متطلبات محددة للحجم.</p></li>
+<li><p><strong>استخدم وضع الحساب التلقائي للحجم في معظم الحالات.</strong> يؤدي تعيين <code translate="no">target_size</code> إلى <code translate="no">max_int64</code> إلى تمكين Milvus من تحليل توزيع المقاطع وموارد العقد لتحديد الحجم الأمثل. هذا هو النهج الموصى به ما لم تكن لديك متطلبات محددة بشأن الحجم.</p></li>
 <li><p><strong>ضع في اعتبارك المقايضة في الأداء.</strong> يعد ضغط الدمج القسري عملية تستهلك الكثير من الموارد. فهو يقرأ بيانات المقاطع ويدمجها ويعيد كتابتها. قم بجدولته خلال فترات انخفاض حركة المرور لتقليل التأثير على زمن استجابة الاستعلامات.</p></li>
 <li><p><strong>راقب عدد المقاطع قبل وبعد العملية.</strong> استخدم <code translate="no">get_compaction_state()</code> و <code translate="no">list_persistent_segments</code> للتحقق من أن عملية الضغط قد أنتجت مقاطع أقل وأكبر حجمًا كما هو متوقع.</p></li>
 </ul>
@@ -288,7 +288,7 @@ state = client.get_compaction_state(job_id)
 <li><p>التكثيف القياسي (targetSize=0 أو تم حذفه) هو مسار تنظيف تدريجي يبذل أقصى جهد ممكن.</p></li>
 <li><p>أما الدمج القسري (targetSize&gt;0) فهو مسار إعادة تجميع على مستوى المجموعة لإنتاج شرائح أقل عددًا وأكبر حجمًا وقريبة من الحجم المستهدف.</p></li>
 </ul>
-<p>الفرق الرئيسي يكمن في شكل الدمج: حيث يعمل الضغط القياسي فعليًّا على تحويل m إلى 1 لكل مهمة، بينما يعمل الدمج القسري على تحويل m إلى n عبر المدخلات المجمعة. ولهذا السبب، يمكن للدمج القسري معالجة تخطيطات المقاطع التي لا يستطيع الضغط القياسي معالجتها. يقارن الجدول التالي بين هذين النوعين من العمليات.</p>
+<p>الفرق الرئيسي هو شكل الدمج: حيث يعمل الضغط القياسي فعليًّا على تحويل m إلى 1 لكل مهمة، بينما يعمل الدمج القسري على تحويل m إلى n عبر المدخلات المجمعة. ولهذا السبب، يمكن للدمج القسري معالجة تخطيطات المقاطع التي لا يستطيع الضغط القياسي معالجتها. يقارن الجدول التالي بين هذين النوعين من العمليات.</p>
 <table>
    <tr>
      <th><p><strong>البعد</strong></p></th>
@@ -313,7 +313,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>صلاحية المعلمة</p></td>
      <td><p>لا يوجد ضبط لحجم المستخدم</p></td>
-     <td><p>يجب أن يكون targetSize الذي يحدده المستخدم &gt;= dataCoord.segment.maxSize؛ وإلا فسيتم رفضه</p></td>
+     <td><p>يجب أن يكون targetSize الذي يحدده المستخدم &gt;= dataCoord.segment.maxSize؛ وإلا يتم رفضه</p></td>
    </tr>
    <tr>
      <td><p>الحد الأعلى الآمن</p></td>
@@ -343,7 +343,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>ضبط التوازي في مسار القراءة</p></td>
      <td><p>لا شيء</p></td>
-     <td><p>يضبط عدد المخرجات باستخدام queryNodeCount / (النسخ المتماثلة × الشرائح) عندما يكون ذلك صالحًا</p></td>
+     <td><p>يضبط عدد المخرجات باستخدام queryNodeCount / (النسخ المتماثلة × الشظايا) عندما يكون ذلك صالحًا</p></td>
    </tr>
    <tr>
      <td><p>حالة الاستخدام النموذجية</p></td>
@@ -353,7 +353,7 @@ state = client.get_compaction_state(job_id)
    <tr>
      <td><p>توقعات النطاق</p></td>
      <td><p>لا تتوقع إعادة تجميع المجموعة بالكامل</p></td>
-     <td><p>مخصص لنتائج إعادة التعبئة على مستوى المجموعة</p></td>
+     <td><p>مصمم لتحقيق نتيجة إعادة التعبئة على مستوى المجموعة</p></td>
    </tr>
 </table>
 <p><strong>إرشادات الاختيار:</strong></p>

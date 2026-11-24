@@ -50,7 +50,7 @@ beta: Milvus 2.5.17+
 <ol>
 <li><p><strong>문서 토큰화</strong>: Milvus에 문서를 삽입하면, 분석기를 사용하여 텍스트가 토큰(개별 단어 또는 용어)으로 분할되며, 각 토큰에 대한 위치 정보가 기록됩니다. 예를 들어, <strong>doc_1은</strong> <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>로 토큰화됩니다. 분석기에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/analyzer-overview.md">분석기 개요를</a> 참조하십시오.</p></li>
 <li><p><strong>역색인 생성</strong>: Milvus는 각 토큰을 해당 토큰이 등장하는 문서와 그 문서 내의 토큰 위치에 매핑하여 역색인을 구축합니다.</p></li>
-<li><p><strong>구문 일치</strong>: 구문 쿼리가 실행되면 Milvus는 역색인에서 각 토큰을 조회하고, 해당 토큰들이 올바른 순서와 근접성 내에서 나타나는지 확인하기 위해 위치를 검사합니다. ‘ <code translate="no">slop</code> ’ 매개변수는 일치하는 토큰들 사이에 허용되는 최대 위치 수를 제어합니다.</p>
+<li><p><strong>구문 일치</strong>: 구문 쿼리가 실행되면 Milvus는 역색인에서 각 토큰을 조회하고, 해당 토큰들이 올바른 순서와 근접성 내에서 나타나는지 확인하기 위해 위치를 검사합니다. ` <code translate="no">slop</code> ` 매개변수는 일치하는 토큰들 사이에 허용되는 최대 위치 수를 제어합니다.</p>
 <ul>
 <li><p><strong>slop = 0은</strong> 토큰이 <strong>정확한 순서대로</strong> 나타나야 <strong>하며 바로 인접해야</strong> 함을 의미합니다(즉, 사이에 다른 단어가 없어야 함).</p>
 <ul>
@@ -94,7 +94,7 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 구문 일치를 활성화하려면, 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개변수를 모두 <code translate="no">True</code> 로 설정하십시오. 이 구성은 Milvus가 텍스트를 토큰화하고, 효율적인 구문 일치에 필요한 위치 정보가 포함된 역색인을 생성하도록 지시합니다.</p>
+    </button></h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 구문 일치를 활성화하려면, 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개변수를 모두 <code translate="no">True</code> 로 설정하십시오. 이 구성은 Milvus가 텍스트를 토큰화하고, 효율적인 구문 일치에 필요한 위치 정보를 포함한 역색인을 생성하도록 지시합니다.</p>
 <p>다음은 구문 일치를 활성화하기 위한 스키마 정의 예시입니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -136,8 +136,8 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>구문 일치 정확도는 텍스트 데이터를 토큰화하는 데 사용되는 분석기에 따라 크게 달라집니다. 언어와 텍스트 형식에 따라 적합한 분석기가 다르며, 이는 토큰화 및 위치 정확도에 영향을 미칩니다. 특정 사용 사례에 적합한 분석기를 선택하면 구문 일치 결과를 최적화할 수 있습니다.</p>
-<p>기본적으로 Milvus는 공백과 구두점을 기준으로 텍스트를 토큰화하고 텍스트를 소문자로 변환하는 표준 분석기를 사용합니다. 기본 사용 시에는 추가 매개변수가 필요하지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/standard-analyzer.md">표준 분석기를</a> 참조하십시오.</p>
-<p>애플리케이션에 특정 분석기가 필요한 경우, ` <code translate="no">analyzer_params</code> ` 매개변수를 사용하여 구성하십시오. 예를 들어, 영어 텍스트에서 구 일치를 위해 ` <code translate="no">english</code> ` 분석기를 구성하는 방법은 다음과 같습니다.</p>
+<p>기본적으로 Milvus는 표준 분석기를 사용하며, 이 분석기는 공백과 구두점을 기준으로 텍스트를 토큰화하고, 40자보다 긴 토큰을 제거하며, 텍스트를 소문자로 변환합니다. 기본 사용 시에는 추가 매개변수가 필요하지 않습니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/standard-analyzer.md">표준 분석기를</a> 참조하십시오.</p>
+<p>애플리케이션에 특정 분석기가 필요한 경우, ` <code translate="no">analyzer_params</code> ` 매개변수를 사용하여 구성하십시오. 예를 들어, 영어 텍스트에서 구문 일치를 위해 ` <code translate="no">english</code> ` 분석기를 구성하는 방법은 다음과 같습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -277,7 +277,7 @@ result = client.query(
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"머신 러닝은 대규모 데이터 분석의 효율성을 높여줍니다"</p></td>
+     <td><p>"머신 러닝은 대규모 데이터 분석의 효율성을 높입니다"</p></td>
    </tr>
 </table>
 <p>문서 1만이 추가 토큰 없이 지정된 순서대로 <strong>“machine learning”이라는</strong> 정확한 구문을 포함하고 있습니다.</p>
@@ -323,7 +323,7 @@ result_slop1 = client.search(
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"딥 러닝 기반 아키텍처는 계산 부하를 최적화합니다"</p></td>
+     <td><p>"딥 러닝 기반 아키텍처는 계산 부하를 최적화한다"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>
@@ -385,7 +385,7 @@ result_slop2 = client.search(
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"기계 기반 접근 방식을 학습하는 것은 현대 AI 발전에 필수적이다"</p></td>
+     <td><p>"기계 기반 접근 방식을 습득하는 것은 현대 AI 발전에 필수적이다"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -393,7 +393,7 @@ result_slop2 = client.search(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"첨단 기계 알고리즘을 학습하면 AI의 역량이 확장됩니다"</p></td>
+     <td><p>"고급 기계 알고리즘을 학습하면 AI의 역량이 확장됩니다"</p></td>
    </tr>
 </table>
 <h2 id="Considerations" class="common-anchor-header">고려 사항<button data-href="#Considerations" class="anchor-icon" translate="no">
@@ -417,7 +417,7 @@ result_slop2 = client.search(
 <li><p>구문 일치 성능은 텍스트가 어떻게 토큰화되는지에 따라 달라집니다. 전체 컬렉션에 분석기를 적용하기 전에 ` <code translate="no">run_analyzer</code> ` 메서드를 사용하여 토큰화 결과를 검토하십시오. 자세한 내용은 <a href="/docs/ko/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">‘분석기 개요’를</a> 참조하십시오.</p></li>
 <li><p><code translate="no">filter</code> 표현식의 이스케이프 규칙:</p>
 <ul>
-<li><p>표현식 내에서 큰따옴표나 작은따옴표로 묶인 문자는 문자열 상수로 해석됩니다. 문자열 상수에 이스케이프 문자가 포함된 경우, 해당 이스케이프 문자는 이스케이프 시퀀스로 표현해야 합니다. 예를 들어, <code translate="no">\</code> 을 표현하려면 ` <code translate="no">\\</code> `을, 탭을 표현하려면 ` <code translate="no">\\t</code> `을, 줄바꿈을 표현하려면 ` <code translate="no">\t</code>`을, 그리고 새 줄을 표현하려면 ` <code translate="no">\\n</code> `을 사용하십시오.</p></li>
+<li><p>표현식 내에서 큰따옴표나 작은따옴표로 묶인 문자는 문자열 상수로 해석됩니다. 문자열 상수에 이스케이프 문자가 포함된 경우, 해당 이스케이프 문자는 이스케이프 시퀀스로 표현해야 합니다. 예를 들어, <code translate="no">\</code> 을 표현하려면 ` <code translate="no">\\</code> `을, 탭을 표현하려면 ` <code translate="no">\\t</code> `을, 줄 바꿈을 표현하려면 ` <code translate="no">\t</code>`을, 그리고 새 줄을 표현하려면 ` <code translate="no">\\n</code> `을 사용하십시오.</p></li>
 <li><p>문자열 상수가 작은따옴표로 묶여 있는 경우, 상수 내의 작은따옴표는 <code translate="no">\\'</code> 로 표기해야 하며, 큰따옴표는 <code translate="no">&quot;</code> 또는 <code translate="no">\\&quot;</code> 로 표기할 수 있습니다. 예: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>문자열 상수가 큰따옴표로 묶여 있는 경우, 상수 내의 큰따옴표는 <code translate="no">\\&quot;</code> 로 표기해야 하며, 작은따옴표는 <code translate="no">'</code> 또는 <code translate="no">\\'</code> 중 하나로 표기할 수 있습니다. 예: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>

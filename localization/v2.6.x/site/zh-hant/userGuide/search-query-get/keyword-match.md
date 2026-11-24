@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 中的文字匹配功能可根據特定術語精確檢索文件。此功能主要用於篩選搜尋以滿足特定條件，並可結合標量篩選來精確化查詢結果，從而實現符合標量標準的向量內相似度搜尋。</p>
+    </button></h1><p>Milvus 中的文字匹配功能可根據特定術語精確檢索文件。此功能主要用於篩選搜尋以滿足特定條件，並可結合標量篩選來精確化查詢結果，允許在符合標量標準的向量內進行相似度搜尋。</p>
 <div class="alert note">
 <p>文字匹配著重於查找查詢詞的完全匹配結果，不會對匹配文檔的相關性進行評分。若您希望根據查詢詞的語義含義和重要性來檢索最相關的文檔，建議您使用<a href="/docs/zh-hant/v2.6.x/full-text-search.md">全文檢索</a>。</p>
 </div>
@@ -67,7 +67,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>文字比對適用於 <a href="/docs/zh-hant/v2.6.x/string.md"><code translate="no">VARCHAR</code></a> 欄位類型上運作，該類型實質上即為 Milvus 中的字串資料類型。若要啟用文字比對，請將 `<code translate="no">enable_analyzer</code> ` 與 `<code translate="no">enable_match</code> ` 兩者皆設定為 `<code translate="no">True</code> `，並在定義集合架構時，可選擇性地配置<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器</a>以進行文字分析。</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">設定<code translate="no">enable_analyzer</code> 與<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">設定<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要為特定的<code translate="no">VARCHAR</code> 欄位啟用文字比對功能，請在定義欄位架構時，將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 兩個參數皆設定為<code translate="no">True</code> 。此設定會指示 Milvus 將文字進行分詞，並為指定欄位建立倒排索引，從而實現快速且高效的文字比對。</p>
+    </button></h3><p>若要為特定的 `<code translate="no">VARCHAR</code> ` 欄位啟用文字比對功能，請在定義欄位架構時，將 `<code translate="no">enable_analyzer</code> ` 與 `<code translate="no">enable_match</code> ` 兩項參數皆設定為 `<code translate="no">True</code> `。此設定會指示 Milvus 將文字進行分詞，並為指定欄位建立倒排索引，從而實現快速且高效的文字比對。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -222,8 +222,8 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>關鍵字匹配的效能與準確度取決於所選的分析器。不同的分析器針對各種語言和文字結構進行了優化，因此選擇合適的分析器將對您特定使用情境的搜尋結果產生顯著影響。</p>
-<p>預設情況下，Milvus 使用<code translate="no">standard</code> 分析器，該分析器會根據空白字元和標點符號將文字進行分詞，並將文字轉換為小寫。套用此預設設定無需額外參數。如需更多資訊，請參閱「<a href="/docs/zh-hant/v2.6.x/standard-analyzer.md">標準」</a>。</p>
-<p>若需使用其他分析器，可透過 `<code translate="no">analyzer_params</code> ` 參數進行配置。例如，若要套用 `<code translate="no">english</code> ` 分析器來處理英文文本：</p>
+<p>預設情況下，Milvus 使用<code translate="no">standard</code> 分析器，該分析器會根據空白字元和標點符號將文字分詞，移除長度超過 40 個字元的詞元，並將文字轉換為小寫。套用此預設設定無需額外參數。如需更多資訊，請參閱<a href="/docs/zh-hant/v2.6.x/standard-analyzer.md">「標準」</a>。</p>
+<p>若需使用其他分析器，可透過 `<code translate="no">analyzer_params</code> ` 參數進行設定。例如，若要套用 `<code translate="no">english</code> ` 分析器來處理英文文本：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -607,11 +607,11 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>為某個欄位啟用詞彙匹配功能會觸發建立倒排索引，這會消耗儲存資源。在決定是否啟用此功能時，請考量其對儲存空間的影響，因為此影響會因文字大小、唯一詞元以及所使用的分析器而異。</p></li>
+<li><p>為某個欄位啟用詞彙匹配功能會觸發建立倒排索引，這會消耗儲存資源。在決定是否啟用此功能時，請考量其對儲存空間的影響，因為這會因文字大小、唯一詞元以及所使用的分析器而異。</p></li>
 <li><p>一旦在資料結構中定義了分析器，其設定將對該集合永久生效。若您認為其他分析器更能滿足需求，可考慮刪除現有集合，並使用所需的分析器設定建立新的集合。</p></li>
 <li><p><code translate="no">filter</code> 表達式中的轉義規則：</p>
 <ul>
-<li><p>在表達式中，以雙引號或單引號包圍的字元將被解釋為字串常數。若字串常數包含轉義字元，則必須使用轉義序列來表示這些轉義字元。例如，使用<code translate="no">\\</code> 來表示<code translate="no">\</code> ，使用<code translate="no">\\t</code> 來表示制表符<code translate="no">\t</code> ，以及使用<code translate="no">\\n</code> 來表示換行符。</p></li>
+<li><p>在表達式中，以雙引號或單引號包圍的字元將被解釋為字串常數。若字串常數包含轉義字元，則必須使用轉義序列來表示該轉義字元。例如，使用<code translate="no">\\</code> 來表示<code translate="no">\</code> ，使用<code translate="no">\\t</code> 來表示制表符<code translate="no">\t</code> ，以及使用<code translate="no">\\n</code> 來表示換行符。</p></li>
 <li><p>若字串常數以單引號包圍，常數內的單引號應以<code translate="no">\\'</code> 表示，而雙引號則可使用<code translate="no">&quot;</code> 或<code translate="no">\\&quot;</code> 表示。範例：<code translate="no">'It\\'s milvus'</code> 。</p></li>
 <li><p>若字串常數以雙引號包圍，則常數內的雙引號應以<code translate="no">\\&quot;</code> 表示，而單引號則可使用<code translate="no">'</code> 或<code translate="no">\\'</code> 表示。範例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</p></li>
 </ul></li>
