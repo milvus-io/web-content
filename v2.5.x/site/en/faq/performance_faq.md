@@ -11,7 +11,7 @@ title: Performance FAQ
 
 Setting `nlist` is scenario-specific. As a rule of thumb, the recommended value of `nlist` is `4 × sqrt(n)`, where `n` is the total number of entities in a segment.
 
-The size of each segment is determined by the `datacoord.segment.maxSize` parameter, which is set to 512 MB by default. The total number of entities in a segment n can be estimated by dividing `datacoord.segment.maxSize` by the size of each entity.
+The size of each segment is determined by the `datacoord.segment.maxSize` parameter, which is set to 1024 MB by default. The total number of entities in a segment n can be estimated by dividing `datacoord.segment.maxSize` by the size of each entity.
 
 Setting `nprobe` is specific to the dataset and scenario, and involves a trade-off between accuracy and query performance. We recommend finding the ideal value through repeated experimentation.
 
