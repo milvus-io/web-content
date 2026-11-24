@@ -1143,6 +1143,33 @@ including the `Highlighter`/`LexicalHighlighter`/`SemanticHighlighter` split.
 Record the fully qualified owner and allowlist status for every nested
 candidate.
 
+**Step 5b — Public type inventory coverage (orphan-type scan)**: the
+`(*T*)`-annotation scan (Step 9) only catches types that pages *reference*, so a
+public type that the docs merely *mention* — or never mention at all — slips
+through. Close that gap deterministically. Build the complete inventory of
+public top-level types defined in the SDK source at the target tag (from the
+SDK's public API surface listed in `references/sdk-map.md` — structs/classes/
+enums/interfaces/records/dataclasses; exclude third-party/proto/wire types,
+internal/private symbols, module-level constants, and pure aliases over
+stdlib/generic containers). Cross-reference every inventory entry against the
+whole doc tree: page titles, `#`/`##`/`###` type headings, `(*T*)` annotations,
+code-fence declarations, and prose. Classify each entry:
+- **documented** — a dedicated page, a `##`/`###` type section, an inline
+  expansion that names the members, or the request/option class of an operation
+  page;
+- **mentioned but not documented** — appears only in prose or a bare annotation
+  (e.g. an `impl From<X> for Y` note, a builder/getter return type, a base-type
+  mention) with no member coverage → resolve by expanding it inline on the page
+  that documents the surrounding/owner type, or give it a page when it has ≥2
+  reference sites;
+- **zero coverage** — the type name occurs nowhere in the tree → resolve by
+  documenting it on the page that surfaces the API returning/consuming it.
+Step 5 may not be marked complete while any inventory entry is not documented;
+record the resolution (page vs inline, and where) for each entry in the run
+summary. Typical zero-coverage catches: `LexicalHighlighter`/`SemanticHighlighter`
+surfaced only through `From<...>` impls, base types named in prose, and
+conversion/builder-only types.
+
 **Step 6 — Enum format**: use the cross-SDK canonical enum format in the doc
 style guide for every expanded enum: one-sentence scope description, native
 declaration, `**Constants:**`, and one multi-line bullet per value. Language

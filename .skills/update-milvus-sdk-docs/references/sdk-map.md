@@ -552,6 +552,19 @@ local directory via this table before editing. Current latest version line is
   **This placement list is not an exemption from Step 10.** A type named here
   that is referenced by only ONE page at the target tag must still be folded
   into that page and the standalone page deleted (Step 10 is unconditional).
+  **Zero-coverage traps (Step 5b)**: rust has no class inheritance, but several
+  public types are surfaced only through prose or trait impls and are easily
+  missed by the `(*T*)`-annotation scan. `LexicalHighlighter`,
+  `SemanticHighlighter`, and `HighlightQuery` are public structs in
+  `src/v2/types/dql.rs` that appear in the docs only via the
+  `impl From<LexicalHighlighter> for Highlighter` /
+  `impl From<SemanticHighlighter> for Highlighter` conversions
+  (`dql.rs:909`, `dql.rs:962`) — they are *converted into*, not subclasses of,
+  `Highlighter`. `HighlightType` (`dql.rs:831`) and `HighlightResult`
+  (`dql.rs:1774`) likewise have no annotation references of their own.
+  Reconciliation must document these alongside `Highlighter` wherever it is
+  documented (page or inline), never treat a prose `From<...>` mention as
+  coverage, and flag any of them absent from the tree as a Step 5b finding.
 - **Dedicated type pages (per-SDK)**: `FieldData` and `Ids` are leaf data
   types with dedicated rust pages — `Vector/FieldData.md` and `Vector/Ids.md`
   — kept scoped to this SDK section (and the cpp section where they overlap),
