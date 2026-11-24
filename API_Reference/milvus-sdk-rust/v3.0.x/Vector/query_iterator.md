@@ -80,7 +80,11 @@ QueryIterator
 
     - `get_pk()` (*&QueryCursorPk*) -
 
-        The primary key of the last returned row.
+        The primary key of the last returned row. Possible values are:
+
+        - **Int64(i64)** - The primary key is an Int64 value.
+
+        - **VarChar(String)** - The primary key is a VarChar string value.
 
     - `get_last_element_offset()` (*Option<i64>*) -
 

@@ -408,7 +408,7 @@ SearchResponse
 
         - `rows()` (*Result<ResultRowIter>*) -
 
-            Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data.
+            Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data. See [ResultRowIter](ResultRowIter.md).
 
     - `get_recalls()` (*&[f32]*) -
 
@@ -444,7 +444,7 @@ SearchResponse
 
             - `get_value()` (*&AggregationBucketValue*) -
 
-                The value of the bucket key.
+                The value of the bucket key. See [AggregationBucketValue](AggregationBucketValue.md).
 
         - `get_count()` (*i64*) -
 
@@ -480,7 +480,7 @@ SearchResponse
 
                 - `get_value()` (*&AggregationHitFieldValue*) -
 
-                    The value of the field.
+                    The value of the field. See [AggregationHitFieldValue](AggregationHitFieldValue.md).
 
         - `get_sub_groups()` (*&[AggregationBucket]*) -
 
