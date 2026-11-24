@@ -375,11 +375,11 @@ auto request = SearchRequest()
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
-    Set highlighter.
+    Set the search highlighter. See [Highlighter](Highlighter.md).
 
 - `SetHighlighter(const HighlighterPtr& highlighter)`
 
-    Set highlighter.
+    Set the search highlighter. See [Highlighter](Highlighter.md).
 
 - `WithSearchAggregation(const SearchAggregationPtr& aggregation)`
 

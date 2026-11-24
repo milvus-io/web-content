@@ -462,11 +462,11 @@ auto request = SearchRequest()
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
-    Sets the highlighter used to highlight matched text in the results. Optional.
+    Sets the highlighter used to highlight matched text in the results. Optional. See [Highlighter](Highlighter.md).
 
 - `SetHighlighter(const HighlighterPtr& highlighter)`
 
-    Set highlighter.
+    Set the search highlighter. See [Highlighter](Highlighter.md).
 
 Vector request payloads use [FieldData](FieldData.md) instances.
 
