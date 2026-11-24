@@ -355,15 +355,15 @@ auto request = SearchRequest()
 
 - `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
-    Set the function chains used to post-process search results. [Function](../Collections/Function.md) chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
+    Set the function chains used to post-process search results. [Function](../Collections/Function/Function.md) chains and rerank cannot be used together. See [FunctionChain](FunctionChain/FunctionChain.md).
 
 - `SetFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
-    Set function chains. [Function](../Collections/Function.md) chains and rerank cannot be used together.
+    Set function chains. [Function](../Collections/Function/Function.md) chains and rerank cannot be used together.
 
 - `AddFunctionChain(const FunctionChain& function_chain)`
 
-    Add a function chain used to post-process search results. [Function](../Collections/Function.md) chains and rerank cannot be used together.
+    Add a function chain used to post-process search results. [Function](../Collections/Function/Function.md) chains and rerank cannot be used together.
 
 - `WithTimezone(const std::string& timezone)`
 
@@ -375,11 +375,11 @@ auto request = SearchRequest()
 
 - `WithHighlighter(const HighlighterPtr& highlighter)`
 
-    Set the search highlighter. See [Highlighter](Highlighter.md).
+    Set the search highlighter. See [Highlighter](Highlighter/Highlighter.md).
 
 - `SetHighlighter(const HighlighterPtr& highlighter)`
 
-    Set the search highlighter. See [Highlighter](Highlighter.md).
+    Set the search highlighter. See [Highlighter](Highlighter/Highlighter.md).
 
 - `WithSearchAggregation(const SearchAggregationPtr& aggregation)`
 
@@ -449,7 +449,7 @@ The request accepts one query-vector representation matching the target field's 
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function/Function.md) or struct-field input</p></td>
      <td><p>AddEmbeddedText() / WithEmbeddedTexts(); AddEmbeddingList() / WithEmbeddingLists()</p></td>
      <td><p>std::string or EmbeddingList</p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>

@@ -1,6 +1,6 @@
 # AlterCollectionFunction()
 
-This operation alters a function of an existing collection. The function name carried by the [Function](Function.md) object identifies which function is altered.
+This operation alters a function of an existing collection. The function name carried by the [Function](Function/Function.md) object identifies which function is altered.
 
 ```cpp
 Status AlterCollectionFunction(const AlterCollectionFunctionRequest& request)

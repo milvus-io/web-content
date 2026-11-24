@@ -293,7 +293,7 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
      <td><p>Dense signed-byte vectors.</p></td>
    </tr>
    <tr>
-     <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
+     <td><p>[Function](../Collections/Function/Function.md) or struct-field input</p></td>
      <td><p>AddEmbeddedText() / WithEmbeddedTexts(); AddEmbeddingList() / WithEmbeddingLists()</p></td>
      <td><p>std::string or EmbeddingList</p></td>
      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
@@ -318,7 +318,7 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
 
 - `AddFunctionChain(const FunctionChain& function_chain)`
 
-    Adds one reranking function chain. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
+    Adds one reranking function chain. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain/FunctionChain.md).
 
 - `SetFunctionChains(std::vector<FunctionChain>&& function_chains)`
 

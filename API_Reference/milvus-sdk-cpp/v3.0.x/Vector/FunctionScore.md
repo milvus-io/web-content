@@ -1,6 +1,6 @@
 # FunctionScore
 
-This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchRequest::WithRerank()`. For `Search` use Boost, Decay, or Model functions. For the function subclass details see [Function](../Collections/Function.md).
+This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchRequest::WithRerank()`. For `Search` use Boost, Decay, or Model functions. For the function subclass details see [Function](../Collections/Function/Function.md).
 
 ```cpp
 using FunctionScorePtr = std::shared_ptr<FunctionScore>;
@@ -50,6 +50,7 @@ auto score = FunctionScore()
 
 ```cpp
 #include <milvus/MilvusClientV2.h>
+#include <iostream>
 using namespace milvus;
 
 // Build a FunctionScore that boosts matching rows by 1.5x
@@ -60,6 +61,7 @@ auto score = FunctionScore().AddFunction(std::make_shared<BoostRerank>(boost));
 auto client = MilvusClientV2::Create();
 client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
 
+SearchResponse response;
 auto status = client->Search(
     SearchRequest()
         .WithCollectionName("my_collection")
@@ -67,7 +69,7 @@ auto status = client->Search(
         .AddFloatVector({0.1f, 0.2f, 0.3f})
         .WithRerank(std::make_shared<FunctionScore>(score))
         .WithLimit(1),
-    SearchResponse());
+    response);
 if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
