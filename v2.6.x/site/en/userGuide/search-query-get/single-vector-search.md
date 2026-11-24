@@ -1121,10 +1121,6 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
     For details on mmap-settings, refer to [Use mmap](mmap.md).
 
-- Clustering Compaction
-
-    For details on clustering compactions, refer to [Clustering Compaction](clustering-compaction.md).
-
 - Use reranking
 
     For details on using rankers to enhance search result relevance, refer to [Decay Ranker Overview](decay-ranker-overview.md) and [Model Ranker Overview](model-ranker-overview.md).
