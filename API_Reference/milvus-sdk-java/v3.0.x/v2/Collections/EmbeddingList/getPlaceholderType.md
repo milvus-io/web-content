@@ -1,6 +1,6 @@
 # getPlaceholderType()
 
-This getter returns the placeholder type of the embedding list, which indicates the vector data format.
+This getter returns the placeholder type of the embedding list, which indicates the vector data format. The getter is declared on [BaseVector](../BaseVector/BaseVector.md).
 
 ```java
 public PlaceholderType getPlaceholderType()

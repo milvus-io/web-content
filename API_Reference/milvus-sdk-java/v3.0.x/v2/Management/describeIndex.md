@@ -71,7 +71,19 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     - `getPendingIndexRows()` (*long*) - The number of rows waiting to be indexed.
 
-    - `getIndexState()` (*IndexBuildState*) - The current index-building state.
+    - `getIndexState()` (*IndexBuildState*) - The current index-building state. Possible values are:
+
+        - **IndexStateNone** - The index build state is not set.
+
+        - **Unissued** - The index build task has not been issued yet.
+
+        - **InProgress** - The index build task is in progress.
+
+        - **Finished** - The index build task has finished successfully.
+
+        - **Failed** - The index build task has failed.
+
+        - **Retry** - The index build task will be retried.
 
     - `getIndexFailedReason()` (*String*) - The reason why index building failed.
 

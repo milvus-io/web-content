@@ -1,6 +1,6 @@
 # EmbeddingList
 
-An **EmbeddingList** instance represents a list of vector embeddings. You can use an **EmbeddingList** instance to build the query vectors in a search against a vector field in an Array of Structs field.
+An **EmbeddingList** instance represents a list of vector embeddings. You can use an **EmbeddingList** instance to build the query vectors in a search against a vector field in an Array of Structs field. It implements [BaseVector](../BaseVector/BaseVector.md).
 
 ```java
 io.milvus.v2.service.vector.request.data.EmbeddingList

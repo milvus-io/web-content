@@ -1,6 +1,6 @@
 # getData()
 
-This getter returns the raw embedding data contained in this embedding list.
+This getter returns the raw embedding data contained in this embedding list. The getter is declared on [BaseVector](../BaseVector/BaseVector.md).
 
 ```java
 public Object getData()
