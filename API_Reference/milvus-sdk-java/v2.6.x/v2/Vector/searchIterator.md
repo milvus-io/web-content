@@ -71,7 +71,7 @@ searchIterator(SearchIteratorReq.builder()
 
 - `vectors(List<BaseVector> vectors)` -
 
-    A list of vectors to search with.
+    A list of vectors to search with. See [BaseVector](BaseVector/BaseVector.md).
 
 - `roundDecimal(int roundDecimal)` -
 
@@ -113,7 +113,15 @@ A *SearchIterator* object to iterate search results, which offers the following 
 
 - `next()` (*List<QueryResultsWrapper.RowRecord>*) -
 
-    Returns the next batch of search results, or an empty list when iteration is complete.
+    Returns the next batch of search results, or an empty list when iteration is complete. Each **RowRecord** has the following methods:
+
+    - `getFieldValues()` (*Map<String, Object>*) - All field values of the record, keyed by field name.
+
+    - `put(String keyName, Object obj)` (*boolean*) - Puts a field value into the record if the key is not already present. Returns `true` if the value was inserted, or `false` if the key already exists.
+
+    - `get(String keyName)` (*Object*) - Gets the value of a field or a dynamic-field key. Throws `ParamException` if the key does not exist.
+
+    - `contains(String keyName)` (*boolean*) - Tests whether a field or dynamic-field key exists in the record.
 
 - `close()` (*void*) -
 

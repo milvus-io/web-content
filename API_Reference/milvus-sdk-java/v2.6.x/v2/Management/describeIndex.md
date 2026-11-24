@@ -73,6 +73,32 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     - `getIndexState()` (*IndexBuildState*) - The current index-building state.
 
+        **Constants:**
+
+        - **IndexStateNone**
+
+            The index build state is not set.
+
+        - **Unissued**
+
+            The index build task has not been issued yet.
+
+        - **InProgress**
+
+            The index build task is in progress.
+
+        - **Finished**
+
+            The index build task has finished successfully.
+
+        - **Failed**
+
+            The index build task has failed.
+
+        - **Retry**
+
+            The index build task will be retried.
+
     - `getIndexFailedReason()` (*String*) - The reason why index building failed.
 
     - `getProperties()` (*Map\<String, String\>*) - **Deprecated.** The index properties, as set at creation time.

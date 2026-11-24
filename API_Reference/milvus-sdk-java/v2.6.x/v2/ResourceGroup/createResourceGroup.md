@@ -32,23 +32,23 @@ createResourceGroup(CreateResourceGroupReq.builder()
 
     - `withRequests(ResourceGroupLimit requests)`
 
-        A **ResourceGroupLimit** instance that defines the number of nodes required by a resource group.
+        A **ResourceGroupLimit** instance that defines the number of nodes required by a resource group. See [ResourceGroupLimit](ResourceGroupLimit.md).
 
     - `withLimits(ResourceGroupLimit limits)`
 
-        A **ResourceGroupLimit** instance that defines the maximum number of nodes required by a resource group.
+        A **ResourceGroupLimit** instance that defines the maximum number of nodes required by a resource group. See [ResourceGroupLimit](ResourceGroupLimit.md).
 
     - `withFrom(List<ResourceGroupTransfer> from)`
 
-        A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers.
+        A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers. See [ResourceGroupTransfer](ResourceGroupTransfer.md).
 
     - `withTo(List<ResourceGroupTransfer> to)`
 
-        A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers.
+        A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers. See [ResourceGroupTransfer](ResourceGroupTransfer.md).
 
     - `withNodeFilter(ResourceGroupNodeFilter nodeFilter)`
 
-        A **ResourceGroupNodeFilter** is used to filter the query nodes with specified node labels.
+        A **ResourceGroupNodeFilter** is used to filter the query nodes with specified node labels. See [ResourceGroupNodeFilter](ResourceGroupNodeFilter.md).
 
         <div class="alert note">
 

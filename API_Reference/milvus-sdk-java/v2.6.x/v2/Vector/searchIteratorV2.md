@@ -76,7 +76,7 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 - `vectors(List<BaseVector> vectors)` -
 
-    A list of vectors to search with.
+    A list of vectors to search with. See [BaseVector](BaseVector/BaseVector.md).
 
 - `roundDecimal(int roundDecimal)` -
 

@@ -37,7 +37,7 @@ A **GetCompactionPlansResp** object that contains the compaction state and plans
 
 - `getPlans()` (*List\<CompactionPlan\>*) -
 
-    A list of compaction plans, each of which shows which segments will be combined.
+    A list of compaction plans, each of which shows which segments will be combined. See [CompactionPlan](CompactionPlan.md).
 
 **EXCEPTIONS:**
 
