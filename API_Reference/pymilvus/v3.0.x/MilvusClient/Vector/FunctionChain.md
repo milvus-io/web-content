@@ -49,13 +49,75 @@ A **FunctionChain** instance that can be extended with the fluent methods below 
 
     The name assigned to this function chain.
 
-- **stage** (*FunctionChainStage*)
+- **stage** (*[FunctionChainStage](FunctionChainStage.md)*)
 
     The normalized execution stage of this function chain.
 
 - **ops** (*Sequence[FunctionChainOp]*)
 
-    An immutable tuple of the operations added to this chain, in insertion order.
+    An immutable tuple of the operations added to this chain, in insertion order. Each entry is a `FunctionChainOp` (see below).
+
+## FunctionChainOp
+
+A single operation in a function chain pipeline.
+
+```python
+@dataclass(frozen=True)
+class FunctionChainOp:
+    op: str
+    expr: Optional[FunctionChainExpr] = None
+    inputs: Tuple[str, ...] = ()
+    outputs: Tuple[str, ...] = ()
+    params: Mapping[str, Any] = field(default_factory=dict)
+```
+
+**FIELDS:**
+
+- **op** (*str*)
+
+    The operation name, such as `"map"`, `"sort"`, or `"limit"`. Must be a non-empty string.
+
+- **expr** (*FunctionChainExpr | None*)
+
+    An optional expression attached to the operation. `map` operations use this to compute output values.
+
+- **inputs** (*Tuple[str, ...]*)
+
+    The input column names consumed by the operation.
+
+- **outputs** (*Tuple[str, ...]*)
+
+    The output column names produced by the operation.
+
+- **params** (*Mapping[str, Any]*)
+
+    The operation parameters. Keys must be non-empty strings, and values must be supported Python literals.
+
+## FunctionChainExpr
+
+A function invocation expression used by a function chain operation.
+
+```python
+@dataclass(frozen=True)
+class FunctionChainExpr:
+    name: str
+    args: Tuple[FunctionChainArg, ...] = ()
+    params: Mapping[str, Any] = field(default_factory=dict)
+```
+
+**FIELDS:**
+
+- **name** (*str*)
+
+    The name of the function to invoke. Must be a non-empty string.
+
+- **args** (*Tuple[FunctionChainArg, ...]*)
+
+    The positional expression arguments. Each argument can be a `ColumnRef` (created with `col()` for field input) or a supported Python literal.
+
+- **params** (*Mapping[str, Any]*)
+
+    The keyword-style function parameters. Keys must be non-empty strings, and values must be supported Python literals.
 
 ## Methods
 
