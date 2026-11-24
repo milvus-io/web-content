@@ -15,7 +15,19 @@ type RBACMeta struct {
 
 - **Users** (*[]*UserInfo*)
 
-    The users.
+    The users. Each **UserInfo** has the following members:
+
+    - **Name** (*string*) -
+
+        The user name.
+
+    - **Roles** (*[]string*) -
+
+        The roles assigned to the user.
+
+    - **Password** (*string*) -
+
+        The password of the user.
 
 - **Roles** (*[]*[Role](Role.md)*)
 
@@ -23,7 +35,31 @@ type RBACMeta struct {
 
 - **RoleGrants** (*[]*RoleGrants*)
 
-    The role grants.
+    The role grants. Each **RoleGrants** has the following members:
+
+    - **Object** (*string*) -
+
+        The object type of the grant, such as `Collection`.
+
+    - **ObjectName** (*string*) -
+
+        The name of the object the grant applies to.
+
+    - **RoleName** (*string*) -
+
+        The role that holds this grant.
+
+    - **GrantorName** (*string*) -
+
+        The name of the grantor.
+
+    - **PrivilegeName** (*string*) -
+
+        The granted privilege, such as `Search` or `Insert`.
+
+    - **DbName** (*string*) -
+
+        The database of the granted object.
 
 - **PrivilegeGroups** (*[]*[PrivilegeGroup](PrivilegeGroup.md)*)
 

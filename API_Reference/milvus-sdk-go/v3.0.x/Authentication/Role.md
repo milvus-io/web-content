@@ -17,7 +17,31 @@ type Role struct {
 
 - **Privileges** (*[]GrantItem*)
 
-    The list of granted privileges.
+    The list of granted privileges. Each **GrantItem** has the following members:
+
+    - **Object** (*string*) -
+
+        The object type of the grant, such as `Collection`.
+
+    - **ObjectName** (*string*) -
+
+        The name of the object the grant applies to.
+
+    - **RoleName** (*string*) -
+
+        The role that holds this grant.
+
+    - **Grantor** (*string*) -
+
+        The name of the grantor.
+
+    - **Privilege** (*string*) -
+
+        The granted privilege, such as `Search` or `Insert`.
+
+    - **DbName** (*string*) -
+
+        The database of the granted object.
 
 ## Example
 

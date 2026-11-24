@@ -50,7 +50,19 @@ type IndexDescription struct {
 
 - **State** (*index.IndexState*)
 
-    The current state.
+    The current index state. Possible values are:
+
+    - **IndexStateNone** (0) - The index state is unknown.
+
+    - **Unissued** (1) - The index creation task has been submitted but not yet started.
+
+    - **InProgress** (2) - Index building is in progress.
+
+    - **Finished** (3) - Index building completed successfully.
+
+    - **Failed** (4) - Index building failed.
+
+    - **Retry** (5) - Index building is being retried.
 
 - **PendingIndexRows** (*int64*)
 
