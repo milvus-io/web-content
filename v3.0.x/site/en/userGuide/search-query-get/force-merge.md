@@ -70,7 +70,7 @@ dataCoord:
    </tr>
    <tr>
      <td><p><code>dataCoord.segment.maxSize</code></p></td>
-     <td><p>512</p></td>
+     <td><p>1024</p></td>
      <td><p>Default segment max size in MB. Used as the target when <code>target_size</code> is 0 or omitted. Also serves as the minimum allowed value for explicit <code>target_size</code>.</p></td>
    </tr>
    <tr>
@@ -102,7 +102,7 @@ Three force merge compaction modes are available:
 compact("my_collection", target_size=?)
 │
 ├─ Mode 1: target_size = 0 (or omitted)
-│  Uses config maxSize (default 512 MB)
+│  Uses config maxSize (default 1024 MB)
 │  Equivalent to standard compaction
 │
 ├─ Mode 2: target_size = 2048
@@ -126,7 +126,7 @@ client = MilvusClient(
     token="root:Milvus"
 )
 
-# Standard compaction — uses config maxSize (default 512 MB)
+# Standard compaction — uses config maxSize (default 1024 MB)
 job_id = client.compact("target_collection")
 ```
 
@@ -171,7 +171,7 @@ The following table explains the parameters.
    <tr>
      <td><p><code>target_size</code></p></td>
      <td><p>int</p></td>
-     <td><p>Optional. The target segment size in MB. There are 3 options of the parameter value:</p><ul><li><p><strong>0 or omitted</strong>: Uses the configured <code>dataCoord.segment.maxSize</code> (default: 512 MB). Equivalent to standard compaction.</p></li><li><p><strong>Explicit value</strong> : Merges segments to approximately the specified size in MB (eg. 2048). Must be greater than or equal to the configured <code>dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 << 63) - 1)</strong>: Automatically calculates the optimal size based on current segment distribution and available node resources.</p></li></ul></td>
+     <td><p>Optional. The target segment size in MB. There are 3 options of the parameter value:</p><ul><li><p><strong>0 or omitted</strong>: Uses the configured <code>dataCoord.segment.maxSize</code> (default: 1024 MB). Equivalent to standard compaction.</p></li><li><p><strong>Explicit value</strong> : Merges segments to approximately the specified size in MB (eg. 2048). Must be greater than or equal to the configured <code>dataCoord.segment.maxSize</code>.</p></li><li><p><strong>max_int64 ((1 << 63) - 1)</strong>: Automatically calculates the optimal size based on current segment distribution and available node resources.</p></li></ul></td>
    </tr>
 </table>
 
