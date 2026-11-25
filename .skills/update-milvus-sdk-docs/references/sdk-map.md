@@ -60,6 +60,44 @@ So when the user quotes an `api-reference/<route>/...` URL, map it back to the
 local directory via this table before editing. Current latest version line is
 `v3.0.x` (Milvus 3.0); the `v2.6.x` line corresponds to Milvus 2.6.
 
+## Rerank / ranker family (cross-SDK)
+
+Every SDK documents the same reranking family used by `hybrid_search()` and
+single-vector `search()` — treat them as ONE family when auditing, even though
+naming, membership, and layout differ:
+
+- **"ranker" naming**: java (`RRFRanker`, `WeightedRanker`, `BoostRanker`,
+  `DecayRanker`, `ModelRanker` under `Collections/Function/`); pymilvus
+  (`BaseRanker` + `RRFRanker`/`WeightedRanker`).
+- **"rerank(er)" naming**: cpp and rust (`RRFRerank`, `WeightedRerank`,
+  `BoostRerank`, `DecayRerank`, `ModelRerank`); go (`Reranker` interface,
+  `NewRRFRanker()`/`NewWeightedReranker()`); csharp (`Reranker`,
+  `RrfReranker`, `WeightedReranker`, `BoostRerank`, `DecayRerank`,
+  `ModelRerank`); node (`RerankerObj`).
+- **Coverage is not uniform**: cpp/java/csharp/rust document all five
+  (RRF, Weighted, Boost, Decay, Model); pymilvus 2.6 and go 2.6 expose only
+  RRF/Weighted at the top level (Boost/Decay/Model are reachable via
+  `FunctionScore`); node uses a strategy/params object.
+- **Semantics follow the SDKs**: `RRFRank(er)`/`WeightedRank(er)` are the
+  `hybrid_search()` rerank strategies that combine sub-search results, while
+  `BoostRerank`/`DecayRerank`/`ModelRerank` are function-based rankers for
+  single-vector `search()` via `FunctionScore` (see cpp `FunctionScore.h`:
+  "For Search(), the functions can be Boost/Decay/Model; for HybridSearch(),
+  the functions can be RRF/Weighted"). Do not present Boost/Decay/Model as
+  hybrid_search inputs.
+- **`FunctionScore`** (the single-vector search function-score reranking
+  container) is a separate page in every tree (`Vector/FunctionScore.md`,
+  `Collections/FunctionScore.md`, or `Collection/FunctionScore.md`).
+- pymilvus additionally has a **model rerank-function family**
+  (`Rerankers/<Name>RerankFunction/`, from `milvus_model`) — a different family
+  from the function-score rankers; keep it under `Rerankers/`.
+
+These types are on the SKILL.md dedicated-type allowlist: they keep standalone
+pages (one page per type in a family-cluster subdirectory, or the SDK's
+family-cluster page), must never be folded into operation pages, and a
+reconciliation run must flag any of them absent from the tree as a Step 5b
+finding.
+
 ## milvus-sdk-cpp
 
 - **SDK repo**: `milvus-sdk-cpp` (cloned into `sdk-tmp/sdks/milvus-sdk-cpp/`)
@@ -155,6 +193,13 @@ local directory via this table before editing. Current latest version line is
     public data model, not an operation response wrapper; its dedicated page is
     scoped to cpp and rust — e.g. rust documents it at `Vector/FieldData.md`.
     Do not expand its large accessor surface recursively; link the page instead.
+  - **Rerank family (Step 5b)**: `Function.h`'s `RRFRerank`, `WeightedRerank`,
+    `BoostRerank`, `DecayRerank`, and `ModelRerank` live one page per type in
+    `Collections/Function/` (see the related-type-cluster rule above). They
+    surface only through the `SearchRequest`/`HybridSearchRequest` rerank prose
+    and `FunctionScore`, so a reconciliation run must flag any of them missing
+    from the cluster as a Step 5b finding — do not document them inline in an
+    operation page.
   - New internal-only headers (e.g. `BloomFilter.h`) are cache types — skip, do
     not create a page unless the symbol surfaces in a public request/response.
   - **`= delete` methods are hidden, not available.** Some request classes
@@ -218,6 +263,14 @@ local directory via this table before editing. Current latest version line is
   Most operations return plain dicts/lists, so the response surface is the
   documented return type itself; only audit typed response classes (e.g. bulk
   writer, `pymilvus/data/*`) for missing members (SKILL.md Pass 1).
+- **Rerank family (Step 5b)**: `BaseRanker` subclasses `RRFRanker` and
+  `WeightedRanker` (`pymilvus/client/abstract.py`) surface only through the
+  `hybrid_search()` `rerank`/`ranker` parameter prose — v2.6.x documents them on
+  `MilvusClient/Vector/BaseRanker.md`, v3.0.x inlines them in the hybrid_search
+  pages; flag any of them absent from the tree as a Step 5b finding. The
+  **model rerank-function family** (`pymilvus/rerank/*` → `Rerankers/<Name>RerankFunction/`,
+  from `milvus_model`) is a separate family and must stay under `Rerankers/`,
+  not be confused with the function-score rankers.
 
 ## milvus-sdk-java
 
@@ -256,6 +309,13 @@ local directory via this table before editing. Current latest version line is
   `FunctionChainArg/Expr/Op/Stage`) must follow this subdirectory convention.
   The shared exception type `MilvusClientException` is placed at
   `v2/Client/MilvusClientException.md`.
+- **Rerank family (Step 5b)**: `RRFRanker`/`WeightedRanker`/`BoostRanker`/
+  `DecayRanker`/`ModelRanker` are dedicated-type-allowlist pages in the
+  `Collections/Function/` cluster (one page per type). Never fold them into
+  operation pages or replace them with inline sections; `SearchReq.functionScore`
+  (a `FunctionScore`) is where the Boost/Decay/Model rankers are consumed, and
+  `HybridSearchReq.ranker` takes the RRF/Weighted family. Flag any ranker absent
+  from the cluster as a Step 5b finding.
 - **Legacy enum values**: `DataType.String` (value 20) exists in the SDK but is
   legacy/internal — do **not** document it; readers should use `DataType.VarChar`.
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
@@ -389,6 +449,12 @@ local directory via this table before editing. Current latest version line is
   `GetReplicateInfo`, `CreateReplicateStream`, `DumpMessages`) and Snapshot/
   (`DescribeSnapshot`, `GetExportSnapshotState`, `GetRestoreSnapshotState`,
   `ListRestoreSnapshotJobs`) operations ARE real, documented features; keep them.
+- **Rerank family (Step 5b)**: `Vector/Reranker.md` documents the `Reranker`
+  interface and its constructors (`NewRRFRanker()`, `NewWeightedReranker()`);
+  the function-based rankers (boost/decay/model) surface through
+  `entity.FunctionScore` (`Collection/FunctionScore.md`, v3.0.x). Reconcile the
+  hybrid-search rerank and the search FunctionScore surfaces together, and flag
+  a ranker missing from the tree as a Step 5b finding.
 
 ## milvus-sdk-node
 
@@ -434,6 +500,11 @@ local directory via this table before editing. Current latest version line is
   `getComponentStates`, `registerLink`, `getClientTelemetry`,
   `pushClientCommand`, `deleteClientCommand`) ARE real, documented features;
   keep them.
+- **Rerank family (Step 5b)**: `Vector/RerankerObj.md` documents the
+  hybrid-search `rerank` parameter's `RerankerObj` (strategy/params) shape;
+  `Vector/FunctionScore.md` covers the single-vector search function-score path.
+  Reconcile both surfaces together and flag a missing rerank/function-score page
+  as a Step 5b finding.
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
   rather than hard-coding a patch number here).
 - **Version pins**: NONE — `About.md` uses `v3.0.0+` → `**latest**` rows and
@@ -538,6 +609,12 @@ local directory via this table before editing. Current latest version line is
   bulk-import REST family shares one top-level envelope, `BulkImportResp`, so it
   keeps a standalone page under `DataImport/` and the operation pages link to
   it (same rule as Rust/C++ `BulkImportResponse`).
+- **Rerank family (Step 5b)**: `Vector/Reranker.md` documents the rerank family
+  in one page — `IReranker`, `RrfReranker`, `WeightedReranker` (rank_params
+  strategies) plus `BoostRerank`/`DecayRerank`/`ModelRerank` (the
+  `FunctionReranker<T>` function-score path) — with `Collections/FunctionScore.md`
+  alongside. Reconcile the full family and flag any rerank type missing from the
+  page as a Step 5b finding.
 
 ## milvus-sdk-rust
 
@@ -556,6 +633,10 @@ local directory via this table before editing. Current latest version line is
   `IndexDesc`/`IndexStateCode`/`CompactionStateCode`/`SegmentLevel`/
   `SegmentState`/`TargetSizeUnit` → `Management/`; `CollectionDesc`/
   `ConsistencyLevel`/`IndexParam`/`LoadState` → `Collections/`;
+  `RRFRerank`/`WeightedRerank`/`BoostRerank`/`DecayRerank`/`ModelRerank` →
+  `Collections/Function/` (java-style family cluster: one page per type, with a
+  "Related types" list linking the siblings in `Function.md` — the cpp
+  `Collections/Function/` precedent);
   `EntityRow`/`FieldPartialUpdateOp`/`FilterTemplateValue`/`FunctionChain`/
   `FunctionScore`/`Highlighter`/`OrderByField`/`SearchAggregation`/
   `SearchVectors` → `Vector/`.
@@ -575,6 +656,18 @@ local directory via this table before editing. Current latest version line is
   Reconciliation must document these alongside `Highlighter` wherever it is
   documented (page or inline), never treat a prose `From<...>` mention as
   coverage, and flag any of them absent from the tree as a Step 5b finding.
+  The **rerank family** — `RRFRerank`, `WeightedRerank`, `BoostRerank`,
+  `DecayRerank`, `ModelRerank` (`src/v2/types/dql.rs`, built by the
+  `rerank_function()` helper) — is the same trap: the types appear in the docs
+  only via the `rerank(...)` parameter prose and their
+  `Deref<Target = Function>` impls, never as `(*T*)` annotations. They are
+  documented as the `Collections/Function/` family cluster (one page per type);
+  `RRFRerank`/`WeightedRerank` are the `hybrid_search()` rerank strategies,
+  `BoostRerank`/`DecayRerank`/`ModelRerank` are the function-based rankers for
+  single-vector `search()` via `FunctionScore`. Reconciliation must flag any
+  rerank type absent from the cluster as a Step 5b finding and must not document
+  them inline in an operation page or fold them (they are on the SKILL.md
+  dedicated-type allowlist).
 - **Dedicated type pages (per-SDK)**: `FieldData` and `Ids` are leaf data
   types with dedicated rust pages — `Vector/FieldData.md` and `Vector/Ids.md`
   — kept scoped to this SDK section (and the cpp section where they overlap),
