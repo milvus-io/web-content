@@ -47,7 +47,7 @@ let request = AddFunctionFieldRequest::builder()
 
 - `function: Option<Function>`
 
-    The function definition, including its name and type. Required. See [Function](Function.md).
+    The function definition, including its name and type. Required. See [Function](Function/Function.md).
 
 - `index: Option<IndexParam>`
 

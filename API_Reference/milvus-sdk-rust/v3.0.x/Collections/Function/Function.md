@@ -22,7 +22,9 @@ pub struct Function
 
 - `function_type: FunctionType`
 
-    Type of the function. See [FunctionType](FunctionType.md).
+    Type of the function. See [FunctionType](../FunctionType.md).
+
+    The function-based rerankers used by search and hybrid-search reranking deref to `Function` (see [Related types](#related-types)).
 
 - `input_fields: Vec<String>`
 
@@ -57,6 +59,18 @@ pub struct Function
 - `add_input_field(value)` - Adds one input field.
 - `add_output_field(value)` - Adds one output field.
 - `param(key, value)` - Sets one function parameter.
+
+## Related types
+
+- [RRFRerank](RRFRerank.md)
+
+- [WeightedRerank](WeightedRerank.md)
+
+- [BoostRerank](BoostRerank.md)
+
+- [DecayRerank](DecayRerank.md)
+
+- [ModelRerank](ModelRerank.md)
 
 ## Example
 
