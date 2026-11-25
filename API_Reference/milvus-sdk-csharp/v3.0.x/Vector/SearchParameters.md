@@ -146,7 +146,7 @@ public sealed class SearchParameters
 
 - `FunctionScoreReranker` (*IReranker?*) -
 
-    A structured function-score reranker (boost / decay / model) to apply to the search, mapped to the proto `schema.FunctionScore`. Takes precedence over `Rerank` when set. See [Reranker](Reranker.md).
+    A structured function-score reranker (boost / decay / model) to apply to the search, mapped to the proto `schema.FunctionScore`. Takes precedence over `Rerank` when set. See [Reranker](Reranker/Reranker.md).
 
 - `FilterTemplates` (*IDictionary\<string, object\>*) -
 

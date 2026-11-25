@@ -137,7 +137,7 @@ SearchResp results = await client.HybridSearchAsync(request);
 
     - `FunctionScoreReranker` (*IReranker?*) -
 
-        A structured function-score reranker (boost / decay / model) for this leg, mapped to the proto `schema.FunctionScore`. When set, it takes precedence over `Rerank`. See [Reranker](Reranker.md).
+        A structured function-score reranker (boost / decay / model) for this leg, mapped to the proto `schema.FunctionScore`. When set, it takes precedence over `Rerank`. See [Reranker](Reranker/Reranker.md).
 
     - `Rerank` (*string?*) -
 
@@ -161,7 +161,7 @@ SearchResp results = await client.HybridSearchAsync(request);
 
 - `Reranker` (*IReranker*) -
 
-    The reranker used to combine the results of the individual searches. See [Reranker](Reranker.md).
+    The reranker used to combine the results of the individual searches. See [Reranker](Reranker/Reranker.md).
 
 - `Limit` (*int*) -
 

@@ -468,13 +468,22 @@ local directory via this table before editing. Current latest version line is
 ## milvus-sdk-csharp
 
 - **SDK repo**: `milvus-sdk-csharp` (cloned into `sdk-tmp/sdks/milvus-sdk-csharp/`)
-- **Online URL**: `https://milvus.io/api-reference/csharp/v2.2.x/` (route `csharp`; only `v2.2.x` exists)
+- **Online URL**: `https://milvus.io/api-reference/csharp/<version-line>/` (route `csharp`; lines `v2.2.x`, `v2.6.x`, and `v3.0.x` exist)
 - **Public API surface**: `Milvus.Client/` (namespace `Milvus.Client`).
   A **newer `Milvus.Client.V2/` implementation** (in-repo) is being prepared as
   the basis for the next csharp versions (2.6.x / 3.x) — future csharp docs
   should be written from `Milvus.Client.V2/` (`MilvusClientV2.*.cs`), not the
   legacy `Milvus.Client/` V1 API.
-- **Doc tree**: only `API_Reference/milvus-sdk-csharp/v2.2.x/` exists.
+- **Doc tree**: `API_Reference/milvus-sdk-csharp/<version-line>/` with the legacy
+  `v2.2.x` line and the `v2.6.x`/`v3.0.x` lines built from `Milvus.Client.V2/`.
+- **Related-type clusters use the java subdirectory layout** (same as java/cpp):
+  when a source file declares a primary type plus related classes (e.g.
+  `Reranker.cs` has `IReranker` + `FunctionReranker<T>`/`RrfReranker`/
+  `WeightedReranker`/`BoostRerank`/`DecayRerank`/`ModelRerank`), document each
+  type in **its own page inside a `<Type>/` subdirectory** — main type at
+  `<Type>/<Type>.md` with a "Related types" list linking each sibling. Do NOT
+  merge related types into one page as `##` sections. `Vector/Reranker/` is the
+  precedent.
 - **Page mapping**: `MilvusClient` methods → operation pages; the doc tree is
   small — map each method to its page directly by name.
 - **Tags**: `v2.2.x`, `v2.3.0-preview.1`, etc. Note many versions are
