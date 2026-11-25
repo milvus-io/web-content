@@ -86,7 +86,7 @@ SearchResp results = await client.SearchAsync(request);
 
 - `FunctionChains` (*IReadOnlyList\<FunctionChain\>*) -
 
-    Function chains applied to the search results. See [FunctionChain](FunctionChain.md).
+    Function chains applied to the search results. See [FunctionChain](FunctionChain/FunctionChain.md).
 
 - `SearchAggregation` (*SearchAggregation?*) -
 
