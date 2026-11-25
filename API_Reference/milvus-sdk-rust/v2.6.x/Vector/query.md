@@ -127,9 +127,9 @@ QueryResponse
 
         The row at the given index as an entity value. See [EntityRow](EntityRow.md).
 
-    - `rows()` (*Result<[ResultRowIter](ResultRowIter.md)>*) -
+    - `rows()` (*Result<ResultRowIter>*) -
 
-        Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data.
+        Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data. See [ResultRowIter](ResultRowIter.md).
 
 - `session_timestamp()` (*u64*) -
 

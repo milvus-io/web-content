@@ -1,6 +1,6 @@
 # FunctionScore
 
-A **FunctionScore** instance combines multiple **[Function](../Collections/Function.md)** instances in a configurable manner. It is used both as a V2 request input for single-vector search reranking and as a response domain object.
+A **FunctionScore** instance combines multiple **[Function](../Collections/Function/Function.md)** instances in a configurable manner. It is used both as a V2 request input for single-vector search reranking and as a response domain object.
 
 ```rust
 pub struct FunctionScore
@@ -8,9 +8,9 @@ pub struct FunctionScore
 
 **PARAMETERS:**
 
-- `functions: Vec<[Function](../Collections/Function.md)>`
+- `functions: Vec<Function>`
 
-    The reranking functions applied to the candidate set. See [Function](../Collections/Function.md).
+    The reranking functions applied to the candidate set. For single-vector search, add one or more function-based rankers such as [BoostRerank](../Collections/Function/BoostRerank.md), [DecayRerank](../Collections/Function/DecayRerank.md), or [ModelRerank](../Collections/Function/ModelRerank.md). See [Function](../Collections/Function/Function.md).
 
 - `params: HashMap<String, serde_json::Value>`
 

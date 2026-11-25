@@ -100,15 +100,15 @@ let request = SearchRequest::builder()
 
     Additional search parameters, such as `nprobe` or `ef`.
 
-- `rerank: Option<[FunctionScore](FunctionScore.md)>`
+- `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. See [FunctionScore](FunctionScore.md).
+    Reranking configuration for single-vector search, built with `FunctionScore::new()` and one or more function-based rankers such as [BoostRerank](../Collections/Function/BoostRerank.md), [DecayRerank](../Collections/Function/DecayRerank.md), or [ModelRerank](../Collections/Function/ModelRerank.md). See [FunctionScore](FunctionScore.md).
 
 - `timezone: String`
 
     Timezone applied when searching or filtering Timestamptz fields.
 
-- `highlighter: Option<[Highlighter](Highlighter/Highlighter.md)>`
+- `highlighter: Option<Highlighter>`
 
     Text-highlighting configuration for full-text search. See [Highlighter](Highlighter/Highlighter.md), [LexicalHighlighter](Highlighter/LexicalHighlighter.md), and [SemanticHighlighter](Highlighter/SemanticHighlighter.md).
 
@@ -216,9 +216,9 @@ SearchResponse
 
             The hit at the given index as an entity row. See [EntityRow](EntityRow.md).
 
-        - `rows()` (*Result<[ResultRowIter](ResultRowIter.md)>*) -
+        - `rows()` (*Result<ResultRowIter>*) -
 
-            Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data.
+            Returns a borrowing iterator over the matched rows, reading values directly from the column-oriented result data. See [ResultRowIter](ResultRowIter.md).
 
     - `get_recalls()` (*&[f32]*) -
 

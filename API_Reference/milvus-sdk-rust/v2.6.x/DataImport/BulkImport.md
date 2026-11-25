@@ -98,7 +98,7 @@ The request must specify exactly one data source among `files`, `object_url`, `o
 
 - `files: Vec<Vec<String>>`
 
-    Local or object-storage paths visible to an open-source Milvus deployment, grouped per import.
+    Local or object-storage paths visible to an open-source Milvus deployment, grouped per import. Use `file()` to add one file or `file_group()` to add one group.
 
 - `object_url: String`
 
@@ -106,7 +106,7 @@ The request must specify exactly one data source among `files`, `object_url`, `o
 
 - `object_urls: Vec<Vec<String>>`
 
-    Object URLs of the files to import, grouped per import.
+    Object URLs of the files to import, grouped per import. Use `object_url_group()` to add one group.
 
 - `cluster_id: String`
 
@@ -138,11 +138,11 @@ The request must specify exactly one data source among `files`, `object_url`, `o
 
 - `data_paths: Vec<Vec<String>>`
 
-    Data paths within the volume to import, grouped per import.
+    Data paths within the volume to import, grouped per import. Use `data_path_group()` to add one group.
 
 - `options: HashMap<String, Value>`
 
-    Additional import options, such as `auto_commit`. Use `rls_principal()` and `skip_rls()` to populate the row-level security options for an import into an RLS-enabled collection.
+    Additional import options, such as `auto_commit`. Use `option()` to add one, or `rls_principal()` and `skip_rls()` to populate the row-level security options for an import into an RLS-enabled collection.
 
     The request exposes `rls_principal()` and `should_skip_rls()` accessors for those two options.
 

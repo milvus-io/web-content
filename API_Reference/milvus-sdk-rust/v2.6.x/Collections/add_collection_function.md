@@ -29,9 +29,9 @@ let request = AddCollectionFunctionRequest::builder()
 
     Name of the collection to alter. Required.
 
-- `function: Option<[Function](Function.md)>`
+- `function: Option<Function>`
 
-    The function to add, including its name and type. Required.
+    The function to add, including its name and type. Required. See [Function](Function/Function.md).
 
 **RETURN TYPE:**
 

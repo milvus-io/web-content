@@ -64,9 +64,9 @@ GetReplicateInfoResponse
 
             The message ID.
 
-        - `get_wal_name()` (*[WalName](WalName.md)*) -
+        - `get_wal_name()` (*WalName*) -
 
-            The WAL name of the message.
+            The WAL name of the message. See [WalName](WalName.md).
 
     - `get_time_tick()` (*u64*) -
 
@@ -92,9 +92,9 @@ GetReplicateInfoResponse
 
             The message ID.
 
-        - `get_wal_name()` (*[WalName](WalName.md)*) -
+        - `get_wal_name()` (*WalName*) -
 
-            The WAL name of the message.
+            The WAL name of the message. See [WalName](WalName.md).
 
     - `get_time_tick()` (*u64*) -
 

@@ -1,6 +1,6 @@
 # BulkImportResponse
 
-The envelope returned by the Milvus bulk-import REST endpoints: the server `code`/`message` plus the endpoint-specific `data` payload. `bulk_import()`, `abort_import()`, `commit_import()`, `get_import_progress()`, and `list_import_jobs()` all return this same response type.
+The envelope returned by the Milvus bulk-import REST endpoints: the server `code`/`message` plus the endpoint-specific `data` payload. `bulk_import()`, `get_import_progress()`, and `list_import_jobs()` all return this same response type.
 
 ```rust
 pub struct BulkImportResponse

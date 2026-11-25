@@ -44,9 +44,13 @@ pub struct SemanticHighlighter
 
 - `new()` - Creates a value initialized with its SDK defaults.
 - `queries(value)` / `set_queries(value)` / `get_queries()` - Sets or returns the queries.
+- `add_query(value)` - Appends one query.
 - `input_fields(value)` / `set_input_fields(value)` / `get_input_fields()` - Sets or returns the input fields.
+- `add_input_field(value)` - Appends one input field.
 - `pre_tags(value)` / `set_pre_tags(value)` / `get_pre_tags()` - Sets or returns the pre tags.
+- `add_pre_tag(value)` - Appends one pre tag.
 - `post_tags(value)` / `set_post_tags(value)` / `get_post_tags()` - Sets or returns the post tags.
+- `add_post_tag(value)` - Appends one post tag.
 - `threshold(value)` / `set_threshold(value)` / `get_threshold()` - Sets or returns the confidence threshold.
 - `highlight_only(value)` / `set_highlight_only(value)` / `get_highlight_only()` - Sets or returns whether only sentence-level fragments are returned.
 - `model_deployment_id(value)` / `set_model_deployment_id(value)` / `get_model_deployment_id()` - Sets or returns the model deployment ID.

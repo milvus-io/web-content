@@ -1,6 +1,6 @@
 # Function
 
-Server-side function attached to a collection schema, used for BM25, text-embedding, or reranking operations.
+Server-side function attached to a collection schema, used for BM25, text-embedding, or reranking operations. The function-based rerankers used by search and hybrid-search reranking deref to `Function` (see [Related types](#related-types)).
 
 ```rust
 pub struct Function
@@ -22,7 +22,7 @@ pub struct Function
 
 - `function_type: FunctionType`
 
-    Type of the function. See [FunctionType](FunctionType.md).
+    Type of the function. See [FunctionType](../FunctionType.md).
 
 - `input_fields: Vec<String>`
 
@@ -59,6 +59,18 @@ pub struct Function
 - `get_id()` - Returns the server-assigned function ID.
 - `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the params.
 - `param(key, value)` - Sets one param.
+
+## Related types
+
+- [RRFRerank](RRFRerank.md)
+
+- [WeightedRerank](WeightedRerank.md)
+
+- [BoostRerank](BoostRerank.md)
+
+- [DecayRerank](DecayRerank.md)
+
+- [ModelRerank](ModelRerank.md)
 
 ## Example
 
