@@ -51,7 +51,7 @@ hybrid_search(
 
         - **expr** (*str*): (Optional) The expression to filter the results.
 
-- **rerank** (*[BaseRanker](../../MilvusClient/Vector/BaseRanker.md)*) -
+- **rerank** (*BaseRanker*) -
 
     The reranking strategy to use for hybrid search. Pass a [BaseRanker](../../MilvusClient/Vector/BaseRanker.md) subclass — `WeightedRanker` or `RRFRanker`.
 
