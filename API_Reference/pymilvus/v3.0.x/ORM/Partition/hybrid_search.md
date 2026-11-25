@@ -53,7 +53,7 @@ hybrid_search(
 
 - **rerank** (*BaseRanker*) -
 
-    The reranking strategy to use for hybrid search. Valid values: `WeightedRanker` and `RRFRanker`.
+    The reranking strategy to use for hybrid search. Valid values: `WeightedRanker` and `RRFRanker`. See [BaseRanker](../../MilvusClient/Vector/BaseRanker.md).
 
     - `WeightedRanker`: The Average Weighted Scoring reranking strategy, which prioritizes vectors based on relevance, averaging their significance.
 
