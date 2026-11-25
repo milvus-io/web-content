@@ -46,7 +46,7 @@ let request = HybridSearchRequest::builder()
 
 - `rerank: Option<Function>`
 
-    Reranking strategy applied to the combined results, such as RRF or weighted reranking. Use `RRFRerank::new()` or `WeightedRerank::new()`. See [Function](../Collections/Function.md).
+    Reranking strategy applied to the combined results. Use `RRFRerank::new()` or `WeightedRerank::new()`. See [RRFRerank](../Collections/Function/RRFRerank.md), [WeightedRerank](../Collections/Function/WeightedRerank.md), and [Function](../Collections/Function/Function.md).
 
 - `limit: i64`
 

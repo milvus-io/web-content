@@ -30,7 +30,7 @@ pub struct CollectionSchema
 
 - `functions: Vec<Function>`
 
-    The functions of the collection, such as BM25 or text-embedding functions. See [Function](Function.md).
+    The functions of the collection, such as BM25 or text-embedding functions. See [Function](Function/Function.md).
 
 - `properties: HashMap<String, String>`
 

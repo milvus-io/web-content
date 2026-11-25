@@ -33,7 +33,7 @@ let request = AddCollectionFunctionRequest::builder()
 
 - `function: Option<Function>`
 
-    The function to add, including its name and type. Required. See [Function](Function.md).
+    The function to add, including its name and type. Required. See [Function](Function/Function.md).
 
 **RETURN TYPE:**
 

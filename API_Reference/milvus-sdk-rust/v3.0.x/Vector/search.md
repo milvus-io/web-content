@@ -106,30 +106,7 @@ let request = SearchRequest::builder()
 
 - `rerank: Option<FunctionScore>`
 
-    Reranking configuration for single-vector search. Mutually exclusive with `function_chains`.
-
-    This struct carries reranking functions and combination settings used by search.
-
-    ```rust
-    pub struct FunctionScore
-    ```
-
-    **PARAMETERS:**
-
-    - `functions: Vec<Function>`
-
-        Reranking functions applied to the candidate set. See [Function](../Collections/Function.md).
-
-    - `params: HashMap<String, serde_json::Value>`
-
-        Combination settings for the reranking functions.
-
-    **METHODS:**
-
-    - `new()` - Creates a value initialized with its SDK defaults.
-    - `functions(value)` / `set_functions(value)` / `get_functions()` - Sets or returns the functions.
-    - `add_function(value)` - Adds one function to the existing values.
-    - `params(value)` / `set_params(value)` / `get_params()` - Sets or returns the params.
+    Reranking configuration for single-vector search, built with `FunctionScore::new()` and one or more function-based rankers such as [BoostRerank](../Collections/Function/BoostRerank.md), [DecayRerank](../Collections/Function/DecayRerank.md), or [ModelRerank](../Collections/Function/ModelRerank.md). Mutually exclusive with `function_chains`. See [FunctionScore](FunctionScore.md).
 
 - `timezone: String`
 
