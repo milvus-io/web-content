@@ -56,9 +56,9 @@ The values substituted into expression-template placeholders.
 Default: `None`
 The alias for `expr`. Do not provide both values. The resolved expression is available through the read-only `filter` property as `request.filter`.
 
-- **ranker** (*Union[BaseRanker, [Function](../Collections/Function/Function.md)]* | *None*) -
+- **ranker** (*Union[BaseRanker, Function]* | *None*) -
 Default: `None`
-The ranker used to combine and order results from the search requests. A `Function` ranker cannot be combined with per-request function chains.
+The ranker used to combine and order results from the search requests. Use `RRFRanker` or `WeightedRanker`, or a `Function`-based ranker; a `Function` ranker cannot be combined with per-request function chains. See [BaseRanker](BaseRanker.md) and [Function](../Collections/Function/Function.md).
 
 - **limit** (*int*) -
 Default: `10`
