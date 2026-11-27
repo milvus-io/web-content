@@ -633,7 +633,54 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CollectionCommons"
+                "type": "object",
+                "properties": {
+                  "dbName": {
+                    "type": "string",
+                    "description": "The name of the database which the collection belongs to. Setting this to a non-existing database results in an error. If not specified, the default database applies.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Database 名称。设置为不存在的 Database 会导致错误。如果未指定，则使用默认 Database。"
+                      },
+                      "ja-JP": {
+                        "description": "collection が属する database の名前です。存在しない database に設定するとエラーになります。指定しない場合は、default database が適用されます。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  },
+                  "collectionName": {
+                    "type": "string",
+                    "description": "The name of the target collection.\nSetting this to a non-existing collection results in an error.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Collection 名称。设置为不存在的 Collection 会导致错误。"
+                      },
+                      "ja-JP": {
+                        "description": "対象の collection の名前です。\n存在しない collection に設定するとエラーになります。"
+                      }
+                    },
+                    "x-added-at": "2.6.x",
+                    "x-last-modified": "2.6.x",
+                    "x-deprecated-since": null
+                  }
+                },
+                "required": [
+                  "collectionName"
+                ],
+                "x-added-at": "2.6.x",
+                "x-last-modified": "2.6.x",
+                "x-deprecated-since": null,
+                "description": "The request body for flushing a collection, which requires `collectionName`.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Flush Collection 的请求体，必须提供 `collectionName`。"
+                  },
+                  "ja-JP": {
+                    "description": "collection を flush するリクエストボディです。`collectionName` が必要です。"
+                  }
+                }
               },
               "example": {
                 "collectionName": "test_collection"
@@ -5594,8 +5641,7 @@
                 "required": [
                   "collectionName",
                   "function",
-                  "outputField",
-                  "indexParams"
+                  "outputField"
                 ],
                 "x-added-at": "3.0.x",
                 "x-last-modified": "3.0.x",
@@ -6319,16 +6365,16 @@
                           "ArrayOfStruct",
                           "Array"
                         ],
-                        "description": "The StructArray data type. Use ArrayOfStruct, or Array together with elementDataType set to Struct.",
+                        "description": "The struct field data type: ArrayOfStruct, or Array with elementDataType Struct.",
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
                         "x-deprecated-since": null,
                         "x-i18n": {
                           "zh-CN": {
-                            "description": "StructArray 数据类型。可设为 ArrayOfStruct，或设为 Array 并将 elementDataType 设为 Struct。"
+                            "description": "Struct 字段的数据类型：ArrayOfStruct，或 elementDataType 为 Struct 的 Array。"
                           },
                           "ja-JP": {
-                            "description": "StructArray のデータ型です。ArrayOfStruct を使用するか、elementDataType を Struct に設定した Array を使用します。"
+                            "description": "Struct フィールドのデータ型：ArrayOfStruct、または elementDataType が Struct の Array。"
                           }
                         }
                       },
@@ -6354,7 +6400,19 @@
                         "type": "array",
                         "minItems": 1,
                         "items": {
-                          "$ref": "#/components/schemas/StructArraySubFieldSchema"
+                          "$ref": "#/components/schemas/FieldSchema",
+                          "description": "A sub-field of the struct array field.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "Struct 字段的子字段。"
+                            },
+                            "ja-JP": {
+                              "description": "Struct フィールドのサブフィールド。"
+                            }
+                          },
+                          "x-added-at": "3.0.x",
+                          "x-last-modified": "3.0.x",
+                          "x-deprecated-since": null
                         },
                         "description": "The scalar or vector sub-fields in the StructArray field.",
                         "x-added-at": "3.0.x",
@@ -6406,16 +6464,16 @@
                       },
                       "nullable": {
                         "type": "boolean",
-                        "description": "Whether the StructArray field can be null.",
+                        "description": "Whether the struct field can be null. Must be true when adding a struct field to an existing collection.",
                         "x-added-at": "3.0.x",
                         "x-last-modified": "3.0.x",
                         "x-deprecated-since": null,
                         "x-i18n": {
                           "zh-CN": {
-                            "description": "StructArray 字段是否允许为 null。"
+                            "description": "Struct 字段是否可为 null。向已有集合添加 Struct 字段时必须为 true。"
                           },
                           "ja-JP": {
-                            "description": "StructArray フィールドを null にできるかどうか。"
+                            "description": "Struct フィールドが null になり得るかどうか。既存コレクションに Struct フィールドを追加する場合は true である必要があります。"
                           }
                         }
                       }
@@ -6669,8 +6727,7 @@
           }
         },
         "required": [
-          "collectionName",
-          "propertyKeys"
+          "collectionName"
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
@@ -7230,17 +7287,17 @@
           },
           "dimension": {
             "type": "integer",
-            "description": "The number of dimensions a vector value should have.\nThis is required if **idType** of this field is set to **FloatVector** or **BinaryVector**.",
+            "description": "The number of dimensions a vector value should have.\nThis is required if **vectorFieldType** is set to **FloatVector** or **BinaryVector**.",
             "x-i18n": {
               "zh-CN": {
-                "description": "向量值的维度数。\n若该字段的 **idType** 为 **FloatVector** 或 **BinaryVector**，则该字段为必填项。"
+                "description": "向量值的维度数。\n若 **vectorFieldType** 为 **FloatVector** 或 **BinaryVector**，则该字段为必填项。"
               },
               "ja-JP": {
-                "description": "ベクトル値が持つべき次元数。\nこのフィールドの **idType** が **FloatVector** または **BinaryVector** に設定されている場合に必須です。"
+                "description": "ベクトル値が持つべき次元数。\n**vectorFieldType** が **FloatVector** または **BinaryVector** に設定されている場合に必須です。"
               }
             },
             "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
+            "x-last-modified": "3.0.x",
             "x-deprecated-since": null
           },
           "metricType": {
@@ -7410,8 +7467,7 @@
           }
         },
         "required": [
-          "collectionName",
-          "dimension"
+          "collectionName"
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
@@ -7619,87 +7675,6 @@
         "x-last-modified": "2.6.x",
         "x-deprecated-since": null
       },
-      "StructArraySubFieldSchema": {
-        "type": "object",
-        "description": "A sub-field definition within a struct array. The dataType refers to the scalar or vector type of each struct field.",
-        "x-i18n": {
-          "zh-CN": {
-            "description": "Struct Array 中的子字段定义。dataType 表示 Struct 字段的标量或向量类型。"
-          },
-          "ja-JP": {
-            "description": "struct array 内のサブフィールド定義です。dataType は各 struct フィールドのスカラーまたはベクトルタイプを指します。"
-          }
-        },
-        "properties": {
-          "fieldName": {
-            "type": "string",
-            "description": "The name of the sub-field.",
-            "x-i18n": {
-              "zh-CN": {
-                "description": "子字段名称。"
-              },
-              "ja-JP": {
-                "description": "サブフィールドの名前。"
-              }
-            },
-            "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
-          },
-          "dataType": {
-            "type": "string",
-            "description": "The scalar or vector type of the struct field.",
-            "x-i18n": {
-              "zh-CN": {
-                "description": "Struct 字段的标量或向量类型。"
-              },
-              "ja-JP": {
-                "description": "struct フィールドのスカラーまたはベクトルタイプ。"
-              }
-            },
-            "enum": [
-              "Bool",
-              "Int8",
-              "Int16",
-              "Int32",
-              "Int64",
-              "Float",
-              "Double",
-              "VarChar",
-              "BinaryVector",
-              "FloatVector",
-              "Float16Vector",
-              "BFloat16Vector",
-              "Int8Vector"
-            ],
-            "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
-          },
-          "elementTypeParams": {
-            "type": "object",
-            "description": "Parameters for the element type, such as max_length for VarChar or dim for vector types.",
-            "x-i18n": {
-              "zh-CN": {
-                "description": "元素类型参数，例如 VarChar 的 max_length 或向量类型的 dim。"
-              },
-              "ja-JP": {
-                "description": "要素タイプのパラメータ。たとえば、VarChar の場合は max_length、ベクトルタイプの場合は dim を指定します。"
-              }
-            },
-            "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
-          }
-        },
-        "required": [
-          "fieldName",
-          "dataType"
-        ],
-        "x-added-at": "2.6.x",
-        "x-last-modified": "2.6.x",
-        "x-deprecated-since": null
-      },
       "StructArrayFieldSchema": {
         "type": "object",
         "description": "A struct array field that groups multiple sub-fields.",
@@ -7754,7 +7729,19 @@
               }
             },
             "items": {
-              "$ref": "#/components/schemas/StructArraySubFieldSchema"
+              "$ref": "#/components/schemas/FieldSchema",
+              "description": "A sub-field of the struct array field.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "Struct 字段的子字段。"
+                },
+                "ja-JP": {
+                  "description": "Struct フィールドのサブフィールド。"
+                }
+              },
+              "x-added-at": "2.6.x",
+              "x-last-modified": "2.6.x",
+              "x-deprecated-since": null
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
@@ -7797,12 +7784,26 @@
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the struct field can be null. Must be true when the field is added via /v2/vectordb/collections/struct_fields/add.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Struct 字段是否可为 null。通过 /v2/vectordb/collections/struct_fields/add 添加时必须为 true。"
+              },
+              "ja-JP": {
+                "description": "Struct フィールドが null になり得るかどうか。/v2/vectordb/collections/struct_fields/add で追加する場合は true である必要があります。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
         "required": [
           "fieldName",
-          "fields",
-          "typeParams"
+          "fields"
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
@@ -8279,6 +8280,36 @@
           },
           "structFields": {
             "$ref": "#/components/schemas/CollectionSchema/properties/structFields"
+          },
+          "externalSource": {
+            "type": "string",
+            "description": "Top-level external source configuration for the collection. A top-level value here is accepted only for explicit rejection; to create an external collection, provide the JSON-encoded external source configuration through `schema.externalSource` or `schema.externalSpec` instead.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集合的顶层外部源配置。此处的顶层值仅用于显式拒绝；要创建外部集合，请改为通过 `schema.externalSource` 或 `schema.externalSpec` 提供 JSON 编码的外部源配置。"
+              },
+              "ja-JP": {
+                "description": "コレクションのトップレベル外部ソース設定。ここでのトップレベル値は明示的な拒否にのみ受け付けられます。外部コレクションを作成するには、代わりに `schema.externalSource` または `schema.externalSpec` を介して JSON エンコードされた外部ソース設定を指定してください。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "externalSpec": {
+            "type": "string",
+            "description": "A JSON-encoded string describing the external specification when creating an external collection, including connection parameters and details such as the source data format and field mapping. Its content varies depending on the connector type and the source data format.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "一个 JSON 编码字符串，用于描述创建外部 Collection 时的外部规范，包括连接参数以及源数据格式和字段映射等详细信息。其内容取决于连接器类型和源数据格式。"
+              },
+              "ja-JP": {
+                "description": "外部 Collection を作成する際の外部仕様を記述する JSON エンコードされた文字列。接続パラメータや、ソースデータ形式、フィールドマッピングなどの詳細を含みます。その内容はコネクタタイプとソースデータ形式によって異なります。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
         "x-added-at": "2.6.x",
@@ -9291,8 +9322,7 @@
           }
         },
         "required": [
-          "collectionName",
-          "properties"
+          "collectionName"
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
@@ -10194,30 +10224,15 @@
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
           },
-          "nullable": {
-            "type": "boolean",
-            "description": "Whether the field can be null. If set to `true`, the field can contain null values.",
-            "x-i18n": {
-              "zh-CN": {
-                "description": "字段是否可以为 null。如果设置为 `true`，则该字段可以包含 null 值。"
-              },
-              "ja-JP": {
-                "description": "フィールドで null を許可するかどうかです。`true` に設定すると、フィールドに null 値を含めることができます。"
-              }
-            },
-            "x-added-at": "2.6.x",
-            "x-last-modified": "2.6.x",
-            "x-deprecated-since": null
-          },
-          "defaultValue": {
+          "externalField": {
             "type": "string",
-            "description": "The default value of the field. This is required if the current field is of the `VarChar` type.",
+            "description": "The name of the corresponding column in the external source. Required when creating an external collection.",
             "x-i18n": {
               "zh-CN": {
-                "description": "字段的默认值。若当前字段为 `VarChar` 类型，则该参数为必填项。"
+                "description": "外部数据源中对应列的名称。创建外部集合时必填。"
               },
               "ja-JP": {
-                "description": "フィールドのデフォルト値。現在のフィールドが `VarChar` 型の場合に必須です。"
+                "description": "外部ソース内の対応する列の名前。external collection を作成する場合に必須です。"
               }
             },
             "x-added-at": "2.6.x",
@@ -10334,19 +10349,123 @@
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
           },
-          "externalField": {
+          "description": {
             "type": "string",
-            "description": "The name of the corresponding column in the external source. Required when creating an external collection.",
+            "description": "A brief description of the field.",
             "x-i18n": {
               "zh-CN": {
-                "description": "外部数据源中对应列的名称。创建外部集合时必填。"
+                "description": "字段的简要描述。"
               },
               "ja-JP": {
-                "description": "外部ソース内の対応する列の名前。external collection を作成する場合に必須です。"
+                "description": "フィールドの簡単な説明。"
               }
             },
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "typeParams": {
+            "description": "Type parameters of the field, such as mmap settings.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段类型参数，例如 mmap 设置。"
+              },
+              "ja-JP": {
+                "description": "フィールドの型パラメータ（mmap 設定など）。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldSchema",
+              "description": "A sub-field of the struct array field.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "Struct 字段的子字段。"
+                },
+                "ja-JP": {
+                  "description": "Struct フィールドのサブフィールド。"
+                }
+              },
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "description": "Sub-fields of a struct array field declared inline.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "内联声明的 Struct 字段的子字段列表。"
+              },
+              "ja-JP": {
+                "description": "インラインで宣言された Struct フィールドのサブフィールド。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the field can be null. If set to `true`, the field can contain null values.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段是否可以为 null。如果设置为 `true`，则该字段可以包含 null 值。"
+              },
+              "ja-JP": {
+                "description": "フィールドで null を許可するかどうかです。`true` に設定すると、フィールドに null 値を含めることができます。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "defaultValue": {
+            "type": "string",
+            "description": "The default value of the field. This is required if the current field is of the `VarChar` type.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段的默认值。若当前字段为 `VarChar` 类型，则该参数为必填项。"
+              },
+              "ja-JP": {
+                "description": "フィールドのデフォルト値。現在のフィールドが `VarChar` 型の場合に必須です。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "elementNullable": {
+            "type": "boolean",
+            "description": "Whether elements of an Array or ArrayOfVector struct sub-field can be null. For an Array<Array<T>> sub-field this is the nullability of the inner array.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Array 或 ArrayOfVector 结构子字段的元素是否可为 null。对于 Array<Array<T>> 子字段，表示内层数组的可空性。"
+              },
+              "ja-JP": {
+                "description": "Array または ArrayOfVector の構造サブフィールドの要素が null になり得るかどうか。Array<Array<T>> サブフィールドの場合は内側の配列の null 許容性を表します。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "typeSchema": {
+            "$ref": "#/components/schemas/TypeSchemaReq",
+            "description": "The type schema of an Array<Array<T>> nested-array sub-field. Every node must set exactly one of leafType and arrayElement, and every array node must carry its own max_capacity in typeParams.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Array<Array<T>> 嵌套数组子字段的类型模式。每个节点上 leafType 与 arrayElement 必须且只能设置其一，且每个数组节点都必须在 typeParams 中设置 max_capacity。"
+              },
+              "ja-JP": {
+                "description": "Array<Array<T>> ネスト配列サブフィールドの型スキーマ。各ノードで leafType と arrayElement のいずれか一方のみを設定し、各配列ノードの typeParams には max_capacity を必ず設定してください。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
             "x-deprecated-since": null
           }
         },
@@ -10396,6 +10515,110 @@
           },
           "elementTypeParams": {
             "$ref": "#/components/schemas/FieldSchema/properties/elementTypeParams"
+          },
+          "description": {
+            "type": "string",
+            "description": "A brief description of the field.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段的简要描述。"
+              },
+              "ja-JP": {
+                "description": "フィールドの簡単な説明。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "externalField": {
+            "type": "string",
+            "description": "The name of the corresponding column in the external source. Required when creating an external collection.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "外部数据源中对应列的名称。创建外部集合时必填。"
+              },
+              "ja-JP": {
+                "description": "外部ソース内の対応する列の名前。external collection を作成する場合に必須です。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "typeParams": {
+            "description": "Type parameters of the field, such as mmap settings.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段类型参数，例如 mmap 设置。"
+              },
+              "ja-JP": {
+                "description": "フィールドの型パラメータ（mmap 設定など）。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldSchema",
+              "description": "A sub-field of the struct array field.",
+              "x-i18n": {
+                "zh-CN": {
+                  "description": "Struct 字段的子字段。"
+                },
+                "ja-JP": {
+                  "description": "Struct フィールドのサブフィールド。"
+                }
+              },
+              "x-added-at": "3.0.x",
+              "x-last-modified": "3.0.x",
+              "x-deprecated-since": null
+            },
+            "description": "Sub-fields of a struct array field declared inline.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "内联声明的 Struct 字段的子字段列表。"
+              },
+              "ja-JP": {
+                "description": "インラインで宣言された Struct フィールドのサブフィールド。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "elementNullable": {
+            "type": "boolean",
+            "description": "Whether elements of an Array or ArrayOfVector struct sub-field can be null. For an Array<Array<T>> sub-field this is the nullability of the inner array.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Array 或 ArrayOfVector 结构子字段的元素是否可为 null。对于 Array<Array<T>> 子字段，表示内层数组的可空性。"
+              },
+              "ja-JP": {
+                "description": "Array または ArrayOfVector の構造サブフィールドの要素が null になり得るかどうか。Array<Array<T>> サブフィールドの場合は内側の配列の null 許容性を表します。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "typeSchema": {
+            "$ref": "#/components/schemas/TypeSchemaReq",
+            "description": "The type schema of an Array<Array<T>> nested-array sub-field. Every node must set exactly one of leafType and arrayElement, and every array node must carry its own max_capacity in typeParams.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "Array<Array<T>> 嵌套数组子字段的类型模式。每个节点上 leafType 与 arrayElement 必须且只能设置其一，且每个数组节点都必须在 typeParams 中设置 max_capacity。"
+              },
+              "ja-JP": {
+                "description": "Array<Array<T>> ネスト配列サブフィールドの型スキーマ。各ノードで leafType と arrayElement のいずれか一方のみを設定し、各配列ノードの typeParams には max_capacity を必ず設定してください。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
           }
         },
         "required": [
@@ -10986,6 +11209,21 @@
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
           },
+          "indexType": {
+            "type": "string",
+            "description": "The type of the index to create",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "要创建的索引类型。"
+              },
+              "ja-JP": {
+                "description": "作成するインデックスのタイプです"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
           "params": {
             "description": "The index type and related settings. <include target=\"milvus\">For details, refer to [Vector Indexes](https://milvus.io/docs/index.md).</include><include target=\"zilliz\">For Zilliz Cloud clusters, you should always set `index_type` to `AUTOINDEX`.</include>",
             "x-i18n": {
@@ -11083,9 +11321,7 @@
           "zh-CN"
         ],
         "required": [
-          "metricType",
-          "fieldName",
-          "indexName"
+          "fieldName"
         ],
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
@@ -11451,6 +11687,82 @@
             "description": "操作固有の結果データを持たない操作が返す汎用レスポンスエンベロープです。`data` オブジェクトを含みます。"
           }
         }
+      },
+      "TypeSchemaReq": {
+        "type": "object",
+        "properties": {
+          "leafType": {
+            "type": "string",
+            "description": "Leaf element type of the innermost array. Set exactly one of leafType and arrayElement on every node.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "最内层数组的叶子元素类型。每个节点上 leafType 与 arrayElement 必须且只能设置其一。"
+              },
+              "ja-JP": {
+                "description": "最内層の配列のリーフ要素型。各ノードで leafType と arrayElement のいずれか一方のみを設定してください。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "arrayElement": {
+            "$ref": "#/components/schemas/TypeSchemaReq",
+            "description": "The next nested array node. Set exactly one of leafType and arrayElement on every node.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "下一层嵌套数组节点。每个节点上 leafType 与 arrayElement 必须且只能设置其一。"
+              },
+              "ja-JP": {
+                "description": "次のネストした配列ノード。各ノードで leafType と arrayElement のいずれか一方のみを設定してください。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "typeParams": {
+            "description": "Node type parameters. Every array node must set max_capacity in typeParams.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "节点类型参数。每个数组节点都必须在 typeParams 中设置 max_capacity。"
+              },
+              "ja-JP": {
+                "description": "ノードの型パラメータ。各配列ノードの typeParams には max_capacity を必ず設定してください。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether this array node can be null.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "该数组节点是否可为 null。"
+              },
+              "ja-JP": {
+                "description": "この配列ノードが null になり得るかどうか。"
+              }
+            },
+            "x-added-at": "3.0.x",
+            "x-last-modified": "3.0.x",
+            "x-deprecated-since": null
+          }
+        },
+        "description": "The type schema of an Array<Array<T>> nested-array sub-field. Every node must set exactly one of leafType and arrayElement, and every array node must carry its own max_capacity in typeParams.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Array<Array<T>> 嵌套数组子字段的类型模式。每个节点上 leafType 与 arrayElement 必须且只能设置其一，且每个数组节点都必须在 typeParams 中设置 max_capacity。"
+          },
+          "ja-JP": {
+            "description": "Array<Array<T>> ネスト配列サブフィールドの型スキーマ。各ノードで leafType と arrayElement のいずれか一方のみを設定し、各配列ノードの typeParams には max_capacity を必ず設定してください。"
+          }
+        },
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
+        "x-deprecated-since": null
       }
     },
     "parameters": {

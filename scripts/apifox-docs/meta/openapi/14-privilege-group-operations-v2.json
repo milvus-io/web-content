@@ -684,8 +684,7 @@
                   }
                 },
                 "required": [
-                  "privilegeGroupName",
-                  "privileges"
+                  "privilegeGroupName"
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
@@ -858,8 +857,7 @@
                   }
                 },
                 "required": [
-                  "privilegeGroupName",
-                  "privileges"
+                  "privilegeGroupName"
                 ],
                 "x-added-at": "2.6.x",
                 "x-last-modified": "2.6.x",
