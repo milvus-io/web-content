@@ -137,6 +137,8 @@ Use separate vector subfields when both modes are required. For example, use `ch
 
 StructArray vector subfields count as vector fields toward the collection-level limit `proxy.maxVectorFieldNum`, which defaults to 10. A StructArray field whose vector subfields are the collection's only vector fields is valid, and dropping such a field is rejected when it would leave the collection without a vector field. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.
 
+StructArray fields also count toward the collection-level field limit `proxy.maxFieldNum`, which defaults to 256. Each StructArray field counts as 1 plus the number of its subfields; the dynamic field (`$meta`) does not count. This limit also applies when you add fields to an existing collection.
+
 
 Starting in Milvus 3.0.6, an element-nullable vector subfield supports only element-level search with regular vector metrics. `MAX_SIM*` metrics, EmbeddingList indexes, and EmbeddingList search are rejected on element-nullable vector subfields, and `AUTOINDEX` does not select a `MAX_SIM*` metric for them. Null vectors do not participate in search. Scalar indexes are not supported on element-nullable subfields or on scalar `ARRAY` subfields.
 
